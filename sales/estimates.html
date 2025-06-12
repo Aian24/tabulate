@@ -36,12 +36,34 @@
                             <span>Actions</span>
                             <i class="fas fa-chevron-down ml-1"></i>
                         </button>
-                        <div id="actionsMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10">
-                            <button class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                <i class="fas fa-file-invoice mr-2"></i>Create Invoice
+                        <div id="actionsMenu" class="hidden absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10">
+                            <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                                <i class="fas fa-file-invoice w-5"></i>
+                                <span>Create Invoice</span>
                             </button>
-                            <button class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                <i class="fas fa-trash-alt mr-2"></i>Delete
+                            <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                                <i class="fas fa-trash-alt w-5"></i>
+                                <span>Delete</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <button id="moreDropdown" class="animated-button text-white px-3 py-1.5 md:px-4 md:py-2 rounded-lg flex items-center space-x-2 text-sm md:text-base">
+                            <span>More</span>
+                            <i class="fas fa-chevron-down ml-1"></i>
+                        </button>
+                        <div id="moreMenu" class="hidden absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10">
+                            <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                                <i class="fas fa-cog w-5"></i>
+                                <span>Settings</span>
+                            </button>
+                            <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                                <i class="fas fa-chart-bar w-5"></i>
+                                <span>Report</span>
+                            </button>
+                            <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                                <i class="fas fa-history w-5"></i>
+                                <span>Audit Trail</span>
                             </button>
                         </div>
                     </div>
@@ -473,6 +495,8 @@
             // Actions dropdown functionality
             const actionsDropdown = document.getElementById('actionsDropdown');
             const actionsMenu = document.getElementById('actionsMenu');
+            const moreDropdown = document.getElementById('moreDropdown');
+            const moreMenu = document.getElementById('moreMenu');
             const estimateModal = document.getElementById('estimateModal');
             const createEstimateBtn = document.getElementById('createEstimate');
             const closeEstimateModal = document.getElementById('closeEstimateModal');
@@ -481,12 +505,20 @@
             // Toggle actions menu
             actionsDropdown.addEventListener('click', () => {
                 actionsMenu.classList.toggle('hidden');
+                moreMenu.classList.add('hidden');
             });
 
-            // Close actions menu when clicking outside
+            // Toggle more menu
+            moreDropdown.addEventListener('click', () => {
+                moreMenu.classList.toggle('hidden');
+                actionsMenu.classList.add('hidden');
+            });
+
+            // Close menus when clicking outside
             document.addEventListener('click', (e) => {
-                if (!actionsDropdown.contains(e.target)) {
+                if (!actionsDropdown.contains(e.target) && !moreDropdown.contains(e.target)) {
                     actionsMenu.classList.add('hidden');
+                    moreMenu.classList.add('hidden');
                 }
             });
 

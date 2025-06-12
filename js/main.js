@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             // Get the current directory depth
             const pathParts = window.location.pathname.split('/');
-            const isInSubfolder = pathParts.includes('sales') || pathParts.includes('dispatch');
+            const isInSubfolder = pathParts.includes('sales') || pathParts.includes('dispatch') || pathParts.includes('financial');
             
             // Adjust the path based on whether we're in a subfolder
             const adjustedUrl = isInSubfolder ? '../' + url : url;

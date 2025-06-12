@@ -27,11 +27,33 @@
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
             <div class="flex items-center gap-2">
                 <h1 class="text-xl md:text-2xl font-bold text-gray-800">Dispatch Board</h1>
-                <button class="animated-button text-white px-3 py-1.5 md:px-4 md:py-2 rounded-lg flex items-center space-x-2 text-sm md:text-base">
-                    <i class="fas fa-plus"></i>
-                    <span class="hidden sm:inline">New Dispatch</span>
-                    <span class="sm:hidden">New</span>
-                </button>
+                <div class="flex items-center gap-2">
+                    <button class="animated-button text-white px-3 py-1.5 md:px-4 md:py-2 rounded-lg flex items-center space-x-2 text-sm md:text-base">
+                        <i class="fas fa-plus"></i>
+                        <span class="hidden sm:inline">New Dispatch</span>
+                        <span class="sm:hidden">New</span>
+                    </button>
+                    <div class="relative">
+                        <button id="moreDropdown" class="animated-button text-white px-3 py-1.5 md:px-4 md:py-2 rounded-lg flex items-center space-x-2 text-sm md:text-base">
+                            <span>More</span>
+                            <i class="fas fa-chevron-down ml-1"></i>
+                        </button>
+                        <div id="moreMenu" class="hidden absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10">
+                            <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                                <i class="fas fa-cog w-5"></i>
+                                <span>Settings</span>
+                            </button>
+                            <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                                <i class="fas fa-chart-bar w-5"></i>
+                                <span>Report</span>
+                            </button>
+                            <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                                <i class="fas fa-history w-5"></i>
+                                <span>Audit Trail</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 <button id="mobileMapBtn" class="md:hidden animated-button text-white px-3 py-1.5 md:px-4 md:py-2 rounded-lg flex items-center space-x-2 text-sm md:text-base">
                     <i class="fas fa-map"></i>
                     <span>Locations</span>
@@ -385,5 +407,22 @@
     <script src="../js/main.js"></script>
     <script src="../js/map-controls.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOny2Fnagtt3h7e5wF9GGC2AaHLOMDDY&callback=initMap" async defer></script>
+    <script>
+        // More dropdown functionality
+        const moreDropdown = document.getElementById('moreDropdown');
+        const moreMenu = document.getElementById('moreMenu');
+
+        // Toggle more menu
+        moreDropdown.addEventListener('click', () => {
+            moreMenu.classList.toggle('hidden');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!moreDropdown.contains(e.target)) {
+                moreMenu.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 </html>
