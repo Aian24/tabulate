@@ -384,4 +384,28 @@ nav .container-fluid {
 
 .calendar-button i {
     color: #3b82f6;
+}
+
+/* Tippy.js Custom Styles to Ensure Visibility */
+.tippy-box[data-theme~='light'] {
+    background-color: white !important;
+    color: #333 !important; /* Dark grey for text */
+}
+
+.tippy-box[data-theme~='light'] .tippy-content {
+    padding: 0 !important; /* Remove default padding to allow anchor padding */
+}
+
+.tippy-box[data-theme~='light'] .tippy-content a {
+    color: #4a5568 !important; /* Tailwind gray-700 for link text */
+    padding: 8px 16px; /* Apply padding directly to links */
+}
+
+.tippy-box[data-theme~='light'] .tippy-content a i {
+    width: 1.25em; /* Ensure consistent icon width */
+    text-align: center; /* Center the icon within its allocated space */
+}
+
+.tippy-box[data-theme~='light'] .tippy-arrow {
+    color: white !important; /* Ensure arrow matches background */
 } 

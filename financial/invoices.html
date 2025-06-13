@@ -8,6 +8,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://unpkg.com/tippy.js@6"></script>
+    <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/themes/light.css" rel="stylesheet"/>
     <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -64,27 +66,40 @@
         </div>
 
         <!-- Controls Section (Calendar, Map View, etc.) -->
-        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6 max-w-sm mx-auto md:max-w-full md:mx-0">
-            <!-- Left side: Calendar and Controls -->
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
+            <!-- Left side: Controls -->
             <div class="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
-                <!-- Calendar Days -->
-                <div id="weekDays" class="grid grid-cols-7 w-full md:w-auto gap-1">
-                    <!-- Week days will be rendered here -->
+                <!-- Show entries dropdown -->
+                <div class="hidden md:flex items-center mr-4">
+                    <label for="entries" class="text-sm text-gray-600 mr-2">Show entries:</label>
+                    <select id="entries" class="border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
                 </div>
-                <!-- Date Range and Filter -->
-                <div class="flex gap-2 w-full md:w-auto">
-                    <button id="openDateRangePicker" class="calendar-button flex-grow md:flex-grow-0">
-                        <i class="fas fa-calendar"></i>
-                        <span>Select Date Range</span>
+                <!-- Filter buttons -->
+                <div class="flex flex-wrap justify-center md:justify-start gap-2">
+                    <button class="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors">
+                        All
                     </button>
-                    <button id="openFilter" class="calendar-button flex-grow md:flex-grow-0">
-                        <i class="fas fa-filter"></i>
-                        <span>Filter</span>
+                    <button class="px-4 py-2 text-sm font-medium text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 transition-colors">
+                        Draft
+                    </button>
+                    <button class="px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 transition-colors">
+                        Unpaid
+                    </button>
+                    <button class="px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-600 transition-colors">
+                        Paid
+                    </button>
+                    <button class="px-4 py-2 text-sm font-medium text-white bg-purple-500 rounded-lg hover:bg-purple-600 transition-colors">
+                        Partial Paid
                     </button>
                 </div>
             </div>
             <!-- Right side: Search -->
-            <div id="search-container" class="relative w-full">
+            <div id="search-container" class="relative w-full md:w-auto">
                 <input type="search" 
                        placeholder="Search..." 
                        class="w-full h-[42px] pl-10 pr-4 rounded-lg border border-green-500 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300"

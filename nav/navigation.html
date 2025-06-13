@@ -16,10 +16,13 @@
                     <i class="fas fa-chevron-down ml-2"></i>
                 </button>
             </div>
-            <a class="nav-link flex items-center space-x-2 text-white hover:text-sky-500" href="#">
-                <i class="fas fa-chart-line"></i>
-                <span class="font-medium">Financial</span>
-            </a>
+            <div class="relative" id="financialDropdown" style="z-index: 9999;">
+                <button class="nav-link flex items-center space-x-2 text-white hover:text-sky-500" id="financialButton">
+                    <i class="fas fa-chart-line"></i>
+                    <span class="font-medium">Financial</span>
+                    <i class="fas fa-chevron-down ml-2"></i>
+                </button>
+            </div>
             <a class="nav-link flex items-center space-x-2 text-white hover:text-sky-500" href="#">
                 <i class="fas fa-users"></i>
                 <span class="font-medium">Accounts</span>
@@ -84,10 +87,30 @@
                     </a>
                 </div>
             </div>
-            <a class="flex items-center space-x-2 text-white hover:text-sky-500 px-4 py-2 rounded-lg hover:bg-white/10" href="#">
-                <i class="fas fa-chart-line"></i>
-                <span class="font-medium">Financial</span>
-            </a>
+            <div class="px-4 py-2">
+                <div class="text-white font-semibold mb-2">
+                    <i class="fas fa-chart-line mr-2"></i>
+                    Financial
+                </div>
+                <div class="pl-4 space-y-1">
+                    <a href="../financial/payroll.html" class="block py-2 text-white hover:text-sky-500">
+                        <i class="fas fa-money-check-alt mr-2"></i>
+                        Payroll
+                    </a>
+                    <a href="../financial/invoices.html" class="block py-2 text-white hover:text-sky-500">
+                        <i class="fas fa-file-invoice-dollar mr-2"></i>
+                        Invoices
+                    </a>
+                    <a href="../financial/expenses.html" class="block py-2 text-white hover:text-sky-500">
+                        <i class="fas fa-receipt mr-2"></i>
+                        Expenses
+                    </a>
+                    <a href="../financial/po.html" class="block py-2 text-white hover:text-sky-500">
+                        <i class="fas fa-clipboard-list mr-2"></i>
+                        P.O.
+                    </a>
+                </div>
+            </div>
             <a class="flex items-center space-x-2 text-white hover:text-sky-500 px-4 py-2 rounded-lg hover:bg-white/10" href="#">
                 <i class="fas fa-users"></i>
                 <span class="font-medium">Accounts</span>
@@ -101,20 +124,20 @@
 </div>
 
 <!-- Overlay for side navigation -->
-<div id="sideNavOverlay" class="md:hidden fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div>
+<div id="sideNavOverlay" class="md:hidden fixed inset-0 bg-blue-900 bg-opacity-75 hidden z-40"></div>
 
 <!-- Dropdown Menu Container -->
-<div id="dropdownMenu" class="hidden" style="position: absolute; z-index: 99999; background: white; border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); min-width: 200px;">
+<div id="dropdownMenu" class="hidden">
     <div class="py-1">
-        <a href="../dispatch/activeprojects.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500">
+        <a href="../dispatch/activeprojects.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center">
             <i class="fas fa-check-circle mr-2"></i>
             Active Projects
         </a>
-        <a href="../dispatch/pendingprojects.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500">
+        <a href="../dispatch/pendingprojects.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center">
             <i class="fas fa-clock mr-2"></i>
             Pending Projects
         </a>
-        <a href="../dispatch/dispatchboard.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500">
+        <a href="../dispatch/dispatchboard.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center">
             <i class="fas fa-tachometer-alt mr-2"></i>
             Dispatch Board
         </a>
@@ -122,19 +145,41 @@
 </div>
 
 <!-- Sales Dropdown Menu Container -->
-<div id="salesDropdownMenu" class="hidden" style="position: absolute; z-index: 99999; background: white; border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); min-width: 200px;">
+<div id="salesDropdownMenu" class="hidden">
     <div class="py-1">
-        <a href="../sales/estimates.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500">
+        <a href="../sales/estimates.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center">
             <i class="fas fa-file-invoice mr-2"></i>
             Estimates
         </a>
-        <a href="../sales/carts.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500">
+        <a href="../sales/carts.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center">
             <i class="fas fa-shopping-basket mr-2"></i>
             Carts
         </a>
-        <a href="../sales/unscheduled.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500">
+        <a href="../sales/unscheduled.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center">
             <i class="fas fa-clock mr-2"></i>
             Unscheduled
         </a>
     </div>
-</div> 
+</div>
+
+<!-- Financial Dropdown Menu Container -->
+<div id="financialDropdownMenu" class="hidden">
+    <div class="py-1">
+        <a href="../financial/payroll.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center">
+            <i class="fas fa-money-check-alt mr-2"></i>
+            Payroll
+        </a>
+        <a href="../financial/invoices.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center">
+            <i class="fas fa-file-invoice-dollar mr-2"></i>
+            Invoices
+        </a>
+        <a href="../financial/expenses.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center">
+            <i class="fas fa-receipt mr-2"></i>
+            Expenses
+        </a>
+        <a href="../financial/po.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center">
+            <i class="fas fa-clipboard-list mr-2"></i>
+            P.O.
+        </a>
+    </div>
+</div>

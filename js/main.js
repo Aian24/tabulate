@@ -516,59 +516,90 @@ document.addEventListener('DOMContentLoaded', function() {
         const dropdownMenu = document.getElementById('dropdownMenu');
         const salesButton = document.getElementById('salesButton');
         const salesDropdownMenu = document.getElementById('salesDropdownMenu');
+        const financialButton = document.getElementById('financialButton');
 
         // Set active state based on current page
         const currentPage = window.location.pathname.split('/').pop();
         const isSalesPage = ['carts.html', 'estimates.html'].includes(currentPage);
         const isProjectPage = ['activeprojects.html', 'pendingprojects.html', 'dispatchboard.html'].includes(currentPage);
+        const isFinancialPage = ['payroll.html', 'invoices.html', 'expenses.html', 'po.html'].includes(currentPage);
 
         if (isSalesPage) {
             salesButton.classList.add('text-sky-500', 'font-semibold', 'bg-white/10', 'px-4', 'py-2', 'rounded-lg');
             salesButton.classList.remove('text-white', 'hover:text-sky-500');
             projectButton.classList.remove('text-sky-500', 'font-semibold', 'bg-white/10', 'px-4', 'py-2', 'rounded-lg');
             projectButton.classList.add('text-white', 'hover:text-sky-500');
+            financialButton.classList.remove('text-sky-500', 'font-semibold', 'bg-white/10', 'px-4', 'py-2', 'rounded-lg');
+            financialButton.classList.add('text-white', 'hover:text-sky-500');
         } else if (isProjectPage) {
             projectButton.classList.add('text-sky-500', 'font-semibold', 'bg-white/10', 'px-4', 'py-2', 'rounded-lg');
             projectButton.classList.remove('text-white', 'hover:text-sky-500');
             salesButton.classList.remove('text-sky-500', 'font-semibold', 'bg-white/10', 'px-4', 'py-2', 'rounded-lg');
             salesButton.classList.add('text-white', 'hover:text-sky-500');
+            financialButton.classList.remove('text-sky-500', 'font-semibold', 'bg-white/10', 'px-4', 'py-2', 'rounded-lg');
+            financialButton.classList.add('text-white', 'hover:text-sky-500');
+        } else if (isFinancialPage) {
+            financialButton.classList.add('text-sky-500', 'font-semibold', 'bg-white/10', 'px-4', 'py-2', 'rounded-lg');
+            financialButton.classList.remove('text-white', 'hover:text-sky-500');
+            salesButton.classList.remove('text-sky-500', 'font-semibold', 'bg-white/10', 'px-4', 'py-2', 'rounded-lg');
+            salesButton.classList.add('text-white', 'hover:text-sky-500');
+            projectButton.classList.remove('text-sky-500', 'font-semibold', 'bg-white/10', 'px-4', 'py-2', 'rounded-lg');
+            projectButton.classList.add('text-white', 'hover:text-sky-500');
         }
 
-        if (projectButton && dropdownMenu) {
-            projectButton.addEventListener('click', (e) => {
-                e.stopPropagation();
-                dropdownMenu.classList.toggle('hidden');
-                salesDropdownMenu.classList.add('hidden'); // Hide sales dropdown
-                
-                // Position the dropdown below the button
-                const buttonRect = projectButton.getBoundingClientRect();
-                dropdownMenu.style.top = buttonRect.bottom + 'px';
-                dropdownMenu.style.left = buttonRect.left + 'px';
-            });
-        }
+        // Remove manual click listeners and stopPropagation, rely on Tippy.js
+        // for dropdown functionality and hiding.
 
-        if (salesButton && salesDropdownMenu) {
-            salesButton.addEventListener('click', (e) => {
-                e.stopPropagation();
-                salesDropdownMenu.classList.toggle('hidden');
-                dropdownMenu.classList.add('hidden'); // Hide project dropdown
-                
-                // Position the dropdown below the button
-                const buttonRect = salesButton.getBoundingClientRect();
-                salesDropdownMenu.style.top = buttonRect.bottom + 'px';
-                salesDropdownMenu.style.left = buttonRect.left + 'px';
-            });
-        }
-
-        // Close dropdowns when clicking outside
-        document.addEventListener('click', () => {
-            if (dropdownMenu) dropdownMenu.classList.add('hidden');
-            if (salesDropdownMenu) salesDropdownMenu.classList.add('hidden');
+        // Sales & Estimates Dropdown
+        tippy('#salesButton', {
+            content: salesDropdownMenu.innerHTML,
+            allowHTML: true,
+            interactive: true,
+            trigger: 'click',
+            placement: 'bottom-start',
+            animation: 'scale',
+            theme: 'light',
+            onShow(instance) {
+                instance.popper.addEventListener('mouseleave', () => {
+                    instance.hide();
+                });
+            }
         });
 
-        // Prevent dropdown from closing when clicking inside it
-        dropdownMenu?.addEventListener('click', (e) => e.stopPropagation());
-        salesDropdownMenu?.addEventListener('click', (e) => e.stopPropagation());
+        // Project & Dispatch Dropdown
+        tippy('#projectButton', {
+            content: dropdownMenu.innerHTML,
+            allowHTML: true,
+            interactive: true,
+            trigger: 'click',
+            placement: 'bottom-start',
+            animation: 'scale',
+            theme: 'light',
+            onShow(instance) {
+                instance.popper.addEventListener('mouseleave', () => {
+                    instance.hide();
+                });
+            }
+        });
+
+        // Financial Dropdown
+        const financialDropdownMenu = document.getElementById('financialDropdownMenu');
+        if (financialButton && financialDropdownMenu) {
+            tippy(financialButton, {
+                content: financialDropdownMenu.innerHTML,
+                allowHTML: true,
+                interactive: true,
+                trigger: 'click',
+                placement: 'bottom-start',
+                animation: 'scale',
+                theme: 'light',
+                onShow(instance) {
+                    instance.popper.addEventListener('mouseleave', () => {
+                        instance.hide();
+                    });
+                }
+            });
+        }
     }
 
     // Load header and navigation
@@ -895,7 +926,7 @@ document.addEventListener('DOMContentLoaded', function() {
         filterBtn.addEventListener('click', () => {
             // Create and show filter modal
             const modal = document.createElement('div');
-            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.className = 'fixed inset-0 bg-blue-900 bg-opacity-75 flex items-center justify-center z-50';
             modal.innerHTML = `
                 <div class="bg-white rounded-lg shadow-xl p-6 w-[400px] max-w-[90vw]">
                     <div class="flex justify-between items-center mb-4">
