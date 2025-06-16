@@ -15,6 +15,50 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/map-controls.css">
+    <style>
+        .calendar-day {
+            @apply p-2 rounded-lg transition-colors duration-200;
+        }
+        .calendar-day:hover {
+            @apply bg-gray-100;
+        }
+        .calendar-day.active {
+            @apply bg-gradient-to-r from-sky-500 to-blue-600;
+        }
+        .calendar-day.active:hover {
+            @apply from-sky-600 to-blue-700;
+        }
+        .view-control-btn {
+            @apply p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors duration-200;
+        }
+        .view-control-btn.active {
+            @apply text-sky-600 bg-sky-50;
+        }
+        .draggable-header {
+            @apply cursor-pointer select-none;
+        }
+        .draggable-header.asc i::before {
+            content: "\f0de";
+        }
+        .draggable-header.desc i::before {
+            content: "\f0dd";
+        }
+        /* Force pointer cursor on all table elements */
+        table tbody tr.dispatch-card,
+        table tbody tr.dispatch-card td,
+        table tbody tr.dispatch-card td *,
+        table tbody tr.dispatch-card td span,
+        table tbody tr.dispatch-card td p {
+            cursor: pointer !important;
+        }
+        /* Ensure modal stays centered */
+        #dispatchModal {
+            @apply flex items-center justify-center;
+        }
+        #dispatchModal > div {
+            @apply transform-none;
+        }
+    </style>
 </head>
 <body class="min-h-screen">
     <!-- Include header -->
@@ -335,8 +379,6 @@
     <!-- Modal for viewing dispatch details -->
     <div id="dispatchModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
         <div class="bg-white rounded-lg shadow-lg max-w-lg w-full p-6 relative">
-            <button id="closeModal" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-xl font-bold">&times;</button>
-            <h2 class="text-xl font-semibold mb-4">Dispatch Details</h2>
             <div id="modalContent" class="space-y-2 text-gray-700 text-sm max-h-96 overflow-y-auto">
                 <!-- Details will be populated here -->
             </div>
@@ -410,6 +452,7 @@
     <!-- Load JavaScript files -->
     <script src="../js/main.js"></script>
     <script src="../js/map-controls.js"></script>
+    <script src="../js/dispatchboard.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOny2Fnagtt3h7e5wF9GGC2AaHLOMDDY&callback=initMap" async defer></script>
     <script>
         // More dropdown functionality

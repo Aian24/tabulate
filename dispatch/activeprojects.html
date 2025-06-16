@@ -162,11 +162,10 @@
                                     <i class="fas fa-sort text-xs opacity-70"></i>
                                 </div>
                             </th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100">
-                        <tr class="dispatch-card hover:bg-gradient-to-r hover:from-blue-50 hover:to-sky-50 transition-all duration-300">
+                        <tr class="dispatch-card hover:bg-gradient-to-r hover:from-blue-50 hover:to-sky-50 transition-all duration-300 cursor-pointer" onclick="showDispatchModal(this)">
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="status-badge text-white text-xs font-semibold px-3 py-1 rounded-full">VIP</span>
                             </td>
@@ -194,13 +193,8 @@
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-xs font-semibold px-3 py-1 rounded-full">One-Time</span>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <button class="animated-button text-white px-4 py-2 rounded-lg text-sm">
-                                    View
-                                </button>
-                            </td>
                         </tr>
-                        <tr class="dispatch-card hover:bg-gradient-to-r hover:from-blue-50 hover:to-sky-50 transition-all duration-300">
+                        <tr class="dispatch-card hover:bg-gradient-to-r hover:from-blue-50 hover:to-sky-50 transition-all duration-300 cursor-pointer" onclick="showDispatchModal(this)">
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="status-badge text-white text-xs font-semibold px-3 py-1 rounded-full">VIP</span>
                             </td>
@@ -228,13 +222,8 @@
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-xs font-semibold px-3 py-1 rounded-full">One-Time</span>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <button class="animated-button text-white px-4 py-2 rounded-lg text-sm">
-                                    View
-                                </button>
-                            </td>
                         </tr>
-                        <tr class="dispatch-card hover:bg-gradient-to-r hover:from-blue-50 hover:to-sky-50 transition-all duration-300">
+                        <tr class="dispatch-card hover:bg-gradient-to-r hover:from-blue-50 hover:to-sky-50 transition-all duration-300 cursor-pointer" onclick="showDispatchModal(this)">
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="status-badge text-white text-xs font-semibold px-3 py-1 rounded-full">VIP</span>
                             </td>
@@ -261,11 +250,6 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-xs font-semibold px-3 py-1 rounded-full">One-Time</span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <button class="animated-button text-white px-4 py-2 rounded-lg text-sm">
-                                    View
-                                </button>
                             </td>
                         </tr>
                     </tbody>
@@ -375,6 +359,80 @@
                 moreMenu.classList.add('hidden');
             }
         });
+
+        // Function to show dispatch modal
+        function showDispatchModal(row) {
+            const modal = document.getElementById('dispatchModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            // Get data from the row
+            const priority = row.cells[0].querySelector('.status-badge').textContent;
+            const category = row.cells[1].textContent.trim();
+            const address = row.cells[2].textContent.trim();
+            const startDate = row.cells[3].textContent.trim();
+            const hours = row.cells[4].textContent.trim();
+            const distance = row.cells[5].textContent.trim();
+            const eta = row.cells[6].textContent.trim();
+            const team = row.cells[7].textContent.trim();
+            const jobType = row.cells[8].textContent.trim();
+
+            // Populate modal content
+            modalContent.innerHTML = `
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <p class="font-medium">Priority</p>
+                        <p>${priority}</p>
+                    </div>
+                    <div>
+                        <p class="font-medium">Service Category</p>
+                        <p>${category}</p>
+                    </div>
+                    <div class="col-span-2">
+                        <p class="font-medium">Address</p>
+                        <p>${address}</p>
+                    </div>
+                    <div>
+                        <p class="font-medium">Start Date</p>
+                        <p>${startDate}</p>
+                    </div>
+                    <div>
+                        <p class="font-medium">B. Hours</p>
+                        <p>${hours}</p>
+                    </div>
+                    <div>
+                        <p class="font-medium">Distance</p>
+                        <p>${distance}</p>
+                    </div>
+                    <div>
+                        <p class="font-medium">ETA</p>
+                        <p>${eta}</p>
+                    </div>
+                    <div>
+                        <p class="font-medium">Team</p>
+                        <p>${team}</p>
+                    </div>
+                    <div>
+                        <p class="font-medium">Job Type</p>
+                        <p>${jobType}</p>
+                    </div>
+                </div>
+            `;
+
+            // Show modal
+            modal.classList.remove('hidden');
+
+            // Close modal when clicking the close button
+            document.getElementById('closeModal').onclick = () => {
+                modal.classList.add('hidden');
+            };
+
+            // Close modal when clicking outside
+            modal.onclick = (e) => {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                }
+            };
+        }
     </script>
 </body>
 </html>
