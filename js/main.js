@@ -4,12 +4,15 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             // Get the current directory depth
             const pathParts = window.location.pathname.split('/');
-            const isInSubfolder = pathParts.includes('sales') || pathParts.includes('dispatch') || pathParts.includes('financial');
+            const isInSubfolder = pathParts.includes('sales') || pathParts.includes('dispatch') || pathParts.includes('financial') || pathParts.includes('accounts');
             
             // Adjust the path based on whether we're in a subfolder
             const adjustedUrl = isInSubfolder ? '../' + url : url;
             
             const response = await fetch(adjustedUrl);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
             const html = await response.text();
             document.getElementById(containerId).innerHTML = html;
             return Promise.resolve();
