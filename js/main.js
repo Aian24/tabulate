@@ -520,6 +520,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const salesButton = document.getElementById('salesButton');
         const salesDropdownMenu = document.getElementById('salesDropdownMenu');
         const financialButton = document.getElementById('financialButton');
+        const accountsButton = document.getElementById('accountsButton');
+        const accountsDropdownMenu = document.getElementById('accountsDropdownMenu');
 
         // Set active state based on current page
         const currentPage = window.location.pathname.split('/').pop();
@@ -534,6 +536,8 @@ document.addEventListener('DOMContentLoaded', function() {
             projectButton.classList.add('text-white', 'hover:text-sky-500');
             financialButton.classList.remove('text-sky-500', 'font-semibold', 'bg-white/10', 'px-4', 'py-2', 'rounded-lg');
             financialButton.classList.add('text-white', 'hover:text-sky-500');
+            accountsButton.classList.remove('text-sky-500', 'font-semibold', 'bg-white/10', 'px-4', 'py-2', 'rounded-lg');
+            accountsButton.classList.add('text-white', 'hover:text-sky-500');
         } else if (isProjectPage) {
             projectButton.classList.add('text-sky-500', 'font-semibold', 'bg-white/10', 'px-4', 'py-2', 'rounded-lg');
             projectButton.classList.remove('text-white', 'hover:text-sky-500');
@@ -541,6 +545,8 @@ document.addEventListener('DOMContentLoaded', function() {
             salesButton.classList.add('text-white', 'hover:text-sky-500');
             financialButton.classList.remove('text-sky-500', 'font-semibold', 'bg-white/10', 'px-4', 'py-2', 'rounded-lg');
             financialButton.classList.add('text-white', 'hover:text-sky-500');
+            accountsButton.classList.remove('text-sky-500', 'font-semibold', 'bg-white/10', 'px-4', 'py-2', 'rounded-lg');
+            accountsButton.classList.add('text-white', 'hover:text-sky-500');
         } else if (isFinancialPage) {
             financialButton.classList.add('text-sky-500', 'font-semibold', 'bg-white/10', 'px-4', 'py-2', 'rounded-lg');
             financialButton.classList.remove('text-white', 'hover:text-sky-500');
@@ -548,6 +554,8 @@ document.addEventListener('DOMContentLoaded', function() {
             salesButton.classList.add('text-white', 'hover:text-sky-500');
             projectButton.classList.remove('text-sky-500', 'font-semibold', 'bg-white/10', 'px-4', 'py-2', 'rounded-lg');
             projectButton.classList.add('text-white', 'hover:text-sky-500');
+            accountsButton.classList.remove('text-sky-500', 'font-semibold', 'bg-white/10', 'px-4', 'py-2', 'rounded-lg');
+            accountsButton.classList.add('text-white', 'hover:text-sky-500');
         }
 
         // Remove manual click listeners and stopPropagation, rely on Tippy.js
@@ -590,6 +598,24 @@ document.addEventListener('DOMContentLoaded', function() {
         if (financialButton && financialDropdownMenu) {
             tippy(financialButton, {
                 content: financialDropdownMenu.innerHTML,
+                allowHTML: true,
+                interactive: true,
+                trigger: 'click',
+                placement: 'bottom-start',
+                animation: 'scale',
+                theme: 'light',
+                onShow(instance) {
+                    instance.popper.addEventListener('mouseleave', () => {
+                        instance.hide();
+                    });
+                }
+            });
+        }
+
+        // Accounts Dropdown
+        if (accountsButton && accountsDropdownMenu) {
+            tippy(accountsButton, {
+                content: accountsDropdownMenu.innerHTML,
                 allowHTML: true,
                 interactive: true,
                 trigger: 'click',

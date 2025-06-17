@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>Deleted Employees</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .back-button {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            transition: all 0.3s ease;
+        }
+        .back-button:hover {
+            transform: translateX(-3px);
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+        }
+        .restore-btn {
+            transition: all 0.2s ease;
+        }
+        .restore-btn:hover {
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50">
+    <!-- Include header -->
+    <div id="header-container"></div>
+
+    <!-- Include navigation -->
+    <div id="nav-container"></div>
+
+    <!-- Main content -->
+    <main class="w-full px-2 py-4">
+        <!-- Table Card -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+            <!-- Header -->
+            <div class="p-4 border-b border-gray-100 bg-gradient-to-r from-purple-50 to-indigo-50">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-800">Deleted Employees</h1>
+                        <p class="text-sm text-gray-600 mt-0.5">View and manage deleted employee records</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <button onclick="window.location.href='employee.html'" class="back-button text-sm px-4 py-2 text-white rounded-md flex items-center gap-2">
+                            <i class="fas fa-arrow-left"></i>Back to List
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table Header -->
+            <div class="p-4 border-b border-gray-100">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-3">
+                        <div class="relative">
+                            <input type="text" placeholder="Search deleted employees..." class="pl-9 pr-3 py-1.5 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all w-60">
+                            <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button id="restoreSelectedBtn" class="text-sm px-3 py-1.5 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors hidden">
+                            <i class="fas fa-undo-alt mr-1.5"></i>Restore Selected
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table Content -->
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-4 py-3 text-left">
+                                <input type="checkbox" id="selectAllDeleted" class="w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                            </th>
+                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600">ID</th>
+                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600">Name</th>
+                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600">Email</th>
+                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600">Phone</th>
+                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600">Deleted Date</th>
+                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-4 py-3">
+                                <input type="checkbox" class="employee-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                            </td>
+                            <td class="px-4 py-3 text-xs text-gray-600">8</td>
+                            <td class="px-4 py-3">
+                                <div class="text-sm font-medium text-gray-900">adminUpdate123 Virginia</div>
+                            </td>
+                            <td class="px-4 py-3 text-xs text-gray-600">employeeone@gmail.com</td>
+                            <td class="px-4 py-3 text-xs text-gray-600">091 2376 5223</td>
+                            <td class="px-4 py-3 text-xs text-gray-600">March 12, 2025</td>
+                            <td class="px-4 py-3">
+                                <button class="text-xs text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
+                                    <i class="fas fa-undo-alt mr-1"></i>Restore
+                                </button>
+                            </td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="px-4 py-3 border-t border-gray-100">
+                <div class="flex justify-between items-center">
+                    <div class="text-xs text-gray-600">
+                        Showing <span class="font-medium">1</span> to <span class="font-medium">10</span> of <span class="font-medium">20</span> entries
+                    </div>
+                    <div class="flex gap-1.5">
+                        <button class="px-2.5 py-1 text-xs border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50 transition-colors">
+                            Previous
+                        </button>
+                        <button class="px-2.5 py-1 text-xs bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors">
+                            1
+                        </button>
+                        <button class="px-2.5 py-1 text-xs border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50 transition-colors">
+                            Next
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Load JavaScript files -->
+    <script src="../js/main.js"></script>
+    <script src="../js/employee.js"></script>
+</body>
+</html> 

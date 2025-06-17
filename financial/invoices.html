@@ -28,38 +28,38 @@
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
             <div class="flex items-center gap-4">
                 <h1 class="text-xl md:text-2xl font-bold text-gray-800">Invoices</h1>
-                <div class="flex items-center gap-2">
-                    <div class="relative">
-                        <button id="actionsDropdown" class="animated-button text-white px-3 py-1.5 md:px-4 md:py-2 rounded-lg flex items-center space-x-2 text-sm md:text-base">
-                            <span>Actions</span>
-                            <i class="fas fa-chevron-down ml-1"></i>
+            </div>
+            <div class="flex items-center gap-2">
+                <div class="relative">
+                    <button id="actionsDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
+                        <span>Actions</span>
+                        <i class="fas fa-chevron-down ml-1"></i>
+                    </button>
+                    <div id="actionsMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10">
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-trash-alt w-5"></i>
+                            <span>Delete</span>
                         </button>
-                        <div id="actionsMenu" class="hidden absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10">
-                            <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                                <i class="fas fa-trash-alt w-5"></i>
-                                <span>Delete</span>
-                            </button>
-                        </div>
                     </div>
-                    <div class="relative">
-                        <button id="moreDropdown" class="animated-button text-white px-3 py-1.5 md:px-4 md:py-2 rounded-lg flex items-center space-x-2 text-sm md:text-base">
-                            <span>More</span>
-                            <i class="fas fa-chevron-down ml-1"></i>
+                </div>
+                <div class="relative">
+                    <button id="moreDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
+                        <span>More</span>
+                        <i class="fas fa-chevron-down ml-1"></i>
+                    </button>
+                    <div id="moreMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10">
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-cog w-5"></i>
+                            <span>Settings</span>
                         </button>
-                        <div id="moreMenu" class="hidden absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10">
-                            <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                                <i class="fas fa-cog w-5"></i>
-                                <span>Settings</span>
-                            </button>
-                            <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                                <i class="fas fa-chart-bar w-5"></i>
-                                <span>Report</span>
-                            </button>
-                            <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                                <i class="fas fa-history w-5"></i>
-                                <span>Audit Trail</span>
-                            </button>
-                        </div>
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-chart-bar w-5"></i>
+                            <span>Report</span>
+                        </button>
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-history w-5"></i>
+                            <span>Audit Trail</span>
+                        </button>
                     </div>
                 </div>
             </div>

@@ -23,10 +23,13 @@
                     <i class="fas fa-chevron-down ml-2"></i>
                 </button>
             </div>
-            <a class="nav-link flex items-center space-x-2 text-white hover:text-sky-500" href="#">
-                <i class="fas fa-users"></i>
-                <span class="font-medium">Accounts</span>
-            </a>
+            <div class="relative" id="accountsDropdown" style="z-index: 9999;">
+                <button class="nav-link flex items-center space-x-2 text-white hover:text-sky-500" id="accountsButton">
+                    <i class="fas fa-users"></i>
+                    <span class="font-medium">Accounts</span>
+                    <i class="fas fa-chevron-down ml-2"></i>
+                </button>
+            </div>
             <a class="nav-link flex items-center space-x-2 text-white hover:text-sky-500" href="#">
                 <i class="fas fa-comments"></i>
                 <span class="font-medium">Marketing</span>
@@ -111,10 +114,22 @@
                     </a>
                 </div>
             </div>
-            <a class="flex items-center space-x-2 text-white hover:text-sky-500 px-4 py-2 rounded-lg hover:bg-white/10" href="#">
-                <i class="fas fa-users"></i>
-                <span class="font-medium">Accounts</span>
-            </a>
+            <div class="px-4 py-2">
+                <div class="text-white font-semibold mb-2">
+                    <i class="fas fa-users mr-2"></i>
+                    Accounts
+                </div>
+                <div class="pl-4 space-y-1">
+                    <a href="../accounts/customerlist.html" class="block py-2 text-white hover:text-sky-500">
+                        <i class="fas fa-address-book mr-2"></i>
+                        Customer List
+                    </a>
+                    <a href="../accounts/employee.html" class="block py-2 text-white hover:text-sky-500">
+                        <i class="fas fa-user-tie mr-2"></i>
+                        Employee List
+                    </a>
+                </div>
+            </div>
             <a class="flex items-center space-x-2 text-white hover:text-sky-500 px-4 py-2 rounded-lg hover:bg-white/10" href="#">
                 <i class="fas fa-comments"></i>
                 <span class="font-medium">Marketing</span>
@@ -127,17 +142,17 @@
 <div id="sideNavOverlay" class="md:hidden fixed inset-0 bg-blue-900 bg-opacity-75 hidden z-40"></div>
 
 <!-- Dropdown Menu Container -->
-<div id="dropdownMenu" class="hidden">
+<div id="dropdownMenu" class="hidden" style="min-width: 200px;">
     <div class="py-1">
-        <a href="../dispatch/activeprojects.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center">
+        <a href="../dispatch/activeprojects.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center" style="white-space: nowrap;">
             <i class="fas fa-check-circle mr-2"></i>
             Active Projects
         </a>
-        <a href="../dispatch/pendingprojects.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center">
+        <a href="../dispatch/pendingprojects.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center" style="white-space: nowrap;">
             <i class="fas fa-clock mr-2"></i>
             Pending Projects
         </a>
-        <a href="../dispatch/dispatchboard.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center">
+        <a href="../dispatch/dispatchboard.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center" style="white-space: nowrap;">
             <i class="fas fa-tachometer-alt mr-2"></i>
             Dispatch Board
         </a>
@@ -145,17 +160,17 @@
 </div>
 
 <!-- Sales Dropdown Menu Container -->
-<div id="salesDropdownMenu" class="hidden">
+<div id="salesDropdownMenu" class="hidden" style="min-width: 200px;">
     <div class="py-1">
-        <a href="../sales/estimates.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center">
+        <a href="../sales/estimates.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center" style="white-space: nowrap;">
             <i class="fas fa-file-invoice mr-2"></i>
             Estimates
         </a>
-        <a href="../sales/carts.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center">
+        <a href="../sales/carts.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center" style="white-space: nowrap;">
             <i class="fas fa-shopping-basket mr-2"></i>
             Carts
         </a>
-        <a href="../sales/unscheduled.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center">
+        <a href="../sales/unscheduled.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center" style="white-space: nowrap;">
             <i class="fas fa-clock mr-2"></i>
             Unscheduled
         </a>
@@ -163,23 +178,37 @@
 </div>
 
 <!-- Financial Dropdown Menu Container -->
-<div id="financialDropdownMenu" class="hidden">
+<div id="financialDropdownMenu" class="hidden" style="min-width: 200px;">
     <div class="py-1">
-        <a href="../financial/invoices.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center">
+        <a href="../financial/invoices.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center" style="white-space: nowrap;">
             <i class="fas fa-file-invoice-dollar mr-2"></i>
             Invoices
         </a>
-        <a href="../financial/expenses.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center">
+        <a href="../financial/expenses.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center" style="white-space: nowrap;">
             <i class="fas fa-receipt mr-2"></i>
             Expenses
         </a>
-        <a href="../financial/po.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center">
+        <a href="../financial/po.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center" style="white-space: nowrap;">
             <i class="fas fa-clipboard-list mr-2"></i>
             P.O.
         </a>
-        <a href="../financial/payroll.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center">
+        <a href="../financial/payroll.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center" style="white-space: nowrap;">
             <i class="fas fa-money-check-alt mr-2"></i>
             Payroll
+        </a>
+    </div>
+</div>
+
+<!-- Accounts Dropdown Menu Container -->
+<div id="accountsDropdownMenu" class="hidden" style="min-width: 200px;">
+    <div class="py-1">
+        <a href="../accounts/customerlist.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center" style="white-space: nowrap;">
+            <i class="fas fa-address-book mr-2"></i>
+            Customer List
+        </a>
+        <a href="../accounts/employee.html" class="block px-4 py-2 text-gray-800 hover:bg-sky-50 hover:text-sky-500 flex items-center" style="white-space: nowrap;">
+            <i class="fas fa-user-tie mr-2"></i>
+            Employee List
         </a>
     </div>
 </div>
