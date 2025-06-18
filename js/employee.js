@@ -1,4 +1,36 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Actions dropdown functionality
+    const actionsDropdown = document.getElementById('actionsDropdown');
+    const actionsMenu = document.getElementById('actionsMenu');
+    const moreDropdown = document.getElementById('moreDropdown');
+    const moreMenu = document.getElementById('moreMenu');
+
+    // Toggle actions menu
+    if (actionsDropdown && actionsMenu) {
+        actionsDropdown.addEventListener('click', () => {
+            actionsMenu.classList.toggle('hidden');
+            if (moreMenu) moreMenu.classList.add('hidden');
+        });
+    }
+
+    // Toggle more menu
+    if (moreDropdown && moreMenu) {
+        moreDropdown.addEventListener('click', () => {
+            moreMenu.classList.toggle('hidden');
+            if (actionsMenu) actionsMenu.classList.add('hidden');
+        });
+    }
+
+    // Close menus when clicking outside
+    document.addEventListener('click', (e) => {
+        if (actionsDropdown && moreDropdown) {
+            if (!actionsDropdown.contains(e.target) && !moreDropdown.contains(e.target)) {
+                if (actionsMenu) actionsMenu.classList.add('hidden');
+                if (moreMenu) moreMenu.classList.add('hidden');
+            }
+        }
+    });
+
     // Modal and button elements
     const createBtn = document.getElementById('createEmployeeBtn');
     const modal = document.getElementById('employeeCreateModal');
