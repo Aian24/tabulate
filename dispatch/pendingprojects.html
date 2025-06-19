@@ -14,50 +14,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <link rel="stylesheet" href="../css/styles.css">
-
-    <!-- Custom styles for Pending Projects page -->
-    <style>
-        /* Table row styles */
-        tbody tr {
-            cursor: pointer; /* Show pointer cursor on hoverable rows */
-        }
-        
-        /* Hover effect for table rows */
-        tbody tr:hover {
-            background-color: rgba(59, 130, 246, 0.05); /* Light blue background on hover */
-        }
-        
-        /* Selected row style */
-        tbody tr.selected {
-            background-color: rgba(59, 130, 246, 0.1); /* Slightly darker blue for selected row */
-        }
-
-        /* Modal visibility control */
-        #dispatchModal {
-            display: none; /* Hide modal by default */
-        }
-
-        #dispatchModal.active {
-            display: block; /* Show modal when active class is added */
-        }
-
-        /* Modal animation */
-        .modal-content {
-            transition: all 0.3s ease-in-out; /* Smooth transition for modal content */
-        }
-
-        /* Toast notification styles */
-        .toast {
-            transition: all 0.3s ease-in-out;
-            transform: translateY(100%);
-            opacity: 0;
-        }
-
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    </style>
 </head>
 <body class="min-h-screen">
     <!-- Include header -->
@@ -67,7 +23,7 @@
     <div id="nav-container"></div>
 
     <!-- Main content -->
-    <main class="container-fluid mx-auto px-4 md:px-6 py-2 md:py-4" style="position: relative; z-index: 1;">
+    <main class="container-fluid mx-auto px-4 md:px-6 py-2 md:py-4 relative-z-1">
         <!-- Combined header with search -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
             <div class="flex items-center gap-4">

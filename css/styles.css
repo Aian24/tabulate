@@ -408,4 +408,276 @@ nav .container-fluid {
 
 .tippy-box[data-theme~='light'] .tippy-arrow {
     color: white !important; /* Ensure arrow matches background */
-} 
+}
+
+/* =====================================================================
+   Custom Buttons for Create Estimate (from create-estimate.html)
+   ===================================================================== */
+.back-button {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    transition: all 0.3s ease;
+}
+.back-button:hover {
+    transform: translateX(-3px);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+}
+.submit-button {
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+    transition: all 0.3s ease;
+}
+.submit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+}
+
+/* =====================================================================
+   Mobile App-like Styles (from accounts/contractors.html, create-contractor.html, deleted-contractors.html)
+   ===================================================================== */
+@media (max-width: 768px) {
+    .mobile-container {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    .mobile-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 1rem;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .mobile-search {
+        background: rgba(255,255,255,0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 25px;
+        border: none;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .mobile-card {
+        background: white;
+        border-radius: 16px;
+        margin: 0.5rem 1rem;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        border: none;
+    }
+    .mobile-button {
+        border-radius: 12px;
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .mobile-button:active {
+        transform: scale(0.95);
+    }
+    .mobile-table {
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+    .mobile-table-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 1rem;
+    }
+    .mobile-table-row {
+        padding: 1rem;
+        border-bottom: 1px solid #f1f5f9;
+        transition: all 0.3s ease;
+    }
+    .mobile-table-row:last-child {
+        border-bottom: none;
+    }
+    .mobile-table-row:active {
+        background-color: #f8fafc;
+        transform: scale(0.98);
+    }
+    .mobile-status {
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+    .mobile-actions {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 1rem;
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+        z-index: 100;
+    }
+    .mobile-fab {
+        position: fixed;
+        bottom: 5rem;
+        right: 1rem;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        z-index: 1000;
+        transition: all 0.3s ease;
+    }
+    .mobile-fab:active {
+        transform: scale(0.9);
+    }
+    .mobile-section {
+        background: white;
+        border-radius: 12px;
+        margin: 0.5rem 1rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        border: 1px solid #f1f5f9;
+    }
+    .mobile-section-header {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        padding: 1rem;
+        border-radius: 12px 12px 0 0;
+        border-bottom: 1px solid #e2e8f0;
+    }
+    .mobile-input {
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 0.75rem;
+        font-size: 0.875rem;
+        transition: all 0.3s ease;
+    }
+    .mobile-input:focus {
+        border-color: #8b5cf6;
+        box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        outline: none;
+    }
+}
+@media (max-width: 400px) {
+    .mobile-button {
+        padding: 0.25rem 0.4rem !important;
+        font-size: 0.75rem !important;
+        border-radius: 20px !important;
+    }
+    .mobile-button i {
+        font-size: 0.75em !important;
+    }
+}
+
+/* =====================================================================
+   Button and Restore Styles (from accounts/deleted-contractors.html, deleted-employees.html)
+   ===================================================================== */
+.restore-btn {
+    transition: all 0.2s ease;
+}
+.restore-btn:hover {
+    transform: translateY(-1px);
+}
+
+/* =====================================================================
+   Pending Projects Page Styles (from dispatch/pendingprojects.html)
+   ===================================================================== */
+
+/* Table row styles */
+tbody tr {
+    cursor: pointer; /* Show pointer cursor on hoverable rows */
+}
+
+/* Hover effect for table rows */
+tbody tr:hover {
+    background-color: rgba(59, 130, 246, 0.05); /* Light blue background on hover */
+}
+
+/* Selected row style */
+tbody tr.selected {
+    background-color: rgba(59, 130, 246, 0.1); /* Slightly darker blue for selected row */
+}
+
+/* Modal visibility control */
+#dispatchModal {
+    display: none; /* Hide modal by default */
+    align-items: center;
+    justify-content: center;
+}
+#dispatchModal.active {
+    display: flex; /* Show modal when active class is added */
+}
+#dispatchModal > div {
+    transform: none;
+}
+
+/* Modal animation */
+.modal-content {
+    transition: all 0.3s ease-in-out; /* Smooth transition for modal content */
+}
+
+/* Toast notification styles */
+.toast {
+    transition: all 0.3s ease-in-out;
+    transform: translateY(100%);
+    opacity: 0;
+}
+.toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Utility class for relative positioning and z-index */
+.relative-z-1 {
+    position: relative;
+    z-index: 1;
+}
+
+/* === Dispatch Board Inline Styles (moved from dispatchboard.html) === */
+
+/* Calendar Day Styles */
+.calendar-day {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+}
+.calendar-day:hover {
+    background-color: #f3f4f6;
+}
+.calendar-day.active {
+    background: linear-gradient(to right, #0ea5e9, #2563eb);
+    color: #fff;
+}
+.calendar-day.active:hover {
+    background: linear-gradient(to right, #0369a1, #1e40af);
+}
+
+/* View Control Buttons */
+.view-control-btn {
+    padding: 0.5rem;
+    color: #4b5563;
+    transition: color 0.2s, background-color 0.2s;
+}
+.view-control-btn:hover {
+    color: #111827;
+    background-color: #f3f4f6;
+}
+.view-control-btn.active {
+    color: #0ea5e9;
+    background-color: #f0f9ff;
+}
+
+/* Draggable Header Styles */
+.draggable-header {
+    cursor: pointer;
+    user-select: none;
+}
+.draggable-header.asc i::before {
+    content: "\f0de";
+}
+.draggable-header.desc i::before {
+    content: "\f0dd";
+}
+
+/* Force pointer cursor on all table elements */
+table tbody tr.dispatch-card,
+table tbody tr.dispatch-card td,
+table tbody tr.dispatch-card td *,
+table tbody tr.dispatch-card td span,
+table tbody tr.dispatch-card td p {
+    cursor: pointer !important;
+}
+
+/* === End Dispatch Board Inline Styles === */ 

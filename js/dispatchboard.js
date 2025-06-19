@@ -39,6 +39,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize map controls
     initializeMapControls();
+
+    // More dropdown functionality (moved from dispatchboard.html)
+    const moreDropdown = document.getElementById('moreDropdown');
+    const moreMenu = document.getElementById('moreMenu');
+    if (moreDropdown && moreMenu) {
+        // Toggle more menu
+        moreDropdown.addEventListener('click', (e) => {
+            e.stopPropagation();
+            moreMenu.classList.toggle('hidden');
+        });
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!moreDropdown.contains(e.target)) {
+                moreMenu.classList.add('hidden');
+            }
+        });
+    }
 });
 
 // Initialize week days
@@ -232,7 +249,7 @@ function showDispatchDetails(data) {
     `;
     
     // Ensure modal is properly centered
-    modal.style.display = 'flex';
+    modal.classList.add('active');
     modal.classList.remove('hidden');
     
     // Prevent body scrolling when modal is open
@@ -264,8 +281,8 @@ function showDispatchDetails(data) {
 // Function to close dispatch modal
 function closeDispatchModal() {
     const modal = document.getElementById('dispatchModal');
+    modal.classList.remove('active');
     modal.classList.add('hidden');
-    modal.style.display = 'none';
     // Restore body scrolling
     document.body.style.overflow = 'auto';
 }

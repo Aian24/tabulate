@@ -7,22 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../css/styles.css">
-    <style>
-        .back-button {
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-            transition: all 0.3s ease;
-        }
-        .back-button:hover {
-            transform: translateX(-3px);
-            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
-        }
-        .restore-btn {
-            transition: all 0.2s ease;
-        }
-        .restore-btn:hover {
-            transform: translateY(-1px);
-        }
-    </style>
 </head>
 <body class="min-h-screen bg-gray-50">
     <!-- Include header -->
@@ -70,17 +54,17 @@
             <!-- Table Content -->
             <div class="overflow-x-auto">
                 <table class="w-full">
-                    <thead class="bg-gray-50">
+                    <thead class="bg-gradient-to-r from-sky-500 to-blue-600 text-white">
                         <tr>
                             <th class="px-4 py-3 text-left">
                                 <input type="checkbox" id="selectAllDeleted" class="w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
                             </th>
-                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600">ID</th>
-                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600">Name</th>
-                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600">Email</th>
-                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600">Phone</th>
-                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600">Deleted Date</th>
-                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600">Actions</th>
+                            <th class="px-4 py-3 text-left text-xs font-semibold">ID</th>
+                            <th class="px-4 py-3 text-left text-xs font-semibold">Name</th>
+                            <th class="px-4 py-3 text-left text-xs font-semibold">Email</th>
+                            <th class="px-4 py-3 text-left text-xs font-semibold">Phone</th>
+                            <th class="px-4 py-3 text-left text-xs font-semibold">Deleted Date</th>
+                            <th class="px-4 py-3 text-left text-xs font-semibold">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100">

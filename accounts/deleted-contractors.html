@@ -17,121 +17,6 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <style>
-        .back-button {
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-            transition: all 0.3s ease;
-        }
-        .back-button:hover {
-            transform: translateX(-3px);
-            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
-        }
-        .restore-btn {
-            transition: all 0.2s ease;
-        }
-        .restore-btn:hover {
-            transform: translateY(-1px);
-        }
-        /* Mobile App-like Styles */
-        @media (max-width: 768px) {
-            .mobile-container {
-                max-width: 100%;
-                margin: 0;
-                padding: 0;
-            }
-            
-            .mobile-header {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                padding: 1rem;
-                margin: 0;
-                border-radius: 0;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            }
-            
-            .mobile-search {
-                background: rgba(255,255,255,0.95);
-                backdrop-filter: blur(10px);
-                border-radius: 25px;
-                border: none;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            }
-            
-            .mobile-card {
-                background: white;
-                border-radius: 16px;
-                margin: 0.5rem 1rem;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-                border: none;
-            }
-            
-            .mobile-button {
-                padding: 0.4rem 0.7rem !important;
-                font-size: 0.85rem !important;
-                min-width: 0 !important;
-            }
-            .mobile-button i {
-                font-size: 0.85em !important;
-            }
-            
-            .mobile-button:active {
-                transform: scale(0.95);
-            }
-            
-            .mobile-table {
-                border-radius: 16px;
-                overflow: hidden;
-                box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-            }
-            
-            .mobile-table-header {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                padding: 1rem;
-            }
-            
-            .mobile-table-row {
-                padding: 1rem;
-                border-bottom: 1px solid #f1f5f9;
-                transition: all 0.3s ease;
-            }
-            
-            .mobile-table-row:last-child {
-                border-bottom: none;
-            }
-            
-            .mobile-table-row:active {
-                background-color: #f8fafc;
-                transform: scale(0.98);
-            }
-            
-            .mobile-status {
-                padding: 0.5rem 1rem;
-                border-radius: 20px;
-                font-size: 0.75rem;
-                font-weight: 600;
-            }
-            
-            .mobile-actions {
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                background: white;
-                padding: 1rem;
-                box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
-                z-index: 100;
-            }
-        }
-        @media (max-width: 400px) {
-            .mobile-button {
-                padding: 0.25rem 0.4rem !important;
-                font-size: 0.75rem !important;
-                border-radius: 20px !important;
-            }
-            .mobile-button i {
-                font-size: 0.75em !important;
-            }
-        }
-    </style>
 </head>
 <body class="min-h-screen bg-gray-50">
     <!-- Include header -->
@@ -435,7 +320,7 @@
         <div class="hidden md:block bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 container-fluid mx-auto px-4 md:px-6">
             <div class="overflow-x-auto">
                 <table class="w-full min-w-[800px]">
-                    <thead class="bg-gradient-to-r from-purple-500 to-indigo-600 text-white">
+                    <thead class="bg-gradient-to-r from-sky-500 to-blue-600 text-white">
                         <tr>
                             <th class="px-6 py-4 text-left">
                                 <input type="checkbox" id="selectAllDeleted" class="w-4 h-4 text-purple-600 rounded focus:ring-purple-500">

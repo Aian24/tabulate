@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <title>Contractors List</title>
+    <title>Vendors List</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
@@ -30,7 +30,7 @@
         <!-- Mobile Header -->
         <div class="mobile-header md:hidden">
             <div class="flex items-center justify-between mb-2">
-                <h1 class="text-lg font-bold text-white">Contractors</h1>
+                <h1 class="text-lg font-bold text-white">Vendors</h1>
                 <div class="flex items-center gap-2">
                     <button class="text-white p-1.5 rounded-full bg-white/20 backdrop-blur-sm">
                         <i class="fas fa-ellipsis-v text-sm"></i>
@@ -39,7 +39,7 @@
             </div>
             <div class="relative">
                 <input type="search" 
-                       placeholder="Search contractors..." 
+                       placeholder="Search vendors..." 
                        class="mobile-search w-full h-8 pl-3 pr-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-white/50 text-sm"
                 />
             </div>
@@ -49,7 +49,7 @@
         <div class="hidden md:block container-fluid mx-auto px-4 md:px-6 py-2 md:py-4">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
                 <div class="flex items-center gap-4">
-                    <h1 class="text-xl md:text-2xl font-bold text-gray-800">Contractors List</h1>
+                    <h1 class="text-xl md:text-2xl font-bold text-gray-800">Vendors List</h1>
                 </div>
                 <div class="flex items-center gap-2">
                     <div class="relative">
@@ -102,12 +102,12 @@
                         <option value="100">100</option>
                     </select>
                 </div>
-                <!-- Deleted Contractors and Create buttons -->
+                <!-- Deleted Vendors and Create buttons -->
                 <div class="flex flex-wrap justify-center md:justify-start gap-2">
-                    <button onclick="window.location.href='deleted-contractors.html'" class="px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 transition-colors">
+                    <button onclick="window.location.href='deleted-vendors.html'" class="px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 transition-colors">
                         <i class="fas fa-trash-alt mr-1"></i> Deleted
                     </button>
-                    <button onclick="window.location.href='create-contractor.html'" class="px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors">
+                    <button onclick="window.location.href='create-vendor.html'" class="px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors">
                         <i class="fas fa-user-plus mr-1"></i>Create
                     </button>
                 </div>
@@ -124,163 +124,283 @@
             </div>
         </div>
 
-        <!-- Mobile Contractors List -->
+        <!-- Mobile Vendors List -->
         <div class="md:hidden pb-20">
             <div class="mobile-card">
                 <div class="mobile-table-header">
-                    <h2 class="text-white font-semibold">Active Contractors</h2>
-                    <p class="text-white/80 text-sm mt-1">5 contractors found</p>
+                    <h2 class="text-white font-semibold">Active Vendors</h2>
+                    <p class="text-white/80 text-sm mt-1">9 vendors found</p>
                 </div>
                 
-                <!-- Mobile Contractor Cards -->
+                <!-- Mobile Vendor Cards -->
                 <div class="p-3 space-y-2">
-                    <!-- Contractor Card 1 -->
+                    <!-- Vendor Card 1 -->
                     <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
                         <div class="flex items-center justify-between mb-1">
                             <div class="flex items-center gap-3">
                                 <div class="w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
-                                    JR
+                                    S
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold text-gray-900 text-sm">Joshua Rolluqui</h3>
-                                    <p class="text-xs text-gray-500">ID: 34</p>
+                                    <h3 class="font-semibold text-gray-900 text-sm">Stanley</h3>
+                                    <p class="text-xs text-gray-500">ID: 4</p>
                                 </div>
                             </div>
                             <span class="mobile-status bg-green-100 text-green-800 text-xs">Active</span>
                         </div>
                         <div class="space-y-1 text-xs">
                             <div>
+                                <span class="text-gray-500">Contact Person:</span>
+                                <span class="text-gray-900">William Stanley Jr.</span>
+                            </div>
+                            <div>
                                 <span class="text-gray-500">Phone:</span>
-                                <span class="text-gray-900">09753565927</span>
+                                <span class="text-gray-900">1 (804) 698-7507</span>
                             </div>
                             <div>
                                 <span class="text-gray-500">Email:</span>
-                                <span class="text-gray-900">joshrolluqui5@gmail.com</span>
+                                <span class="text-gray-900">senatorstanley@senate.virginia.gov</span>
                             </div>
-                        </div>
-                        <div class="mt-1">
-                            <span class="text-gray-500 text-xs">Address:</span>
-                            <span class="text-gray-900 text-xs">Taga Etivac</span>
                         </div>
                     </div>
 
-                    <!-- Contractor Card 2 -->
+                    <!-- Vendor Card 2 -->
                     <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
                         <div class="flex items-center justify-between mb-1">
                             <div class="flex items-center gap-3">
                                 <div class="w-8 h-8 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
-                                    KM
+                                    R
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold text-gray-900 text-sm">Kerry Madi</h3>
-                                    <p class="text-xs text-gray-500">ID: 18</p>
+                                    <h3 class="font-semibold text-gray-900 text-sm">Ryobi</h3>
+                                    <p class="text-xs text-gray-500">ID: 6</p>
                                 </div>
                             </div>
                             <span class="mobile-status bg-green-100 text-green-800 text-xs">Active</span>
                         </div>
                         <div class="space-y-1 text-xs">
                             <div>
+                                <span class="text-gray-500">Contact Person:</span>
+                                <span class="text-gray-900">Akira Urakami</span>
+                            </div>
+                            <div>
                                 <span class="text-gray-500">Phone:</span>
-                                <span class="text-gray-900">09653481235</span>
+                                <span class="text-gray-900">1-(800)-268-4015</span>
                             </div>
                             <div>
                                 <span class="text-gray-500">Email:</span>
-                                <span class="text-gray-900">contractorfour@gmail.com</span>
+                                <span class="text-gray-900">reviews@ryobitools.com</span>
                             </div>
-                        </div>
-                        <div class="mt-1">
-                            <span class="text-gray-500 text-xs">Address:</span>
-                            <span class="text-gray-900 text-xs">420 Buckland Hills Dr</span>
                         </div>
                     </div>
 
-                    <!-- Contractor Card 3 -->
+                    <!-- Vendor Card 3 -->
                     <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
                         <div class="flex items-center justify-between mb-1">
                             <div class="flex items-center gap-3">
                                 <div class="w-8 h-8 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
-                                    AM
+                                    1
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold text-gray-900 text-sm">Aspyn Merla</h3>
-                                    <p class="text-xs text-gray-500">ID: 17</p>
+                                    <h3 class="font-semibold text-gray-900 text-sm">1</h3>
+                                    <p class="text-xs text-gray-500">ID: 7</p>
                                 </div>
                             </div>
                             <span class="mobile-status bg-green-100 text-green-800 text-xs">Active</span>
                         </div>
                         <div class="space-y-1 text-xs">
                             <div>
+                                <span class="text-gray-500">Contact Person:</span>
+                                <span class="text-gray-900">Joshua Rolluqui</span>
+                            </div>
+                            <div>
                                 <span class="text-gray-500">Phone:</span>
-                                <span class="text-gray-900">09345678245</span>
+                                <span class="text-gray-900">097 5356 5927</span>
                             </div>
                             <div>
                                 <span class="text-gray-500">Email:</span>
-                                <span class="text-gray-900">contractorthree@gmail.com</span>
+                                <span class="text-gray-900">oshwaldo@gmail.ocm</span>
                             </div>
-                        </div>
-                        <div class="mt-1">
-                            <span class="text-gray-500 text-xs">Address:</span>
-                            <span class="text-gray-900 text-xs">11 Jungle Road</span>
                         </div>
                     </div>
 
-                    <!-- Contractor Card 4 -->
+                    <!-- Vendor Card 4 -->
                     <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
                         <div class="flex items-center justify-between mb-1">
                             <div class="flex items-center gap-3">
                                 <div class="w-8 h-8 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
-                                    AT
+                                    O
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold text-gray-900 text-sm">Anona Tammy</h3>
-                                    <p class="text-xs text-gray-500">ID: 15</p>
+                                    <h3 class="font-semibold text-gray-900 text-sm">Oshwald</h3>
+                                    <p class="text-xs text-gray-500">ID: 9</p>
                                 </div>
                             </div>
                             <span class="mobile-status bg-green-100 text-green-800 text-xs">Active</span>
                         </div>
                         <div class="space-y-1 text-xs">
                             <div>
+                                <span class="text-gray-500">Contact Person:</span>
+                                <span class="text-gray-900">Oshwald Briones</span>
+                            </div>
+                            <div>
                                 <span class="text-gray-500">Phone:</span>
-                                <span class="text-gray-900">09123123123</span>
+                                <span class="text-gray-900">09123123</span>
                             </div>
                             <div>
                                 <span class="text-gray-500">Email:</span>
-                                <span class="text-gray-900">contractorone@gmail.com</span>
+                                <span class="text-gray-900">Oshwald22203@gmail.com</span>
                             </div>
-                        </div>
-                        <div class="mt-1">
-                            <span class="text-gray-500 text-xs">Address:</span>
-                            <span class="text-gray-900 text-xs">10040 County Road 48</span>
                         </div>
                     </div>
 
-                    <!-- Contractor Card 5 -->
+                    <!-- Vendor Card 5 -->
                     <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
                         <div class="flex items-center justify-between mb-1">
                             <div class="flex items-center gap-3">
                                 <div class="w-8 h-8 bg-gradient-to-br from-teal-400 to-cyan-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
-                                    LJ
+                                    G
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold text-gray-900 text-sm">Lake Jacqueline</h3>
-                                    <p class="text-xs text-gray-500">ID: 16</p>
+                                    <h3 class="font-semibold text-gray-900 text-sm">Global</h3>
+                                    <p class="text-xs text-gray-500">ID: 10</p>
                                 </div>
                             </div>
                             <span class="mobile-status bg-green-100 text-green-800 text-xs">Active</span>
                         </div>
                         <div class="space-y-1 text-xs">
                             <div>
+                                <span class="text-gray-500">Contact Person:</span>
+                                <span class="text-gray-900">Eric Smith</span>
+                            </div>
+                            <div>
                                 <span class="text-gray-500">Phone:</span>
-                                <span class="text-gray-900">08945671231</span>
+                                <span class="text-gray-900">12345678900000000000000000000000000000000000000</span>
                             </div>
                             <div>
                                 <span class="text-gray-500">Email:</span>
-                                <span class="text-gray-900">contractortwo@gmail.com</span>
+                                <span class="text-gray-900">eric.smith@gmail.com</span>
                             </div>
                         </div>
-                        <div class="mt-1">
-                            <span class="text-gray-500 text-xs">Address:</span>
-                            <span class="text-gray-900 text-xs">315 Foxon Blvd</span>
+                    </div>
+
+                    <!-- Vendor Card 6 -->
+                    <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
+                        <div class="flex items-center justify-between mb-1">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-gradient-to-br from-pink-400 to-yellow-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
+                                    L
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900 text-sm">LIXIL</h3>
+                                    <p class="text-xs text-gray-500">ID: 5</p>
+                                </div>
+                            </div>
+                            <span class="mobile-status bg-green-100 text-green-800 text-xs">Active</span>
+                        </div>
+                        <div class="space-y-1 text-xs">
+                            <div>
+                                <span class="text-gray-500">Contact Person:</span>
+                                <span class="text-gray-900">Kinya Seto</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">Phone:</span>
+                                <span class="text-gray-900">092352342</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">Email:</span>
+                                <span class="text-gray-900">customer.helpdesk@lixil.com</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vendor Card 7 -->
+                    <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
+                        <div class="flex items-center justify-between mb-1">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-gradient-to-br from-blue-400 to-green-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
+                                    C
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900 text-sm">Citi Hardware</h3>
+                                    <p class="text-xs text-gray-500">ID: 2</p>
+                                </div>
+                            </div>
+                            <span class="mobile-status bg-green-100 text-green-800 text-xs">Active</span>
+                        </div>
+                        <div class="space-y-1 text-xs">
+                            <div>
+                                <span class="text-gray-500">Contact Person:</span>
+                                <span class="text-gray-900">Citi Dagupan</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">Phone:</span>
+                                <span class="text-gray-900">091237652</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">Email:</span>
+                                <span class="text-gray-900">citi@harware.com</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vendor Card 8 -->
+                    <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
+                        <div class="flex items-center justify-between mb-1">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
+                                    D
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900 text-sm">DIYI</h3>
+                                    <p class="text-xs text-gray-500">ID: 3</p>
+                                </div>
+                            </div>
+                            <span class="mobile-status bg-green-100 text-green-800 text-xs">Active</span>
+                        </div>
+                        <div class="space-y-1 text-xs">
+                            <div>
+                                <span class="text-gray-500">Contact Person:</span>
+                                <span class="text-gray-900">Aljune Mutilaptalib</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">Phone:</span>
+                                <span class="text-gray-900">09672334565</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">Email:</span>
+                                <span class="text-gray-900">aljune@diyi.com</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vendor Card 9 -->
+                    <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
+                        <div class="flex items-center justify-between mb-1">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-gradient-to-br from-gray-400 to-blue-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
+                                    A
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900 text-sm">Ace Hardware</h3>
+                                    <p class="text-xs text-gray-500">ID: 1</p>
+                                </div>
+                            </div>
+                            <span class="mobile-status bg-green-100 text-green-800 text-xs">Active</span>
+                        </div>
+                        <div class="space-y-1 text-xs">
+                            <div>
+                                <span class="text-gray-500">Contact Person:</span>
+                                <span class="text-gray-900">Ace Tilap</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">Phone:</span>
+                                <span class="text-gray-900">69696969</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">Email:</span>
+                                <span class="text-gray-900">ace@hardware.com</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -290,11 +410,11 @@
         <!-- Mobile Action Buttons -->
         <div class="md:hidden mobile-actions">
             <div class="flex gap-3">
-                <button onclick="window.location.href='deleted-contractors.html'" class="mobile-button flex-1 bg-red-500 text-white flex items-center justify-center gap-2">
+                <button onclick="window.location.href='deleted-vendors.html'" class="mobile-button flex-1 bg-red-500 text-white flex items-center justify-center gap-2">
                     <i class="fas fa-trash-alt"></i>
                     <span>Deleted</span>
                 </button>
-                <button onclick="window.location.href='create-contractor.html'" class="mobile-button flex-1 bg-purple-600 text-white flex items-center justify-center gap-2">
+                <button onclick="window.location.href='create-vendor.html'" class="mobile-button flex-1 bg-purple-600 text-white flex items-center justify-center gap-2">
                     <i class="fas fa-user-plus"></i>
                     <span>Create</span>
                 </button>
@@ -302,11 +422,11 @@
         </div>
 
         <!-- Desktop Table content -->
-        <div class="hidden md:block hidden  container-fluid mx-auto px-4 md:px-6">
+        <div class="hidden md:block  rounded-xl container-fluid mx-auto">
             <div class="overflow-x-auto">
-                <table class="w-full rounded-lg overflow-hidden bg-white border border-gray-200">
-                    <thead>
-                        <tr class="bg-gradient-to-r from-sky-500 to-blue-600 text-white rounded-t-xl">
+                <table class="w-full min-w-[800px] rounded-lg overflow-hidden bg-white border border-gray-200">
+                    <thead class="bg-gradient-to-r from-sky-500 to-blue-600 text-white">
+                        <tr>
                             <th class="px-6 py-4 text-left">
                                 <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
                             </th>
@@ -316,21 +436,15 @@
                                     <i class="fas fa-sort text-xs opacity-70"></i>
                                 </div>
                             </th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="name">
+                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="vendor-name">
                                 <div class="flex items-center space-x-2">
-                                    <span>Name</span>
+                                    <span>Vendor Name</span>
                                     <i class="fas fa-sort text-xs opacity-70"></i>
                                 </div>
                             </th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="address">
+                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="contact-person">
                                 <div class="flex items-center space-x-2">
-                                    <span>Address</span>
-                                    <i class="fas fa-sort text-xs opacity-70"></i>
-                                </div>
-                            </th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="phone">
-                                <div class="flex items-center space-x-2">
-                                    <span>Phone</span>
+                                    <span>Contact Person</span>
                                     <i class="fas fa-sort text-xs opacity-70"></i>
                                 </div>
                             </th>
@@ -340,15 +454,15 @@
                                     <i class="fas fa-sort text-xs opacity-70"></i>
                                 </div>
                             </th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="account-status">
+                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="phone">
                                 <div class="flex items-center space-x-2">
-                                    <span>Account Status</span>
+                                    <span>Phone</span>
                                     <i class="fas fa-sort text-xs opacity-70"></i>
                                 </div>
                             </th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="deleted-status">
+                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="account-status">
                                 <div class="flex items-center space-x-2">
-                                    <span>Deleted Status</span>
+                                    <span>Account Status</span>
                                     <i class="fas fa-sort text-xs opacity-70"></i>
                                 </div>
                             </th>
@@ -359,81 +473,136 @@
                             <td class="px-6 py-4">
                                 <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
                             </td>
-                            <td class="px-6 py-4 text-sm text-gray-600">34</td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Joshua Rolluqui</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">Taga Etivac</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">09753565927</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">joshrolluqui5@gmail.com</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">4</td>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Stanley</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">William Stanley Jr.</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">senatorstanley@senate.virginia.gov</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">1 (804) 698-7507</td>
                             <td class="px-6 py-4">
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                     Active
                                 </span>
                             </td>
-                            <td class="px-6 py-4 text-sm text-gray-600">—</td>
                         </tr>
                         <tr class="hover:bg-gray-50 transition-colors cursor-pointer">
                             <td class="px-6 py-4">
                                 <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
                             </td>
-                            <td class="px-6 py-4 text-sm text-gray-600">18</td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Kerry Madi</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">420 Buckland Hills Dr</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">09653481235</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">contractorfour@gmail.com</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">6</td>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Ryobi</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Akira Urakami</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">reviews@ryobitools.com</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">1-(800)-268-4015</td>
                             <td class="px-6 py-4">
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                     Active
                                 </span>
                             </td>
-                            <td class="px-6 py-4 text-sm text-gray-600">—</td>
                         </tr>
                         <tr class="hover:bg-gray-50 transition-colors cursor-pointer">
                             <td class="px-6 py-4">
                                 <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
                             </td>
-                            <td class="px-6 py-4 text-sm text-gray-600">17</td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Aspyn Merla</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">11 Jungle Road</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">09345678245</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">contractorthree@gmail.com</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">7</td>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">1</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Joshua Rolluqui</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">oshwaldo@gmail.ocm</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">097 5356 5927</td>
                             <td class="px-6 py-4">
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                     Active
                                 </span>
                             </td>
-                            <td class="px-6 py-4 text-sm text-gray-600">—</td>
                         </tr>
                         <tr class="hover:bg-gray-50 transition-colors cursor-pointer">
                             <td class="px-6 py-4">
                                 <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
                             </td>
-                            <td class="px-6 py-4 text-sm text-gray-600">15</td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Anona Tammy</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">10040 County Road 48</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">09123123123</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">contractorone@gmail.com</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">9</td>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Oshwald</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Oshwald Briones</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Oshwald22203@gmail.com</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">09123123</td>
                             <td class="px-6 py-4">
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                     Active
                                 </span>
                             </td>
-                            <td class="px-6 py-4 text-sm text-gray-600">—</td>
                         </tr>
                         <tr class="hover:bg-gray-50 transition-colors cursor-pointer">
                             <td class="px-6 py-4">
                                 <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
                             </td>
-                            <td class="px-6 py-4 text-sm text-gray-600">16</td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Lake Jacqueline</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">315 Foxon Blvd</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">08945671231</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">contractortwo@gmail.com</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">10</td>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Global</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Eric Smith</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">eric.smith@gmail.com</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">12345678900000000000000000000000000000000000000</td>
                             <td class="px-6 py-4">
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                     Active
                                 </span>
                             </td>
-                            <td class="px-6 py-4 text-sm text-gray-600">—</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors cursor-pointer">
+                            <td class="px-6 py-4">
+                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-600">5</td>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">LIXIL</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Kinya Seto</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">customer.helpdesk@lixil.com</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">092352342</td>
+                            <td class="px-6 py-4">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    Active
+                                </span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors cursor-pointer">
+                            <td class="px-6 py-4">
+                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-600">2</td>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Citi Hardware</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Citi Dagupan</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">citi@harware.com</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">091237652</td>
+                            <td class="px-6 py-4">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    Active
+                                </span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors cursor-pointer">
+                            <td class="px-6 py-4">
+                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-600">3</td>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">DIYI</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Aljune Mutilaptalib</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">aljune@diyi.com</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">09672334565</td>
+                            <td class="px-6 py-4">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    Active
+                                </span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors cursor-pointer">
+                            <td class="px-6 py-4">
+                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-600">1</td>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Ace Hardware</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Ace Tilap</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">ace@hardware.com</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">69696969</td>
+                            <td class="px-6 py-4">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    Active
+                                </span>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -463,23 +632,23 @@
         </div>
     </main>
 
-    <!-- Modal for viewing contractor details -->
-    <div id="contractorModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+    <!-- Modal for viewing vendor details -->
+    <div id="vendorModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
         <div class="bg-white rounded-lg shadow-lg max-w-lg w-full p-6 relative">
             <button id="closeModal" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-xl font-bold">&times;</button>
-            <h2 class="text-xl font-semibold mb-4">Contractor Details</h2>
+            <h2 class="text-xl font-semibold mb-4">Vendor Details</h2>
             <div id="modalContent" class="space-y-2 text-gray-700 text-sm max-h-96 overflow-y-auto">
                 <!-- Details will be populated here -->
             </div>
         </div>
     </div>
 
-    <!-- Contractor Create Modal -->
-    <div id="contractorCreateModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-[9999]">
+    <!-- Vendor Create Modal -->
+    <div id="vendorCreateModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-[9999]">
         <div class="bg-white rounded-lg shadow-lg max-w-6xl w-full p-8 relative overflow-y-auto max-h-[90vh] z-[9999]">
-            <button id="closeContractorCreateModal" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-xl font-bold">&times;</button>
-            <h2 class="text-xl font-semibold mb-4">Contractor Create Form</h2>
-            <form id="contractorCreateForm">
+            <button id="closeVendorCreateModal" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-xl font-bold">&times;</button>
+            <h2 class="text-xl font-semibold mb-4">Vendor Create Form</h2>
+            <form id="vendorCreateForm">
                 <!-- Personal Information -->
                 <div class="mb-8">
                     <h3 class="text-lg font-semibold text-purple-500 mb-2">Personal Information</h3>
@@ -651,7 +820,7 @@
                             <input type="text" class="w-full border rounded px-3 py-2" placeholder="Hours per day" required />
                         </div>
                         <div class="col-span-1">
-                            <label class="block text-sm font-medium text-gray-700">Contractor Number</label>
+                            <label class="block text-sm font-medium text-gray-700">Vendor Number</label>
                             <input type="text" class="w-full border rounded px-3 py-2" placeholder="PC012" />
                         </div>
                         <div class="col-span-1">
@@ -691,21 +860,21 @@
         </div>
     </div>
 
-    <!-- Deleted Contractors Modal -->
-    <div id="deletedContractorsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+    <!-- Deleted Vendors Modal -->
+    <div id="deletedVendorsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
         <div class="bg-white rounded-lg shadow-lg max-w-6xl w-full p-8 relative overflow-y-auto max-h-[90vh]">
-            <button id="closeDeletedContractorsModal" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-xl font-bold">&times;</button>
-            <h2 class="text-xl font-semibold mb-6 text-gray-800">Deleted Contractors</h2>
+            <button id="closeDeletedVendorsModal" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-xl font-bold">&times;</button>
+            <h2 class="text-xl font-semibold mb-6 text-gray-800">Deleted Vendors</h2>
             <div class="mb-4 flex justify-between items-center">
                 <button id="restoreSelectedBtn" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors hidden">
                     <i class="fas fa-undo-alt mr-2"></i> Restore Selected
                 </button>
             </div>
             
-            <!-- Mobile Deleted Contractors List -->
+            <!-- Mobile Deleted Vendors List -->
             <div class="md:hidden">
                 <div class="space-y-3">
-                    <!-- Deleted Contractor Card 1 -->
+                    <!-- Deleted Vendor Card 1 -->
                     <div class="bg-white rounded-lg border border-gray-200 p-4">
                         <div class="flex items-center justify-between mb-2">
                             <div class="flex items-center gap-3">
@@ -740,7 +909,7 @@
                         </div>
                     </div>
 
-                    <!-- Deleted Contractor Card 2 -->
+                    <!-- Deleted Vendor Card 2 -->
                     <div class="bg-white rounded-lg border border-gray-200 p-4">
                         <div class="flex items-center justify-between mb-2">
                             <div class="flex items-center gap-3">
@@ -777,9 +946,9 @@
                 </div>
             </div>
 
-            <!-- Desktop Deleted Contractors Table -->
+            <!-- Desktop Deleted Vendors Table -->
             <div class="hidden md:block overflow-x-auto">
-                <table id="deletedContractorsTable" class="min-w-full bg-white border border-gray-200 rounded-lg">
+                <table id="deletedVendorsTable" class="min-w-full bg-white border border-gray-200 rounded-lg">
                     <thead>
                         <tr class="bg-gradient-to-r from-sky-500 to-blue-600 text-white">
                             <th class="px-6 py-4 text-left text-sm font-semibold">
@@ -796,7 +965,7 @@
                     <tbody class="divide-y divide-gray-100">
                         <tr class="hover:bg-gray-50 transition-colors">
                             <td class="px-6 py-4">
-                                <input type="checkbox" class="contractor-checkbox w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
+                                <input type="checkbox" class="vendor-checkbox w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
                             </td>
                             <td class="px-6 py-4">8</td>
                             <td class="px-6 py-4">John Doe</td>
@@ -811,7 +980,7 @@
                         </tr>
                         <tr class="hover:bg-gray-50 transition-colors">
                             <td class="px-6 py-4">
-                                <input type="checkbox" class="contractor-checkbox w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
+                                <input type="checkbox" class="vendor-checkbox w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
                             </td>
                             <td class="px-6 py-4">9</td>
                             <td class="px-6 py-4">Jane Smith</td>
@@ -833,6 +1002,6 @@
     <!-- Load JavaScript files -->
     <script src="../js/main.js"></script>
     <script src="../js/activeprojects.js"></script>
-    <script src="../js/contractors.js"></script>
+    <script src="../js/vendors.js"></script>
 </body>
 </html>
