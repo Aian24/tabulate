@@ -35,7 +35,7 @@
                         <span>Actions</span>
                         <i class="fas fa-chevron-down ml-1"></i>
                     </button>
-                    <div id="actionsMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10">
+                    <div id="actionsMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
                         <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
                             <i class="fas fa-trash-alt w-5"></i>
                             <span>Delete</span>
@@ -47,7 +47,7 @@
                         <span>More</span>
                         <i class="fas fa-chevron-down ml-1"></i>
                     </button>
-                    <div id="moreMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10">
+                    <div id="moreMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
                         <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
                             <i class="fas fa-cog w-5"></i>
                             <span>Settings</span>
@@ -81,17 +81,13 @@
                 </div>
                 <!-- Filter buttons -->
                 <div class="flex flex-wrap justify-center md:justify-start gap-2">
-                    <button class="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors">
-                        All
-                    </button>
-                    <button class="px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 transition-colors">
-                        Unpaid
-                    </button>
-                    <button class="px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-600 transition-colors">
-                        Paid
-                    </button>
-                    <button class="px-4 py-2 text-sm font-medium text-white bg-purple-500 rounded-lg hover:bg-purple-600 transition-colors">
-                        Partial Paid
+                    <button class="filter-btn border-2 border-blue-500 text-blue-500" data-filter="all">All</button>
+                    <button class="filter-btn border-2 border-red-500 text-red-500" data-filter="unpaid">Unpaid</button>
+                    <button class="filter-btn border-2 border-green-500 text-green-500" data-filter="paid">Paid</button>
+                    <button class="filter-btn border-2 border-purple-500 text-purple-500" data-filter="partial">Partial Paid</button>
+                    <button id="openFilter" class="calendar-button flex-grow md:flex-grow-0 border-2 border-gray-400 text-gray-700 flex items-center gap-1 px-3 py-1 rounded-lg">
+                        <i class="fas fa-filter"></i>
+                        <span>Filters</span>
                     </button>
                 </div>
             </div>
@@ -465,18 +461,6 @@ Seaside Blvd Pasay, Metro Manila Philippines 1300</td>
         </div>
     </div>
 
-    <!-- Toast Notification -->
-    <div class="toast fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 flex items-center space-x-3 border-l-4 border-green-500">
-        <i class="fas fa-check-circle text-green-500 text-xl"></i>
-        <div>
-            <h4 class="font-medium text-gray-800">Success!</h4>
-            <p class="text-sm text-gray-600">New dispatch has been assigned to Team A</p>
-        </div>
-        <button class="text-gray-400 hover:text-gray-600 ml-4">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-
     <!-- Date Range Modal -->
     <div id="dateRangeModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
         <div class="bg-white rounded-lg shadow-xl p-6 w-[800px] max-w-[90vw]">
@@ -607,7 +591,6 @@ Seaside Blvd Pasay, Metro Manila Philippines 1300</td>
 
     <!-- Load JavaScript files -->
     <script src="../js/main.js"></script>
-    <script src="../js/activeprojects.js"></script>
     <script src="../js/invoices.js"></script>
 </body>
 </html>

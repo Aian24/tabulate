@@ -680,4 +680,29 @@ table tbody tr.dispatch-card td p {
     cursor: pointer !important;
 }
 
-/* === End Dispatch Board Inline Styles === */ 
+/* === End Dispatch Board Inline Styles === */
+
+/* =====================================================================
+   Filter Button Styles (for Invoices,Expenses/Financial filter buttons)
+   - Default: colored border and text, transparent background
+   - .active-filter: solid background and white text for selected state
+   - To adjust height, modify padding property
+   ===================================================================== */
+.filter-btn {
+    border-width: 2px;
+    background: transparent;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.75rem; /* Reduced vertical and horizontal padding */
+    font-size: 0.875rem;
+    transition: background 0.2s, color 0.2s;
+}
+.filter-btn.active-filter {
+    color: #fff;
+}
+.filter-btn.border-blue-500.active-filter { background: #3b82f6; }
+.filter-btn.border-red-500.active-filter { background: #ef4444; }
+.filter-btn.border-green-500.active-filter { background: #22c55e; }
+.filter-btn.border-purple-500.active-filter { background: #a855f7; }
+.filter-btn.border-yellow-500.active-filter { background: #facc15; }
+/* === End Filters buttons for Financial Inline Styles === */

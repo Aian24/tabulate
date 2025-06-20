@@ -35,6 +35,136 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize vendors functionality
     initializeVendors();
+
+    // FILTER MODAL LOGIC FOR VENDORS
+    const filterBtn = document.getElementById('openFilter');
+    if (filterBtn) {
+        filterBtn.addEventListener('click', () => {
+            // Gather unique values from the desktop table
+            const table = document.querySelector('table');
+            if (!table) return;
+            const rows = table.querySelectorAll('tbody tr');
+            const ids = new Set();
+            const names = new Set();
+            const contactPersons = new Set();
+            const emails = new Set();
+            const phones = new Set();
+            const statuses = new Set();
+            rows.forEach(row => {
+                ids.add(row.querySelector('td:nth-child(2)')?.textContent.trim() || '');
+                names.add(row.querySelector('td:nth-child(3)')?.textContent.trim() || '');
+                contactPersons.add(row.querySelector('td:nth-child(4)')?.textContent.trim() || '');
+                emails.add(row.querySelector('td:nth-child(5)')?.textContent.trim() || '');
+                phones.add(row.querySelector('td:nth-child(6)')?.textContent.trim() || '');
+                statuses.add(row.querySelector('td:nth-child(7) span')?.textContent.trim() || '');
+            });
+
+            // Create modal
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-gray-900 bg-opacity-60 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class=\"bg-white rounded-lg shadow-xl p-6 w-[500px] max-w-[95vw]\">
+                    <div class=\"flex justify-between items-center mb-4\">
+                        <h3 class=\"text-lg font-semibold text-gray-800\">Filter Vendors</h3>
+                        <button class=\"text-gray-500 hover:text-gray-700\" id=\"closeFilterModal\"><i class=\"fas fa-times\"></i></button>
+                    </div>
+                    <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4\">
+                        <div>
+                            <label class=\"block text-sm font-medium text-gray-700 mb-2\">ID</label>
+                            <select id=\"filterId\" class=\"w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500\">
+                                <option value=\"\">All</option>
+                                ${Array.from(ids).filter(Boolean).map(id => `<option value=\"${id}\">${id}</option>`).join('')}
+                            </select>
+                        </div>
+                        <div>
+                            <label class=\"block text-sm font-medium text-gray-700 mb-2\">Name</label>
+                            <select id=\"filterName\" class=\"w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500\">
+                                <option value=\"\">All</option>
+                                ${Array.from(names).filter(Boolean).map(n => `<option value=\"${n}\">${n}</option>`).join('')}
+                            </select>
+                        </div>
+                        <div>
+                            <label class=\"block text-sm font-medium text-gray-700 mb-2\">Contact Person</label>
+                            <select id=\"filterContactPerson\" class=\"w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500\">
+                                <option value=\"\">All</option>
+                                ${Array.from(contactPersons).filter(Boolean).map(cp => `<option value=\"${cp}\">${cp}</option>`).join('')}
+                            </select>
+                        </div>
+                        <div>
+                            <label class=\"block text-sm font-medium text-gray-700 mb-2\">Email</label>
+                            <select id=\"filterEmail\" class=\"w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500\">
+                                <option value=\"\">All</option>
+                                ${Array.from(emails).filter(Boolean).map(e => `<option value=\"${e}\">${e}</option>`).join('')}
+                            </select>
+                        </div>
+                        <div>
+                            <label class=\"block text-sm font-medium text-gray-700 mb-2\">Phone</label>
+                            <select id=\"filterPhone\" class=\"w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500\">
+                                <option value=\"\">All</option>
+                                ${Array.from(phones).filter(Boolean).map(p => `<option value=\"${p}\">${p}</option>`).join('')}
+                            </select>
+                        </div>
+                        <div>
+                            <label class=\"block text-sm font-medium text-gray-700 mb-2\">Status</label>
+                            <select id=\"filterStatus\" class=\"w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500\">
+                                <option value=\"\">All</option>
+                                ${Array.from(statuses).filter(Boolean).map(s => `<option value=\"${s}\">${s}</option>`).join('')}
+                            </select>
+                        </div>
+                    </div>
+                    <div class=\"flex justify-end gap-2 mt-6\">
+                        <button class=\"px-4 py-2 text-sm text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded transition-colors\" id=\"resetFilter\">Reset</button>
+                        <button class=\"px-4 py-2 text-sm text-white bg-blue-500 hover:bg-blue-600 rounded transition-colors\" id=\"applyFilter\">Apply</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+
+            // Focus the first dropdown for accessibility
+            setTimeout(() => { modal.querySelector('#filterId').focus(); }, 100);
+
+            // Close modal
+            modal.querySelector('#closeFilterModal').addEventListener('click', () => modal.remove());
+            // Close modal when clicking outside
+            modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
+
+            // Reset filter
+            modal.querySelector('#resetFilter').addEventListener('click', () => {
+                modal.querySelectorAll('select').forEach(select => {
+                    select.value = '';
+                });
+                // Show all rows
+                rows.forEach(row => { row.style.display = ''; });
+            });
+
+            // Apply filter
+            modal.querySelector('#applyFilter').addEventListener('click', () => {
+                const id = modal.querySelector('#filterId').value;
+                const name = modal.querySelector('#filterName').value;
+                const contactPerson = modal.querySelector('#filterContactPerson').value;
+                const email = modal.querySelector('#filterEmail').value;
+                const phone = modal.querySelector('#filterPhone').value;
+                const status = modal.querySelector('#filterStatus').value;
+                rows.forEach(row => {
+                    const rowId = row.querySelector('td:nth-child(2)')?.textContent.trim() || '';
+                    const rowName = row.querySelector('td:nth-child(3)')?.textContent.trim() || '';
+                    const rowContactPerson = row.querySelector('td:nth-child(4)')?.textContent.trim() || '';
+                    const rowEmail = row.querySelector('td:nth-child(5)')?.textContent.trim() || '';
+                    const rowPhone = row.querySelector('td:nth-child(6)')?.textContent.trim() || '';
+                    const rowStatus = row.querySelector('td:nth-child(7) span')?.textContent.trim() || '';
+                    const match =
+                        (!id || rowId === id) &&
+                        (!name || rowName === name) &&
+                        (!contactPerson || rowContactPerson === contactPerson) &&
+                        (!email || rowEmail === email) &&
+                        (!phone || rowPhone === phone) &&
+                        (!status || rowStatus === status);
+                    row.style.display = match ? '' : 'none';
+                });
+                modal.remove();
+            });
+        });
+    }
 });
 
 function initializeVendors() {

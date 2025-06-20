@@ -32,24 +32,38 @@
                     <button id="generatedPayrollTab" class="text-md md:text-xl font-bold text-gray-400 px-2 py-0.5 rounded-lg">Generated Payroll</button>
                 </div>
             </div>
-            <div class="relative ml-auto">
-                <button id="moreDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
-                    <span>More</span>
-                    <i class="fas fa-chevron-down ml-1"></i>
-                </button>
-                <div id="moreMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10">
-                    <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                        <i class="fas fa-cog w-5"></i>
-                        <span>Settings</span>
+            <div class="flex items-center gap-2">
+                <div class="relative">
+                    <button id="actionsDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
+                        <span>Actions</span>
+                        <i class="fas fa-chevron-down ml-1"></i>
                     </button>
-                    <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                        <i class="fas fa-chart-bar w-5"></i>
-                        <span>Report</span>
+                    <div id="actionsMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-trash-alt w-5"></i>
+                            <span>Delete</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="relative ml-auto">
+                    <button id="moreDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
+                        <span>More</span>
+                        <i class="fas fa-chevron-down ml-1"></i>
                     </button>
-                    <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                        <i class="fas fa-history w-5"></i>
-                        <span>Audit Trail</span>
-                    </button>
+                    <div id="moreMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-cog w-5"></i>
+                            <span>Settings</span>
+                        </button>
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-chart-bar w-5"></i>
+                            <span>Report</span>
+                        </button>
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-history w-5"></i>
+                            <span>Audit Trail</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -224,7 +238,6 @@
 
     <!-- Load JavaScript files -->
     <script src="../js/main.js"></script>
-    <script src="../js/activeprojects.js"></script>
     <script src="../js/payroll.js"></script>
 </body>
 </html>

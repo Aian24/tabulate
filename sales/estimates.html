@@ -39,7 +39,7 @@
                         <span>Actions</span>
                         <i class="fas fa-chevron-down ml-1"></i>
                     </button>
-                    <div id="actionsMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10">
+                    <div id="actionsMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
                         <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
                             <i class="fas fa-file-invoice w-5"></i>
                             <span>Create Invoice</span>
@@ -55,7 +55,7 @@
                         <span>More</span>
                         <i class="fas fa-chevron-down ml-1"></i>
                     </button>
-                    <div id="moreMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10">
+                    <div id="moreMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
                         <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
                             <i class="fas fa-cog w-5"></i>
                             <span>Settings</span>
@@ -313,18 +313,6 @@
         </div>
     </div>
 
-    <!-- Toast Notification -->
-    <div class="toast fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 flex items-center space-x-3 border-l-4 border-green-500">
-        <i class="fas fa-check-circle text-green-500 text-xl"></i>
-        <div>
-            <h4 class="font-medium text-gray-800">Success!</h4>
-            <p class="text-sm text-gray-600">New dispatch has been assigned to Team A</p>
-        </div>
-        <button class="text-gray-400 hover:text-gray-600 ml-4">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-
     <!-- Mobile Card View -->
     <div class="mobile-card-view hidden md:hidden max-w-sm mx-auto">
         <!-- Mobile cards will be rendered here -->
@@ -332,7 +320,6 @@
 
     <!-- Load JavaScript files -->
     <script src="../js/main.js"></script>
-    <script src="../js/activeprojects.js"></script>
     <script src="../js/estimates.js"></script>
 </body>
 </html>

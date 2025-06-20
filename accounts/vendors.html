@@ -57,7 +57,7 @@
                             <span>Actions</span>
                             <i class="fas fa-chevron-down ml-1"></i>
                         </button>
-                        <div id="actionsMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10">
+                        <div id="actionsMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
                             <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
                                 <i class="fas fa-trash-alt w-5"></i>
                                 <span>Delete</span>
@@ -69,7 +69,7 @@
                             <span>More</span>
                             <i class="fas fa-chevron-down ml-1"></i>
                         </button>
-                        <div id="moreMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10">
+                        <div id="moreMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
                             <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
                                 <i class="fas fa-cog w-5"></i>
                                 <span>Settings</span>
@@ -109,6 +109,10 @@
                     </button>
                     <button onclick="window.location.href='create-vendor.html'" class="px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors">
                         <i class="fas fa-user-plus mr-1"></i>Create
+                    </button>
+                    <button id="openFilter" class="calendar-button border-2 border-gray-400 text-gray-700 flex items-center gap-1 px-3 py-1 rounded-lg">
+                        <i class="fas fa-filter"></i>
+                        <span>Filters</span>
                     </button>
                 </div>
             </div>
@@ -1001,7 +1005,6 @@
 
     <!-- Load JavaScript files -->
     <script src="../js/main.js"></script>
-    <script src="../js/activeprojects.js"></script>
     <script src="../js/vendors.js"></script>
 </body>
 </html>

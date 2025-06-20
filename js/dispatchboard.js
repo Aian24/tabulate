@@ -56,6 +56,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // Initialize filter
+    initializeFilter();
 });
 
 // Initialize week days
@@ -421,4 +424,129 @@ function initializeMapControls() {
         const map = document.getElementById('map');
         mapContainer.appendChild(map);
     });
-} 
+}
+
+// Move filter initialization to its own listener to avoid conflicts
+document.addEventListener('DOMContentLoaded', function() {
+    function initializeFilter() {
+        const filterBtn = document.getElementById('openFilter');
+        if (!filterBtn) return;
+
+        filterBtn.addEventListener('click', () => {
+            // Gather unique values from the table
+            const rows = document.querySelectorAll('table tbody tr');
+            const priorities = new Set();
+            const teams = new Set();
+            const statuses = new Set();
+            rows.forEach(row => {
+                priorities.add(row.querySelector('td:nth-child(3)')?.textContent.trim() || '');
+                teams.add(row.querySelector('td:nth-child(11)')?.textContent.trim() || '');
+                statuses.add(row.querySelector('td:nth-child(12)')?.textContent.trim() || '');
+            });
+
+            // Create and show filter modal
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-gray-900 bg-opacity-60 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white rounded-lg shadow-xl p-6 w-[500px] max-w-[95vw]">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Filter Dispatches</h3>
+                        <button class="text-gray-500 hover:text-gray-700" id="closeFilterModal">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Priority</label>
+                            <select id="filterPriority" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="">All Priorities</option>
+                                ${Array.from(priorities).filter(Boolean).map(p => `<option value="${p}">${p}</option>`).join('')}
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Team</label>
+                            <select id="filterTeam" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="">All Teams</option>
+                                ${Array.from(teams).filter(Boolean).map(t => `<option value="${t}">${t}</option>`).join('')}
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                            <select id="filterStatus" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="">All Statuses</option>
+                                ${Array.from(statuses).filter(Boolean).map(s => `<option value="${s}">${s}</option>`).join('')}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex justify-end gap-2 mt-6">
+                        <button class="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded transition-colors" id="resetFilter">
+                            <i class="fas fa-undo"></i> Reset
+                        </button>
+                        <button class="px-4 py-2 text-sm text-white bg-blue-500 hover:bg-blue-600 rounded transition-colors" id="applyFilter">
+                            <i class="fas fa-check"></i> Apply
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+
+            // Close modal
+            const closeBtn = modal.querySelector('#closeFilterModal');
+            closeBtn.addEventListener('click', () => {
+                modal.remove();
+            });
+
+            // Reset filter
+            const resetBtn = modal.querySelector('#resetFilter');
+            resetBtn.addEventListener('click', () => {
+                modal.querySelectorAll('select').forEach(select => {
+                    select.value = '';
+                });
+                // Show all rows
+                rows.forEach(row => { row.style.display = ''; });
+            });
+
+            // Apply filter
+            const applyBtn = modal.querySelector('#applyFilter');
+            applyBtn.addEventListener('click', () => {
+                const priority = modal.querySelector('#filterPriority').value;
+                const team = modal.querySelector('#filterTeam').value;
+                const status = modal.querySelector('#filterStatus').value;
+
+                filterTable(priority, team, status);
+                modal.remove();
+            });
+
+            // Close modal when clicking outside
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
+        });
+    }
+
+    function filterTable(priority, team, status) {
+        const tableBody = document.querySelector('tbody');
+        const rows = tableBody.querySelectorAll('tr');
+        
+        rows.forEach(row => {
+            const rowPriority = row.querySelector('td:nth-child(3)')?.textContent.trim();
+            const rowTeam = row.querySelector('td:nth-child(11)')?.textContent.trim();
+            const rowStatus = row.querySelector('td:nth-child(12)')?.textContent.trim();
+
+            const priorityMatch = !priority || rowPriority === priority;
+            const teamMatch = !team || rowTeam === team;
+            const statusMatch = !status || rowStatus === status;
+
+            if (priorityMatch && teamMatch && statusMatch) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
+    initializeFilter();
+}); 

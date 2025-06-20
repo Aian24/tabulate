@@ -206,101 +206,119 @@ document.addEventListener('DOMContentLoaded', function() {
     const estimateModal = document.getElementById('estimateModal');
     const createEstimateBtn = document.getElementById('createEstimate');
     const closeEstimateModal = document.getElementById('closeEstimateModal');
-    const cancelEstimateBtn = document.getElementById('cancelEstimate');
+    const cancelEstimateBtn = document.getElementById('cancelEstimateBtn');
 
     // Toggle actions menu
-    actionsDropdown.addEventListener('click', () => {
-        actionsMenu.classList.toggle('hidden');
-        moreMenu.classList.add('hidden');
-    });
+    if (actionsDropdown && actionsMenu && moreMenu) {
+        actionsDropdown.addEventListener('click', () => {
+            actionsMenu.classList.toggle('hidden');
+            moreMenu.classList.add('hidden');
+        });
+    }
 
     // Toggle more menu
-    moreDropdown.addEventListener('click', () => {
-        moreMenu.classList.toggle('hidden');
-        actionsMenu.classList.add('hidden');
-    });
+    if (moreDropdown && moreMenu && actionsMenu) {
+        moreDropdown.addEventListener('click', () => {
+            moreMenu.classList.toggle('hidden');
+            actionsMenu.classList.add('hidden');
+        });
+    }
 
     // Close menus when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!actionsDropdown.contains(e.target) && !moreDropdown.contains(e.target)) {
-            actionsMenu.classList.add('hidden');
-            moreMenu.classList.add('hidden');
-        }
-    });
+    if (actionsDropdown && moreDropdown && actionsMenu && moreMenu) {
+        document.addEventListener('click', (e) => {
+            if (!actionsDropdown.contains(e.target) && !moreDropdown.contains(e.target)) {
+                actionsMenu.classList.add('hidden');
+                moreMenu.classList.add('hidden');
+            }
+        });
+    }
 
     // Open estimate modal
-    createEstimateBtn.addEventListener('click', () => {
-        estimateModal.classList.remove('hidden');
-        estimateModal.classList.add('flex');
-        actionsMenu.classList.add('hidden');
-    });
+    if (createEstimateBtn && estimateModal && actionsMenu) {
+        createEstimateBtn.addEventListener('click', () => {
+            estimateModal.classList.remove('hidden');
+            estimateModal.classList.add('flex');
+            actionsMenu.classList.add('hidden');
+        });
+    }
 
     // Close estimate modal
     const closeModal = () => {
-        estimateModal.classList.add('hidden');
-        estimateModal.classList.remove('flex');
+        if (estimateModal) {
+            estimateModal.classList.add('hidden');
+            estimateModal.classList.remove('flex');
+        }
     };
 
-    closeEstimateModal.addEventListener('click', closeModal);
-    cancelEstimateBtn.addEventListener('click', closeModal);
+    if (closeEstimateModal) {
+        closeEstimateModal.addEventListener('click', closeModal);
+    }
+    if (cancelEstimateBtn) {
+        cancelEstimateBtn.addEventListener('click', closeModal);
+    }
 
     // Close modal when clicking outside
-    estimateModal.addEventListener('click', (e) => {
-        if (e.target === estimateModal) {
-            closeModal();
-        }
-    });
+    if (estimateModal) {
+        estimateModal.addEventListener('click', (e) => {
+            if (e.target === estimateModal) {
+                closeModal();
+            }
+        });
+    }
 
     // Add estimate item functionality
     const addItemBtn = document.getElementById('addItem');
     const estimateItems = document.getElementById('estimateItems');
     let itemCount = 0;
 
-    addItemBtn.addEventListener('click', () => {
-        itemCount++;
-        const newRow = document.createElement('tr');
-        newRow.innerHTML = `
-            <td class="px-4 py-2">${itemCount}</td>
-            <td class="px-4 py-2">
-                <select class="w-full px-2 py-1 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
-                    <option value="">Select service</option>
-                </select>
-            </td>
-            <td class="px-4 py-2">
-                <input type="number" class="w-full px-2 py-1 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500" step="0.01">
-            </td>
-            <td class="px-4 py-2">
-                <input type="number" class="w-full px-2 py-1 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
-            </td>
-            <td class="px-4 py-2">
-                <input type="number" class="w-full px-2 py-1 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500" step="0.01">
-            </td>
-            <td class="px-4 py-2">
-                <input type="number" class="w-full px-2 py-1 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500" step="0.01">
-            </td>
-            <td class="px-4 py-2">
-                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
-            </td>
-            <td class="px-4 py-2">
-                <input type="number" class="w-full px-2 py-1 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500" step="0.01">
-            </td>
-            <td class="px-4 py-2">
-                <input type="number" class="w-full px-2 py-1 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500" step="0.01">
-            </td>
-            <td class="px-4 py-2">
-                <span class="font-medium">$0.00</span>
-            </td>
-            <td class="px-4 py-2">
-                <input type="file" class="w-full" accept="image/*">
-            </td>
-            <td class="px-4 py-2">
-                <button type="button" class="text-red-500 hover:text-red-700" onclick="this.closest('tr').remove();">
-                    <i class="fas fa-trash-alt"></i>
-                </button>
-            </td>
-        `;
-        estimateItems.appendChild(newRow);
-    });
+    if (addItemBtn && estimateItems) {
+        addItemBtn.addEventListener('click', () => {
+            itemCount++;
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td class="px-4 py-2">${itemCount}</td>
+                <td class="px-4 py-2">
+                    <select class="w-full px-2 py-1 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                        <option value="">Select service</option>
+                    </select>
+                </td>
+                <td class="px-4 py-2">
+                    <input type="number" class="w-full px-2 py-1 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500" step="0.01">
+                </td>
+                <td class="px-4 py-2">
+                    <input type="number" class="w-full px-2 py-1 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                </td>
+                <td class="px-4 py-2">
+                    <input type="number" class="w-full px-2 py-1 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500" step="0.01">
+                </td>
+                <td class="px-4 py-2">
+                    <input type="number" class="w-full px-2 py-1 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500" step="0.01">
+                </td>
+                <td class="px-4 py-2">
+                    <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
+                </td>
+                <td class="px-4 py-2">
+                    <input type="number" class="w-full px-2 py-1 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500" step="0.01">
+                </td>
+                <td class="px-4 py-2">
+                    <input type="number" class="w-full px-2 py-1 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500" step="0.01">
+                </td>
+                <td class="px-4 py-2">
+                    <span class="font-medium">$0.00</span>
+                </td>
+                <td class="px-4 py-2">
+                    <input type="file" class="w-full" accept="image/*">
+                </td>
+                <td class="px-4 py-2">
+                    <button type="button" class="text-red-500 hover:text-red-700" onclick="this.closest('tr').remove();">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </td>
+            `;
+            estimateItems.appendChild(newRow);
+        });
+    }
 
     // Add click event to table rows to show estimate details
     const tableRows = document.querySelectorAll('tbody tr');
@@ -316,4 +334,94 @@ document.addEventListener('DOMContentLoaded', function() {
             estimateDetailsModal.classList.add('flex');
         });
     });
+
+    // --- FILTER BUTTON LOGIC FOR ESTIMATES ---
+    // This block creates a filter modal and filters table rows based on selected criteria.
+    const filterBtn = document.getElementById('openFilter');
+    if (filterBtn) {
+        filterBtn.addEventListener('click', () => {
+            // Gather unique values from the table
+            const rows = document.querySelectorAll('table tbody tr');
+            const customers = new Set();
+            const statuses = new Set();
+            const categories = new Set();
+            rows.forEach(row => {
+                customers.add(row.querySelector('td:nth-child(3)')?.textContent.trim() || '');
+                statuses.add(row.querySelector('td:nth-child(9) span')?.textContent.trim() || '');
+                categories.add(row.querySelector('td:nth-child(8)')?.textContent.trim() || '');
+            });
+
+            // Create modal
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-gray-900 bg-opacity-60 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white rounded-lg shadow-xl p-6 w-[350px] max-w-[90vw]">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Filter Estimates</h3>
+                        <button class="text-gray-500 hover:text-gray-700" id="closeFilterModal"><i class="fas fa-times"></i></button>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Customer</label>
+                            <select id="filterCustomer" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                                <option value="">All Customers</option>
+                                ${Array.from(customers).filter(Boolean).map(c => `<option value="${c}">${c}</option>`).join('')}
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                            <select id="filterStatus" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                                <option value="">All Statuses</option>
+                                ${Array.from(statuses).filter(Boolean).map(s => `<option value="${s}">${s}</option>`).join('')}
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                            <select id="filterCategory" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                                <option value="">All Categories</option>
+                                ${Array.from(categories).filter(Boolean).map(cat => `<option value="${cat}">${cat}</option>`).join('')}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex justify-end gap-2 mt-6">
+                        <button class="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded transition-colors" id="resetFilter">Reset</button>
+                        <button class="px-4 py-2 text-sm text-white bg-green-500 hover:bg-green-600 rounded transition-colors" id="applyFilter">Apply</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+
+            // Focus the first dropdown for accessibility
+            setTimeout(() => { modal.querySelector('#filterCustomer').focus(); }, 100);
+
+            // Close modal
+            modal.querySelector('#closeFilterModal').addEventListener('click', () => modal.remove());
+            // Close modal when clicking outside
+            modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
+
+            // Reset filter
+            modal.querySelector('#resetFilter').addEventListener('click', () => {
+                modal.querySelector('#filterCustomer').value = '';
+                modal.querySelector('#filterStatus').value = '';
+                modal.querySelector('#filterCategory').value = '';
+                // Show all rows
+                rows.forEach(row => { row.style.display = ''; });
+            });
+
+            // Apply filter
+            modal.querySelector('#applyFilter').addEventListener('click', () => {
+                const customer = modal.querySelector('#filterCustomer').value;
+                const status = modal.querySelector('#filterStatus').value;
+                const category = modal.querySelector('#filterCategory').value;
+                rows.forEach(row => {
+                    const rowCustomer = row.querySelector('td:nth-child(3)')?.textContent.trim() || '';
+                    const rowStatus = row.querySelector('td:nth-child(9) span')?.textContent.trim() || '';
+                    const rowCategory = row.querySelector('td:nth-child(8)')?.textContent.trim() || '';
+                    const match = (!customer || rowCustomer === customer) && (!status || rowStatus === status) && (!category || rowCategory === category);
+                    row.style.display = match ? '' : 'none';
+                });
+                modal.remove();
+            });
+        });
+    }
 }); 

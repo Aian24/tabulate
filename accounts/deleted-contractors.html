@@ -317,146 +317,148 @@
         </div>
 
         <!-- Desktop Table content -->
-        <div class="hidden md:block bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 container-fluid mx-auto px-4 md:px-6">
-            <div class="overflow-x-auto">
-                <table class="w-full min-w-[800px]">
-                    <thead class="bg-gradient-to-r from-sky-500 to-blue-600 text-white">
-                        <tr>
-                            <th class="px-6 py-4 text-left">
-                                <input type="checkbox" id="selectAllDeleted" class="w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
-                            </th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold">ID</th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold">Full Name</th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold">Phone</th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold">Email</th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold">Account Status</th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold">Date Deleted</th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-100">
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-6 py-4">
-                                <input type="checkbox" class="contractor-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
-                            </td>
-                            <td class="px-6 py-4 text-sm text-gray-600">8</td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">John Doe</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">091 2376 5223</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">johndoe@gmail.com</td>
-                            <td class="px-6 py-4">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                                    Inactive
-                                </span>
-                            </td>
-                            <td class="px-6 py-4 text-sm text-gray-600">March 12, 2025</td>
-                            <td class="px-6 py-4">
-                                <button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
-                                    <i class="fas fa-undo-alt mr-1"></i> Restore
-                                </button>
-                            </td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-6 py-4">
-                                <input type="checkbox" class="contractor-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
-                            </td>
-                            <td class="px-6 py-4 text-sm text-gray-600">9</td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Jane Smith</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">092 3456 7890</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">janesmith@gmail.com</td>
-                            <td class="px-6 py-4">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                                    Inactive
-                                </span>
-                            </td>
-                            <td class="px-6 py-4 text-sm text-gray-600">March 10, 2025</td>
-                            <td class="px-6 py-4">
-                                <button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
-                                    <i class="fas fa-undo-alt mr-1"></i> Restore
-                                </button>
-                            </td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-6 py-4">
-                                <input type="checkbox" class="contractor-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
-                            </td>
-                            <td class="px-6 py-4 text-sm text-gray-600">10</td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Mike Johnson</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">093 4567 8901</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">mikejohnson@gmail.com</td>
-                            <td class="px-6 py-4">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                                    Inactive
-                                </span>
-                            </td>
-                            <td class="px-6 py-4 text-sm text-gray-600">March 8, 2025</td>
-                            <td class="px-6 py-4">
-                                <button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
-                                    <i class="fas fa-undo-alt mr-1"></i> Restore
-                                </button>
-                            </td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-6 py-4">
-                                <input type="checkbox" class="contractor-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
-                            </td>
-                            <td class="px-6 py-4 text-sm text-gray-600">11</td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Sarah Wilson</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">094 5678 9012</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">sarahwilson@gmail.com</td>
-                            <td class="px-6 py-4">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                                    Inactive
-                                </span>
-                            </td>
-                            <td class="px-6 py-4 text-sm text-gray-600">March 5, 2025</td>
-                            <td class="px-6 py-4">
-                                <button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
-                                    <i class="fas fa-undo-alt mr-1"></i> Restore
-                                </button>
-                            </td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-6 py-4">
-                                <input type="checkbox" class="contractor-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
-                            </td>
-                            <td class="px-6 py-4 text-sm text-gray-600">12</td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">David Brown</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">095 6789 0123</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">davidbrown@gmail.com</td>
-                            <td class="px-6 py-4">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                                    Inactive
-                                </span>
-                            </td>
-                            <td class="px-6 py-4 text-sm text-gray-600">March 3, 2025</td>
-                            <td class="px-6 py-4">
-                                <button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
-                                    <i class="fas fa-undo-alt mr-1"></i> Restore
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            
-            <!-- Pagination -->
-            <div class="bg-gray-50 px-4 md:px-6 py-4 flex flex-col md:flex-row justify-between items-center border-t border-gray-100 gap-4">
-                <div class="flex items-center gap-2 text-sm text-gray-600 order-2 md:order-1">
-                    <span class="mx-2">|</span>
-                    Showing <span class="font-medium">1</span> to <span class="font-medium">5</span> of <span class="font-medium">5</span> entries
+        <div class="hidden md:block container-fluid mx-auto px-4 md:px-6">
+            <div class="bg-white rounded-xl overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full min-w-[800px]">
+                        <thead class="bg-gradient-to-r from-sky-500 to-blue-600 text-white">
+                            <tr>
+                                <th class="px-6 py-4 text-left">
+                                    <input type="checkbox" id="selectAllDeleted" class="w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                                </th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold">ID</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold">Full Name</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold">Phone</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold">Email</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold">Account Status</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold">Date Deleted</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4">
+                                    <input type="checkbox" class="contractor-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">8</td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900">John Doe</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">091 2376 5223</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">johndoe@gmail.com</td>
+                                <td class="px-6 py-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                        Inactive
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">March 12, 2025</td>
+                                <td class="px-6 py-4">
+                                    <button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
+                                        <i class="fas fa-undo-alt mr-1"></i> Restore
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4">
+                                    <input type="checkbox" class="contractor-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">9</td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900">Jane Smith</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">092 3456 7890</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">janesmith@gmail.com</td>
+                                <td class="px-6 py-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                        Inactive
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">March 10, 2025</td>
+                                <td class="px-6 py-4">
+                                    <button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
+                                        <i class="fas fa-undo-alt mr-1"></i> Restore
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4">
+                                    <input type="checkbox" class="contractor-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">10</td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900">Mike Johnson</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">093 4567 8901</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">mikejohnson@gmail.com</td>
+                                <td class="px-6 py-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                        Inactive
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">March 8, 2025</td>
+                                <td class="px-6 py-4">
+                                    <button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
+                                        <i class="fas fa-undo-alt mr-1"></i> Restore
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4">
+                                    <input type="checkbox" class="contractor-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">11</td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900">Sarah Wilson</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">094 5678 9012</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">sarahwilson@gmail.com</td>
+                                <td class="px-6 py-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                        Inactive
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">March 5, 2025</td>
+                                <td class="px-6 py-4">
+                                    <button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
+                                        <i class="fas fa-undo-alt mr-1"></i> Restore
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4">
+                                    <input type="checkbox" class="contractor-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">12</td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900">David Brown</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">095 6789 0123</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">davidbrown@gmail.com</td>
+                                <td class="px-6 py-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                        Inactive
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">March 3, 2025</td>
+                                <td class="px-6 py-4">
+                                    <button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
+                                        <i class="fas fa-undo-alt mr-1"></i> Restore
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="flex space-x-2 order-1 md:order-2">
-                    <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
-                        <i class="fas fa-chevron-left mr-1"></i>
-                        <span class="hidden sm:inline">Previous</span>
-                    </button>
-                    <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-white bg-purple-600 border border-purple-600 rounded-lg hover:bg-purple-700 transition-colors duration-200">
-                        1
-                    </button>
-                    <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
-                        <span class="hidden sm:inline">Next</span>
-                        <i class="fas fa-chevron-right ml-1"></i>
-                    </button>
+                
+                <!-- Pagination -->
+                <div class="bg-gray-50 px-4 md:px-6 py-4 flex flex-col md:flex-row justify-between items-center border-t border-gray-100 gap-4 rounded-b-xl">
+                    <div class="flex items-center gap-2 text-sm text-gray-600 order-2 md:order-1">
+                        <span class="mx-2">|</span>
+                        Showing <span class="font-medium">1</span> to <span class="font-medium">5</span> of <span class="font-medium">5</span> entries
+                    </div>
+                    <div class="flex space-x-2 order-1 md:order-2">
+                        <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                            <i class="fas fa-chevron-left mr-1"></i>
+                            <span class="hidden sm:inline">Previous</span>
+                        </button>
+                        <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-white bg-purple-600 border border-purple-600 rounded-lg hover:bg-purple-700 transition-colors duration-200">
+                            1
+                        </button>
+                        <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                            <span class="hidden sm:inline">Next</span>
+                            <i class="fas fa-chevron-right ml-1"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
