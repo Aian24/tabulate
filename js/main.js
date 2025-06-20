@@ -528,6 +528,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const isSalesPage = ['carts.html', 'estimates.html'].includes(currentPage);
         const isProjectPage = ['activeprojects.html', 'pendingprojects.html', 'dispatchboard.html'].includes(currentPage);
         const isFinancialPage = ['payroll.html', 'invoices.html', 'expenses.html', 'po.html'].includes(currentPage);
+        const isAccountsPage = [
+            'customerlist.html',
+            'employee.html',
+            'contractors.html',
+            'vendors.html',
+            'create-vendor.html'
+        ].includes(currentPage);
 
         if (isSalesPage) {
             salesButton.classList.add('text-sky-500', 'font-semibold', 'bg-white/10', 'px-4', 'py-2', 'rounded-lg');
@@ -556,6 +563,15 @@ document.addEventListener('DOMContentLoaded', function() {
             projectButton.classList.add('text-white', 'hover:text-sky-500');
             accountsButton.classList.remove('text-sky-500', 'font-semibold', 'bg-white/10', 'px-4', 'py-2', 'rounded-lg');
             accountsButton.classList.add('text-white', 'hover:text-sky-500');
+        } else if (isAccountsPage) {
+            accountsButton.classList.add('text-sky-500', 'font-semibold', 'bg-white/10', 'px-4', 'py-2', 'rounded-lg');
+            accountsButton.classList.remove('text-white', 'hover:text-sky-500');
+            salesButton.classList.remove('text-sky-500', 'font-semibold', 'bg-white/10', 'px-4', 'py-2', 'rounded-lg');
+            salesButton.classList.add('text-white', 'hover:text-sky-500');
+            projectButton.classList.remove('text-sky-500', 'font-semibold', 'bg-white/10', 'px-4', 'py-2', 'rounded-lg');
+            projectButton.classList.add('text-white', 'hover:text-sky-500');
+            financialButton.classList.remove('text-sky-500', 'font-semibold', 'bg-white/10', 'px-4', 'py-2', 'rounded-lg');
+            financialButton.classList.add('text-white', 'hover:text-sky-500');
         }
 
         // Remove manual click listeners and stopPropagation, rely on Tippy.js
