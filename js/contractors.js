@@ -410,20 +410,12 @@ function initializeRowClickHandlers() {
             if (event.target.type === 'checkbox') {
                 return;
             }
-            
             // Get contractor data from row
             const cells = this.querySelectorAll('td');
             if (cells.length >= 7) {
-                const contractorData = {
-                    id: cells[1].textContent.trim(),
-                    name: cells[2].textContent.trim(),
-                    address: cells[3].textContent.trim(),
-                    phone: cells[4].textContent.trim(),
-                    email: cells[5].textContent.trim(),
-                    status: cells[6].textContent.trim()
-                };
-                
-                showContractorDetails(contractorData);
+                const contractorId = cells[1].textContent.trim();
+                // Redirect to details page with contractor ID as query param
+                window.location.href = `contractor-details.html?id=${encodeURIComponent(contractorId)}`;
             }
         });
     });
