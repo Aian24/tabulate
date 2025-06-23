@@ -1,0 +1,765 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+}
+
+/* Prevent text wrapping in table cells */
+table td, table th {
+    white-space: nowrap;
+}
+
+/* Mobile Select Styling */
+@media (max-width: 768px) {
+    select {
+        font-size: 14px;
+        min-width: 0;
+        max-width: 100%;
+        width: 100%;
+        height: auto;
+        line-height: 1.2;
+    }
+    select option {
+        font-size: 12px;
+        padding: 6px 8px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+        box-sizing: border-box;
+        line-height: 1.2;
+        max-width: 100%;
+        display: block;
+    }
+    
+    /* Prevent dropdown from being too large */
+    select:focus {
+        max-height: 200px;
+        overflow-y: auto;
+    }
+}
+
+/* General select styling */
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+select option {
+    padding: 8px 12px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Modern Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #94a3b8;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+}
+
+/* Glass Effect */
+.glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Draggable Column Styles */
+.draggable-header {
+    cursor: move;
+    user-select: none;
+}
+
+.draggable-header.dragging {
+    opacity: 0.5;
+    background: #e2e8f0;
+}
+
+.column-drop-target {
+    border-left: 2px solid #3b82f6;
+}
+
+/* Card Animations */
+.dispatch-card {
+    animation: fadeIn 0.6s ease-out;
+    transition: all 0.3s ease;
+}
+
+.dispatch-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Notification Badge Animation */
+.notification-badge {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Navigation Hover Effect */
+.nav-link {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: #38bdf8;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Button Hover Animation */
+.animated-button {
+    transition: all 0.3s ease;
+    background: linear-gradient(45deg, #3b82f6, #38bdf8);
+}
+
+.animated-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+}
+
+/* Status Badge */
+.status-badge {
+    background: linear-gradient(45deg, #4f46e5, #6366f1);
+    transition: all 0.3s ease;
+}
+
+.status-badge:hover {
+    transform: scale(1.05);
+}
+
+/* Toast Animation */
+.toast {
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Hide pagination and entries display on mobile */
+@media (max-width: 768px) {
+    .show-entries-container,
+    .pagination-controls {
+        display: none !important;
+    }
+    
+    /* Hide table info on mobile */
+    #tableInfo {
+        display: none !important;
+    }
+    
+    /* Show mobile card view */
+    .mobile-card-view {
+        display: block !important;
+    }
+    
+    /* Hide table on mobile */
+    .mobile-table-container {
+        display: none !important;
+    }
+}
+
+/* Mobile View Styles */
+@media (max-width: 768px) {
+    /* Hide the entire table container on mobile */
+    .bg-white.rounded-xl.shadow-sm.overflow-hidden.border.border-gray-100 {
+        display: none !important;
+    }
+    
+    /* Show mobile card view */
+    .mobile-card-view {
+        display: block !important;
+    }
+}
+
+/* Container Styles */
+.container-fluid {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: 1400px) {
+    .container-fluid {
+        padding-right: 30px;
+        padding-left: 30px;
+    }
+}
+
+/* Table Container Styles */
+.bg-white.rounded-xl.shadow-sm.overflow-hidden.border.border-gray-100 {
+    width: 100%;
+    max-width: none;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+}
+
+/* Search Bar Container */
+.flex.items-center.gap-2.w-full.sm\:w-auto.sm\:ml-auto {
+    width: 100%;
+    max-width: 300px;
+}
+
+/* Table Wrapper */
+.overflow-x-auto.-mx-4.md\:mx-0 {
+    width: 100%;
+    margin: 0;
+}
+
+/* Header and Navigation Containers */
+header .container-fluid,
+nav .container-fluid {
+    width: 100%;
+}
+
+/* Cards Grid */
+.grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-3.gap-6 {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .md\:grid-cols-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .lg\:grid-cols-3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1536px) {
+    .xl\:grid-cols-4 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Calendar Container Styles */
+#calendarFilter {
+    background-color: #f8fafc;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+/* Calendar Day Styles */
+#weekDays {
+    height: 40px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.week-day-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 12px;
+    min-width: 48px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+}
+
+.week-day-btn:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background-color: #e5e7eb;
+}
+
+.week-day-btn .day-name {
+    font-size: 0.75rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.week-day-btn .day-number {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+.week-day-btn.selected {
+    background-color: #3b82f6;
+}
+
+.week-day-btn.selected .day-name,
+.week-day-btn.selected .day-number {
+    color: white;
+}
+
+.week-day-btn:hover:not(.selected) {
+    background-color: #f3f4f6;
+}
+
+/* Date Range and Filter Buttons */
+.calendar-button {
+    height: 40px;
+    padding: 0 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    background: white;
+    color: #374151;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+
+.calendar-button:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+}
+
+.calendar-button i {
+    color: #3b82f6;
+}
+
+/* Tippy.js Custom Styles to Ensure Visibility */
+.tippy-box[data-theme~='light'] {
+    background-color: white !important;
+    color: #333 !important; /* Dark grey for text */
+}
+
+.tippy-box[data-theme~='light'] .tippy-content {
+    padding: 0 !important; /* Remove default padding to allow anchor padding */
+}
+
+.tippy-box[data-theme~='light'] .tippy-content a {
+    color: #4a5568 !important; /* Tailwind gray-700 for link text */
+    padding: 8px 16px; /* Apply padding directly to links */
+}
+
+.tippy-box[data-theme~='light'] .tippy-content a i {
+    width: 1.25em; /* Ensure consistent icon width */
+    text-align: center; /* Center the icon within its allocated space */
+}
+
+.tippy-box[data-theme~='light'] .tippy-arrow {
+    color: white !important; /* Ensure arrow matches background */
+}
+
+/* =====================================================================
+   Custom Buttons for Create Estimate (from create-estimate.html)
+   ===================================================================== */
+.back-button {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    transition: all 0.3s ease;
+}
+.back-button:hover {
+    transform: translateX(-3px);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+}
+.submit-button {
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+    transition: all 0.3s ease;
+}
+.submit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+}
+
+/* =====================================================================
+   Mobile App-like Styles (from accounts/contractors.html, create-contractor.html, deleted-contractors.html)
+   ===================================================================== */
+@media (max-width: 768px) {
+    .mobile-container {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    .mobile-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 1rem;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .mobile-search {
+        background: rgba(255,255,255,0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 25px;
+        border: none;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .mobile-card {
+        background: white;
+        border-radius: 16px;
+        margin: 0.5rem 1rem;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        border: none;
+    }
+    .mobile-button {
+        border-radius: 12px;
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .mobile-button:active {
+        transform: scale(0.95);
+    }
+    .mobile-table {
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+    .mobile-table-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 1rem;
+    }
+    .mobile-table-row {
+        padding: 1rem;
+        border-bottom: 1px solid #f1f5f9;
+        transition: all 0.3s ease;
+    }
+    .mobile-table-row:last-child {
+        border-bottom: none;
+    }
+    .mobile-table-row:active {
+        background-color: #f8fafc;
+        transform: scale(0.98);
+    }
+    .mobile-status {
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+    .mobile-actions {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 1rem;
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+        z-index: 100;
+    }
+    .mobile-fab {
+        position: fixed;
+        bottom: 5rem;
+        right: 1rem;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        z-index: 1000;
+        transition: all 0.3s ease;
+    }
+    .mobile-fab:active {
+        transform: scale(0.9);
+    }
+    .mobile-section {
+        background: white;
+        border-radius: 12px;
+        margin: 0.5rem 1rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        border: 1px solid #f1f5f9;
+    }
+    .mobile-section-header {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        padding: 1rem;
+        border-radius: 12px 12px 0 0;
+        border-bottom: 1px solid #e2e8f0;
+    }
+    .mobile-input {
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 0.75rem;
+        font-size: 0.875rem;
+        transition: all 0.3s ease;
+    }
+    .mobile-input:focus {
+        border-color: #8b5cf6;
+        box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        outline: none;
+    }
+}
+@media (max-width: 400px) {
+    .mobile-button {
+        padding: 0.25rem 0.4rem !important;
+        font-size: 0.75rem !important;
+        border-radius: 20px !important;
+    }
+    .mobile-button i {
+        font-size: 0.75em !important;
+    }
+}
+
+/* =====================================================================
+   Button and Restore Styles (from accounts/deleted-contractors.html, deleted-employees.html)
+   ===================================================================== */
+.restore-btn {
+    transition: all 0.2s ease;
+}
+.restore-btn:hover {
+    transform: translateY(-1px);
+}
+
+/* =====================================================================
+   Pending Projects Page Styles (from dispatch/pendingprojects.html)
+   ===================================================================== */
+
+/* Table row styles */
+tbody tr {
+    cursor: pointer; /* Show pointer cursor on hoverable rows */
+}
+
+/* Hover effect for table rows */
+tbody tr:hover {
+    background-color: rgba(59, 130, 246, 0.05); /* Light blue background on hover */
+}
+
+/* Selected row style */
+tbody tr.selected {
+    background-color: rgba(59, 130, 246, 0.1); /* Slightly darker blue for selected row */
+}
+
+/* Modal visibility control */
+#dispatchModal {
+    display: none; /* Hide modal by default */
+    align-items: center;
+    justify-content: center;
+}
+#dispatchModal.active {
+    display: flex; /* Show modal when active class is added */
+}
+#dispatchModal > div {
+    transform: none;
+}
+
+/* Modal animation */
+.modal-content {
+    transition: all 0.3s ease-in-out; /* Smooth transition for modal content */
+}
+
+/* Toast notification styles */
+.toast {
+    transition: all 0.3s ease-in-out;
+    transform: translateY(100%);
+    opacity: 0;
+}
+.toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Utility class for relative positioning and z-index */
+.relative-z-1 {
+    position: relative;
+    z-index: 1;
+}
+
+/* === Dispatch Board Inline Styles (moved from dispatchboard.html) === */
+
+/* Calendar Day Styles */
+.calendar-day {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+}
+.calendar-day:hover {
+    background-color: #f3f4f6;
+}
+.calendar-day.active {
+    background: linear-gradient(to right, #0ea5e9, #2563eb);
+    color: #fff;
+}
+.calendar-day.active:hover {
+    background: linear-gradient(to right, #0369a1, #1e40af);
+}
+
+/* View Control Buttons */
+.view-control-btn {
+    padding: 0.5rem;
+    color: #4b5563;
+    transition: color 0.2s, background-color 0.2s;
+}
+.view-control-btn:hover {
+    color: #111827;
+    background-color: #f3f4f6;
+}
+.view-control-btn.active {
+    color: #0ea5e9;
+    background-color: #f0f9ff;
+}
+
+/* Draggable Header Styles */
+.draggable-header {
+    cursor: pointer;
+    user-select: none;
+}
+.draggable-header.asc i::before {
+    content: "\f0de";
+}
+.draggable-header.desc i::before {
+    content: "\f0dd";
+}
+
+/* Force pointer cursor on all table elements */
+table tbody tr.dispatch-card,
+table tbody tr.dispatch-card td,
+table tbody tr.dispatch-card td *,
+table tbody tr.dispatch-card td span,
+table tbody tr.dispatch-card td p {
+    cursor: pointer !important;
+}
+
+/* === End Dispatch Board Inline Styles === */
+
+/* =====================================================================
+   Filter Button Styles (for Invoices,Expenses/Financial filter buttons)
+   - Default: colored border and text, transparent background
+   - .active-filter: solid background and white text for selected state
+   - To adjust height, modify padding property
+   ===================================================================== */
+.filter-btn {
+    border-width: 2px;
+    background: transparent;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.75rem; /* Reduced vertical and horizontal padding */
+    font-size: 0.875rem;
+    transition: background 0.2s, color 0.2s;
+}
+.filter-btn.active-filter {
+    color: #fff;
+}
+.filter-btn.border-blue-500.active-filter { background: #3b82f6; }
+.filter-btn.border-red-500.active-filter { background: #ef4444; }
+.filter-btn.border-green-500.active-filter { background: #22c55e; }
+.filter-btn.border-purple-500.active-filter { background: #a855f7; }
+.filter-btn.border-yellow-500.active-filter { background: #facc15; }
+/* === End Filters buttons for Financial Inline Styles === */
+
+/* =====================
+   Vendor Details Page Custom Styles
+   ===================== */
+.tab-btn.active {
+    border-bottom-width: 3px;
+    border-color: #0ea5e9;
+    color: #0ea5e9;
+    background: linear-gradient(90deg, #e0f2fe 0%, #f0f9ff 100%);
+}
+.tab-btn {
+    transition: background 0.2s, color 0.2s;
+}
+.tab-btn:not(.active):hover {
+    background: #f1f5f9;
+}
+.filter-btn {
+    border-radius: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.92rem;
+    background: #fff;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.filter-btn.active-filter[data-filter="all"] {
+    background-color: #3b82f6;
+    color: #fff;
+    border-color: #3b82f6;
+}
+.filter-btn.active-filter[data-filter="draft"] {
+    background-color: #facc15;
+    color: #fff;
+    border-color: #facc15;
+}
+.filter-btn.active-filter[data-filter="sent"] {
+    background-color: #22c55e;
+    color: #fff;
+    border-color: #22c55e;
+}
+.filter-btn.active-filter[data-filter="acknowledged"] {
+    background-color: #a78bfa;
+    color: #fff;
+    border-color: #a78bfa;
+}
+.filter-btn.active-filter[data-filter="received"] {
+    background-color: #3b82f6;
+    color: #fff;
+    border-color: #3b82f6;
+}
+.filter-btn.active-filter[data-filter="ordered"] {
+    background-color: #3b82f6;
+    color: #fff;
+    border-color: #3b82f6;
+}
+/* =====================
+   Vendor Details Page Custom Styles -End
+   ===================== */

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+        <title>Estimates</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+        <script src="https://unpkg.com/@popperjs/core@2"></script>
+        <script src="https://unpkg.com/tippy.js@6"></script>
+        <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+        <link href="https://unpkg.com/tippy.js@6/themes/light.css" rel="stylesheet"/>
+        <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <link rel="stylesheet" href="../css/styles.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    </head>
+<body class="min-h-screen bg-gray-50">
+    <!-- Include header -->
+    <div id="header-container"></div>
+
+    <!-- Include navigation -->
+    <div id="nav-container"></div>
+
+    <main class="p-4">
+        <!-- Top bar -->
+        <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center">
+                <a href="#" class="text-gray-600"><i class="fas fa-arrow-left text-xl"></i></a>
+                <h1 class="text-xl font-semibold ml-3">Estimates</h1>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button class="bg-blue-500 text-white px-3 py-1.5 rounded-md text-sm font-semibold">Create +</button>
+                <div class="relative inline-block text-left">
+                    <button type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-1.5 bg-blue-500 text-sm font-medium text-white hover:bg-blue-600" id="menu-button" aria-expanded="true" aria-haspopup="true">
+                      Actions
+                      <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="relative inline-block text-left">
+                    <button type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-1.5 bg-blue-500 text-sm font-medium text-white hover:bg-blue-600" id="menu-button" aria-expanded="true" aria-haspopup="true">
+                      More
+                      <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                      </svg>
+                    </button>
+                  </div>
+            </div>
+        </div>
+
+        <!-- Search and filter -->
+        <div class="flex mb-4">
+            <div class="relative flex-grow">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                    <i class="fas fa-search"></i>
+                </span>
+                <input type="text" placeholder="Search" class="w-full pl-10 pr-4 py-2 border rounded-r-none rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+            </div>
+            <button class="bg-blue-500 text-white px-3 py-2 rounded-l-none rounded-r-md">
+                <i class="fas fa-filter"></i>
+            </button>
+        </div>
+
+        <!-- Estimates List -->
+        <div class="space-y-4">
+            <!-- Estimate Card 1 -->
+            <div class="bg-sky-50 rounded-lg shadow p-4">
+                <div class="flex justify-between items-start">
+                    <h2 class="text-xl font-bold text-cyan-600">Estimate No. 1048</h2>
+                    <span class="px-2 py-0.5 text-xs font-semibold text-yellow-800 bg-yellow-200 rounded-md">Pending</span>
+                </div>
+                <div class="mt-3 text-sm text-gray-700 space-y-1">
+                    <p>Customer Name: Billy Mamaril</p>
+                    <p>Address: Pabahay 2000 Muzon</p>
+                    <div class="grid grid-cols-2">
+                        <p>Date Created: mm/dd/yyyy</p>
+                        <p>Date Sent: mm/dd/yyyy</p>
+                    </div>
+                    <p>Date Created: No Category Available</p>
+                    <p>Price: <span class="font-bold text-blue-600">$700.00</span></p>
+                </div>
+                <div class="mt-3 flex justify-end">
+                    <button class="bg-blue-500 text-white text-sm font-semibold px-4 py-1.5 rounded-md">Convert to Invoice</button>
+                </div>
+            </div>
+
+            <!-- Estimate Card 2 -->
+            <div class="bg-sky-50 rounded-lg shadow p-4">
+                <div class="flex justify-between items-start">
+                    <h2 class="text-xl font-bold text-cyan-600">Estimate No. 1048</h2>
+                    <span class="px-2 py-0.5 text-xs font-semibold text-yellow-800 bg-yellow-200 rounded-md">Pending</span>
+                </div>
+                <div class="mt-3 text-sm text-gray-700 space-y-1">
+                    <p>Customer Name: Billy Mamaril</p>
+                    <p>Address: Pabahay 2000 Muzon</p>
+                    <div class="grid grid-cols-2">
+                        <p>Date Created: mm/dd/yyyy</p>
+                        <p>Date Sent: mm/dd/yyyy</p>
+                    </div>
+                    <p>Date Created: No Category Available</p>
+                    <p>Price: <span class="font-bold text-blue-600">$700.00</span></p>
+                </div>
+                <div class="mt-3 flex justify-end">
+                    <button class="bg-blue-500 text-white text-sm font-semibold px-4 py-1.5 rounded-md">Convert to Invoice</button>
+                </div>
+            </div>
+
+            <!-- Estimate Card 3 -->
+            <div class="bg-sky-50 rounded-lg shadow p-4">
+                <div class="flex justify-between items-start">
+                    <h2 class="text-xl font-bold text-cyan-600">Estimate No. 1048</h2>
+                    <span class="px-2 py-0.5 text-xs font-semibold text-yellow-800 bg-yellow-200 rounded-md">Pending</span>
+                </div>
+                <div class="mt-3 text-sm text-gray-700 space-y-1">
+                    <p>Customer Name: Billy Mamaril</p>
+                    <p>Address: Pabahay 2000 Muzon</p>
+                    <div class="grid grid-cols-2">
+                        <p>Date Created: mm/dd/yyyy</p>
+                        <p>Date Sent: mm/dd/yyyy</p>
+                    </div>
+                    <p>Date Created: No Category Available</p>
+                    <p>Price: <span class="font-bold text-blue-600">$700.00</span></p>
+                </div>
+                <div class="mt-3 flex justify-end">
+                    <button class="bg-blue-500 text-white text-sm font-semibold px-4 py-1.5 rounded-md">Convert to Invoice</button>
+                </div>
+            </div>
+
+            <!-- Estimate Card 4 -->
+            <div class="bg-sky-50 rounded-lg shadow p-4">
+                <div class="flex justify-between items-start">
+                    <h2 class="text-xl font-bold text-cyan-600">Estimate No. 1048</h2>
+                    <span class="px-2 py-0.5 text-xs font-semibold text-yellow-800 bg-yellow-200 rounded-md">Pending</span>
+                </div>
+                <div class="mt-3 text-sm text-gray-700 space-y-1">
+                    <p>Customer Name: Billy Mamaril</p>
+                    <p>Address: Pabahay 2000 Muzon</p>
+                    <div class="grid grid-cols-2">
+                        <p>Date Created: mm/dd/yyyy</p>
+                        <p>Date Sent: mm/dd/yyyy</p>
+                    </div>
+                    <p>Date Created: No Category Available</p>
+                    <p>Price: <span class="font-bold text-blue-600">$700.00</span></p>
+                </div>
+                <div class="mt-3 flex justify-end">
+                    <button class="bg-blue-500 text-white text-sm font-semibold px-4 py-1.5 rounded-md">Convert to Invoice</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        // Load header and navigation
+        fetch('../nav/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            });
+        fetch('../nav/navigation.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav-container').innerHTML = data;
+            });
+        </script>
+    </body>
+    </html> 

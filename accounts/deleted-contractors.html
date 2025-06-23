@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>Deleted Contractors</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/themes/light.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+</head>
+<body class="min-h-screen bg-gray-50">
+    <!-- Include header -->
+    <div id="header-container"></div>
+
+    <!-- Include navigation -->
+    <div id="nav-container"></div>
+
+    <!-- Main content -->
+    <main class="mobile-container">
+        <!-- Mobile Header -->
+        <div class="mobile-header md:hidden">
+            <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center gap-3">
+                    <button onclick="window.location.href='contractors.html'" class="text-white p-1.5 rounded-full bg-white/20 backdrop-blur-sm">
+                        <i class="fas fa-arrow-left text-sm"></i>
+                    </button>
+                    <h1 class="text-lg font-bold text-white">Deleted Contractors</h1>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button class="text-white p-1.5 rounded-full bg-white/20 backdrop-blur-sm">
+                        <i class="fas fa-ellipsis-v text-sm"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="relative">
+                <input type="search" 
+                       placeholder="Search deleted contractors..." 
+                       class="mobile-search w-full h-8 pl-3 pr-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-white/50 text-sm"
+                />
+            </div>
+        </div>
+
+        <!-- Desktop Header (hidden on mobile) -->
+        <div class="hidden md:block container-fluid mx-auto px-4 md:px-6 py-2 md:py-4">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
+                <div class="flex items-center gap-4">
+                    <button onclick="window.location.href='contractors.html'" class="back-button text-sm px-4 py-2 text-white rounded-md flex items-center gap-2">
+                        <i class="fas fa-arrow-left"></i>Back to List
+                    </button>
+                    <h1 class="text-xl md:text-2xl font-bold text-gray-800">Deleted Contractors</h1>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="relative">
+                        <button id="actionsDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
+                            <span>Actions</span>
+                            <i class="fas fa-chevron-down ml-1"></i>
+                        </button>
+                        <div id="actionsMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10">
+                            <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                                <i class="fas fa-trash-alt w-5"></i>
+                                <span>Delete</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls Section -->
+        <div class="hidden md:flex flex-col md:flex-row items-center justify-between gap-4 mb-6 container-fluid mx-auto px-4 md:px-6">
+            <!-- Left side: Controls -->
+            <div class="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
+                <!-- Show entries dropdown -->
+                <div class="hidden md:flex items-center mr-4">
+                    <label for="entries" class="text-sm text-gray-600 mr-2">Show entries:</label>
+                    <select id="entries" class="border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+                <!-- Restore Selected button -->
+                <div class="flex flex-wrap justify-center md:justify-start gap-2">
+                    <button id="restoreSelectedBtn" class="px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors hidden">
+                        <i class="fas fa-undo-alt mr-1"></i> Restore Selected
+                    </button>
+                </div>
+            </div>
+            <!-- Right side: Search -->
+            <div id="search-container" class="relative w-full md:w-auto">
+                <input type="search" 
+                       placeholder="Search..." 
+                       class="w-full h-[42px] pl-10 pr-4 rounded-lg border border-green-500 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300"
+                />
+                <button class="absolute left-3 top-1/2 -translate-y-1/2 text-blue-500 hover:text-blue-600 transition-colors">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Deleted Contractors List -->
+        <div class="md:hidden pb-20">
+            <div class="mobile-card">
+                <div class="mobile-table-header">
+                    <h2 class="text-white font-semibold">Deleted Contractors</h2>
+                    <p class="text-white/80 text-sm mt-1">5 contractors found</p>
+                </div>
+                
+                <!-- Mobile Deleted Contractor Cards -->
+                <div class="p-3 space-y-2">
+                    <!-- Deleted Contractor Card 1 -->
+                    <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
+                        <div class="flex items-center justify-between mb-1">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" class="contractor-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                                <div class="w-8 h-8 bg-gradient-to-br from-red-400 to-pink-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
+                                    JD
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900 text-sm">John Doe</h3>
+                                    <p class="text-xs text-gray-500">ID: 8</p>
+                                </div>
+                            </div>
+                            <span class="mobile-status bg-red-100 text-red-800 text-xs">Inactive</span>
+                        </div>
+                        <div class="space-y-1 text-xs">
+                            <div>
+                                <span class="text-gray-500">Phone:</span>
+                                <span class="text-gray-900">091 2376 5223</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">Email:</span>
+                                <span class="text-gray-900">johndoe@gmail.com</span>
+                            </div>
+                        </div>
+                        <div class="mt-1 flex justify-between items-center">
+                            <div>
+                                <span class="text-gray-500 text-xs">Deleted:</span>
+                                <span class="text-gray-900 text-xs">March 12, 2025</span>
+                            </div>
+                            <button class="text-xs text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
+                                <i class="fas fa-undo-alt mr-1"></i> Restore
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Deleted Contractor Card 2 -->
+                    <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
+                        <div class="flex items-center justify-between mb-1">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" class="contractor-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                                <div class="w-8 h-8 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
+                                    JS
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900 text-sm">Jane Smith</h3>
+                                    <p class="text-xs text-gray-500">ID: 9</p>
+                                </div>
+                            </div>
+                            <span class="mobile-status bg-red-100 text-red-800 text-xs">Inactive</span>
+                        </div>
+                        <div class="space-y-1 text-xs">
+                            <div>
+                                <span class="text-gray-500">Phone:</span>
+                                <span class="text-gray-900">092 3456 7890</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">Email:</span>
+                                <span class="text-gray-900">janesmith@gmail.com</span>
+                            </div>
+                        </div>
+                        <div class="mt-1 flex justify-between items-center">
+                            <div>
+                                <span class="text-gray-500 text-xs">Deleted:</span>
+                                <span class="text-gray-900 text-xs">March 10, 2025</span>
+                            </div>
+                            <button class="text-xs text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
+                                <i class="fas fa-undo-alt mr-1"></i> Restore
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Deleted Contractor Card 3 -->
+                    <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
+                        <div class="flex items-center justify-between mb-1">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" class="contractor-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                                <div class="w-8 h-8 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
+                                    MJ
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900 text-sm">Mike Johnson</h3>
+                                    <p class="text-xs text-gray-500">ID: 10</p>
+                                </div>
+                            </div>
+                            <span class="mobile-status bg-red-100 text-red-800 text-xs">Inactive</span>
+                        </div>
+                        <div class="space-y-1 text-xs">
+                            <div>
+                                <span class="text-gray-500">Phone:</span>
+                                <span class="text-gray-900">093 4567 8901</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">Email:</span>
+                                <span class="text-gray-900">mikejohnson@gmail.com</span>
+                            </div>
+                        </div>
+                        <div class="mt-1 flex justify-between items-center">
+                            <div>
+                                <span class="text-gray-500 text-xs">Deleted:</span>
+                                <span class="text-gray-900 text-xs">March 8, 2025</span>
+                            </div>
+                            <button class="text-xs text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
+                                <i class="fas fa-undo-alt mr-1"></i> Restore
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Deleted Contractor Card 4 -->
+                    <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
+                        <div class="flex items-center justify-between mb-1">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" class="contractor-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                                <div class="w-8 h-8 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
+                                    SW
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900 text-sm">Sarah Wilson</h3>
+                                    <p class="text-xs text-gray-500">ID: 11</p>
+                                </div>
+                            </div>
+                            <span class="mobile-status bg-red-100 text-red-800 text-xs">Inactive</span>
+                        </div>
+                        <div class="space-y-1 text-xs">
+                            <div>
+                                <span class="text-gray-500">Phone:</span>
+                                <span class="text-gray-900">094 5678 9012</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">Email:</span>
+                                <span class="text-gray-900">sarahwilson@gmail.com</span>
+                            </div>
+                        </div>
+                        <div class="mt-1 flex justify-between items-center">
+                            <div>
+                                <span class="text-gray-500 text-xs">Deleted:</span>
+                                <span class="text-gray-900 text-xs">March 5, 2025</span>
+                            </div>
+                            <button class="text-xs text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
+                                <i class="fas fa-undo-alt mr-1"></i> Restore
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Deleted Contractor Card 5 -->
+                    <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
+                        <div class="flex items-center justify-between mb-1">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" class="contractor-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                                <div class="w-8 h-8 bg-gradient-to-br from-indigo-400 to-blue-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
+                                    DB
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900 text-sm">David Brown</h3>
+                                    <p class="text-xs text-gray-500">ID: 12</p>
+                                </div>
+                            </div>
+                            <span class="mobile-status bg-red-100 text-red-800 text-xs">Inactive</span>
+                        </div>
+                        <div class="space-y-1 text-xs">
+                            <div>
+                                <span class="text-gray-500">Phone:</span>
+                                <span class="text-gray-900">095 6789 0123</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">Email:</span>
+                                <span class="text-gray-900">davidbrown@gmail.com</span>
+                            </div>
+                        </div>
+                        <div class="mt-1 flex justify-between items-center">
+                            <div>
+                                <span class="text-gray-500 text-xs">Deleted:</span>
+                                <span class="text-gray-900 text-xs">March 3, 2025</span>
+                            </div>
+                            <button class="text-xs text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
+                                <i class="fas fa-undo-alt mr-1"></i> Restore
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Action Buttons -->
+        <div class="md:hidden mobile-actions">
+            <div class="flex gap-3">
+                <button onclick="window.location.href='contractors.html'" class="mobile-button flex-1 bg-gray-500 text-white flex items-center justify-center gap-2 text-sm py-2">
+                    <i class="fas fa-arrow-left text-xs"></i>
+                    <span>Back</span>
+                </button>
+                <button id="restoreSelectedBtnMobile" class="mobile-button flex-1 bg-purple-600 text-white flex items-center justify-center gap-2 text-sm py-2">
+                    <i class="fas fa-undo-alt text-xs"></i>
+                    <span>Restore Selected</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Desktop Table content -->
+        <div class="hidden md:block container-fluid mx-auto px-4 md:px-6">
+            <div class="bg-white rounded-xl overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full min-w-[800px]">
+                        <thead class="bg-gradient-to-r from-sky-500 to-blue-600 text-white">
+                            <tr>
+                                <th class="px-6 py-4 text-left">
+                                    <input type="checkbox" id="selectAllDeleted" class="w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                                </th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold">ID</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold">Full Name</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold">Phone</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold">Email</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold">Account Status</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold">Date Deleted</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4">
+                                    <input type="checkbox" class="contractor-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">8</td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900">John Doe</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">091 2376 5223</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">johndoe@gmail.com</td>
+                                <td class="px-6 py-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                        Inactive
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">March 12, 2025</td>
+                                <td class="px-6 py-4">
+                                    <button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
+                                        <i class="fas fa-undo-alt mr-1"></i> Restore
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4">
+                                    <input type="checkbox" class="contractor-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">9</td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900">Jane Smith</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">092 3456 7890</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">janesmith@gmail.com</td>
+                                <td class="px-6 py-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                        Inactive
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">March 10, 2025</td>
+                                <td class="px-6 py-4">
+                                    <button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
+                                        <i class="fas fa-undo-alt mr-1"></i> Restore
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4">
+                                    <input type="checkbox" class="contractor-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">10</td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900">Mike Johnson</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">093 4567 8901</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">mikejohnson@gmail.com</td>
+                                <td class="px-6 py-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                        Inactive
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">March 8, 2025</td>
+                                <td class="px-6 py-4">
+                                    <button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
+                                        <i class="fas fa-undo-alt mr-1"></i> Restore
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4">
+                                    <input type="checkbox" class="contractor-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">11</td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900">Sarah Wilson</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">094 5678 9012</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">sarahwilson@gmail.com</td>
+                                <td class="px-6 py-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                        Inactive
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">March 5, 2025</td>
+                                <td class="px-6 py-4">
+                                    <button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
+                                        <i class="fas fa-undo-alt mr-1"></i> Restore
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4">
+                                    <input type="checkbox" class="contractor-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">12</td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900">David Brown</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">095 6789 0123</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">davidbrown@gmail.com</td>
+                                <td class="px-6 py-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                        Inactive
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">March 3, 2025</td>
+                                <td class="px-6 py-4">
+                                    <button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
+                                        <i class="fas fa-undo-alt mr-1"></i> Restore
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Pagination -->
+                <div class="bg-gray-50 px-4 md:px-6 py-4 flex flex-col md:flex-row justify-between items-center border-t border-gray-100 gap-4 rounded-b-xl">
+                    <div class="flex items-center gap-2 text-sm text-gray-600 order-2 md:order-1">
+                        <span class="mx-2">|</span>
+                        Showing <span class="font-medium">1</span> to <span class="font-medium">5</span> of <span class="font-medium">5</span> entries
+                    </div>
+                    <div class="flex space-x-2 order-1 md:order-2">
+                        <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                            <i class="fas fa-chevron-left mr-1"></i>
+                            <span class="hidden sm:inline">Previous</span>
+                        </button>
+                        <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-white bg-purple-600 border border-purple-600 rounded-lg hover:bg-purple-700 transition-colors duration-200">
+                            1
+                        </button>
+                        <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                            <span class="hidden sm:inline">Next</span>
+                            <i class="fas fa-chevron-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Load JavaScript files -->
+    <script src="../js/main.js"></script>
+    <script src="../js/contractors.js"></script>
+</body>
+</html> 

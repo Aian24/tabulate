@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Employee Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
+    <!-- Header and Navigation -->
+    <div id="header-container"></div>
+    <div id="nav-container"></div>
+
+    <div class="w-full px-0 md:px-6 py-8">
+        <div class="mb-6 flex items-center gap-2">
+            <button onclick="window.history.back()" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition">
+                <i class="fas fa-arrow-left"></i> Back
+            </button>
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800 ml-4" id="employeeNameHeader">Employee</h1>
+        </div>
+        <div class="bg-white/90 rounded-2xl shadow-2xl p-4 md:p-8 border border-blue-100 w-full">
+            <div class="border-b mb-6 pb-2 flex flex-col md:flex-row md:items-end md:justify-between gap-2">
+                <nav class="flex space-x-2" id="tabs">
+                    <button class="tab-btn active px-5 py-2 font-semibold rounded-t-lg" data-tab="details">
+                        <i class="fas fa-info-circle mr-2"></i>Employee Details
+                    </button>
+                    <button class="tab-btn px-5 py-2 font-semibold rounded-t-lg" data-tab="employment">
+                        <i class="fas fa-briefcase mr-2"></i>Employment Details
+                    </button>
+                    <button class="tab-btn px-5 py-2 font-semibold rounded-t-lg" data-tab="finances">
+                        <i class="fas fa-coins mr-2"></i>Finances
+                    </button>
+                    <button class="tab-btn px-5 py-2 font-semibold rounded-t-lg" data-tab="tax">
+                        <i class="fas fa-file-invoice-dollar mr-2"></i>Tax
+                    </button>
+                </nav>
+            </div>
+            <div id="tab-content">
+                <div class="tab-panel" data-tab="details">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="col-span-1 bg-gray-50 rounded-lg p-4">
+                            <h3 class="font-semibold text-gray-700 mb-2">Contact</h3>
+                            <div class="mb-2 flex items-center gap-2"><i class="fas fa-envelope text-blue-500"></i><span class="font-semibold">Email:</span> <span id="employeeEmail"></span></div>
+                            <div class="mb-2 flex items-center gap-2"><i class="fas fa-phone text-blue-500"></i><span class="font-semibold">Phone:</span> <span id="employeePhone"></span></div>
+                            <div class="mb-2 flex items-start gap-2"><i class="fas fa-map-marker-alt text-blue-500 mt-1"></i><span class="font-semibold">Address:</span> <span id="employeeAddress"></span></div>
+                        </div>
+                        <div class="col-span-1 bg-gray-50 rounded-lg p-4">
+                            <h3 class="font-semibold text-gray-700 mb-2">Emergency Contact Information</h3>
+                            <div class="mb-1"><span class="font-semibold">Name</span><br />Not Assigned</div>
+                            <div class="mb-1"><span class="font-semibold">Email</span><br />Not Assigned</div>
+                            <div class="mb-1"><span class="font-semibold">Phone</span><br />Not Assigned</div>
+                            <div class="mb-1"><span class="font-semibold">Address</span><br />Not Assigned</div>
+                        </div>
+                        <div class="col-span-1 bg-gray-50 rounded-lg p-4">
+                            <h3 class="font-semibold text-gray-700 mb-2">Spouse Information</h3>
+                            <div class="mb-1"><span class="font-semibold">Name</span><br />Not Assigned</div>
+                            <div class="mb-1"><span class="font-semibold">Email</span><br />Not Assigned</div>
+                            <div class="mb-1"><span class="font-semibold">Phone</span><br />Not Assigned</div>
+                            <div class="mb-1"><span class="font-semibold">Address</span><br />Not Assigned</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-panel hidden" data-tab="employment">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                        <div class="col-span-1 bg-white rounded-lg p-4 shadow border">
+                            <h3 class="font-semibold text-gray-700 mb-2 flex items-center gap-2"><i class="fas fa-location-arrow text-blue-500"></i>Work Address</h3>
+                            <div class="mb-2"><span class="font-semibold">Address:</span><br>Brgy. Maderan GMA Cavite<br>GMA, Cavite 4117</div>
+                            <button class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 flex items-center gap-2"><i class="fas fa-edit"></i> Edit Employment Details</button>
+                        </div>
+                        <div class="col-span-2 flex flex-col gap-6">
+                            <div class="bg-blue-50 rounded-lg p-4 flex flex-col md:flex-row md:justify-between md:items-center mb-2">
+                                <div>
+                                    <h4 class="font-semibold text-gray-700 mb-1">Employment Details</h4>
+                                    <div><span class="font-semibold">Position</span><br>Intern</div>
+                                    <div class="mt-2"><span class="font-semibold">Department</span><br><span class="text-gray-800 font-bold">Not Assigned</span></div>
+                                </div>
+                                <div class="mt-4 md:mt-0">
+                                    <h4 class="font-semibold text-gray-700 mb-1">Personal Information</h4>
+                                    <div><span class="font-semibold">Hire Date</span><br><span class="font-bold">12 March 2025</span></div>
+                                    <div class="mt-2"><span class="font-semibold">Employment Status</span><br><span class="text-green-500 font-bold">Active</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-blue-50 rounded-lg p-4 mb-6">
+                        <h4 class="font-semibold text-gray-700 mb-2">Assigned Services</h4>
+                        <!-- Assigned services content here -->
+                    </div>
+                    <div class="bg-blue-50 rounded-lg p-4 mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="font-semibold text-gray-700">Work Schedule</h4>
+                            <button class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm flex items-center gap-1"><i class="fas fa-plus"></i> Add Schedule</button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full text-sm border border-blue-200 rounded-lg overflow-hidden">
+                                <thead class="bg-blue-400 text-white">
+                                    <tr>
+                                        <th class="px-4 py-2">Day</th>
+                                        <th class="px-4 py-2">Time In</th>
+                                        <th class="px-4 py-2">Time Out</th>
+                                        <th class="px-4 py-2">Break Hours</th>
+                                        <th class="px-4 py-2">Total Working Hours</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Example row -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="bg-blue-50 rounded-lg p-4 mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="font-semibold text-gray-700">Licenses</h4>
+                            <button class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm flex items-center gap-1"><i class="fas fa-plus"></i> Add Licenses</button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full text-sm border border-blue-200 rounded-lg overflow-hidden">
+                                <thead class="bg-blue-400 text-white">
+                                    <tr>
+                                        <th class="px-4 py-2">Image</th>
+                                        <th class="px-4 py-2">Type</th>
+                                        <th class="px-4 py-2">Licence Number</th>
+                                        <th class="px-4 py-2">License State</th>
+                                        <th class="px-4 py-2">Expiry Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Example row -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-panel hidden" data-tab="finances">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-2">
+                        <div class="flex items-center gap-2">
+                            <h4 class="font-semibold text-gray-700">Finances</h4>
+                            <div class="relative ml-4">
+                                <select id="financeDropdown" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                                    <option value="payroll">Payroll</option>
+                                    <option value="bonuses">Bonuses</option>
+                                    <option value="deductions">Deductions</option>
+                                    <option value="leave">Leave</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="finance-payroll" class="finance-section">
+                        <h5 class="font-semibold text-gray-800 mb-2">Employee's Payroll</h5>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                            <div class="rounded-lg p-4 bg-cyan-400 text-white flex flex-col justify-between">
+                                <span>Rate</span>
+                                <span class="text-2xl font-bold text-right">$ 10.00</span>
+                            </div>
+                            <div class="rounded-lg p-4 bg-amber-400 text-white flex flex-col justify-between">
+                                <span>Current Earnings</span>
+                                <span class="text-2xl font-bold text-right">$ 0.00</span>
+                            </div>
+                            <div class="rounded-lg p-4 bg-sky-400 text-white flex flex-col justify-between">
+                                <span>Overall Earnings</span>
+                                <span class="text-2xl font-bold text-right">$ 0.00</span>
+                            </div>
+                        </div>
+                        <div class="mb-2 font-semibold text-gray-700">Recent Pay Stubs</div>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full text-sm border border-blue-200 rounded-lg overflow-hidden">
+                                <thead class="bg-sky-400 text-white">
+                                    <tr>
+                                        <th class="px-4 py-2">Pay Period</th>
+                                        <th class="px-4 py-2">Amount</th>
+                                        <th class="px-4 py-2">Payment Date</th>
+                                        <th class="px-4 py-2">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Example row -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="finance-bonuses" class="finance-section hidden">
+                        <h5 class="font-semibold text-gray-800 mb-2">Bonuses</h5>
+                        <!-- Create Bonus Modal -->
+                        <div id="createBonusModal" class="hidden fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
+                            <div class="bg-white rounded-lg shadow-lg w-full max-w-3xl p-0 overflow-hidden">
+                                <div class="bg-sky-400 px-6 py-3 text-white font-semibold text-lg">Create Bonus</div>
+                                <form id="createBonusForm" class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-semibold mb-1 text-gray-700">Type<span class="text-red-500">*</span></label>
+                                        <input type="text" name="type" class="w-full border rounded px-3 py-2" required />
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold mb-1 text-gray-700">Description<span class="text-red-500">*</span></label>
+                                        <input type="text" name="description" class="w-full border rounded px-3 py-2" required />
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold mb-1 text-gray-700">Amount<span class="text-red-500">*</span></label>
+                                        <input type="number" name="amount" class="w-full border rounded px-3 py-2" required />
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold mb-1 text-gray-700">Date Awarded<span class="text-red-500">*</span></label>
+                                        <input type="date" name="date_awarded" class="w-full border rounded px-3 py-2" required />
+                                    </div>
+                                    <div class="col-span-2 flex gap-2 mt-4">
+                                        <button type="submit" class="px-4 py-2 bg-sky-500 text-white rounded hover:bg-sky-600 flex items-center gap-2"><i class="fas fa-save"></i>Submit</button>
+                                        <button type="button" id="cancelCreateBonus" class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow border p-4">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2 gap-2">
+                                <div class="flex items-center gap-2">
+                                    <label class="text-xs font-semibold">Show</label>
+                                    <select class="border border-gray-300 rounded px-2 py-1 text-xs">
+                                        <option>100</option>
+                                        <option>50</option>
+                                        <option>25</option>
+                                        <option>10</option>
+                                    </select>
+                                    <span class="text-xs">of 0</span>
+                                </div>
+                                <div class="flex gap-2">
+                                    <button id="openCreateBonus" class="px-4 py-1 bg-blue-500 text-white rounded text-xs font-semibold flex items-center gap-1"><i class="fas fa-plus"></i> Create</button>
+                                    <button class="px-4 py-1 bg-gray-800 text-white rounded text-xs font-semibold flex items-center gap-1"><i class="fas fa-bars"></i> Action</button>
+                                </div>
+                                <div class="flex items-center gap-1">
+                                    <label class="text-xs font-semibold">Search:</label>
+                                    <input type="text" class="border border-gray-300 rounded px-2 py-1 text-xs" />
+                                </div>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full text-sm border border-blue-200 rounded-lg overflow-hidden">
+                                    <thead class="bg-sky-400 text-white">
+                                        <tr>
+                                            <th class="px-4 py-2"><input type="checkbox" /></th>
+                                            <th class="px-4 py-2">Type</th>
+                                            <th class="px-4 py-2">Description</th>
+                                            <th class="px-4 py-2">Amount</th>
+                                            <th class="px-4 py-2">Awarded Date</th>
+                                            <th class="px-4 py-2">Created Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="6" class="text-center text-xs text-gray-500 py-4">No data available in table</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="finance-deductions" class="finance-section hidden">
+                        <h5 class="font-semibold text-gray-800 mb-2">Payroll Employee Deductions</h5>
+                        <!-- Create Deduction Modal -->
+                        <div id="createDeductionModal" class="hidden fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
+                            <div class="bg-white rounded-lg shadow-lg w-full max-w-4xl p-0 overflow-hidden">
+                                <div class="bg-sky-400 px-6 py-3 text-white font-semibold text-lg">Create Employee Deduction</div>
+                                <form id="createDeductionForm" class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-semibold mb-1 text-gray-700">Type<span class="text-red-500">*</span></label>
+                                        <select name="type" class="w-full border rounded px-3 py-2" required>
+                                            <option value="">Statutory Deductions</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold mb-1 text-gray-700">Name<span class="text-red-500">*</span></label>
+                                        <input type="text" name="name" class="w-full border rounded px-3 py-2" required />
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold mb-1 text-gray-700">Description</label>
+                                        <input type="text" name="description" class="w-full border rounded px-3 py-2" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold mb-1 text-gray-700">Amount<span class="text-red-500">*</span></label>
+                                        <input type="number" name="amount" class="w-full border rounded px-3 py-2" required />
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold mb-1 text-gray-700">Timing<span class="text-red-500">*</span></label>
+                                        <select name="timing" class="w-full border rounded px-3 py-2" required>
+                                            <option value="">-- Select Timing --</option>
+                                            <option value="Monthly">Monthly</option>
+                                            <option value="Weekly">Weekly</option>
+                                            <option value="One-time">One-time</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold mb-1 text-gray-700">Deduction Start Date<span class="text-red-500">*</span></label>
+                                        <input type="date" name="start_date" class="w-full border rounded px-3 py-2" required />
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold mb-1 text-gray-700">Deduction End Date</label>
+                                        <input type="date" name="end_date" class="w-full border rounded px-3 py-2" />
+                                    </div>
+                                    <div class="col-span-2 flex gap-2 mt-4">
+                                        <button type="submit" class="px-4 py-2 bg-sky-500 text-white rounded hover:bg-sky-600 flex items-center gap-2"><i class="fas fa-save"></i>Submit</button>
+                                        <button type="button" id="cancelCreateDeduction" class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow border p-4">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2 gap-2">
+                                <div class="flex items-center gap-2">
+                                    <label class="text-xs font-semibold">Show</label>
+                                    <select class="border border-gray-300 rounded px-2 py-1 text-xs">
+                                        <option>100</option>
+                                        <option>50</option>
+                                        <option>25</option>
+                                        <option>10</option>
+                                    </select>
+                                    <span class="text-xs">of 0</span>
+                                </div>
+                                <div class="flex gap-2">
+                                    <button id="openCreateDeduction" class="px-4 py-1 bg-blue-500 text-white rounded text-xs font-semibold flex items-center gap-1"><i class="fas fa-plus"></i> Create</button>
+                                    <button class="px-4 py-1 bg-gray-800 text-white rounded text-xs font-semibold flex items-center gap-1"><i class="fas fa-bars"></i> Action</button>
+                                </div>
+                                <div class="flex items-center gap-1">
+                                    <label class="text-xs font-semibold">Search:</label>
+                                    <input type="text" class="border border-gray-300 rounded px-2 py-1 text-xs" />
+                                </div>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full text-sm border border-blue-200 rounded-lg overflow-hidden">
+                                    <thead class="bg-sky-400 text-white">
+                                        <tr>
+                                            <th class="px-4 py-2"><input type="checkbox" /></th>
+                                            <th class="px-4 py-2">Type</th>
+                                            <th class="px-4 py-2">Name</th>
+                                            <th class="px-4 py-2">Description</th>
+                                            <th class="px-4 py-2">Timing</th>
+                                            <th class="px-4 py-2">Amount</th>
+                                            <th class="px-4 py-2">Effective Date</th>
+                                            <th class="px-4 py-2">Created Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="8" class="text-center text-xs text-gray-500 py-4">No data available in table</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="finance-leave" class="finance-section hidden">
+                        <h5 class="font-semibold text-gray-800 mb-2">Payroll Employee Leave Credits</h5>
+                        <!-- Add Leave Policy Modal -->
+                        <div id="addLeavePolicyModal" class="hidden fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
+                            <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-0 overflow-hidden">
+                                <div class="flex items-center justify-between border-b px-6 py-3">
+                                    <div class="font-semibold text-lg">Add Leave Policy</div>
+                                    <button id="closeAddLeavePolicyModal" class="text-gray-500 hover:text-gray-700 text-xl">&times;</button>
+                                </div>
+                                <form id="addLeavePolicyForm" class="p-6">
+                                    <div class="mb-4">
+                                        <label class="block text-sm font-semibold mb-1 text-gray-700">Leave Type</label>
+                                        <select class="w-full border rounded px-3 py-2">
+                                            <option value="">Select Leave Type</option>
+                                            <option value="Sick">Sick Leave</option>
+                                            <option value="Vacation">Vacation Leave</option>
+                                            <option value="Maternity">Maternity Leave</option>
+                                        </select>
+                                    </div>
+                                    <div class="flex gap-2 justify-end mt-6">
+                                        <button type="button" id="cancelAddLeavePolicy" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">Cancel</button>
+                                        <button type="submit" class="px-4 py-2 bg-sky-500 text-white rounded hover:bg-sky-600">Add Policy</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- Create Employee Leave Modal -->
+                        <div id="createLeaveModal" class="hidden fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
+                            <div class="bg-white rounded-lg shadow-lg w-full max-w-4xl p-0 overflow-hidden">
+                                <div class="bg-sky-400 px-6 py-3 text-white font-semibold text-lg">Create Employee Leave</div>
+                                <form id="createLeaveForm" class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-semibold mb-1 text-gray-700">Leave Type<span class="text-red-500">*</span></label>
+                                        <select name="leave_type" class="w-full border rounded px-3 py-2" required>
+                                            <option value="">Select Leave Type</option>
+                                            <option value="Sick">Sick Leave</option>
+                                            <option value="Vacation">Vacation Leave</option>
+                                            <option value="Maternity">Maternity Leave</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold mb-1 text-gray-700">Status<span class="text-red-500">*</span></label>
+                                        <input type="text" name="status" value="Pending" readonly class="w-full border rounded px-3 py-2 bg-gray-100" required />
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold mb-1 text-gray-700">Leave Start Date Time<span class="text-red-500">*</span></label>
+                                        <input type="datetime-local" name="start_date" class="w-full border rounded px-3 py-2" required />
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold mb-1 text-gray-700">Leave End Date Time<span class="text-red-500">*</span></label>
+                                        <input type="datetime-local" name="end_date" class="w-full border rounded px-3 py-2" required />
+                                    </div>
+                                    <div class="col-span-2">
+                                        <label class="block text-sm font-semibold mb-1 text-gray-700">Notes</label>
+                                        <textarea name="notes" class="w-full border rounded px-3 py-2" rows="2"></textarea>
+                                    </div>
+                                    <div class="col-span-2 flex gap-2 mt-4">
+                                        <button type="submit" class="px-4 py-2 bg-sky-500 text-white rounded hover:bg-sky-600 flex items-center gap-2"><i class="fas fa-save"></i>Submit</button>
+                                        <button type="button" id="cancelCreateLeave" class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow border p-4">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2 gap-2">
+                                <div class="flex items-center gap-2">
+                                    <label class="text-xs font-semibold">Show</label>
+                                    <select class="border border-gray-300 rounded px-2 py-1 text-xs">
+                                        <option>100</option>
+                                        <option>50</option>
+                                        <option>25</option>
+                                        <option>10</option>
+                                    </select>
+                                    <span class="text-xs">of 0</span>
+                                </div>
+                                <div class="flex gap-2">
+                                    <button class="px-4 py-1 bg-gray-800 text-white rounded text-xs font-semibold flex items-center gap-1"><i class="fas fa-bars"></i> Action</button>
+                                    <button id="openAddLeavePolicyModal" class="px-4 py-1 bg-gray-200 text-gray-700 rounded text-xs font-semibold flex items-center gap-1"><i class="fas fa-plus"></i> Add Leave Policy</button>
+                                    <button id="openCreateLeaveModal" class="px-4 py-1 bg-blue-500 text-white rounded text-xs font-semibold flex items-center gap-1"><i class="fas fa-plus"></i> Create</button>
+                                </div>
+                                <div class="flex items-center gap-1">
+                                    <label class="text-xs font-semibold">Search:</label>
+                                    <input type="text" class="border border-gray-300 rounded px-2 py-1 text-xs" />
+                                </div>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full text-sm border border-blue-200 rounded-lg overflow-hidden">
+                                    <thead class="bg-sky-400 text-white">
+                                        <tr>
+                                            <th class="px-4 py-2"><input type="checkbox" /></th>
+                                            <th class="px-4 py-2">Leave Type</th>
+                                            <th class="px-4 py-2">Start Date</th>
+                                            <th class="px-4 py-2">End Date</th>
+                                            <th class="px-4 py-2">Status</th>
+                                            <th class="px-4 py-2">Notes</th>
+                                            <th class="px-4 py-2">Approved By</th>
+                                            <th class="px-4 py-2">Created Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="8" class="text-center text-xs text-gray-500 py-4">No data available in table</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-panel hidden" data-tab="tax">
+                    <div class="mb-6 flex items-center gap-2">
+                        <button onclick="window.history.back()" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                    </div>
+                    <div class="bg-white rounded-lg shadow border p-6">
+                        <div class="bg-sky-400 text-white px-4 py-2 rounded-t-md font-semibold mb-6">Employee Tax Form</div>
+                        <form class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-semibold mb-1 text-gray-700">Filing Status</label>
+                                <input type="text" class="w-full border rounded px-3 py-2" value="Single or Married filing separately" />
+                            </div>
+                            <div class="mt-6">
+                                <div class="text-sky-600 font-semibold mb-2">Claim Dependents</div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-semibold mb-1 text-gray-700">Multiply the number of qualifying children under age 17 by $2,000</label>
+                                        <input type="text" class="w-full border rounded px-3 py-2" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold mb-1 text-gray-700">Multiply the number of other dependents by $500</label>
+                                        <input type="text" class="w-full border rounded px-3 py-2" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-6">
+                                <div class="text-sky-600 font-semibold mb-2">Address</div>
+                                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-semibold mb-1 text-gray-700">Address</label>
+                                        <input type="text" class="w-full border rounded px-3 py-2" value="Brgy. Maderan GMA Cavite" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold mb-1 text-gray-700">City</label>
+                                        <input type="text" class="w-full border rounded px-3 py-2" value="GMA" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold mb-1 text-gray-700">State</label>
+                                        <input type="text" class="w-full border rounded px-3 py-2" value="Cavite" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold mb-1 text-gray-700">Zip</label>
+                                        <input type="text" class="w-full border rounded px-3 py-2" value="4117" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pt-4">
+                                <button type="submit" class="px-6 py-2 bg-sky-500 text-white rounded hover:bg-sky-600 flex items-center gap-2"><i class="fas fa-save"></i>Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- JS moved to js/employee.js. See that file for all employee-details logic. -->
+    <script src="../js/employee.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html> 

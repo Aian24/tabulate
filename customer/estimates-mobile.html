@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+        <title>Jobs</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+        <script src="https://unpkg.com/@popperjs/core@2"></script>
+        <script src="https://unpkg.com/tippy.js@6"></script>
+        <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+        <link href="https://unpkg.com/tippy.js@6/themes/light.css" rel="stylesheet"/>
+        <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <link rel="stylesheet" href="../css/styles.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    </head>
+<body class="min-h-screen bg-gray-50">
+    <!-- Include header -->
+    <div id="header-container"></div>
+
+    <!-- Include navigation -->
+    <div id="nav-container"></div>
+
+    <div class="max-w-md mx-auto mt-4 flex items-center gap-2 cursor-pointer select-none" onclick="history.back()">
+        <i class="fas fa-arrow-left text-lg text-black"></i>
+        <span class="text-black text-base font-medium">Estimates</span>
+    </div>
+    <div class="max-w-md mx-auto mt-6 rounded-[2rem] overflow-hidden shadow-lg bg-white">
+        <div class="bg-[#4CB6E8] flex flex-col items-center pt-8 pb-4 relative">
+            <div class="relative">
+                <span class="inline-block w-28 h-28 bg-white rounded-full border-4 border-blue-400 flex items-center justify-center">
+                    <svg class="w-24 h-24 text-blue-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 7.5a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.25a8.38 8.38 0 0115 0v.25a.75.75 0 01-.75.75h-13.5a.75.75 0 01-.75-.75v-.25z" />
+                    </svg>
+                </span>
+                <span class="absolute bottom-2 right-2 bg-white rounded-full p-1.5 shadow text-purple-600 border border-purple-300">
+                    <i class="fas fa-pen fa-sm"></i>
+                </span>
+            </div>
+            <div class="flex items-center gap-2 mt-2">
+                <h2 class="text-3xl font-extrabold text-center text-black">Bria Salsalani</h2>
+            </div>
+            <p class="text-center text-black/80 text-base font-medium">sallie@bria.com</p>
+        </div>
+        <div class="px-4 py-6 bg-[#F3F8FC] flex flex-col gap-4">
+            <!-- Estimate Card 1 -->
+            <div class="bg-white rounded-xl shadow p-4 flex flex-col gap-2">
+                <div class="text-black/80 text-sm">Date Created: <span class="text-black/60">mm/dd/yyyy</span></div>
+                <div class="text-black/80 text-sm">Type : Invoice Due Soon</div>
+                <div class="text-black/80 text-sm">Details: Invoice 1038-01 is due soon</div>
+                <div class="text-black/80 text-sm">Total: <a href="#" class="text-blue-500 underline font-bold">$ 0.00</a></div>
+            </div>
+            <!-- Estimate Card 2 -->
+            <div class="bg-white rounded-xl shadow p-4 flex flex-col gap-2">
+                <div class="text-black/80 text-sm">Date Created: <span class="text-black/60">mm/dd/yyyy</span></div>
+                <div class="text-black/80 text-sm">Type : Invoice Due Soon</div>
+                <div class="text-black/80 text-sm">Details: Invoice 1038-01 is due soon</div>
+                <div class="text-black/80 text-sm">Total: <a href="#" class="text-blue-500 underline font-bold">$ 0.00</a></div>
+            </div>
+            <!-- Estimate Card 3 -->
+            <div class="bg-white rounded-xl shadow p-4 flex flex-col gap-2">
+                <div class="text-black/80 text-sm">Date Created: <span class="text-black/60">mm/dd/yyyy</span></div>
+                <div class="text-black/80 text-sm">Type : Invoice Due Soon</div>
+                <div class="text-black/80 text-sm">Details: Invoice 1038-01 is due soon</div>
+                <div class="text-black/80 text-sm">Total: <a href="#" class="text-blue-500 underline font-bold">$ 0.00</a></div>
+            </div>
+            <!-- Estimate Card 4 -->
+            <div class="bg-white rounded-xl shadow p-4 flex flex-col gap-2">
+                <div class="text-black/80 text-sm">Date Created: <span class="text-black/60">mm/dd/yyyy</span></div>
+                <div class="text-black/80 text-sm">Type : Invoice Due Soon</div>
+                <div class="text-black/80 text-sm">Details: Invoice 1038-01 is due soon</div>
+                <div class="text-black/80 text-sm">Total: <a href="#" class="text-blue-500 underline font-bold">$ 0.00</a></div>
+            </div>
+            <div class="pt-4 pb-2">
+                <button class="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 rounded-lg shadow transition">Save</button>
+            </div>
+        </div>
+    </div>
+    <script>
+    // Load header and navigation
+    fetch('../nav/header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-container').innerHTML = data;
+        });
+    fetch('../nav/navigation.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('nav-container').innerHTML = data;
+        });
+    </script>
+</body>
+</html> 

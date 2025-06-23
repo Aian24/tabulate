@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>Pending Projects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/themes/light.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="min-h-screen">
+    <!-- Include header -->
+    <div id="header-container"></div>
+
+    <!-- Include navigation -->
+    <div id="nav-container"></div>
+
+    <!-- Main content -->
+    <main class="container-fluid mx-auto px-4 md:px-6 py-2 md:py-4 relative-z-1">
+        <!-- Combined header with search -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
+            <div class="flex items-center gap-4">
+                <h1 class="text-xl md:text-2xl font-bold text-gray-800">Pending Dispatches</h1>
+            </div>
+            <div class="relative">
+                <button id="moreDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
+                    <span>More</span>
+                    <i class="fas fa-chevron-down ml-1"></i>
+                </button>
+                <div id="moreMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10">
+                    <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                        <i class="fas fa-cog w-5"></i>
+                        <span>Settings</span>
+                    </button>
+                    <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                        <i class="fas fa-chart-bar w-5"></i>
+                        <span>Report</span>
+                    </button>
+                    <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                        <i class="fas fa-history w-5"></i>
+                        <span>Audit Trail</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls Section (Calendar, Map View, etc.) -->
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6 max-w-sm mx-auto md:max-w-full md:mx-0">
+            <!-- Left side: Calendar and Controls -->
+            <div class="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
+                <!-- Calendar Days -->
+                <div id="weekDays" class="grid grid-cols-7 w-full md:w-auto gap-1">
+                    <!-- Week days will be rendered here -->
+                </div>
+                <!-- Date Range and Filter -->
+                <div class="flex gap-2 w-full md:w-auto">
+                    <button id="openDateRangePicker" class="calendar-button flex-grow md:flex-grow-0">
+                        <i class="fas fa-calendar"></i>
+                        <span>Select Date Range</span>
+                    </button>
+                    <button id="openFilter" class="calendar-button flex-grow md:flex-grow-0">
+                        <i class="fas fa-filter"></i>
+                        <span>Filter</span>
+                    </button>
+                    <div class="hidden md:flex items-center gap-2">
+                        <label class="text-sm text-gray-600">
+                            Show
+                            <select class="pagination-entries-select mx-2 px-3 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            entries
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!-- Right side: Search -->
+            <div id="search-container" class="relative w-full">
+                <input type="search" 
+                       placeholder="Search..." 
+                       class="w-full h-[42px] pl-10 pr-4 rounded-lg border border-green-500 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300"
+                />
+                <button class="absolute left-3 top-1/2 -translate-y-1/2 text-blue-500 hover:text-blue-600 transition-colors">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Modern Data Table -->
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
+            <div class="overflow-x-auto -mx-4 md:mx-0">
+                <table class="w-full min-w-[800px]">
+                    <thead class="bg-gradient-to-r from-sky-500 to-blue-600 text-white">
+                        <tr>
+                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="priority">
+                                <div class="flex items-center space-x-2">
+                                    <span>Priority Type</span>
+                                    <i class="fas fa-sort text-xs opacity-70"></i>
+                                </div>
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="category">
+                                <div class="flex items-center space-x-2">
+                                    <span>Service Category</span>
+                                    <i class="fas fa-sort text-xs opacity-70"></i>
+                                </div>
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="client">
+                                <div class="flex items-center space-x-2">
+                                    <span>Client Name</span>
+                                    <i class="fas fa-sort text-xs opacity-70"></i>
+                                </div>
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="address">
+                                <div class="flex items-center space-x-2">
+                                    <span>Address</span>
+                                    <i class="fas fa-sort text-xs opacity-70"></i>
+                                </div>
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="start-date">
+                                <div class="flex items-center space-x-2">
+                                    <span>Start Date</span>
+                                    <i class="fas fa-sort text-xs opacity-70"></i>
+                                </div>
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="hours">
+                                <div class="flex items-center space-x-2">
+                                    <span>B. Hours</span>
+                                    <i class="fas fa-sort text-xs opacity-70"></i>
+                                </div>
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="distance">
+                                <div class="flex items-center space-x-2">
+                                    <span>Distance</span>
+                                    <i class="fas fa-sort text-xs opacity-70"></i>
+                                </div>
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="eta">
+                                <div class="flex items-center space-x-2">
+                                    <span>ETA</span>
+                                    <i class="fas fa-sort text-xs opacity-70"></i>
+                                </div>
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="team">
+                                <div class="flex items-center space-x-2">
+                                    <span>Team Assigned</span>
+                                    <i class="fas fa-sort text-xs opacity-70"></i>
+                                </div>
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="status">
+                                <div class="flex items-center space-x-2">
+                                    <span>Status</span>
+                                    <i class="fas fa-sort text-xs opacity-70"></i>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        <!-- First Row -->
+                        <tr class="dispatch-card hover:bg-gradient-to-r hover:from-blue-50 hover:to-sky-50 transition-all duration-300">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="status-badge text-white text-xs font-semibold px-3 py-1 rounded-full">Non-VIP</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="text-sm font-medium text-gray-900">Lawn Mowing</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="text-sm text-gray-600">Jamie Dora</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <p class="text-sm text-gray-600 truncate max-w-[300px]" title="Pabahay 2000 Muzon Philippines San Jose Del Monte, Bulacan, 3023">Pabahay 2000 Muzon Philippines San Jose Del Monte, Bulacan, 3023</p>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="text-sm text-gray-500">N/A</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="text-sm text-gray-500">8 hrs.</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="text-sm font-medium text-gray-900">Loading...</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="text-sm font-medium text-gray-900">Loading...</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="text-sm font-medium text-gray-900">N/A</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-3 py-1 rounded-full">Pending</span>
+                            </td>
+                        </tr>
+                        <!-- Second Row -->
+                        <tr class="dispatch-card hover:bg-gradient-to-r hover:from-blue-50 hover:to-sky-50 transition-all duration-300">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="status-badge text-white text-xs font-semibold px-3 py-1 rounded-full">Non-VIP</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="text-sm font-medium text-gray-900">Lawn Mowing</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="text-sm text-gray-600">N/A N/A</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <p class="text-sm text-gray-600 truncate max-w-[300px]" title="Lost Street Dimatagpuan Dimahanap,, 1234">Lost Street Dimatagpuan Dimahanap,, 1234</p>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="text-sm text-gray-500">N/A</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="text-sm text-gray-500">8 hrs.</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="text-sm font-medium text-gray-900">Loading...</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="text-sm font-medium text-gray-900">Loading...</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="text-sm font-medium text-gray-900">N/A</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-3 py-1 rounded-full">Pending</span>
+                            </td>
+                        </tr>
+                        <!-- Third Row -->
+                        <tr class="dispatch-card hover:bg-gradient-to-r hover:from-blue-50 hover:to-sky-50 transition-all duration-300">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="status-badge text-white text-xs font-semibold px-3 py-1 rounded-full">VIP</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="text-sm font-medium text-gray-900">Office Cleaning Service</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="text-sm text-gray-600">Ryan Lester</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <p class="text-sm text-gray-600 truncate max-w-[300px]" title="Pabahay 2000 Muzon San Jose Del Monte Bulacan, Philippines San Jose Monte Bulacan, 3023">Pabahay 2000 Muzon San Jose Del Monte Bulacan, Philippines San Jose Monte Bulacan, 3023</p>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="text-sm text-gray-500">N/A</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="text-sm text-gray-500">60 hrs.</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="text-sm font-medium text-gray-900">Loading...</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="text-sm font-medium text-gray-900">Loading...</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="text-sm font-medium text-gray-900">Team E</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-3 py-1 rounded-full">Pending</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="bg-gray-50 px-4 md:px-6 py-4 flex flex-col md:flex-row justify-between items-center border-t border-gray-100 gap-4">
+                <div class="flex items-center gap-2 text-sm text-gray-600 order-2 md:order-1">
+                    <span class="mx-2">|</span>
+                    Showing <span class="font-medium">1</span> to <span class="font-medium">3</span> of <span class="font-medium">3</span> entries
+                </div>
+                <div class="flex space-x-2 order-1 md:order-2">
+                    <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                        <i class="fas fa-chevron-left mr-1"></i>
+                        <span class="hidden sm:inline">Previous</span>
+                    </button>
+                    <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-white bg-sky-500 border border-sky-500 rounded-lg hover:bg-sky-600 transition-colors duration-200">
+                        1
+                    </button>
+                    <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                        <span class="hidden sm:inline">Next</span>
+                        <i class="fas fa-chevron-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for viewing dispatch details -->
+    <div id="dispatchModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+        <div class="min-h-screen px-4 text-center">
+            <!-- This element is to trick the browser into centering the modal contents. -->
+            <span class="inline-block h-screen align-middle" aria-hidden="true">&#8203;</span>
+            <div class="inline-block w-full max-w-2xl p-6 my-8 text-left align-middle transition-all transform bg-white shadow-xl rounded-lg relative">
+            <button id="closeModal" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-xl font-bold">&times;</button>
+                <h2 class="text-xl font-semibold mb-4">Update Dispatch</h2>
+                <form id="dispatchForm" class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Select Team *</label>
+                            <select name="team" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="">-- Select a Team --</option>
+                                <option value="team-a">Team A</option>
+                                <option value="team-b">Team B</option>
+                                <option value="team-c">Team C</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">VIP *</label>
+                            <select name="priority" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="">-- Select Priority Type --</option>
+                                <option value="vip">VIP</option>
+                                <option value="non-vip">Non-VIP</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Start Date *</label>
+                            <input type="text" name="startDate" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="mm/dd/yyyy">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Status *</label>
+                            <select name="status" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="">-- Select Status --</option>
+                                <option value="pending">Pending</option>
+                                <option value="in-progress">In Progress</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Billing Type</label>
+                            <select name="billingType" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="">-- Select Billing Type --</option>
+                                <option value="hourly">Hourly</option>
+                                <option value="fixed">Fixed</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-3">Job Details</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg space-y-3">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600">Customer</label>
+                                    <p class="text-sm text-gray-900" id="modalCustomer">N/A N/A</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600">Address</label>
+                                    <p class="text-sm text-gray-900" id="modalAddress">Lost Street Dimatagpuan Dimahanap,, 1234</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600">Service</label>
+                                    <p class="text-sm text-gray-900" id="modalService">Lawn Mowing</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600">Status</label>
+                                    <p class="text-sm text-gray-900" id="modalStatus">Pending</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600">Team</label>
+                                    <p class="text-sm text-gray-900" id="modalTeam">N/A</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600">Start Date</label>
+                                    <p class="text-sm text-gray-900" id="modalStartDate">N/A</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600">Priority Type</label>
+                                    <p class="text-sm text-gray-900" id="modalPriority">Non-VIP</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600">Budget Hours</label>
+                                    <p class="text-sm text-gray-900" id="modalHours">8 hrs.</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600">Distance</label>
+                                    <p class="text-sm text-gray-900" id="modalDistance">Loading...</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600">ETA</label>
+                                    <p class="text-sm text-gray-900" id="modalETA">Loading...</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600">Recurrence</label>
+                                    <p class="text-sm text-gray-900" id="modalRecurrence">-</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end gap-2 mt-6">
+                        <button type="button" id="cancelButton" class="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded transition-colors">
+                            Cancel
+                        </button>
+                        <button type="submit" class="px-4 py-2 text-sm text-white bg-blue-500 hover:bg-blue-600 rounded transition-colors">
+                            Update Dispatch
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 flex items-center space-x-3 border-l-4 border-green-500">
+        <i class="fas fa-check-circle text-green-500 text-xl"></i>
+        <div>
+            <h4 class="font-medium text-gray-800">Success!</h4>
+            <p class="text-sm text-gray-600">New dispatch has been assigned to Team A</p>
+        </div>
+        <button class="text-gray-400 hover:text-gray-600 ml-4">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Date Range Modal -->
+    <div id="dateRangeModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg shadow-xl p-6 w-[800px] max-w-[90vw]">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-semibold text-gray-800">Select Date Range</h3>
+                <button id="closeDateRangeModal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="grid grid-cols-2 gap-6">
+                <!-- From Date -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">From Date</label>
+                    <input type="text" id="fromDatePicker" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Select date">
+                </div>
+                <!-- To Date -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">To Date</label>
+                    <input type="text" id="toDatePicker" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Select date">
+                </div>
+            </div>
+            <div class="flex justify-end gap-2 mt-4">
+                <button id="resetDateRange" class="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded transition-colors">
+                    <i class="fas fa-undo"></i> Reset
+                </button>
+                <button id="applyDateRange" class="px-4 py-2 text-sm text-white bg-blue-500 hover:bg-blue-600 rounded transition-colors">
+                    <i class="fas fa-check"></i> Apply
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Card View -->
+    <div class="mobile-card-view hidden md:hidden max-w-sm mx-auto">
+        <!-- Mobile cards will be rendered here -->
+                                </div>
+
+    <!-- Load JavaScript files -->
+    <script src="../js/main.js"></script>
+    <script src="../js/pendingprojects.js"></script>
+</body>
+</html>

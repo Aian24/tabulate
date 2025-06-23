@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Estimate Details</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/styles.css">
+    <!--
+        Developer Note:
+        This page is for displaying the details of a single estimate. Data is populated via JS (see estimates.js).
+        The layout is based on employee-details.html for UI consistency. All modal logic is removed.
+    -->
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
+    <!-- Header and Navigation -->
+    <div id="header-container"></div>
+    <div id="nav-container"></div>
+
+    <div class="w-full px-0 md:px-6 py-8">
+        <div class="mb-6 flex items-center gap-2">
+            <button onclick="window.history.back()" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition">
+                <i class="fas fa-arrow-left"></i> Back
+            </button>
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800 ml-4" id="estimateNumberHeader">Estimate</h1>
+        </div>
+        <div class="bg-white/90 rounded-2xl shadow-2xl p-4 md:p-8 border border-blue-100 w-full">
+            <!-- Customer Information -->
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold text-gray-700 mb-3">Customer Information</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm text-gray-700">
+                    <div>
+                        <p class="font-semibold">Full Name</p>
+                        <p id="customerFullName"></p>
+                    </div>
+                    <div>
+                        <p class="font-semibold">Phone</p>
+                        <p id="customerPhone"></p>
+                    </div>
+                    <div>
+                        <p class="font-semibold">Email</p>
+                        <p id="customerEmail"></p>
+                    </div>
+                    <div>
+                        <p class="font-semibold">Address</p>
+                        <p id="customerAddress"></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Quotation -->
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold text-gray-700 mb-3">Quotation</h3>
+                <div class="overflow-x-auto border border-gray-200 rounded-lg">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr class="bg-gradient-to-r from-sky-500 to-blue-600 text-white">
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Items</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Price</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Quantity</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Discount</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Tax</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Deposit Percentage (%)</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Deposit Amount</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Total Price</th>
+                            </tr>
+                        </thead>
+                        <tbody id="quotationItems" class="bg-white divide-y divide-gray-200">
+                            <!-- Quotation items will be populated here by JS -->
+                        </tbody>
+                        <tfoot>
+                            <tr class="bg-gray-50">
+                                <td colspan="7" class="px-6 py-3 text-right text-base font-semibold text-gray-800">Grand Total:</td>
+                                <td class="px-6 py-3 text-left text-base font-semibold text-gray-800" id="grandTotal"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <!-- Terms and Conditions -->
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold text-gray-700 mb-3">TERMS AND CONDITION</h3>
+                <div id="termsAndConditions" class="text-sm text-gray-700 space-y-2">
+                    <!-- Terms and conditions will be populated here by JS -->
+                </div>
+            </div>
+            <!-- Action Buttons -->
+            <div class="flex justify-end space-x-3 mt-6">
+                <button class="animated-button bg-green-500 text-white px-4 py-2 rounded-lg flex items-center space-x-2 text-sm">
+                    <i class="fas fa-check-circle mr-1"></i>
+                    <span>Approve</span>
+                </button>
+                <button class="animated-button bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center space-x-2 text-sm">
+                    <i class="fas fa-edit mr-1"></i>
+                    <span>Edit</span>
+                </button>
+                <button class="animated-button bg-red-500 text-white px-4 py-2 rounded-lg flex items-center space-x-2 text-sm">
+                    <i class="fas fa-file-pdf mr-1"></i>
+                    <span>Download Pdf</span>
+                </button>
+                <button class="animated-button bg-yellow-500 text-white px-4 py-2 rounded-lg flex items-center space-x-2 text-sm">
+                    <i class="fas fa-envelope mr-1"></i>
+                    <span>Send Email</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Load JavaScript files -->
+    <script src="../js/main.js"></script>
+    <script src="../js/estimates.js"></script>
+</body>
+</html> 
