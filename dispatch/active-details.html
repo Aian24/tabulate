@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Active Job Details</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
+    <!-- Header and Navigation -->
+    <div id="header-container"></div>
+    <div id="nav-container"></div>
+
+    <div class="w-full px-0 md:px-6 py-8">
+        <div class="mb-6 flex items-center gap-2">
+            <button onclick="window.history.back()" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition">
+                <i class="fas fa-arrow-left"></i> Back
+            </button>
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800 ml-4">Update Job Details</h1>
+        </div>
+        <form class="bg-white/90 rounded-2xl shadow-2xl p-4 md:p-8 border border-blue-100 w-full">
+            <!-- Main Form Fields -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="relative">
+                    <label class="block text-sm font-semibold mb-1">Select Team *</label>
+                    <select id="teamField" class="w-full px-3 py-2 border rounded-lg appearance-none">
+                        <option value="" disabled hidden>Select a Team</option>
+                        <option value="Team A">Team A</option>
+                        <option value="Team B">Team B</option>
+                        <option value="Team C">Team C</option>
+                        <option value="Team D">Team D</option>
+                        <option value="Team E">Team E</option>
+                        <option value="Ma i">Ma i</option>
+                    </select>
+                    <span class="pointer-events-none absolute right-3 top-9 text-gray-500"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="relative">
+                    <label class="block text-sm font-semibold mb-1">VIP *</label>
+                    <select id="vipField" class="w-full px-3 py-2 border rounded-lg appearance-none">
+                        <option value="" disabled hidden>Select VIP</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                    <span class="pointer-events-none absolute right-3 top-9 text-gray-500"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-1">Start Date *</label>
+                    <input id="startDateField" type="date" class="w-full px-3 py-2 border rounded-lg" />
+                </div>
+                <div class="relative">
+                    <label class="block text-sm font-semibold mb-1">Status *</label>
+                    <select id="statusField" class="w-full px-3 py-2 border rounded-lg appearance-none">
+                        <option value="" disabled hidden>Select Status</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Queued">Queued</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Assigned">Assigned</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="On Hold">On Hold</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Verified">Verified</option>
+                        <option value="Cancelled">Cancelled</option>
+                        <option value="Rejected">Rejected</option>
+                        <option value="Undispatched">Undispatched</option>
+                        <option value="Skipped">Skipped</option>
+                        <option value="Dispatched">Dispatched</option>
+                        <option value="Waiting List">Waiting List</option>
+                        <option value="Projects">Projects</option>
+                    </select>
+                    <span class="pointer-events-none absolute right-3 top-9 text-gray-500"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="relative">
+                    <label class="block text-sm font-semibold mb-1">Billing Type</label>
+                    <select id="billingTypeField" class="w-full px-3 py-2 border rounded-lg appearance-none">
+                        <option value="" disabled hidden>Select Billing Type</option>
+                        <option value="One Time">One Time</option>
+                        <option value="Recurring">Recurring</option>
+                        <option value="Long Term">Long Term</option>
+                    </select>
+                    <span class="pointer-events-none absolute right-3 top-9 text-gray-500"><i class="fas fa-chevron-down"></i></span>
+                </div>
+            </div>
+            <!-- Job Details Section -->
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold text-gray-700 mb-3">Job Details</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
+                    <div>
+                        <label class="font-semibold">Customer</label>
+                        <input id="customerField" type="text" class="w-full px-3 py-2 border rounded-lg bg-gray-100 text-gray-500" readonly />
+                    </div>
+                    <div>
+                        <label class="font-semibold">Address</label>
+                        <input id="addressField" type="text" class="w-full px-3 py-2 border rounded-lg bg-gray-100 text-gray-500" readonly />
+                    </div>
+                    <div>
+                        <label class="font-semibold">Service</label>
+                        <input id="serviceField" type="text" class="w-full px-3 py-2 border rounded-lg bg-gray-100 text-gray-500" readonly />
+                    </div>
+                    <div>
+                        <label class="font-semibold">Status</label>
+                        <input id="jobStatusField" type="text" class="w-full px-3 py-2 border rounded-lg bg-gray-100 text-gray-500" readonly />
+                    </div>
+                    <div>
+                        <label class="font-semibold">Team</label>
+                        <input id="jobTeamField" type="text" class="w-full px-3 py-2 border rounded-lg bg-gray-100 text-gray-500" readonly />
+                    </div>
+                    <div>
+                        <label class="font-semibold">Start Date</label>
+                        <input id="jobStartDateField" type="text" class="w-full px-3 py-2 border rounded-lg bg-gray-100 text-gray-500" readonly />
+                    </div>
+                    <div>
+                        <label class="font-semibold">Priority Type</label>
+                        <input id="priorityTypeField" type="text" class="w-full px-3 py-2 border rounded-lg bg-gray-100 text-gray-500" readonly />
+                    </div>
+                    <div>
+                        <label class="font-semibold">Budget Hours</label>
+                        <input id="budgetHoursField" type="text" class="w-full px-3 py-2 border rounded-lg bg-gray-100 text-gray-500" readonly />
+                    </div>
+                    <div>
+                        <label class="font-semibold">Distance</label>
+                        <input id="distanceField" type="text" class="w-full px-3 py-2 border rounded-lg bg-gray-100 text-gray-500" readonly />
+                    </div>
+                    <div>
+                        <label class="font-semibold">ETA</label>
+                        <input id="etaField" type="text" class="w-full px-3 py-2 border rounded-lg bg-gray-100 text-gray-500" readonly />
+                    </div>
+                </div>
+            </div>
+            <!-- Action Buttons -->
+            <div class="flex justify-end space-x-3 mt-6">
+                <button type="button" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg" onclick="window.history.back()">Cancel</button>
+                <button type="submit" class="bg-sky-400 text-white px-4 py-2 rounded-lg">Save</button>
+                <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Create Job</button>
+            </div>
+        </form>
+    </div>
+    <!-- Load JavaScript files -->
+    <script src="../js/main.js"></script>
+    <script src="../js/activeprojects.js"></script>
+    <script>
+    function setSelectValueOrPlaceholder(select, value) {
+        if (!value || !Array.from(select.options).some(opt => opt.value === value)) {
+            select.selectedIndex = 0;
+        } else {
+            select.value = value;
+        }
+    }
+
+    if (window.location.pathname.includes('active-details.html')) {
+        document.addEventListener('DOMContentLoaded', function() {
+            const data = JSON.parse(localStorage.getItem('activeJobDetails') || '{}');
+            if (data) {
+                setSelectValueOrPlaceholder(document.getElementById('teamField'), data.team);
+                setSelectValueOrPlaceholder(document.getElementById('vipField'), data.vip);
+                document.getElementById('startDateField').value = data.startDate || '';
+                setSelectValueOrPlaceholder(document.getElementById('statusField'), data.status);
+                setSelectValueOrPlaceholder(document.getElementById('billingTypeField'), data.billingType);
+                document.getElementById('customerField').value = data.customer || '';
+                document.getElementById('addressField').value = data.address || '';
+                document.getElementById('serviceField').value = data.service || '';
+                document.getElementById('jobStatusField').value = data.jobStatus || '';
+                document.getElementById('jobTeamField').value = data.jobTeam || '';
+                document.getElementById('jobStartDateField').value = data.jobStartDate || '';
+                document.getElementById('priorityTypeField').value = data.priorityType || '';
+                document.getElementById('budgetHoursField').value = data.budgetHours || '';
+                document.getElementById('distanceField').value = data.distance || '';
+                document.getElementById('etaField').value = data.eta || '';
+            }
+        });
+    }
+    </script>
+</body>
+</html> 
