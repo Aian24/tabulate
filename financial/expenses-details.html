@@ -12,22 +12,22 @@
     <!-- Include header and navigation -->
     <div id="header-container"></div>
     <div id="nav-container"></div>
-    <div class="w-full px-0 md:px-6 py-8">
-        <div class="mb-6 flex items-center gap-2">
-            <button onclick="window.history.back()" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition">
-                <i class="fas fa-arrow-left"></i> Back
-            </button>
-            <h1 class="text-2xl md:text-3xl font-bold text-gray-800 ml-4">Expense Details</h1>
-        </div>
-        <!-- Edit Button above the card -->
-        <div class="flex justify-end mb-2">
+
+    <!-- Main content -->
+    <main class="w-full px-0 md:px-6 py-8">
+        <div class="mb-6 flex items-center gap-2 justify-between">
+            <div class="flex items-center gap-2">
+                <button onclick="window.history.back()" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-800 ml-4">Expense Details</h1>
+            </div>
             <button id="editExpenseBtn" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 flex items-center gap-2">
                 <i class="fas fa-edit"></i>
                 <span>Edit</span>
             </button>
         </div>
         <div class="bg-white/90 rounded-2xl shadow-2xl border border-blue-100 w-full">
-          
             <div class="px-6 pt-4 pb-8">
                 <!-- Stacked layout: Expense Info on top, Tools & Parts below -->
                 <!-- Expense Information (Top) -->
@@ -98,8 +98,15 @@
                 </div>
             </div>
         </div>
-    </div>
+    </main>
     <!-- Load JavaScript files -->
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/themes/light.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="../js/main.js"></script>
     <script src="../js/expenses.js"></script>
     <script>

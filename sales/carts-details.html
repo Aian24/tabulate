@@ -19,7 +19,8 @@
     <div id="header-container"></div>
     <div id="nav-container"></div>
 
-    <div class="w-full px-0 md:px-6 py-8">
+    <!-- Main content -->
+    <main class="w-full px-0 md:px-6 py-8">
         <div class="mb-6 flex items-center gap-2">
             <button onclick="window.history.back()" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition">
                 <i class="fas fa-arrow-left"></i> Back
@@ -79,8 +80,15 @@
                 </div>
             </div>
         </div>
-    </div>
+    </main>
     <!-- Load JavaScript files -->
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/themes/light.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="../js/main.js"></script>
     <script src="../js/carts.js"></script>
 </body>
