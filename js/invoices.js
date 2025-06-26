@@ -7,22 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- COMMON FUNCTIONALITY ----------------------------------------------------
     // -----------------------------------------------------------------------------
 
-    // Load header and navigation components if containers are present
-    if (document.getElementById('header-container')) {
-        fetch('../nav/header.html')
-            .then(res => res.text())
-            .then(html => {
-                document.getElementById('header-container').innerHTML = html;
-            });
-    }
-
-    if (document.getElementById('nav-container')) {
-        fetch('../nav/navigation.html')
-            .then(res => res.text())
-            .then(html => {
-                document.getElementById('nav-container').innerHTML = html;
-            });
-    }
+    // The header and navigation are now loaded by the main.js file.
+    // This ensures that navigation initialization scripts are run correctly.
 
     // -----------------------------------------------------------------------------
     // --- INVOICES LIST PAGE (invoices.html) --------------------------------------

@@ -11,10 +11,107 @@
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body class="min-h-screen bg-blue-50">
-    <!-- Header and Navigation -->
-    <div id="header-container"></div>
-    <div id="nav-container"></div>
+    <!-- Header -->
+    <header class="sticky top-0 z-50 px-4 md:px-6 py-3 shadow-lg bg-[#33b6ff] w-full">
+        <div class="container-fluid mx-auto flex items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+                <img alt="Premium Designscape logo" class="h-10 md:h-12 w-auto rounded-lg shadow-md transition-transform hover:scale-105" 
+                     src="../images/logo.png"/>
+            </div>
+            <div class="hidden md:flex items-center space-x-4 flex-1 max-w-xl mx-6">
+                <button class="px-3 py-1.5 md:px-4 md:py-2 bg-white/50 backdrop-blur-sm border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors flex items-center space-x-2">
+                    <span>Categories</span>
+                    <i class="fas fa-chevron-down text-xs"></i>
+                </button>
+                <div class="relative flex-1">
+                    <input class="w-full pl-10 pr-4 py-2 rounded-lg border border-green-500 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300"
+                           placeholder="Search..." type="search"/>
+                    <button class="absolute left-3 top-1/2 -translate-y-1/2 text-blue-500 hover:text-blue-600 transition-colors">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 md:space-x-6">
+                <button class="relative text-gray-600 hover:text-sky-500 transition-colors duration-300" id="notifications">
+                    <i class="fas fa-bell text-xl"></i>
+                    <span class="notification-badge absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">16</span>
+                </button>
+                <button class="text-gray-600 hover:text-sky-500 transition-colors duration-300" id="bookmarks">
+                    <i class="fas fa-bookmark text-xl"></i>
+                </button>
+                <button class="text-gray-600 hover:text-sky-500 transition-colors duration-300" id="settings">
+                    <i class="fas fa-cog text-xl"></i>
+                </button>
+                <button class="flex items-center space-x-2 bg-gradient-to-r from-sky-500 to-blue-600 text-white px-3 md:px-4 py-2 rounded-full hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
+                    <i class="fas fa-user-circle text-xl"></i>
+                    <span class="hidden md:inline font-medium">Profile</span>
+                </button>
+                <button class="text-gray-600 hover:text-sky-500 transition-colors duration-300 md:hidden" id="burgerMenuBtn">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
 
+    <!-- Navigation -->
+    <nav class="hidden md:block bg-[#051c2c] shadow-md px-2 md:px-3 py-2 w-full">
+        <div class="container-fluid mx-auto">
+            <div class="flex items-center justify-start space-x-3">
+                <div class="relative" id="salesDropdown" style="z-index: 9999;">
+                    <button class="nav-link flex items-center space-x-2 text-sky-500 font-semibold bg-white/10 px-2 py-1 rounded-lg text-sm" id="salesButton">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Sales & Estimates</span>
+                        <i class="fas fa-chevron-down ml-2"></i>
+                    </button>
+                </div>
+                <div class="relative" id="projectDropdown" style="z-index: 9999;">
+                    <button class="nav-link flex items-center space-x-2 text-white hover:text-sky-500 px-2 py-1 rounded-lg text-sm" id="projectButton">
+                        <i class="fas fa-cogs"></i>
+                        <span>Project & Dispatch</span>
+                        <i class="fas fa-chevron-down ml-2"></i>
+                    </button>
+                </div>
+                <div class="relative" id="financialDropdown" style="z-index: 9999;">
+                    <button class="nav-link flex items-center space-x-2 text-white hover:text-sky-500 px-2 py-1 rounded-lg text-sm" id="financialButton">
+                        <i class="fas fa-chart-line"></i>
+                        <span class="font-medium">Financial</span>
+                        <i class="fas fa-chevron-down ml-2"></i>
+                    </button>
+                </div>
+                <div class="relative" id="accountsDropdown" style="z-index: 9999;">
+                    <button class="nav-link flex items-center space-x-2 text-white hover:text-sky-500 px-2 py-1 rounded-lg text-sm" id="accountsButton">
+                        <i class="fas fa-users"></i>
+                        <span class="font-medium">Accounts</span>
+                        <i class="fas fa-chevron-down ml-2"></i>
+                    </button>
+                </div>
+                <a class="nav-link flex items-center space-x-2 text-white hover:text-sky-500 px-2 py-1 rounded-lg text-sm" href="#">
+                    <i class="fas fa-comments"></i>
+                    <span class="font-medium">Marketing</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Side Navigation Menu -->
+    <div id="sideNav" class="md:hidden fixed top-0 left-0 h-full w-56 bg-[#051c2c] transform -translate-x-full transition-transform duration-300 ease-in-out z-50 shadow-lg">
+        <div class="p-2">
+            <div class="flex justify-between items-center mb-6">
+                <img alt="Premium Designscape logo" class="h-8 w-auto" src="../images/logo.png"/>
+                <button id="closeSideNav" class="text-white hover:text-sky-500">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="space-y-2">
+                <!-- Mobile menu content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay for side navigation -->
+    <div id="sideNavOverlay" class="md:hidden fixed inset-0 bg-blue-900 bg-opacity-75 hidden z-40"></div>
+
+    <!-- Rest of your content -->
     <div class="w-full px-4 md:px-6 py-8">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-3xl font-bold text-gray-800">Refunds</h1>

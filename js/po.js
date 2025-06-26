@@ -199,4 +199,27 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('active-filter');
         });
     });
+
+    // PO Details Navigation (NEW)
+    document.querySelectorAll('tbody tr').forEach(row => {
+        row.classList.add('cursor-pointer');
+        row.addEventListener('click', () => {
+            const cells = row.querySelectorAll('td');
+            // Defensive: check if enough cells exist
+            if (cells.length < 6) return;
+            // Map table columns to PO details fields
+            const poData = {
+                poNumber: cells[2]?.innerText.trim() || '',
+                vendor: cells[3]?.innerText.trim() || '',
+                status: cells[1]?.innerText.trim() || '',
+                orderDate: cells[4]?.innerText.trim() || '',
+                totalAmount: cells[5]?.innerText.trim() || '',
+                // Add more fields as needed
+            };
+            // Store data in localStorage for retrieval in details page
+            localStorage.setItem('selectedPO', JSON.stringify(poData));
+            // Navigate to the details page
+            window.location.href = 'po-details.html';
+        });
+    });
 }); 
