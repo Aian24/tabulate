@@ -174,4 +174,71 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Optionally, initialize the filter on DOMContentLoaded
     initializeFilter();
-}); 
+});
+
+// Utility: Check which page we're on
+const isActiveProjectsPage = window.location.pathname.includes('activeprojects.html');
+const isActiveDetailsPage = window.location.pathname.includes('active-details.html');
+
+// --- 1. On activeprojects.html: Row click to details page ---
+if (isActiveProjectsPage) {
+    // Wait for DOM to load
+    document.addEventListener('DOMContentLoaded', function() {
+        // Attach click event to each dispatch row
+        document.querySelectorAll('.dispatch-card').forEach(row => {
+            row.addEventListener('click', function() {
+                // Gather data from the row's cells
+                const data = {
+                    team: row.cells[7]?.innerText.trim() || '',
+                    vip: row.cells[0]?.innerText.trim() || '',
+                    startDate: row.cells[3]?.innerText.trim() || '',
+                    status: 'Pending', // Default or update as needed
+                    billingType: row.cells[8]?.innerText.trim() || '',
+                    customer: row.cells[4]?.innerText.trim() || '',
+                    address: row.cells[2]?.innerText.trim() || '',
+                    service: row.cells[1]?.innerText.trim() || '',
+                    jobStatus: '', // Not available in table, can be set later
+                    jobTeam: row.cells[7]?.innerText.trim() || '',
+                    jobStartDate: '', // Not available in table, can be set later
+                    priorityType: row.cells[2]?.innerText.trim() || '',
+                    budgetHours: row.cells[7]?.innerText.trim() || '',
+                    distance: row.cells[5]?.innerText.trim() || '',
+                    eta: row.cells[6]?.innerText.trim() || ''
+                };
+                // Store in localStorage
+                localStorage.setItem('activeJobDetails', JSON.stringify(data));
+                // Redirect to details page
+                window.location.href = 'active-details.html';
+            });
+        });
+    });
+}
+
+// --- 2. On active-details.html: Populate form from localStorage ---
+if (isActiveDetailsPage) {
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get data from localStorage
+        const data = JSON.parse(localStorage.getItem('activeJobDetails') || '{}');
+        // Populate fields if data exists
+        if (data) {
+            document.getElementById('teamField').value = data.team || '';
+            document.getElementById('vipField').value = data.vip || '';
+            document.getElementById('startDateField').value = data.startDate || '';
+            document.getElementById('statusField').value = data.status || '';
+            document.getElementById('billingTypeField').value = data.billingType || '';
+            document.getElementById('customerField').value = data.customer || '';
+            document.getElementById('addressField').value = data.address || '';
+            document.getElementById('serviceField').value = data.service || '';
+            document.getElementById('jobStatusField').value = data.jobStatus || '';
+            document.getElementById('jobTeamField').value = data.jobTeam || '';
+            document.getElementById('jobStartDateField').value = data.jobStartDate || '';
+            document.getElementById('priorityTypeField').value = data.priorityType || '';
+            document.getElementById('budgetHoursField').value = data.budgetHours || '';
+            document.getElementById('distanceField').value = data.distance || '';
+            document.getElementById('etaField').value = data.eta || '';
+        }
+    });
+}
+
+// --- End of activeprojects.js ---
+// All logic for both pages is contained here for maintainability. 

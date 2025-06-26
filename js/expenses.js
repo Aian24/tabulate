@@ -109,47 +109,27 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Expense Details Modal Functionality (NEW)
-    const expenseDetailsModal = document.getElementById('expenseDetailsModal');
-    const closeExpenseDetailsModal = document.getElementById('closeExpenseDetailsModal');
-
+    // Expense Details Navigation (NEW)
     document.querySelectorAll('tbody tr').forEach(row => {
         row.classList.add('cursor-pointer');
         row.addEventListener('click', () => {
+            // Collect data from the row's cells
             const cells = row.querySelectorAll('td');
-            // Map table columns to modal fields
-            document.getElementById('expStatus').value = cells[1]?.innerText.trim() || '';
-            document.getElementById('expCategory').value = cells[2]?.innerText.trim() || '';
-            document.getElementById('expVendor').value = cells[3]?.innerText.trim() || '';
-            document.getElementById('expDepartment').value = cells[4]?.innerText.trim() || '';
-            document.getElementById('expEmployee').value = cells[5]?.innerText.trim() || '';
-            document.getElementById('expAmount').value = (cells[6]?.innerText.trim() || '').replace('$','');
-            document.getElementById('expDate').value = cells[7]?.innerText.trim() || '';
-            document.getElementById('expPaymentMethod').value = 'Cash'; // Placeholder, update if you have this data
-
-            // Dummy data for Tools & Parts Purchase Form (replace with real data if available)
-            document.getElementById('tpVendor').value = 'Sari-sari store';
-            document.getElementById('tpPartType').value = 'left';
-            document.getElementById('tpQuantity').value = '1';
-            document.getElementById('tpPurpose').value = 'for delivery';
-            // Image
-            document.getElementById('tpImagePreview').style.display = 'none';
-            document.getElementById('tpImagePlaceholder').style.display = 'block';
-
-            // Show modal
-            expenseDetailsModal.classList.remove('hidden');
-            expenseDetailsModal.classList.add('flex');
+            const expenseData = {
+                status: cells[1]?.innerText.trim() || '',
+                category: cells[2]?.innerText.trim() || '',
+                vendor: cells[3]?.innerText.trim() || '',
+                department: cells[4]?.innerText.trim() || '',
+                employee: cells[5]?.innerText.trim() || '',
+                amount: (cells[6]?.innerText.trim() || '').replace('$',''),
+                date: cells[7]?.innerText.trim() || '',
+                paymentMethod: 'Cash' // Placeholder, update if you have this data
+            };
+            // Store data in localStorage for retrieval in details page
+            localStorage.setItem('selectedExpense', JSON.stringify(expenseData));
+            // Navigate to the details page
+            window.location.href = 'expenses-details.html';
         });
-    });
-    closeExpenseDetailsModal.addEventListener('click', () => {
-        expenseDetailsModal.classList.add('hidden');
-        expenseDetailsModal.classList.remove('flex');
-    });
-    expenseDetailsModal.addEventListener('click', (e) => {
-        if (e.target === expenseDetailsModal) {
-            expenseDetailsModal.classList.add('hidden');
-            expenseDetailsModal.classList.remove('flex');
-        }
     });
 
     // Create Expense Modal Functionality

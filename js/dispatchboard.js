@@ -34,9 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize table interactions
     initializeTableInteractions();
 
-    // Initialize modals
-    initializeModals();
-
     // Initialize map controls
     initializeMapControls();
 
@@ -89,9 +86,6 @@ function initializeTableInteractions() {
     const table = document.querySelector('table');
     const headers = table.querySelectorAll('th');
     const rows = table.querySelectorAll('tbody tr');
-    const modal = document.getElementById('dispatchModal');
-    const modalContent = document.getElementById('modalContent');
-    const closeModal = document.getElementById('closeModal');
 
     // Add click event to rows
     rows.forEach(row => {
@@ -111,7 +105,8 @@ function initializeTableInteractions() {
                     status: row.querySelector('td:nth-child(12)').textContent
                 };
 
-                showDispatchDetails(data);
+                localStorage.setItem('dispatchJobDetails', JSON.stringify(data));
+                window.location.href = 'dispatchboard-details.html';
             }
         });
     });
@@ -125,169 +120,6 @@ function initializeTableInteractions() {
             });
         }
     });
-
-    // Close modal when clicking close button
-    closeModal.addEventListener('click', () => {
-        closeDispatchModal();
-    });
-
-    // Close modal when clicking outside
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            closeDispatchModal();
-        }
-    });
-}
-
-// Show dispatch details in modal
-function showDispatchDetails(data) {
-    const modal = document.getElementById('dispatchModal');
-    const modalContent = document.getElementById('modalContent');
-    
-    modalContent.innerHTML = `
-        <div class="space-y-6">
-            <div class="flex justify-between items-center">
-                <h2 class="text-xl font-semibold text-gray-800">Update Dispatch</h2>
-                <button id="closeModal" class="text-gray-500 hover:text-gray-700">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            
-            <form class="space-y-4">
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Select Team *</label>
-                        <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                            <option value="Team A">Team A</option>
-                            <option value="Team B">Team B</option>
-                            <option value="Team C">Team C</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">VIP *</label>
-                        <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Start Date *</label>
-                        <input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" value="2025-05-09">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Status *</label>
-                        <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                            <option value="Approved">Approved</option>
-                            <option value="Pending">Pending</option>
-                            <option value="Cancelled">Cancelled</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Billing Type</label>
-                        <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                            <option value="">-- Select Billing Type --</option>
-                            <option value="Hourly">Hourly</option>
-                            <option value="Fixed">Fixed</option>
-                            <option value="Project">Project</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="border-t border-gray-200 pt-4">
-                    <h3 class="text-lg font-medium text-gray-900 mb-4">Job Details</h3>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <p class="text-sm text-gray-500">Customer</p>
-                            <p class="font-medium">${data.client}</p>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500">Address</p>
-                            <p class="font-medium">${data.address}</p>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500">Service</p>
-                            <p class="font-medium">${data.category}</p>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500">Status</p>
-                            <p class="font-medium">${data.status}</p>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500">Team</p>
-                            <p class="font-medium">${data.team}</p>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500">Start Date</p>
-                            <p class="font-medium">${data.startDate}</p>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500">Priority Type</p>
-                            <p class="font-medium">${data.priority}</p>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500">Budget Hours</p>
-                            <p class="font-medium">${data.hours}</p>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500">Distance</p>
-                            <p class="font-medium">${data.distance}</p>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500">ETA</p>
-                            <p class="font-medium">${data.eta}</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex justify-end gap-2 pt-4 border-t border-gray-200">
-                    <button type="button" class="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded transition-colors">
-                        Cancel
-                    </button>
-                    <button type="submit" class="px-4 py-2 text-sm text-white bg-blue-500 hover:bg-blue-600 rounded transition-colors">
-                        Update
-                    </button>
-                </div>
-            </form>
-        </div>
-    `;
-    
-    // Ensure modal is properly centered
-    modal.classList.add('active');
-    modal.classList.remove('hidden');
-    
-    // Prevent body scrolling when modal is open
-    document.body.style.overflow = 'hidden';
-
-    // Add event listener for the new close button
-    const newCloseButton = modalContent.querySelector('#closeModal');
-    if (newCloseButton) {
-        newCloseButton.addEventListener('click', closeDispatchModal);
-    }
-
-    // Add event listener for the cancel button
-    const cancelButton = modalContent.querySelector('button[type="button"]');
-    if (cancelButton) {
-        cancelButton.addEventListener('click', closeDispatchModal);
-    }
-
-    // Add event listener for form submission
-    const form = modalContent.querySelector('form');
-    if (form) {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            // Handle form submission here
-            closeDispatchModal();
-        });
-    }
-}
-
-// Function to close dispatch modal
-function closeDispatchModal() {
-    const modal = document.getElementById('dispatchModal');
-    modal.classList.remove('active');
-    modal.classList.add('hidden');
-    // Restore body scrolling
-    document.body.style.overflow = 'auto';
 }
 
 // Sort table function
@@ -338,47 +170,6 @@ function getColumnIndex(column) {
         'status': 12
     };
     return columnMap[column] || 1;
-}
-
-// Initialize modals
-function initializeModals() {
-    // Date Range Modal
-    const dateRangeModal = document.getElementById('dateRangeModal');
-    const openDateRangePicker = document.getElementById('openDateRangePicker');
-    const closeDateRangeModal = document.getElementById('closeDateRangeModal');
-    const resetDateRange = document.getElementById('resetDateRange');
-    const applyDateRange = document.getElementById('applyDateRange');
-
-    openDateRangePicker.addEventListener('click', () => {
-        dateRangeModal.classList.remove('hidden');
-    });
-
-    closeDateRangeModal.addEventListener('click', () => {
-        dateRangeModal.classList.add('hidden');
-    });
-
-    resetDateRange.addEventListener('click', () => {
-        document.getElementById('fromDatePicker').value = '';
-        document.getElementById('toDatePicker').value = '';
-    });
-
-    applyDateRange.addEventListener('click', () => {
-        // Apply date range filter logic here
-        dateRangeModal.classList.add('hidden');
-    });
-
-    // Mobile Map Modal
-    const mobileMapModal = document.getElementById('mobileMapModal');
-    const mobileMapBtn = document.getElementById('mobileMapBtn');
-    const closeMobileMapModal = document.getElementById('closeMobileMapModal');
-
-    mobileMapBtn.addEventListener('click', () => {
-        mobileMapModal.classList.remove('hidden');
-    });
-
-    closeMobileMapModal.addEventListener('click', () => {
-        mobileMapModal.classList.add('hidden');
-    });
 }
 
 // Initialize map controls
@@ -550,3 +341,64 @@ document.addEventListener('DOMContentLoaded', function() {
 
     initializeFilter();
 }); 
+
+// Handles both dispatchboard.html and dispatchboard-details.html logic
+
+const isDispatchBoardPage = window.location.pathname.includes('dispatchboard.html');
+const isDispatchBoardDetailsPage = window.location.pathname.includes('dispatchboard-details.html');
+
+// --- 1. On dispatchboard.html: Row click to details page ---
+if (isDispatchBoardPage) {
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.dispatch-card').forEach(row => {
+            row.addEventListener('click', function() {
+                // Gather data from the row's cells (adjust indices as needed for your table)
+                const data = {
+                    team: row.cells[10]?.innerText.trim() || '',
+                    vip: row.cells[2]?.innerText.trim() || '', // Adjust if VIP is present
+                    startDate: row.cells[6]?.innerText.trim() || '',
+                    status: row.cells[11]?.innerText.trim() || '',
+                    billingType: '', // Not present in table, can be set later
+                    customer: row.cells[4]?.innerText.trim() || '',
+                    address: row.cells[5]?.innerText.trim() || '',
+                    service: row.cells[3]?.innerText.trim() || '',
+                    jobStatus: '',
+                    jobTeam: row.cells[10]?.innerText.trim() || '',
+                    jobStartDate: '',
+                    priorityType: row.cells[2]?.innerText.trim() || '',
+                    budgetHours: row.cells[7]?.innerText.trim() || '',
+                    distance: row.cells[8]?.innerText.trim() || '',
+                    eta: row.cells[9]?.innerText.trim() || ''
+                };
+                localStorage.setItem('dispatchJobDetails', JSON.stringify(data));
+                window.location.href = 'dispatchboard-details.html';
+            });
+        });
+    });
+}
+
+// --- 2. On dispatchboard-details.html: Populate form from localStorage ---
+if (isDispatchBoardDetailsPage) {
+    document.addEventListener('DOMContentLoaded', function() {
+        const data = JSON.parse(localStorage.getItem('dispatchJobDetails') || '{}');
+        if (data) {
+            document.getElementById('teamField').value = data.team || '';
+            document.getElementById('vipField').value = data.vip || '';
+            document.getElementById('startDateField').value = data.startDate || '';
+            document.getElementById('statusField').value = data.status || '';
+            document.getElementById('billingTypeField').value = data.billingType || '';
+            document.getElementById('customerField').value = data.customer || '';
+            document.getElementById('addressField').value = data.address || '';
+            document.getElementById('serviceField').value = data.service || '';
+            document.getElementById('jobStatusField').value = data.jobStatus || '';
+            document.getElementById('jobTeamField').value = data.jobTeam || '';
+            document.getElementById('jobStartDateField').value = data.jobStartDate || '';
+            document.getElementById('priorityTypeField').value = data.priorityType || '';
+            document.getElementById('budgetHoursField').value = data.budgetHours || '';
+            document.getElementById('distanceField').value = data.distance || '';
+            document.getElementById('etaField').value = data.eta || '';
+        }
+    });
+}
+// --- End of dispatchboard.js ---
+// All logic for both pages is contained here for maintainability. 
