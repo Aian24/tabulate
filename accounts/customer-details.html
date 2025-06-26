@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Customer Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
+    <!-- Header and Navigation -->
+    <div id="header-container"></div>
+    <div id="nav-container"></div>
+
+    <!-- Main content -->
+    <main class="w-full px-0 md:px-6 py-8">
+        <div class="mb-6 flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+                <button id="backBtn" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition" onclick="window.location.href='customerlist.html'">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-800 ml-4" id="customerNameHeader"></h1>
+            </div>
+            <!-- Centered Search Bar -->
+            <div class="flex-1 flex justify-center">
+                <div class="relative w-80">
+                    <input id="globalSearch" type="search" placeholder="Search all..." class="w-full h-[42px] pl-10 pr-4 rounded-lg border border-green-500 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300" />
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-green-500 pointer-events-none">
+                        <i class="fas fa-search"></i>
+                    </span>
+                </div>
+            </div>
+            <button id="editBtn" onclick="window.location.href='customer-edit.html'" class="px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center gap-2 text-sm">
+                <i class="fas fa-edit"></i> Edit
+            </button>
+        </div>
+        <!-- Top Section: Jobs, Invoices, Transactions -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <!-- Jobs -->
+            <div class="bg-white rounded-lg shadow border p-4 flex flex-col">
+                <div class="flex justify-between items-center mb-1">
+                    <h2 class="font-semibold text-gray-800 text-lg">Jobs</h2>
+                    <span class="text-sky-500 font-bold" id="jobsTotal"></span>
+                </div>
+                <div id="jobsList" class="flex-1 overflow-y-auto max-h-40 text-sm space-y-2"></div>
+            </div>
+            <!-- Invoices -->
+            <div class="bg-white rounded-lg shadow border p-4 flex flex-col">
+                <div class="flex justify-between items-center mb-1">
+                    <div class="flex items-center gap-2">
+                        <h2 class="font-semibold text-gray-800 text-lg">Invoices</h2>
+                        <span class="bg-gray-200 text-xs px-2 py-1 rounded font-semibold">Paid / Pending</span>
+                    </div>
+                    <span class="text-sky-500 font-bold" id="invoicesTotal"></span>
+                </div>
+                <div id="invoicesList" class="flex-1 overflow-y-auto max-h-40 text-sm space-y-2"></div>
+            </div>
+            <!-- Transactions -->
+            <div class="bg-white rounded-lg shadow border p-4 flex flex-col">
+                <div class="flex justify-between items-center mb-1">
+                    <h2 class="font-semibold text-gray-800 text-lg">Transactions</h2>
+                    <span class="text-sky-500 font-bold" id="transactionsTotal"></span>
+                </div>
+                <div id="transactionsList" class="flex-1 overflow-y-auto max-h-40 text-sm space-y-2"></div>
+            </div>
+        </div>
+        <!-- Main Details Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <!-- Left Column: Personal Info & Preferences -->
+            <div class="flex flex-col gap-4">
+                <!-- Personal Information -->
+                <div class="bg-white rounded-lg shadow border p-4">
+                    <h3 class="font-semibold text-gray-700 mb-2">Personal Information</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        <div>
+                            <div class="text-xs text-gray-500">First Name</div>
+                            <div class="font-medium" id="personalFirstName"></div>
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Last Name</div>
+                            <div class="font-medium" id="personalLastName"></div>
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Phone</div>
+                            <div class="font-medium" id="personalPhone"></div>
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Email</div>
+                            <div class="font-medium" id="personalEmail"></div>
+                        </div>
+                        <div class="md:col-span-2">
+                            <div class="text-xs text-gray-500">Address</div>
+                            <div class="font-medium" id="personalAddress"></div>
+                        </div>
+                        <div class="md:col-span-2">
+                            <div class="text-xs text-gray-500">Building Address</div>
+                            <div class="font-medium" id="personalBuildingAddress"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Preferences -->
+                <div class="bg-white rounded-lg shadow border p-4">
+                    <h3 class="font-semibold text-gray-700 mb-2">Preferences</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        <div>
+                            <div class="text-xs text-gray-500">Client Since</div>
+                            <div class="font-medium" id="prefClientSince"></div>
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Lead Acquired Date</div>
+                            <div class="font-medium" id="prefLeadAcquiredDate"></div>
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Main Language</div>
+                            <div class="font-medium" id="prefMainLanguage"></div>
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Preferred Communication</div>
+                            <div class="font-medium" id="prefPreferredCommunication"></div>
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Payment Terms</div>
+                            <div class="font-medium" id="prefPaymentTerms"></div>
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Payment Method</div>
+                            <div class="font-medium" id="prefPaymentMethod"></div>
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Taxable</div>
+                            <div class="font-medium" id="prefTaxable"></div>
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Tags</div>
+                            <div class="font-medium" id="prefTags"></div>
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Sales Person</div>
+                            <div class="font-medium" id="prefSalesPerson"></div>
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Contractor</div>
+                            <div class="font-medium" id="prefContractor"></div>
+                        </div>
+                        <div class="md:col-span-2">
+                            <div class="text-xs text-gray-500">Invoice Frequency</div>
+                            <div class="font-medium" id="prefInvoiceFrequency"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Column: Billing, Notes, Custom Fields -->
+            <div class="flex flex-col gap-4">
+                <!-- Billing Information -->
+                <div class="bg-white rounded-lg shadow border p-4">
+                    <h3 class="font-semibold text-gray-700 mb-2">Billing Information</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        <div>
+                            <div class="text-xs text-gray-500">First Name</div>
+                            <div class="font-medium" id="billingFirstName"></div>
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Last Name</div>
+                            <div class="font-medium" id="billingLastName"></div>
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Phone</div>
+                            <div class="font-medium" id="billingPhone"></div>
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Email</div>
+                            <div class="font-medium" id="billingEmail"></div>
+                        </div>
+                        <div class="md:col-span-2">
+                            <div class="text-xs text-gray-500">Address</div>
+                            <div class="font-medium" id="billingAddress"></div>
+                        </div>
+                        <div class="md:col-span-2">
+                            <div class="text-xs text-gray-500">Company Name</div>
+                            <div class="font-medium" id="billingCompanyName"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Customer Notes -->
+                <div class="bg-white rounded-lg shadow border p-4">
+                    <h3 class="font-semibold text-gray-700 mb-2">Customer Notes</h3>
+                    <textarea id="customerNotes" class="w-full border rounded p-2 min-h-[60px]" readonly></textarea>
+                </div>
+                <!-- Custom Fields -->
+                <div class="bg-white rounded-lg shadow border p-4">
+                    <h3 class="font-semibold text-gray-700 mb-2">Custom Fields</h3>
+                    <table class="min-w-full text-xs">
+                        <thead>
+                            <tr class="bg-blue-200">
+                                <th class="px-2 py-1 text-left">Field Name</th>
+                                <th class="px-2 py-1 text-left">Value</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customFields"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/themes/light.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="../js/customerlist.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html> 
