@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>Vendors</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/themes/light.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+</head>
+<body class="min-h-screen bg-sky-50">
+    <!-- Include header -->
+    <div id="header-container"></div>
+    <!-- Include navigation -->
+    <div id="nav-container"></div>
+
+    <main class="p-4">
+        <div class="flex justify-between items-center mb-4">
+            <div class="flex items-center gap-2">
+                <button id="deletedVendorsBtn" class="px-3 py-1 text-sm bg-gray-200 rounded-md">Deleted Vendors</button>
+                <button id="createVendorBtn" class="px-3 py-1 text-sm bg-blue-500 text-white rounded-md">Create +</button>
+                <button id="actionsBtn" class="px-3 py-1 text-sm bg-blue-500 text-white rounded-md">Actions</button>
+            </div>
+            <div class="relative inline-block text-left">
+                <button type="button" class="inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700">
+                    More
+                    <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <input type="search" placeholder="Search" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+        </div>
+
+        <div class="space-y-4">
+            <!-- Vendor Card Template -->
+            <div class="bg-white rounded-lg shadow p-4 cursor-pointer vendor-card">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <div class="text-blue-600 font-medium">Joshua Rolluqui</div>
+                        <div class="text-sm text-gray-600">joshrolluqui@gmail.com</div>
+                        <div class="text-sm text-gray-600">917-633-6363</div>
+                        <div class="text-sm text-gray-600">Contact Person: William Stanley Jr.</div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">Active</span>
+                        <div class="text-sm text-gray-500">ID no: 34</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Repeat vendor card with different status -->
+            <div class="bg-white rounded-lg shadow p-4 cursor-pointer vendor-card">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <div class="text-blue-600 font-medium">Bria Salsalani</div>
+                        <div class="text-sm text-gray-600">sallie@brio.com</div>
+                        <div class="text-sm text-gray-600">917-633-6363</div>
+                        <div class="text-sm text-gray-600">Contact Person: Akira Urakami</div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="px-2 py-1 text-xs bg-gray-100 text-gray-800 rounded-full">Inactive</span>
+                        <div class="text-sm text-gray-500">ID no: 11</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Load header and navigation
+        fetch('../nav/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            });
+        fetch('../nav/navigation.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav-container').innerHTML = data;
+            });
+
+        // Navigation logic for buttons and cards
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('deletedVendorsBtn').onclick = function() {
+                window.location.href = '../accounts/deleted-vendors.html';
+            };
+            document.getElementById('createVendorBtn').onclick = function() {
+                window.location.href = 'vvendor-profile.html';
+            };
+            document.getElementById('actionsBtn').onclick = function() {
+                window.location.href = 'vendor-purchase-orders.html';
+            };
+            document.querySelectorAll('.vendor-card').forEach(function(card) {
+                card.onclick = function() {
+                    window.location.href = 'vendor-profile.html';
+                };
+            });
+        });
+    </script>
+</body>
+</html> 

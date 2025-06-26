@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/themes/light.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+</head>
+<body class="min-h-screen bg-sky-50">
+    <!-- Include header -->
+    <div id="header-container" class="w-full"></div>
+    <!-- Include navigation -->
+    <div id="nav-container" class="w-full"></div>
+
+    <div class="max-w-md mx-auto">
+        <!-- Back Navigation -->
+        <div class="px-4 py-2">
+            <a href="vendor-profile.html" class="flex items-center text-gray-700">
+                <i class="fas fa-chevron-left mr-1"></i>
+                <span>Vendors</span>
+            </a>
+        </div>
+
+        <!-- Main Content Card -->
+        <div class="bg-sky-400 rounded-t-2xl px-4">
+            <div class="text-white py-2">Expense Settings</div>
+            
+            <!-- Profile Section -->
+            <div class="flex justify-center -mb-12">
+                <div class="bg-white rounded-full border-4 border-sky-400 w-24 h-24 flex items-center justify-center">
+                    <i class="fas fa-user text-5xl text-sky-400"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white px-4 pt-16 pb-4 rounded-b-2xl">
+            <!-- Vendor Name -->
+            <div class="text-center mb-4">
+                <h2 class="text-2xl font-bold">Vendor Name</h2>
+            </div>
+
+            <!-- Edit Button -->
+            <div class="flex justify-end mb-4">
+                <button class="bg-sky-400 text-white px-4 py-1 rounded text-sm">Edit</button>
+            </div>
+
+            <!-- Form -->
+            <form class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm mb-1">Department</label>
+                        <div class="bg-sky-50 p-2 rounded">
+                            <input type="text" class="w-full bg-transparent outline-none" />
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm mb-1">Category</label>
+                        <div class="bg-sky-50 p-2 rounded">
+                            <input type="text" class="w-full bg-transparent outline-none" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm mb-1">Payment Type</label>
+                        <div class="bg-sky-50 p-2 rounded">
+                            <input type="text" class="w-full bg-transparent outline-none" />
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm mb-1">Since</label>
+                        <div class="bg-sky-50 p-2 rounded">
+                            <input type="text" class="w-full bg-transparent outline-none" />
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm mb-1">Communication Preferences</label>
+                    <div class="bg-gray-100 p-2 rounded">
+                        <select class="w-full bg-transparent outline-none mb-2">
+                            <option>Select</option>
+                        </select>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" />
+                                <span class="text-sm">Phone Call</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" />
+                                <span class="text-sm">Text Message</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" />
+                                <span class="text-sm">Email</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm mb-1">This Vendor is Tax Exempt?</label>
+                        <div class="bg-gray-100 p-2 rounded">
+                            <select class="w-full bg-transparent outline-none">
+                                <option>Yes</option>
+                                <option>No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm mb-1">Vendor Tax Percentage (%)</label>
+                        <div class="bg-sky-50 p-2 rounded">
+                            <input type="text" class="w-full bg-transparent outline-none" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Save Button -->
+                <div class="flex justify-end mt-4">
+                    <button type="submit" class="bg-sky-400 text-white px-4 py-1 rounded text-sm">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Load header and navigation
+        fetch('../nav/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            });
+        fetch('../nav/navigation.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav-container').innerHTML = data;
+            });
+    </script>
+</body>
+</html> 

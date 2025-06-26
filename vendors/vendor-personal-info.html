@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+        <title>Vendor Personal Information</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+        <script src="https://unpkg.com/@popperjs/core@2"></script>
+        <script src="https://unpkg.com/tippy.js@6"></script>
+        <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+        <link href="https://unpkg.com/tippy.js@6/themes/light.css" rel="stylesheet"/>
+        <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <link rel="stylesheet" href="../css/styles.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    </head>
+<body class="min-h-screen bg-sky-50">
+    <!-- Include header -->
+    <div id="header-container"></div>
+
+    <!-- Include navigation -->
+    <div id="nav-container"></div>
+
+    <main class="p-4">
+        <div class="flex justify-between items-center mb-4">
+            <a href="vendor-profile.html" class="text-gray-600 flex items-center">
+                <i class="fas fa-chevron-left text-lg"></i>
+                <span class="ml-2 font-semibold">Back</span>
+            </a>
+            <h1 class="text-xl font-semibold">Personal Information</h1>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-4 space-y-4">
+            <!-- Vendor Name Section -->
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700">Vendor Name</label>
+                <div class="flex space-x-2">
+                    <div class="flex-1">
+                        <input type="text" placeholder="First Name" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                    </div>
+                    <div class="flex-1">
+                        <input type="text" placeholder="Last Name" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Address Section -->
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700">Home Address</label>
+                <input type="text" placeholder="Street Address" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                <div class="flex space-x-2">
+                    <div class="flex-1">
+                        <input type="text" placeholder="City" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                    </div>
+                    <div class="w-24">
+                        <input type="text" placeholder="State" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                    </div>
+                    <div class="w-24">
+                        <input type="text" placeholder="Zip" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700">Contact Information</label>
+                <input type="email" placeholder="Email Address" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                <input type="tel" placeholder="Phone Number" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+            </div>
+
+            <!-- Contact Person -->
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700">Contact Person</label>
+                <div class="flex space-x-2">
+                    <div class="flex-1">
+                        <input type="text" placeholder="First Name" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                    </div>
+                    <div class="flex-1">
+                        <input type="text" placeholder="Last Name" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                    </div>
+                </div>
+                <input type="email" placeholder="Email Address" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                <input type="tel" placeholder="Phone Number" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+            </div>
+
+            <!-- Save Button -->
+            <div class="pt-4">
+                <button class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">
+                    Save
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Load header and navigation
+        fetch('../nav/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            });
+        fetch('../nav/navigation.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav-container').innerHTML = data;
+            });
+    </script>
+</body>
+</html> 
