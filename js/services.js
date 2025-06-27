@@ -499,4 +499,179 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
+
+    // === Custom Dropdown for Business Category ===
+    // Handles the multi-select dropdown with checkboxes and select all for business categories
+    const dropdownButton = document.getElementById('dropdownButton');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const dropdownSelected = document.getElementById('dropdownSelected');
+    const categoryOptions = document.querySelectorAll('.categoryOption');
+    const selectAll = document.getElementById('selectAllCategories');
+    const businessCategoryInput = document.getElementById('businessCategoryInput');
+
+    if(dropdownButton && dropdownMenu) {
+        dropdownButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle('hidden');
+        });
+        document.addEventListener('click', () => {
+            dropdownMenu.classList.add('hidden');
+        });
+        dropdownMenu.addEventListener('click', e => e.stopPropagation());
+    }
+    if(selectAll && categoryOptions.length) {
+        selectAll.addEventListener('change', function() {
+            categoryOptions.forEach(opt => { opt.checked = this.checked; });
+            updateSelected();
+        });
+        categoryOptions.forEach(opt => {
+            opt.addEventListener('change', function() {
+                selectAll.checked = Array.from(categoryOptions).every(opt => opt.checked);
+                updateSelected();
+            });
+        });
+    }
+    function updateSelected() {
+        const selected = Array.from(categoryOptions).filter(opt => opt.checked).map(opt => opt.value);
+        dropdownSelected.textContent = selected.length ? selected.join(', ') : 'Select options...';
+        businessCategoryInput.value = selected.join(',');
+    }
+
+    // === Add/Remove Season Rows ===
+    // Handles dynamic addition and removal of season rows in the Select Seasons section
+    const seasonsContainer = document.getElementById('seasonsContainer');
+    const addSeasonBtn = document.getElementById('addSeason');
+    function createSeasonRow() {
+        const div = document.createElement('div');
+        div.className = 'grid grid-cols-1 md:grid-cols-4 gap-4 items-center season-row border border-blue-200 rounded-lg p-4';
+        div.innerHTML = `
+            <div>
+                <label class='block text-sm font-medium text-gray-700 mb-1'>Seasons:</label>
+                <select name='seasons[]' class='w-full border border-blue-300 rounded-lg px-4 py-2 focus:ring-blue-500 focus:border-blue-500 text-sm font-medium text-gray-800' required>
+                    <option value=''>Select...</option>
+                    <option value='Spring'>Spring</option>
+                    <option value='Summer'>Summer</option>
+                    <option value='Fall'>Fall</option>
+                    <option value='Winter'>Winter</option>
+                </select>
+            </div>
+            <div>
+                <label class='block text-sm font-medium text-gray-700 mb-1'>Start Date:</label>
+                <input type='date' name='startDate[]' class='w-full border border-blue-300 rounded-lg px-4 py-2 focus:ring-blue-500 focus:border-blue-500 text-sm font-medium text-gray-800' required />
+            </div>
+            <div>
+                <label class='block text-sm font-medium text-gray-700 mb-1'>End Date:</label>
+                <input type='date' name='endDate[]' class='w-full border border-blue-300 rounded-lg px-4 py-2 focus:ring-blue-500 focus:border-blue-500 text-sm font-medium text-gray-800' required />
+            </div>
+            <div class='flex items-end h-full'>
+                <button type='button' class='removeSeason bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded text-sm font-semibold'>Remove</button>
+            </div>
+        `;
+        return div;
+    }
+    if (addSeasonBtn && seasonsContainer) {
+        addSeasonBtn.addEventListener('click', function() {
+            const newRow = createSeasonRow();
+            seasonsContainer.appendChild(newRow);
+        });
+        seasonsContainer.addEventListener('click', function(e) {
+            if (e.target && e.target.classList.contains('removeSeason')) {
+                const row = e.target.closest('.season-row');
+                if (row && seasonsContainer.children.length > 1) {
+                    row.remove();
+                }
+            }
+        });
+    }
+
+    // === Related Services Dropdown ===
+    // Handles the multi-select dropdown for related services with select all
+    const relatedDropdownButton = document.getElementById('relatedDropdownButton');
+    const relatedDropdownMenu = document.getElementById('relatedDropdownMenu');
+    const relatedDropdownSelected = document.getElementById('relatedDropdownSelected');
+    const relatedOptions = document.querySelectorAll('.relatedOption');
+    const selectAllRelated = document.getElementById('selectAllRelated');
+    const relatedServicesInput = document.getElementById('relatedServicesInput');
+
+    if(relatedDropdownButton && relatedDropdownMenu) {
+        relatedDropdownButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            relatedDropdownMenu.classList.toggle('hidden');
+        });
+        document.addEventListener('click', () => {
+            relatedDropdownMenu.classList.add('hidden');
+        });
+        relatedDropdownMenu.addEventListener('click', e => e.stopPropagation());
+    }
+    if(selectAllRelated && relatedOptions.length) {
+        selectAllRelated.addEventListener('change', function() {
+            relatedOptions.forEach(opt => { opt.checked = this.checked; });
+            updateRelatedSelected();
+        });
+        relatedOptions.forEach(opt => {
+            opt.addEventListener('change', function() {
+                selectAllRelated.checked = Array.from(relatedOptions).every(opt => opt.checked);
+                updateRelatedSelected();
+            });
+        });
+    }
+    function updateRelatedSelected() {
+        const selected = Array.from(relatedOptions).filter(opt => opt.checked).map(opt => opt.value);
+        relatedDropdownSelected.textContent = selected.length ? selected.join(', ') : 'Select options...';
+        relatedServicesInput.value = selected.join(',');
+    }
+
+    // === Material List: Show Add Items Button for each row ===
+    // Handles multiple rows in the Material List table
+    document.querySelectorAll('table tr').forEach(row => {
+        const materialSelect = row.querySelector('td select');
+        const addItemBtn = row.querySelector('.add-item-btn');
+        if (materialSelect && addItemBtn) {
+            materialSelect.addEventListener('change', function() {
+                if (materialSelect.value && materialSelect.value !== 'Select Materials') {
+                    addItemBtn.classList.remove('hidden');
+                } else {
+                    addItemBtn.classList.add('hidden');
+                }
+            });
+        }
+    });
+
+    // === Equipment List: Show Add Equipment Button for each row ===
+    // Handles multiple rows in the Equipment List table
+    document.querySelectorAll('table tr').forEach(row => {
+        const equipmentSelect = row.querySelector('td select');
+        const addEquipmentBtn = row.querySelector('.add-equipment-btn');
+        if (equipmentSelect && addEquipmentBtn) {
+            equipmentSelect.addEventListener('change', function() {
+                if (equipmentSelect.value && equipmentSelect.value !== 'Select Equipment') {
+                    addEquipmentBtn.classList.remove('hidden');
+                } else {
+                    addEquipmentBtn.classList.add('hidden');
+                }
+            });
+        }
+    });
+
+    // Scheduling Settings: Show/hide Recurrence Type dropdown and ensure consistent input height
+    const schedulingCheckbox = document.getElementById('schedulingSettings');
+    const recurrenceTypeContainer = document.getElementById('recurrenceTypeContainer');
+    const recurrenceTypeSelect = document.getElementById('recurrenceType');
+    if (schedulingCheckbox && recurrenceTypeContainer && recurrenceTypeSelect) {
+        schedulingCheckbox.addEventListener('change', function() {
+            if (schedulingCheckbox.checked) {
+                recurrenceTypeContainer.classList.remove('hidden');
+            } else {
+                recurrenceTypeContainer.classList.add('hidden');
+            }
+        });
+        // Set initial state
+        if (schedulingCheckbox.checked) {
+            recurrenceTypeContainer.classList.remove('hidden');
+        } else {
+            recurrenceTypeContainer.classList.add('hidden');
+        }
+        // Always ensure the select has the same height as Upload Image
+        recurrenceTypeSelect.classList.add('h-[42px]', 'px-4', 'py-2');
+    }
 });
