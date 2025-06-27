@@ -126,10 +126,7 @@
 
         <!-- Content Container for Split View -->
         <div id="contentContainer" class="flex flex-col md:flex-row gap-2">
-            <!-- Map will be moved here in split view -->
-            <div id="splitMapContainer" class="hidden md:w-[30%]"></div>
-            
-            <!-- Table Container -->
+            <!-- Table Container - Now on the left -->
             <div id="tableContainer" class="flex-1">
                 <!-- Modern Data Table -->
                 <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
@@ -311,6 +308,9 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Map will be moved here in split view - Now on the right -->
+            <div id="splitMapContainer" class="hidden md:w-[30%]"></div>
         </div>
     </main>
 
