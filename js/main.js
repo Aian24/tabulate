@@ -2,13 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to load HTML content
     async function loadHTML(url, containerId) {
         try {
-            // Get the current directory depth
-            const pathParts = window.location.pathname.split('/');
-            const isInSubfolder = pathParts.includes('sales') || pathParts.includes('dispatch') || pathParts.includes('financial') || pathParts.includes('accounts');
-            
-            // Adjust the path based on whether we're in a subfolder
-            const adjustedUrl = isInSubfolder ? '../' + url : url;
-            
+            // Always load from the project root
+            const adjustedUrl = '/tabulate/' + url.replace(/^\/+/,'');
             const response = await fetch(adjustedUrl);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -522,18 +517,24 @@ document.addEventListener('DOMContentLoaded', function() {
         const financialButton = document.getElementById('financialButton');
         const accountsButton = document.getElementById('accountsButton');
         const accountsDropdownMenu = document.getElementById('accountsDropdownMenu');
+        const automationButton = document.getElementById('automationButton');
+        const automationDropdownMenu = document.getElementById('automationDropdownMenu');
 
         // Set active state based on current page
         const currentPage = window.location.pathname.split('/').pop();
-        const isSalesPage = ['carts.html', 'estimates.html'].includes(currentPage);
-        const isProjectPage = ['activeprojects.html', 'pendingprojects.html', 'dispatchboard.html'].includes(currentPage);
-        const isFinancialPage = ['payroll.html', 'invoices.html', 'expenses.html', 'po.html'].includes(currentPage);
+        const isSalesPage = [
+            'carts.html', 'estimates.html',
+            'carts-details.html', 'estimate-details.html'
+        ].includes(currentPage);
+        const isProjectPage = [
+            'activeprojects.html', 'pendingprojects.html', 'dispatchboard.html',
+            'active-details.html', 'pending-details.html', 'dispatchboard-details.html'
+        ].includes(currentPage);
+        const isFinancialPage = [
+            'payroll.html', 'invoices.html', 'expenses.html', 'po.html'
+        ].includes(currentPage);
         const isAccountsPage = [
-            'customerlist.html',
-            'employee.html',
-            'contractors.html',
-            'vendors.html',
-            'create-vendor.html'
+            'customerlist.html', 'employee.html', 'contractors.html', 'vendors.html', 'create-vendor.html'
         ].includes(currentPage);
 
         if (isSalesPage) {
@@ -632,6 +633,24 @@ document.addEventListener('DOMContentLoaded', function() {
         if (accountsButton && accountsDropdownMenu) {
             tippy(accountsButton, {
                 content: accountsDropdownMenu.innerHTML,
+                allowHTML: true,
+                interactive: true,
+                trigger: 'click',
+                placement: 'bottom-start',
+                animation: 'scale',
+                theme: 'light',
+                onShow(instance) {
+                    instance.popper.addEventListener('mouseleave', () => {
+                        instance.hide();
+                    });
+                }
+            });
+        }
+
+        // System & Automation Dropdown
+        if (automationButton && automationDropdownMenu) {
+            tippy(automationButton, {
+                content: automationDropdownMenu.innerHTML,
                 allowHTML: true,
                 interactive: true,
                 trigger: 'click',

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <title>Carts</title>
+    <title>Reports</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
@@ -23,19 +23,31 @@
     <div id="nav-container"></div>
 
     <!-- Main content -->
-    <main class="container-fluid mx-auto px-4 md:px-6 py-2 md:py-4" style="position: relative; z-index: 1;">
+    <main class="container-fluid mx-auto px-4 md:px-6 py-2 md:py-4 relative-z-1">
         <!-- Combined header with search -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
             <div class="flex items-center gap-4">
-                <h1 class="text-xl md:text-2xl font-bold text-gray-800">Carts</h1>
+                <h1 class="text-xl md:text-2xl font-bold text-gray-800">Reports</h1>
             </div>
             <div class="flex items-center gap-2">
+                <button id="createReport" onclick="window.location.href='create-report.html'" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
+                    <i class="fas fa-plus mr-1"></i>
+                    <span>Create</span>
+                </button>
                 <div class="relative">
                     <button id="actionsDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
                         <span>Actions</span>
                         <i class="fas fa-chevron-down ml-1"></i>
                     </button>
                     <div id="actionsMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-file-pdf w-5"></i>
+                            <span>Export as PDF</span>
+                        </button>
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-file-csv w-5"></i>
+                            <span>Export as CSV</span>
+                        </button>
                         <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
                             <i class="fas fa-trash-alt w-5"></i>
                             <span>Delete</span>
@@ -52,24 +64,15 @@
                             <i class="fas fa-cog w-5"></i>
                             <span>Settings</span>
                         </button>
-                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                            <i class="fas fa-chart-bar w-5"></i>
-                            <span>Report</span>
-                        </button>
-                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                            <i class="fas fa-history w-5"></i>
-                            <span>Audit Trail</span>
-                        </button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Controls Section (Calendar, Map View, etc.) -->
+        <!-- Controls Section -->
         <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6 max-w-sm mx-auto md:max-w-full md:mx-0">
             <!-- Left side: Controls -->
             <div class="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
-                <!-- Filter -->
                 <div class="flex gap-2 w-full md:w-auto">
                     <button id="openFilter" class="calendar-button flex-grow md:flex-grow-0">
                         <i class="fas fa-filter"></i>
@@ -110,15 +113,9 @@
                             <th class="px-6 py-4 text-left">
                                 <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
                             </th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="full-name">
+                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="name">
                                 <div class="flex items-center space-x-2">
-                                    <span>Full Name</span>
-                                    <i class="fas fa-sort text-xs opacity-70"></i>
-                                </div>
-                            </th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="quantity">
-                                <div class="flex items-center space-x-2">
-                                    <span>Quantity</span>
+                                    <span>Name</span>
                                     <i class="fas fa-sort text-xs opacity-70"></i>
                                 </div>
                             </th>
@@ -128,110 +125,63 @@
                                     <i class="fas fa-sort text-xs opacity-70"></i>
                                 </div>
                             </th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="total-price">
+                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="period">
                                 <div class="flex items-center space-x-2">
-                                    <span>Total Price</span>
+                                    <span>Period</span>
                                     <i class="fas fa-sort text-xs opacity-70"></i>
                                 </div>
                             </th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="order-date">
+                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="show-date">
                                 <div class="flex items-center space-x-2">
-                                    <span>Order Date</span>
+                                    <span>Show Date</span>
                                     <i class="fas fa-sort text-xs opacity-70"></i>
                                 </div>
                             </th>
+                             <th class="px-6 py-4 text-left text-sm font-semibold">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100">
-                        <tr class="hover:bg-gray-50 transition-colors">
+                        <tr class="hover:bg-gray-50 transition-colors cursor-pointer">
                             <td class="px-6 py-4">
                                 <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
                             </td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">AdminUpdate123 Admin1234</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">4</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">Service</td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">$ 4,449.20</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">March 26, 2025</td>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">ree</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Estimates</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Last Week</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Active</td>
+                            <td class="px-6 py-4 text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <button onclick="window.location.href='edit-report.html'" class="text-white px-3 py-1 rounded-md flex items-center space-x-1 text-xs" style="background-color: #3B82F6;">
+                                        <i class="fas fa-edit"></i>
+                                        <span>Edit</span>
+                                    </button>
+                                    <button class="text-white px-3 py-1 rounded-md flex items-center space-x-1 text-xs" style="background-color: #EF4444;">
+                                        <i class="fas fa-trash"></i>
+                                        <span>Delete</span>
+                                    </button>
+                                </div>
+                            </td>
                         </tr>
-                        <tr class="hover:bg-gray-50 transition-colors">
+                        <tr class="hover:bg-gray-50 transition-colors cursor-pointer">
                             <td class="px-6 py-4">
                                 <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
                             </td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Bria Salsalani</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">1</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">Service</td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">$ 932.40</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">March 28, 2025</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-6 py-4">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Estimate past 90</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Estimates</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Quarter 1</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Active</td>
+                            <td class="px-6 py-4 text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <button onclick="window.location.href='edit-report.html'" class="text-white px-3 py-1 rounded-md flex items-center space-x-1 text-xs" style="background-color: #3B82F6;">
+                                        <i class="fas fa-edit"></i>
+                                        <span>Edit</span>
+                                    </button>
+                                    <button class="text-white px-3 py-1 rounded-md flex items-center space-x-1 text-xs" style="background-color: #EF4444;">
+                                        <i class="fas fa-trash"></i>
+                                        <span>Delete</span>
+                                    </button>
+                                </div>
                             </td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Jamie Dora</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">1</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">Package</td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">$ 200.00</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">May 6, 2025</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-6 py-4">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
-                            </td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Jesse Abajar</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">2</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">Package, Service</td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">$ 953.40</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">March 14, 2025</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-6 py-4">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
-                            </td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Joshua Rolluqui</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">1</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">Package</td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">$ 200.00</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">March 13, 2025</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-6 py-4">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
-                            </td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Paget Zowie</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">1</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">Package</td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">$ 6,230.00</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">March 13, 2025</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-6 py-4">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
-                            </td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Qqq Qwe2343456</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">1</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">Service</td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">$ 932.40</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">March 19, 2025</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-6 py-4">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
-                            </td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Rence Art</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">3</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">Package</td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">$ 14,487.00</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">March 20, 2025</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-6 py-4">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
-                            </td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Renne Ball</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">1</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">Service</td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">$ 932.40</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">March 17, 2025</td>
                         </tr>
                     </tbody>
                 </table>
@@ -241,7 +191,7 @@
             <div class="bg-gray-50 px-4 md:px-6 py-4 flex flex-col md:flex-row justify-between items-center border-t border-gray-100 gap-4">
                 <div class="flex items-center gap-2 text-sm text-gray-600 order-2 md:order-1">
                     <span class="mx-2">|</span>
-                    Showing <span class="font-medium">1</span> to <span class="font-medium">1</span> of <span class="font-medium">1</span> entries
+                    Showing <span class="font-medium">1</span> to <span class="font-medium">2</span> of <span class="font-medium">2</span> entries
                 </div>
                 <div class="flex space-x-2 order-1 md:order-2">
                     <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
@@ -260,8 +210,6 @@
         </div>
     </main>
 
-
-
     <!-- Mobile Card View -->
     <div class="mobile-card-view hidden md:hidden max-w-sm mx-auto">
         <!-- Mobile cards will be rendered here -->
@@ -269,6 +217,6 @@
 
     <!-- Load JavaScript files -->
     <script src="../js/main.js"></script>
-    <script src="../js/carts.js"></script>
+    <script src="../js/reports.js"></script>
 </body>
 </html>
