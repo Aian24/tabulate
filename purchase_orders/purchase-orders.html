@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>Expenses</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+    <link href="="https://unpkg.com/tippy.js@6/themes/light.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+</head>
+<body class="min-h-screen bg-sky-50">
+    <!-- Include header -->
+    <div id="header-container"></div>
+
+    <!-- Include navigation -->
+    <div id="nav-container"></div>
+
+    <main class="p-4">
+        <div class="flex justify-between items-center mb-4 w-full">
+            <span class="text-lg font-semibold">Purchase Orders</span>
+            <div class="flex items-center gap-2">
+                <button class="bg-blue-300 text-white rounded-md text-sm font-medium flex items-center justify-center px-4 py-1.5"><span>Actions</span> <i class="fas fa-caret-down ml-1"></i></button>
+                <div class="relative inline-block text-left">
+                    <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700" id="menu-button" aria-expanded="false" aria-haspopup="true">
+                        More
+                        <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <!-- Dropdown menu -->
+                    <div id="dropdown-menu"
+                        class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10"
+                        style="display: none;">
+                        <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="menu-button">
+                            <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem">Export</a>
+                            <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem">Print</a>
+                            <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem">Settings</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mb-2 flex w-full gap-2">
+            <button class="bg-blue-500 text-white rounded text-sm font-medium flex items-center justify-center flex-1 min-w-0"><i class="fas fa-plus mr-1"></i>Create</button>
+            <input type="text" placeholder="Search" class="rounded border border-gray-300 text-sm flex-[2] min-w-0 px-3 py-2" />
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="flex flex-wrap gap-2 mb-2 w-full justify-center">
+            <button id="filter-all" class="px-4 py-1 rounded text-sm font-semibold bg-sky-200 text-sky-900 flex items-center justify-center whitespace-nowrap" onclick="filterPOs('all')">All</button>
+            <button id="filter-draft" class="px-4 py-1 rounded text-sm font-semibold bg-gray-200 text-gray-700 flex items-center justify-center whitespace-nowrap" onclick="filterPOs('draft')">Draft</button>
+            <button id="filter-sent" class="px-4 py-1 rounded text-sm font-semibold bg-orange-200 text-orange-800 flex items-center justify-center whitespace-nowrap" onclick="filterPOs('sent')">Sent</button>
+            <button id="filter-acknowledged" class="px-4 py-1 rounded text-sm font-semibold bg-blue-200 text-blue-800 flex items-center justify-center whitespace-nowrap" onclick="filterPOs('acknowledged')">Acknowledged</button>
+            <button id="filter-received" class="px-4 py-1 rounded text-sm font-semibold bg-indigo-900 text-white flex items-center justify-center whitespace-nowrap" onclick="filterPOs('received')">Received</button>
+        </div>
+        <!-- Purchase Orders List -->
+        <div class="flex flex-col gap-1 w-full">
+            <!-- Example Card: PO Header -->
+            <div class="bg-white rounded border border-gray-200 shadow-sm p-4 mb-1">
+                <div class="flex justify-between items-center mb-1">
+                    <span class="text-xl font-semibold text-sky-500">PO Number</span>
+                    <span class="px-3 py-1 rounded bg-indigo-300 text-white text-xs font-semibold">Status</span>
+                </div>
+                <hr class="my-2 border-gray-300">
+                <div class="flex justify-between text-base font-medium text-gray-800">
+                    <div>
+                        <div class="font-semibold">Order Date:</div>
+                        <div class="font-semibold">mm//dd//yyy</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-semibold">Vendor Name:</div>
+                        <div class="font-semibold">mm//dd//yyy</div>
+                        <a href="#" class="text-sky-500 font-semibold block mt-1">Total Price</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Sample Data Cards -->
+            <a href="purchase-order-view.html" class="block bg-white rounded border border-gray-200 shadow-sm p-4 mb-1 hover:bg-sky-50 transition" data-status="pending">
+                <div class="flex justify-between items-center mb-1">
+                    <span class="text-xl font-semibold text-sky-500">PO1035-03</span>
+                    <span class="px-3 py-1 rounded bg-gray-300 text-gray-700 text-xs font-semibold">Pending</span>
+                </div>
+                <hr class="my-2 border-gray-300">
+                <div class="flex justify-between text-base font-medium text-gray-800">
+                    <div>
+                        <div class="font-semibold">Order Date:</div>
+                        <div class="font-semibold">May 12, 2025</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-semibold">Vendor Name:</div>
+                        <div class="font-semibold">Ryobi</div>
+                        <span class="text-sky-500 font-semibold block mt-1">$186.00</span>
+                    </div>
+                </div>
+            </a>
+            <div class="bg-white rounded border border-gray-200 shadow-sm p-4 mb-1" data-status="sent">
+                <div class="flex justify-between items-center mb-1">
+                    <span class="text-xl font-semibold text-sky-500">PO1035-04</span>
+                    <span class="px-3 py-1 rounded bg-orange-200 text-orange-800 text-xs font-semibold">Sent</span>
+                </div>
+                <hr class="my-2 border-gray-300">
+                <div class="flex justify-between text-base font-medium text-gray-800">
+                    <div>
+                        <div class="font-semibold">Order Date:</div>
+                        <div class="font-semibold">May 13, 2025</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-semibold">Vendor Name:</div>
+                        <div class="font-semibold">Makita</div>
+                        <span class="text-sky-500 font-semibold block mt-1">$250.00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded border border-gray-200 shadow-sm p-4 mb-1" data-status="acknowledged">
+                <div class="flex justify-between items-center mb-1">
+                    <span class="text-xl font-semibold text-sky-500">PO1035-05</span>
+                    <span class="px-3 py-1 rounded bg-blue-200 text-blue-800 text-xs font-semibold">Acknowledged</span>
+                </div>
+                <hr class="my-2 border-gray-300">
+                <div class="flex justify-between text-base font-medium text-gray-800">
+                    <div>
+                        <div class="font-semibold">Order Date:</div>
+                        <div class="font-semibold">May 14, 2025</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-semibold">Vendor Name:</div>
+                        <div class="font-semibold">Bosch</div>
+                        <span class="text-sky-500 font-semibold block mt-1">$320.00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded border border-gray-200 shadow-sm p-4 mb-1" data-status="received">
+                <div class="flex justify-between items-center mb-1">
+                    <span class="text-xl font-semibold text-sky-500">PO1035-06</span>
+                    <span class="px-3 py-1 rounded bg-indigo-900 text-white text-xs font-semibold">Received</span>
+                </div>
+                <hr class="my-2 border-gray-300">
+                <div class="flex justify-between text-base font-medium text-gray-800">
+                    <div>
+                        <div class="font-semibold">Order Date:</div>
+                        <div class="font-semibold">May 15, 2025</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-semibold">Vendor Name:</div>
+                        <div class="font-semibold">DeWalt</div>
+                        <span class="text-sky-500 font-semibold block mt-1">$410.00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded border border-gray-200 shadow-sm p-4 mb-1" data-status="draft">
+                <div class="flex justify-between items-center mb-1">
+                    <span class="text-xl font-semibold text-sky-500">PO1035-07</span>
+                    <span class="px-3 py-1 rounded bg-indigo-300 text-white text-xs font-semibold">Draft</span>
+                </div>
+                <hr class="my-2 border-gray-300">
+                <div class="flex justify-between text-base font-medium text-gray-800">
+                    <div>
+                        <div class="font-semibold">Order Date:</div>
+                        <div class="font-semibold">May 16, 2025</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-semibold">Vendor Name:</div>
+                        <div class="font-semibold">Hilti</div>
+                        <span class="text-sky-500 font-semibold block mt-1">$95.00</span>
+                    </div>
+                </div>
+            </div>
+            <a href="purchase-order-view.html" class="block bg-white rounded border border-gray-200 shadow-sm p-4 mb-1 hover:bg-sky-50 transition" data-status="pending">
+                <div class="flex justify-between items-center mb-1">
+                    <span class="text-xl font-semibold text-sky-500">PO1035-08</span>
+                    <span class="px-3 py-1 rounded bg-gray-300 text-gray-700 text-xs font-semibold">Pending</span>
+                </div>
+                <hr class="my-2 border-gray-300">
+                <div class="flex justify-between text-base font-medium text-gray-800">
+                    <div>
+                        <div class="font-semibold">Order Date:</div>
+                        <div class="font-semibold">May 17, 2025</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-semibold">Vendor Name:</div>
+                        <div class="font-semibold">Milwaukee</div>
+                        <span class="text-sky-500 font-semibold block mt-1">$210.00</span>
+                    </div>
+                </div>
+            </a>
+            <div class="bg-white rounded border border-gray-200 shadow-sm p-4 mb-1" data-status="sent">
+                <div class="flex justify-between items-center mb-1">
+                    <span class="text-xl font-semibold text-sky-500">PO1035-09</span>
+                    <span class="px-3 py-1 rounded bg-orange-200 text-orange-800 text-xs font-semibold">Sent</span>
+                </div>
+                <hr class="my-2 border-gray-300">
+                <div class="flex justify-between text-base font-medium text-gray-800">
+                    <div>
+                        <div class="font-semibold">Order Date:</div>
+                        <div class="font-semibold">May 18, 2025</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-semibold">Vendor Name:</div>
+                        <div class="font-semibold">Festool</div>
+                        <span class="text-sky-500 font-semibold block mt-1">$330.00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded border border-gray-200 shadow-sm p-4 mb-1" data-status="acknowledged">
+                <div class="flex justify-between items-center mb-1">
+                    <span class="text-xl font-semibold text-sky-500">PO1035-10</span>
+                    <span class="px-3 py-1 rounded bg-blue-200 text-blue-800 text-xs font-semibold">Acknowledged</span>
+                </div>
+                <hr class="my-2 border-gray-300">
+                <div class="flex justify-between text-base font-medium text-gray-800">
+                    <div>
+                        <div class="font-semibold">Order Date:</div>
+                        <div class="font-semibold">May 19, 2025</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-semibold">Vendor Name:</div>
+                        <div class="font-semibold">Metabo</div>
+                        <span class="text-sky-500 font-semibold block mt-1">$120.00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded border border-gray-200 shadow-sm p-4 mb-1" data-status="received">
+                <div class="flex justify-between items-center mb-1">
+                    <span class="text-xl font-semibold text-sky-500">PO1035-11</span>
+                    <span class="px-3 py-1 rounded bg-indigo-900 text-white text-xs font-semibold">Received</span>
+                </div>
+                <hr class="my-2 border-gray-300">
+                <div class="flex justify-between text-base font-medium text-gray-800">
+                    <div>
+                        <div class="font-semibold">Order Date:</div>
+                        <div class="font-semibold">May 20, 2025</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-semibold">Vendor Name:</div>
+                        <div class="font-semibold">Ridgid</div>
+                        <span class="text-sky-500 font-semibold block mt-1">$175.00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded border border-gray-200 shadow-sm p-4 mb-1" data-status="draft">
+                <div class="flex justify-between items-center mb-1">
+                    <span class="text-xl font-semibold text-sky-500">PO1035-12</span>
+                    <span class="px-3 py-1 rounded bg-indigo-300 text-white text-xs font-semibold">Draft</span>
+                </div>
+                <hr class="my-2 border-gray-300">
+                <div class="flex justify-between text-base font-medium text-gray-800">
+                    <div>
+                        <div class="font-semibold">Order Date:</div>
+                        <div class="font-semibold">May 21, 2025</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-semibold">Vendor Name:</div>
+                        <div class="font-semibold">Porter-Cable</div>
+                        <span class="text-sky-500 font-semibold block mt-1">$80.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Load header and nav
+        fetch('../nav/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            });
+        fetch('../nav/navigation.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav-container').innerHTML = data;
+            });
+
+        // Dropdown functionality - using JS only (no class hidden)
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuButton = document.getElementById('menu-button');
+            const dropdownMenu = document.getElementById('dropdown-menu');
+
+            dropdownMenu.style.display = 'none';
+            menuButton.setAttribute('aria-expanded', 'false');
+
+            menuButton.addEventListener('click', function (e) {
+                e.stopPropagation();
+                const isVisible = dropdownMenu.style.display === 'block';
+                dropdownMenu.style.display = isVisible ? 'none' : 'block';
+                menuButton.setAttribute('aria-expanded', !isVisible);
+            });
+
+            document.addEventListener('click', function (e) {
+                if (!menuButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                    dropdownMenu.style.display = 'none';
+                    menuButton.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+
+        // Toggle cart details
+        function toggleCartDetails(idx) {
+            for (let i = 0; i < 3; i++) {
+                const details = document.getElementById('cart-details-' + i);
+                const arrow = document.getElementById('arrow-' + i);
+                if (details && arrow) {
+                    if (i === idx) {
+                        const isHidden = details.classList.contains('hidden');
+                        details.classList.toggle('hidden');
+                        arrow.classList.toggle('rotate-90', isHidden);
+                    } else {
+                        details.classList.add('hidden');
+                        arrow.classList.remove('rotate-90');
+                    }
+                }
+            }
+        }
+
+        function toggleExpenseDetails(idx) {
+            const details = document.getElementById('expense-details-' + idx);
+            const arrow = document.getElementById('arrow-' + idx);
+            const isOpen = !details.classList.contains('hidden');
+            // Close all (only one open at a time)
+            for (let i = 0; i < 1; i++) {
+                const d = document.getElementById('expense-details-' + i);
+                const a = document.getElementById('arrow-' + i);
+                if (d) d.classList.add('hidden');
+                if (a) a.classList.remove('rotate-90');
+            }
+            // If it was not open, open it
+            if (!isOpen) {
+                details.classList.remove('hidden');
+                arrow.classList.add('rotate-90');
+            }
+        }
+
+        function filterPOs(status) {
+            // Remove active class from all filter buttons
+            document.getElementById('filter-all').classList.remove('bg-sky-400', 'text-white');
+            document.getElementById('filter-draft').classList.remove('bg-gray-300', 'text-gray-700');
+            document.getElementById('filter-sent').classList.remove('bg-orange-200', 'text-orange-800');
+            document.getElementById('filter-acknowledged').classList.remove('bg-blue-200', 'text-blue-800');
+            document.getElementById('filter-received').classList.remove('bg-indigo-900', 'text-white');
+
+            // Add active class to selected
+            if (status === 'all') {
+                document.getElementById('filter-all').classList.add('bg-sky-400', 'text-white');
+            } else if (status === 'draft') {
+                document.getElementById('filter-draft').classList.add('bg-gray-300', 'text-gray-700');
+            } else if (status === 'sent') {
+                document.getElementById('filter-sent').classList.add('bg-orange-200', 'text-orange-800');
+            } else if (status === 'acknowledged') {
+                document.getElementById('filter-acknowledged').classList.add('bg-blue-200', 'text-blue-800');
+            } else if (status === 'received') {
+                document.getElementById('filter-received').classList.add('bg-indigo-900', 'text-white');
+            }
+
+            // Show/hide cards
+            const cards = document.querySelectorAll('[data-status]');
+            cards.forEach(card => {
+                if (status === 'all' || card.getAttribute('data-status') === status) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
