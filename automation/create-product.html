@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Create Product</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
+    <!-- Header and Navigation -->
+    <div id="header-container"></div>
+    <div id="nav-container"></div>
+
+    <!-- Main content -->
+    <main class="w-full px-0 md:px-6 py-8">
+        <div class="mb-6 flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2 ml-4">
+                <button id="backBtn" class="px-4 py-2 bg-blue-500 text-white rounded font-bold flex items-center gap-2">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Create Product</h1>
+            </div>
+        </div>
+        <div class="flex flex-col md:flex-row gap-6">
+            <!-- Left: Product Details -->
+            <div class="flex-1 bg-white rounded-xl shadow p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-1">Item Name <span class="text-red-500">*</span></label>
+                        <input type="text" class="w-full rounded border border-gray-400 bg-white px-3 py-2 text-base" placeholder="" />
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-1">Specification <span class="text-red-500">*</span></label>
+                        <input type="text" class="w-full rounded border border-gray-400 bg-white px-3 py-2 text-base" placeholder="" />
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-1">Notes <span class="text-red-500">*</span></label>
+                        <input type="text" class="w-full rounded border border-gray-400 bg-white px-3 py-2 text-base" placeholder="" />
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-1">Business category <span class="text-red-500">*</span></label>
+                        <!-- Multiselect Dropdown -->
+                        <div class="relative" id="businessCategoryDropdown">
+                            <button type="button" id="dropdownButton" class="w-full border border-blue-300 rounded-lg px-4 py-2 focus:ring-blue-500 focus:border-blue-500 text-sm font-medium text-gray-800 text-left flex items-center justify-between">
+                                <span id="dropdownSelected">Select options...</span>
+                                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </button>
+                            <div id="dropdownMenu" class="absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg hidden max-h-60 overflow-y-auto grid grid-cols-1 md:grid-cols-2">
+                                <div class="px-3 py-2 hover:bg-gray-100 flex items-center gap-2">
+                                    <input type="checkbox" id="selectAllCategories" class="w-5 h-5 rounded border-gray-300">
+                                    <label for="selectAllCategories" class="text-sm font-medium text-gray-800 select-none">Select All</label>
+                                </div>
+                                <div class="px-3 py-2 hover:bg-gray-100 flex items-center gap-2">
+                                    <input type="checkbox" class="categoryOption w-5 h-5 rounded border-gray-300" value="Construction Services" id="cat-construction">
+                                    <label for="cat-construction" class="text-sm font-medium text-gray-800 select-none">Construction Services</label>
+                                </div>
+                                <div class="px-3 py-2 hover:bg-gray-100 flex items-center gap-2">
+                                    <input type="checkbox" class="categoryOption w-5 h-5 rounded border-gray-300" value="Plumbing Services" id="cat-plumbing">
+                                    <label for="cat-plumbing" class="text-sm font-medium text-gray-800 select-none">Plumbing Services</label>
+                                </div>
+                                <div class="px-3 py-2 hover:bg-gray-100 flex items-center gap-2">
+                                    <input type="checkbox" class="categoryOption w-5 h-5 rounded border-gray-300" value="Landscaping & Maintenance" id="cat-landscaping">
+                                    <label for="cat-landscaping" class="text-sm font-medium text-gray-800 select-none">Landscaping & Maintenance</label>
+                                </div>
+                                <div class="px-3 py-2 hover:bg-gray-100 flex items-center gap-2">
+                                    <input type="checkbox" class="categoryOption w-5 h-5 rounded border-gray-300" value="Maintenance Services" id="cat-maintenance">
+                                    <label for="cat-maintenance" class="text-sm font-medium text-gray-800 select-none">Maintenance Services</label>
+                                </div>
+                                <div class="px-3 py-2 hover:bg-gray-100 flex items-center gap-2">
+                                    <input type="checkbox" class="categoryOption w-5 h-5 rounded border-gray-300" value="Electrical Services" id="cat-electrical">
+                                    <label for="cat-electrical" class="text-sm font-medium text-gray-800 select-none">Electrical Services</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-2 mt-4">
+                    <span class="text-lg font-semibold text-purple-600">Vendors</span>
+                </div>
+                <div id="addVendorBtnContainer" class="mb-2"></div>
+                <div class="overflow-x-auto">
+                    <table class="w-full mt-2 mb-4 border border-gray-200 rounded-lg table-fixed">
+                        <thead>
+                            <tr class="bg-sky-500 text-white">
+                                <th class="px-4 py-2 text-left w-1/6">Vendor</th>
+                                <th class="px-4 py-2 text-left w-1/6">Vendor Item Number</th>
+                                <th class="px-4 py-2 text-left w-1/6">Vendor Price</th>
+                                <th class="px-4 py-2 text-left w-1/6">Vendor Qty Type</th>
+                                <th class="px-4 py-2 text-left w-1/6">Vendor Qty Per Item</th>
+                                <th class="px-4 py-2 text-center w-1/6 action-col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Vendor rows will be added here -->
+                        </tbody>
+                    </table>
+                </div>
+                <button id="submitBtn" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center gap-2 text-sm">
+                    <i class="fas fa-save"></i> Submit
+                </button>
+            </div>
+            <!-- Right: Upload Image -->
+            <div class="w-full md:w-1/3 bg-white rounded-xl shadow p-6 h-fit">
+                <label class="block text-gray-700 font-semibold mb-2">Upload Image</label>
+                <input type="file" class="w-full rounded border border-gray-300" />
+            </div>
+        </div>
+    </main>
+    <script src="../js/main.js"></script>
+    <script src="../js/create-product.js"></script>
+</body>
+</html> 
