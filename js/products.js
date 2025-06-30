@@ -13,6 +13,8 @@ const products = [
   { name: 'Mawer', vendors: 'DIYI', price: '$ 1,000.00', date: 'March 12, 2025' },
 ];
 
+const vendors = ["Global", "Interline", "DIYI", "Citi Hardware", "LIXIL", "Ryobi", "Stanley", "Ace Hardware", "Oshwald"];
+
 function renderProductsTable() {
   const tbody = document.getElementById('products-table-body');
   tbody.innerHTML = '';
@@ -57,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let isEditing = false;
 
   // Toggle edit/view mode for all fields
-  function renderEditMode(edit) {
+  function renderEditMode(edit, saveChanges = false) {
     isEditing = edit;
     // Toggle Edit/Update+Cancel buttons
     const btnContainer = editBtn.parentElement;
@@ -73,13 +75,13 @@ document.addEventListener('DOMContentLoaded', function() {
         updateBtn.id = 'updateBtn';
         updateBtn.className = 'px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center gap-2 text-sm';
         updateBtn.innerHTML = '<i class="fas fa-save"></i> Update';
-        updateBtn.onclick = () => renderEditMode(false); // TODO: Implement save logic
+        updateBtn.onclick = () => renderEditMode(false, true); // Implement save logic
         // Create Cancel button
         const cancelBtn = document.createElement('button');
         cancelBtn.id = 'cancelBtn';
         cancelBtn.className = 'px-4 py-2 bg-red-500 text-white rounded shadow hover:bg-red-600 flex items-center gap-2 text-sm';
         cancelBtn.innerHTML = '<i class="fas fa-times"></i> Cancel';
-        cancelBtn.onclick = () => renderEditMode(false); // TODO: Implement revert logic
+        cancelBtn.onclick = () => renderEditMode(false, false); // Implement revert logic
         btnGroup.appendChild(updateBtn);
         btnGroup.appendChild(cancelBtn);
         btnContainer.appendChild(btnGroup);
@@ -88,8 +90,22 @@ document.addEventListener('DOMContentLoaded', function() {
       editBtn.classList.remove('hidden');
       document.getElementById('editBtnGroup')?.remove();
     }
+
+    // Store original values when entering edit mode
+    if (edit) {
+      mainContent.querySelectorAll('input, textarea').forEach(input => {
+        if (input.type !== 'file') {
+          input.setAttribute('data-original-value', input.value);
+        }
+      });
+    }
+
     // Toggle fields
     mainContent.querySelectorAll('input, textarea').forEach(input => {
+      if (!saveChanges && input.hasAttribute('data-original-value')) {
+        input.value = input.getAttribute('data-original-value');
+      }
+
       if (input.name === 'businessCategory') {
         input.parentElement.querySelector('.custom-multiselect')?.classList.toggle('hidden', !edit);
         input.classList.toggle('hidden', edit);
@@ -99,16 +115,56 @@ document.addEventListener('DOMContentLoaded', function() {
         input.classList.toggle('bg-white', edit);
       }
     });
+
     // Vendors table: show/hide Action column and Add Vendors button
     const vendorsTable = mainContent.querySelector('table');
+    const vendorTableHeader = vendorsTable.querySelector('thead tr');
+
     let actionTh = vendorsTable.querySelector('th.action-col');
     const addVendorBtnContainer = document.getElementById('addVendorBtnContainer');
     // Show/hide Submit button in edit mode
     let submitBtn = document.getElementById('detailsSubmitBtn');
     if (edit) {
-      vendorsTable.querySelector('tr').insertAdjacentHTML('beforeend', '<th class="px-4 py-2 text-left action-col">Action</th>');
+      // Make existing vendor rows editable
       vendorsTable.querySelectorAll('tbody tr').forEach(row => {
-        row.insertAdjacentHTML('beforeend', `<td class="px-4 py-2 text-center action-col"><button class="delete-vendor px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"><i class="fas fa-trash"></i></button></td>`);
+        row.querySelectorAll('td[data-col]').forEach(cell => {
+          const currentValue = cell.textContent.trim();
+          cell.setAttribute('data-original-value', currentValue);
+          const colType = cell.getAttribute('data-col');
+
+          if (colType === 'vendor') {
+            const optionsHtml = vendors.map(vendor => 
+                `<option value="${vendor}" ${currentValue === vendor ? 'selected' : ''}>${vendor}</option>`
+            ).join('');
+            cell.innerHTML = `
+              <div class="relative w-full h-full">
+                <select class="w-full h-full rounded border border-gray-400 bg-white px-3 py-2 text-base appearance-none pr-8">
+                  ${optionsHtml}
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+                </div>
+              </div>
+            `;
+          } else {
+            cell.innerHTML = `<input type="text" class="w-full h-full rounded border border-gray-400 bg-white px-3 py-2 text-base" value="${currentValue}">`;
+          }
+        });
+      });
+
+      const headerCells = vendorTableHeader.querySelectorAll('th');
+      if (!vendorTableHeader.querySelector('.action-col')) {
+        headerCells.forEach(th => {
+          th.classList.remove('w-1/5');
+          th.style.width = '18.4%';
+        });
+        vendorTableHeader.insertAdjacentHTML('beforeend', '<th class="px-4 py-2 text-left action-col" style="width: 8%;">Action</th>');
+      }
+
+      vendorsTable.querySelectorAll('tbody tr').forEach(row => {
+        if (!row.querySelector('.action-col')) {
+          row.insertAdjacentHTML('beforeend', `<td class="px-4 py-2 text-center action-col"><button class="delete-vendor px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"><i class="fas fa-trash"></i></button></td>`);
+        }
       });
       // Add Vendors button
       if (addVendorBtnContainer && !document.getElementById('addVendorBtn')) {
@@ -119,12 +175,22 @@ document.addEventListener('DOMContentLoaded', function() {
         addBtn.onclick = function() {
           // Add a new editable row to the vendors table
           const newRow = document.createElement('tr');
+          const optionsHtml = '<option value="" disabled selected>Select A Vendor</option>' + vendors.map(vendor => `<option value="${vendor}">${vendor}</option>`).join('');
           newRow.innerHTML = `
-            <td class='px-4 py-2'><input type='text' class='w-full rounded border border-gray-400 bg-white' placeholder='Vendor' /></td>
-            <td class='px-4 py-2'><input type='text' class='w-full rounded border border-gray-400 bg-white' placeholder='Vendor Item Number' /></td>
-            <td class='px-4 py-2'><input type='text' class='w-full rounded border border-gray-400 bg-white' placeholder='Vendor Price' /></td>
-            <td class='px-4 py-2'><input type='text' class='w-full rounded border border-gray-400 bg-white' placeholder='Vendor Qty Type' /></td>
-            <td class='px-4 py-2'><input type='text' class='w-full rounded border border-gray-400 bg-white' placeholder='Vendor Qty Per Item' /></td>
+            <td class='px-4 py-2'>
+              <div class="relative w-full h-full">
+                <select class='w-full h-full rounded border border-gray-400 bg-white px-3 py-2 text-base appearance-none pr-8'>
+                  ${optionsHtml}
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+                </div>
+              </div>
+            </td>
+            <td class='px-4 py-2'><input type='text' class='w-full h-full rounded border border-gray-400 bg-white px-3 py-2 text-base' /></td>
+            <td class='px-4 py-2'><input type='text' class='w-full h-full rounded border border-gray-400 bg-white px-3 py-2 text-base' /></td>
+            <td class='px-4 py-2'><input type='text' class='w-full h-full rounded border border-gray-400 bg-white px-3 py-2 text-base' /></td>
+            <td class='px-4 py-2'><input type='text' class='w-full h-full rounded border border-gray-400 bg-white px-3 py-2 text-base' /></td>
             <td class='px-4 py-2 text-center action-col'><button class='delete-vendor px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600'><i class='fas fa-trash'></i></button></td>
           `;
           vendorsTable.querySelector('tbody').appendChild(newRow);
@@ -140,7 +206,36 @@ document.addEventListener('DOMContentLoaded', function() {
         };
       });
     } else {
+      // Revert existing vendor rows to readonly
+      vendorsTable.querySelectorAll('tbody tr').forEach(row => {
+        // vendor cell
+        row.querySelectorAll('td[data-col]').forEach(cell => {
+          if (cell.hasAttribute('data-original-value')) {
+            let displayValue = '';
+            const colType = cell.getAttribute('data-col');
+
+            if (saveChanges) {
+              if (colType === 'vendor') {
+                displayValue = cell.querySelector('select').value;
+              } else {
+                displayValue = cell.querySelector('input').value;
+              }
+            } else {
+              displayValue = cell.getAttribute('data-original-value');
+            }
+            cell.innerHTML = displayValue;
+          }
+        });
+      });
+
       // Remove all Action columns and cells robustly
+      const headerCells = vendorTableHeader.querySelectorAll('th');
+      headerCells.forEach(th => {
+        if (!th.classList.contains('action-col')) {
+          th.classList.add('w-1/5');
+          th.style.width = '';
+        }
+      });
       vendorsTable.querySelectorAll('th.action-col').forEach(th => th.remove());
       vendorsTable.querySelectorAll('td.action-col').forEach(td => td.remove());
       vendorsTable.querySelectorAll('td .delete-vendor').forEach(btn => btn.closest('td')?.remove());
