@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Expense Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="min-h-screen bg-blue-50">
+    <!-- Include header and navigation -->
+    <div id="header-container"></div>
+    <div id="nav-container"></div>
+
+    <!-- Main content -->
+    <main class="w-full px-0 md:px-6 py-8">
+        <div class="mb-6 flex items-center gap-2 justify-between">
+            <div class="flex items-center gap-2">
+                <button onclick="window.history.back()" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-800 ml-4">Expense Details</h1>
+            </div>
+            <button id="editExpenseBtn" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 flex items-center gap-2">
+                <i class="fas fa-edit"></i>
+                <span>Edit</span>
+            </button>
+        </div>
+        <div class="bg-white/90 rounded-2xl shadow-2xl border border-blue-100 w-full">
+            <div class="px-6 pt-4 pb-8">
+                <!-- Stacked layout: Expense Info on top, Tools & Parts below -->
+                <!-- Expense Information (Top) -->
+                <div class="mb-10">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700">Vendor</label>
+                            <input id="expVendor" type="text" class="mt-1 w-full border rounded px-2 py-1 bg-gray-100" readonly>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700">Employee</label>
+                            <input id="expEmployee" type="text" class="mt-1 w-full border rounded px-2 py-1 bg-gray-100" readonly>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700">Department</label>
+                            <input id="expDepartment" type="text" class="mt-1 w-full border rounded px-2 py-1 bg-gray-100" readonly>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700">Category</label>
+                            <input id="expCategory" type="text" class="mt-1 w-full border rounded px-2 py-1 bg-gray-100" readonly>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700">Amount ($)</label>
+                            <input id="expAmount" type="text" class="mt-1 w-full border rounded px-2 py-1 bg-gray-100" readonly>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700">Payment Method</label>
+                            <input id="expPaymentMethod" type="text" class="mt-1 w-full border rounded px-2 py-1 bg-gray-100" readonly>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700">Expense Date</label>
+                            <input id="expDate" type="text" class="mt-1 w-full border rounded px-2 py-1 bg-gray-100" readonly>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700">Status</label>
+                            <input id="expStatus" type="text" class="mt-1 w-full border rounded px-2 py-1 bg-gray-100" readonly>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tools & Parts Purchase Form (Bottom) -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-center">Tools & Parts Purchase Form</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700">Vendor</label>
+                            <input id="tpVendor" type="text" class="mt-1 w-full border rounded px-2 py-1 bg-gray-100" readonly>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700">Part Type</label>
+                            <input id="tpPartType" type="text" class="mt-1 w-full border rounded px-2 py-1 bg-gray-100" readonly>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700">Quantity</label>
+                            <input id="tpQuantity" type="text" class="mt-1 w-full border rounded px-2 py-1 bg-gray-100" readonly>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700">Purpose</label>
+                            <input id="tpPurpose" type="text" class="mt-1 w-full border rounded px-2 py-1 bg-gray-100" readonly>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Uploaded Images</label>
+                        <div id="tpImages" class="border rounded p-2 min-h-[120px] flex items-center justify-center">
+                            <img id="tpImagePreview" src="" alt="Card image cap" class="max-h-32 object-contain" style="display:none;"/>
+                            <span id="tpImagePlaceholder" class="text-gray-400">No image uploaded</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Load JavaScript files -->
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/themes/light.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/expenses.js"></script>
+    <script>
+    // Expense Details Page Logic
+    document.addEventListener('DOMContentLoaded', function() {
+        // Load data from localStorage
+        const data = JSON.parse(localStorage.getItem('selectedExpense')) || {};
+        // Fill fields
+        document.getElementById('expVendor').value = data.vendor || '';
+        document.getElementById('expEmployee').value = data.employee || '';
+        document.getElementById('expDepartment').value = data.department || '';
+        document.getElementById('expCategory').value = data.category || '';
+        document.getElementById('expAmount').value = data.amount || '';
+        document.getElementById('expPaymentMethod').value = data.paymentMethod || '';
+        document.getElementById('expDate').value = data.date || '';
+        document.getElementById('expStatus').value = data.status || '';
+        // Dummy data for Tools & Parts Purchase Form (replace with real data if available)
+        document.getElementById('tpVendor').value = 'Sari-sari store';
+        document.getElementById('tpPartType').value = 'left';
+        document.getElementById('tpQuantity').value = '1';
+        document.getElementById('tpPurpose').value = 'for delivery';
+        // Image
+        document.getElementById('tpImagePreview').style.display = 'none';
+        document.getElementById('tpImagePlaceholder').style.display = 'block';
+
+        // Edit button logic
+        const editBtn = document.getElementById('editExpenseBtn');
+        let isEditable = false;
+        editBtn.addEventListener('click', function() {
+            isEditable = !isEditable;
+            // Toggle all inputs
+            document.querySelectorAll('input').forEach(input => {
+                if (input.id !== 'expPaymentMethod') { // Example: keep payment method readonly
+                    input.readOnly = !isEditable;
+                    input.classList.toggle('bg-gray-100', !isEditable);
+                    input.classList.toggle('bg-white', isEditable);
+                }
+            });
+            editBtn.innerHTML = isEditable ? '<i class="fas fa-save"></i> <span>Save</span>' : '<i class="fas fa-edit"></i> <span>Edit</span>';
+            if (!isEditable) {
+                // Save logic here (e.g., send to backend or update localStorage)
+                // For now, just update localStorage
+                const updatedData = {
+                    vendor: document.getElementById('expVendor').value,
+                    employee: document.getElementById('expEmployee').value,
+                    department: document.getElementById('expDepartment').value,
+                    category: document.getElementById('expCategory').value,
+                    amount: document.getElementById('expAmount').value,
+                    paymentMethod: document.getElementById('expPaymentMethod').value,
+                    date: document.getElementById('expDate').value,
+                    status: document.getElementById('expStatus').value
+                };
+                localStorage.setItem('selectedExpense', JSON.stringify(updatedData));
+            }
+        });
+    });
+    </script>
+</body>
+</html> 

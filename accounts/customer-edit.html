@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Edit Customer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
+    <!-- Header and Navigation -->
+    <div id="header-container"></div>
+    <div id="nav-container"></div>
+    <div class="w-full px-0 md:px-6 py-8">
+        <div class="mb-6 flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+                <button id="backBtn" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition" onclick="window.location.href='customer-details.html'">
+                    <i class="fas fa-arrow-left"></i> Cancel
+                </button>
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-800 ml-4" id="customerNameHeader"></h1>
+            </div>
+            <button id="updateBtn" class="px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center gap-2 text-sm">
+                <i class="fas fa-save"></i> Update
+            </button>
+        </div>
+        <!-- Main Details Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <!-- Left Column: Personal Info & Preferences -->
+            <div class="flex flex-col gap-4">
+                <!-- Personal Information -->
+                <div class="bg-white rounded-lg shadow border p-4">
+                    <h3 class="font-semibold text-gray-700 mb-2">Personal Information</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        <div>
+                            <div class="text-xs text-gray-500">First Name</div>
+                            <input type="text" class="font-medium w-full border rounded px-2 py-1" id="personalFirstName" />
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Last Name</div>
+                            <input type="text" class="font-medium w-full border rounded px-2 py-1" id="personalLastName" />
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Phone</div>
+                            <input type="text" class="font-medium w-full border rounded px-2 py-1" id="personalPhone" />
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Email</div>
+                            <input type="email" class="font-medium w-full border rounded px-2 py-1" id="personalEmail" />
+                        </div>
+                        <div class="md:col-span-2">
+                            <div class="text-xs text-gray-500">Address</div>
+                            <input type="text" class="font-medium w-full border rounded px-2 py-1" id="personalAddress" />
+                        </div>
+                        <div class="md:col-span-2">
+                            <div class="text-xs text-gray-500">Building Address</div>
+                            <input type="text" class="font-medium w-full border rounded px-2 py-1" id="personalBuildingAddress" />
+                        </div>
+                    </div>
+                </div>
+                <!-- Preferences -->
+                <div class="bg-white rounded-lg shadow border p-4">
+                    <h3 class="font-semibold text-gray-700 mb-2">Preferences</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        <div>
+                            <div class="text-xs text-gray-500">Client Since</div>
+                            <input type="date" class="font-medium w-full border rounded px-2 py-1" id="prefClientSince" />
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Lead Acquired Date</div>
+                            <input type="date" class="font-medium w-full border rounded px-2 py-1" id="prefLeadAcquiredDate" />
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Main Language</div>
+                            <input type="text" class="font-medium w-full border rounded px-2 py-1" id="prefMainLanguage" />
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Preferred Communication</div>
+                            <input type="text" class="font-medium w-full border rounded px-2 py-1" id="prefPreferredCommunication" />
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Payment Terms</div>
+                            <input type="text" class="font-medium w-full border rounded px-2 py-1" id="prefPaymentTerms" />
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Payment Method</div>
+                            <input type="text" class="font-medium w-full border rounded px-2 py-1" id="prefPaymentMethod" />
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Taxable</div>
+                            <input type="text" class="font-medium w-full border rounded px-2 py-1" id="prefTaxable" />
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Tags</div>
+                            <input type="text" class="font-medium w-full border rounded px-2 py-1" id="prefTags" />
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Sales Person</div>
+                            <input type="text" class="font-medium w-full border rounded px-2 py-1" id="prefSalesPerson" />
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Contractor</div>
+                            <input type="text" class="font-medium w-full border rounded px-2 py-1" id="prefContractor" />
+                        </div>
+                        <div class="md:col-span-2">
+                            <div class="text-xs text-gray-500">Invoice Frequency</div>
+                            <input type="text" class="font-medium w-full border rounded px-2 py-1" id="prefInvoiceFrequency" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Column: Billing, Notes, Custom Fields -->
+            <div class="flex flex-col gap-4">
+                <!-- Billing Information -->
+                <div class="bg-white rounded-lg shadow border p-4">
+                    <h3 class="font-semibold text-gray-700 mb-2">Billing Information</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        <div>
+                            <div class="text-xs text-gray-500">First Name</div>
+                            <input type="text" class="font-medium w-full border rounded px-2 py-1" id="billingFirstName" />
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Last Name</div>
+                            <input type="text" class="font-medium w-full border rounded px-2 py-1" id="billingLastName" />
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Phone</div>
+                            <input type="text" class="font-medium w-full border rounded px-2 py-1" id="billingPhone" />
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Email</div>
+                            <input type="email" class="font-medium w-full border rounded px-2 py-1" id="billingEmail" />
+                        </div>
+                        <div class="md:col-span-2">
+                            <div class="text-xs text-gray-500">Address</div>
+                            <input type="text" class="font-medium w-full border rounded px-2 py-1" id="billingAddress" />
+                        </div>
+                        <div class="md:col-span-2">
+                            <div class="text-xs text-gray-500">Company Name</div>
+                            <input type="text" class="font-medium w-full border rounded px-2 py-1" id="billingCompanyName" />
+                        </div>
+                    </div>
+                </div>
+                <!-- Customer Notes -->
+                <div class="bg-white rounded-lg shadow border p-4">
+                    <h3 class="font-semibold text-gray-700 mb-2">Customer Notes</h3>
+                    <textarea id="customerNotes" class="w-full border rounded p-2 min-h-[60px]"></textarea>
+                </div>
+                <!-- Custom Fields -->
+                <div class="bg-white rounded-lg shadow border p-4">
+                    <h3 class="font-semibold text-gray-700 mb-2">Custom Fields</h3>
+                    <table class="min-w-full text-xs">
+                        <thead>
+                            <tr class="bg-blue-200">
+                                <th class="px-2 py-1 text-left">Field Name</th>
+                                <th class="px-2 py-1 text-left">Value</th>
+                                <th class="px-2 py-1 text-left">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customFields"></tbody>
+                    </table>
+                    <button id="addCustomFieldBtn" type="button" class="mt-2 px-3 py-1 bg-blue-100 text-blue-700 rounded text-xs flex items-center gap-1"><i class="fas fa-plus"></i> Add Field</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/customerlist.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html> 

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>View Product</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
+    <!-- Header and Navigation -->
+    <div id="header-container"></div>
+    <div id="nav-container"></div>
+
+    <!-- Main content -->
+    <main class="w-full px-0 md:px-6 py-8">
+        <div class="mb-6 flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+                <button id="backBtn" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-800 ml-4">View Product</h1>
+            </div>
+            <button id="editBtn" class="px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center gap-2 text-sm">
+                <i class="fas fa-edit"></i> Edit
+            </button>
+        </div>
+        <div class="flex flex-col md:flex-row gap-6">
+            <!-- Left: Product Details -->
+            <div class="flex-1 bg-white rounded-xl shadow p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-1">Item Name <span class="text-red-500">*</span></label>
+                        <input type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" value="Plant Cutters 1." readonly />
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-1">Specification <span class="text-red-500">*</span></label>
+                        <input type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" value="Cool amazing 67x3 size." readonly />
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-1">Notes <span class="text-red-500">*</span></label>
+                        <input type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" value="This product was updated via Selenium." readonly />
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-1">Business category <span class="text-red-500">*</span></label>
+                        <input type="text" name="businessCategory" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" value="Construction Services, Plumbing Services" readonly />
+                    </div>
+                </div>
+                <div class="mb-2 mt-4">
+                    <span class="text-lg font-semibold text-purple-600">Vendors</span>
+                </div>
+                <div id="addVendorBtnContainer" class="mb-2"></div>
+                <div class="overflow-x-auto">
+                    <table class="w-full mt-2 mb-4 border border-gray-200 rounded-lg table-fixed">
+                        <thead>
+                            <tr class="bg-sky-500 text-white">
+                                <th class="w-1/5 px-4 py-2 text-left">Vendor</th>
+                                <th class="w-1/5 px-4 py-2 text-left">Vendor Item Number</th>
+                                <th class="w-1/5 px-4 py-2 text-left">Vendor Price</th>
+                                <th class="w-1/5 px-4 py-2 text-left">Vendor Qty Type</th>
+                                <th class="w-1/5 px-4 py-2 text-left">Vendor Qty Per Item</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-100 hover:bg-blue-50 transition-colors">
+                                <td class="px-4 py-2" data-col="vendor">Global</td>
+                                <td class="px-4 py-2" data-col="item-number">ITEM-6377</td>
+                                <td class="px-4 py-2" data-col="price">97.34</td>
+                                <td class="px-4 py-2" data-col="qty-type">Box</td>
+                                <td class="px-4 py-2" data-col="qty-per-item">6</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Right: Upload Image -->
+            <div class="w-full md:w-1/3 bg-white rounded-xl shadow p-6 h-fit">
+                <label class="block text-gray-700 font-semibold mb-2">Upload Image</label>
+                <input type="file" class="w-full rounded border-gray-300" />
+            </div>
+        </div>
+    </main>
+    <script src="../js/main.js"></script>
+    <script src="../js/products.js"></script>
+</body>
+</html> 

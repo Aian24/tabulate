@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>Expenses</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/themes/light.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="min-h-screen">
+    <!-- Include header -->
+    <div id="header-container"></div>
+
+    <!-- Include navigation -->
+    <div id="nav-container"></div>
+
+    <!-- Main content -->
+    <main class="container-fluid mx-auto px-4 md:px-6 py-2 md:py-4 relative-z-1">
+        <!-- Combined header with search -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
+            <div class="flex items-center gap-4">
+                <h1 class="text-xl md:text-2xl font-bold text-gray-800">Expenses</h1>
+            </div>
+            <div class="flex items-center gap-2">
+                <button id="createExpenseButton" onclick="window.location.href='create-expense.html'" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
+                    <i class="fas fa-plus mr-1"></i>
+                    <span>Create</span>
+                </button>
+                <div class="relative">
+                    <button id="actionsDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
+                        <span>Actions</span>
+                        <i class="fas fa-chevron-down ml-1"></i>
+                    </button>
+                    <div id="actionsMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-trash-alt w-5"></i>
+                            <span>Delete</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="relative">
+                    <button id="moreDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
+                        <span>More</span>
+                        <i class="fas fa-chevron-down ml-1"></i>
+                    </button>
+                    <div id="moreMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-cog w-5"></i>
+                            <span>Settings</span>
+                        </button>
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-chart-bar w-5"></i>
+                            <span>Report</span>
+                        </button>
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-history w-5"></i>
+                            <span>Audit Trail</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls Section (Calendar, Map View, etc.) -->
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6 max-w-sm mx-auto md:max-w-full md:mx-0">
+            <!-- Left side: Calendar and Controls -->
+            <div class="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
+                <!-- Date Range and Filter -->
+                <div class="flex flex-wrap justify-center md:justify-start gap-2 w-full md:w-auto">
+                    <div class="hidden md:flex items-center gap-2 mr-4">
+                        <label class="text-sm text-gray-600">
+                            Show
+                            <select class="mx-2 px-3 py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            entries
+                        </label>
+                    </div>
+                    <div class="flex flex-wrap justify-center md:justify-start gap-2 w-full md:w-auto">
+                        <button class="filter-btn border-blue-500 text-blue-500" data-filter="all">All</button>
+                        <button class="filter-btn border-yellow-500 text-yellow-500" data-filter="draft">Draft</button>
+                        <button class="filter-btn border-red-500 text-red-500" data-filter="unpaid">Unpaid</button>
+                        <button class="filter-btn border-green-500 text-green-500" data-filter="paid">Paid</button>
+                        <button id="openFilter" class="calendar-button flex-grow md:flex-grow-0 border-2 border-gray-400 text-gray-700 flex items-center gap-1 px-3 py-1 rounded-lg">
+                            <i class="fas fa-filter"></i>
+                            <span>Filters</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Right side: Search -->
+            <div id="search-container" class="relative w-full">
+                <input type="search" 
+                       placeholder="Search..." 
+                       class="w-full h-[42px] pl-10 pr-4 rounded-lg border border-green-500 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300"
+                />
+                <button class="absolute left-3 top-1/2 -translate-y-1/2 text-blue-500 hover:text-blue-600 transition-colors">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Table content -->
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
+            <div class="overflow-x-auto">
+                <table class="w-full min-w-[800px]">
+                    <thead class="bg-gradient-to-r from-sky-500 to-blue-600 text-white">
+                        <tr>
+                            <th class="px-6 py-4 text-left">
+                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="status">
+                                <div class="flex items-center space-x-2">
+                                    <span>Status</span>
+                                    <i class="fas fa-sort text-xs opacity-70"></i>
+                                </div>
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="category">
+                                <div class="flex items-center space-x-2">
+                                    <span>Category</span>
+                                    <i class="fas fa-sort text-xs opacity-70"></i>
+                                </div>
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="vendor">
+                                <div class="flex items-center space-x-2">
+                                    <span>Vendor</span>
+                                    <i class="fas fa-sort text-xs opacity-70"></i>
+                                </div>
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="department">
+                                <div class="flex items-center space-x-2">
+                                    <span>Department</span>
+                                    <i class="fas fa-sort text-xs opacity-70"></i>
+                                </div>
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="employee">
+                                <div class="flex items-center space-x-2">
+                                    <span>Employee</span>
+                                    <i class="fas fa-sort text-xs opacity-70"></i>
+                                </div>
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="price">
+                                <div class="flex items-center space-x-2">
+                                    <span>Price</span>
+                                    <i class="fas fa-sort text-xs opacity-70"></i>
+                                </div>
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="recurring-due-date">
+                                <div class="flex items-center space-x-2">
+                                    <span>Recurring Due Date</span>
+                                    <i class="fas fa-sort text-xs opacity-70"></i>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        <tr class="hover:bg-gray-50 transition-colors cursor-pointer">
+                            <td class="px-6 py-4">
+                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                    Pending
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Tools & Parts Purchase</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Ace Hardware</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Plumbing Services</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Virgee Virginia</td>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">$1.00</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">-</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors cursor-pointer">
+                            <td class="px-6 py-4">
+                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                    Pending
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Equipment Maintenance & Repair</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Stanley</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Maintenance Services</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Joshua Rolluqui</td>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">$52.00</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">-</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors cursor-pointer">
+                            <td class="px-6 py-4">
+                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                    Pending
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Material Purchase</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Oshwald</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Electrical Services</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Oshwald Briones</td>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">$11.00</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">-</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors cursor-pointer">
+                            <td class="px-6 py-4">
+                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                    Pending
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Plant & Material Purchase</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Ace Hardware</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Landscaping & Maintenance</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Virgee Virginia</td>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">$100.00</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">-</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors cursor-pointer">
+                            <td class="px-6 py-4">
+                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                    Pending
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Tools & Parts Purchase</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Ace Hardware</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Plumbing Services</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Virgee Virginia</td>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">$100.00</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">-</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors cursor-pointer">
+                            <td class="px-6 py-4">
+                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                    Pending
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-600">-</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Ryobi</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Construction Services</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Sherilyn Hillary</td>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">$500.00</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">-</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors cursor-pointer">
+                            <td class="px-6 py-4">
+                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Draft
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Materials</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Ace Hardware</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">-</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">-</td>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">$1,600.00</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">-</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors cursor-pointer">
+                            <td class="px-6 py-4">
+                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Draft
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Materials</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Citi Hardware</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">-</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">-</td>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">$400.00</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="bg-gray-50 px-4 md:px-6 py-4 flex flex-col md:flex-row justify-between items-center border-t border-gray-100 gap-4">
+                <div class="flex items-center gap-2 text-sm text-gray-600 order-2 md:order-1">
+                   
+                    <span class="mx-2">|</span>
+                    Showing <span class="font-medium">1</span> to <span class="font-medium">1</span> of <span class="font-medium">1</span> entries
+                </div>
+                <div class="flex space-x-2 order-1 md:order-2">
+                    <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                        <i class="fas fa-chevron-left mr-1"></i>
+                        <span class="hidden sm:inline">Previous</span>
+                    </button>
+                    <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-white bg-sky-500 border border-sky-500 rounded-lg hover:bg-sky-600 transition-colors duration-200">
+                        1
+                    </button>
+                    <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                        <span class="hidden sm:inline">Next</span>
+                        <i class="fas fa-chevron-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for viewing dispatch details -->
+    <div id="dispatchModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg shadow-lg max-w-lg w-full p-6 relative">
+            <button id="closeModal" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-xl font-bold">&times;</button>
+            <h2 class="text-xl font-semibold mb-4">Dispatch Details</h2>
+            <div id="modalContent" class="space-y-2 text-gray-700 text-sm max-h-96 overflow-y-auto">
+                <!-- Details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Date Range Modal -->
+    <div id="dateRangeModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg shadow-xl p-6 w-[800px] max-w-[90vw]">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-semibold text-gray-800">Select Date Range</h3>
+                <button id="closeDateRangeModal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="grid grid-cols-2 gap-6">
+                <!-- From Date -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">From Date</label>
+                    <input type="text" id="fromDatePicker" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Select date">
+                </div>
+                <!-- To Date -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">To Date</label>
+                    <input type="text" id="toDatePicker" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Select date">
+                </div>
+            </div>
+            <div class="flex justify-end gap-2 mt-4">
+                <button id="resetDateRange" class="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded transition-colors">
+                    <i class="fas fa-undo"></i> Reset
+                </button>
+                <button id="applyDateRange" class="px-4 py-2 text-sm text-white bg-blue-500 hover:bg-blue-600 rounded transition-colors">
+                    <i class="fas fa-check"></i> Apply
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Card View -->
+    <div class="mobile-card-view hidden md:hidden max-w-sm mx-auto">
+        <!-- Mobile cards will be rendered here -->
+                                </div>
+
+    <!-- Invoice Details Modal -->
+    <div id="invoiceDetailsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg shadow-xl p-6 w-[90%] max-w-4xl max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-semibold text-gray-800">Invoice Details</h2>
+                <button id="closeInvoiceModal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="space-y-6">
+                <!-- Invoice Header -->
+                <div class="border-b pb-4">
+                    <h3 class="text-lg font-medium text-gray-900" id="invoiceNumber"></h3>
+                </div>
+
+                <!-- Three Column Layout -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Customer Information -->
+                    <div>
+                        <h4 class="text-md font-medium text-gray-700 mb-4">Customer Information</h4>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-500">Name</label>
+                                <p class="mt-1 text-sm text-gray-900" id="customerName"></p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-500">Phone</label>
+                                <p class="mt-1 text-sm text-gray-900" id="customerPhone"></p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-500">Email</label>
+                                <p class="mt-1 text-sm text-gray-900" id="customerEmail"></p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-500">Address</label>
+                                <p class="mt-1 text-sm text-gray-900 whitespace-pre-line max-w-[250px]" id="customerAddress"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Latest Invoice Information -->
+                    <div>
+                        <h4 class="text-md font-medium text-gray-700 mb-4">Latest Invoice Information</h4>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-500">Date Created</label>
+                                <p class="mt-1 text-sm text-gray-900" id="invoiceDateCreated"></p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-500">Date Sent</label>
+                                <p class="mt-1 text-sm text-gray-900" id="invoiceDateSent"></p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-500">Total Amount</label>
+                                <p class="mt-1 text-sm text-gray-900" id="invoiceTotal"></p>
+                            </div>
+                            <div>
+                                <label class="block text-sm" id="invoiceStatus"></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment History -->
+                    <div>
+                        <h4 class="text-md font-medium text-gray-700 mb-4">Payment History / Receipts</h4>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-500">Last Payment Date</label>
+                                <p class="mt-1 text-sm text-gray-900" id="lastPaymentDate"></p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-500">Last Payment Amount</label>
+                                <p class="mt-1 text-sm text-gray-900" id="lastPaymentAmount"></p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-500">Payment Method</label>
+                                <p class="mt-1 text-sm text-gray-900" id="paymentMethod"></p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-500">Remaining Balance</label>
+                                <p class="mt-1 text-sm text-gray-900" id="remainingBalance"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load JavaScript files -->
+    <script src="../js/main.js"></script>
+    <script src="../js/expenses.js"></script>
+</body>
+</html>
