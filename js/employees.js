@@ -315,3 +315,138 @@ function renderEmployeeDetails(employee) {
 // End code migrated from employee.js
 // =====================
 // ... existing code ... 
+
+// Modal animation helpers (copied from contractors.js)
+function showModal(modal) {
+    modal.classList.remove('hidden');
+    setTimeout(() => {
+        modal.querySelector('.modal-content-modern').classList.add('show');
+    }, 10);
+}
+function hideModal(modal) {
+    modal.querySelector('.modal-content-modern').classList.remove('show');
+    setTimeout(() => {
+        modal.classList.add('hidden');
+    }, 250);
+}
+let restoreEmployeeIndex = null;
+function showRestoreEmployeeModal(idx) {
+    restoreEmployeeIndex = idx;
+    const modal = document.getElementById('restoreEmployeeModal');
+    if (!modal) return;
+    showModal(modal);
+}
+function hideRestoreEmployeeModal() {
+    const modal = document.getElementById('restoreEmployeeModal');
+    if (!modal) return;
+    hideModal(modal);
+    restoreEmployeeIndex = null;
+}
+function showRestoreSelectedEmployeeModal() {
+    const modal = document.getElementById('restoreSelectedEmployeeModal');
+    if (!modal) return;
+    showModal(modal);
+}
+function hideRestoreSelectedEmployeeModal() {
+    const modal = document.getElementById('restoreSelectedEmployeeModal');
+    if (!modal) return;
+    hideModal(modal);
+}
+document.addEventListener('DOMContentLoaded', function() {
+    if (!window.location.pathname.includes('deleted-employees.html')) return;
+    // Attach restore button handlers for deleted employees (desktop & mobile)
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.restore-btn')) {
+            // Find index from table row or card
+            let idx = null;
+            // Desktop table
+            const tr = e.target.closest('tr');
+            if (tr) {
+                // Find index by row order in tbody
+                const tbody = tr.parentElement;
+                idx = Array.from(tbody.children).indexOf(tr);
+            }
+            // Mobile card
+            const card = e.target.closest('.mobile-table-row');
+            if (card) {
+                // Find index by card order in container
+                const container = card.parentElement;
+                idx = Array.from(container.children).indexOf(card);
+            }
+            if (idx !== null && idx !== -1) {
+                showRestoreEmployeeModal(idx);
+            }
+        }
+    });
+    // Restore Selected button handlers (desktop & mobile)
+    const restoreSelectedBtn = document.getElementById('restoreSelectedBtn');
+    const restoreSelectedBtnMobile = document.getElementById('restoreSelectedBtnMobile');
+    if (restoreSelectedBtn) {
+        restoreSelectedBtn.onclick = function(e) {
+            e.preventDefault();
+            showRestoreSelectedEmployeeModal();
+        };
+    }
+    if (restoreSelectedBtnMobile) {
+        restoreSelectedBtnMobile.onclick = function(e) {
+            e.preventDefault();
+            showRestoreSelectedEmployeeModal();
+        };
+    }
+    // Modal button handlers
+    const cancelRestoreBtn = document.getElementById('cancelRestoreEmployee');
+    if (cancelRestoreBtn) {
+        cancelRestoreBtn.onclick = hideRestoreEmployeeModal;
+    }
+    const confirmRestoreBtn = document.getElementById('confirmRestoreEmployee');
+    if (confirmRestoreBtn) {
+        confirmRestoreBtn.onclick = function() {
+            if (restoreEmployeeIndex !== null) {
+                // Remove employee from table (mock: just hide row)
+                // Desktop table
+                const table = document.querySelector('table');
+                if (table) {
+                    const row = table.querySelectorAll('tbody tr')[restoreEmployeeIndex];
+                    if (row) row.remove();
+                }
+                // Mobile card
+                const mobileList = document.querySelector('.p-3.space-y-2');
+                if (mobileList) {
+                    const card = mobileList.children[restoreEmployeeIndex];
+                    if (card) card.remove();
+                }
+            }
+            hideRestoreEmployeeModal();
+        };
+    }
+    const cancelRestoreSelectedBtn = document.getElementById('cancelRestoreSelectedEmployee');
+    if (cancelRestoreSelectedBtn) {
+        cancelRestoreSelectedBtn.onclick = hideRestoreSelectedEmployeeModal;
+    }
+    const confirmRestoreSelectedBtn = document.getElementById('confirmRestoreSelectedEmployee');
+    if (confirmRestoreSelectedBtn) {
+        confirmRestoreSelectedBtn.onclick = function() {
+            // Remove all checked employees (mock: just hide rows/cards)
+            // Desktop table
+            const checked = Array.from(document.querySelectorAll('.employee-checkbox:checked'));
+            const table = document.querySelector('table');
+            if (table) {
+                const tbody = table.querySelector('tbody');
+                const rows = Array.from(tbody.children);
+                checked.forEach(cb => {
+                    const tr = cb.closest('tr');
+                    if (tr) tr.remove();
+                });
+            }
+            // Mobile cards
+            const mobileList = document.querySelector('.p-3.space-y-2');
+            if (mobileList) {
+                checked.forEach(cb => {
+                    const card = cb.closest('.mobile-table-row');
+                    if (card) card.remove();
+                });
+            }
+            hideRestoreSelectedEmployeeModal();
+        };
+    }
+}); 

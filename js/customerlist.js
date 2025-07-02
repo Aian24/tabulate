@@ -485,6 +485,146 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial state
     updateRestoreButtonVisibility();
     updateSelectAllCheckbox();
+
+    // Modal animation helpers (copied from contractors.js)
+    function showModal(modal) {
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.querySelector('.modal-content-modern').classList.add('show');
+        }, 10);
+    }
+    function hideModal(modal) {
+        modal.querySelector('.modal-content-modern').classList.remove('show');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 250);
+    }
+    let restoreCustomerIndex = null;
+    function showRestoreCustomerModal(idx) {
+        restoreCustomerIndex = idx;
+        const modal = document.getElementById('restoreCustomerModal');
+        if (!modal) return;
+        showModal(modal);
+    }
+    function hideRestoreCustomerModal() {
+        const modal = document.getElementById('restoreCustomerModal');
+        if (!modal) return;
+        hideModal(modal);
+        restoreCustomerIndex = null;
+    }
+    function showRestoreSelectedCustomerModal() {
+        const modal = document.getElementById('restoreSelectedCustomerModal');
+        if (!modal) return;
+        showModal(modal);
+    }
+    function hideRestoreSelectedCustomerModal() {
+        const modal = document.getElementById('restoreSelectedCustomerModal');
+        if (!modal) return;
+        hideModal(modal);
+    }
+    if (!window.location.pathname.includes('deleted-customers.html')) return;
+    // Attach restore button handlers for deleted customers (desktop & mobile)
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.restore-btn')) {
+            // Find index from table row or card
+            let idx = null;
+            // Desktop table
+            const tr = e.target.closest('tr');
+            if (tr) {
+                // Find index by row order in tbody
+                const tbody = tr.parentElement;
+                idx = Array.from(tbody.children).indexOf(tr);
+            }
+            // Mobile card
+            const card = e.target.closest('.mobile-table-row');
+            if (card) {
+                // Find index by card order in container
+                const container = card.parentElement;
+                idx = Array.from(container.children).indexOf(card);
+            }
+            if (idx !== null && idx !== -1) {
+                showRestoreCustomerModal(idx);
+            }
+        }
+    });
+    // Restore Selected button handlers (desktop & mobile)
+    const restoreSelectedBtn = document.getElementById('restoreSelectedBtn');
+    const restoreSelectedBtnMobile = document.getElementById('restoreSelectedBtnMobile');
+    if (restoreSelectedBtn) {
+        restoreSelectedBtn.onclick = function(e) {
+            e.preventDefault();
+            showRestoreSelectedCustomerModal();
+        };
+    }
+    if (restoreSelectedBtnMobile) {
+        restoreSelectedBtnMobile.onclick = function(e) {
+            e.preventDefault();
+            showRestoreSelectedCustomerModal();
+        };
+    }
+    // Modal button handlers
+    const cancelRestoreBtn = document.getElementById('cancelRestoreCustomer');
+    if (cancelRestoreBtn) {
+        cancelRestoreBtn.onclick = hideRestoreCustomerModal;
+    }
+    const confirmRestoreBtn = document.getElementById('confirmRestoreCustomer');
+    if (confirmRestoreBtn) {
+        confirmRestoreBtn.onclick = function() {
+            if (restoreCustomerIndex !== null) {
+                // Remove customer from table (mock: just hide row)
+                // Desktop table
+                const table = document.querySelector('table');
+                if (table) {
+                    const row = table.querySelectorAll('tbody tr')[restoreCustomerIndex];
+                    if (row) row.remove();
+                }
+                // Mobile card
+                const mobileList = document.querySelector('.p-3.space-y-2');
+                if (mobileList) {
+                    const card = mobileList.children[restoreCustomerIndex];
+                    if (card) card.remove();
+                }
+            }
+            hideRestoreCustomerModal();
+        };
+    }
+    const cancelRestoreSelectedBtn = document.getElementById('cancelRestoreSelectedCustomer');
+    if (cancelRestoreSelectedBtn) {
+        cancelRestoreSelectedBtn.onclick = hideRestoreSelectedCustomerModal;
+    }
+    const confirmRestoreSelectedBtn = document.getElementById('confirmRestoreSelectedCustomer');
+    if (confirmRestoreSelectedBtn) {
+        confirmRestoreSelectedBtn.onclick = function() {
+            // Remove all checked customers (mock: just hide rows/cards)
+            // Desktop table
+            const checked = Array.from(document.querySelectorAll('.customer-checkbox:checked'));
+            const table = document.querySelector('table');
+            if (table) {
+                const tbody = table.querySelector('tbody');
+                const rows = Array.from(tbody.children);
+                checked.forEach(cb => {
+                    const tr = cb.closest('tr');
+                    if (tr) tr.remove();
+                });
+            }
+            // Mobile cards
+            const mobileList = document.querySelector('.p-3.space-y-2');
+            if (mobileList) {
+                checked.forEach(cb => {
+                    const card = cb.closest('.mobile-table-row');
+                    if (card) card.remove();
+                });
+            }
+            hideRestoreSelectedCustomerModal();
+        };
+    }
+    // Remove row click redirection for deleted-customers.html
+    if (window.location.pathname.includes('deleted-customers.html')) {
+        const customerTableRows = document.querySelectorAll('table tbody tr');
+        customerTableRows.forEach(row => {
+            row.replaceWith(row.cloneNode(true)); // Remove all event listeners
+        });
+    }
 });
 
 // =========================

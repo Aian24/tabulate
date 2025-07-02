@@ -402,6 +402,8 @@ function initializeDataTable() {
 }
 
 function initializeRowClickHandlers() {
+    // Only add click handlers for contractors.html, not deleted-contractors.html
+    if (!window.location.pathname.includes('contractors.html') || window.location.pathname.includes('deleted-contractors.html')) return;
     // Add click handlers to table rows for viewing details
     const tableRows = document.querySelectorAll('tbody tr');
     tableRows.forEach(row => {
@@ -616,7 +618,6 @@ function initializeDeletedContractorsCheckboxes() {
             if (selectedContractors.length > 0) {
                 // Placeholder for restore logic
                 console.log('Restoring contractors:', selectedContractors);
-                alert(`Restoring ${selectedContractors.length} contractor(s): ${selectedContractors.map(c => c.fullName).join(', ')}`);
             }
         });
     }
@@ -626,8 +627,7 @@ function initializeDeletedContractorsCheckboxes() {
             const row = e.target.closest('tr');
             const contractorData = getContractorDataFromRow(row);
             // Placeholder for restore logic
-            console.log('Restoring contractor:', contractorData);
-            alert(`Restoring contractor: ${contractorData.fullName}`);
+            // console.log('Restoring contractor:', contractorData);
         }
     });
 }
@@ -883,4 +883,138 @@ function renderContractorNotFound() {
             }
         }, 0);
     });
-})(); 
+})();
+
+// Modal animation helpers (copied from vendors.js)
+function showModal(modal) {
+    modal.classList.remove('hidden');
+    setTimeout(() => {
+        modal.querySelector('.modal-content-modern').classList.add('show');
+    }, 10);
+}
+function hideModal(modal) {
+    modal.querySelector('.modal-content-modern').classList.remove('show');
+    setTimeout(() => {
+        modal.classList.add('hidden');
+    }, 250);
+}
+let restoreContractorIndex = null;
+function showRestoreContractorModal(idx) {
+    restoreContractorIndex = idx;
+    const modal = document.getElementById('restoreContractorModal');
+    if (!modal) return;
+    showModal(modal);
+}
+function hideRestoreContractorModal() {
+    const modal = document.getElementById('restoreContractorModal');
+    if (!modal) return;
+    hideModal(modal);
+    restoreContractorIndex = null;
+}
+function showRestoreSelectedContractorModal() {
+    const modal = document.getElementById('restoreSelectedContractorModal');
+    if (!modal) return;
+    showModal(modal);
+}
+function hideRestoreSelectedContractorModal() {
+    const modal = document.getElementById('restoreSelectedContractorModal');
+    if (!modal) return;
+    hideModal(modal);
+}
+document.addEventListener('DOMContentLoaded', function() {
+    // Attach restore button handlers for deleted contractors (desktop & mobile)
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.restore-btn')) {
+            // Find index from table row or card
+            let idx = null;
+            // Desktop table
+            const tr = e.target.closest('tr');
+            if (tr) {
+                // Find index by row order in tbody
+                const tbody = tr.parentElement;
+                idx = Array.from(tbody.children).indexOf(tr);
+            }
+            // Mobile card
+            const card = e.target.closest('.mobile-table-row');
+            if (card) {
+                // Find index by card order in container
+                const container = card.parentElement;
+                idx = Array.from(container.children).indexOf(card);
+            }
+            if (idx !== null && idx !== -1) {
+                showRestoreContractorModal(idx);
+            }
+        }
+    });
+    // Restore Selected button handlers (desktop & mobile)
+    const restoreSelectedBtn = document.getElementById('restoreSelectedBtn');
+    const restoreSelectedBtnMobile = document.getElementById('restoreSelectedBtnMobile');
+    if (restoreSelectedBtn) {
+        restoreSelectedBtn.onclick = function(e) {
+            e.preventDefault();
+            showRestoreSelectedContractorModal();
+        };
+    }
+    if (restoreSelectedBtnMobile) {
+        restoreSelectedBtnMobile.onclick = function(e) {
+            e.preventDefault();
+            showRestoreSelectedContractorModal();
+        };
+    }
+    // Modal button handlers
+    const cancelRestoreBtn = document.getElementById('cancelRestoreContractor');
+    if (cancelRestoreBtn) {
+        cancelRestoreBtn.onclick = hideRestoreContractorModal;
+    }
+    const confirmRestoreBtn = document.getElementById('confirmRestoreContractor');
+    if (confirmRestoreBtn) {
+        confirmRestoreBtn.onclick = function() {
+            if (restoreContractorIndex !== null) {
+                // Remove contractor from table (mock: just hide row)
+                // Desktop table
+                const table = document.querySelector('table');
+                if (table) {
+                    const row = table.querySelectorAll('tbody tr')[restoreContractorIndex];
+                    if (row) row.remove();
+                }
+                // Mobile card
+                const mobileList = document.querySelector('.p-3.space-y-2');
+                if (mobileList) {
+                    const card = mobileList.children[restoreContractorIndex];
+                    if (card) card.remove();
+                }
+            }
+            hideRestoreContractorModal();
+        };
+    }
+    const cancelRestoreSelectedBtn = document.getElementById('cancelRestoreSelectedContractor');
+    if (cancelRestoreSelectedBtn) {
+        cancelRestoreSelectedBtn.onclick = hideRestoreSelectedContractorModal;
+    }
+    const confirmRestoreSelectedBtn = document.getElementById('confirmRestoreSelectedContractor');
+    if (confirmRestoreSelectedBtn) {
+        confirmRestoreSelectedBtn.onclick = function() {
+            // Remove all checked contractors (mock: just hide rows/cards)
+            // Desktop table
+            const checked = Array.from(document.querySelectorAll('.contractor-checkbox:checked'));
+            const table = document.querySelector('table');
+            if (table) {
+                const tbody = table.querySelector('tbody');
+                const rows = Array.from(tbody.children);
+                checked.forEach(cb => {
+                    const tr = cb.closest('tr');
+                    if (tr) tr.remove();
+                });
+            }
+            // Mobile cards
+            const mobileList = document.querySelector('.p-3.space-y-2');
+            if (mobileList) {
+                checked.forEach(cb => {
+                    const card = cb.closest('.mobile-table-row');
+                    if (card) card.remove();
+                });
+            }
+            hideRestoreSelectedContractorModal();
+        };
+    }
+}); 

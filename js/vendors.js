@@ -340,6 +340,8 @@ function initializeDataTable() {
 }
 
 function initializeRowClickHandlers() {
+    // Only add click handlers for vendors.html, not deleted-vendors.html
+    if (!window.location.pathname.includes('vendors.html') || window.location.pathname.includes('deleted-vendors.html')) return;
     // Add click handlers to table rows for viewing details
     const tableRows = document.querySelectorAll('tbody tr');
     tableRows.forEach(row => {
@@ -490,25 +492,6 @@ function initializeDeletedVendorsCheckboxes() {
         if (e.target.classList.contains('vendor-checkbox')) {
             updateRestoreButtonVisibility();
             updateSelectAllCheckbox();
-        }
-    });
-    if (restoreSelectedBtn) {
-        restoreSelectedBtn.addEventListener('click', function() {
-            const selectedVendors = getSelectedVendors();
-            if (selectedVendors.length > 0) {
-                // Placeholder for restore logic
-                console.log('Restoring vendors:', selectedVendors);
-                alert(`Restoring ${selectedVendors.length} vendor(s): ${selectedVendors.map(v => v.name).join(', ')}`);
-            }
-        });
-    }
-    document.addEventListener('click', function(e) {
-        if (e.target.closest('.restore-btn')) {
-            const row = e.target.closest('tr');
-            const vendorData = getVendorDataFromRow(row);
-            // Placeholder for restore logic
-            console.log('Restoring vendor:', vendorData);
-            alert(`Restoring vendor: ${vendorData.name}`);
         }
     });
 }
@@ -1156,4 +1139,145 @@ function showToast(message) {
         toast.classList.remove('opacity-100');
         toast.classList.add('opacity-0');
     }, 1800);
-} 
+}
+
+// Modal animation helpers (copied from products.js)
+function showModal(modal) {
+    modal.classList.remove('hidden');
+    setTimeout(() => {
+        modal.querySelector('.modal-content-modern').classList.add('show');
+    }, 10);
+}
+function hideModal(modal) {
+    modal.querySelector('.modal-content-modern').classList.remove('show');
+    setTimeout(() => {
+        modal.classList.add('hidden');
+    }, 250);
+}
+
+let restoreVendorIndex = null;
+
+function showRestoreVendorModal(idx) {
+    restoreVendorIndex = idx;
+    const modal = document.getElementById('restoreVendorModal');
+    if (!modal) return;
+    showModal(modal);
+}
+
+function hideRestoreVendorModal() {
+    const modal = document.getElementById('restoreVendorModal');
+    if (!modal) return;
+    hideModal(modal);
+    restoreVendorIndex = null;
+}
+
+function showRestoreSelectedVendorModal() {
+    const modal = document.getElementById('restoreSelectedVendorModal');
+    if (!modal) return;
+    showModal(modal);
+}
+
+function hideRestoreSelectedVendorModal() {
+    const modal = document.getElementById('restoreSelectedVendorModal');
+    if (!modal) return;
+    hideModal(modal);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // ... existing code ...
+    // Attach restore button handlers for deleted vendors (desktop & mobile)
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.restore-btn')) {
+            // Find index from table row or card
+            let idx = null;
+            // Desktop table
+            const tr = e.target.closest('tr');
+            if (tr) {
+                // Find index by row order in tbody
+                const tbody = tr.parentElement;
+                idx = Array.from(tbody.children).indexOf(tr);
+            }
+            // Mobile card
+            const card = e.target.closest('.mobile-table-row');
+            if (card) {
+                // Find index by card order in container
+                const container = card.parentElement;
+                idx = Array.from(container.children).indexOf(card);
+            }
+            if (idx !== null && idx !== -1) {
+                showRestoreVendorModal(idx);
+            }
+        }
+    });
+    // Restore Selected button handlers (desktop & mobile)
+    const restoreSelectedBtn = document.getElementById('restoreSelectedBtn');
+    const restoreSelectedBtnMobile = document.getElementById('restoreSelectedBtnMobile');
+    if (restoreSelectedBtn) {
+        restoreSelectedBtn.onclick = function(e) {
+            e.preventDefault();
+            showRestoreSelectedVendorModal();
+        };
+    }
+    if (restoreSelectedBtnMobile) {
+        restoreSelectedBtnMobile.onclick = function(e) {
+            e.preventDefault();
+            showRestoreSelectedVendorModal();
+        };
+    }
+    // Modal button handlers
+    const cancelRestoreBtn = document.getElementById('cancelRestoreVendor');
+    if (cancelRestoreBtn) {
+        cancelRestoreBtn.onclick = hideRestoreVendorModal;
+    }
+    const confirmRestoreBtn = document.getElementById('confirmRestoreVendor');
+    if (confirmRestoreBtn) {
+        confirmRestoreBtn.onclick = function() {
+            if (restoreVendorIndex !== null) {
+                // Remove vendor from table (mock: just hide row)
+                // Desktop table
+                const table = document.querySelector('table');
+                if (table) {
+                    const row = table.querySelectorAll('tbody tr')[restoreVendorIndex];
+                    if (row) row.remove();
+                }
+                // Mobile card
+                const mobileList = document.querySelector('.p-3.space-y-2');
+                if (mobileList) {
+                    const card = mobileList.children[restoreVendorIndex];
+                    if (card) card.remove();
+                }
+            }
+            hideRestoreVendorModal();
+        };
+    }
+    const cancelRestoreSelectedBtn = document.getElementById('cancelRestoreSelectedVendor');
+    if (cancelRestoreSelectedBtn) {
+        cancelRestoreSelectedBtn.onclick = hideRestoreSelectedVendorModal;
+    }
+    const confirmRestoreSelectedBtn = document.getElementById('confirmRestoreSelectedVendor');
+    if (confirmRestoreSelectedBtn) {
+        confirmRestoreSelectedBtn.onclick = function() {
+            // Remove all checked vendors (mock: just hide rows/cards)
+            // Desktop table
+            const checked = Array.from(document.querySelectorAll('.vendor-checkbox:checked'));
+            const table = document.querySelector('table');
+            if (table) {
+                const tbody = table.querySelector('tbody');
+                const rows = Array.from(tbody.children);
+                checked.forEach(cb => {
+                    const tr = cb.closest('tr');
+                    if (tr) tr.remove();
+                });
+            }
+            // Mobile cards
+            const mobileList = document.querySelector('.p-3.space-y-2');
+            if (mobileList) {
+                checked.forEach(cb => {
+                    const card = cb.closest('.mobile-table-row');
+                    if (card) card.remove();
+                });
+            }
+            hideRestoreSelectedVendorModal();
+        };
+    }
+}); 

@@ -355,4 +355,134 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initial state
   updateRestoreButtonVisibility();
   updateSelectAllCheckbox();
-}); 
+
+  // Attach restore button handlers for deleted equipments (desktop & mobile)
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('.restore-btn')) {
+      // Find index from table row or card
+      let idx = null;
+      // Desktop table
+      const tr = e.target.closest('tr');
+      if (tr) {
+        // Find index by row order in tbody
+        const tbody = tr.parentElement;
+        idx = Array.from(tbody.children).indexOf(tr);
+      }
+      // Mobile card
+      const card = e.target.closest('.mobile-table-row');
+      if (card) {
+        // Find index by card order in container
+        const container = card.parentElement;
+        idx = Array.from(container.children).indexOf(card);
+      }
+      if (idx !== null && idx !== -1) {
+        showRestoreEquipmentModal(idx);
+      }
+    }
+  });
+  // Restore Selected button handlers (desktop & mobile)
+  const restoreSelectedBtn = document.getElementById('restoreSelectedBtn');
+  const restoreSelectedBtnMobile = document.getElementById('restoreSelectedBtnMobile');
+  if (restoreSelectedBtn) {
+    restoreSelectedBtn.onclick = function(e) {
+      e.preventDefault();
+      showRestoreSelectedEquipmentModal();
+    };
+  }
+  if (restoreSelectedBtnMobile) {
+    restoreSelectedBtnMobile.onclick = function(e) {
+      e.preventDefault();
+      showRestoreSelectedEquipmentModal();
+    };
+  }
+  // Modal button handlers
+  const cancelRestoreBtn = document.getElementById('cancelRestoreEquipment');
+  if (cancelRestoreBtn) {
+    cancelRestoreBtn.onclick = hideRestoreEquipmentModal;
+  }
+  const confirmRestoreBtn = document.getElementById('confirmRestoreEquipment');
+  if (confirmRestoreBtn) {
+    confirmRestoreBtn.onclick = function() {
+      if (restoreEquipmentIndex !== null && equipmentData[restoreEquipmentIndex]) {
+        equipmentData.splice(restoreEquipmentIndex, 1);
+        // Re-render table and mobile cards if needed
+        // (Assume renderEquipmentTable is used for both views)
+        renderEquipmentTable();
+        // Optionally, re-render mobile cards if you have a function for that
+      }
+      hideRestoreEquipmentModal();
+      // Update restore button visibility
+      const updateRestoreButtonVisibility = window.updateRestoreButtonVisibility || (()=>{});
+      updateRestoreButtonVisibility();
+    };
+  }
+  const cancelRestoreSelectedBtn = document.getElementById('cancelRestoreSelectedEquipment');
+  if (cancelRestoreSelectedBtn) {
+    cancelRestoreSelectedBtn.onclick = hideRestoreSelectedEquipmentModal;
+  }
+  const confirmRestoreSelectedBtn = document.getElementById('confirmRestoreSelectedEquipment');
+  if (confirmRestoreSelectedBtn) {
+    confirmRestoreSelectedBtn.onclick = function() {
+      // Get all checked indexes
+      const checked = Array.from(document.querySelectorAll('.equipment-checkbox:checked'));
+      // Find indexes in table (desktop)
+      const tbody = document.querySelector('table tbody');
+      let indexes = checked.map(cb => {
+        const tr = cb.closest('tr');
+        return tr ? Array.from(tbody.children).indexOf(tr) : -1;
+      });
+      // Also check mobile cards if needed (not implemented here)
+      indexes = indexes.filter(idx => idx !== -1).sort((a, b) => b - a); // sort desc to splice safely
+      indexes.forEach(idx => {
+        if (equipmentData[idx]) equipmentData.splice(idx, 1);
+      });
+      renderEquipmentTable();
+      hideRestoreSelectedEquipmentModal();
+      // Update restore button visibility
+      const updateRestoreButtonVisibility = window.updateRestoreButtonVisibility || (()=>{});
+      updateRestoreButtonVisibility();
+    };
+  }
+});
+
+let restoreEquipmentIndex = null;
+
+function showRestoreEquipmentModal(idx) {
+  restoreEquipmentIndex = idx;
+  const modal = document.getElementById('restoreEquipmentModal');
+  if (!modal) return;
+  showModal(modal);
+}
+
+function hideRestoreEquipmentModal() {
+  const modal = document.getElementById('restoreEquipmentModal');
+  if (!modal) return;
+  hideModal(modal);
+  restoreEquipmentIndex = null;
+}
+
+function showRestoreSelectedEquipmentModal() {
+  const modal = document.getElementById('restoreSelectedEquipmentModal');
+  if (!modal) return;
+  showModal(modal);
+}
+
+function hideRestoreSelectedEquipmentModal() {
+  const modal = document.getElementById('restoreSelectedEquipmentModal');
+  if (!modal) return;
+  hideModal(modal);
+}
+
+// Modal animation helpers (copied from products.js)
+function showModal(modal) {
+  modal.classList.remove('hidden');
+  setTimeout(() => {
+    modal.querySelector('.modal-content-modern').classList.add('show');
+  }, 10);
+}
+function hideModal(modal) {
+  modal.querySelector('.modal-content-modern').classList.remove('show');
+  setTimeout(() => {
+    modal.classList.add('hidden');
+  }, 250);
+} 

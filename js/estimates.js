@@ -448,4 +448,213 @@ document.addEventListener('DOMContentLoaded', function() {
         p.textContent = term;
         termsDiv.appendChild(p);
     });
-})(); 
+})();
+
+// =============================
+// Deleted Estimates Logic
+// =============================
+if (window.location.pathname.includes('deleted-estimates.html')) {
+    // Sample deleted estimates data (based on estimates.html)
+    let deletedEstimates = [
+        { number: '#1013', customer: 'Jamie Dora', created: 'March 19, 2025', sent: 'N/A', price: '$ 7,162.40', address: 'Pabahay 2000 Muzon', category: 'No category available', status: 'Pending' },
+        { number: '#1014', customer: 'Alex Cruz', created: 'March 20, 2025', sent: 'March 21, 2025', price: '$ 2,500.00', address: 'Greenfields Subd.', category: 'Electrical', status: 'Approved' },
+        { number: '#1015', customer: 'Maria Lopez', created: 'March 22, 2025', sent: 'N/A', price: '$ 4,800.00', address: 'Sunrise Villas', category: 'Plumbing', status: 'Rejected' },
+    ];
+    let selectedEstimates = new Set();
+    let restoreIdx = null;
+
+    // Render desktop table
+    function renderDeletedEstimatesTable() {
+        const tbody = document.getElementById('deleted-estimates-table-body');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+        deletedEstimates.forEach((est, idx) => {
+            let statusColor = est.status === 'Pending' ? 'bg-yellow-100 text-yellow-800' : est.status === 'Approved' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800';
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="px-6 py-4"><input type="checkbox" class="estimate-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500" data-idx="${idx}"></td>
+                <td class="px-6 py-4 text-sm font-medium text-gray-900">${est.number}</td>
+                <td class="px-6 py-4 text-sm text-gray-900">${est.customer}</td>
+                <td class="px-6 py-4 text-sm text-gray-900">${est.created}</td>
+                <td class="px-6 py-4 text-sm text-gray-900">${est.sent}</td>
+                <td class="px-6 py-4 text-sm text-gray-900">${est.price}</td>
+                <td class="px-6 py-4 text-sm text-gray-900">${est.address}</td>
+                <td class="px-6 py-4 text-sm text-gray-900">${est.category}</td>
+                <td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusColor}">${est.status}</span></td>
+                <td class="px-6 py-4"><button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn" data-idx="${idx}"><i class="fas fa-undo-alt mr-1"></i> Restore</button></td>
+            `;
+            tbody.appendChild(tr);
+        });
+        // Attach checkbox listeners
+        tbody.querySelectorAll('.estimate-checkbox').forEach(cb => {
+            cb.addEventListener('change', function(e) {
+                const idx = parseInt(this.getAttribute('data-idx'));
+                if (this.checked) selectedEstimates.add(idx);
+                else selectedEstimates.delete(idx);
+                updateRestoreButtonVisibility();
+                updateSelectAllCheckbox();
+            });
+        });
+        // Attach restore button listeners
+        tbody.querySelectorAll('.restore-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                restoreIdx = parseInt(this.getAttribute('data-idx'));
+                showRestoreEstimateModal();
+            });
+        });
+    }
+
+    // Render mobile cards
+    function renderDeletedEstimatesMobileCards() {
+        const container = document.getElementById('deleted-estimates-mobile-cards');
+        if (!container) return;
+        container.innerHTML = '';
+        deletedEstimates.forEach((est, idx) => {
+            let statusColor = est.status === 'Pending' ? 'bg-yellow-100 text-yellow-800' : est.status === 'Approved' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800';
+            const card = document.createElement('div');
+            card.className = 'mobile-table-row bg-white rounded-lg border border-gray-100';
+            card.innerHTML = `
+                <div class="flex items-center justify-between mb-1">
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" class="estimate-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500" data-idx="${idx}">
+                        <div class="w-8 h-8 bg-gradient-to-br from-blue-400 to-green-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">${est.number.replace('#','')}</div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900 text-sm">${est.customer}</h3>
+                            <p class="text-xs text-gray-500">${est.price}</p>
+                        </div>
+                    </div>
+                    <span class="mobile-status ${statusColor} text-xs">${est.status}</span>
+                </div>
+                <div class="space-y-1 text-xs">
+                    <div><span class="text-gray-500">Estimate #:</span><span class="text-gray-900">${est.number}</span></div>
+                    <div><span class="text-gray-500">Created:</span><span class="text-gray-900">${est.created}</span></div>
+                    <div><span class="text-gray-500">Sent:</span><span class="text-gray-900">${est.sent}</span></div>
+                    <div><span class="text-gray-500">Address:</span><span class="text-gray-900">${est.address}</span></div>
+                    <div><span class="text-gray-500">Category:</span><span class="text-gray-900">${est.category}</span></div>
+                </div>
+                <div class="mt-1 flex justify-between items-center">
+                    <div><span class="text-gray-500 text-xs">Status:</span><span class="text-gray-900 text-xs">${est.status}</span></div>
+                    <button class="text-xs text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn" data-idx="${idx}"><i class="fas fa-undo-alt mr-1"></i> Restore</button>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+        // Attach checkbox listeners
+        container.querySelectorAll('.estimate-checkbox').forEach(cb => {
+            cb.addEventListener('change', function(e) {
+                const idx = parseInt(this.getAttribute('data-idx'));
+                if (this.checked) selectedEstimates.add(idx);
+                else selectedEstimates.delete(idx);
+                updateRestoreButtonVisibility();
+                updateSelectAllCheckbox();
+            });
+        });
+        // Attach restore button listeners
+        container.querySelectorAll('.restore-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                restoreIdx = parseInt(this.getAttribute('data-idx'));
+                showRestoreEstimateModal();
+            });
+        });
+    }
+
+    // Update restore selected button visibility
+    function updateRestoreButtonVisibility() {
+        const btn = document.getElementById('restoreSelectedEstimatesBtn');
+        const btnMobile = document.getElementById('restoreSelectedEstimatesBtnMobile');
+        if (btn) btn.classList.toggle('hidden', selectedEstimates.size === 0);
+        if (btnMobile) btnMobile.disabled = selectedEstimates.size === 0;
+        if (btnMobile) btnMobile.classList.toggle('opacity-50', selectedEstimates.size === 0);
+    }
+
+    // Update select all checkbox
+    function updateSelectAllCheckbox() {
+        const selectAll = document.getElementById('selectAllDeletedEstimates');
+        const checkboxes = document.querySelectorAll('.estimate-checkbox');
+        if (!selectAll) return;
+        selectAll.checked = checkboxes.length > 0 && Array.from(checkboxes).every(cb => cb.checked);
+        selectAll.indeterminate = !selectAll.checked && Array.from(checkboxes).some(cb => cb.checked);
+    }
+
+    // Select all logic
+    const selectAll = document.getElementById('selectAllDeletedEstimates');
+    if (selectAll) {
+        selectAll.addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('.estimate-checkbox');
+            checkboxes.forEach((cb, idx) => {
+                cb.checked = this.checked;
+                if (this.checked) selectedEstimates.add(idx);
+                else selectedEstimates.delete(idx);
+            });
+            updateRestoreButtonVisibility();
+            updateSelectAllCheckbox();
+        });
+    }
+
+    // Restore modals logic
+    function showRestoreEstimateModal() {
+        const modal = document.getElementById('restoreEstimateModal');
+        if (!modal) return;
+        modal.classList.remove('hidden');
+        setTimeout(() => modal.querySelector('.modal-content-modern').classList.add('show'), 10);
+    }
+    function hideRestoreEstimateModal() {
+        const modal = document.getElementById('restoreEstimateModal');
+        if (!modal) return;
+        modal.querySelector('.modal-content-modern').classList.remove('show');
+        setTimeout(() => modal.classList.add('hidden'), 300);
+    }
+    function showRestoreSelectedEstimatesModal() {
+        const modal = document.getElementById('restoreSelectedEstimatesModal');
+        if (!modal) return;
+        modal.classList.remove('hidden');
+        setTimeout(() => modal.querySelector('.modal-content-modern').classList.add('show'), 10);
+    }
+    function hideRestoreSelectedEstimatesModal() {
+        const modal = document.getElementById('restoreSelectedEstimatesModal');
+        if (!modal) return;
+        modal.querySelector('.modal-content-modern').classList.remove('show');
+        setTimeout(() => modal.classList.add('hidden'), 300);
+    }
+
+    // Restore single estimate
+    document.getElementById('cancelRestoreEstimate')?.addEventListener('click', hideRestoreEstimateModal);
+    document.getElementById('confirmRestoreEstimate')?.addEventListener('click', function() {
+        if (restoreIdx !== null) {
+            deletedEstimates.splice(restoreIdx, 1);
+            selectedEstimates.delete(restoreIdx);
+            restoreIdx = null;
+            renderDeletedEstimatesTable();
+            renderDeletedEstimatesMobileCards();
+            updateRestoreButtonVisibility();
+            updateSelectAllCheckbox();
+        }
+        hideRestoreEstimateModal();
+    });
+
+    // Restore selected estimates
+    document.getElementById('restoreSelectedEstimatesBtn')?.addEventListener('click', function() {
+        if (selectedEstimates.size > 0) showRestoreSelectedEstimatesModal();
+    });
+    document.getElementById('restoreSelectedEstimatesBtnMobile')?.addEventListener('click', function() {
+        if (selectedEstimates.size > 0) showRestoreSelectedEstimatesModal();
+    });
+    document.getElementById('cancelRestoreSelectedEstimates')?.addEventListener('click', hideRestoreSelectedEstimatesModal);
+    document.getElementById('confirmRestoreSelectedEstimates')?.addEventListener('click', function() {
+        deletedEstimates = deletedEstimates.filter((est, idx) => !selectedEstimates.has(idx));
+        selectedEstimates.clear();
+        renderDeletedEstimatesTable();
+        renderDeletedEstimatesMobileCards();
+        updateRestoreButtonVisibility();
+        updateSelectAllCheckbox();
+        hideRestoreSelectedEstimatesModal();
+    });
+
+    // Initial render
+    renderDeletedEstimatesTable();
+    renderDeletedEstimatesMobileCards();
+    updateRestoreButtonVisibility();
+    updateSelectAllCheckbox();
+} 

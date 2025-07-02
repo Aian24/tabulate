@@ -107,8 +107,94 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       if (input.name === 'businessCategory') {
-        input.parentElement.querySelector('.custom-multiselect')?.classList.toggle('hidden', !edit);
-        input.classList.toggle('hidden', edit);
+        // Remove any existing dropdown to prevent duplicates
+        input.parentElement.querySelector('.custom-multiselect')?.remove();
+        if (edit) {
+          // Create dropdown
+          const wrapper = document.createElement('div');
+          wrapper.className = 'custom-multiselect';
+          wrapper.innerHTML = `
+            <div class="relative" id="businessCategoryDropdown">
+              <button type="button" id="dropdownButton" class="w-full border border-blue-300 rounded-lg px-4 py-2 focus:ring-blue-500 focus:border-blue-500 text-sm font-medium text-gray-800 text-left flex items-center justify-between">
+                <span id="dropdownSelected">Select options...</span>
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+              </button>
+              <div id="dropdownMenu" class="absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg hidden max-h-60 overflow-y-auto grid grid-cols-1 md:grid-cols-2">
+                <div class="px-3 py-2 hover:bg-gray-100 flex items-center gap-2">
+                  <input type="checkbox" id="selectAllCategories" class="w-5 h-5 rounded border-gray-300">
+                  <label for="selectAllCategories" class="text-sm font-medium text-gray-800 select-none">Select All</label>
+                </div>
+                <div class="px-3 py-2 hover:bg-gray-100 flex items-center gap-2">
+                  <input type="checkbox" class="categoryOption w-5 h-5 rounded border-gray-300" value="Construction Services" id="cat-construction">
+                  <label for="cat-construction" class="text-sm font-medium text-gray-800 select-none">Construction Services</label>
+                </div>
+                <div class="px-3 py-2 hover:bg-gray-100 flex items-center gap-2">
+                  <input type="checkbox" class="categoryOption w-5 h-5 rounded border-gray-300" value="Plumbing Services" id="cat-plumbing">
+                  <label for="cat-plumbing" class="text-sm font-medium text-gray-800 select-none">Plumbing Services</label>
+                </div>
+                <div class="px-3 py-2 hover:bg-gray-100 flex items-center gap-2">
+                  <input type="checkbox" class="categoryOption w-5 h-5 rounded border-gray-300" value="Landscaping & Maintenance" id="cat-landscaping">
+                  <label for="cat-landscaping" class="text-sm font-medium text-gray-800 select-none">Landscaping & Maintenance</label>
+                </div>
+                <div class="px-3 py-2 hover:bg-gray-100 flex items-center gap-2">
+                  <input type="checkbox" class="categoryOption w-5 h-5 rounded border-gray-300" value="Maintenance Services" id="cat-maintenance">
+                  <label for="cat-maintenance" class="text-sm font-medium text-gray-800 select-none">Maintenance Services</label>
+                </div>
+                <div class="px-3 py-2 hover:bg-gray-100 flex items-center gap-2">
+                  <input type="checkbox" class="categoryOption w-5 h-5 rounded border-gray-300" value="Electrical Services" id="cat-electrical">
+                  <label for="cat-electrical" class="text-sm font-medium text-gray-800 select-none">Electrical Services</label>
+                </div>
+              </div>
+            </div>
+          `;
+          input.parentElement.appendChild(wrapper);
+          input.classList.add('hidden');
+
+          // Initialize dropdown logic
+          const dropdownButton = wrapper.querySelector('#dropdownButton');
+          const dropdownMenu = wrapper.querySelector('#dropdownMenu');
+          const dropdownSelected = wrapper.querySelector('#dropdownSelected');
+          const categoryOptions = wrapper.querySelectorAll('.categoryOption');
+          const selectAll = wrapper.querySelector('#selectAllCategories');
+
+          // Set checked state from input value
+          const selectedValues = input.value.split(',').map(v => v.trim());
+          categoryOptions.forEach(opt => {
+            if (selectedValues.includes(opt.value)) opt.checked = true;
+          });
+          // Set select all if all are checked
+          if (Array.from(categoryOptions).every(opt => opt.checked)) selectAll.checked = true;
+
+          function updateSelected() {
+            const selected = Array.from(categoryOptions).filter(opt => opt.checked).map(opt => opt.value);
+            dropdownSelected.textContent = selected.length ? selected.join(', ') : 'Select options...';
+            // Update the hidden input value
+            input.value = selected.join(', ');
+          }
+
+          dropdownButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle('hidden');
+          });
+          document.addEventListener('click', () => {
+            dropdownMenu.classList.add('hidden');
+          });
+          dropdownMenu.addEventListener('click', e => e.stopPropagation());
+
+          selectAll.addEventListener('change', function() {
+            categoryOptions.forEach(opt => { opt.checked = this.checked; });
+            updateSelected();
+          });
+          categoryOptions.forEach(opt => {
+            opt.addEventListener('change', function() {
+              selectAll.checked = Array.from(categoryOptions).every(opt => opt.checked);
+              updateSelected();
+            });
+          });
+          updateSelected();
+        } else {
+          input.classList.remove('hidden');
+        }
       } else {
         input.readOnly = !edit;
         input.classList.toggle('bg-gray-100', !edit);
@@ -202,7 +288,31 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.onclick = function(e) {
           e.preventDefault();
           const row = btn.closest('tr');
-          if (row) row.remove();
+          // Show confirmation modal
+          const deleteVendorModal = document.getElementById('deleteVendorModal');
+          if (!deleteVendorModal) { row.remove(); return; } // fallback
+          showModal(deleteVendorModal);
+          // Remove any previous listeners
+          const confirmBtn = document.getElementById('confirmDeleteVendor');
+          const cancelBtn = document.getElementById('cancelDeleteVendor');
+          // Remove old listeners by cloning
+          const newConfirm = confirmBtn.cloneNode(true);
+          const newCancel = cancelBtn.cloneNode(true);
+          confirmBtn.parentNode.replaceChild(newConfirm, confirmBtn);
+          cancelBtn.parentNode.replaceChild(newCancel, cancelBtn);
+          // Confirm delete
+          newConfirm.onclick = function() {
+            row.remove();
+            hideModal(deleteVendorModal);
+          };
+          // Cancel delete
+          newCancel.onclick = function() {
+            hideModal(deleteVendorModal);
+          };
+          // Hide modal if background is clicked
+          deleteVendorModal.onclick = function(event) {
+            if (event.target === deleteVendorModal) hideModal(deleteVendorModal);
+          };
         };
       });
     } else {
@@ -244,82 +354,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
   editBtn.addEventListener('click', () => renderEditMode(true));
-
-  // --- Custom Multiselect for Business Category ---
-  // Only render in edit mode
-  // This logic is based on the dropdown in create-service.html
-  const bcInput = document.querySelector('input[name="businessCategory"]');
-  if (bcInput) {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'custom-multiselect hidden';
-    wrapper.innerHTML = `
-      <div class="relative" id="businessCategoryDropdown">
-        <button type="button" id="dropdownButton" class="w-full border border-blue-300 rounded-lg px-4 py-2 focus:ring-blue-500 focus:border-blue-500 text-sm font-medium text-gray-800 text-left flex items-center justify-between">
-          <span id="dropdownSelected">Select options...</span>
-          <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-        </button>
-        <div id="dropdownMenu" class="absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg hidden max-h-60 overflow-y-auto grid grid-cols-1 md:grid-cols-2">
-          <div class="px-3 py-2 hover:bg-gray-100 flex items-center gap-2">
-            <input type="checkbox" id="selectAllCategories" class="w-5 h-5 rounded border-gray-300">
-            <label for="selectAllCategories" class="text-sm font-medium text-gray-800 select-none">Select All</label>
-          </div>
-          <div class="px-3 py-2 hover:bg-gray-100 flex items-center gap-2">
-            <input type="checkbox" class="categoryOption w-5 h-5 rounded border-gray-300" value="Construction Services" id="cat-construction">
-            <label for="cat-construction" class="text-sm font-medium text-gray-800 select-none">Construction Services</label>
-          </div>
-          <div class="px-3 py-2 hover:bg-gray-100 flex items-center gap-2">
-            <input type="checkbox" class="categoryOption w-5 h-5 rounded border-gray-300" value="Plumbing Services" id="cat-plumbing">
-            <label for="cat-plumbing" class="text-sm font-medium text-gray-800 select-none">Plumbing Services</label>
-          </div>
-          <div class="px-3 py-2 hover:bg-gray-100 flex items-center gap-2">
-            <input type="checkbox" class="categoryOption w-5 h-5 rounded border-gray-300" value="Landscaping & Maintenance" id="cat-landscaping">
-            <label for="cat-landscaping" class="text-sm font-medium text-gray-800 select-none">Landscaping & Maintenance</label>
-          </div>
-          <div class="px-3 py-2 hover:bg-gray-100 flex items-center gap-2">
-            <input type="checkbox" class="categoryOption w-5 h-5 rounded border-gray-300" value="Maintenance Services" id="cat-maintenance">
-            <label for="cat-maintenance" class="text-sm font-medium text-gray-800 select-none">Maintenance Services</label>
-          </div>
-          <div class="px-3 py-2 hover:bg-gray-100 flex items-center gap-2">
-            <input type="checkbox" class="categoryOption w-5 h-5 rounded border-gray-300" value="Electrical Services" id="cat-electrical">
-            <label for="cat-electrical" class="text-sm font-medium text-gray-800 select-none">Electrical Services</label>
-          </div>
-        </div>
-      </div>
-    `;
-    bcInput.parentElement.appendChild(wrapper);
-  }
-  // Multiselect dropdown logic
-  let dropdownButton = document.getElementById('dropdownButton');
-  let dropdownMenu = document.getElementById('dropdownMenu');
-  let dropdownSelected = document.getElementById('dropdownSelected');
-  let categoryOptions = document.querySelectorAll('.categoryOption');
-  let selectAll = document.getElementById('selectAllCategories');
-  if(dropdownButton && dropdownMenu) {
-    dropdownButton.addEventListener('click', (e) => {
-      e.stopPropagation();
-      dropdownMenu.classList.toggle('hidden');
-    });
-    document.addEventListener('click', () => {
-      dropdownMenu.classList.add('hidden');
-    });
-    dropdownMenu.addEventListener('click', e => e.stopPropagation());
-  }
-  if(selectAll && categoryOptions.length) {
-    selectAll.addEventListener('change', function() {
-      categoryOptions.forEach(opt => { opt.checked = this.checked; });
-      updateSelected();
-    });
-    categoryOptions.forEach(opt => {
-      opt.addEventListener('change', function() {
-        selectAll.checked = Array.from(categoryOptions).every(opt => opt.checked);
-        updateSelected();
-      });
-    });
-  }
-  function updateSelected() {
-    const selected = Array.from(categoryOptions).filter(opt => opt.checked).map(opt => opt.value);
-    dropdownSelected.textContent = selected.length ? selected.join(', ') : 'Select options...';
-  }
 });
 
 // =========================
@@ -387,17 +421,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const addVendorBtnContainer = document.getElementById('addVendorBtnContainer');
   const vendorsTable = document.querySelector('table');
   if (addVendorBtnContainer && vendorsTable) {
-    // Add Vendors button
-    if (!document.getElementById('addVendorBtn')) {
-      const addBtn = document.createElement('button');
-      addBtn.id = 'addVendorBtn';
-      addBtn.className = 'px-4 py-2 bg-cyan-500 text-white rounded shadow hover:bg-cyan-600 flex items-center gap-2 text-sm';
-      addBtn.innerHTML = '<i class="fas fa-plus"></i> Add Vendors';
-      addBtn.onclick = function() {
-        addVendorRow();
-      };
-      addVendorBtnContainer.appendChild(addBtn);
-    }
     // Always show at least one vendor row on load
     if (vendorsTable.querySelectorAll('tbody tr').length === 0) {
       addVendorRow();
@@ -422,10 +445,29 @@ document.addEventListener('DOMContentLoaded', function() {
       </td>
     `;
     vendorsTable.querySelector('tbody').appendChild(newRow);
-    // Attach delete event
+    // Attach delete event with modal
     newRow.querySelector('.delete-vendor').onclick = function(e) {
       e.preventDefault();
-      newRow.remove();
+      const deleteVendorModal = document.getElementById('deleteVendorModal');
+      if (!deleteVendorModal) { newRow.remove(); return; }
+      showModal(deleteVendorModal);
+      // Remove any previous listeners
+      const confirmBtn = document.getElementById('confirmDeleteVendor');
+      const cancelBtn = document.getElementById('cancelDeleteVendor');
+      const newConfirm = confirmBtn.cloneNode(true);
+      const newCancel = cancelBtn.cloneNode(true);
+      confirmBtn.parentNode.replaceChild(newConfirm, confirmBtn);
+      cancelBtn.parentNode.replaceChild(newCancel, cancelBtn);
+      newConfirm.onclick = function() {
+        newRow.remove();
+        hideModal(deleteVendorModal);
+      };
+      newCancel.onclick = function() {
+        hideModal(deleteVendorModal);
+      };
+      deleteVendorModal.onclick = function(event) {
+        if (event.target === deleteVendorModal) hideModal(deleteVendorModal);
+      };
     };
   }
 
@@ -433,7 +475,624 @@ document.addEventListener('DOMContentLoaded', function() {
   vendorsTable.querySelectorAll('.delete-vendor').forEach(btn => {
     btn.onclick = function(e) {
       e.preventDefault();
-      btn.closest('tr').remove();
+      const row = btn.closest('tr');
+      const deleteVendorModal = document.getElementById('deleteVendorModal');
+      if (!deleteVendorModal) { row.remove(); return; }
+      showModal(deleteVendorModal);
+      // Remove any previous listeners
+      const confirmBtn = document.getElementById('confirmDeleteVendor');
+      const cancelBtn = document.getElementById('cancelDeleteVendor');
+      const newConfirm = confirmBtn.cloneNode(true);
+      const newCancel = cancelBtn.cloneNode(true);
+      confirmBtn.parentNode.replaceChild(newConfirm, confirmBtn);
+      cancelBtn.parentNode.replaceChild(newCancel, cancelBtn);
+      newConfirm.onclick = function() {
+        row.remove();
+        hideModal(deleteVendorModal);
+      };
+      newCancel.onclick = function() {
+        hideModal(deleteVendorModal);
+      };
+      deleteVendorModal.onclick = function(event) {
+        if (event.target === deleteVendorModal) hideModal(deleteVendorModal);
+      };
     };
   });
-}); 
+});
+
+// Add this helper for modal animation (like po.js)
+function showModal(modal) {
+  modal.classList.remove('hidden');
+  setTimeout(() => {
+    modal.querySelector('.modal-content-modern').classList.add('show');
+  }, 10);
+}
+function hideModal(modal) {
+  modal.querySelector('.modal-content-modern').classList.remove('show');
+  setTimeout(() => {
+    modal.classList.add('hidden');
+  }, 250);
+}
+
+// =========================
+// Deleted Products Page Logic
+// =========================
+
+// Sample deleted products data
+const deletedProducts = [
+  {
+    name: 'Paint Brush Set',
+    vendors: 'LIXIL',
+    price: '$ 350.00',
+    deletedDate: 'April 1, 2025',
+  },
+  {
+    name: 'Wheelbarrows',
+    vendors: 'Ryobi',
+    price: '$ 3,200.00',
+    deletedDate: 'April 2, 2025',
+  },
+  {
+    name: 'Bricks',
+    vendors: 'Ace Hardware',
+    price: '$ 20.00',
+    deletedDate: 'April 3, 2025',
+  },
+  {
+    name: 'Gloves (Rubber-coated)',
+    vendors: 'LIXIL',
+    price: '$ 150.00',
+    deletedDate: 'April 4, 2025',
+  },
+];
+
+function renderDeletedProductsTable() {
+  const tbody = document.getElementById('deleted-products-table-body');
+  if (!tbody) return;
+  tbody.innerHTML = '';
+  deletedProducts.forEach((product, idx) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="px-6 py-4"><input type="checkbox" class="deleted-product-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500" data-idx="${idx}" onclick="event.stopPropagation()"></td>
+      <td class="px-6 py-4 text-sm font-medium text-gray-900">${product.name}</td>
+      <td class="px-6 py-4 text-sm text-gray-900">${product.vendors}</td>
+      <td class="px-6 py-4 text-sm text-gray-900">${product.price}</td>
+      <td class="px-6 py-4 text-sm text-gray-900">${product.deletedDate}</td>
+      <td class="px-6 py-4">
+        <button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn"><i class="fas fa-undo-alt mr-1"></i> Restore</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function renderDeletedProductsMobileCards() {
+  const container = document.getElementById('mobile-deleted-products-list');
+  if (!container) return;
+  container.innerHTML = '';
+  deletedProducts.forEach((product, idx) => {
+    const card = document.createElement('div');
+    card.className = 'mobile-table-row bg-white rounded-lg border border-gray-100';
+    card.innerHTML = `
+      <div class="flex items-center justify-between mb-1">
+        <div class="flex items-center gap-3">
+          <input type="checkbox" class="deleted-product-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500" data-idx="${idx}">
+          <div class="w-8 h-8 bg-gradient-to-br from-blue-400 to-green-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">${product.name.slice(0,2).toUpperCase()}</div>
+          <div>
+            <h3 class="font-semibold text-gray-900 text-sm">${product.name}</h3>
+            <p class="text-xs text-gray-500">Vendor: ${product.vendors}</p>
+          </div>
+        </div>
+        <span class="mobile-status bg-red-100 text-red-800 text-xs">Deleted</span>
+      </div>
+      <div class="space-y-1 text-xs">
+        <div><span class="text-gray-500">Price:</span><span class="text-gray-900">${product.price}</span></div>
+        <div><span class="text-gray-500">Deleted Date:</span><span class="text-gray-900">${product.deletedDate}</span></div>
+      </div>
+      <div class="mt-1 flex justify-between items-center">
+        <button class="text-xs text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn"><i class="fas fa-undo-alt mr-1"></i> Restore</button>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function updateRestoreButtonVisibilityProducts() {
+  const restoreSelectedBtn = document.getElementById('restoreSelectedBtn');
+  const restoreSelectedBtnMobile = document.getElementById('restoreSelectedBtnMobile');
+  const checkedBoxes = document.querySelectorAll('.deleted-product-checkbox:checked');
+  if (restoreSelectedBtn) {
+    restoreSelectedBtn.classList.toggle('hidden', checkedBoxes.length === 0);
+  }
+  if (restoreSelectedBtnMobile) {
+    restoreSelectedBtnMobile.classList.toggle('hidden', checkedBoxes.length === 0);
+  }
+}
+
+function updateSelectAllCheckboxProducts() {
+  const selectAllCheckbox = document.getElementById('selectAllDeleted');
+  const checkboxes = document.querySelectorAll('.deleted-product-checkbox');
+  const checkedBoxes = document.querySelectorAll('.deleted-product-checkbox:checked');
+  if (selectAllCheckbox) {
+    selectAllCheckbox.checked = checkboxes.length === checkedBoxes.length && checkboxes.length > 0;
+    selectAllCheckbox.indeterminate = checkedBoxes.length > 0 && checkedBoxes.length < checkboxes.length;
+  }
+}
+
+let restoreProductIndex = null;
+
+function showRestoreProductModal(idx) {
+  restoreProductIndex = idx;
+  const modal = document.getElementById('restoreProductModal');
+  if (!modal) return;
+  showModal(modal);
+}
+
+function hideRestoreProductModal() {
+  const modal = document.getElementById('restoreProductModal');
+  if (!modal) return;
+  hideModal(modal);
+  restoreProductIndex = null;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // ... existing code ...
+  // Render deleted products table and mobile cards if on deleted-products.html
+  if (document.getElementById('deleted-products-table-body')) {
+    renderDeletedProductsTable();
+  }
+  if (document.getElementById('mobile-deleted-products-list')) {
+    renderDeletedProductsMobileCards();
+  }
+  // Select all checkbox
+  const selectAllCheckbox = document.getElementById('selectAllDeleted');
+  if (selectAllCheckbox) {
+    selectAllCheckbox.addEventListener('change', function() {
+      const checkboxes = document.querySelectorAll('.deleted-product-checkbox');
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = this.checked;
+      });
+      updateRestoreButtonVisibilityProducts();
+      updateSelectAllCheckboxProducts();
+    });
+  }
+  // Individual checkbox handlers
+  document.addEventListener('change', function(e) {
+    if (e.target.classList.contains('deleted-product-checkbox')) {
+      updateRestoreButtonVisibilityProducts();
+      updateSelectAllCheckboxProducts();
+    }
+  });
+  // Initial state
+  updateRestoreButtonVisibilityProducts();
+  updateSelectAllCheckboxProducts();
+  // Attach restore button handlers for deleted products (desktop)
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('.restore-btn')) {
+      // Find index from table row or card
+      let idx = null;
+      // Desktop table
+      const tr = e.target.closest('tr');
+      if (tr && tr.querySelector('.deleted-product-checkbox')) {
+        idx = tr.querySelector('.deleted-product-checkbox').getAttribute('data-idx');
+      }
+      // Mobile card
+      const card = e.target.closest('.mobile-table-row');
+      if (card && card.querySelector('.deleted-product-checkbox')) {
+        idx = card.querySelector('.deleted-product-checkbox').getAttribute('data-idx');
+      }
+      if (idx !== null) {
+        showRestoreProductModal(Number(idx));
+      }
+    }
+  });
+  // Modal button handlers
+  const cancelRestoreBtn = document.getElementById('cancelRestoreProduct');
+  if (cancelRestoreBtn) {
+    cancelRestoreBtn.onclick = hideRestoreProductModal;
+  }
+  const confirmRestoreBtn = document.getElementById('confirmRestoreProduct');
+  if (confirmRestoreBtn) {
+    confirmRestoreBtn.onclick = function() {
+      if (restoreProductIndex !== null && deletedProducts[restoreProductIndex]) {
+        deletedProducts.splice(restoreProductIndex, 1);
+        renderDeletedProductsTable();
+        renderDeletedProductsMobileCards();
+        updateRestoreButtonVisibilityProducts();
+        updateSelectAllCheckboxProducts();
+      }
+      hideRestoreProductModal();
+    };
+  }
+});
+
+function showRestoreSelectedProductModal() {
+  const modal = document.getElementById('restoreSelectedProductModal');
+  if (!modal) return;
+  showModal(modal);
+}
+
+function hideRestoreSelectedProductModal() {
+  const modal = document.getElementById('restoreSelectedProductModal');
+  if (!modal) return;
+  hideModal(modal);
+}
+
+// =========================
+// Deleted Services Example Data & Logic
+// =========================
+const deletedServices = [
+  {
+    name: 'Weed Control',
+    unitPrice: '$708.40',
+    priceMatrix: 'No Price Matrix',
+    priceMatrixStatus: 'danger', // 'danger' or 'success'
+    status: 'Active',
+    dateCreated: 'June 3, 2025'
+  },
+  {
+    name: 'Lawn Mowing',
+    unitPrice: '$78.40',
+    priceMatrix: 'Price Matrix Available',
+    priceMatrixStatus: 'success',
+    status: 'Active',
+    dateCreated: 'March 13, 2025'
+  },
+  {
+    name: 'Roofing Installation',
+    unitPrice: '$6,230.00',
+    priceMatrix: 'No Price Matrix',
+    priceMatrixStatus: 'danger',
+    status: 'Active',
+    dateCreated: 'March 13, 2025'
+  },
+  {
+    name: 'Office Cleaning Service',
+    unitPrice: '$5,712.00',
+    priceMatrix: 'No Price Matrix',
+    priceMatrixStatus: 'danger',
+    status: 'Active',
+    dateCreated: 'March 13, 2025'
+  }
+];
+
+function renderDeletedServicesTable() {
+  const tbody = document.getElementById('deleted-services-table-body');
+  if (!tbody) return;
+  tbody.innerHTML = '';
+  deletedServices.forEach((service, idx) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="px-6 py-4"><input type="checkbox" class="deleted-service-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500" data-idx="${idx}" onclick="event.stopPropagation()"></td>
+      <td class="px-6 py-4 text-sm font-medium text-gray-900">${service.name}</td>
+      <td class="px-6 py-4 text-sm text-gray-900">${service.unitPrice}</td>
+      <td class="px-6 py-4 text-sm">
+        <span class="${service.priceMatrixStatus === 'danger' ? 'text-red-500' : 'text-sky-500'}">
+          <i class="fas ${service.priceMatrixStatus === 'danger' ? 'fa-exclamation-circle' : 'fa-check-circle'} mr-1"></i>${service.priceMatrix}
+        </span>
+      </td>
+      <td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">${service.status}</span></td>
+      <td class="px-6 py-4 text-sm text-gray-900">${service.dateCreated}</td>
+      <td class="px-6 py-4">
+        <button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn"><i class="fas fa-undo-alt mr-1"></i> Restore</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+  updateSelectAllCheckboxServices();
+}
+
+function renderDeletedServicesMobileCards() {
+  const container = document.getElementById('mobile-deleted-services-list');
+  if (!container) return;
+  container.innerHTML = '';
+  deletedServices.forEach((service, idx) => {
+    const card = document.createElement('div');
+    card.className = 'mobile-table-row bg-white rounded-lg border border-gray-100';
+    card.innerHTML = `
+      <div class="flex items-center justify-between mb-1">
+        <div class="flex items-center gap-3">
+          <input type="checkbox" class="deleted-service-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500" data-idx="${idx}">
+          <div class="w-8 h-8 bg-gradient-to-br from-blue-400 to-green-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">${service.name.slice(0,2).toUpperCase()}</div>
+          <div>
+            <h3 class="font-semibold text-gray-900 text-sm">${service.name}</h3>
+            <p class="text-xs text-gray-500">${service.unitPrice}</p>
+          </div>
+        </div>
+        <span class="mobile-status bg-blue-100 text-blue-800 text-xs">${service.status}</span>
+      </div>
+      <div class="space-y-1 text-xs">
+        <div><span class="text-gray-500">Price Matrix:</span><span class="${service.priceMatrixStatus === 'danger' ? 'text-red-500' : 'text-sky-500'} ml-1">${service.priceMatrix}</span></div>
+        <div><span class="text-gray-500">Date Created:</span><span class="text-gray-900 ml-1">${service.dateCreated}</span></div>
+      </div>
+      <div class="mt-1 flex justify-between items-center">
+        <button class="text-xs text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn"><i class="fas fa-undo-alt mr-1"></i> Restore</button>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+  updateSelectAllCheckboxServices();
+}
+
+function updateRestoreButtonVisibilityServices() {
+  const restoreSelectedBtn = document.getElementById('restoreSelectedBtn');
+  const restoreSelectedBtnMobile = document.getElementById('restoreSelectedBtnMobile');
+  const checkedBoxes = document.querySelectorAll('.deleted-service-checkbox:checked');
+  if (restoreSelectedBtn) {
+    restoreSelectedBtn.classList.toggle('hidden', checkedBoxes.length === 0);
+  }
+  if (restoreSelectedBtnMobile) {
+    restoreSelectedBtnMobile.classList.toggle('hidden', checkedBoxes.length === 0);
+  }
+}
+
+function updateSelectAllCheckboxServices() {
+  const selectAllCheckbox = document.getElementById('selectAllDeleted');
+  const checkboxes = document.querySelectorAll('.deleted-service-checkbox');
+  const checkedBoxes = document.querySelectorAll('.deleted-service-checkbox:checked');
+  if (selectAllCheckbox && document.getElementById('deleted-services-table-body')) {
+    // Remove any previous event listeners by replacing the node
+    const cloned = selectAllCheckbox.cloneNode(true);
+    selectAllCheckbox.parentNode.replaceChild(cloned, selectAllCheckbox);
+    const newSelectAllCheckbox = document.getElementById('selectAllDeleted');
+    newSelectAllCheckbox.addEventListener('change', function() {
+      console.log('Select all clicked');
+      const checkboxes = document.querySelectorAll('.deleted-service-checkbox');
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = this.checked;
+        checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+      console.log('Checked:', document.querySelectorAll('.deleted-service-checkbox:checked').length);
+    });
+  }
+}
+
+let restoreServiceIndex = null;
+
+function showRestoreServiceModal(idx) {
+  restoreServiceIndex = idx;
+  const modal = document.getElementById('restoreServiceModal');
+  if (!modal) return;
+  showModal(modal);
+}
+
+function hideRestoreServiceModal() {
+  const modal = document.getElementById('restoreServiceModal');
+  if (!modal) return;
+  hideModal(modal);
+  restoreServiceIndex = null;
+}
+
+function showRestoreSelectedServiceModal() {
+  const modal = document.getElementById('restoreSelectedServiceModal');
+  if (!modal) return;
+  showModal(modal);
+}
+
+function hideRestoreSelectedServiceModal() {
+  const modal = document.getElementById('restoreSelectedServiceModal');
+  if (!modal) return;
+  hideModal(modal);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Render deleted services table and mobile cards if on deleted-services.html
+  if (document.getElementById('deleted-services-table-body')) {
+    renderDeletedServicesTable();
+  }
+  if (document.getElementById('mobile-deleted-services-list')) {
+    renderDeletedServicesMobileCards();
+  }
+  // Select all checkbox
+  const selectAllCheckbox = document.getElementById('selectAllDeleted');
+  if (selectAllCheckbox && document.getElementById('deleted-services-table-body')) {
+    selectAllCheckbox.addEventListener('change', function() {
+      const checkboxes = document.querySelectorAll('.deleted-service-checkbox');
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = this.checked;
+        checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+    });
+  }
+  // Individual checkbox handlers
+  document.addEventListener('change', function(e) {
+    if (e.target.classList.contains('deleted-service-checkbox')) {
+      updateRestoreButtonVisibilityServices();
+      updateSelectAllCheckboxServices();
+    }
+  });
+  // Initial state
+  updateRestoreButtonVisibilityServices();
+  updateSelectAllCheckboxServices();
+  // Attach restore button handlers for deleted services (desktop & mobile)
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('.restore-btn') && (document.getElementById('deleted-services-table-body') || document.getElementById('mobile-deleted-services-list'))) {
+      // Find index from table row or card
+      let idx = null;
+      // Desktop table
+      const tr = e.target.closest('tr');
+      if (tr && tr.querySelector('.deleted-service-checkbox')) {
+        idx = tr.querySelector('.deleted-service-checkbox').getAttribute('data-idx');
+      }
+      // Mobile card
+      const card = e.target.closest('.mobile-table-row');
+      if (card && card.querySelector('.deleted-service-checkbox')) {
+        idx = card.querySelector('.deleted-service-checkbox').getAttribute('data-idx');
+      }
+      if (idx !== null) {
+        showRestoreServiceModal(Number(idx));
+      }
+    }
+  });
+  // Modal button handlers
+  const cancelRestoreBtn = document.getElementById('cancelRestoreService');
+  if (cancelRestoreBtn) {
+    cancelRestoreBtn.onclick = hideRestoreServiceModal;
+  }
+  const confirmRestoreBtn = document.getElementById('confirmRestoreService');
+  if (confirmRestoreBtn) {
+    confirmRestoreBtn.onclick = function() {
+      if (restoreServiceIndex !== null && deletedServices[restoreServiceIndex]) {
+        deletedServices.splice(restoreServiceIndex, 1);
+        renderDeletedServicesTable();
+        renderDeletedServicesMobileCards();
+        updateRestoreButtonVisibilityServices();
+        updateSelectAllCheckboxServices();
+      }
+      hideRestoreServiceModal();
+    };
+  }
+  // Restore Selected button handlers (desktop & mobile)
+  const restoreSelectedBtn = document.getElementById('restoreSelectedBtn');
+  const restoreSelectedBtnMobile = document.getElementById('restoreSelectedBtnMobile');
+  if (restoreSelectedBtn) {
+    restoreSelectedBtn.onclick = function(e) {
+      e.preventDefault();
+      showRestoreSelectedServiceModal();
+    };
+  }
+  if (restoreSelectedBtnMobile) {
+    restoreSelectedBtnMobile.onclick = function(e) {
+      e.preventDefault();
+      showRestoreSelectedServiceModal();
+    };
+  }
+  // Modal button handlers for restore selected
+  const cancelRestoreSelectedBtn = document.getElementById('cancelRestoreSelectedService');
+  if (cancelRestoreSelectedBtn) {
+    cancelRestoreSelectedBtn.onclick = hideRestoreSelectedServiceModal;
+  }
+  const confirmRestoreSelectedBtn = document.getElementById('confirmRestoreSelectedService');
+  if (confirmRestoreSelectedBtn) {
+    confirmRestoreSelectedBtn.onclick = function() {
+      // Get all checked indexes
+      const checked = Array.from(document.querySelectorAll('.deleted-service-checkbox:checked'));
+      const indexes = checked.map(cb => Number(cb.getAttribute('data-idx'))).sort((a, b) => b - a); // sort desc to splice safely
+      indexes.forEach(idx => {
+        if (deletedServices[idx]) deletedServices.splice(idx, 1);
+      });
+      renderDeletedServicesTable();
+      renderDeletedServicesMobileCards();
+      updateRestoreButtonVisibilityServices();
+      updateSelectAllCheckboxServices();
+      hideRestoreSelectedServiceModal();
+    };
+  }
+});
+
+// =========================
+// Restore Selected Products Logic (for deleted-products.html)
+// =========================
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Only run on deleted-products.html
+  const isDeletedProductsPage = document.getElementById('deleted-products-table-body') || document.getElementById('mobile-deleted-products-list');
+  if (!isDeletedProductsPage) return;
+
+  // Render deleted products table and mobile cards
+  if (document.getElementById('deleted-products-table-body')) {
+    renderDeletedProductsTable();
+  }
+  if (document.getElementById('mobile-deleted-products-list')) {
+    renderDeletedProductsMobileCards();
+  }
+
+  // Select all checkbox logic
+  const selectAllCheckbox = document.getElementById('selectAllDeleted');
+  if (selectAllCheckbox) {
+    selectAllCheckbox.addEventListener('change', function() {
+      const checkboxes = document.querySelectorAll('.deleted-product-checkbox');
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = this.checked;
+      });
+      updateRestoreButtonVisibilityProducts();
+      updateSelectAllCheckboxProducts();
+    });
+  }
+
+  // Individual checkbox handlers
+  document.addEventListener('change', function(e) {
+    if (e.target.classList.contains('deleted-product-checkbox')) {
+      updateRestoreButtonVisibilityProducts();
+      updateSelectAllCheckboxProducts();
+    }
+  });
+
+  // Initial state
+  updateRestoreButtonVisibilityProducts();
+  updateSelectAllCheckboxProducts();
+
+  // Restore Selected button handlers (desktop & mobile)
+  const restoreSelectedBtn = document.getElementById('restoreSelectedBtn');
+  const restoreSelectedBtnMobile = document.getElementById('restoreSelectedBtnMobile');
+  if (restoreSelectedBtn) {
+    restoreSelectedBtn.onclick = function(e) {
+      e.preventDefault();
+      showRestoreSelectedProductModal();
+    };
+  }
+  if (restoreSelectedBtnMobile) {
+    restoreSelectedBtnMobile.onclick = function(e) {
+      e.preventDefault();
+      showRestoreSelectedProductModal();
+    };
+  }
+
+  // Modal button handlers
+  const cancelRestoreSelectedBtn = document.getElementById('cancelRestoreSelectedProduct');
+  if (cancelRestoreSelectedBtn) {
+    cancelRestoreSelectedBtn.onclick = hideRestoreSelectedProductModal;
+  }
+  const confirmRestoreSelectedBtn = document.getElementById('confirmRestoreSelectedProduct');
+  if (confirmRestoreSelectedBtn) {
+    confirmRestoreSelectedBtn.onclick = function() {
+      // Get all checked indexes
+      const checked = Array.from(document.querySelectorAll('.deleted-product-checkbox:checked'));
+      const indexes = checked.map(cb => Number(cb.getAttribute('data-idx'))).sort((a, b) => b - a); // sort desc to splice safely
+      indexes.forEach(idx => {
+        if (deletedProducts[idx]) deletedProducts.splice(idx, 1);
+      });
+      renderDeletedProductsTable();
+      renderDeletedProductsMobileCards();
+      updateRestoreButtonVisibilityProducts();
+      updateSelectAllCheckboxProducts();
+      hideRestoreSelectedProductModal();
+    };
+  }
+});
+
+// Update restore button visibility for products
+function updateRestoreButtonVisibilityProducts() {
+  const restoreSelectedBtn = document.getElementById('restoreSelectedBtn');
+  const restoreSelectedBtnMobile = document.getElementById('restoreSelectedBtnMobile');
+  const checkedBoxes = document.querySelectorAll('.deleted-product-checkbox:checked');
+  if (restoreSelectedBtn) {
+    restoreSelectedBtn.classList.toggle('hidden', checkedBoxes.length === 0);
+  }
+  if (restoreSelectedBtnMobile) {
+    restoreSelectedBtnMobile.classList.toggle('hidden', checkedBoxes.length === 0);
+  }
+}
+
+// Update select all checkbox for products
+function updateSelectAllCheckboxProducts() {
+  const selectAllCheckbox = document.getElementById('selectAllDeleted');
+  const checkboxes = document.querySelectorAll('.deleted-product-checkbox');
+  const checkedBoxes = document.querySelectorAll('.deleted-product-checkbox:checked');
+  if (selectAllCheckbox) {
+    selectAllCheckbox.checked = checkboxes.length === checkedBoxes.length && checkboxes.length > 0;
+    selectAllCheckbox.indeterminate = checkedBoxes.length > 0 && checkedBoxes.length < checkboxes.length;
+  }
+}
+
+// Show/Hide restore selected modal for products
+function showRestoreSelectedProductModal() {
+  const modal = document.getElementById('restoreSelectedProductModal');
+  if (!modal) return;
+  showModal(modal);
+}
+function hideRestoreSelectedProductModal() {
+  const modal = document.getElementById('restoreSelectedProductModal');
+  if (!modal) return;
+  hideModal(modal);
+} 

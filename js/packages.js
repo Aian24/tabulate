@@ -263,4 +263,206 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
     // --- End Package Creation Page Logic ---
+
+    // =============================
+    // Deleted Packages Logic
+    // =============================
+    if (window.location.pathname.includes('deleted-packages.html')) {
+        // Sample deleted packages data (based on packages.html)
+        let deletedPackages = [
+            { name: 'Deep Clean With Free Hose Package', amount: '$7,893.20', status: 'Active', created: 'March 14, 2025' },
+            { name: 'Garden Landscaping Package', amount: '$200.00', status: 'Active', created: 'March 12, 2025' },
+            { name: 'Office Cleaning Package', amount: '$14,266.00', status: 'Active', created: 'March 12, 2025' },
+            { name: 'Basic Home Repair Package', amount: '$2,139.20', status: 'Active', created: 'March 12, 2025' },
+            { name: 'Electrical Installation Package', amount: '$6,230.00', status: 'Active', created: 'March 12, 2025' },
+            { name: 'Buten Package', amount: '$14,081.20', status: 'Active', created: 'June 27, 2025' },
+        ];
+        let selectedPackages = new Set();
+        let restoreIdx = null;
+
+        // Render desktop table
+        function renderDeletedPackagesTable() {
+            const tbody = document.getElementById('deleted-packages-table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            deletedPackages.forEach((pkg, idx) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="px-6 py-4"><input type="checkbox" class="package-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500" data-idx="${idx}"></td>
+                    <td class="px-6 py-4 text-sm font-medium text-gray-900">${pkg.name}</td>
+                    <td class="px-6 py-4 text-sm text-gray-900">${pkg.amount}</td>
+                    <td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">${pkg.status}</span></td>
+                    <td class="px-6 py-4 text-sm text-gray-900">${pkg.created}</td>
+                    <td class="px-6 py-4"><button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn" data-idx="${idx}"><i class="fas fa-undo-alt mr-1"></i> Restore</button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+            // Attach checkbox listeners
+            tbody.querySelectorAll('.package-checkbox').forEach(cb => {
+                cb.addEventListener('change', function(e) {
+                    const idx = parseInt(this.getAttribute('data-idx'));
+                    if (this.checked) selectedPackages.add(idx);
+                    else selectedPackages.delete(idx);
+                    updateRestoreButtonVisibility();
+                    updateSelectAllCheckbox();
+                });
+            });
+            // Attach restore button listeners
+            tbody.querySelectorAll('.restore-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    restoreIdx = parseInt(this.getAttribute('data-idx'));
+                    showRestorePackageModal();
+                });
+            });
+        }
+
+        // Render mobile cards
+        function renderDeletedPackagesMobileCards() {
+            const container = document.getElementById('deleted-packages-mobile-cards');
+            if (!container) return;
+            container.innerHTML = '';
+            deletedPackages.forEach((pkg, idx) => {
+                const card = document.createElement('div');
+                card.className = 'mobile-table-row bg-white rounded-lg border border-gray-100';
+                card.innerHTML = `
+                    <div class="flex items-center justify-between mb-1">
+                        <div class="flex items-center gap-3">
+                            <input type="checkbox" class="package-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500" data-idx="${idx}">
+                            <div class="w-8 h-8 bg-gradient-to-br from-blue-400 to-green-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">${pkg.name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase()}</div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900 text-sm">${pkg.name}</h3>
+                                <p class="text-xs text-gray-500">${pkg.amount}</p>
+                            </div>
+                        </div>
+                        <span class="mobile-status bg-blue-100 text-blue-800 text-xs">${pkg.status}</span>
+                    </div>
+                    <div class="space-y-1 text-xs">
+                        <div><span class="text-gray-500">Status:</span><span class="text-gray-900">${pkg.status}</span></div>
+                    </div>
+                    <div class="mt-1 flex justify-between items-center">
+                        <div><span class="text-gray-500 text-xs">Created:</span><span class="text-gray-900 text-xs">${pkg.created}</span></div>
+                        <button class="text-xs text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn" data-idx="${idx}"><i class="fas fa-undo-alt mr-1"></i> Restore</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            // Attach checkbox listeners
+            container.querySelectorAll('.package-checkbox').forEach(cb => {
+                cb.addEventListener('change', function(e) {
+                    const idx = parseInt(this.getAttribute('data-idx'));
+                    if (this.checked) selectedPackages.add(idx);
+                    else selectedPackages.delete(idx);
+                    updateRestoreButtonVisibility();
+                    updateSelectAllCheckbox();
+                });
+            });
+            // Attach restore button listeners
+            container.querySelectorAll('.restore-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    restoreIdx = parseInt(this.getAttribute('data-idx'));
+                    showRestorePackageModal();
+                });
+            });
+        }
+
+        // Update restore selected button visibility
+        function updateRestoreButtonVisibility() {
+            const btn = document.getElementById('restoreSelectedPackagesBtn');
+            const btnMobile = document.getElementById('restoreSelectedPackagesBtnMobile');
+            if (btn) btn.classList.toggle('hidden', selectedPackages.size === 0);
+            if (btnMobile) btnMobile.disabled = selectedPackages.size === 0;
+            if (btnMobile) btnMobile.classList.toggle('opacity-50', selectedPackages.size === 0);
+        }
+
+        // Update select all checkbox
+        function updateSelectAllCheckbox() {
+            const selectAll = document.getElementById('selectAllDeletedPackages');
+            const checkboxes = document.querySelectorAll('.package-checkbox');
+            if (!selectAll) return;
+            selectAll.checked = checkboxes.length > 0 && Array.from(checkboxes).every(cb => cb.checked);
+            selectAll.indeterminate = !selectAll.checked && Array.from(checkboxes).some(cb => cb.checked);
+        }
+
+        // Select all logic
+        const selectAll = document.getElementById('selectAllDeletedPackages');
+        if (selectAll) {
+            selectAll.addEventListener('change', function() {
+                const checkboxes = document.querySelectorAll('.package-checkbox');
+                checkboxes.forEach((cb, idx) => {
+                    cb.checked = this.checked;
+                    if (this.checked) selectedPackages.add(idx);
+                    else selectedPackages.delete(idx);
+                });
+                updateRestoreButtonVisibility();
+                updateSelectAllCheckbox();
+            });
+        }
+
+        // Restore modals logic
+        function showRestorePackageModal() {
+            const modal = document.getElementById('restorePackageModal');
+            if (!modal) return;
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.querySelector('.modal-content-modern').classList.add('show'), 10);
+        }
+        function hideRestorePackageModal() {
+            const modal = document.getElementById('restorePackageModal');
+            if (!modal) return;
+            modal.querySelector('.modal-content-modern').classList.remove('show');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+        function showRestoreSelectedPackagesModal() {
+            const modal = document.getElementById('restoreSelectedPackagesModal');
+            if (!modal) return;
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.querySelector('.modal-content-modern').classList.add('show'), 10);
+        }
+        function hideRestoreSelectedPackagesModal() {
+            const modal = document.getElementById('restoreSelectedPackagesModal');
+            if (!modal) return;
+            modal.querySelector('.modal-content-modern').classList.remove('show');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        // Restore single package
+        document.getElementById('cancelRestorePackage')?.addEventListener('click', hideRestorePackageModal);
+        document.getElementById('confirmRestorePackage')?.addEventListener('click', function() {
+            if (restoreIdx !== null) {
+                deletedPackages.splice(restoreIdx, 1);
+                selectedPackages.delete(restoreIdx);
+                restoreIdx = null;
+                renderDeletedPackagesTable();
+                renderDeletedPackagesMobileCards();
+                updateRestoreButtonVisibility();
+                updateSelectAllCheckbox();
+            }
+            hideRestorePackageModal();
+        });
+
+        // Restore selected packages
+        document.getElementById('restoreSelectedPackagesBtn')?.addEventListener('click', function() {
+            if (selectedPackages.size > 0) showRestoreSelectedPackagesModal();
+        });
+        document.getElementById('restoreSelectedPackagesBtnMobile')?.addEventListener('click', function() {
+            if (selectedPackages.size > 0) showRestoreSelectedPackagesModal();
+        });
+        document.getElementById('cancelRestoreSelectedPackages')?.addEventListener('click', hideRestoreSelectedPackagesModal);
+        document.getElementById('confirmRestoreSelectedPackages')?.addEventListener('click', function() {
+            deletedPackages = deletedPackages.filter((pkg, idx) => !selectedPackages.has(idx));
+            selectedPackages.clear();
+            renderDeletedPackagesTable();
+            renderDeletedPackagesMobileCards();
+            updateRestoreButtonVisibility();
+            updateSelectAllCheckbox();
+            hideRestoreSelectedPackagesModal();
+        });
+
+        // Initial render
+        renderDeletedPackagesTable();
+        renderDeletedPackagesMobileCards();
+        updateRestoreButtonVisibility();
+        updateSelectAllCheckbox();
+    }
 }); 
