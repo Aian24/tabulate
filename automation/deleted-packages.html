@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <title>Deleted Customers</title>
+    <title>Deleted Packages</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
@@ -14,9 +14,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </head>
 <body class="min-h-screen bg-gray-50">
     <!-- Include header -->
@@ -31,10 +28,10 @@
         <div class="mobile-header md:hidden">
             <div class="flex items-center justify-between mb-2">
                 <div class="flex items-center gap-3">
-                    <button onclick="window.location.href='customerlist.html'" class="text-white p-1.5 rounded-full bg-white/20 backdrop-blur-sm">
+                    <button onclick="window.location.href='packages.html'" class="text-white p-1.5 rounded-full bg-white/20 backdrop-blur-sm">
                         <i class="fas fa-arrow-left text-sm"></i>
                     </button>
-                    <h1 class="text-lg font-bold text-white">Deleted Customers</h1>
+                    <h1 class="text-lg font-bold text-white">Deleted Packages</h1>
                 </div>
                 <div class="flex items-center gap-2">
                     <button class="text-white p-1.5 rounded-full bg-white/20 backdrop-blur-sm">
@@ -44,7 +41,7 @@
             </div>
             <div class="relative">
                 <input type="search" 
-                       placeholder="Search deleted customers..." 
+                       placeholder="Search deleted packages..." 
                        class="mobile-search w-full h-8 pl-3 pr-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-white/50 text-sm"
                 />
             </div>
@@ -54,10 +51,10 @@
         <div class="hidden md:block container-fluid mx-auto px-4 md:px-6 py-2 md:py-4">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
                 <div class="flex items-center gap-4">
-                    <button onclick="window.location.href='customerlist.html'" class="back-button text-sm px-4 py-2 text-white rounded-md flex items-center gap-2">
+                    <button onclick="window.location.href='packages.html'" class="back-button text-sm px-4 py-2 text-white rounded-md flex items-center gap-2">
                         <i class="fas fa-arrow-left"></i>Back to List
                     </button>
-                    <h1 class="text-xl md:text-2xl font-bold text-gray-800">Deleted Customers</h1>
+                    <h1 class="text-xl md:text-2xl font-bold text-gray-800">Deleted Packages</h1>
                 </div>
                 <div class="flex items-center gap-2">
                     <div class="relative">
@@ -92,7 +89,7 @@
                 </div>
                 <!-- Restore Selected button -->
                 <div class="flex flex-wrap justify-center md:justify-start gap-2">
-                    <button id="restoreSelectedBtn" class="px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors hidden">
+                    <button id="restoreSelectedPackagesBtn" class="px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors hidden">
                         <i class="fas fa-undo-alt mr-1"></i> Restore Selected
                     </button>
                 </div>
@@ -109,37 +106,16 @@
             </div>
         </div>
 
-        <!-- Mobile Deleted Customers List -->
+        <!-- Mobile Deleted Packages List -->
         <div class="md:hidden pb-20">
             <div class="mobile-card">
                 <div class="mobile-table-header">
-                    <h2 class="text-white font-semibold">Deleted Customers</h2>
-                    <p class="text-white/80 text-sm mt-1">0 customers found</p>
+                    <h2 class="text-white font-semibold">Deleted Packages</h2>
+                    <p class="text-white/80 text-sm mt-1">6 packages found</p>
                 </div>
-                <!-- Mobile Deleted Customer Cards -->
-                <div class="p-3 space-y-2">
-                    <!-- Example Card -->
-                    <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
-                        <div class="flex items-center justify-between mb-1">
-                            <div class="flex items-center gap-3">
-                                <input type="checkbox" class="customer-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
-                                <div class="w-8 h-8 bg-gradient-to-br from-red-400 to-pink-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">JD</div>
-                                <div>
-                                    <h3 class="font-semibold text-gray-900 text-sm">John Doe</h3>
-                                    <p class="text-xs text-gray-500">ID: 1</p>
-                                </div>
-                            </div>
-                            <span class="mobile-status bg-red-100 text-red-800 text-xs">Deactivated</span>
-                        </div>
-                        <div class="space-y-1 text-xs">
-                             <div><span class="text-gray-500">Phone:</span><span class="text-gray-900">09123456789</span></div>
-                            <div><span class="text-gray-500">Email:</span><span class="text-gray-900">john@example.com</span></div>
-                        </div>
-                        <div class="mt-1 flex justify-between items-center">
-                            <div><span class="text-gray-500 text-xs">Deleted:</span><span class="text-gray-900 text-xs">March 12, 2025</span></div>
-                            <button class="text-xs text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn"><i class="fas fa-undo-alt mr-1"></i> Restore</button>
-                        </div>
-                    </div>
+                <!-- Mobile Deleted Package Cards -->
+                <div id="deleted-packages-mobile-cards" class="p-3 space-y-2">
+                    <!-- Cards rendered by JS -->
                 </div>
             </div>
         </div>
@@ -147,11 +123,11 @@
         <!-- Mobile Action Buttons -->
         <div class="md:hidden mobile-actions">
             <div class="flex gap-3">
-                <button onclick="window.location.href='customerlist.html'" class="mobile-button flex-1 bg-gray-500 text-white flex items-center justify-center gap-2 text-sm py-2">
+                <button onclick="window.location.href='packages.html'" class="mobile-button flex-1 bg-gray-500 text-white flex items-center justify-center gap-2 text-sm py-2">
                     <i class="fas fa-arrow-left text-xs"></i>
                     <span>Back</span>
                 </button>
-                <button id="restoreSelectedBtnMobile" class="mobile-button flex-1 bg-purple-600 text-white flex items-center justify-center gap-2 text-sm py-2">
+                <button id="restoreSelectedPackagesBtnMobile" class="mobile-button flex-1 bg-purple-600 text-white flex items-center justify-center gap-2 text-sm py-2">
                     <i class="fas fa-undo-alt text-xs"></i>
                     <span>Restore Selected</span>
                 </button>
@@ -165,21 +141,16 @@
                     <table class="w-full min-w-[800px] rounded-xl">
                         <thead class="bg-gradient-to-r from-sky-500 to-blue-600 text-white">
                             <tr>
-                                <th class="px-6 py-4 text-left"><input type="checkbox" id="selectAllDeleted" class="w-4 h-4 text-purple-600 rounded focus:ring-purple-500"></th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold">ID</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold">Full Name</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold">Phone</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold">Email</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold">Verification Status</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold">Account Status</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold">Date Registered</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold">Date Deleted</th>
+                                <th class="px-6 py-4 text-left"><input type="checkbox" id="selectAllDeletedPackages" class="w-4 h-4 text-purple-600 rounded focus:ring-purple-500"></th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold">Package Name</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold">Amount</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold">Status</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold">Created Date</th>
                                 <th class="px-6 py-4 text-left text-sm font-semibold">Actions</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-100">
-                            <!-- Example Row -->
-                            <tr><td class="px-6 py-4"><input type="checkbox" class="customer-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500"></td><td class="px-6 py-4 text-sm text-gray-600">1</td><td class="px-6 py-4 text-sm font-medium text-gray-900">John Doe</td><td class="px-6 py-4 text-sm text-gray-600">09123456789</td><td class="px-6 py-4 text-sm text-gray-600">john@example.com</td><td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Unverified</span></td><td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Deactivated</span></td><td class="px-6 py-4 text-sm text-gray-600">March 1, 2025</td><td class="px-6 py-4 text-sm text-gray-600">March 12, 2025</td><td class="px-6 py-4"><button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn"><i class="fas fa-undo-alt mr-1"></i> Restore</button></td></tr>
+                        <tbody id="deleted-packages-table-body" class="divide-y divide-gray-100">
+                            <!-- Rows rendered by JS -->
                         </tbody>
                     </table>
                 </div>
@@ -188,7 +159,7 @@
                 <div class="bg-gray-50 px-4 md:px-6 py-4 flex flex-col md:flex-row justify-between items-center border-t border-gray-100 gap-4 rounded-b-xl">
                     <div class="flex items-center gap-2 text-sm text-gray-600 order-2 md:order-1">
                         <span class="mx-2">|</span>
-                        Showing <span class="font-medium">1</span> to <span class="font-medium">1</span> of <span class="font-medium">1</span> entries
+                        Showing <span class="font-medium">1</span> to <span class="font-medium">6</span> of <span class="font-medium">6</span> entries
                     </div>
                     <div class="flex space-x-2 order-1 md:order-2">
                         <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
@@ -208,33 +179,30 @@
         </div>
     </main>
 
-    <!-- Load JavaScript files -->
-    <script src="../js/main.js"></script>
-    <script src="../js/customerlist.js"></script>
-
-    <div id="restoreCustomerModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+    <!-- Restore Modals -->
+    <div id="restorePackageModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
         <div class="modal-content-modern bg-white rounded-2xl shadow-2xl max-w-sm w-full p-8 text-center transform scale-95 opacity-0 transition-all duration-300">
             <div class="flex justify-center mb-3">
                 <i class="fas fa-undo-alt text-purple-500 text-4xl animate-bounce"></i>
             </div>
-            <h2 class="text-2xl font-bold mb-2">Restore Customer?</h2>
-            <p class="mb-6 text-gray-600">Are you sure you want to restore this customer?</p>
+            <h2 class="text-2xl font-bold mb-2">Restore Package?</h2>
+            <p class="mb-6 text-gray-600">Are you sure you want to restore this package?</p>
             <div class="flex justify-center gap-4">
-                <button id="cancelRestoreCustomer" class="px-6 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition">Cancel</button>
-                <button id="confirmRestoreCustomer" class="px-6 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition">Restore</button>
+                <button id="cancelRestorePackage" class="px-6 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition">Cancel</button>
+                <button id="confirmRestorePackage" class="px-6 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition">Restore</button>
             </div>
         </div>
     </div>
-    <div id="restoreSelectedCustomerModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+    <div id="restoreSelectedPackagesModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
         <div class="modal-content-modern bg-white rounded-2xl shadow-2xl max-w-sm w-full p-8 text-center transform scale-95 opacity-0 transition-all duration-300">
             <div class="flex justify-center mb-3">
                 <i class="fas fa-undo-alt text-purple-500 text-4xl animate-bounce"></i>
             </div>
-            <h2 class="text-2xl font-bold mb-2">Restore Selected Customers?</h2>
-            <p class="mb-6 text-gray-600">Are you sure you want to restore the selected customers?</p>
+            <h2 class="text-2xl font-bold mb-2">Restore Selected Packages?</h2>
+            <p class="mb-6 text-gray-600">Are you sure you want to restore the selected packages?</p>
             <div class="flex justify-center gap-4">
-                <button id="cancelRestoreSelectedCustomer" class="px-6 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition">Cancel</button>
-                <button id="confirmRestoreSelectedCustomer" class="px-6 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition">Restore</button>
+                <button id="cancelRestoreSelectedPackages" class="px-6 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition">Cancel</button>
+                <button id="confirmRestoreSelectedPackages" class="px-6 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition">Restore</button>
             </div>
         </div>
     </div>
@@ -244,5 +212,8 @@
         transform: scale(1) !important;
     }
     </style>
+    <!-- Load JavaScript files -->
+    <script src="../js/main.js"></script>
+    <script src="../js/packages.js"></script>
 </body>
 </html> 
