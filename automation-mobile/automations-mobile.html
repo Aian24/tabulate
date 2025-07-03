@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>Automations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/themes/light.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+</head>
+<body class="min-h-screen bg-sky-50">
+    <!-- Include header -->
+    <div id="header-container"></div>
+
+    <!-- Include navigation -->
+    <div id="nav-container"></div>
+
+    <main class="p-4">
+        <div class="flex justify-between items-center mb-4 w-full">
+            <span class="text-lg font-semibold">Automations</span>
+            <div class="flex items-center gap-2">
+                <div class="relative inline-block text-left">
+                    <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700" id="menu-button" aria-expanded="false" aria-haspopup="true">
+                        More
+                        <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <!-- Dropdown menu -->
+                    <div id="dropdown-menu"
+                        class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10"
+                        style="display: none;">
+                        <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="menu-button">
+                            <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem">Export</a>
+                            <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem">Print</a>
+                            <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem">Settings</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mb-2 flex w-full gap-2">
+            <button class="bg-blue-500 text-white rounded text-sm font-medium flex items-center justify-center flex-1 min-w-0"><i class="fas fa-plus mr-1"></i>Create</button>
+            <input type="text" placeholder="Search" class="rounded border border-gray-300 text-sm flex-[2] min-w-0 px-3 py-2" />
+        </div>
+
+        <div class="flex flex-col w-full">
+            <!-- Automation Rows -->
+            <div class="divide-y divide-gray-100">
+                <!-- Row 1 -->
+                <div class="bg-white rounded-md shadow-sm mb-2 px-3 pt-2 pb-2" style="border: 1px solid #e0f2fe;">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sky-500 font-semibold text-sm">Sample Invoice</span>
+                        <button onclick="showDropdownMenu(event, 'dropdown-1')" class="focus:outline-none">
+                            <i class="fa fa-ellipsis-v text-sky-400"></i>
+                        </button>
+                        <div id="dropdown-1" class="dropdown-menu absolute right-0 mt-1 w-32 bg-white border border-gray-200 rounded shadow z-10 hidden">
+                            <div class="px-2 py-1 bg-blue-200 text-sky-900 cursor-pointer text-xs">Activate</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Edit Sequences</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Edit Name</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Duplicate</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Delete</div>
+                        </div>
+                    </div>
+                    <hr class="my-1 border-t border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600 text-base">Invoices</span>
+                        <span class="bg-blue-400 text-white text-xs font-semibold px-3 py-1 rounded">Active</span>
+                    </div>
+                </div>
+                <!-- Row 2 -->
+                <div class="bg-white rounded-md shadow-sm mb-2 px-3 pt-2 pb-2" style="border: 1px solid #e0f2fe;">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sky-500 font-semibold text-sm">12321</span>
+                        <button onclick="showDropdownMenu(event, 'dropdown-2')" class="focus:outline-none">
+                            <i class="fa fa-ellipsis-v text-sky-400"></i>
+                        </button>
+                        <div id="dropdown-2" class="dropdown-menu absolute right-0 mt-1 w-32 bg-white border border-gray-200 rounded shadow z-10 hidden">
+                            <div class="px-2 py-1 bg-blue-200 text-sky-900 cursor-pointer text-xs">Activate</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Edit Sequences</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Edit Name</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Duplicate</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Delete</div>
+                        </div>
+                    </div>
+                    <hr class="my-1 border-t border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600 text-base">Estimate</span>
+                        <span class="bg-gray-400 text-white text-xs font-semibold px-3 py-1 rounded">Inactive</span>
+                    </div>
+                </div>
+                <!-- Row 3 -->
+                <div class="bg-white rounded-md shadow-sm mb-2 px-3 pt-2 pb-2" style="border: 1px solid #e0f2fe;">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sky-500 font-semibold text-sm">Sample Invoice</span>
+                        <button onclick="showDropdownMenu(event, 'dropdown-3')" class="focus:outline-none">
+                            <i class="fa fa-ellipsis-v text-sky-400"></i>
+                        </button>
+                        <div id="dropdown-3" class="dropdown-menu absolute right-0 mt-1 w-32 bg-white border border-gray-200 rounded shadow z-10 hidden">
+                            <div class="px-2 py-1 bg-blue-200 text-sky-900 cursor-pointer text-xs">Activate</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Edit Sequences</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Edit Name</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Duplicate</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Delete</div>
+                        </div>
+                    </div>
+                    <hr class="my-1 border-t border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600 text-base">Invoices</span>
+                        <span class="bg-blue-400 text-white text-xs font-semibold px-3 py-1 rounded">Active</span>
+                    </div>
+                </div>
+                <!-- Row 4 -->
+                <div class="bg-white rounded-md shadow-sm mb-2 px-3 pt-2 pb-2" style="border: 1px solid #e0f2fe;">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sky-500 font-semibold text-sm">12321</span>
+                        <button onclick="showDropdownMenu(event, 'dropdown-4')" class="focus:outline-none">
+                            <i class="fa fa-ellipsis-v text-sky-400"></i>
+                        </button>
+                        <div id="dropdown-4" class="dropdown-menu absolute right-0 mt-1 w-32 bg-white border border-gray-200 rounded shadow z-10 hidden">
+                            <div class="px-2 py-1 bg-blue-200 text-sky-900 cursor-pointer text-xs">Activate</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Edit Sequences</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Edit Name</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Duplicate</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Delete</div>
+                        </div>
+                    </div>
+                    <hr class="my-1 border-t border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600 text-base">Estimate</span>
+                        <span class="bg-gray-400 text-white text-xs font-semibold px-3 py-1 rounded">Inactive</span>
+                    </div>
+                </div>
+                <!-- Row 5 -->
+                <div class="bg-white rounded-md shadow-sm mb-2 px-3 pt-2 pb-2" style="border: 1px solid #e0f2fe;">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sky-500 font-semibold text-sm">Sample Invoice</span>
+                        <button onclick="showDropdownMenu(event, 'dropdown-5')" class="focus:outline-none">
+                            <i class="fa fa-ellipsis-v text-sky-400"></i>
+                        </button>
+                        <div id="dropdown-5" class="dropdown-menu absolute right-0 mt-1 w-32 bg-white border border-gray-200 rounded shadow z-10 hidden">
+                            <div class="px-2 py-1 bg-blue-200 text-sky-900 cursor-pointer text-xs">Activate</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Edit Sequences</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Edit Name</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Duplicate</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Delete</div>
+                        </div>
+                    </div>
+                    <hr class="my-1 border-t border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600 text-base">Invoices</span>
+                        <span class="bg-blue-400 text-white text-xs font-semibold px-3 py-1 rounded">Active</span>
+                    </div>
+                </div>
+                <!-- Row 6 -->
+                <div class="bg-white rounded-md shadow-sm mb-2 px-3 pt-2 pb-2" style="border: 1px solid #e0f2fe;">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sky-500 font-semibold text-sm">12321</span>
+                        <button onclick="showDropdownMenu(event, 'dropdown-6')" class="focus:outline-none">
+                            <i class="fa fa-ellipsis-v text-sky-400"></i>
+                        </button>
+                        <div id="dropdown-6" class="dropdown-menu absolute right-0 mt-1 w-32 bg-white border border-gray-200 rounded shadow z-10 hidden">
+                            <div class="px-2 py-1 bg-blue-200 text-sky-900 cursor-pointer text-xs">Activate</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Edit Sequences</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Edit Name</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Duplicate</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Delete</div>
+                        </div>
+                    </div>
+                    <hr class="my-1 border-t border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600 text-base">Estimate</span>
+                        <span class="bg-gray-400 text-white text-xs font-semibold px-3 py-1 rounded">Inactive</span>
+                    </div>
+                </div>
+                <!-- Row 7 -->
+                <div class="bg-white rounded-md shadow-sm mb-2 px-3 pt-2 pb-2" style="border: 1px solid #e0f2fe;">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sky-500 font-semibold text-sm">Sample Invoice</span>
+                        <button onclick="showDropdownMenu(event, 'dropdown-7')" class="focus:outline-none">
+                            <i class="fa fa-ellipsis-v text-sky-400"></i>
+                        </button>
+                        <div id="dropdown-7" class="dropdown-menu absolute right-0 mt-1 w-32 bg-white border border-gray-200 rounded shadow z-10 hidden">
+                            <div class="px-2 py-1 bg-blue-200 text-sky-900 cursor-pointer text-xs">Activate</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Edit Sequences</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Edit Name</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Duplicate</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Delete</div>
+                        </div>
+                    </div>
+                    <hr class="my-1 border-t border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600 text-base">Invoices</span>
+                        <span class="bg-blue-400 text-white text-xs font-semibold px-3 py-1 rounded">Active</span>
+                    </div>
+                </div>
+                <!-- Row 8 -->
+                <div class="bg-white rounded-md shadow-sm mb-2 px-3 pt-2 pb-2" style="border: 1px solid #e0f2fe;">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sky-500 font-semibold text-sm">12321</span>
+                        <button onclick="showDropdownMenu(event, 'dropdown-8')" class="focus:outline-none">
+                            <i class="fa fa-ellipsis-v text-sky-400"></i>
+                        </button>
+                        <div id="dropdown-8" class="dropdown-menu absolute right-0 mt-1 w-32 bg-white border border-gray-200 rounded shadow z-10 hidden">
+                            <div class="px-2 py-1 bg-blue-200 text-sky-900 cursor-pointer text-xs">Activate</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Edit Sequences</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Edit Name</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Duplicate</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Delete</div>
+                        </div>
+                    </div>
+                    <hr class="my-1 border-t border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600 text-base">Estimate</span>
+                        <span class="bg-gray-400 text-white text-xs font-semibold px-3 py-1 rounded">Inactive</span>
+                    </div>
+                </div>
+                <!-- Row 9 -->
+                <div class="bg-white rounded-md shadow-sm mb-2 px-3 pt-2 pb-2" style="border: 1px solid #e0f2fe;">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sky-500 font-semibold text-sm">Sample Invoice</span>
+                        <button onclick="showDropdownMenu(event, 'dropdown-9')" class="focus:outline-none">
+                            <i class="fa fa-ellipsis-v text-sky-400"></i>
+                        </button>
+                        <div id="dropdown-9" class="dropdown-menu absolute right-0 mt-1 w-32 bg-white border border-gray-200 rounded shadow z-10 hidden">
+                            <div class="px-2 py-1 bg-blue-200 text-sky-900 cursor-pointer text-xs">Activate</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Edit Sequences</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Edit Name</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Duplicate</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Delete</div>
+                        </div>
+                    </div>
+                    <hr class="my-1 border-t border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600 text-base">Invoices</span>
+                        <span class="bg-blue-400 text-white text-xs font-semibold px-3 py-1 rounded">Active</span>
+                    </div>
+                </div>
+                <!-- Row 10 -->
+                <div class="bg-white rounded-md shadow-sm mb-2 px-3 pt-2 pb-2" style="border: 1px solid #e0f2fe;">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sky-500 font-semibold text-sm">12321</span>
+                        <button onclick="showDropdownMenu(event, 'dropdown-10')" class="focus:outline-none">
+                            <i class="fa fa-ellipsis-v text-sky-400"></i>
+                        </button>
+                        <div id="dropdown-10" class="dropdown-menu absolute right-0 mt-1 w-32 bg-white border border-gray-200 rounded shadow z-10 hidden">
+                            <div class="px-2 py-1 bg-blue-200 text-sky-900 cursor-pointer text-xs">Activate</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Edit Sequences</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Edit Name</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Duplicate</div>
+                            <div class="px-2 py-1 hover:bg-blue-100 cursor-pointer text-xs">Delete</div>
+                        </div>
+                    </div>
+                    <hr class="my-1 border-t border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600 text-base">Estimate</span>
+                        <span class="bg-gray-400 text-white text-xs font-semibold px-3 py-1 rounded">Inactive</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Load header and nav
+        fetch('../nav/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            });
+        fetch('../nav/navigation.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav-container').innerHTML = data;
+            });
+
+        // Dropdown logic for 3-dot menus
+        function showDropdownMenu(event, id) {
+            event.stopPropagation();
+            // Close all other dropdowns
+            document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.add('hidden'));
+            // Open the selected dropdown
+            const menu = document.getElementById(id);
+            if (menu) menu.classList.toggle('hidden');
+        }
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.add('hidden'));
+        });
+    </script>
+</body>
+</html>
