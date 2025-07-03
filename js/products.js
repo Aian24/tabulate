@@ -468,10 +468,10 @@ document.addEventListener('DOMContentLoaded', function() {
           ${vendorList.map(v => `<option value='${v}'>${v}</option>`).join('')}
         </select>
       </td>
-      <td class='px-4 py-2'><input type='text' class='w-full rounded border border-gray-400 bg-white px-2 py-1 text-base' placeholder='' /></td>
-      <td class='px-4 py-2'><input type='text' class='w-full rounded border border-gray-400 bg-white px-2 py-1 text-base' placeholder='' /></td>
-      <td class='px-4 py-2'><input type='text' class='w-full rounded border border-gray-400 bg-white px-2 py-1 text-base' placeholder='' /></td>
-      <td class='px-4 py-2'><input type='text' class='w-full rounded border border-gray-400 bg-white px-2 py-1 text-base' placeholder='' /></td>
+      <td class='px-4 py-2'><input type='text' class='w-full h-full rounded border border-gray-400 bg-white px-2 py-1 text-base' placeholder='' /></td>
+      <td class='px-4 py-2'><input type='text' class='w-full h-full rounded border border-gray-400 bg-white px-2 py-1 text-base' placeholder='' /></td>
+      <td class='px-4 py-2'><input type='text' class='w-full h-full rounded border border-gray-400 bg-white px-2 py-1 text-base' placeholder='' /></td>
+      <td class='px-4 py-2'><input type='text' class='w-full h-full rounded border border-gray-400 bg-white px-2 py-1 text-base' placeholder='' /></td>
       <td class='px-4 py-2 text-center action-col flex items-center justify-center'>
         <button class='delete-vendor px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600'><i class='fas fa-trash'></i></button>
       </td>
@@ -1129,4 +1129,40 @@ function hideRestoreSelectedProductModal() {
   const modal = document.getElementById('restoreSelectedProductModal');
   if (!modal) return;
   hideModal(modal);
-} 
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Dropdown logic for Actions and More buttons (copied from equipments.js)
+  const actionsDropdown = document.getElementById('actionsDropdown');
+  const actionsMenu = document.getElementById('actionsMenu');
+  const moreDropdown = document.getElementById('moreDropdown');
+  const moreMenu = document.getElementById('moreMenu');
+
+  // Toggle actions menu
+  if (actionsDropdown && actionsMenu && moreMenu) {
+    actionsDropdown.addEventListener('click', (e) => {
+      e.stopPropagation();
+      actionsMenu.classList.toggle('hidden');
+      moreMenu.classList.add('hidden');
+    });
+  }
+
+  // Toggle more menu
+  if (moreDropdown && moreMenu && actionsMenu) {
+    moreDropdown.addEventListener('click', (e) => {
+      e.stopPropagation();
+      moreMenu.classList.toggle('hidden');
+      actionsMenu.classList.add('hidden');
+    });
+  }
+
+  // Close menus when clicking outside
+  if (actionsDropdown && moreDropdown && actionsMenu && moreMenu) {
+    document.addEventListener('click', (e) => {
+      if (!actionsDropdown.contains(e.target) && !moreDropdown.contains(e.target)) {
+        actionsMenu.classList.add('hidden');
+        moreMenu.classList.add('hidden');
+      }
+    });
+  }
+}); 

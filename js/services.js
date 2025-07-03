@@ -769,4 +769,32 @@ document.addEventListener('DOMContentLoaded', function() {
             modal.classList.add('hidden');
         }, 250);
     }
+
+    // Dropdown toggles (fix: only one open at a time)
+    const actionsDropdown = document.getElementById('actionsDropdown');
+    const actionsMenu = document.getElementById('actionsMenu');
+    const moreDropdown = document.getElementById('moreDropdown');
+    const moreMenu = document.getElementById('moreMenu');
+
+    if (actionsDropdown && actionsMenu && moreMenu) {
+        actionsDropdown.addEventListener('click', function (e) {
+            e.stopPropagation();
+            actionsMenu.classList.toggle('hidden');
+            moreMenu.classList.add('hidden');
+        });
+    }
+    if (moreDropdown && moreMenu && actionsMenu) {
+        moreDropdown.addEventListener('click', function (e) {
+            e.stopPropagation();
+            moreMenu.classList.toggle('hidden');
+            actionsMenu.classList.add('hidden');
+        });
+    }
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function (e) {
+        if (!actionsDropdown.contains(e.target) && !moreDropdown.contains(e.target)) {
+            actionsMenu && actionsMenu.classList.add('hidden');
+            moreMenu && moreMenu.classList.add('hidden');
+        }
+    });
 });

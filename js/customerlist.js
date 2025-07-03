@@ -235,6 +235,40 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // --- DROPDOWN LOGIC FOR ACTIONS AND MORE BUTTONS ---
+    const actionsDropdown = document.getElementById('actionsDropdown');
+    const actionsMenu = document.getElementById('actionsMenu');
+    const moreDropdown = document.getElementById('moreDropdown');
+    const moreMenu = document.getElementById('moreMenu');
+
+    // Toggle actions menu
+    if (actionsDropdown && actionsMenu && moreMenu) {
+        actionsDropdown.addEventListener('click', (e) => {
+            e.stopPropagation();
+            actionsMenu.classList.toggle('hidden');
+            moreMenu.classList.add('hidden');
+        });
+    }
+
+    // Toggle more menu
+    if (moreDropdown && moreMenu && actionsMenu) {
+        moreDropdown.addEventListener('click', (e) => {
+            e.stopPropagation();
+            moreMenu.classList.toggle('hidden');
+            actionsMenu.classList.add('hidden');
+        });
+    }
+
+    // Close menus when clicking outside
+    if (actionsDropdown && moreDropdown && actionsMenu && moreMenu) {
+        document.addEventListener('click', (e) => {
+            if (!actionsDropdown.contains(e.target) && !moreDropdown.contains(e.target)) {
+                actionsMenu.classList.add('hidden');
+                moreMenu.classList.add('hidden');
+            }
+        });
+    }
+
     // --- CUSTOMER DETAILS PAGE LOGIC ---
     if (document.getElementById('customerNameHeader')) {
         let customerData = null;
@@ -694,184 +728,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const customerTableRows = document.querySelectorAll('table tbody tr');
         customerTableRows.forEach(row => {
             row.replaceWith(row.cloneNode(true)); // Remove all event listeners
-        });
-    }
-});
-
-// =========================
-// The following code was migrated from js/customer-edit.js
-// Original file deleted for consolidation. Please update references accordingly.
-// =========================
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Load header and navigation if needed
-    if (typeof loadHTML === 'function') {
-        loadHTML('../nav/header.html', 'header-container');
-        loadHTML('../nav/navigation.html', 'nav-container');
-    }
-
-    // Get customer data
-    let customerData = null;
-    try {
-        customerData = JSON.parse(localStorage.getItem('selectedCustomer'));
-    } catch (e) {}
-    if (!customerData) {
-        const nameHeader = document.getElementById('customerNameHeader');
-        if (nameHeader) nameHeader.textContent = 'Not Found';
-        return;
-    }
-    // Header
-    const nameHeader = document.getElementById('customerNameHeader');
-    if (nameHeader) nameHeader.textContent = customerData.fullName || '';
-    // Personal Info
-    const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.value = val || ''; };
-    setVal('personalFirstName', customerData.personalFirstName);
-    setVal('personalLastName', customerData.personalLastName);
-    setVal('personalPhone', customerData.personalPhone);
-    setVal('personalEmail', customerData.personalEmail);
-    setVal('personalAddress', customerData.personalAddress);
-    setVal('personalBuildingAddress', customerData.personalBuildingAddress);
-    // Preferences
-    setVal('prefClientSince', customerData.prefClientSince);
-    setVal('prefLeadAcquiredDate', customerData.prefLeadAcquiredDate);
-    setVal('prefMainLanguage', customerData.prefMainLanguage);
-    setVal('prefPreferredCommunication', customerData.prefPreferredCommunication);
-    setVal('prefPaymentTerms', customerData.prefPaymentTerms);
-    setVal('prefPaymentMethod', customerData.prefPaymentMethod);
-    setVal('prefTaxable', customerData.prefTaxable);
-    setVal('prefTags', customerData.prefTags);
-    setVal('prefSalesPerson', customerData.prefSalesPerson);
-    setVal('prefContractor', customerData.prefContractor);
-    setVal('prefInvoiceFrequency', customerData.prefInvoiceFrequency);
-    // Billing
-    setVal('billingFirstName', customerData.billingFirstName);
-    setVal('billingLastName', customerData.billingLastName);
-    setVal('billingPhone', customerData.billingPhone);
-    setVal('billingEmail', customerData.billingEmail);
-    setVal('billingAddress', customerData.billingAddress);
-    setVal('billingCompanyName', customerData.billingCompanyName);
-    // Notes
-    setVal('customerNotes', customerData.customerNotes);
-    // Custom Fields
-    const customFieldsTbody = document.getElementById('customFields');
-    function renderCustomFields(fields) {
-        if (!customFieldsTbody) return;
-        customFieldsTbody.innerHTML = '';
-        (fields || []).forEach((f, idx) => {
-            customFieldsTbody.innerHTML += `<tr>
-                <td><input type="text" class="border rounded px-2 py-1 w-full" value="${f.name}" data-idx="${idx}" data-type="name"></td>
-                <td><input type="text" class="border rounded px-2 py-1 w-full" value="${f.value}" data-idx="${idx}" data-type="value"></td>
-                <td><button type="button" class="removeCustomFieldBtn text-red-500" data-idx="${idx}"><i class='fas fa-trash text-2xl'></i></button></td>
-            </tr>`;
-        });
-    }
-    renderCustomFields(customerData.customFields || []);
-    // Remove custom field with confirmation modal
-    let customFieldToDeleteIdx = null;
-    const deleteCustomFieldModal = document.getElementById('deleteCustomFieldModal');
-    const confirmDeleteCustomFieldBtn = document.getElementById('confirmDeleteCustomField');
-    const cancelDeleteCustomFieldBtn = document.getElementById('cancelDeleteCustomField');
-    if (customFieldsTbody) {
-        customFieldsTbody.addEventListener('click', function(e) {
-            const btn = e.target.closest('.removeCustomFieldBtn');
-            if (btn) {
-                customFieldToDeleteIdx = parseInt(btn.getAttribute('data-idx'));
-                if (deleteCustomFieldModal) {
-                    deleteCustomFieldModal.classList.remove('hidden');
-                    setTimeout(() => {
-                        deleteCustomFieldModal.querySelector('.modal-content-modern').classList.add('show');
-                    }, 10);
-                }
-            }
-        });
-    }
-    if (cancelDeleteCustomFieldBtn) {
-        cancelDeleteCustomFieldBtn.onclick = function() {
-            if (deleteCustomFieldModal) {
-                deleteCustomFieldModal.querySelector('.modal-content-modern').classList.remove('show');
-                setTimeout(() => {
-                    deleteCustomFieldModal.classList.add('hidden');
-                }, 200);
-            }
-            customFieldToDeleteIdx = null;
-        };
-    }
-    if (confirmDeleteCustomFieldBtn) {
-        confirmDeleteCustomFieldBtn.onclick = function() {
-            if (customFieldToDeleteIdx !== null) {
-                const fields = [];
-                customFieldsTbody.querySelectorAll('tr').forEach((tr, idx) => {
-                    if (idx !== customFieldToDeleteIdx) {
-                        const name = tr.querySelector('input[data-type="name"]').value;
-                        const value = tr.querySelector('input[data-type="value"]').value;
-                        if (name || value) fields.push({ name, value });
-                    }
-                });
-                renderCustomFields(fields);
-            }
-            if (deleteCustomFieldModal) {
-                deleteCustomFieldModal.querySelector('.modal-content-modern').classList.remove('show');
-                setTimeout(() => {
-                    deleteCustomFieldModal.classList.add('hidden');
-                }, 200);
-            }
-            customFieldToDeleteIdx = null;
-        };
-    }
-    // Hide modal when clicking outside
-    if (deleteCustomFieldModal) {
-        deleteCustomFieldModal.onclick = function(event) {
-            if (event.target === deleteCustomFieldModal) {
-                deleteCustomFieldModal.querySelector('.modal-content-modern').classList.remove('show');
-                setTimeout(() => {
-                    deleteCustomFieldModal.classList.add('hidden');
-                }, 200);
-            }
-        };
-    }
-    // Update/save button
-    const updateBtn = document.getElementById('updateBtn');
-    if (updateBtn) {
-        updateBtn.addEventListener('click', function() {
-            // Gather all fields
-            const customFields = [];
-            if (customFieldsTbody) {
-                customFieldsTbody.querySelectorAll('tr').forEach(tr => {
-                    const name = tr.querySelector('input[data-type="name"]').value;
-                    const value = tr.querySelector('input[data-type="value"]').value;
-                    if (name || value) customFields.push({ name, value });
-                });
-            }
-            const updated = {
-                ...customerData,
-                personalFirstName: document.getElementById('personalFirstName')?.value || '',
-                personalLastName: document.getElementById('personalLastName')?.value || '',
-                personalPhone: document.getElementById('personalPhone')?.value || '',
-                personalEmail: document.getElementById('personalEmail')?.value || '',
-                personalAddress: document.getElementById('personalAddress')?.value || '',
-                personalBuildingAddress: document.getElementById('personalBuildingAddress')?.value || '',
-                prefClientSince: document.getElementById('prefClientSince')?.value || '',
-                prefLeadAcquiredDate: document.getElementById('prefLeadAcquiredDate')?.value || '',
-                prefMainLanguage: document.getElementById('prefMainLanguage')?.value || '',
-                prefPreferredCommunication: document.getElementById('prefPreferredCommunication')?.value || '',
-                prefPaymentTerms: document.getElementById('prefPaymentTerms')?.value || '',
-                prefPaymentMethod: document.getElementById('prefPaymentMethod')?.value || '',
-                prefTaxable: document.getElementById('prefTaxable')?.value || '',
-                prefTags: document.getElementById('prefTags')?.value || '',
-                prefSalesPerson: document.getElementById('prefSalesPerson')?.value || '',
-                prefContractor: document.getElementById('prefContractor')?.value || '',
-                prefInvoiceFrequency: document.getElementById('prefInvoiceFrequency')?.value || '',
-                billingFirstName: document.getElementById('billingFirstName')?.value || '',
-                billingLastName: document.getElementById('billingLastName')?.value || '',
-                billingPhone: document.getElementById('billingPhone')?.value || '',
-                billingEmail: document.getElementById('billingEmail')?.value || '',
-                billingAddress: document.getElementById('billingAddress')?.value || '',
-                billingCompanyName: document.getElementById('billingCompanyName')?.value || '',
-                customerNotes: document.getElementById('customerNotes')?.value || '',
-                customFields
-            };
-            localStorage.setItem('selectedCustomer', JSON.stringify(updated));
-            window.location.href = 'customer-details.html';
         });
     }
 }); 
