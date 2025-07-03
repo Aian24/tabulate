@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1" name="viewport"/>
-        <title>Invoices</title>
+        <title>Transactions</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
         <script src="https://unpkg.com/@popperjs/core@2"></script>
@@ -26,11 +26,12 @@
     <div id="nav-container"></div>
 
     <div class="max-w-md mx-auto mt-4">
-        <!-- Header -->
+        <!-- Back link -->
         <div class="flex items-center gap-2 cursor-pointer select-none mb-2" onclick="history.back()">
             <i class="fas fa-arrow-left text-lg text-black"></i>
-            <span class="text-black text-base font-medium">Invoices</span>
+            <span class="text-black text-base font-medium">Transactions</span>
         </div>
+        <a href="" class="text-sky-700 text-lg"><i class="fas fa-arrow-left"></i></a>
         <div class="rounded-[2rem] overflow-hidden shadow-lg bg-white">
             <div class="bg-[#4CB6E8] flex flex-col items-center pt-8 pb-4 relative">
                 <div class="relative">
@@ -50,45 +51,33 @@
                 <p class="text-center text-black/80 text-base font-medium">sallie@bria.com</p>
             </div>
             <div class="px-4 py-6 bg-[#F3F8FC] flex flex-col gap-4">
-                <!-- Invoice Card 1 -->
+                <!-- Transaction Card 1 -->
                 <div class="bg-white rounded-xl shadow p-4 flex flex-col gap-2">
-                    <div class="flex justify-between items-center">
-                        <span class="text-black/80 text-sm font-medium">Invoice No. 218046737</span>
-                        <a href="#" class="text-[#4CB6E8] font-bold text-sm">Value</a>
-                    </div>
-                    <div class="text-black/80 text-sm">Total Cost : $0.0</div>
-                    <div class="text-black/80 text-sm">Date Created : mm/dd/yyyy</div>
-                    <div class="text-black/80 text-sm">Status : mm/dd/yyyy</div>
+                    <div class="text-black/80 text-sm font-medium">Date Created: <span class="text-[#4CB6E8]">mm//dd//yyy</span></div>
+                    <div class="text-black/80 text-sm">Type : Invoice Due Soon</div>
+                    <div class="text-black/80 text-sm">Details: Invoice 1038-01 is due soon</div>
+                    <div class="text-black/80 text-sm">Total: <span class="text-[#4CB6E8] font-bold">$ 0.00</span></div>
                 </div>
-                <!-- Invoice Card 2 -->
+                <!-- Transaction Card 2 -->
                 <div class="bg-white rounded-xl shadow p-4 flex flex-col gap-2">
-                    <div class="flex justify-between items-center">
-                        <span class="text-black/80 text-sm font-medium">Invoice No. 218046737</span>
-                        <a href="#" class="text-[#4CB6E8] font-bold text-sm">Value</a>
-                    </div>
-                    <div class="text-black/80 text-sm">Total Cost : $0.0</div>
-                    <div class="text-black/80 text-sm">Date Created : mm/dd/yyyy</div>
-                    <div class="text-black/80 text-sm">Status : mm/dd/yyyy</div>
+                    <div class="text-black/80 text-sm font-medium">Date Created: <span class="text-[#4CB6E8]">mm//dd//yyy</span></div>
+                    <div class="text-black/80 text-sm">Type : Invoice Due Soon</div>
+                    <div class="text-black/80 text-sm">Details: Invoice 1038-01 is due soon</div>
+                    <div class="text-black/80 text-sm">Total: <span class="text-[#4CB6E8] font-bold">$ 0.00</span></div>
                 </div>
-                <!-- Invoice Card 3 -->
+                <!-- Transaction Card 3 -->
                 <div class="bg-white rounded-xl shadow p-4 flex flex-col gap-2">
-                    <div class="flex justify-between items-center">
-                        <span class="text-black/80 text-sm font-medium">Invoice No. 218046737</span>
-                        <a href="#" class="text-[#4CB6E8] font-bold text-sm">Value</a>
-                    </div>
-                    <div class="text-black/80 text-sm">Total Cost : $0.0</div>
-                    <div class="text-black/80 text-sm">Date Created : mm/dd/yyyy</div>
-                    <div class="text-black/80 text-sm">Status : mm/dd/yyyy</div>
+                    <div class="text-black/80 text-sm font-medium">Date Created: <span class="text-[#4CB6E8]">mm//dd//yyy</span></div>
+                    <div class="text-black/80 text-sm">Type : Invoice Due Soon</div>
+                    <div class="text-black/80 text-sm">Details: Invoice 1038-01 is due soon</div>
+                    <div class="text-black/80 text-sm">Total: <span class="text-[#4CB6E8] font-bold">$ 0.00</span></div>
                 </div>
-                <!-- Invoice Card 4 -->
+                <!-- Transaction Card 4 -->
                 <div class="bg-white rounded-xl shadow p-4 flex flex-col gap-2">
-                    <div class="flex justify-between items-center">
-                        <span class="text-black/80 text-sm font-medium">Invoice No. 218046737</span>
-                        <a href="#" class="text-[#4CB6E8] font-bold text-sm">Value</a>
-                    </div>
-                    <div class="text-black/80 text-sm">Total Cost : $0.0</div>
-                    <div class="text-black/80 text-sm">Date Created : mm/dd/yyyy</div>
-                    <div class="text-black/80 text-sm">Status : mm/dd/yyyy</div>
+                    <div class="text-black/80 text-sm font-medium">Date Created: <span class="text-[#4CB6E8]">mm//dd//yyy</span></div>
+                    <div class="text-black/80 text-sm">Type : Invoice Due Soon</div>
+                    <div class="text-black/80 text-sm">Details: Invoice 1038-01 is due soon</div>
+                    <div class="text-black/80 text-sm">Total: <span class="text-[#4CB6E8] font-bold">$ 0.00</span></div>
                 </div>
                 <div class="pt-4 pb-2">
                     <button class="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 rounded-lg shadow transition">Save</button>

@@ -23,11 +23,11 @@
     <div id="header-container"></div>
     <!-- Include navigation -->
     <div id="nav-container"></div>
-    <main class="p-4">
+    <main class="p-4 bg-[#183153] min-h-screen text-white">
         <div class="flex justify-between items-center mb-4 w-full">
             <span class="text-lg font-semibold">Popular Services</span>
             <div class="flex items-center gap-2">
-                    <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700" id="menu-button" aria-expanded="false" aria-haspopup="true">
+                    <button type="button" class="inline-flex justify-center w-full rounded-md px-4 py-1.5 bg-blue-400 text-sm font-medium text-white shadow" id="menu-button" aria-expanded="false" aria-haspopup="true">
                         More
                         <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -35,14 +35,34 @@
                     </button>
                     <div id="dropdown-menu" class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10" style="display: none;">
                         <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="menu-button">
-                            <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem">Export</a>
-                            <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem">Print</a>
-                            <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem">Settings</a>
+                            <a href="#" class="text-gray-100 block px-4 py-2 text-sm hover:bg-gray-800" role="menuitem">Export</a>
+                            <a href="#" class="text-gray-100 block px-4 py-2 text-sm hover:bg-gray-800" role="menuitem">Print</a>
+                            <a href="#" class="text-gray-100 block px-4 py-2 text-sm hover:bg-gray-800" role="menuitem">Settings</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="border-t border-gray-200 my-2"></div>
+        <div class="flex flex-row p-0 w-full">
+            <div class="w-1/2 flex flex-col">
+                <h2 class="text-2xl font-bold mb-2">New Service</h2>
+                <ul class="flex flex-col gap-1" id="vertical-tabs">
+                    <li class="text-white cursor-pointer px-2 py-1 rounded hover:bg-blue-700 bg-blue-500" data-content="service-information-and-preview-content.html">Service Information</li>
+                    <li class="text-white cursor-pointer px-2 py-1 rounded hover:bg-blue-700" data-content="material-list-content.html">Material List</li>
+                    <li class="text-white cursor-pointer px-2 py-1 rounded hover:bg-blue-700" data-content="equipment-list-content.html">Equipment List</li>
+                    <li class="text-white cursor-pointer px-2 py-1 rounded hover:bg-blue-700" data-content="manpower-content.html">Manpower</li>
+                    <li class="text-white cursor-pointer px-2 py-1 rounded hover:bg-blue-700" data-content="custom-fields-content.html">Custom Fields</li>
+                </ul>
+                <div id="tab-content-area" class="w-full"></div>
+            </div>
+            <div class="pl-1 w-1/2 flex items-start justify-center">
+                <div id="tab-preview-area" class="w-full"></div>
+            </div>
+        </div>
+        <!-- Add this container for below-row content -->
+        <div id="below-row-content"></div>
+     </main>   
     <script>
         // Load header and nav
         fetch('../nav/header.html')
@@ -55,6 +75,79 @@
             .then(data => {
                 document.getElementById('nav-container').innerHTML = data;
             });
+
+        // Tab content loading logic (with preview area)
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabItems = document.querySelectorAll('#vertical-tabs li');
+            const contentArea = document.getElementById('tab-content-area');
+            const previewArea = document.getElementById('tab-preview-area');
+            function loadTabContent(file, previewFile) {
+                if (file === 'service-information-and-preview-content.html') {
+                    fetch(file)
+                        .then(response => response.text())
+                        .then(html => {
+                            // Create a temporary DOM to extract the three sections
+                            const tempDiv = document.createElement('div');
+                            tempDiv.innerHTML = html;
+                            const infoTab = tempDiv.querySelector('#service-info-tab');
+                            const previewTab = tempDiv.querySelector('#service-preview-tab');
+                            const relatedServices = Array.from(tempDiv.children).find(
+                                el => el.textContent && el.textContent.includes('Related Services') && el.tagName === 'DIV'
+                            );
+                            contentArea.innerHTML = infoTab ? infoTab.outerHTML : '';
+                            previewArea.innerHTML = previewTab ? previewTab.outerHTML : '';
+                            // Insert Related Services below the flex row
+                            let relatedContainer = document.getElementById('related-services-container');
+                            if (!relatedContainer) {
+                                relatedContainer = document.createElement('div');
+                                relatedContainer.id = 'related-services-container';
+                                // Insert after the flex row
+                                const flexRow = document.querySelector('.flex.flex-row.p-0.w-full');
+                                if (flexRow && flexRow.parentNode) {
+                                    flexRow.parentNode.insertBefore(relatedContainer, flexRow.nextSibling);
+                                }
+                            }
+                            relatedContainer.innerHTML = relatedServices ? relatedServices.outerHTML : '';
+                            // Clear below-row content
+                            const belowRow = document.getElementById('below-row-content');
+                            if (belowRow) belowRow.innerHTML = '';
+                        });
+                } else {
+                    fetch(file)
+                        .then(response => response.text())
+                        .then(html => {
+                            // Insert into below-row-content
+                            let belowRow = document.getElementById('below-row-content');
+                            if (!belowRow) {
+                                belowRow = document.createElement('div');
+                                belowRow.id = 'below-row-content';
+                                // Insert after the flex row
+                                const flexRow = document.querySelector('.flex.flex-row.p-0.w-full');
+                                if (flexRow && flexRow.parentNode) {
+                                    flexRow.parentNode.insertBefore(belowRow, flexRow.nextSibling);
+                                }
+                            }
+                            belowRow.innerHTML = html;
+                        });
+                    contentArea.innerHTML = '';
+                    previewArea.innerHTML = '';
+                    // Remove Related Services if present
+                    const relatedContainer = document.getElementById('related-services-container');
+                    if (relatedContainer) relatedContainer.innerHTML = '';
+                }
+            }
+            // Load default tab
+            loadTabContent('service-information-and-preview-content.html', null);
+            tabItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    tabItems.forEach(i => i.classList.remove('bg-blue-500'));
+                    this.classList.add('bg-blue-500');
+                    const file = this.getAttribute('data-content');
+                    loadTabContent(file, null);
+                });
+            });
+        });
     </script>
 
-</body> </html>
+</body> 
+</html>

@@ -27,8 +27,9 @@
     <!-- Back Button -->
     <div class="max-w-md mx-auto mt-4 flex items-center gap-2 cursor-pointer select-none" onclick="history.back()">
         <i class="fas fa-arrow-left text-lg text-black"></i>
-        <span class="text-black text-base font-medium">Custom Fields</span>
+        <span class="text-black text-base font-medium">Billing Information</span>
     </div>
+    <a href="" class="text-sky-700 text-lg"><i class="fas fa-arrow-left"></i></a>
     <div class="max-w-md mx-auto mt-6 rounded-[2rem] overflow-hidden shadow-lg bg-white">
         <div class="bg-[#4CB6E8] flex flex-col items-center pt-8 pb-4 relative">
             <div class="relative">
@@ -42,49 +43,26 @@
                     <i class="fas fa-pen fa-sm"></i>
                 </span>
             </div>
-            <div class="flex items-center gap-2 mt-2">
-                <h2 class="text-3xl font-extrabold text-center text-black">Bria Salsalani</h2>
-            </div>
+            <h2 class="text-3xl font-extrabold text-center text-black mt-2">Bria Salsalani</h2>
             <p class="text-center text-black/80 text-base font-medium">sallie@bria.com</p>
         </div>
-        <div class="px-4 py-6 bg-[#F3F8FC] flex flex-col gap-4">
-            <!-- Custom Field Card 1 -->
-            <div class="bg-white rounded-xl shadow p-4 flex flex-col gap-2">
-                <div class="flex justify-between items-center">
-                    <span class="font-bold text-black text-base">Field Name</span>
-                    <span class="text-blue-500 font-bold">Value</span>
-                </div>
-                <div class="text-black/80 text-sm">Description</div>
-                <div class="flex justify-end mt-2">
-                    <button class="px-4 py-1 bg-blue-200 text-blue-700 rounded-lg font-bold text-sm">Action</button>
-                </div>
-            </div>
-            <!-- Custom Field Card 2 -->
-            <div class="bg-white rounded-xl shadow p-4 flex flex-col gap-2">
-                <div class="flex justify-between items-center">
-                    <span class="font-bold text-black text-base">Field Name</span>
-                    <span class="text-blue-500 font-bold">Value</span>
-                </div>
-                <div class="text-black/80 text-sm">Description</div>
-                <div class="flex justify-end mt-2">
-                    <button class="px-4 py-1 bg-blue-200 text-blue-700 rounded-lg font-bold text-sm">Action</button>
-                </div>
-            </div>
-            <!-- Custom Field Card 3 -->
-            <div class="bg-white rounded-xl shadow p-4 flex flex-col gap-2">
-                <div class="flex justify-between items-center">
-                    <span class="font-bold text-black text-base">Field Name</span>
-                    <span class="text-blue-500 font-bold">Value</span>
-                </div>
-                <div class="text-black/80 text-sm">Description</div>
-                <div class="flex justify-end mt-2">
-                    <button class="px-4 py-1 bg-blue-200 text-blue-700 rounded-lg font-bold text-sm">Action</button>
-                </div>
-            </div>
+        <form class="px-6 py-6 flex flex-col gap-1 bg-[#F3F8FC]">
+            <label class="text-sm font-bold text-black mt-2" for="first-name">First Name</label>
+            <input type="text" id="first-name" value="Janet" class="rounded-lg border border-gray-200 px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 font-medium"/>
+            <label class="text-sm font-bold text-black mt-2" for="last-name">Last Name</label>
+            <input type="text" id="last-name" value="Aleesha" class="rounded-lg border border-gray-200 px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 font-medium"/>
+            <label class="text-sm font-bold text-black mt-2" for="phone-number">Phone Number</label>
+            <input type="text" id="phone-number" value="(02) 456-8582" class="rounded-lg border border-gray-200 px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 font-medium"/>
+            <label class="text-sm font-bold text-black mt-2" for="email-address">Email Address</label>
+            <input type="email" id="email-address" value="janet@aleesha.com" class="rounded-lg border border-gray-200 px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 font-medium"/>
+            <label class="text-sm font-bold text-black mt-2" for="current-address">Current Address</label>
+            <input type="text" id="current-address" value="888 Mindanao Avenue, Barangay Talipapa, Quezon City, MM 7784" class="rounded-lg border border-gray-200 px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 font-medium"/>
+            <label class="text-sm font-bold text-black mt-2" for="company-name">Company Name</label>
+            <input type="text" id="company-name" value="Yrrecrerre Building" class="rounded-lg border border-gray-200 px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 font-medium"/>
             <div class="pt-4 pb-2">
-                <button class="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 rounded-lg shadow transition">Save</button>
+                <button type="submit" class="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 rounded-lg shadow transition">Save</button>
             </div>
-        </div>
+        </form>
     </div>
     <script>
     // Load header and navigation

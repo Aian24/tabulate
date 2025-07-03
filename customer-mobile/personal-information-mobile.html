@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1" name="viewport"/>
-        <title>Jobs</title>
+        <title>Contractors List</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
         <script src="https://unpkg.com/@popperjs/core@2"></script>
@@ -24,11 +24,12 @@
 
     <!-- Include navigation -->
     <div id="nav-container"></div>
-
+    <!-- Back Button -->
     <div class="max-w-md mx-auto mt-4 flex items-center gap-2 cursor-pointer select-none" onclick="history.back()">
         <i class="fas fa-arrow-left text-lg text-black"></i>
-        <span class="text-black text-base font-medium">Estimates</span>
+        <span class="text-black text-base font-medium">Personal Information</span>
     </div>
+    <a href="" class="text-sky-700 text-lg"><i class="fas fa-arrow-left"></i></a>
     <div class="max-w-md mx-auto mt-6 rounded-[2rem] overflow-hidden shadow-lg bg-white">
         <div class="bg-[#4CB6E8] flex flex-col items-center pt-8 pb-4 relative">
             <div class="relative">
@@ -42,44 +43,26 @@
                     <i class="fas fa-pen fa-sm"></i>
                 </span>
             </div>
-            <div class="flex items-center gap-2 mt-2">
-                <h2 class="text-3xl font-extrabold text-center text-black">Bria Salsalani</h2>
-            </div>
+            <h2 class="text-3xl font-extrabold text-center text-black mt-2">Bria Salsalani</h2>
             <p class="text-center text-black/80 text-base font-medium">sallie@bria.com</p>
         </div>
-        <div class="px-4 py-6 bg-[#F3F8FC] flex flex-col gap-4">
-            <!-- Estimate Card 1 -->
-            <div class="bg-white rounded-xl shadow p-4 flex flex-col gap-2">
-                <div class="text-black/80 text-sm">Date Created: <span class="text-black/60">mm/dd/yyyy</span></div>
-                <div class="text-black/80 text-sm">Type : Invoice Due Soon</div>
-                <div class="text-black/80 text-sm">Details: Invoice 1038-01 is due soon</div>
-                <div class="text-black/80 text-sm">Total: <a href="#" class="text-blue-500 underline font-bold">$ 0.00</a></div>
-            </div>
-            <!-- Estimate Card 2 -->
-            <div class="bg-white rounded-xl shadow p-4 flex flex-col gap-2">
-                <div class="text-black/80 text-sm">Date Created: <span class="text-black/60">mm/dd/yyyy</span></div>
-                <div class="text-black/80 text-sm">Type : Invoice Due Soon</div>
-                <div class="text-black/80 text-sm">Details: Invoice 1038-01 is due soon</div>
-                <div class="text-black/80 text-sm">Total: <a href="#" class="text-blue-500 underline font-bold">$ 0.00</a></div>
-            </div>
-            <!-- Estimate Card 3 -->
-            <div class="bg-white rounded-xl shadow p-4 flex flex-col gap-2">
-                <div class="text-black/80 text-sm">Date Created: <span class="text-black/60">mm/dd/yyyy</span></div>
-                <div class="text-black/80 text-sm">Type : Invoice Due Soon</div>
-                <div class="text-black/80 text-sm">Details: Invoice 1038-01 is due soon</div>
-                <div class="text-black/80 text-sm">Total: <a href="#" class="text-blue-500 underline font-bold">$ 0.00</a></div>
-            </div>
-            <!-- Estimate Card 4 -->
-            <div class="bg-white rounded-xl shadow p-4 flex flex-col gap-2">
-                <div class="text-black/80 text-sm">Date Created: <span class="text-black/60">mm/dd/yyyy</span></div>
-                <div class="text-black/80 text-sm">Type : Invoice Due Soon</div>
-                <div class="text-black/80 text-sm">Details: Invoice 1038-01 is due soon</div>
-                <div class="text-black/80 text-sm">Total: <a href="#" class="text-blue-500 underline font-bold">$ 0.00</a></div>
-            </div>
+        <form class="px-6 py-6 flex flex-col gap-1 bg-[#F3F8FC]">
+            <label class="text-sm font-bold text-black mt-2" for="first-name">First Name</label>
+            <input type="text" id="first-name" value="Bria" class="rounded-lg border border-gray-200 px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 font-medium"/>
+            <label class="text-sm font-bold text-black mt-2" for="last-name">Last Name</label>
+            <input type="text" id="last-name" value="Salsalani" class="rounded-lg border border-gray-200 px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 font-medium"/>
+            <label class="text-sm font-bold text-black mt-2" for="phone-number">Phone Number</label>
+            <input type="text" id="phone-number" value="3758644" class="rounded-lg border border-gray-200 px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 font-medium"/>
+            <label class="text-sm font-bold text-black mt-2" for="email-address">Email Address</label>
+            <input type="email" id="email-address" value="sallie@bria.com" class="rounded-lg border border-gray-200 px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 font-medium"/>
+            <label class="text-sm font-bold text-black mt-2" for="current-address">Current Address</label>
+            <input type="text" id="current-address" value="Pinyahan, Diliman, Quezon, Metro Manila, Philippines 1008" class="rounded-lg border border-gray-200 px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 font-medium"/>
+            <label class="text-sm font-bold text-black mt-2" for="billing-address">Billing Address</label>
+            <input type="text" id="billing-address" value="Armal Building" class="rounded-lg border border-gray-200 px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 font-medium"/>
             <div class="pt-4 pb-2">
-                <button class="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 rounded-lg shadow transition">Save</button>
+                <button type="submit" class="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 rounded-lg shadow transition">Save</button>
             </div>
-        </div>
+        </form>
     </div>
     <script>
     // Load header and navigation
@@ -94,5 +77,8 @@
             document.getElementById('nav-container').innerHTML = data;
         });
     </script>
+    <script src="../js/main.js"></script>
+    <script src="../js/activeprojects.js"></script>
+    <script src="../js/contractors.js"></script>
 </body>
 </html> 

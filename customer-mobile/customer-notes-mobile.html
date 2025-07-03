@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1" name="viewport"/>
-        <title>Jobs</title>
+        <title>Contractors List</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
         <script src="https://unpkg.com/@popperjs/core@2"></script>
@@ -24,11 +24,12 @@
 
     <!-- Include navigation -->
     <div id="nav-container"></div>
-
+    <!-- Back Button -->
     <div class="max-w-md mx-auto mt-4 flex items-center gap-2 cursor-pointer select-none" onclick="history.back()">
         <i class="fas fa-arrow-left text-lg text-black"></i>
-        <span class="text-black text-base font-medium">Jobs</span>
+        <span class="text-black text-base font-medium">Customer Notes</span>
     </div>
+    <a href="" class="text-sky-700 text-lg"><i class="fas fa-arrow-left"></i></a>
     <div class="max-w-md mx-auto mt-6 rounded-[2rem] overflow-hidden shadow-lg bg-white">
         <div class="bg-[#4CB6E8] flex flex-col items-center pt-8 pb-4 relative">
             <div class="relative">
@@ -48,38 +49,38 @@
             <p class="text-center text-black/80 text-base font-medium">sallie@bria.com</p>
         </div>
         <div class="px-4 py-6 bg-[#F3F8FC] flex flex-col gap-4">
-            <!-- Project Card 1 -->
+            <!-- Custom Field Card 1 -->
             <div class="bg-white rounded-xl shadow p-4 flex flex-col gap-2">
                 <div class="flex justify-between items-center">
-                    <span class="font-bold text-black text-base">Project Number</span>
-                    <a href="#" class="text-blue-500 font-bold">1002</a>
+                    <span class="font-bold text-black text-base">Note 1</span>
+                    <span class="text-blue-500 font-bold">Value</span>
                 </div>
-                <div class="text-black/80 text-sm">Date Started: mm/dd/yyyy</div>
-                <div class="text-black/80 text-sm">EndTarget: mm/dd/yyyy</div>
-                <div class="text-black/80 text-sm">Status: <span class="text-blue-500 font-bold">Undispatched</span></div>
-                <div class="text-black/80 text-sm">Assigned Team: <span class="text-blue-500 font-bold">Team B</span></div>
+                <div class="text-black/80 text-sm">Description</div>
+                <div class="flex justify-end mt-2">
+                    <button class="px-4 py-1 bg-blue-200 text-blue-700 rounded-lg font-bold text-sm">Action</button>
+                </div>
             </div>
-            <!-- Project Card 2 -->
+            <!-- Custom Field Card 2 -->
             <div class="bg-white rounded-xl shadow p-4 flex flex-col gap-2">
                 <div class="flex justify-between items-center">
-                    <span class="font-bold text-black text-base">Project Number</span>
-                    <a href="#" class="text-blue-500 font-bold">1002</a>
+                    <span class="font-bold text-black text-base">Note 2</span>
+                    <span class="text-blue-500 font-bold">Value</span>
                 </div>
-                <div class="text-black/80 text-sm">Date Started: mm/dd/yyyy</div>
-                <div class="text-black/80 text-sm">EndTarget: mm/dd/yyyy</div>
-                <div class="text-black/80 text-sm">Status: <span class="text-blue-500 font-bold">Undispatched</span></div>
-                <div class="text-black/80 text-sm">Assigned Team: <span class="text-blue-500 font-bold">Team B</span></div>
+                <div class="text-black/80 text-sm">Description</div>
+                <div class="flex justify-end mt-2">
+                    <button class="px-4 py-1 bg-blue-200 text-blue-700 rounded-lg font-bold text-sm">Action</button>
+                </div>
             </div>
-            <!-- Project Card 3 -->
+            <!-- Custom Field Card 3 -->
             <div class="bg-white rounded-xl shadow p-4 flex flex-col gap-2">
                 <div class="flex justify-between items-center">
-                    <span class="font-bold text-black text-base">Project Number</span>
-                    <a href="#" class="text-blue-500 font-bold">1002</a>
+                    <span class="font-bold text-black text-base">Note 3</span>
+                    <span class="text-blue-500 font-bold">Value</span>
                 </div>
-                <div class="text-black/80 text-sm">Date Started: mm/dd/yyyy</div>
-                <div class="text-black/80 text-sm">EndTarget: mm/dd/yyyy</div>
-                <div class="text-black/80 text-sm">Status: <span class="text-blue-500 font-bold">Undispatched</span></div>
-                <div class="text-black/80 text-sm">Assigned Team: <span class="text-blue-500 font-bold">Team B</span></div>
+                <div class="text-black/80 text-sm">Description</div>
+                <div class="flex justify-end mt-2">
+                    <button class="px-4 py-1 bg-blue-200 text-blue-700 rounded-lg font-bold text-sm">Action</button>
+                </div>
             </div>
             <div class="pt-4 pb-2">
                 <button class="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 rounded-lg shadow transition">Save</button>
@@ -99,5 +100,8 @@
             document.getElementById('nav-container').innerHTML = data;
         });
     </script>
+    <script src="../js/main.js"></script>
+    <script src="../js/activeprojects.js"></script>
+    <script src="../js/contractors.js"></script>
 </body>
 </html> 

@@ -1,0 +1,70 @@
+<div id="service-info-tab">
+    <div class="flex flex-col w-full">
+        <div class="bg-white rounded p-2 mb-2">
+            <div class="font-semibold border-b border-gray-400 mb-2 pb-1 text-black">Service Information</div>
+            <input type="text" placeholder="Service Name" class="w-full mb-1 px-2 py-1 rounded border text-black"/>
+            <input type="text" placeholder="Estimate Name" class="w-full mb-1 px-2 py-1 rounded border text-black"/>
+            <input type="text" placeholder="Tags" class="w-full mb-1 px-2 py-1 rounded border text-black"/>
+            <input type="text" placeholder="Business Category" class="w-full mb-1 px-2 py-1 rounded border text-black"/>
+            <input type="text" placeholder="Budget Hours" class="w-full mb-1 px-2 py-1 rounded border text-black"/>
+            <select class="w-full mb-1 px-2 py-1 rounded border text-black">
+                <option>Billing Mode</option>
+            </select>
+            <select class="w-full mb-1 px-2 py-1 rounded border text-black">
+                <option>Tax</option>
+            </select>
+        </div>
+        <div class="bg-white rounded p-2 mb-2">
+            <div class="font-semibold border-b border-gray-400 mb-2 pb-1 text-black">Select Seasons</div>
+            <input type="text" placeholder="season" class="w-full mb-1 px-2 py-1 rounded border text-black"/>
+            <input type="text" placeholder="Start Date mm/dd/yyyy" class="w-full mb-1 px-2 py-1 rounded border text-black"/>
+            <input type="text" placeholder="End Date mm/dd/yyyy" class="w-full mb-1 px-2 py-1 rounded border text-black"/>
+            <button class="bg-blue-500 text-white px-2 py-1 rounded w-full">Add +</button>
+        </div>
+        <div class="bg-white rounded p-2 mb-2">
+            <div class="font-semibold border-b border-gray-400 mb-2 pb-1 text-black">Scheduling Settings</div>
+            <select class="w-full mb-1 px-2 py-1 rounded border text-black">
+                <option>Recurrence Type</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div id="service-preview-tab">
+    <div class="flex flex-col gap-2 w-full">
+        <!-- Service Preview Card -->
+        <div class="bg-[#183153] rounded p-2 w-full">
+            <div class="font-semibold text-white border-b border-gray-400 mb-2 pb-1">Service Preview</div>
+            <img src="../images/landscaping.png" alt="Service Preview" class="rounded mb-2 w-full h-[120px] object-cover"/>
+            <div class="w-full">
+                <div class="font-semibold text-white">Landscaping <span class="float-right text-gray-200">$0.00</span></div>
+                <div class="text-xs text-gray-300">Garden Beautification</div>
+                <div class="text-xs text-gray-300">Landscape & Maintenance</div>
+                <div class="text-xs text-gray-400">218046737 <span class="float-right text-green-400">Active</span></div>
+            </div>
+        </div>
+        <!-- Description Box -->
+        <div class="bg-white rounded p-2 w-full">
+            <div class="font-semibold border-b border-gray-400 mb-2 pb-1 text-black">Description</div>
+            <textarea class="w-full h-52 rounded border text-black" placeholder="(max of 150 Characters)" style="height: 240px;"></textarea>
+        </div>
+        <!-- Terms & Condition Box -->
+        <div class="bg-white rounded p-2 w-full">
+            <div class="font-semibold border-b border-gray-400 mb-2 pb-1 text-black">Terms & Condition</div>
+            <textarea class="w-full h-52 rounded border text-black" placeholder="(max of 150 Characters)"></textarea>
+        </div>
+    </div>
+</div>
+<!-- Related Services section, outside the two main containers -->
+<div class="bg-white rounded p-2 w-full">
+    <div class="font-semibold border-b border-gray-400 mb-2 pb-1 text-black">Related Services</div>
+    <select class="w-full mb-2 px-2 py-1 rounded border text-black">
+        <option>Select More Services</option>
+    </select>
+    <div class="flex flex-wrap gap-1">
+        <span class="bg-blue-300 text-white px-2 py-1 rounded text-xs">Weed Control</span>
+        <span class="bg-blue-300 text-white px-2 py-1 rounded text-xs">Lawn Mowing</span>
+        <span class="bg-blue-300 text-white px-2 py-1 rounded text-xs">Washing Machine Maintenance</span>
+        <span class="bg-blue-300 text-white px-2 py-1 rounded text-xs">Residential House Planning</span>
+        <span class="bg-blue-300 text-white px-2 py-1 rounded text-xs">Roofing Installation</span>
+    </div>
+</div> 
