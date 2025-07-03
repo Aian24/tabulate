@@ -9,29 +9,32 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Dropdown toggles
-    function setupDropdown(buttonId, menuId) {
-        const btn = document.getElementById(buttonId);
-        const menu = document.getElementById(menuId);
-        if (btn && menu) {
-            btn.addEventListener('click', function (e) {
-                e.stopPropagation();
-                menu.classList.toggle('hidden');
-            });
-        }
-    }
-    setupDropdown('actionsDropdown', 'actionsMenu');
-    setupDropdown('moreDropdown', 'moreMenu');
+    // Dropdown toggles (fix: only one open at a time)
+    const actionsDropdown = document.getElementById('actionsDropdown');
+    const actionsMenu = document.getElementById('actionsMenu');
+    const moreDropdown = document.getElementById('moreDropdown');
+    const moreMenu = document.getElementById('moreMenu');
 
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', function () {
-        const menus = ['actionsMenu', 'moreMenu'];
-        menus.forEach(id => {
-            const menu = document.getElementById(id);
-            if (menu && !menu.classList.contains('hidden')) {
-                menu.classList.add('hidden');
-            }
+    if (actionsDropdown && actionsMenu && moreMenu) {
+        actionsDropdown.addEventListener('click', function (e) {
+            e.stopPropagation();
+            actionsMenu.classList.toggle('hidden');
+            moreMenu.classList.add('hidden');
         });
+    }
+    if (moreDropdown && moreMenu && actionsMenu) {
+        moreDropdown.addEventListener('click', function (e) {
+            e.stopPropagation();
+            moreMenu.classList.toggle('hidden');
+            actionsMenu.classList.add('hidden');
+        });
+    }
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function (e) {
+        if (!actionsDropdown.contains(e.target) && !moreDropdown.contains(e.target)) {
+            actionsMenu && actionsMenu.classList.add('hidden');
+            moreMenu && moreMenu.classList.add('hidden');
+        }
     });
 
     // Placeholder for filter/search logic

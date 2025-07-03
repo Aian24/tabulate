@@ -14,6 +14,40 @@ document.addEventListener('DOMContentLoaded', function () {
     if (isEmployeeListPage) {
         initializeEmployeeRowClicks();
     }
+
+    // --- DROPDOWN LOGIC FOR ACTIONS AND MORE BUTTONS ---
+    const actionsDropdown = document.getElementById('actionsDropdown');
+    const actionsMenu = document.getElementById('actionsMenu');
+    const moreDropdown = document.getElementById('moreDropdown');
+    const moreMenu = document.getElementById('moreMenu');
+
+    // Toggle actions menu
+    if (actionsDropdown && actionsMenu && moreMenu) {
+        actionsDropdown.addEventListener('click', (e) => {
+            e.stopPropagation();
+            actionsMenu.classList.toggle('hidden');
+            moreMenu.classList.add('hidden');
+        });
+    }
+
+    // Toggle more menu
+    if (moreDropdown && moreMenu && actionsMenu) {
+        moreDropdown.addEventListener('click', (e) => {
+            e.stopPropagation();
+            moreMenu.classList.toggle('hidden');
+            actionsMenu.classList.add('hidden');
+        });
+    }
+
+    // Close menus when clicking outside
+    if (actionsDropdown && moreDropdown && actionsMenu && moreMenu) {
+        document.addEventListener('click', (e) => {
+            if (!actionsDropdown.contains(e.target) && !moreDropdown.contains(e.target)) {
+                actionsMenu.classList.add('hidden');
+                moreMenu.classList.add('hidden');
+            }
+        });
+    }
 });
 
 function initializeDeletedEmployeesCheckboxes() {

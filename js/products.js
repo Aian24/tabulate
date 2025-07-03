@@ -1,16 +1,16 @@
 // Product data from the provided image
 const products = [
-  { name: 'Plant Cutters 1.', vendors: 'Global', price: '$ 97.34', date: 'March 12, 2025' },
-  { name: 'Stairs', vendors: 'DIYI', price: '$ 800.00', date: 'March 12, 2025' },
-  { name: 'Steel Bars', vendors: 'Global', price: '$ 76.87', date: 'March 12, 2025' },
-  { name: 'Parasitic Acid', vendors: 'Citi Hardware', price: '$ 50.00', date: 'March 12, 2025' },
-  { name: 'Paint Brush Set', vendors: 'LIXIL', price: '$ 350.00', date: 'March 12, 2025' },
-  { name: 'Wheelbarrows', vendors: 'Ryobi', price: '$ 3,200.00', date: 'March 12, 2025' },
-  { name: 'Garden Soil Mix', vendors: 'Stanley', price: '$ 231.28', date: 'March 12, 2025' },
-  { name: 'Bricks', vendors: 'Ace Hardware', price: '$ 20.00', date: 'March 12, 2025' },
-  { name: 'Gloves (Rubber-coated)', vendors: 'LIXIL', price: '$ 150.00', date: 'March 12, 2025' },
-  { name: 'Rake.', vendors: 'Ace Hardware, Oshwald', price: '$ 1,000.00, $ 112.25', date: 'March 12, 2025' },
-  { name: 'Mawer', vendors: 'DIYI', price: '$ 1,000.00', date: 'March 12, 2025' },
+  { name: 'Plant Cutters 1.', vendors: 'Global', price: '$ 97.34', date: 'March 12, 2025', status: 'Active' },
+  { name: 'Stairs', vendors: 'DIYI', price: '$ 800.00', date: 'March 12, 2025', status: 'Inactive' },
+  { name: 'Steel Bars', vendors: 'Global', price: '$ 76.87', date: 'March 12, 2025', status: 'Active' },
+  { name: 'Parasitic Acid', vendors: 'Citi Hardware', price: '$ 50.00', date: 'March 12, 2025', status: 'Inactive' },
+  { name: 'Paint Brush Set', vendors: 'LIXIL', price: '$ 350.00', date: 'March 12, 2025', status: 'Active' },
+  { name: 'Wheelbarrows', vendors: 'Ryobi', price: '$ 3,200.00', date: 'March 12, 2025', status: 'Active' },
+  { name: 'Garden Soil Mix', vendors: 'Stanley', price: '$ 231.28', date: 'March 12, 2025', status: 'Inactive' },
+  { name: 'Bricks', vendors: 'Ace Hardware', price: '$ 20.00', date: 'March 12, 2025', status: 'Active' },
+  { name: 'Gloves (Rubber-coated)', vendors: 'LIXIL', price: '$ 150.00', date: 'March 12, 2025', status: 'Inactive' },
+  { name: 'Rake.', vendors: 'Ace Hardware, Oshwald', price: '$ 1,000.00, $ 112.25', date: 'March 12, 2025', status: 'Active' },
+  { name: 'Mawer', vendors: 'DIYI', price: '$ 1,000.00', date: 'March 12, 2025', status: 'Inactive' },
 ];
 
 const vendors = ["Global", "Interline", "DIYI", "Citi Hardware", "LIXIL", "Ryobi", "Stanley", "Ace Hardware", "Oshwald"];
@@ -25,6 +25,9 @@ function renderProductsTable() {
       <td class="px-6 py-4 text-sm text-gray-900">${product.name}</td>
       <td class="px-6 py-4 text-sm text-gray-900">${product.vendors}</td>
       <td class="px-6 py-4 text-sm text-gray-900">${product.price}</td>
+      <td class="px-6 py-4 text-sm">
+        <span class="inline-block px-2 py-1 rounded-full text-xs font-semibold ${product.status === 'Active' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}">${product.status}</span>
+      </td>
       <td class="px-6 py-4 text-sm text-gray-900">${product.date}</td>
     `;
     tr.classList.add('cursor-pointer', 'hover:bg-blue-50', 'transition-colors');
@@ -195,6 +198,35 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
           input.classList.remove('hidden');
         }
+      } else if (input.name === 'status') {
+        if (edit) {
+          // Replace input with dropdown
+          const parent = input.parentElement;
+          input.classList.add('hidden');
+          let select = parent.querySelector('select[name="status"]');
+          if (!select) {
+            select = document.createElement('select');
+            select.name = 'status';
+            select.className = 'w-full rounded border border-gray-400 bg-white px-3 py-2 text-base';
+            ['Active', 'Inactive'].forEach(opt => {
+              const option = document.createElement('option');
+              option.value = opt;
+              option.textContent = opt;
+              if (input.value === opt) option.selected = true;
+              select.appendChild(option);
+            });
+            parent.appendChild(select);
+          }
+        } else {
+          // Remove dropdown if exists and show input
+          const parent = input.parentElement;
+          const select = parent.querySelector('select[name="status"]');
+          if (select) select.remove();
+          input.classList.remove('hidden');
+        }
+        input.readOnly = true;
+        input.classList.toggle('bg-gray-100', true);
+        input.classList.toggle('bg-white', false);
       } else {
         input.readOnly = !edit;
         input.classList.toggle('bg-gray-100', !edit);
@@ -436,10 +468,10 @@ document.addEventListener('DOMContentLoaded', function() {
           ${vendorList.map(v => `<option value='${v}'>${v}</option>`).join('')}
         </select>
       </td>
-      <td class='px-4 py-2'><input type='text' class='w-full rounded border border-gray-400 bg-white px-2 py-1 text-base' placeholder='' /></td>
-      <td class='px-4 py-2'><input type='text' class='w-full rounded border border-gray-400 bg-white px-2 py-1 text-base' placeholder='' /></td>
-      <td class='px-4 py-2'><input type='text' class='w-full rounded border border-gray-400 bg-white px-2 py-1 text-base' placeholder='' /></td>
-      <td class='px-4 py-2'><input type='text' class='w-full rounded border border-gray-400 bg-white px-2 py-1 text-base' placeholder='' /></td>
+      <td class='px-4 py-2'><input type='text' class='w-full h-full rounded border border-gray-400 bg-white px-2 py-1 text-base' placeholder='' /></td>
+      <td class='px-4 py-2'><input type='text' class='w-full h-full rounded border border-gray-400 bg-white px-2 py-1 text-base' placeholder='' /></td>
+      <td class='px-4 py-2'><input type='text' class='w-full h-full rounded border border-gray-400 bg-white px-2 py-1 text-base' placeholder='' /></td>
+      <td class='px-4 py-2'><input type='text' class='w-full h-full rounded border border-gray-400 bg-white px-2 py-1 text-base' placeholder='' /></td>
       <td class='px-4 py-2 text-center action-col flex items-center justify-center'>
         <button class='delete-vendor px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600'><i class='fas fa-trash'></i></button>
       </td>
@@ -557,6 +589,9 @@ function renderDeletedProductsTable() {
       <td class="px-6 py-4 text-sm font-medium text-gray-900">${product.name}</td>
       <td class="px-6 py-4 text-sm text-gray-900">${product.vendors}</td>
       <td class="px-6 py-4 text-sm text-gray-900">${product.price}</td>
+      <td class="px-6 py-4 text-sm">
+        <span class="inline-block px-2 py-1 rounded-full text-xs font-semibold ${product.status === 'Active' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}">${product.status}</span>
+      </td>
       <td class="px-6 py-4 text-sm text-gray-900">${product.deletedDate}</td>
       <td class="px-6 py-4">
         <button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn"><i class="fas fa-undo-alt mr-1"></i> Restore</button>
@@ -811,7 +846,6 @@ function renderDeletedServicesMobileCards() {
     `;
     container.appendChild(card);
   });
-  updateSelectAllCheckboxServices();
 }
 
 function updateRestoreButtonVisibilityServices() {
@@ -1095,4 +1129,40 @@ function hideRestoreSelectedProductModal() {
   const modal = document.getElementById('restoreSelectedProductModal');
   if (!modal) return;
   hideModal(modal);
-} 
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Dropdown logic for Actions and More buttons (copied from equipments.js)
+  const actionsDropdown = document.getElementById('actionsDropdown');
+  const actionsMenu = document.getElementById('actionsMenu');
+  const moreDropdown = document.getElementById('moreDropdown');
+  const moreMenu = document.getElementById('moreMenu');
+
+  // Toggle actions menu
+  if (actionsDropdown && actionsMenu && moreMenu) {
+    actionsDropdown.addEventListener('click', (e) => {
+      e.stopPropagation();
+      actionsMenu.classList.toggle('hidden');
+      moreMenu.classList.add('hidden');
+    });
+  }
+
+  // Toggle more menu
+  if (moreDropdown && moreMenu && actionsMenu) {
+    moreDropdown.addEventListener('click', (e) => {
+      e.stopPropagation();
+      moreMenu.classList.toggle('hidden');
+      actionsMenu.classList.add('hidden');
+    });
+  }
+
+  // Close menus when clicking outside
+  if (actionsDropdown && moreDropdown && actionsMenu && moreMenu) {
+    document.addEventListener('click', (e) => {
+      if (!actionsDropdown.contains(e.target) && !moreDropdown.contains(e.target)) {
+        actionsMenu.classList.add('hidden');
+        moreMenu.classList.add('hidden');
+      }
+    });
+  }
+}); 
