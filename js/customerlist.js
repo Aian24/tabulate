@@ -314,10 +314,81 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('customerNotes').value = customerData.customerNotes || '';
         // Custom Fields
         const customFieldsTbody = document.getElementById('customFields');
-        customFieldsTbody.innerHTML = '';
-        (customerData.customFields || []).forEach(f => {
-            customFieldsTbody.innerHTML += `<tr><td class="px-2 py-1">${f.name}</td><td class="px-2 py-1">${f.value}</td></tr>`;
-        });
+        function renderCustomFields(fields) {
+            if (!customFieldsTbody) return;
+            customFieldsTbody.innerHTML = '';
+            (fields || []).forEach((f, idx) => {
+                customFieldsTbody.innerHTML += `<tr>
+                    <td><input type="text" class="border rounded px-2 py-1 w-full" value="${f.name}" data-idx="${idx}" data-type="name"></td>
+                    <td><input type="text" class="border rounded px-2 py-1 w-full" value="${f.value}" data-idx="${idx}" data-type="value"></td>
+                    <td><button type="button" class="removeCustomFieldBtn text-red-500" data-idx="${idx}"><i class='fas fa-trash text-2xl'></i></button></td>
+                </tr>`;
+            });
+        }
+        renderCustomFields(customerData.customFields || []);
+        // Remove custom field with confirmation modal
+        let customFieldToDeleteIdx = null;
+        const deleteCustomFieldModal = document.getElementById('deleteCustomFieldModal');
+        const confirmDeleteCustomFieldBtn = document.getElementById('confirmDeleteCustomField');
+        const cancelDeleteCustomFieldBtn = document.getElementById('cancelDeleteCustomField');
+        if (customFieldsTbody) {
+            customFieldsTbody.addEventListener('click', function(e) {
+                const btn = e.target.closest('.removeCustomFieldBtn');
+                if (btn) {
+                    customFieldToDeleteIdx = parseInt(btn.getAttribute('data-idx'));
+                    if (deleteCustomFieldModal) {
+                        deleteCustomFieldModal.classList.remove('hidden');
+                        setTimeout(() => {
+                            deleteCustomFieldModal.querySelector('.modal-content-modern').classList.add('show');
+                        }, 10);
+                    }
+                }
+            });
+        }
+        if (cancelDeleteCustomFieldBtn) {
+            cancelDeleteCustomFieldBtn.onclick = function() {
+                if (deleteCustomFieldModal) {
+                    deleteCustomFieldModal.querySelector('.modal-content-modern').classList.remove('show');
+                    setTimeout(() => {
+                        deleteCustomFieldModal.classList.add('hidden');
+                    }, 200);
+                }
+                customFieldToDeleteIdx = null;
+            };
+        }
+        if (confirmDeleteCustomFieldBtn) {
+            confirmDeleteCustomFieldBtn.onclick = function() {
+                if (customFieldToDeleteIdx !== null) {
+                    const fields = [];
+                    customFieldsTbody.querySelectorAll('tr').forEach((tr, idx) => {
+                        if (idx !== customFieldToDeleteIdx) {
+                            const name = tr.querySelector('input[data-type="name"]').value;
+                            const value = tr.querySelector('input[data-type="value"]').value;
+                            if (name || value) fields.push({ name, value });
+                        }
+                    });
+                    renderCustomFields(fields);
+                }
+                if (deleteCustomFieldModal) {
+                    deleteCustomFieldModal.querySelector('.modal-content-modern').classList.remove('show');
+                    setTimeout(() => {
+                        deleteCustomFieldModal.classList.add('hidden');
+                    }, 200);
+                }
+                customFieldToDeleteIdx = null;
+            };
+        }
+        // Hide modal when clicking outside
+        if (deleteCustomFieldModal) {
+            deleteCustomFieldModal.onclick = function(event) {
+                if (event.target === deleteCustomFieldModal) {
+                    deleteCustomFieldModal.querySelector('.modal-content-modern').classList.remove('show');
+                    setTimeout(() => {
+                        deleteCustomFieldModal.classList.add('hidden');
+                    }, 200);
+                }
+            };
+        }
     }
 
     // Edit Modal Logic for Customer Details
@@ -690,32 +761,73 @@ document.addEventListener('DOMContentLoaded', function() {
             customFieldsTbody.innerHTML += `<tr>
                 <td><input type="text" class="border rounded px-2 py-1 w-full" value="${f.name}" data-idx="${idx}" data-type="name"></td>
                 <td><input type="text" class="border rounded px-2 py-1 w-full" value="${f.value}" data-idx="${idx}" data-type="value"></td>
-                <td><button type="button" class="removeCustomFieldBtn text-red-500" data-idx="${idx}"><i class='fas fa-trash'></i></button></td>
+                <td><button type="button" class="removeCustomFieldBtn text-red-500" data-idx="${idx}"><i class='fas fa-trash text-2xl'></i></button></td>
             </tr>`;
         });
     }
     renderCustomFields(customerData.customFields || []);
-    // Add custom field
-    const addCustomFieldBtn = document.getElementById('addCustomFieldBtn');
-    if (addCustomFieldBtn && customFieldsTbody) {
-        addCustomFieldBtn.addEventListener('click', function() {
-            const fields = [];
-            customFieldsTbody.querySelectorAll('tr').forEach(tr => {
-                const name = tr.querySelector('input[data-type="name"]').value;
-                const value = tr.querySelector('input[data-type="value"]').value;
-                if (name || value) fields.push({ name, value });
-            });
-            fields.push({ name: '', value: '' });
-            renderCustomFields(fields);
-        });
-    }
-    // Remove custom field
+    // Remove custom field with confirmation modal
+    let customFieldToDeleteIdx = null;
+    const deleteCustomFieldModal = document.getElementById('deleteCustomFieldModal');
+    const confirmDeleteCustomFieldBtn = document.getElementById('confirmDeleteCustomField');
+    const cancelDeleteCustomFieldBtn = document.getElementById('cancelDeleteCustomField');
     if (customFieldsTbody) {
         customFieldsTbody.addEventListener('click', function(e) {
-            if (e.target.closest('.removeCustomFieldBtn')) {
-                e.target.closest('tr').remove();
+            const btn = e.target.closest('.removeCustomFieldBtn');
+            if (btn) {
+                customFieldToDeleteIdx = parseInt(btn.getAttribute('data-idx'));
+                if (deleteCustomFieldModal) {
+                    deleteCustomFieldModal.classList.remove('hidden');
+                    setTimeout(() => {
+                        deleteCustomFieldModal.querySelector('.modal-content-modern').classList.add('show');
+                    }, 10);
+                }
             }
         });
+    }
+    if (cancelDeleteCustomFieldBtn) {
+        cancelDeleteCustomFieldBtn.onclick = function() {
+            if (deleteCustomFieldModal) {
+                deleteCustomFieldModal.querySelector('.modal-content-modern').classList.remove('show');
+                setTimeout(() => {
+                    deleteCustomFieldModal.classList.add('hidden');
+                }, 200);
+            }
+            customFieldToDeleteIdx = null;
+        };
+    }
+    if (confirmDeleteCustomFieldBtn) {
+        confirmDeleteCustomFieldBtn.onclick = function() {
+            if (customFieldToDeleteIdx !== null) {
+                const fields = [];
+                customFieldsTbody.querySelectorAll('tr').forEach((tr, idx) => {
+                    if (idx !== customFieldToDeleteIdx) {
+                        const name = tr.querySelector('input[data-type="name"]').value;
+                        const value = tr.querySelector('input[data-type="value"]').value;
+                        if (name || value) fields.push({ name, value });
+                    }
+                });
+                renderCustomFields(fields);
+            }
+            if (deleteCustomFieldModal) {
+                deleteCustomFieldModal.querySelector('.modal-content-modern').classList.remove('show');
+                setTimeout(() => {
+                    deleteCustomFieldModal.classList.add('hidden');
+                }, 200);
+            }
+            customFieldToDeleteIdx = null;
+        };
+    }
+    // Hide modal when clicking outside
+    if (deleteCustomFieldModal) {
+        deleteCustomFieldModal.onclick = function(event) {
+            if (event.target === deleteCustomFieldModal) {
+                deleteCustomFieldModal.querySelector('.modal-content-modern').classList.remove('show');
+                setTimeout(() => {
+                    deleteCustomFieldModal.classList.add('hidden');
+                }, 200);
+            }
+        };
     }
     // Update/save button
     const updateBtn = document.getElementById('updateBtn');

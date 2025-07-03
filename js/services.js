@@ -53,35 +53,35 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
                             <div>
                                 <div class="text-xs text-gray-500 mb-1">Service Name</div>
-                                <input type="text" class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="Weed control" readonly />
+                                <input type="text" class="w-full border border-black rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="Weed control" readonly />
                             </div>
                             <div>
                                 <div class="text-xs text-gray-500 mb-1">Estimate Name</div>
-                                <input type="text" class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="Weed control" readonly />
+                                <input type="text" class="w-full border border-black rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="Weed control" readonly />
                             </div>
                             <div>
                                 <div class="text-xs text-gray-500 mb-1">Tag</div>
-                                <input type="text" class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="Weed" readonly />
+                                <input type="text" class="w-full border border-black rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="Weed" readonly />
                             </div>
                             <div>
                                 <div class="text-xs text-gray-500 mb-1">Business Category <span class='text-red-500'>*</span></div>
-                                <input type="text" class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="Landscaping & Maintenance" readonly />
+                                <input type="text" class="w-full border border-black rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="Landscaping & Maintenance" readonly />
                             </div>
                             <div>
                                 <div class="text-xs text-gray-500 mb-1">Budget Hour/s</div>
-                                <input type="text" class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="2" readonly />
+                                <input type="text" class="w-full border border-black rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="2" readonly />
                             </div>
                             <div>
                                 <div class="text-xs text-gray-500 mb-1">Default Rate</div>
-                                <input type="text" class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="100.00" readonly />
+                                <input type="text" class="w-full border border-black rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="100.00" readonly />
                             </div>
                             <div>
                                 <div class="text-xs text-gray-500 mb-1">Billing Mode <span class='text-red-500'>*</span></div>
-                                <input type="text" class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="Flat rate" readonly />
+                                <input type="text" class="w-full border border-black rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="Flat rate" readonly />
                             </div>
                             <div>
                                 <div class="text-xs text-gray-500 mb-1">Tax <span class='text-red-500'>*</span></div>
-                                <input type="text" class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="Not" readonly />
+                                <input type="text" class="w-full border border-black rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="Not" readonly />
                             </div>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -106,9 +106,9 @@ document.addEventListener('DOMContentLoaded', function() {
                                         </thead>
                                         <tbody>
                                             <tr class="bg-gray-50">
-                                                <td><input type="text" class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="Fall" readonly /></td>
-                                                <td><input type="text" class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="09/01/2025" readonly /></td>
-                                                <td><input type="text" class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="11/30/2025" readonly /></td>
+                                                <td><input type="text" class="w-full border border-black rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="Fall" readonly /></td>
+                                                <td><input type="text" class="w-full border border-black rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="09/01/2025" readonly /></td>
+                                                <td><input type="text" class="w-full border border-black rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="11/30/2025" readonly /></td>
                                                 <td class="px-4 py-2 season-action" style="display:none;"></td>
                                             </tr>
                                         </tbody>
@@ -127,11 +127,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <div class="text-xs text-gray-500 mb-1">Recurrence Type</div>
-                                <input type="text" class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="Monthly" readonly />
+                                <input type="text" class="w-full border border-black rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="Monthly" readonly />
                             </div>
                             <div>
                                 <div class="text-xs text-gray-500 mb-1">Description</div>
-                                <input type="text" class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="test" readonly />
+                                <input type="text" class="w-full border border-black rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="test" readonly />
                             </div>
                         </div>
                     </div>
@@ -139,13 +139,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     <!-- Terms and Conditions Card -->
                     <div class="bg-white rounded-2xl shadow-lg p-8 border border-blue-100 w-full">
                         <h2 class="text-xl font-bold text-blue-700 mb-4">Terms and Conditions <span class='text-red-500'>*</span></h2>
-                        <textarea class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" rows="2" readonly>test</textarea>
+                        <textarea class="w-full border border-black rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" rows="2" readonly>test</textarea>
                     </div>
 
                     <!-- Related Services Card -->
                     <div class="bg-white rounded-2xl shadow-lg p-8 border border-blue-100 w-full">
                         <h2 class="text-xl font-bold text-blue-700 mb-4">Related Services</h2>
-                        <select class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" multiple disabled>
+                        <select class="w-full border border-black rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" multiple disabled>
                             <option selected>Plant Cutters</option>
                         </select>
                     </div>
@@ -170,14 +170,14 @@ document.addEventListener('DOMContentLoaded', function() {
                                 </thead>
                                 <tbody>
                                     <tr class="bg-gray-50">
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Plant Cutters" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="1" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Unit" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="500.00" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="500.00" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="40" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="200.00" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="700.00" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Plant Cutters" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="1" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Unit" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="500.00" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="500.00" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="40" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="200.00" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="700.00" readonly /></td>
                                         <td class="px-4 py-2 material-action" style="display:none;"></td>
                                     </tr>
                                 </tbody>
@@ -208,13 +208,13 @@ document.addEventListener('DOMContentLoaded', function() {
                                 </thead>
                                 <tbody>
                                     <tr class="bg-gray-50">
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="shovel" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="1" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="2.00" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="2.00" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="40" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="0.80" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="2.80" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="shovel" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="1" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="2.00" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="2.00" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="40" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="0.80" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="2.80" readonly /></td>
                                         <td class="px-4 py-2 equipment-action" style="display:none;"></td>
                                     </tr>
                                 </tbody>
@@ -245,24 +245,24 @@ document.addEventListener('DOMContentLoaded', function() {
                                 </thead>
                                 <tbody>
                                     <tr class="bg-gray-50">
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Leader" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="1" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="2.00" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="1.00" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="2.00" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="40.00" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="0.80" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="2.80" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Leader" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="1" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="2.00" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="1.00" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="2.00" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="40.00" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="0.80" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="2.80" readonly /></td>
                                     </tr>
                                     <tr class="bg-white">
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Labor" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="1" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="2.00" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="1.00" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="2.00" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="40" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="0.80" readonly /></td>
-                                        <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="2.80" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Labor" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="1" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="2.00" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="1.00" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="2.00" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="40" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="0.80" readonly /></td>
+                                        <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="2.80" readonly /></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -294,12 +294,12 @@ document.addEventListener('DOMContentLoaded', function() {
                             <tbody>
                                 <tr class="bg-gray-50">
                                     <td class="px-4 py-2">Lot Size</td>
-                                    <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="-" readonly /></td>
+                                    <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="-" readonly /></td>
                                     <td class="px-4 py-2 custom-field-action" style="display:none;"></td>
                                 </tr>
                                 <tr class="bg-white">
                                     <td class="px-4 py-2">Floor Area</td>
-                                    <td><input type="text" class="w-full border border-gray-300 rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="-" readonly /></td>
+                                    <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="-" readonly /></td>
                                     <td class="px-4 py-2 custom-field-action" style="display:none;"></td>
                                 </tr>
                             </tbody>
@@ -339,57 +339,140 @@ document.addEventListener('DOMContentLoaded', function() {
                         } else {
                             el.readOnly = false;
                         }
-                        el.classList.add('ring-2', 'ring-blue-300');
                         originalValues[el.name || el.id || el.outerHTML] = el.value;
                     });
                     // Show actions columns
                     if (customFieldsActionsHeader) customFieldsActionsHeader.style.display = '';
                     customFieldActions.forEach(td => {
                         td.style.display = '';
-                        td.innerHTML = `<button class='delete-custom-field px-2 py-1 text-red-600 hover:text-white hover:bg-red-500 rounded transition' title='Delete'><i class='fas fa-trash'></i></button>`;
+                        td.innerHTML = `<button class='delete-custom-field px-2 py-1 text-red-600 hover:text-white hover:bg-red-500 rounded transition' title='Delete'><i class='fas fa-trash text-xl'></i></button>`;
                     });
                     if (seasonsActionsHeader) seasonsActionsHeader.style.display = '';
                     seasonActions.forEach(td => {
                         td.style.display = '';
-                        td.innerHTML = `<button class='delete-season px-2 py-1 text-red-600 hover:text-white hover:bg-red-500 rounded transition' title='Delete'><i class='fas fa-trash'></i></button>`;
+                        td.innerHTML = `<button class='delete-season px-2 py-1 text-red-600 hover:text-white hover:bg-red-500 rounded transition' title='Delete'><i class='fas fa-trash text-xl'></i></button>`;
                     });
                     if (materialActionsHeader) materialActionsHeader.style.display = '';
                     materialActions.forEach(td => {
                         td.style.display = '';
-                        td.innerHTML = `<button class='delete-material px-2 py-1 text-red-600 hover:text-white hover:bg-red-500 rounded transition' title='Delete'><i class='fas fa-trash'></i></button>`;
+                        td.innerHTML = `<button class='delete-material px-2 py-1 text-red-600 hover:text-white hover:bg-red-500 rounded transition' title='Delete'><i class='fas fa-trash text-xl'></i></button>`;
                     });
                     if (equipmentActionsHeader) equipmentActionsHeader.style.display = '';
                     equipmentActions.forEach(td => {
                         td.style.display = '';
-                        td.innerHTML = `<button class='delete-equipment px-2 py-1 text-red-600 hover:text-white hover:bg-red-500 rounded transition' title='Delete'><i class='fas fa-trash'></i></button>`;
+                        td.innerHTML = `<button class='delete-equipment px-2 py-1 text-red-600 hover:text-white hover:bg-red-500 rounded transition' title='Delete'><i class='fas fa-trash text-xl'></i></button>`;
                     });
                     // Add delete logic
                     document.querySelectorAll('.delete-custom-field').forEach(btn => {
                         btn.addEventListener('click', function(e) {
                             e.preventDefault();
                             const row = btn.closest('tr');
-                            if (row) row.remove();
+                            const fieldName = row?.querySelector('td')?.textContent?.trim() || '';
+                            const modal = document.getElementById('deleteServiceModal');
+                            if (!modal) { row.remove(); return; }
+                            document.getElementById('deleteServiceModalTitle').textContent = 'Delete Custom Field?';
+                            document.getElementById('deleteServiceModalText').textContent = `Are you sure you want to delete the custom field \"${fieldName}\"?`;
+                            showModal(modal);
+                            const confirmBtn = document.getElementById('confirmDeleteService');
+                            const cancelBtn = document.getElementById('cancelDeleteService');
+                            const newConfirm = confirmBtn.cloneNode(true);
+                            const newCancel = cancelBtn.cloneNode(true);
+                            confirmBtn.parentNode.replaceChild(newConfirm, confirmBtn);
+                            cancelBtn.parentNode.replaceChild(newCancel, cancelBtn);
+                            newConfirm.onclick = function() {
+                                row.remove();
+                                hideModal(modal);
+                            };
+                            newCancel.onclick = function() {
+                                hideModal(modal);
+                            };
+                            modal.onclick = function(event) {
+                                if (event.target === modal) hideModal(modal);
+                            };
                         });
                     });
                     document.querySelectorAll('.delete-season').forEach(btn => {
                         btn.addEventListener('click', function(e) {
                             e.preventDefault();
                             const row = btn.closest('tr');
-                            if (row) row.remove();
+                            const seasonName = row?.querySelector('td input')?.value?.trim() || '';
+                            const modal = document.getElementById('deleteServiceModal');
+                            if (!modal) { row.remove(); return; }
+                            document.getElementById('deleteServiceModalTitle').textContent = 'Delete Season?';
+                            document.getElementById('deleteServiceModalText').textContent = `Are you sure you want to delete the season \"${seasonName}\"?`;
+                            showModal(modal);
+                            const confirmBtn = document.getElementById('confirmDeleteService');
+                            const cancelBtn = document.getElementById('cancelDeleteService');
+                            const newConfirm = confirmBtn.cloneNode(true);
+                            const newCancel = cancelBtn.cloneNode(true);
+                            confirmBtn.parentNode.replaceChild(newConfirm, confirmBtn);
+                            cancelBtn.parentNode.replaceChild(newCancel, cancelBtn);
+                            newConfirm.onclick = function() {
+                                row.remove();
+                                hideModal(modal);
+                            };
+                            newCancel.onclick = function() {
+                                hideModal(modal);
+                            };
+                            modal.onclick = function(event) {
+                                if (event.target === modal) hideModal(modal);
+                            };
                         });
                     });
                     document.querySelectorAll('.delete-material').forEach(btn => {
                         btn.addEventListener('click', function(e) {
                             e.preventDefault();
                             const row = btn.closest('tr');
-                            if (row) row.remove();
+                            const materialName = row?.querySelector('td input')?.value?.trim() || '';
+                            const modal = document.getElementById('deleteServiceModal');
+                            if (!modal) { row.remove(); return; }
+                            document.getElementById('deleteServiceModalTitle').textContent = 'Delete Material?';
+                            document.getElementById('deleteServiceModalText').textContent = `Are you sure you want to delete the material \"${materialName}\"?`;
+                            showModal(modal);
+                            const confirmBtn = document.getElementById('confirmDeleteService');
+                            const cancelBtn = document.getElementById('cancelDeleteService');
+                            const newConfirm = confirmBtn.cloneNode(true);
+                            const newCancel = cancelBtn.cloneNode(true);
+                            confirmBtn.parentNode.replaceChild(newConfirm, confirmBtn);
+                            cancelBtn.parentNode.replaceChild(newCancel, cancelBtn);
+                            newConfirm.onclick = function() {
+                                row.remove();
+                                hideModal(modal);
+                            };
+                            newCancel.onclick = function() {
+                                hideModal(modal);
+                            };
+                            modal.onclick = function(event) {
+                                if (event.target === modal) hideModal(modal);
+                            };
                         });
                     });
                     document.querySelectorAll('.delete-equipment').forEach(btn => {
                         btn.addEventListener('click', function(e) {
                             e.preventDefault();
                             const row = btn.closest('tr');
-                            if (row) row.remove();
+                            const equipmentName = row?.querySelector('td input')?.value?.trim() || '';
+                            const modal = document.getElementById('deleteServiceModal');
+                            if (!modal) { row.remove(); return; }
+                            document.getElementById('deleteServiceModalTitle').textContent = 'Delete Equipment?';
+                            document.getElementById('deleteServiceModalText').textContent = `Are you sure you want to delete the equipment \"${equipmentName}\"?`;
+                            showModal(modal);
+                            const confirmBtn = document.getElementById('confirmDeleteService');
+                            const cancelBtn = document.getElementById('cancelDeleteService');
+                            const newConfirm = confirmBtn.cloneNode(true);
+                            const newCancel = cancelBtn.cloneNode(true);
+                            confirmBtn.parentNode.replaceChild(newConfirm, confirmBtn);
+                            cancelBtn.parentNode.replaceChild(newCancel, cancelBtn);
+                            newConfirm.onclick = function() {
+                                row.remove();
+                                hideModal(modal);
+                            };
+                            newCancel.onclick = function() {
+                                hideModal(modal);
+                            };
+                            modal.onclick = function(event) {
+                                if (event.target === modal) hideModal(modal);
+                            };
                         });
                     });
                     // Hide Edit button, show Save and Cancel in a flex container
@@ -403,7 +486,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         const saveBtn = document.createElement('button');
                         saveBtn.id = 'saveEditBtn';
                         saveBtn.className = 'px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center gap-2 text-sm';
-                        saveBtn.innerHTML = '<i class="fas fa-check"></i> Save';
+                        saveBtn.innerHTML = '<i class="fas fa-save"></i> Update';
                         // Cancel button
                         const cancelBtn = document.createElement('button');
                         cancelBtn.id = 'cancelEditBtn';
@@ -429,7 +512,6 @@ document.addEventListener('DOMContentLoaded', function() {
                             } else {
                                 el.readOnly = true;
                             }
-                            el.classList.remove('ring-2', 'ring-blue-300');
                             const key = el.name || el.id || el.outerHTML;
                             if (originalValues[key] !== undefined) el.value = originalValues[key];
                         });
@@ -467,7 +549,6 @@ document.addEventListener('DOMContentLoaded', function() {
                             } else {
                                 el.readOnly = true;
                             }
-                            el.classList.remove('ring-2', 'ring-blue-300');
                         });
                         // Hide actions columns
                         if (customFieldsActionsHeader) customFieldsActionsHeader.style.display = 'none';
@@ -547,7 +628,7 @@ document.addEventListener('DOMContentLoaded', function() {
         div.innerHTML = `
             <div>
                 <label class='block text-sm font-medium text-gray-700 mb-1'>Seasons:</label>
-                <select name='seasons[]' class='w-full border border-blue-300 rounded-lg px-4 py-2 focus:ring-blue-500 focus:border-blue-500 text-sm font-medium text-gray-800' required>
+                <select name='seasons[]' class='w-full border border-black rounded-lg px-4 py-2 text-sm font-medium text-gray-800' required>
                     <option value=''>Select...</option>
                     <option value='Spring'>Spring</option>
                     <option value='Summer'>Summer</option>
@@ -557,11 +638,11 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
             <div>
                 <label class='block text-sm font-medium text-gray-700 mb-1'>Start Date:</label>
-                <input type='date' name='startDate[]' class='w-full border border-blue-300 rounded-lg px-4 py-2 focus:ring-blue-500 focus:border-blue-500 text-sm font-medium text-gray-800' required />
+                <input type='date' name='startDate[]' class='w-full border border-black rounded-lg px-4 py-2 text-sm font-medium text-gray-800' required />
             </div>
             <div>
                 <label class='block text-sm font-medium text-gray-700 mb-1'>End Date:</label>
-                <input type='date' name='endDate[]' class='w-full border border-blue-300 rounded-lg px-4 py-2 focus:ring-blue-500 focus:border-blue-500 text-sm font-medium text-gray-800' required />
+                <input type='date' name='endDate[]' class='w-full border border-black rounded-lg px-4 py-2 text-sm font-medium text-gray-800' required />
             </div>
             <div class='flex items-end h-full'>
                 <button type='button' class='removeSeason bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded text-sm font-semibold'>Remove</button>
@@ -673,5 +754,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         // Always ensure the select has the same height as Upload Image
         recurrenceTypeSelect.classList.add('h-[42px]', 'px-4', 'py-2');
+    }
+
+    // Add these utility functions for modal display/animation (from products.js)
+    function showModal(modal) {
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.querySelector('.modal-content-modern').classList.add('show');
+        }, 10);
+    }
+    function hideModal(modal) {
+        modal.querySelector('.modal-content-modern').classList.remove('show');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 250);
     }
 });
