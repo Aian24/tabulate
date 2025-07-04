@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+        <title>Products</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+        <script src="https://unpkg.com/@popperjs/core@2"></script>
+        <script src="https://unpkg.com/tippy.js@6"></script>
+        <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+        <link href="https://unpkg.com/tippy.js@6/themes/light.css" rel="stylesheet"/>
+        <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <link rel="stylesheet" href="../css/styles.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    </head>
+<body class="min-h-screen bg-sky-50">
+    <!-- Include header -->
+    <div id="header-container"></div>
+
+    <!-- Include navigation -->
+    <div id="nav-container"></div>
+
+    <main class="p-4">
+
+            <div class="flex justify-between items-center mb-4">
+                <a href="products.html" class="text-gray-600 flex items-center">
+                    <i class="fas fa-chevron-left text-lg"></i>
+                    <span class="ml-2 font-semibold">Back</span>
+                </a>
+                <div class="relative inline-block text-left">
+                    <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700" id="menu-button" aria-expanded="true" aria-haspopup="true">
+                      More
+                      <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                      </svg>
+                    </button>
+                </div>
+            </div>
+
+        <!-- Product Information Section -->
+        <div class="bg-white border-2 border-blue-200 rounded-xl shadow mb-6 max-w-2xl mx-auto">
+            <div class="px-4 pt-3 pb-2 border-b border-blue-100">
+                <span class="text-blue-700 font-semibold text-base">Product Information</span>
+            </div>
+            <div class="p-4">
+                <div class="grid grid-cols-2 gap-4 items-start">
+                    <!-- Left column -->
+                    <div>
+                        <label class="block text-gray-500 text-xs mb-1" for="product">Product</label>
+                        <input id="product" type="text" value="Plant Cutters" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2"/>
+
+                        <label class="block text-gray-500 text-xs mb-1" for="specification">Sepecification</label>
+                        <input id="specification" type="text" value="Cool amazing 67×3 size." class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2"/>
+
+                        <label class="block text-gray-500 text-xs mb-1" for="notes">Notes</label>
+                        <textarea id="notes" rows="3" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 resize-none">This product was updated via Selenium.</textarea>
+
+                        <label class="block text-gray-500 text-xs mb-1" for="business-category">Business Category</label>
+                        <input id="business-category" type="text" value="Construction Services, Plumbing Services" class="w-full border border-gray-300 rounded px-2 py-1 text-base"/>
+                    </div>
+                    <!-- Right column -->
+                    <div class="flex flex-col justify-between h-full">
+                        <!-- Photo Upload Container -->
+                        <div class="w-full border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 p-4 mb-3">
+                            <div class="text-center">
+                                <!-- Photo Preview Area -->
+                                <div id="photo-preview" class="w-full border border-gray-300 rounded bg-white mb-3 mx-auto" style="height: 140px; max-width: 200px; display: flex; align-items: center; justify-content: center;">
+                                    <div class="text-gray-400 text-center">
+                                        <i class="fas fa-image text-3xl mb-2"></i>
+                                        <p class="text-xs">No image selected</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- File Input -->
+                                <div class="relative">
+                                    <input type="file" id="photo-upload" accept="image/*" class="hidden" onchange="previewImage(this)"/>
+                                    <label for="photo-upload" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded text-sm cursor-pointer transition-colors">
+                                        <i class="fas fa-upload mr-1"></i>
+                                        Choose File
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 mt-2 justify-end">
+                            <button class="bg-blue-400 text-white px-6 py-1 rounded text-base">Update</button>
+                            <button class="bg-fuchsia-600 text-white px-6 py-1 rounded text-base">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Supplier Details Section -->
+        <div class="rounded-xl shadow border border-blue-200 max-w-2xl mx-auto mt-5">
+            <div class="rounded-t-xl bg-gradient-to-r from-blue-400 to-blue-300 px-4 py-2">
+                <span class="text-white font-semibold text-base">Supplier Details</span>
+            </div>
+            <div class="p-4">
+                <table class="min-w-full text-xs mb-2">
+                    <thead>
+                        <tr class="bg-blue-100 text-blue-900">
+                            <th class="px-2 py-1 text-left">Item Number</th>
+                            <th class="px-2 py-1 text-left">Total Price</th>
+                        </tr>
+                        <tr class="bg-white text-gray-700">
+                            <td class="px-2 py-1">
+                                Vendor:<br>Quantity Type:
+                            </td>
+                            <td class="px-2 py-1">
+                                Vendor Price:<br>Quantity per Item:
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="px-2 py-1 align-top w-1/2">
+                                <span class="text-blue-700 font-semibold cursor-pointer hover:underline">ITEM-6377</span><br>
+                                <span class="block text-gray-700">Vendor: <span class="font-medium">Global</span></span>
+                                <span class="block text-gray-700">Quantity Type: <span class="font-medium">Box(es)</span></span>
+                            </td>
+                            <td class="px-2 py-1 align-top w-1/2">
+                                <span class="block text-gray-700">Vendor Price: <span class="font-medium">$97.34</span></span>
+                                <span class="block text-gray-700">Quantity per Item: <span class="font-medium">6</span></span>
+                                <div class="flex gap-2 mt-2 justify-end">
+                                    <button class="bg-blue-300 text-blue-900 px-3 py-1 rounded text-xs">Add item</button>
+                                    <button class="bg-fuchsia-600 text-white px-3 py-1 rounded text-xs">Save</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    </div>
+
+    <script>
+        // Image preview functionality
+        function previewImage(input) {
+            const preview = document.getElementById('photo-preview');
+            
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    preview.innerHTML = `<img src="${e.target.result}" alt="Product Preview" class="w-full h-full object-cover rounded">`;
+                };
+                
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                preview.innerHTML = `
+                    <div class="text-gray-400 text-center">
+                        <i class="fas fa-image text-3xl mb-2"></i>
+                        <p class="text-xs">No image selected</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Load header and navigation
+        fetch('../nav/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            });
+        fetch('../nav/navigation.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav-container').innerHTML = data;
+            });
+    </script>
+</body>
+</html> 
