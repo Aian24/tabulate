@@ -113,66 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('resize', updateView);
     }
 
-    // Initialize Side Navigation for Mobile
-    function initializeMobileNav() {
-        const burgerMenuBtn = document.getElementById('burgerMenuBtn');
-        const sideNav = document.getElementById('sideNav');
-        const closeSideNav = document.getElementById('closeSideNav');
-        const sideNavOverlay = document.getElementById('sideNavOverlay');
-
-        if (!burgerMenuBtn || !sideNav || !closeSideNav || !sideNavOverlay) {
-            console.warn('Mobile navigation elements not found');
-            return;
-        }
-
-        function openSideNav() {
-            sideNav.classList.remove('-translate-x-full');
-            sideNavOverlay.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeSideNavMenu() {
-            sideNav.classList.add('-translate-x-full');
-            sideNavOverlay.classList.add('hidden');
-            document.body.style.overflow = '';
-        }
-
-        // Remove any existing event listeners
-        burgerMenuBtn.removeEventListener('click', openSideNav);
-        closeSideNav.removeEventListener('click', closeSideNavMenu);
-        sideNavOverlay.removeEventListener('click', closeSideNavMenu);
-
-        // Add event listeners
-        burgerMenuBtn.addEventListener('click', openSideNav);
-        closeSideNav.addEventListener('click', closeSideNavMenu);
-        sideNavOverlay.addEventListener('click', closeSideNavMenu);
-
-        // Close side nav when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!sideNav.contains(e.target) && !burgerMenuBtn.contains(e.target) && !sideNav.classList.contains('-translate-x-full')) {
-                closeSideNavMenu();
-            }
-        });
-    }
-
-    // Add submenu toggle logic for mobile sidebar
-    const mobileMenuList = document.getElementById('mobileMenuList');
-    if (mobileMenuList) {
-        mobileMenuList.querySelectorAll('.mobile-menu-item > button').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const parent = btn.parentElement;
-                const submenu = parent.querySelector('.mobile-submenu');
-                const isOpen = !submenu.classList.contains('hidden');
-                // Close all submenus
-                mobileMenuList.querySelectorAll('.mobile-submenu').forEach(sm => sm.classList.add('hidden'));
-                // Toggle this submenu
-                if (!isOpen) {
-                    submenu.classList.remove('hidden');
-                }
-            });
-        });
-    }
+   
 
     // Initialize Desktop Dropdown Menu
     function initializeDesktopNav() {
@@ -330,6 +271,88 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }
+    }
+
+    // Initialize Mobile Side Navigation and Dropdowns
+    function initializeMobileNav() {
+        const sideNav = document.getElementById('sideNav');
+        const sideNavOverlay = document.getElementById('sideNavOverlay');
+        const closeSideNavBtn = document.getElementById('closeSideNav');
+        // Use the correct burger menu button id from header
+        const openSideNavBtn = document.getElementById('burgerMenuBtn');
+
+        // Open side nav
+        if (openSideNavBtn && sideNav && sideNavOverlay) {
+            openSideNavBtn.addEventListener('click', () => {
+                sideNav.classList.remove('-translate-x-full');
+                sideNavOverlay.classList.remove('hidden');
+            });
+        }
+        // Close side nav
+        if (closeSideNavBtn && sideNav && sideNavOverlay) {
+            closeSideNavBtn.addEventListener('click', () => {
+                sideNav.classList.add('-translate-x-full');
+                sideNavOverlay.classList.add('hidden');
+            });
+        }
+        // Close on overlay click
+        if (sideNavOverlay && sideNav) {
+            sideNavOverlay.addEventListener('click', () => {
+                sideNav.classList.add('-translate-x-full');
+                sideNavOverlay.classList.add('hidden');
+            });
+        }
+
+        // Dropdown logic for each main section
+        const sections = [
+            {
+                headerSelector: '.text-sky-500.font-semibold.mb-2', // Sales & Estimates
+                submenuSelector: '.text-sky-500.font-semibold.mb-2 + .pl-2'
+            },
+            {
+                headerSelector: '.text-white.font-semibold.mb-2 i.fa-cogs', // Project & Dispatch
+                submenuSelector: '.text-white.font-semibold.mb-2 i.fa-cogs'
+            },
+            {
+                headerSelector: '.text-white.font-semibold.mb-2 i.fa-chart-line', // Financial
+                submenuSelector: '.text-white.font-semibold.mb-2 i.fa-chart-line'
+            },
+            {
+                headerSelector: '.text-white.font-semibold.mb-2 i.fa-users', // Accounts
+                submenuSelector: '.text-white.font-semibold.mb-2 i.fa-users'
+            }
+        ];
+
+        // Improved: Find all px-2 py-1 blocks and add toggle to their header
+        document.querySelectorAll('#sideNav .px-2.py-1').forEach((section, idx) => {
+            const header = section.querySelector('div.font-semibold');
+            const submenu = section.querySelector('div.pl-2');
+            if (header && submenu) {
+                // Add a chevron if not present
+                if (!header.querySelector('.fa-chevron-down')) {
+                    const chevron = document.createElement('i');
+                    chevron.className = 'fas fa-chevron-down ml-2';
+                    header.appendChild(chevron);
+                }
+                // Start collapsed except first section
+                if (idx !== 0) {
+                    submenu.style.display = 'none';
+                } else {
+                    submenu.style.display = 'block';
+                }
+                header.style.cursor = 'pointer';
+                header.style.display = 'flex';
+                header.style.alignItems = 'center';
+                header.style.justifyContent = 'flex-start';
+                header.addEventListener('click', () => {
+                    const isOpen = submenu.style.display !== 'none';
+                    // Collapse all
+                    document.querySelectorAll('#sideNav .px-2.py-1 .pl-2').forEach(s => s.style.display = 'none');
+                    // Toggle this one
+                    submenu.style.display = isOpen ? 'none' : 'block';
+                });
+            }
+        });
     }
 
     // Load header and navigation
