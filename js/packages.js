@@ -139,7 +139,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                     <span class="font-semibold text-gray-700">OVER ALL TOTAL PRICE</span>
                                     <input type="number" class="bg-blue-100 text-blue-700 px-4 py-2 rounded-lg font-bold" value="${totalPrice}" readonly />
                                 </div>
-                                ${editMode ? '<button class="mt-4 px-4 py-2 bg-red-600 text-white rounded shadow flex items-center gap-2" id="addServiceBtn"><i class="fas fa-plus-circle"></i> Service</button>' : ''}
+                                ${!editMode ? '<div class="mt-2 flex justify-start"><button id="editBtn" class="px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center gap-2 text-sm"><i class="fas fa-edit"></i> Edit</button></div>' : ''}
+                                ${editMode ? '<div class="flex gap-2 mt-2"><button class="px-6 py-2 bg-sky-500 text-white rounded shadow hover:bg-sky-600 flex items-center gap-2 text-sm" id="updateBtn"><i class="fas fa-save"></i> Update</button><button class="px-6 py-2 bg-red-500 text-white rounded shadow hover:bg-red-600 flex items-center gap-2 text-sm" id="cancelBtn">Cancel</button></div>' : ''}
                             </div>
                         </div>
                     </div>
@@ -151,7 +152,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         </div>
                     </div>
                 </div>
-                ${editMode ? '<div class="flex gap-2 mt-8"><button class="px-6 py-2 bg-sky-500 text-white rounded shadow hover:bg-sky-600 flex items-center gap-2 text-sm" id="updateBtn"><i class="fas fa-save"></i> Update</button></div>' : ''}
                 `;
 
                 // Add event listeners for delete and add service in edit mode
@@ -188,19 +188,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Edit button logic
         const editBtn = document.getElementById('editBtn');
-        const cancelBtn = document.getElementById('cancelBtn');
         if (editBtn) {
             editBtn.onclick = function() {
+                editBtn.style.display = 'none'; // Hide Edit button
                 renderPackageDetails(true);
                 // Re-attach cancel and update logic in edit mode
                 const cancelBtnEdit = document.getElementById('cancelBtn');
                 if (cancelBtnEdit) {
                     cancelBtnEdit.onclick = function() {
-                        if (window.history.length > 1) {
-                            window.history.back();
-                        } else {
-                            window.location.href = 'packages.html';
-                        }
+                        renderPackageDetails(false);
+                        editBtn.style.display = ''; // Show Edit button again
+                    };
+                }
+                const updateBtnEdit = document.getElementById('updateBtn');
+                if (updateBtnEdit) {
+                    updateBtnEdit.onclick = function() {
+                        // Save logic here (if any)
+                        renderPackageDetails(false);
+                        editBtn.style.display = ''; // Show Edit button again
                     };
                 }
             };

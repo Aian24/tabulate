@@ -733,76 +733,71 @@ function getContractorQueryParam(param) {
  */
 function renderContractorDetails(contractor) {
     return `
-        <div class="bg-white rounded-xl shadow-lg p-6 md:p-10 w-full">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
-                <div class="flex items-center gap-4">
-                    <div class="w-16 h-16 bg-blue-400 rounded-full flex items-center justify-center text-white text-2xl font-bold">${contractor.initials}</div>
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+            <div class="flex items-center gap-4">
+                <div class="w-16 h-16 bg-blue-400 rounded-full flex items-center justify-center text-white text-2xl font-bold">${contractor.initials}</div>
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-800">${contractor.name}</h1>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Contractor ID: ${contractor.id}</span>
+                    </div>
+                    <div class="text-xs text-gray-500 mt-1">Member since ${contractor.memberSince}</div>
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-gray-100 rounded-lg p-4">
+                <h2 class="text-md font-semibold text-gray-700 mb-3">CONTACT</h2>
+                <div class="flex items-center gap-2 mb-2 text-sm">
+                    <i class="fas fa-envelope text-blue-500"></i>
+                    <span class="font-semibold">Email:</span> ${contractor.email}
+                </div>
+                <div class="flex items-center gap-2 mb-2 text-sm">
+                    <i class="fas fa-phone text-green-500"></i>
+                    <span class="font-semibold">Phone:</span> ${contractor.phone}
+                </div>
+                <div class="flex items-start gap-2 text-sm">
+                    <i class="fas fa-location-arrow text-purple-500 mt-1"></i>
                     <div>
-                        <h1 class="text-2xl font-bold text-gray-800">${contractor.name}</h1>
-                        <div class="flex items-center gap-2 mt-1">
-                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Contractor ID: ${contractor.id}</span>
-                        </div>
-                        <div class="text-xs text-gray-500 mt-1">Member since ${contractor.memberSince}</div>
+                        <span class="font-semibold">Address:</span><br/>
+                        ${contractor.address1}<br/>
+                        ${contractor.address2 ? contractor.address2 + '<br/>' : ''}
                     </div>
                 </div>
-                <div class="flex gap-2">
-                    <button id="editProfileBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition flex items-center gap-2">
-                        <i class="fas fa-pen"></i> Edit Profile
-                    </button>
-                    <button id="cancelBtn" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition flex items-center gap-2">
-                        <i class="fas fa-times"></i> Cancel
-                    </button>
-                </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="flex flex-col gap-6">
                 <div class="bg-gray-100 rounded-lg p-4">
-                    <h2 class="text-md font-semibold text-gray-700 mb-3">CONTACT</h2>
-                    <div class="flex items-center gap-2 mb-2 text-sm">
-                        <i class="fas fa-envelope text-blue-500"></i>
-                        <span class="font-semibold">Email:</span> ${contractor.email}
-                    </div>
-                    <div class="flex items-center gap-2 mb-2 text-sm">
-                        <i class="fas fa-phone text-green-500"></i>
-                        <span class="font-semibold">Phone:</span> ${contractor.phone}
-                    </div>
-                    <div class="flex items-start gap-2 text-sm">
-                        <i class="fas fa-location-arrow text-purple-500 mt-1"></i>
+                    <h2 class="text-md font-semibold text-gray-700 mb-3">CONTRACTOR ABOUT</h2>
+                    <div class="flex justify-between text-sm">
                         <div>
-                            <span class="font-semibold">Address:</span><br/>
-                            ${contractor.address1}<br/>
-                            ${contractor.address2 ? contractor.address2 + '<br/>' : ''}
+                            <span class="font-semibold">Position</span><br/>
+                            ${contractor.position}
+                        </div>
+                        <div>
+                            <span class="font-semibold">Department</span><br/>
+                            <span class="text-gray-500">${contractor.department}</span>
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-col gap-6">
-                    <div class="bg-gray-100 rounded-lg p-4">
-                        <h2 class="text-md font-semibold text-gray-700 mb-3">CONTRACTOR ABOUT</h2>
-                        <div class="flex justify-between text-sm">
-                            <div>
-                                <span class="font-semibold">Position</span><br/>
-                                ${contractor.position}
-                            </div>
-                            <div>
-                                <span class="font-semibold">Department</span><br/>
-                                <span class="text-gray-500">${contractor.department}</span>
-                            </div>
+                <div class="bg-gray-100 rounded-lg p-4">
+                    <h2 class="text-md font-semibold text-gray-700 mb-3">PERSONAL INFORMATION</h2>
+                    <div class="flex justify-between text-sm">
+                        <div>
+                            <span class="font-semibold">Contractor Since</span><br/>
+                            ${contractor.contractorSince}
                         </div>
-                    </div>
-                    <div class="bg-gray-100 rounded-lg p-4">
-                        <h2 class="text-md font-semibold text-gray-700 mb-3">PERSONAL INFORMATION</h2>
-                        <div class="flex justify-between text-sm">
-                            <div>
-                                <span class="font-semibold">Contractor Since</span><br/>
-                                ${contractor.contractorSince}
-                            </div>
-                            <div>
-                                <span class="font-semibold">Employment Status</span><br/>
-                                <span class="${contractor.employmentStatus === 'Active' ? 'text-green-500' : 'text-blue-400'}">${contractor.employmentStatus}</span>
-                            </div>
+                        <div>
+                            <span class="font-semibold">Employment Status</span><br/>
+                            <span class="${contractor.employmentStatus === 'Active' ? 'text-green-500' : 'text-blue-400'}">${contractor.employmentStatus}</span>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="mt-6 flex justify-start">
+            <button id="editProfileBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition flex items-center gap-2">
+                <i class="fas fa-pen"></i> Edit Profile
+            </button>
         </div>
     `;
 }
