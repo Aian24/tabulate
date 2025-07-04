@@ -155,6 +155,25 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Add submenu toggle logic for mobile sidebar
+    const mobileMenuList = document.getElementById('mobileMenuList');
+    if (mobileMenuList) {
+        mobileMenuList.querySelectorAll('.mobile-menu-item > button').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const parent = btn.parentElement;
+                const submenu = parent.querySelector('.mobile-submenu');
+                const isOpen = !submenu.classList.contains('hidden');
+                // Close all submenus
+                mobileMenuList.querySelectorAll('.mobile-submenu').forEach(sm => sm.classList.add('hidden'));
+                // Toggle this submenu
+                if (!isOpen) {
+                    submenu.classList.remove('hidden');
+                }
+            });
+        });
+    }
+
     // Initialize Desktop Dropdown Menu
     function initializeDesktopNav() {
         const projectButton = document.getElementById('projectButton');

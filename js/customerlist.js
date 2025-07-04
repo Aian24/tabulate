@@ -823,6 +823,10 @@ function renderMobileProfile() {
   container.innerHTML = `
     <div class="w-full max-w-md mx-auto mt-4">
       <div class="bg-white rounded-2xl shadow p-4">
+        <!-- Mobile Back Button -->
+        <button id="mobileBackBtn" class="mb-6 bg-blue-500 text-white rounded-full p-2 flex items-center gap-2 shadow hover:bg-blue-600 transition">
+          <i class="fas fa-arrow-left"></i> Back
+        </button>
         <div class="rounded-t-2xl flex flex-col items-center pt-6 pb-4 -mx-4 -mt-4" style="background-color: #41B6FF;">
           <div class="bg-white rounded-full border-4 flex items-center justify-center" style="border-color: #41B6FF; width: 80px; height: 80px;" >
             <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -869,6 +873,13 @@ function renderMobileProfile() {
       </div>
     </div>
   `;
+  // Add back button handler
+  const backBtn = document.getElementById('mobileBackBtn');
+  if (backBtn) {
+    backBtn.addEventListener('click', function() {
+      window.location.href = 'customerlist.html';
+    });
+  }
   // Fill in customer data
   document.getElementById('mobileProfileName').textContent = customer.fullName || '';
   document.getElementById('mobileProfileEmail').textContent = customer.personalEmail || '';
