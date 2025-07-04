@@ -15,16 +15,11 @@
 
     <!-- Main content -->
     <main class="w-full px-0 md:px-6 py-8">
-        <div class="mb-6 flex items-center justify-between gap-2">
-            <div class="flex items-center gap-2">
-                <button id="backBtn" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition">
-                    <i class="fas fa-arrow-left"></i> Back
-                </button>
-                <h1 class="text-2xl md:text-3xl font-bold text-gray-800 ml-4">View Product</h1>
-            </div>
-            <button id="editBtn" class="px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center gap-2 text-sm">
-                <i class="fas fa-edit"></i> Edit
+        <div class="mb-6 flex items-center gap-2">
+            <button id="backBtn" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition">
+                <i class="fas fa-arrow-left"></i> Back
             </button>
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800 ml-4">View Product</h1>
         </div>
         <div class="flex flex-col md:flex-row gap-6">
             <!-- Left: Product Details -->
@@ -76,6 +71,12 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <!-- Edit button moved to bottom left -->
+                <div class="mt-2 flex justify-start">
+                    <button id="editBtn" class="px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center gap-2 text-sm">
+                        <i class="fas fa-edit"></i> Edit
+                    </button>
                 </div>
             </div>
             <!-- Right: Upload Image -->
