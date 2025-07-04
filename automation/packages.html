@@ -15,7 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body class="min-h-screen">
+<body class="min-h-screen bg-sky-50">
     <!-- Include header -->
     <div id="header-container"></div>
 
@@ -24,8 +24,8 @@
 
     <!-- Main content -->
     <main class="container-fluid mx-auto px-4 md:px-6 py-2 md:py-4 relative-z-1">
-        <!-- Combined header with search -->
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
+        <!-- Desktop Header -->
+        <div class="hidden md:flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
             <div class="flex items-center gap-4">
                 <h1 class="text-xl md:text-2xl font-bold text-gray-800">Packages</h1>
             </div>
@@ -69,8 +69,8 @@
             </div>
         </div>
 
-        <!-- Controls Section (Filter, Search) -->
-        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
+        <!-- Desktop Controls Section -->
+        <div class="hidden md:flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
             <!-- Left side: Controls -->
             <div class="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
                 <!-- Show entries dropdown -->
@@ -109,8 +109,8 @@
             </div>
         </div>
 
-        <!-- Table content (Packages) -->
-        <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
+        <!-- Desktop Table View -->
+        <div class="hidden md:block bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
             <div class="overflow-x-auto">
                 <table class="w-full min-w-[800px]">
                     <thead class="bg-gradient-to-r from-sky-500 to-blue-600 text-white">
@@ -174,7 +174,6 @@
             <!-- Pagination -->
             <div class="bg-gray-50 px-4 md:px-6 py-4 flex flex-col md:flex-row justify-between items-center border-t border-gray-100 gap-4">
                 <div class="flex items-center gap-2 text-sm text-gray-600 order-2 md:order-1">
-                    
                     Showing <span class="font-medium">1</span> to <span class="font-medium">6</span> of <span class="font-medium">6</span> entries
                 </div>
                 <div class="flex space-x-2 order-1 md:order-2">
@@ -192,15 +191,154 @@
                 </div>
             </div>
         </div>
-    </main>
 
-    <!-- Mobile Card View (Packages) -->
-    <div class="mobile-card-view hidden md:hidden max-w-sm mx-auto">
-        <!-- Mobile cards will be rendered here -->
-                                </div>
+        <!-- Mobile View Only -->
+        <div class="block md:hidden">
+            <!-- Mobile Header -->
+            <div class="flex justify-between items-center mb-4 w-full">
+                <span class="text-lg font-semibold">Packages</span>
+                <div class="flex items-center gap-2">
+                    <div class="relative inline-block text-left">
+                        <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700" id="mobile-menu-button" aria-expanded="false" aria-haspopup="true">
+                            More
+                            <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <!-- Dropdown menu -->
+                        <div id="mobile-dropdown-menu"
+                            class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10"
+                            style="display: none;">
+                            <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="mobile-menu-button">
+                                <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem">Export</a>
+                                <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem">Print</a>
+                                <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem">Settings</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mobile Controls -->
+            <div class="mb-2 flex w-full gap-2">
+                <button class="bg-blue-500 text-white rounded text-sm font-medium flex items-center justify-center flex-1 min-w-0 py-2" onclick="window.location.href='create-package.html'">
+                    <i class="fas fa-plus mr-1"></i>Create
+                </button>
+                <button class="bg-blue-200 text-blue-800 rounded text-sm font-medium flex items-center justify-center flex-1 min-w-0 py-2" id="mobile-actions-button">
+                    <i class="fas fa-caret-down mr-1"></i>Actions
+                </button>
+                <input type="text" placeholder="Search" class="rounded border border-gray-300 text-sm flex-[2] min-w-0 px-3 py-2" id="mobile-search" />
+            </div>
+            
+            <!-- Mobile Header Card -->
+            <div class="bg-white rounded-lg shadow p-2 mb-2">
+                <div class="flex font-semibold text-sky-500 text-base justify-between items-center px-2">
+                    <span class="flex-1">Package Name</span>
+                    <span class="w-32 text-right">Total Price</span>
+                </div>
+                <hr class="my-0.5 border-gray-300">
+                <div class="flex text-gray-400 text-xs justify-between items-center px-2 mt-1 mb-2">
+                    <span class="flex-1">Date Created: mm/dd/yyyy</span>
+                </div>
+            </div>
+            
+            <!-- Mobile Package Cards -->
+            <div class="space-y-2">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-lg shadow p-2">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sky-500 font-semibold text-base flex-1">Deep Clean With Free Hose Package</span>
+                        <span class="text-sky-400 font-semibold text-base w-32 text-right">$7,893.20</span>
+                    </div>
+                    <hr class="my-0.5 border-gray-300">
+                    <div class="flex justify-between items-center mt-1 text-xs text-gray-700">
+                        <span>Date Created: March 14, 2025</span>
+                        <span class="bg-blue-400 text-white rounded px-3 py-1 text-xs font-semibold ml-2">Active</span>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white rounded-lg shadow p-2">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sky-500 font-semibold text-base flex-1">Garden Landscaping Package</span>
+                        <span class="text-sky-400 font-semibold text-base w-32 text-right">$200.00</span>
+                    </div>
+                    <hr class="my-0.5 border-gray-300">
+                    <div class="flex justify-between items-center mt-1 text-xs text-gray-700">
+                        <span>Date Created: March 12, 2025</span>
+                        <span class="bg-blue-400 text-white rounded px-3 py-1 text-xs font-semibold ml-2">Active</span>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white rounded-lg shadow p-2">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sky-500 font-semibold text-base flex-1">Office Cleaning Package</span>
+                        <span class="text-sky-400 font-semibold text-base w-32 text-right">$14,266.00</span>
+                    </div>
+                    <hr class="my-0.5 border-gray-300">
+                    <div class="flex justify-between items-center mt-1 text-xs text-gray-700">
+                        <span>Date Created: March 12, 2025</span>
+                        <span class="bg-blue-400 text-white rounded px-3 py-1 text-xs font-semibold ml-2">Active</span>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-white rounded-lg shadow p-2">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sky-500 font-semibold text-base flex-1">Basic Home Repair Package</span>
+                        <span class="text-sky-400 font-semibold text-base w-32 text-right">$2,139.20</span>
+                    </div>
+                    <hr class="my-0.5 border-gray-300">
+                    <div class="flex justify-between items-center mt-1 text-xs text-gray-700">
+                        <span>Date Created: March 12, 2025</span>
+                        <span class="bg-blue-400 text-white rounded px-3 py-1 text-xs font-semibold ml-2">Active</span>
+                    </div>
+                </div>
+                <!-- Card 5 -->
+                <div class="bg-white rounded-lg shadow p-2">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sky-500 font-semibold text-base flex-1">Electrical Installation Package</span>
+                        <span class="text-sky-400 font-semibold text-base w-32 text-right">$6,230.00</span>
+                    </div>
+                    <hr class="my-0.5 border-gray-300">
+                    <div class="flex justify-between items-center mt-1 text-xs text-gray-700">
+                        <span>Date Created: March 12, 2025</span>
+                        <span class="bg-blue-400 text-white rounded px-3 py-1 text-xs font-semibold ml-2">Active</span>
+                    </div>
+                </div>
+                <!-- Card 6 -->
+                <div class="bg-white rounded-lg shadow p-2">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sky-500 font-semibold text-base flex-1">Buten Package</span>
+                        <span class="text-sky-400 font-semibold text-base w-32 text-right">$14,081.20</span>
+                    </div>
+                    <hr class="my-0.5 border-gray-300">
+                    <div class="flex justify-between items-center mt-1 text-xs text-gray-700">
+                        <span>Date Created: June 27, 2025</span>
+                        <span class="bg-blue-400 text-white rounded px-3 py-1 text-xs font-semibold ml-2">Active</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 
     <!-- Load JavaScript files -->
     <script src="../js/main.js"></script>
     <script src="../js/packages.js"></script>
+    <script>
+        // Mobile dropdown functionality
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const dropdown = document.getElementById('mobile-dropdown-menu');
+            dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+        });
+        fetch('../nav/header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-container').innerHTML = data;
+        });
+    fetch('../nav/navigation.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('nav-container').innerHTML = data;
+        });
+    </script>
 </body>
 </html>

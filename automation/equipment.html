@@ -28,7 +28,7 @@
     <!-- Main content -->
     <main class="container-fluid mx-auto px-4 md:px-6 py-2 md:py-4" style="position: relative; z-index: 1;">
         <!-- Combined header with search -->
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
+        <div class="hidden md:flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
             <div class="flex items-center gap-4">
                 <h1 class="text-xl md:text-2xl font-bold text-gray-800">Equipments List</h1>
             </div>
@@ -69,7 +69,7 @@
         </div>
 
         <!-- Controls Section -->
-        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
+        <div class="hidden md:flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
             <!-- Left side: Controls -->
             <div class="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
                 <!-- Show entries dropdown -->
@@ -108,8 +108,8 @@
             </div>
         </div>
 
-        <!-- Table content -->
-        <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
+        <!-- Desktop Table View -->
+        <div class="hidden md:block bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
             <div class="overflow-x-auto">
                 <table class="w-full min-w-[800px]">
                     <thead class="bg-gradient-to-r from-sky-500 to-blue-600 text-white">
@@ -134,8 +134,6 @@
             <!-- Pagination -->
             <div class="bg-gray-50 px-4 md:px-6 py-4 flex flex-col md:flex-row justify-between items-center border-t border-gray-100 gap-4">
                 <div class="flex items-center gap-2 text-sm text-gray-600 order-2 md:order-1">
-                    
-                    
                     Showing <span class="font-medium">1</span> to <span class="font-medium">1</span> of <span class="font-medium">1</span> entries
                 </div>
                 <div class="flex space-x-2 order-1 md:order-2">
@@ -153,9 +151,122 @@
                 </div>
             </div>
         </div>
+
+        <!-- Mobile View Only -->
+<div class="block md:hidden">
+    <!-- Mobile Header -->
+    <div class="flex justify-between items-center mb-4">
+        <span class="text-lg font-semibold">Equipments</span>
+        <div class="relative inline-block text-left">
+            <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700" id="mobile-menu-button" aria-expanded="false" aria-haspopup="true">
+                More
+                <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Mobile Controls -->
+    <div class="mb-2 flex w-full gap-2">
+        <button class="bg-blue-500 text-white rounded text-sm font-medium flex items-center justify-center flex-1 min-w-0 py-2" onclick="window.location.href='create-equipment.html'">
+            <i class="fas fa-plus mr-1"></i>Create
+        </button>
+        <button class="bg-blue-200 text-blue-800 rounded text-sm font-medium flex items-center justify-center flex-1 min-w-0 py-2" id="mobile-actions-button">
+            <i class="fas fa-caret-down mr-1"></i>Actions
+        </button>
+        <input type="text" placeholder="Search" class="rounded border border-gray-300 text-sm flex-[2] min-w-0 px-3 py-2" id="mobile-search" />
+    </div>
+
+    <!-- Mobile Card Container -->
+    <div class="space-y-2 max-w-2xl mx-auto" id="mobile-card-container">
+        <!-- Equipment Card 1 -->
+        <div class="bg-white border-2 border-blue-200 rounded-xl shadow">
+            <div class="px-4 pt-3 pb-2 border-b border-blue-100 bg-blue-50 rounded-t-xl flex justify-between items-center">
+                <span class="text-blue-700 font-semibold text-base">Lawn Mower</span>
+                <span class="bg-blue-400 text-white rounded px-3 py-1 text-xs font-semibold ml-2">Active</span>
+            </div>
+            <div class="p-4 grid grid-cols-1 gap-2 text-xs text-gray-700">
+                <div><span class="font-semibold">Specification:</span> Self-propelled Gas-powered Mower For Residential Lawns</div>
+                <div><span class="font-semibold">Equipment Code:</span> LM100</div>
+                <div><span class="font-semibold">Status:</span> On Stock</div>
+                <div><span class="font-semibold">Acquisition Date:</span> March 12, 2025</div>
+            </div>
+        </div>
+        
+        <!-- Equipment Card 2 -->
+        <div class="bg-white border-2 border-blue-200 rounded-xl shadow">
+            <div class="px-4 pt-3 pb-2 border-b border-blue-100 bg-blue-50 rounded-t-xl flex justify-between items-center">
+                <span class="text-blue-700 font-semibold text-base">Shovel</span>
+                <span class="bg-blue-400 text-white rounded px-3 py-1 text-xs font-semibold ml-2">Active</span>
+            </div>
+            <div class="p-4 grid grid-cols-1 gap-2 text-xs text-gray-700">
+                <div><span class="font-semibold">Specification:</span> Very Small But Yayay</div>
+                <div><span class="font-semibold">Equipment Code:</span> 1sh0w-b1ll</div>
+                <div><span class="font-semibold">Status:</span> On Stock</div>
+                <div><span class="font-semibold">Acquisition Date:</span> March 12, 2025</div>
+            </div>
+        </div>
+        
+        <!-- Equipment Card 3 -->
+        <div class="bg-white border-2 border-blue-200 rounded-xl shadow">
+            <div class="px-4 pt-3 pb-2 border-b border-blue-100 bg-blue-50 rounded-t-xl flex justify-between items-center">
+                <span class="text-blue-700 font-semibold text-base">Garden Hose</span>
+                <span class="bg-blue-400 text-white rounded px-3 py-1 text-xs font-semibold ml-2">Active</span>
+            </div>
+            <div class="p-4 grid grid-cols-1 gap-2 text-xs text-gray-700">
+                <div><span class="font-semibold">Specification:</span> Thread 1/2, 50 Meters Long</div>
+                <div><span class="font-semibold">Equipment Code:</span> H0s3</div>
+                <div><span class="font-semibold">Status:</span> On Stock</div>
+                <div><span class="font-semibold">Acquisition Date:</span> March 12, 2025</div>
+            </div>
+        </div>
+        
+        <!-- Equipment Card 4 -->
+        <div class="bg-white border-2 border-blue-200 rounded-xl shadow">
+            <div class="px-4 pt-3 pb-2 border-b border-blue-100 bg-blue-50 rounded-t-xl flex justify-between items-center">
+                <span class="text-blue-700 font-semibold text-base">Nails</span>
+                <span class="bg-blue-400 text-white rounded px-3 py-1 text-xs font-semibold ml-2">Active</span>
+            </div>
+            <div class="p-4 grid grid-cols-1 gap-2 text-xs text-gray-700">
+                <div><span class="font-semibold">Specification:</span> Of All Inches 0.5in - 10in</div>
+                <div><span class="font-semibold">Equipment Code:</span> Nell'sArmstrong</div>
+                <div><span class="font-semibold">Status:</span> On Stock</div>
+                <div><span class="font-semibold">Acquisition Date:</span> March 12, 2025</div>
+            </div>
+        </div>
+        
+        <!-- Equipment Card 5 -->
+        <div class="bg-white border-2 border-blue-200 rounded-xl shadow">
+            <div class="px-4 pt-3 pb-2 border-b border-blue-100 bg-blue-50 rounded-t-xl flex justify-between items-center">
+                <span class="text-blue-700 font-semibold text-base">Concrete Mixer</span>
+                <span class="bg-blue-400 text-white rounded px-3 py-1 text-xs font-semibold ml-2">Active</span>
+            </div>
+            <div class="p-4 grid grid-cols-1 gap-2 text-xs text-gray-700">
+                <div><span class="font-semibold">Specification:</span> Portable Concrete Mixer, 3 Cubic Ft Capacity</div>
+                <div><span class="font-semibold">Equipment Code:</span> EQP-0001</div>
+                <div><span class="font-semibold">Status:</span> On Stock</div>
+                <div><span class="font-semibold">Acquisition Date:</span> March 12, 2025</div>
+            </div>
+        </div>
+        
+        <!-- Equipment Card 6 -->
+        <div class="bg-white border-2 border-blue-200 rounded-xl shadow">
+            <div class="px-4 pt-3 pb-2 border-b border-blue-100 bg-blue-50 rounded-t-xl flex justify-between items-center">
+                <span class="text-blue-700 font-semibold text-base">Welding Machine</span>
+                <span class="bg-blue-400 text-white rounded px-3 py-1 text-xs font-semibold ml-2">Active</span>
+            </div>
+            <div class="p-4 grid grid-cols-1 gap-2 text-xs text-gray-700">
+                <div><span class="font-semibold">Specification:</span> Arc Welding Machine, 300 Amps Output</div>
+                <div><span class="font-semibold">Equipment Code:</span> EQP-0002</div>
+                <div><span class="font-semibold">Status:</span> On Stock</div>
+                <div><span class="font-semibold">Acquisition Date:</span> March 12, 2025</div>
+            </div>
+        </div>
+    </div>
+</div>
     </main>
 
- 
     <!-- Date Range Modal -->
     <div id="dateRangeModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
         <div class="bg-white rounded-lg shadow-xl p-6 w-[800px] max-w-[90vw]">
@@ -187,11 +298,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Mobile Card View -->
-    <div class="mobile-card-view hidden md:hidden max-w-sm mx-auto">
-        <!-- Mobile cards will be rendered here -->
-                                </div>
 
     <!-- Invoice Details Modal -->
     <div id="invoiceDetailsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
@@ -285,6 +391,18 @@
     </div>
 
     <!-- Load JavaScript files -->
+     <script>
+        fetch('../nav/header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-container').innerHTML = data;
+        });
+    fetch('../nav/navigation.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('nav-container').innerHTML = data;
+        });
+     </script>
     <script src="../js/main.js"></script>
     <script src="../js/equipments.js"></script>
 </body>

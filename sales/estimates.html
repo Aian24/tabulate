@@ -1,271 +1,387 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <title>Estimates</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-    <script src="https://unpkg.com/@popperjs/core@2"></script>
-    <script src="https://unpkg.com/tippy.js@6"></script>
-    <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
-    <link href="https://unpkg.com/tippy.js@6/themes/light.css" rel="stylesheet"/>
-    <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <link rel="stylesheet" href="../css/styles.css">
-</head>
-<body class="min-h-screen">
-    <!-- Include header -->
-    <div id="header-container"></div>
-
-    <!-- Include navigation -->
-    <div id="nav-container"></div>
-
-    <!-- Main content -->
-    <main class="container-fluid mx-auto px-4 md:px-6 py-2 md:py-4 relative-z-1">
-        <!-- Combined header with search -->
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
-            <div class="flex items-center gap-4">
-                <h1 class="text-xl md:text-2xl font-bold text-gray-800">Estimates</h1>
-            </div>
-            <div class="flex items-center gap-2">
-                <div class="relative">
-                    <button id="actionsDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
-                        <span>Actions</span>
-                        <i class="fas fa-chevron-down ml-1"></i>
-                    </button>
-                    <div id="actionsMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
-                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                            <i class="fas fa-file-invoice w-5"></i>
-                            <span>Create Invoice</span>
-                        </button>
-                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                            <i class="fas fa-trash-alt w-5"></i>
-                            <span>Delete</span>
-                        </button>
-                    </div>
-                </div>
-                <div class="relative">
-                    <button id="moreDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
-                        <span>More</span>
-                        <i class="fas fa-chevron-down ml-1"></i>
-                    </button>
-                    <div id="moreMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
-                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                            <i class="fas fa-cog w-5"></i>
-                            <span>Settings</span>
-                        </button>
-                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                            <i class="fas fa-chart-bar w-5"></i>
-                            <span>Report</span>
-                        </button>
-                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                            <i class="fas fa-history w-5"></i>
-                            <span>Audit Trail</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
+    <head>
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+        <title>Estimates</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+        <script src="https://unpkg.com/@popperjs/core@2"></script>
+        <script src="https://unpkg.com/tippy.js@6"></script>
+        <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+        <link href="https://unpkg.com/tippy.js@6/themes/light.css" rel="stylesheet"/>
+        <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <link rel="stylesheet" href="../css/styles.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    </head>
+    <body class="min-h-screen bg-sky-50">
+        <!-- Include header -->
+        <div id="header-container"></div>
+    
+        <!-- Include navigation -->
+        <div id="nav-container"></div>
+    
+        <main class="container-fluid mx-auto px-4 md:px-6 py-2 md:py-4" style="position: relative; z-index: 1;">
+    <!-- Desktop Header -->
+    <div class="hidden md:flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
+        <div class="flex items-center gap-4">
+            <h1 class="text-xl md:text-2xl font-bold text-gray-800">Estimates</h1>
         </div>
-
-        <!-- Controls Section (Filter, Search) -->
-        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
-            <!-- Left side: Controls -->
-            <div class="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
-                <!-- Show entries dropdown -->
-                <div class="hidden md:flex items-center mr-4">
-                    <label class="text-sm text-gray-600 mr-2">Show entries:</label>
-                    <select class="pagination-entries-select border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select>
-                </div>
-                <!-- Action buttons -->
-                <div class="flex flex-wrap justify-center md:justify-start gap-2">
-                    <button id="createEstimateBtn" class="px-2 py-1 text-xs font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors" onclick="window.location.href='create-estimate.html'">
-                        <i class="fas fa-plus mr-0.5"></i> Create Estimate
-                    </button>
-                    <button id="deletedEstimatesBtn" class="px-2 py-1 text-xs font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 transition-colors" onclick="window.location.href='deleted-estimates.html'">
-                        <i class="fas fa-trash-alt mr-0.5"></i> Deleted Estimates
-                    </button>
-                    <button id="openFilter" class="calendar-button border-2 border-gray-400 text-gray-700 flex items-center gap-1 px-2 py-1 rounded-lg text-xs">
-                        <i class="fas fa-filter"></i>
-                        <span>Filter</span>
-                    </button>
-                </div>
-            </div>
-            <!-- Right side: Search -->
-            <div id="search-container" class="relative w-full md:w-auto">
-                <input type="search" 
-                       placeholder="Search..." 
-                       class="w-full h-[42px] pl-10 pr-4 rounded-lg border border-green-500 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300"
-                />
-                <button class="absolute left-3 top-1/2 -translate-y-1/2 text-blue-500 hover:text-blue-600 transition-colors">
-                    <i class="fas fa-search"></i>
+        <div class="flex items-center gap-2">
+            <div class="relative">
+                <button id="actionsDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
+                    <span>Actions</span>
+                    <i class="fas fa-chevron-down ml-1"></i>
                 </button>
-            </div>
-        </div>
-
-        <!-- Table content -->
-        <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
-            <div class="overflow-x-auto">
-                <table class="w-full min-w-[800px]">
-                    <thead class="bg-gradient-to-r from-sky-500 to-blue-600 text-white">
-                        <tr>
-                            <th class="px-6 py-4 text-left">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
-                            </th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="estimate-number">
-                                <div class="flex items-center space-x-2">
-                                    <span>Estimate #</span>
-                                    <i class="fas fa-sort text-xs opacity-70"></i>
-                                </div>
-                            </th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="customer">
-                                <div class="flex items-center space-x-2">
-                                    <span>Customer</span>
-                                    <i class="fas fa-sort text-xs opacity-70"></i>
-                                </div>
-                            </th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="date-created">
-                                <div class="flex items-center space-x-2">
-                                    <span>Date Created</span>
-                                    <i class="fas fa-sort text-xs opacity-70"></i>
-                                </div>
-                            </th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="date-sent">
-                                <div class="flex items-center space-x-2">
-                                    <span>Date Sent</span>
-                                    <i class="fas fa-sort text-xs opacity-70"></i>
-                                </div>
-                            </th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="price">
-                                <div class="flex items-center space-x-2">
-                                    <span>Price</span>
-                                    <i class="fas fa-sort text-xs opacity-70"></i>
-                                </div>
-                            </th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="address">
-                                <div class="flex items-center space-x-2">
-                                    <span>Address</span>
-                                    <i class="fas fa-sort text-xs opacity-70"></i>
-                                </div>
-                            </th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="category">
-                                <div class="flex items-center space-x-2">
-                                    <span>Category</span>
-                                    <i class="fas fa-sort text-xs opacity-70"></i>
-                                </div>
-                            </th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="status">
-                                <div class="flex items-center space-x-2">
-                                    <span>Status</span>
-                                    <i class="fas fa-sort text-xs opacity-70"></i>
-                                </div>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-100">
-                        <!-- Developer: Each row represents an estimate. Add more rows as needed. -->
-                        <tr class="hover:bg-gray-50 transition-colors cursor-pointer">
-                            <td class="px-6 py-4">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
-                            </td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">#1013</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">Jamie Dora</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">March 19, 2025</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">N/A</td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">$ 7,162.40</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">Pabahay 2000 Muzon</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">No category available</td>
-                            <td class="px-6 py-4">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                                    Pending
-                                </span>
-                            </td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 transition-colors cursor-pointer">
-                            <td class="px-6 py-4">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
-                            </td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">#1014</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">Alex Cruz</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">March 20, 2025</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">March 21, 2025</td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">$ 2,500.00</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">Greenfields Subd.</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">Electrical</td>
-                            <td class="px-6 py-4">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                    Approved
-                                </span>
-                            </td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 transition-colors cursor-pointer">
-                            <td class="px-6 py-4">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
-                            </td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">#1015</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">Maria Lopez</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">March 22, 2025</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">N/A</td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">$ 4,800.00</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">Sunrise Villas</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">Plumbing</td>
-                            <td class="px-6 py-4">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                                    Rejected
-                                </span>
-                            </td>
-                        </tr>
-                        <!-- Add more rows as needed -->
-                    </tbody>
-                </table>
-            </div>
-            
-            <!-- Pagination -->
-            <div class="bg-gray-50 px-4 md:px-6 py-4 flex flex-col md:flex-row justify-between items-center border-t border-gray-100 gap-4">
-                <div class="flex items-center gap-2 text-sm text-gray-600 order-2 md:order-1">
-                    Showing <span class="font-medium">1</span> to <span class="font-medium">1</span> of <span class="font-medium">1</span> entries
-                </div>
-                <div class="flex space-x-2 order-1 md:order-2">
-                    <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
-                        <i class="fas fa-chevron-left mr-1"></i>
-                        <span class="hidden sm:inline">Previous</span>
+                <div id="actionsMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
+                    <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                        <i class="fas fa-file-invoice w-5"></i>
+                        <span>Create Invoice</span>
                     </button>
-                    <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-white bg-sky-500 border border-sky-500 rounded-lg hover:bg-sky-600 transition-colors duration-200">
-                        1
-                    </button>
-                    <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
-                        <span class="hidden sm:inline">Next</span>
-                        <i class="fas fa-chevron-right ml-1"></i>
+                    <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                        <i class="fas fa-trash-alt w-5"></i>
+                        <span>Delete</span>
                     </button>
                 </div>
             </div>
-        </div>
-    </main>
-
-    <!-- Modal for viewing dispatch details -->
-    <div id="dispatchModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center hidden z-50">
-        <div class="bg-white rounded-lg shadow-lg max-w-lg w-full p-6 relative">
-            <button id="closeModal" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-xl font-bold">&times;</button>
-            <h2 class="text-xl font-semibold mb-4">Dispatch Details</h2>
-            <div id="modalContent" class="space-y-2 text-gray-700 text-sm max-h-96 overflow-y-auto">
-                <!-- Details will be populated here -->
+            <div class="relative">
+                <button id="moreDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
+                    <span>More</span>
+                    <i class="fas fa-chevron-down ml-1"></i>
+                </button>
+                <div id="moreMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
+                    <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                        <i class="fas fa-cog w-5"></i>
+                        <span>Settings</span>
+                    </button>
+                    <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                        <i class="fas fa-chart-bar w-5"></i>
+                        <span>Report</span>
+                    </button>
+                    <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                        <i class="fas fa-history w-5"></i>
+                        <span>Audit Trail</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Mobile Card View -->
-    <div class="mobile-card-view hidden md:hidden max-w-sm mx-auto">
-        <!-- Mobile cards will be rendered here -->
-                                </div>
+    <!-- Desktop Controls Section -->
+    <div class="hidden md:flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
+        <!-- Left side: Controls -->
+        <div class="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
+            <!-- Show entries dropdown -->
+            <div class="hidden md:flex items-center mr-4">
+                <label class="text-sm text-gray-600 mr-2">Show entries:</label>
+                <select class="pagination-entries-select border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <!-- Action buttons -->
+            <div class="flex flex-wrap justify-center md:justify-start gap-2">
+                <button id="createEstimateBtn" class="px-2 py-1 text-xs font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors" onclick="window.location.href='create-estimate.html'">
+                    <i class="fas fa-plus mr-0.5"></i> Create Estimate
+                </button>
+                <button id="deletedEstimatesBtn" class="px-2 py-1 text-xs font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 transition-colors" onclick="window.location.href='deleted-estimates.html'">
+                    <i class="fas fa-trash-alt mr-0.5"></i> Deleted Estimates
+                </button>
+                <button id="openFilter" class="calendar-button border-2 border-gray-400 text-gray-700 flex items-center gap-1 px-2 py-1 rounded-lg text-xs">
+                    <i class="fas fa-filter"></i>
+                    <span>Filter</span>
+                </button>
+            </div>
+        </div>
+        <!-- Right side: Search -->
+        <div id="search-container" class="relative w-full md:w-auto">
+            <input type="search" 
+                   placeholder="Search..." 
+                   class="w-full h-[42px] pl-10 pr-4 rounded-lg border border-green-500 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300"
+            />
+            <button class="absolute left-3 top-1/2 -translate-y-1/2 text-blue-500 hover:text-blue-600 transition-colors">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </div>
 
-    <!-- Load JavaScript files -->
-    <script src="../js/main.js"></script>
-    <script src="../js/estimates.js"></script>
-</body>
+    <!-- Desktop Table View -->
+    <div class="hidden md:block bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
+        <div class="overflow-x-auto">
+            <table class="w-full min-w-[800px]">
+                <thead class="bg-gradient-to-r from-sky-500 to-blue-600 text-white">
+                    <tr>
+                        <th class="px-6 py-4 text-left">
+                            <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
+                        </th>
+                        <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="estimate-number">
+                            <div class="flex items-center space-x-2">
+                                <span>Estimate #</span>
+                                <i class="fas fa-sort text-xs opacity-70"></i>
+                            </div>
+                        </th>
+                        <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="customer">
+                            <div class="flex items-center space-x-2">
+                                <span>Customer</span>
+                                <i class="fas fa-sort text-xs opacity-70"></i>
+                            </div>
+                        </th>
+                        <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="date-created">
+                            <div class="flex items-center space-x-2">
+                                <span>Date Created</span>
+                                <i class="fas fa-sort text-xs opacity-70"></i>
+                            </div>
+                        </th>
+                        <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="date-sent">
+                            <div class="flex items-center space-x-2">
+                                <span>Date Sent</span>
+                                <i class="fas fa-sort text-xs opacity-70"></i>
+                            </div>
+                        </th>
+                        <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="price">
+                            <div class="flex items-center space-x-2">
+                                <span>Price</span>
+                                <i class="fas fa-sort text-xs opacity-70"></i>
+                            </div>
+                        </th>
+                        <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="address">
+                            <div class="flex items-center space-x-2">
+                                <span>Address</span>
+                                <i class="fas fa-sort text-xs opacity-70"></i>
+                            </div>
+                        </th>
+                        <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="category">
+                            <div class="flex items-center space-x-2">
+                                <span>Category</span>
+                                <i class="fas fa-sort text-xs opacity-70"></i>
+                            </div>
+                        </th>
+                        <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="status">
+                            <div class="flex items-center space-x-2">
+                                <span>Status</span>
+                                <i class="fas fa-sort text-xs opacity-70"></i>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                    <tr class="hover:bg-gray-50 transition-colors cursor-pointer">
+                        <td class="px-6 py-4">
+                            <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
+                        </td>
+                        <td class="px-6 py-4 text-sm font-medium text-gray-900">#1013</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">Jamie Dora</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">March 19, 2025</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">N/A</td>
+                        <td class="px-6 py-4 text-sm font-medium text-gray-900">$ 7,162.40</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">Pabahay 2000 Muzon</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">No category available</td>
+                        <td class="px-6 py-4">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                Pending
+                            </span>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-gray-50 transition-colors cursor-pointer">
+                        <td class="px-6 py-4">
+                            <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
+                        </td>
+                        <td class="px-6 py-4 text-sm font-medium text-gray-900">#1014</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">Alex Cruz</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">March 20, 2025</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">March 21, 2025</td>
+                        <td class="px-6 py-4 text-sm font-medium text-gray-900">$ 2,500.00</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">Greenfields Subd.</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">Electrical</td>
+                        <td class="px-6 py-4">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                Approved
+                            </span>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-gray-50 transition-colors cursor-pointer">
+                        <td class="px-6 py-4">
+                            <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
+                        </td>
+                        <td class="px-6 py-4 text-sm font-medium text-gray-900">#1015</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">Maria Lopez</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">March 22, 2025</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">N/A</td>
+                        <td class="px-6 py-4 text-sm font-medium text-gray-900">$ 4,800.00</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">Sunrise Villas</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">Plumbing</td>
+                        <td class="px-6 py-4">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                Rejected
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Pagination -->
+        <div class="bg-gray-50 px-4 md:px-6 py-4 flex flex-col md:flex-row justify-between items-center border-t border-gray-100 gap-4">
+            <div class="flex items-center gap-2 text-sm text-gray-600 order-2 md:order-1">
+                Showing <span class="font-medium">1</span> to <span class="font-medium">3</span> of <span class="font-medium">3</span> entries
+            </div>
+            <div class="flex space-x-2 order-1 md:order-2">
+                <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                    <i class="fas fa-chevron-left mr-1"></i>
+                    <span class="hidden sm:inline">Previous</span>
+                </button>
+                <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-white bg-sky-500 border border-sky-500 rounded-lg hover:bg-sky-600 transition-colors duration-200">
+                    1
+                </button>
+                <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                    <span class="hidden sm:inline">Next</span>
+                    <i class="fas fa-chevron-right ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile View Only -->
+    <div class="block md:hidden">
+        <!-- Mobile Header -->
+        <div class="flex justify-between items-center mb-4 w-full">
+            <span class="text-lg font-semibold">Estimates</span>
+            <div class="flex items-center gap-2">
+                <div class="relative inline-block text-left">
+                    <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700" id="mobile-menu-button" aria-expanded="false" aria-haspopup="true">
+                        More
+                        <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <!-- Mobile Dropdown menu -->
+                    <div id="mobile-dropdown-menu"
+                        class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10"
+                        style="display: none;">
+                        <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="mobile-menu-button">
+                            <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem">Export</a>
+                            <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem">Print</a>
+                            <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem">Settings</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Controls -->
+        <div class="mb-2 flex w-full gap-2">
+            <button class="bg-blue-500 text-white rounded text-sm font-medium flex items-center justify-center flex-1 min-w-0 py-2">
+                <i class="fas fa-plus mr-1"></i>Create
+            </button>
+            <button class="bg-blue-200 text-blue-800 rounded text-sm font-medium flex items-center justify-center flex-1 min-w-0 py-2" id="mobile-actions-button">
+                <i class="fas fa-caret-down mr-1"></i>Actions
+            </button>
+            <input type="text" placeholder="Search" class="rounded border border-gray-300 text-sm flex-[2] min-w-0 px-3 py-2" id="mobile-search" />
+        </div>
+
+        <!-- Mobile Estimates List -->
+        <div class="space-y-4">
+            <!-- Estimate Card 1 -->
+            <div class="bg-sky-50 rounded-lg shadow p-4">
+                <div class="flex justify-between items-start">
+                    <h2 class="text-xl font-bold text-cyan-600">Estimate No. 1013</h2>
+                    <span class="px-2 py-0.5 text-xs font-semibold text-yellow-800 bg-yellow-200 rounded-md">Pending</span>
+                </div>
+                <div class="mt-3 text-sm text-gray-700 space-y-1">
+                    <p>Customer Name: Jamie Dora</p>
+                    <p>Address: Pabahay 2000 Muzon</p>
+                    <div class="grid grid-cols-2">
+                        <p>Date Created: March 19, 2025</p>
+                        <p>Date Sent: N/A</p>
+                    </div>
+                    <p>Category: No category available</p>
+                    <p>Price: <span class="font-bold text-blue-600">$7,162.40</span></p>
+                </div>
+                <div class="mt-3 flex justify-end">
+                    <button class="bg-blue-500 text-white text-sm font-semibold px-4 py-1.5 rounded-md">Convert to Invoice</button>
+                </div>
+            </div>
+
+            <!-- Estimate Card 2 -->
+            <div class="bg-sky-50 rounded-lg shadow p-4">
+                <div class="flex justify-between items-start">
+                    <h2 class="text-xl font-bold text-cyan-600">Estimate No. 1014</h2>
+                    <span class="px-2 py-0.5 text-xs font-semibold text-green-800 bg-green-200 rounded-md">Approved</span>
+                </div>
+                <div class="mt-3 text-sm text-gray-700 space-y-1">
+                    <p>Customer Name: Alex Cruz</p>
+                    <p>Address: Greenfields Subd.</p>
+                    <div class="grid grid-cols-2">
+                        <p>Date Created: March 20, 2025</p>
+                        <p>Date Sent: March 21, 2025</p>
+                    </div>
+                    <p>Category: Electrical</p>
+                    <p>Price: <span class="font-bold text-blue-600">$2,500.00</span></p>
+                </div>
+                <div class="mt-3 flex justify-end">
+                    <button class="bg-blue-500 text-white text-sm font-semibold px-4 py-1.5 rounded-md">Convert to Invoice</button>
+                </div>
+            </div>
+
+            <!-- Estimate Card 3 -->
+            <div class="bg-sky-50 rounded-lg shadow p-4">
+                <div class="flex justify-between items-start">
+                    <h2 class="text-xl font-bold text-cyan-600">Estimate No. 1015</h2>
+                    <span class="px-2 py-0.5 text-xs font-semibold text-red-800 bg-red-200 rounded-md">Rejected</span>
+                </div>
+                <div class="mt-3 text-sm text-gray-700 space-y-1">
+                    <p>Customer Name: Maria Lopez</p>
+                    <p>Address: Sunrise Villas</p>
+                    <div class="grid grid-cols-2">
+                        <p>Date Created: March 22, 2025</p>
+                        <p>Date Sent: N/A</p>
+                    </div>
+                    <p>Category: Plumbing</p>
+                    <p>Price: <span class="font-bold text-blue-600">$4,800.00</span></p>
+                </div>
+                <div class="mt-3 flex justify-end">
+                    <button class="bg-gray-400 text-white text-sm font-semibold px-4 py-1.5 rounded-md" disabled>Rejected</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+        <script>
+            // Load header and navigation
+            fetch('../nav/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                });
+            fetch('../nav/navigation.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('nav-container').innerHTML = data;
+                });
+
+            // Mobile dropdown functionality
+            document.getElementById('mobile-menu-button').addEventListener('click', function() {
+                const dropdown = document.getElementById('mobile-dropdown-menu');
+                dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+            });
+
+            // Desktop dropdown functionality
+            document.getElementById('desktop-menu-button').addEventListener('click', function() {
+                const dropdown = document.getElementById('desktop-dropdown-menu');
+                dropdown.classList.toggle('hidden');
+            });
+
+            // Mobile dropdown functionality
+            document.getElementById('mobile-menu-button').addEventListener('click', function() {
+                const dropdown = document.getElementById('mobile-dropdown-menu');
+                dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+            });
+        </script>
+    </body>
 </html>

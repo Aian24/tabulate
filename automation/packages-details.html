@@ -15,16 +15,255 @@
 
     <!-- Main content -->
     <main class="w-full px-0 md:px-6 py-8">
-        <div class="mb-6 flex items-center gap-2">
+        <!-- Desktop Header -->
+        <div class="hidden md:block mb-6 flex items-center gap-2">
             <button id="backBtn" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition">
                 <i class="fas fa-arrow-left"></i> Back
             </button>
-            <h1 class="text-2xl md:text-3xl font-bold text-gray-800 ml-4" id="packageNameHeader"></h1>
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800 ml-4" id="packageNameHeader">Package Details</h1>
         </div>
-        <!-- Package Details Sections -->
-        <div id="packageDetailsContainer"></div>
+
+        <!-- Mobile Header -->
+        <div class="block md:hidden mb-4 px-4">
+            <div class="flex justify-between items-center">
+                <a href="packages.html" class="text-gray-600 flex items-center">
+                    <i class="fas fa-chevron-left text-lg"></i>
+                    <span class="ml-2 font-semibold">Back</span>
+                </a>
+                <div class="relative inline-block text-left">
+                    <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700" id="mobile-menu-button" aria-expanded="false" aria-haspopup="true">
+                        More
+                        <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desktop Layout -->
+        <div class="hidden md:block">
+            <div id="packageDetailsContainer">
+                <!-- Package details will be populated here by JavaScript -->
+                <!-- Fallback content for when JS is loading -->
+                <div class="flex flex-col md:flex-row gap-6">
+                    <!-- Left: Package Details -->
+                    <div class="flex-1 bg-white rounded-xl shadow p-6">
+                        <!-- Package Information -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-semibold text-gray-700 mb-4">Package Information</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-1">Package Name</label>
+                                    <input type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" value="Deep Clean with Free Hose Package" readonly />
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-1">Total Cost</label>
+                                    <input type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" value="$7,893.20" readonly />
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label class="block text-gray-700 font-semibold mb-1">Service Description</label>
+                                    <textarea class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" rows="3" readonly>Comprehensive cleaning package with professional equipment and free garden hose included. Max of 500 Characters</textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-1">Package Renewal Date</label>
+                                    <input type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" value="June 29, 2025" readonly />
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-1">Status</label>
+                                    <input type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" value="Active" readonly />
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 mb-4">
+                                <label class="inline-flex items-center text-sm text-blue-600 font-medium">
+                                    <input type="checkbox" checked disabled class="accent-blue-500 mr-2"/>
+                                    Renew Service
+                                </label>
+                                <label class="inline-flex items-center text-sm text-blue-600 font-medium">
+                                    <input type="checkbox" checked disabled class="accent-blue-500 mr-2"/>
+                                    Active
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Project Inclusions -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-semibold text-gray-700 mb-4">Project Inclusions</h3>
+                            <div class="overflow-x-auto border border-gray-200 rounded-lg">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-gradient-to-r from-sky-500 to-blue-600 text-white">
+                                        <tr>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Service Type</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Start Date</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">End Date</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Default Hours</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Rate</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Electrical Wiring Installation</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">June 27, 2025</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">July 27, 2025</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$600.00</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$80.00</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">$1,663.20</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Deep Cleaning Service</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">June 27, 2025</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">July 27, 2025</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$800.00</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$75.00</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">$6,230.00</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="bg-gray-50">
+                                            <td colspan="5" class="px-6 py-3 text-right text-base font-semibold text-gray-800">Grand Total:</td>
+                                            <td class="px-6 py-3 text-left text-base font-semibold text-gray-800">$7,893.20</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="mt-4">
+                                <button class="px-4 py-2 bg-blue-300 text-blue-900 rounded text-sm font-semibold hover:bg-blue-400">Add Service</button>
+                            </div>
+                        </div>
+
+                        <!-- Edit button -->
+                        <div class="mt-4 flex justify-start gap-3">
+                            <button class="px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center gap-2 text-sm">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="px-4 py-2 bg-fuchsia-600 text-white rounded shadow hover:bg-fuchsia-700 flex items-center gap-2 text-sm">
+                                <i class="fas fa-save"></i> Save
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Right: Upload Image -->
+                    <div class="w-full md:w-1/3 bg-white rounded-xl shadow p-6 h-fit">
+                        <label class="block text-gray-700 font-semibold mb-2">Upload Image</label>
+                        <input type="file" class="w-full rounded border-gray-300" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Layout -->
+        <div class="block md:hidden px-4">
+            <!-- Total Package Cost Bar -->
+            <div class="rounded-lg bg-blue-400 text-white text-center font-semibold text-lg py-2 mb-3 shadow border border-blue-300">
+                Total Package Cost: $7,893.20
+            </div>
+
+            <!-- Package Information Section -->
+            <div class="bg-white rounded-lg shadow border border-blue-200 mb-4">
+                <div class="bg-blue-50 px-4 py-2 rounded-t-lg border-b border-blue-100">
+                    <span class="text-blue-700 font-semibold text-base">Package Information</span>
+                </div>
+                <div class="p-4">
+                    <label class="block text-gray-600 text-xs mb-1" for="mobile-package-name">Package Name</label>
+                    <input id="mobile-package-name" type="text" value="Deep Clean with Free Hose Package" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-3"/>
+
+                    <label class="block text-gray-600 text-xs mb-1" for="mobile-service-description">Service Description</label>
+                    <textarea id="mobile-service-description" rows="3" maxlength="500" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-1 resize-none">Comprehensive cleaning package with professional equipment and free garden hose included.</textarea>
+                    <div class="text-xs text-gray-400 mb-3">Max of 500 Characters</div>
+
+                    <label class="block text-gray-600 text-xs mb-1" for="mobile-renewal-date">Package Renewal Date</label>
+                    <input id="mobile-renewal-date" type="text" value="June 29, 2025" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2"/>
+
+                    <div class="flex items-center gap-4 mb-3">
+                        <label class="inline-flex items-center text-sm text-blue-600 font-medium">
+                            <input type="checkbox" checked class="accent-blue-500 mr-2"/>
+                            Renew Service
+                        </label>
+                        <label class="inline-flex items-center text-sm text-blue-600 font-medium">
+                            <input type="checkbox" checked class="accent-blue-500 mr-2"/>
+                            Active
+                        </label>
+                    </div>
+                    <div class="flex gap-2 justify-end">
+                        <button class="bg-blue-400 hover:bg-blue-500 text-white px-6 py-1 rounded text-base font-semibold">Edit</button>
+                        <button class="bg-fuchsia-600 hover:bg-fuchsia-700 text-white px-6 py-1 rounded text-base font-semibold">Save</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Inclusions Section -->
+            <div class="bg-white rounded-lg shadow border border-blue-200 mb-4">
+                <div class="bg-blue-400 rounded-t-lg px-4 py-2">
+                    <span class="text-white font-semibold text-base">Project Inclusions</span>
+                </div>
+                <div class="p-4">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-xs mb-2">
+                            <thead>
+                                <tr class="bg-blue-100 text-blue-900">
+                                    <th class="px-2 py-1 text-left">Service Type</th>
+                                    <th class="px-2 py-1 text-left">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b">
+                                    <td class="px-2 py-1 align-top w-2/3">
+                                        <span class="block text-blue-700 font-semibold">Electrical Wiring Installation</span>
+                                        <span class="block text-gray-700 text-xs">Starting Date: June 27, 2025</span>
+                                        <span class="block text-gray-700 text-xs">End Date: July 27, 2025</span>
+                                        <span class="block text-gray-700 text-xs">Default B. Hours: $600.00</span>
+                                        <span class="block text-gray-700 text-xs">Default Rate: $80.00</span>
+                                    </td>
+                                    <td class="px-2 py-1 align-top w-1/3 text-blue-700 font-semibold text-right">$1,663.20</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-2 py-1 align-top w-2/3">
+                                        <span class="block text-blue-700 font-semibold">Deep Cleaning Service</span>
+                                        <span class="block text-gray-700 text-xs">Starting Date: June 27, 2025</span>
+                                        <span class="block text-gray-700 text-xs">End Date: July 27, 2025</span>
+                                        <span class="block text-gray-700 text-xs">Default B. Hours: $800.00</span>
+                                        <span class="block text-gray-700 text-xs">Default Rate: $75.00</span>
+                                    </td>
+                                    <td class="px-2 py-1 align-top w-1/3 text-blue-700 font-semibold text-right">$6,230.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <button class="bg-blue-300 hover:bg-blue-400 text-blue-900 px-4 py-1 rounded text-xs font-semibold">Add Service</button>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-cyan-700 font-semibold text-base">Grand total:</span>
+                        <span class="text-cyan-700 font-semibold text-base">$7,893.20</span>
+                    </div>
+                    <div class="flex justify-end mt-2">
+                        <button class="bg-fuchsia-600 hover:bg-fuchsia-700 text-white px-6 py-1 rounded text-base font-semibold">Save</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upload Image Section -->
+            <div class="bg-white rounded-lg shadow border border-blue-200 p-4 mb-4">
+                <label class="block text-gray-600 text-xs mb-1" for="mobile-upload-image">Upload Image</label>
+                <input id="mobile-upload-image" type="file" class="w-full border border-gray-300 rounded px-2 py-1 text-base"/>
+            </div>
+        </div>
     </main>
+    
     <script src="../js/main.js"></script>
     <script src="../js/packages.js"></script>
+    <script>
+        fetch('../nav/header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-container').innerHTML = data;
+        });
+    fetch('../nav/navigation.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('nav-container').innerHTML = data;
+        });
+    </script>
 </body>
-</html> 
+</html>

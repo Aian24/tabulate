@@ -15,89 +15,195 @@
 
     <!-- Main content -->
     <main class="w-full px-0 md:px-6 py-8">
-        <div class="mb-6 flex items-center gap-2">
+        <!-- Desktop Header -->
+        <div class="hidden md:block mb-6 flex items-center gap-2">
             <button id="backBtn" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition">
                 <i class="fas fa-arrow-left"></i> Back
             </button>
             <h1 id="equipmentDetailsTitle" class="text-2xl md:text-3xl font-bold text-gray-800 ml-4"></h1>
         </div>
-        <div class="flex flex-col md:flex-row gap-6">
-            <!-- Left: Equipment Details -->
-            <div class="flex-1 bg-white rounded-xl shadow p-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-                    <div>
-                        <label class="block text-gray-700 font-semibold mb-1">Equipment Code</label>
-                        <input id="equipmentCode" type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" readonly />
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 font-semibold mb-1">Equipments Name</label>
-                        <input id="equipmentName" type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" readonly />
-                    </div>
-                    <div class="md:col-span-2">
-                        <label class="block text-gray-700 font-semibold mb-1">Description</label>
-                        <textarea id="equipmentDescription" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" rows="2" readonly></textarea>
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 font-semibold mb-1">Acquisition Date</label>
-                        <input id="acquisitionDate" type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" readonly />
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 font-semibold mb-1">Available Quantity</label>
-                        <input id="availableQuantity" type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" readonly />
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 font-semibold mb-1">Power Type</label>
-                        <div id="powerTypeContainer" class="relative">
-                          <input id="powerType" type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" readonly />
-                          <span class="dropdown-chevron absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none hidden">
-                            <svg width="20" height="20" fill="none" stroke="#6B7280" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-                          </span>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 font-semibold mb-1">Condition</label>
-                        <div id="conditionContainer" class="relative">
-                          <input id="condition" type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" readonly />
-                          <span class="dropdown-chevron absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none hidden">
-                            <svg width="20" height="20" fill="none" stroke="#6B7280" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-                          </span>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 font-semibold mb-1">Status</label>
-                        <div id="statusContainer" class="relative">
-                          <input id="status" type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" readonly />
-                          <span class="dropdown-chevron absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none hidden">
-                            <svg width="20" height="20" fill="none" stroke="#6B7280" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-                          </span>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 font-semibold mb-1">Vendor</label>
-                        <div id="vendorContainer" class="relative">
-                          <input id="vendor" type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" readonly />
-                          <span class="dropdown-chevron absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none hidden">
-                            <svg width="20" height="20" fill="none" stroke="#6B7280" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-                          </span>
-                        </div>
-                        <button id="addVendorBtn" class="mt-2 px-2 py-1 bg-green-600 text-white rounded text-xs"><i class="fas fa-plus"></i> Add Vendor</button>
-                    </div>
-                </div>
-                <!-- Edit button moved to bottom left inside the card -->
-                <div class="mt-2 flex justify-start">
-                    <button id="editBtn" class="px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center gap-2 text-sm">
-                        <i class="fas fa-edit"></i> Edit
+
+        <!-- Mobile Header -->
+        <div class="block md:hidden mb-4 px-4">
+            <div class="flex justify-between items-center">
+                <a href="equipments.html" class="text-gray-600 flex items-center">
+                    <i class="fas fa-chevron-left text-lg"></i>
+                    <span class="ml-2 font-semibold">Back</span>
+                </a>
+                <div class="relative inline-block text-left">
+                    <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700" id="mobile-menu-button" aria-expanded="false" aria-haspopup="true">
+                        More
+                        <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
                     </button>
                 </div>
             </div>
-            <!-- Right: Upload Image -->
-            <div class="w-full md:w-1/3 bg-white rounded-xl shadow p-6 h-fit">
-                <label class="block text-gray-700 font-semibold mb-2">Upload Image</label>
-                <input id="equipmentImage" type="file" class="w-full rounded border-gray-300" />
+        </div>
+
+        <!-- Desktop Layout -->
+        <div class="hidden md:block">
+            <div class="flex flex-col md:flex-row gap-6">
+                <!-- Left: Equipment Details -->
+                <div class="flex-1 bg-white rounded-xl shadow p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-1">Equipment Code</label>
+                            <input id="equipmentCode" type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" readonly />
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-1">Equipments Name</label>
+                            <input id="equipmentName" type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" readonly />
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-gray-700 font-semibold mb-1">Description</label>
+                            <textarea id="equipmentDescription" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" rows="2" readonly></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-1">Acquisition Date</label>
+                            <input id="acquisitionDate" type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" readonly />
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-1">Available Quantity</label>
+                            <input id="availableQuantity" type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" readonly />
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-1">Power Type</label>
+                            <div id="powerTypeContainer" class="relative">
+                              <input id="powerType" type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" readonly />
+                              <span class="dropdown-chevron absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none hidden">
+                                <svg width="20" height="20" fill="none" stroke="#6B7280" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                              </span>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-1">Condition</label>
+                            <div id="conditionContainer" class="relative">
+                              <input id="condition" type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" readonly />
+                              <span class="dropdown-chevron absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none hidden">
+                                <svg width="20" height="20" fill="none" stroke="#6B7280" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                              </span>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-1">Status</label>
+                            <div id="statusContainer" class="relative">
+                              <input id="status" type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" readonly />
+                              <span class="dropdown-chevron absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none hidden">
+                                <svg width="20" height="20" fill="none" stroke="#6B7280" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                              </span>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-1">Vendor</label>
+                            <div id="vendorContainer" class="relative">
+                              <input id="vendor" type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" readonly />
+                              <span class="dropdown-chevron absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none hidden">
+                                <svg width="20" height="20" fill="none" stroke="#6B7280" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                              </span>
+                            </div>
+                            <button id="addVendorBtn" class="mt-2 px-2 py-1 bg-green-600 text-white rounded text-xs"><i class="fas fa-plus"></i> Add Vendor</button>
+                        </div>
+                    </div>
+                    <!-- Edit button moved to bottom left inside the card -->
+                    <div class="mt-2 flex justify-start">
+                        <button id="editBtn" class="px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center gap-2 text-sm">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
+                </div>
+                <!-- Right: Upload Image -->
+                <div class="w-full md:w-1/3 bg-white rounded-xl shadow p-6 h-fit">
+                    <label class="block text-gray-700 font-semibold mb-2">Upload Image</label>
+                    <input id="equipmentImage" type="file" class="w-full rounded border-gray-300" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Layout -->
+        <div class="block md:hidden px-4">
+            <!-- Equipment Information Section -->
+            <div class="bg-white border-2 border-blue-200 rounded-xl shadow mb-6 max-w-2xl mx-auto">
+                <div class="px-4 pt-3 pb-2 border-b border-blue-100 bg-blue-50 rounded-t-xl">
+                    <span class="text-blue-700 font-semibold text-base">Equipment Information</span>
+                </div>
+                <div class="p-4">
+                    <div class="grid grid-cols-1 gap-4">
+                        <div>
+                            <label class="block text-gray-500 text-xs mb-1" for="mobile-equipment-name">Equipment Name</label>
+                            <input id="mobile-equipment-name" type="text" value="Lawn Mower" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-500 text-xs mb-1" for="mobile-equipment-code">Equipment Code</label>
+                            <input id="mobile-equipment-code" type="text" value="LM100" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-500 text-xs mb-1" for="mobile-specification">Specification</label>
+                            <input id="mobile-specification" type="text" value="Self-propelled Gas-powered Mower For Residential Lawns" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-500 text-xs mb-1" for="mobile-acquisition-date">Acquisition Date</label>
+                            <input id="mobile-acquisition-date" type="text" value="March 12, 2025" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-500 text-xs mb-1" for="mobile-available-quantity">Available Quantity</label>
+                            <input id="mobile-available-quantity" type="text" value="1" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-500 text-xs mb-1" for="mobile-power-type">Power Type</label>
+                            <input id="mobile-power-type" type="text" value="Gas" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-500 text-xs mb-1" for="mobile-condition">Condition</label>
+                            <input id="mobile-condition" type="text" value="Brand New" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-500 text-xs mb-1" for="mobile-status">Status</label>
+                            <input id="mobile-status" type="text" value="On Stock" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-500 text-xs mb-1" for="mobile-vendor">Vendor</label>
+                            <input id="mobile-vendor" type="text" value="Ace Hardware" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
+                        </div>
+                    </div>
+                    
+                    <!-- Mobile Edit Button -->
+                    <div class="mt-4 flex justify-start">
+                        <button id="mobileEditBtn" class="px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center gap-2 text-sm">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Upload Image Section -->
+            <div class="bg-white rounded-lg shadow border border-blue-200 p-4 mb-4 max-w-2xl mx-auto">
+                <label class="block text-gray-600 text-xs mb-1" for="mobile-upload-image">Upload Image</label>
+                <input id="mobile-upload-image" type="file" class="w-full border border-gray-300 rounded px-2 py-1 text-base"/>
             </div>
         </div>
     </main>
+    <script>
+        fetch('../nav/header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-container').innerHTML = data;
+        });
+    fetch('../nav/navigation.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('nav-container').innerHTML = data;
+        });
+    </script>
     <script src="../js/main.js"></script>
     <script src="../js/equipments.js"></script>
 </body>
-</html> 
+</html>

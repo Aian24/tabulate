@@ -21,89 +21,212 @@
 
     <!-- Main content -->
     <main class="w-full px-0 md:px-6 py-8">
-        <div class="mb-6 flex items-center gap-2">
+        <!-- Desktop Header -->
+        <div class="hidden md:block mb-6 flex items-center gap-2">
             <button onclick="window.history.back()" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition">
                 <i class="fas fa-arrow-left"></i> Back
             </button>
             <h1 class="text-2xl md:text-3xl font-bold text-gray-800 ml-4" id="estimateNumberHeader">Estimate</h1>
         </div>
-        <div class="bg-white/90 rounded-2xl shadow-2xl p-4 md:p-8 border border-blue-100 w-full">
-            <!-- Customer Information -->
-            <div class="mb-6">
-                <h3 class="text-lg font-semibold text-gray-700 mb-3">Customer Information</h3>
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm text-gray-700">
-                    <div>
-                        <p class="font-semibold">Full Name</p>
-                        <p id="customerFullName"></p>
+
+        <!-- Mobile Header -->
+        <div class="block md:hidden mb-4 px-4">
+            <div class="flex justify-between items-center">
+                <a href="estimates.html" class="text-gray-600 flex items-center">
+                    <i class="fas fa-chevron-left text-lg"></i>
+                    <span class="ml-2 font-semibold">Back</span>
+                </a>
+                <div class="relative inline-block text-left">
+                    <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700" id="mobile-menu-button" aria-expanded="false" aria-haspopup="true">
+                        More
+                        <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desktop Layout -->
+        <div class="hidden md:block">
+            <div class="bg-white/90 rounded-2xl shadow-2xl p-4 md:p-8 border border-blue-100 w-full">
+                <!-- Customer Information -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-3">Customer Information</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm text-gray-700">
+                        <div>
+                            <p class="font-semibold">Full Name</p>
+                            <p id="customerFullName">Billy Mamaril</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Phone</p>
+                            <p id="customerPhone">09293422436</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Email</p>
+                            <p id="customerEmail">billymamaril23@gmail.com</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Address</p>
+                            <p id="customerAddress">Pabahay 2000 Muzon</p>
+                        </div>
                     </div>
-                    <div>
-                        <p class="font-semibold">Phone</p>
-                        <p id="customerPhone"></p>
+                </div>
+                <!-- Quotation -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-3">Quotation</h3>
+                    <div class="overflow-x-auto border border-gray-200 rounded-lg">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr class="bg-gradient-to-r from-sky-500 to-blue-600 text-white">
+                                    <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Items</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Price</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Quantity</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Discount</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Tax</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Deposit Percentage (%)</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Deposit Amount</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Total Price</th>
+                                </tr>
+                            </thead>
+                            <tbody id="quotationItems" class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Lawn Maintenance Service</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">$350.00</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">2</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">$0.00</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">$0.00</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">5%</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">$35.00</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">$700.00</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr class="bg-gray-50">
+                                    <td colspan="7" class="px-6 py-3 text-right text-base font-semibold text-gray-800">Grand Total:</td>
+                                    <td class="px-6 py-3 text-left text-base font-semibold text-gray-800" id="grandTotal">$700.00</td>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
-                    <div>
-                        <p class="font-semibold">Email</p>
-                        <p id="customerEmail"></p>
+                </div>
+                <!-- Terms and Conditions -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-3">TERMS AND CONDITION</h3>
+                    <div id="termsAndConditions" class="text-sm text-gray-700 space-y-2">
+                        <div>
+                            <p class="font-semibold">Lawn Maintenance Service</p>
+                            <ul class="list-disc list-inside ml-4 mt-1">
+                                <li>Service subject to weather</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div>
-                        <p class="font-semibold">Address</p>
-                        <p id="customerAddress"></p>
+                </div>
+                <!-- Action Buttons -->
+                <div class="flex justify-start space-x-3 mt-6">
+                    <button class="animated-button bg-green-500 text-white px-4 py-2 rounded-lg flex items-center space-x-2 text-sm">
+                        <i class="fas fa-check-circle mr-1"></i>
+                        <span>Approve</span>
+                    </button>
+                    <button class="animated-button bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center space-x-2 text-sm">
+                        <i class="fas fa-edit mr-1"></i>
+                        <span>Edit</span>
+                    </button>
+                    <button class="animated-button bg-red-500 text-white px-4 py-2 rounded-lg flex items-center space-x-2 text-sm">
+                        <i class="fas fa-file-pdf mr-1"></i>
+                        <span>Download Pdf</span>
+                    </button>
+                    <button class="animated-button bg-yellow-500 text-white px-4 py-2 rounded-lg flex items-center space-x-2 text-sm">
+                        <i class="fas fa-envelope mr-1"></i>
+                        <span>Send Email</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Layout -->
+        <div class="block md:hidden px-4">
+            <h1 class="text-xl text-gray-800 mb-4 font-semibold">Estimate No. 1048</h1>
+
+            <!-- Customer Information Card -->
+            <div class="bg-sky-100 rounded-lg shadow p-4 mb-4">
+                <h2 class="text-md font-semibold border-b border-gray-300 pb-2 mb-3">Customer Information</h2>
+                <div class="text-sm text-gray-700 space-y-2">
+                    <p><span class="font-semibold">Customer Name:</span> Billy Mamaril</p>
+                    <p><span class="font-semibold">Phone:</span> 09293422436</p>
+                    <p><span class="font-semibold">Email Address:</span> billymamaril23@gmail.com</p>
+                    <p><span class="font-semibold">Address:</span> Pabahay 2000 Muzon</p>
+                </div>
+            </div>
+
+            <!-- Estimated Items Card -->
+            <div class="bg-sky-100 rounded-lg shadow p-4 mb-4">
+                <div class="flex items-center border-b border-gray-300 pb-2 mb-3">
+                    <input type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                    <h2 class="text-md font-semibold ml-2">Estimated Items</h2>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between text-sm">
+                        <div class="flex items-center">
+                            <input type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                            <span class="ml-3">Lawn Maintenance Service</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                    <div class="flex items-center justify-between text-sm">
+                        <div class="flex items-center">
+                            <input type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                            <span class="ml-3">Garden Cleanup Service</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
                     </div>
                 </div>
             </div>
-            <!-- Quotation -->
-            <div class="mb-6">
-                <h3 class="text-lg font-semibold text-gray-700 mb-3">Quotation</h3>
-                <div class="overflow-x-auto border border-gray-200 rounded-lg">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr class="bg-gradient-to-r from-sky-500 to-blue-600 text-white">
-                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Items</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Price</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Quantity</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Discount</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Tax</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Deposit Percentage (%)</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Deposit Amount</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Total Price</th>
-                            </tr>
-                        </thead>
-                        <tbody id="quotationItems" class="bg-white divide-y divide-gray-200">
-                            <!-- Quotation items will be populated here by JS -->
-                        </tbody>
-                        <tfoot>
-                            <tr class="bg-gray-50">
-                                <td colspan="7" class="px-6 py-3 text-right text-base font-semibold text-gray-800">Grand Total:</td>
-                                <td class="px-6 py-3 text-left text-base font-semibold text-gray-800" id="grandTotal"></td>
-                            </tr>
-                        </tfoot>
-                    </table>
+
+            <!-- Grand Total Card -->
+            <div class="bg-sky-100 rounded-lg shadow p-4 mb-4">
+                <div class="flex justify-between items-center text-sm mb-2 font-semibold">
+                    <span>Grand Total</span>
+                    <span class="text-blue-600">$ 700.00</span>
+                </div>
+                <hr class="border-gray-300">
+                <div class="text-sm text-gray-700 space-y-2 mt-2">
+                    <div class="flex justify-between">
+                        <span>Deposit ( Upfront Payment)</span>
+                        <span>$ 35.00</span>
+                    </div>
+                    <div class="flex justify-between font-semibold">
+                        <span>Remaining Balance</span>
+                        <span>$ 665.00</span>
+                    </div>
                 </div>
             </div>
-            <!-- Terms and Conditions -->
-            <div class="mb-6">
-                <h3 class="text-lg font-semibold text-gray-700 mb-3">TERMS AND CONDITION</h3>
-                <div id="termsAndConditions" class="text-sm text-gray-700 space-y-2">
-                    <!-- Terms and conditions will be populated here by JS -->
+
+            <!-- Terms and Conditions Card -->
+            <div class="bg-sky-100 rounded-lg shadow p-4 mb-4">
+                <h2 class="text-md font-semibold border-b border-gray-300 pb-2 mb-3">Terms and Conditions</h2>
+                <div class="text-sm space-y-3">
+                    <div>
+                        <p class="font-semibold">Lawn Maintenance Service</p>
+                        <ul class="list-disc list-inside ml-4 mt-1">
+                            <li>Service subject to weather</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-semibold">Garden Cleanup Service</p>
+                        <ul class="list-disc list-inside ml-4 mt-1">
+                            <li>Equipment provided by contractor</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+            
             <!-- Action Buttons -->
-            <div class="flex justify-start space-x-3 mt-6">
-                <button class="animated-button bg-green-500 text-white px-4 py-2 rounded-lg flex items-center space-x-2 text-sm">
-                    <i class="fas fa-check-circle mr-1"></i>
-                    <span>Approve</span>
-                </button>
-                <button class="animated-button bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center space-x-2 text-sm">
-                    <i class="fas fa-edit mr-1"></i>
-                    <span>Edit</span>
-                </button>
-                <button class="animated-button bg-red-500 text-white px-4 py-2 rounded-lg flex items-center space-x-2 text-sm">
-                    <i class="fas fa-file-pdf mr-1"></i>
-                    <span>Download Pdf</span>
-                </button>
-                <button class="animated-button bg-yellow-500 text-white px-4 py-2 rounded-lg flex items-center space-x-2 text-sm">
-                    <i class="fas fa-envelope mr-1"></i>
-                    <span>Send Email</span>
-                </button>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-sm">
+                <button class="bg-teal-400 text-white font-semibold py-2 px-4 rounded-md">Approve</button>
+                <button class="bg-slate-600 text-white font-semibold py-2 px-4 rounded-md">Edit</button>
+                <button class="bg-purple-500 text-white font-semibold py-2 px-4 rounded-md">Download Pdf</button>
+                <button class="bg-amber-400 text-white font-semibold py-2 px-4 rounded-md">Send Email</button>
             </div>
         </div>
     </main>
@@ -118,4 +241,4 @@
     <script src="../js/main.js"></script>
     <script src="../js/estimates.js"></script>
 </body>
-</html> 
+</html>

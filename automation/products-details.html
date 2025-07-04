@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>View Product</title>
+    <title>Product Details</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="../css/styles.css">
@@ -15,77 +15,211 @@
 
     <!-- Main content -->
     <main class="w-full px-0 md:px-6 py-8">
-        <div class="mb-6 flex items-center gap-2">
+        <!-- Desktop Header -->
+        <div class="hidden md:block mb-6 flex items-center gap-2">
             <button id="backBtn" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition">
                 <i class="fas fa-arrow-left"></i> Back
             </button>
-            <h1 class="text-2xl md:text-3xl font-bold text-gray-800 ml-4">View Product</h1>
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800 ml-4">Product Details</h1>
         </div>
-        <div class="flex flex-col md:flex-row gap-6">
-            <!-- Left: Product Details -->
-            <div class="flex-1 bg-white rounded-xl shadow p-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-                    <div>
-                        <label class="block text-gray-700 font-semibold mb-1">Item Name <span class="text-red-500">*</span></label>
-                        <input type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" value="Plant Cutters 1." readonly />
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 font-semibold mb-1">Specification <span class="text-red-500">*</span></label>
-                        <input type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" value="Cool amazing 67x3 size." readonly />
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 font-semibold mb-1">Notes <span class="text-red-500">*</span></label>
-                        <input type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" value="This product was updated via Selenium." readonly />
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 font-semibold mb-1">Business category <span class="text-red-500">*</span></label>
-                        <input type="text" name="businessCategory" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" value="Construction Services, Plumbing Services" readonly />
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 font-semibold mb-1">Status <span class="text-red-500">*</span></label>
-                        <input type="text" name="status" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" value="Active" readonly />
-                    </div>
-                </div>
-                <div class="mb-2 mt-4">
-                    <span class="text-lg font-semibold text-purple-600">Vendors</span>
-                </div>
-                <div id="addVendorBtnContainer" class="mb-2"></div>
-                <div class="overflow-x-auto">
-                    <table class="w-full mt-2 mb-4 border border-gray-200 rounded-lg table-fixed">
-                        <thead>
-                            <tr class="bg-sky-500 text-white">
-                                <th class="w-1/5 px-4 py-2 text-left">Vendor</th>
-                                <th class="w-1/5 px-4 py-2 text-left">Vendor Item Number</th>
-                                <th class="w-1/5 px-4 py-2 text-left">Vendor Price</th>
-                                <th class="w-1/5 px-4 py-2 text-left">Vendor Qty Type</th>
-                                <th class="w-1/5 px-4 py-2 text-left">Vendor Qty Per Item</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="border-b border-gray-100 hover:bg-blue-50 transition-colors">
-                                <td class="px-4 py-2" data-col="vendor">Global</td>
-                                <td class="px-4 py-2" data-col="item-number">ITEM-6377</td>
-                                <td class="px-4 py-2" data-col="price">97.34</td>
-                                <td class="px-4 py-2" data-col="qty-type">Box</td>
-                                <td class="px-4 py-2" data-col="qty-per-item">6</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <!-- Edit button moved to bottom left -->
-                <div class="mt-2 flex justify-start">
-                    <button id="editBtn" class="px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center gap-2 text-sm">
-                        <i class="fas fa-edit"></i> Edit
+
+        <!-- Mobile Header -->
+        <div class="block md:hidden mb-4 px-4">
+            <div class="flex justify-between items-center">
+                <a href="products.html" class="text-gray-600 flex items-center">
+                    <i class="fas fa-chevron-left text-lg"></i>
+                    <span class="ml-2 font-semibold">Back</span>
+                </a>
+                <div class="relative inline-block text-left">
+                    <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700" id="mobile-menu-button" aria-expanded="false" aria-haspopup="true">
+                        More
+                        <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
                     </button>
                 </div>
             </div>
-            <!-- Right: Upload Image -->
-            <div class="w-full md:w-1/3 bg-white rounded-xl shadow p-6 h-fit">
-                <label class="block text-gray-700 font-semibold mb-2">Upload Image</label>
-                <input type="file" class="w-full rounded border-gray-300" />
+        </div>
+
+        <!-- Desktop Layout -->
+        <div class="hidden md:block">
+            <div class="flex flex-col md:flex-row gap-6">
+                <!-- Left: Product Details -->
+                <div class="flex-1 bg-white rounded-xl shadow p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-1">Item Name <span class="text-red-500">*</span></label>
+                            <input type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" value="Plant Cutters 1." readonly />
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-1">Specification <span class="text-red-500">*</span></label>
+                            <input type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" value="Cool amazing 67x3 size." readonly />
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-1">Notes <span class="text-red-500">*</span></label>
+                            <input type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" value="This product was updated via Selenium." readonly />
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-1">Business Category <span class="text-red-500">*</span></label>
+                            <input type="text" name="businessCategory" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" value="Construction Services, Plumbing Services" readonly />
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-1">Status <span class="text-red-500">*</span></label>
+                            <input type="text" name="status" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" value="Active" readonly />
+                        </div>
+                    </div>
+                    
+                    <!-- Vendors Section -->
+                    <div class="mb-6">
+                        <div class="mb-2 mt-4">
+                            <span class="text-lg font-semibold text-purple-600">Vendors</span>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full mt-2 mb-4 border border-gray-200 rounded-lg table-fixed">
+                                <thead>
+                                    <tr class="bg-sky-500 text-white">
+                                        <th class="w-1/5 px-4 py-2 text-left">Vendor</th>
+                                        <th class="w-1/5 px-4 py-2 text-left">Vendor Item Number</th>
+                                        <th class="w-1/5 px-4 py-2 text-left">Vendor Price</th>
+                                        <th class="w-1/5 px-4 py-2 text-left">Vendor Qty Type</th>
+                                        <th class="w-1/5 px-4 py-2 text-left">Vendor Qty Per Item</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-gray-100 hover:bg-blue-50 transition-colors">
+                                        <td class="px-4 py-2" data-col="vendor">Global</td>
+                                        <td class="px-4 py-2" data-col="item-number">ITEM-6377</td>
+                                        <td class="px-4 py-2" data-col="price">$97.34</td>
+                                        <td class="px-4 py-2" data-col="qty-type">Box</td>
+                                        <td class="px-4 py-2" data-col="qty-per-item">6</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-100 hover:bg-blue-50 transition-colors">
+                                        <td class="px-4 py-2" data-col="vendor">Ace Hardware</td>
+                                        <td class="px-4 py-2" data-col="item-number">ITEM-8901</td>
+                                        <td class="px-4 py-2" data-col="price">$89.99</td>
+                                        <td class="px-4 py-2" data-col="qty-type">Each</td>
+                                        <td class="px-4 py-2" data-col="qty-per-item">1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button class="px-4 py-2 bg-green-600 text-white rounded text-sm font-semibold hover:bg-green-700">
+                            <i class="fas fa-plus mr-1"></i> Add Vendor
+                        </button>
+                    </div>
+                    
+                    <!-- Edit button -->
+                    <div class="mt-4 flex justify-start">
+                        <button id="editBtn" class="px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center gap-2 text-sm">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Right: Upload Image -->
+                <div class="w-full md:w-1/3 bg-white rounded-xl shadow p-6 h-fit">
+                    <label class="block text-gray-700 font-semibold mb-2">Upload Image</label>
+                    <input type="file" class="w-full rounded border-gray-300" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Layout -->
+        <div class="block md:hidden px-4">
+            <!-- Product Information Section -->
+            <div class="bg-white rounded-lg shadow border border-blue-200 mb-4">
+                <div class="bg-blue-50 px-4 py-2 rounded-t-lg border-b border-blue-100">
+                    <span class="text-blue-700 font-semibold text-base">Product Information</span>
+                </div>
+                <div class="p-4">
+                    <div class="grid grid-cols-1 gap-4">
+                        <div>
+                            <label class="block text-gray-500 text-xs mb-1" for="mobile-item-name">Item Name</label>
+                            <input id="mobile-item-name" type="text" value="Plant Cutters 1." class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-500 text-xs mb-1" for="mobile-specification">Specification</label>
+                            <input id="mobile-specification" type="text" value="Cool amazing 67x3 size." class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-500 text-xs mb-1" for="mobile-notes">Notes</label>
+                            <input id="mobile-notes" type="text" value="This product was updated via Selenium." class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-500 text-xs mb-1" for="mobile-business-category">Business Category</label>
+                            <input id="mobile-business-category" type="text" value="Construction Services, Plumbing Services" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-500 text-xs mb-1" for="mobile-status">Status</label>
+                            <input id="mobile-status" type="text" value="Active" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
+                        </div>
+                    </div>
+                    
+                    <!-- Mobile Edit Button -->
+                    <div class="mt-4 flex justify-start">
+                        <button id="mobileEditBtn" class="px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center gap-2 text-sm">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vendors Section -->
+            <div class="bg-white rounded-lg shadow border border-blue-200 mb-4">
+                <div class="bg-purple-400 rounded-t-lg px-4 py-2">
+                    <span class="text-white font-semibold text-base">Vendors</span>
+                </div>
+                <div class="p-4">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-xs mb-2">
+                            <thead>
+                                <tr class="bg-blue-100 text-blue-900">
+                                    <th class="px-2 py-1 text-left">Vendor</th>
+                                    <th class="px-2 py-1 text-left">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b">
+                                    <td class="px-2 py-1 align-top w-2/3">
+                                        <span class="block text-blue-700 font-semibold">Global</span>
+                                        <span class="block text-gray-700 text-xs">Item Number: ITEM-6377</span>
+                                        <span class="block text-gray-700 text-xs">Qty Type: Box</span>
+                                        <span class="block text-gray-700 text-xs">Qty Per Item: 6</span>
+                                    </td>
+                                    <td class="px-2 py-1 align-top w-1/3 text-blue-700 font-semibold text-right">$97.34</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-2 py-1 align-top w-2/3">
+                                        <span class="block text-blue-700 font-semibold">Ace Hardware</span>
+                                        <span class="block text-gray-700 text-xs">Item Number: ITEM-8901</span>
+                                        <span class="block text-gray-700 text-xs">Qty Type: Each</span>
+                                        <span class="block text-gray-700 text-xs">Qty Per Item: 1</span>
+                                    </td>
+                                    <td class="px-2 py-1 align-top w-1/3 text-blue-700 font-semibold text-right">$89.99</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded text-xs font-semibold">
+                            <i class="fas fa-plus mr-1"></i> Add Vendor
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Upload Image Section -->
+            <div class="bg-white rounded-lg shadow border border-blue-200 p-4 mb-4">
+                <label class="block text-gray-600 text-xs mb-1" for="mobile-upload-image">Upload Image</label>
+                <input id="mobile-upload-image" type="file" class="w-full border border-gray-300 rounded px-2 py-1 text-base"/>
             </div>
         </div>
     </main>
+    
     <!-- Delete Vendor Modal -->
     <div id="deleteVendorModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
         <div class="modal-content-modern bg-white rounded-2xl shadow-2xl max-w-sm w-full p-8 text-center transform scale-95 opacity-0 transition-all duration-300">
@@ -100,13 +234,27 @@
             </div>
         </div>
     </div>
+    
     <style>
     .modal-content-modern.show {
         opacity: 1 !important;
         transform: scale(1) !important;
     }
     </style>
+    
     <script src="../js/main.js"></script>
     <script src="../js/products.js"></script>
+    <script>
+        fetch('../nav/header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-container').innerHTML = data;
+        });
+    fetch('../nav/navigation.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('nav-container').innerHTML = data;
+        });
+    </script>
 </body>
-</html> 
+</html>
