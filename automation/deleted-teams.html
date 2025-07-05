@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>Deleted Teams</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/themes/light.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+    .modal-content-modern.show {
+        opacity: 1 !important;
+        transform: scale(1) !important;
+    }
+    </style>
+</head>
+<body class="min-h-screen bg-sky-50">
+    <!-- Include header -->
+    <div id="header-container"></div>
+
+    <!-- Include navigation -->
+    <div id="nav-container"></div>
+
+    <!-- Main content -->
+    <main class="container-fluid mx-auto px-4 md:px-6 py-2 md:py-4 relative-z-1">
+        <!-- Desktop Header -->
+        <div class="hidden md:flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
+            <div class="flex items-center gap-4">
+                <button onclick="window.location.href='team-management.html'" class="px-4 py-2 bg-purple-600 text-white rounded-lg shadow hover:bg-purple-700 flex items-center gap-2 transition font-medium">
+                    <i class="fas fa-arrow-left"></i> Back to List
+                </button>
+                <h1 class="text-2xl font-bold text-gray-800">Deleted Teams</h1>
+            </div>
+            <div class="flex items-center gap-2">
+                <!-- Restore Selected button will be shown/hidden by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Desktop Controls Section -->
+        <div class="hidden md:flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
+            <!-- Left side: Controls -->
+            <div class="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
+                <!-- Show entries dropdown -->
+                <div class="hidden md:flex items-center mr-4">
+                    <label class="text-sm text-gray-600 mr-2">Show entries:</label>
+                    <select class="pagination-entries-select border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50" selected>50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+                <!-- Action buttons -->
+                <div class="flex flex-wrap justify-center md:justify-start gap-2">
+                    <button id="restoreSelectedBtn" class="px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors hidden">
+                        <i class="fas fa-undo-alt mr-1"></i> Restore Selected
+                    </button>
+                    <button id="openFilter" class="calendar-button border-2 border-gray-400 text-gray-700 flex items-center gap-1 px-2 py-1 rounded-lg text-xs">
+                        <i class="fas fa-filter"></i>
+                        <span>Filter</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Right side: Search -->
+            <div id="search-container" class="relative w-full md:w-auto">
+                <input type="search" 
+                       placeholder="Search deleted teams..." 
+                       class="w-full h-[42px] pl-10 pr-4 rounded-lg border border-green-500 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300"
+                />
+                <button class="absolute left-3 top-1/2 -translate-y-1/2 text-blue-500 hover:text-blue-600 transition-colors">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Desktop Table View -->
+        <div class="hidden md:block bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
+            <div class="overflow-x-auto">
+                <table class="w-full min-w-[800px]">
+                    <thead class="bg-gradient-to-r from-red-500 to-red-600 text-white">
+                        <tr>
+                            <th class="px-6 py-4 text-left">
+                                <input type="checkbox" id="selectAllDeleted" class="w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold">Name</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold">Default Service</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold">Team Lead</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold">Team Members</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold">Total Rate Per Day</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold">Deleted Date</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        <tr data-team-id="1">
+                            <td class="px-6 py-4"><input type="checkbox" class="w-4 h-4 text-purple-600 rounded focus:ring-purple-500"></td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Old Cleaning Team</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Office Cleaning</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Mary Johnson</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">4 members</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">$280.00</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">March 10, 2025</td>
+                            <td class="px-6 py-4">
+                                <div class="flex gap-2">
+                                    <button class="restore-team-btn px-2 py-1 text-xs font-medium text-white bg-green-500 rounded hover:bg-green-600 transition-colors" data-team-id="1">
+                                        <i class="fas fa-undo mr-1"></i>Restore
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr data-team-id="2">
+                            <td class="px-6 py-4"><input type="checkbox" class="w-4 h-4 text-purple-600 rounded focus:ring-purple-500"></td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Temporary Paint Team</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">House Painting</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Bob Wilson</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">6 members</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">$480.00</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">March 8, 2025</td>
+                            <td class="px-6 py-4">
+                                <div class="flex gap-2">
+                                    <button class="restore-team-btn px-2 py-1 text-xs font-medium text-white bg-green-500 rounded hover:bg-green-600 transition-colors" data-team-id="2">
+                                        <i class="fas fa-undo mr-1"></i>Restore
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr data-team-id="3">
+                            <td class="px-6 py-4"><input type="checkbox" class="w-4 h-4 text-purple-600 rounded focus:ring-purple-500"></td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Seasonal Garden Team</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Garden Maintenance</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Alice Brown</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">3 members</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">$240.00</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">March 5, 2025</td>
+                            <td class="px-6 py-4">
+                                <div class="flex gap-2">
+                                    <button class="restore-team-btn px-2 py-1 text-xs font-medium text-white bg-green-500 rounded hover:bg-green-600 transition-colors" data-team-id="3">
+                                        <i class="fas fa-undo mr-1"></i>Restore
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr data-team-id="4">
+                            <td class="px-6 py-4"><input type="checkbox" class="w-4 h-4 text-purple-600 rounded focus:ring-purple-500"></td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Emergency Repair Team</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Plumbing Repair</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Charlie Davis</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">5 members</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">$400.00</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">March 1, 2025</td>
+                            <td class="px-6 py-4">
+                                <div class="flex gap-2">
+                                    <button class="restore-team-btn px-2 py-1 text-xs font-medium text-white bg-green-500 rounded hover:bg-green-600 transition-colors" data-team-id="4">
+                                        <i class="fas fa-undo mr-1"></i>Restore
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="bg-gray-50 px-4 md:px-6 py-4 flex flex-col md:flex-row justify-between items-center border-t border-gray-100 gap-4">
+                <div class="flex items-center gap-2 text-sm text-gray-600 order-2 md:order-1">
+                    Showing <span class="font-medium">1</span> to <span class="font-medium">4</span> of <span class="font-medium">4</span> entries
+                </div>
+                <div class="flex items-center gap-2 order-1 md:order-2">
+                    <button class="px-3 py-1 text-sm text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        Previous
+                    </button>
+                    <button class="px-3 py-1 text-sm text-white bg-red-500 border border-red-500 rounded-lg">1</button>
+                    <button class="px-3 py-1 text-sm text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        Next
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile View -->
+        <div class="md:hidden space-y-4">
+            <!-- Mobile Header -->
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <button onclick="window.location.href='team-management.html'" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <h1 class="text-xl font-bold text-gray-800">Deleted Teams</h1>
+                </div>
+                <div class="flex gap-2">
+                    <button id="restoreSelectedBtnMobile" class="px-3 py-1 text-xs font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors hidden">
+                        <i class="fas fa-undo-alt mr-1"></i> Restore Selected
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Search -->
+            <div class="relative">
+                <input type="search" 
+                       placeholder="Search deleted teams..." 
+                       class="w-full h-12 pl-10 pr-4 rounded-lg border border-green-500 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300"
+                />
+                <button class="absolute left-3 top-1/2 -translate-y-1/2 text-blue-500 hover:text-blue-600 transition-colors">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Deleted Team Cards -->
+            <div class="space-y-3">
+                <div class="bg-white rounded-lg shadow-sm border border-red-200 p-4" data-team-id="1">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-semibold text-gray-900">Old Cleaning Team</h3>
+                        <span class="text-sm text-red-600 font-medium">Deleted</span>
+                    </div>
+                    <div class="space-y-1 text-sm text-gray-600">
+                        <div><span class="font-medium">Service:</span> Office Cleaning</div>
+                        <div><span class="font-medium">Lead:</span> Mary Johnson</div>
+                        <div><span class="font-medium">Members:</span> 4 members</div>
+                        <div><span class="font-medium">Rate:</span> $280.00/day</div>
+                        <div><span class="font-medium">Deleted:</span> March 10, 2025</div>
+                    </div>
+                    <div class="flex gap-2 mt-3">
+                        <button class="restore-team-btn flex-1 px-3 py-1 text-xs font-medium text-white bg-green-500 rounded hover:bg-green-600 transition-colors" data-team-id="1">
+                            <i class="fas fa-undo mr-1"></i>Restore
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-red-200 p-4" data-team-id="2">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-semibold text-gray-900">Temporary Paint Team</h3>
+                        <span class="text-sm text-red-600 font-medium">Deleted</span>
+                    </div>
+                    <div class="space-y-1 text-sm text-gray-600">
+                        <div><span class="font-medium">Service:</span> House Painting</div>
+                        <div><span class="font-medium">Lead:</span> Bob Wilson</div>
+                        <div><span class="font-medium">Members:</span> 6 members</div>
+                        <div><span class="font-medium">Rate:</span> $480.00/day</div>
+                        <div><span class="font-medium">Deleted:</span> March 8, 2025</div>
+                    </div>
+                    <div class="flex gap-2 mt-3">
+                        <button class="restore-team-btn flex-1 px-3 py-1 text-xs font-medium text-white bg-green-500 rounded hover:bg-green-600 transition-colors" data-team-id="2">
+                            <i class="fas fa-undo mr-1"></i>Restore
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-red-200 p-4" data-team-id="3">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-semibold text-gray-900">Seasonal Garden Team</h3>
+                        <span class="text-sm text-red-600 font-medium">Deleted</span>
+                    </div>
+                    <div class="space-y-1 text-sm text-gray-600">
+                        <div><span class="font-medium">Service:</span> Garden Maintenance</div>
+                        <div><span class="font-medium">Lead:</span> Alice Brown</div>
+                        <div><span class="font-medium">Members:</span> 3 members</div>
+                        <div><span class="font-medium">Rate:</span> $240.00/day</div>
+                        <div><span class="font-medium">Deleted:</span> March 5, 2025</div>
+                    </div>
+                    <div class="flex gap-2 mt-3">
+                        <button class="restore-team-btn flex-1 px-3 py-1 text-xs font-medium text-white bg-green-500 rounded hover:bg-green-600 transition-colors" data-team-id="3">
+                            <i class="fas fa-undo mr-1"></i>Restore
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-red-200 p-4" data-team-id="4">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-semibold text-gray-900">Emergency Repair Team</h3>
+                        <span class="text-sm text-red-600 font-medium">Deleted</span>
+                    </div>
+                    <div class="space-y-1 text-sm text-gray-600">
+                        <div><span class="font-medium">Service:</span> Plumbing Repair</div>
+                        <div><span class="font-medium">Lead:</span> Charlie Davis</div>
+                        <div><span class="font-medium">Members:</span> 5 members</div>
+                        <div><span class="font-medium">Rate:</span> $400.00/day</div>
+                        <div><span class="font-medium">Deleted:</span> March 1, 2025</div>
+                    </div>
+                    <div class="flex gap-2 mt-3">
+                        <button class="restore-team-btn flex-1 px-3 py-1 text-xs font-medium text-white bg-green-500 rounded hover:bg-green-600 transition-colors" data-team-id="4">
+                            <i class="fas fa-undo mr-1"></i>Restore
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../js/team.js"></script>
+    <script src="../js/main.js"></script>
+    
+    <!-- Restore Selected Modal -->
+    <div id="restoreSelectedTeamModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="modal-content-modern bg-white rounded-2xl shadow-2xl max-w-sm w-full p-8 text-center transform scale-95 opacity-0 transition-all duration-300">
+            <div class="flex justify-center mb-3">
+                <i class="fas fa-undo-alt text-purple-500 text-4xl animate-bounce"></i>
+            </div>
+            <h2 class="text-2xl font-bold mb-2">Restore Selected Teams?</h2>
+            <p class="mb-6 text-gray-600">Are you sure you want to restore the selected teams?</p>
+            <div class="flex justify-center gap-4">
+                <button id="cancelRestoreSelectedTeam" class="px-6 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition">Cancel</button>
+                <button id="confirmRestoreSelectedTeam" class="px-6 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition">Restore</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Restore Team Modal -->
+    <div id="restoreTeamModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="modal-content-modern bg-white rounded-2xl shadow-2xl max-w-sm w-full p-8 text-center transform scale-95 opacity-0 transition-all duration-300">
+            <div class="flex justify-center mb-3">
+                <i class="fas fa-undo-alt text-purple-500 text-4xl animate-bounce"></i>
+            </div>
+            <h2 class="text-2xl font-bold mb-2">Restore Team?</h2>
+            <p class="mb-6 text-gray-600">Are you sure you want to restore this team?</p>
+            <div class="flex justify-center gap-4">
+                <button id="cancelRestoreTeam" class="px-6 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition">Cancel</button>
+                <button id="confirmRestoreTeam" class="px-6 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition">Restore</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

@@ -821,55 +821,50 @@ function renderMobileProfile() {
 
   // Mobile profile HTML (from customer-mobile/profile.html, simplified for injection)
   container.innerHTML = `
-    <div class="w-full max-w-md mx-auto mt-4">
-      <div class="bg-white rounded-2xl shadow p-4">
-        <!-- Mobile Back Button -->
-        <button id="mobileBackBtn" class="mb-6 bg-blue-500 text-white rounded-full p-2 flex items-center gap-2 shadow hover:bg-blue-600 transition">
-          <i class="fas fa-arrow-left"></i> Back
+    <div class="rounded-t-2xl flex flex-col items-center pt-0 pb-4 -mx-4" style="background-color: #41B6FF; position: relative;">
+      <button id="mobileBackBtn" class="absolute top-2 left-2 bg-blue-500 text-white rounded-full px-3 py-1 flex items-center gap-2 shadow hover:bg-blue-600 transition text-sm w-fit" style="margin-left: 8px;">
+        <i class="fas fa-arrow-left"></i> Back
+      </button>
+      <div class="bg-white rounded-full border-4 flex items-center justify-center mt-8" style="border-color: #41B6FF; width: 80px; height: 80px;" >
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="32" cy="32" r="32" fill="white"/>
+          <circle cx="32" cy="24" r="12" fill="#d1d5db"/>
+          <ellipse cx="32" cy="48" rx="20" ry="12" fill="#d1d5db"/>
+        </svg>
+      </div>
+      <div class="text-2xl font-bold text-gray-800" id="mobileProfileName"></div>
+      <div class="text-gray-600 text-sm mb-2" id="mobileProfileEmail"></div>
+    </div>
+    <div class="flex flex-col items-center py-4">
+      <div class="text-3xl font-bold" style="color: #41B6FF;">$0</div>
+      <div class="w-full border-t border-gray-200 my-3"></div>
+      <div class="grid grid-cols-4 gap-2 w-full text-center">
+        <button class="flex flex-col items-center card-action-btn" data-action="jobs" type="button" style="background:none;border:none;outline:none;cursor:pointer;">
+          <i class="fa fa-file-invoice-dollar text-2xl mb-1" style="color: #41B6FF;"></i>
+          <span class="text-xs font-semibold text-gray-700">Jobs</span>
         </button>
-        <div class="rounded-t-2xl flex flex-col items-center pt-6 pb-4 -mx-4 -mt-4" style="background-color: #41B6FF;">
-          <div class="bg-white rounded-full border-4 flex items-center justify-center" style="border-color: #41B6FF; width: 80px; height: 80px;" >
-            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="32" cy="32" r="32" fill="white"/>
-              <circle cx="32" cy="24" r="12" fill="#d1d5db"/>
-              <ellipse cx="32" cy="48" rx="20" ry="12" fill="#d1d5db"/>
-            </svg>
-          </div>
-          <div class="text-2xl font-bold text-gray-800" id="mobileProfileName"></div>
-          <div class="text-gray-600 text-sm mb-2" id="mobileProfileEmail"></div>
-        </div>
-        <div class="flex flex-col items-center py-4">
-          <div class="text-3xl font-bold" style="color: #41B6FF;">$0</div>
-          <div class="w-full border-t border-gray-200 my-3"></div>
-          <div class="grid grid-cols-4 gap-2 w-full text-center">
-            <button class="flex flex-col items-center card-action-btn" data-action="jobs" type="button" style="background:none;border:none;outline:none;cursor:pointer;">
-              <i class="fa fa-file-invoice-dollar text-2xl mb-1" style="color: #41B6FF;"></i>
-              <span class="text-xs font-semibold text-gray-700">Jobs</span>
-            </button>
-            <button class="flex flex-col items-center card-action-btn" data-action="estimates" type="button" style="background:none;border:none;outline:none;cursor:pointer;">
-              <i class="fa fa-file-signature text-2xl mb-1" style="color: #41B6FF;"></i>
-              <span class="text-xs font-semibold text-gray-700">Estimates</span>
-            </button>
-            <button class="flex flex-col items-center card-action-btn" data-action="invoices" type="button" style="background:none;border:none;outline:none;cursor:pointer;">
-              <i class="fa fa-file-invoice text-2xl mb-1" style="color: #41B6FF;"></i>
-              <span class="text-xs font-semibold text-gray-700">Invoices</span>
-            </button>
-            <button class="flex flex-col items-center card-action-btn" data-action="transactions" type="button" style="background:none;border:none;outline:none;cursor:pointer;">
-              <i class="fa fa-exchange-alt text-2xl mb-1" style="color: #41B6FF;"></i>
-              <span class="text-xs font-semibold text-gray-700">Transactions</span>
-            </button>
-          </div>
-        </div>
-        <div class="mt-2">
-          <div class="font-bold text-gray-700 mb-1">Customer Information</div>
-          <div class="divide-y divide-blue-100 rounded overflow-hidden flex flex-col">
-            <div class="bg-blue-50 py-2 px-3 font-medium flex justify-between items-center">Personal Information <span>&gt;</span></div>
-            <div class="bg-blue-50 py-2 px-3 font-medium flex justify-between items-center">Billing Information <span>&gt;</span></div>
-            <div class="bg-blue-50 py-2 px-3 font-medium flex justify-between items-center">Preferences <span>&gt;</span></div>
-            <div class="bg-blue-50 py-2 px-3 font-medium flex justify-between items-center">Custom Fields <span>&gt;</span></div>
-            <div class="bg-blue-50 py-2 px-3 font-medium flex justify-between items-center">Customer Notes <span>&gt;</span></div>
-          </div>
-        </div>
+        <button class="flex flex-col items-center card-action-btn" data-action="estimates" type="button" style="background:none;border:none;outline:none;cursor:pointer;">
+          <i class="fa fa-file-signature text-2xl mb-1" style="color: #41B6FF;"></i>
+          <span class="text-xs font-semibold text-gray-700">Estimates</span>
+        </button>
+        <button class="flex flex-col items-center card-action-btn" data-action="invoices" type="button" style="background:none;border:none;outline:none;cursor:pointer;">
+          <i class="fa fa-file-invoice text-2xl mb-1" style="color: #41B6FF;"></i>
+          <span class="text-xs font-semibold text-gray-700">Invoices</span>
+        </button>
+        <button class="flex flex-col items-center card-action-btn" data-action="transactions" type="button" style="background:none;border:none;outline:none;cursor:pointer;">
+          <i class="fa fa-exchange-alt text-2xl mb-1" style="color: #41B6FF;"></i>
+          <span class="text-xs font-semibold text-gray-700">Transactions</span>
+        </button>
+      </div>
+    </div>
+    <div class="mt-2">
+      <div class="font-bold text-gray-700 mb-1">Customer Information</div>
+      <div class="divide-y divide-blue-100 rounded overflow-hidden flex flex-col">
+        <div class="bg-blue-50 py-2 px-3 font-medium flex justify-between items-center">Personal Information <span>&gt;</span></div>
+        <div class="bg-blue-50 py-2 px-3 font-medium flex justify-between items-center">Billing Information <span>&gt;</span></div>
+        <div class="bg-blue-50 py-2 px-3 font-medium flex justify-between items-center">Preferences <span>&gt;</span></div>
+        <div class="bg-blue-50 py-2 px-3 font-medium flex justify-between items-center">Custom Fields <span>&gt;</span></div>
+        <div class="bg-blue-50 py-2 px-3 font-medium flex justify-between items-center">Customer Notes <span>&gt;</span></div>
       </div>
     </div>
   `;

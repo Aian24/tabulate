@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>Team Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/themes/light.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 md:bg-sky-50">
+    <!-- Header and Navigation -->
+    <div id="header-container"></div>
+    <div id="nav-container"></div>
+
+    <!-- Mobile View ONLY -->
+    <main class="p-4 md:hidden">
+        <div class="flex justify-between items-center mb-4">
+            <a href="team-management.html" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+            <div class="relative inline-block text-left">
+                <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700" id="menu-button" aria-expanded="true" aria-haspopup="true">
+                  More
+                  <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                </button>
+            </div>
+        </div>
+
+        <div id="team-info-tab">
+            <!-- Team Information Card (Always 2 columns) -->
+            <div class="bg-blue-50 rounded-lg shadow-md p-3 mb-3 border">
+              <div class="grid grid-cols-2 gap-x-4 gap-y-0 mb-2">
+                <div class="mb-1">
+                  <label class="text-[18px] text-gray-400 font-normal leading-tight">Team Name</label>
+                  <input type="text" placeholder="Team Name" class="w-full font-bold text-black bg-white px-2 py-1 rounded border"/>
+                </div>
+                <div class="mb-1">
+                  <label class="text-[18px] text-gray-400 font-normal leading-tight">Default Service</label>
+                  <input type="text" placeholder="Default Service" class="w-full font-bold text-black bg-white px-2 py-1 rounded border"/>
+                </div>
+                <div class="mb-1">
+                  <label class="text-[18px] text-gray-400 font-normal leading-tight">Team Lead</label>
+                  <input type="text" placeholder="Team Lead" class="w-full font-bold text-black bg-white px-2 py-1 rounded border"/>
+                </div>
+                <div class="mb-1">
+                  <label class="text-[18px] text-gray-400 font-normal leading-tight">Total Members</label>
+                  <input type="text" placeholder="Total Members" class="w-full font-bold text-black bg-white px-2 py-1 rounded border"/>
+                </div>
+                <div class="mb-1">
+                  <label class="text-[18px] text-gray-400 font-normal leading-tight">Rate Per Day</label>
+                  <input type="text" placeholder="Rate Per Day" class="w-full font-bold text-black bg-white px-2 py-1 rounded border"/>
+                </div>
+                <div class="mb-1">
+                  <label class="text-[18px] text-gray-400 font-normal leading-tight">Status</label>
+                  <select class="w-full font-bold text-black bg-white px-2 py-1 rounded border">
+                    <option>Active</option>
+                    <option>Inactive</option>
+                  </select>
+                </div>
+                <div class="mb-1">
+                  <label class="text-[18px] text-gray-400 font-normal leading-tight">Created Date</label>
+                  <input type="text" placeholder="Created Date" class="w-full font-bold text-black bg-white px-2 py-1 rounded border"/>
+                </div>
+                <div class="mb-1">
+                  <label class="text-[18px] text-gray-400 font-normal leading-tight">Last Updated</label>
+                  <input type="text" placeholder="Last Updated" class="w-full font-bold text-black bg-white px-2 py-1 rounded border"/>
+                </div>
+              </div>
+              <div class="mb-2">
+                <label class="text-base text-gray-400 font-normal leading-tight">Team Description</label>
+                <textarea class="w-full h-24 font-semibold text-black bg-white rounded border" placeholder="Team description and notes"></textarea>
+              </div>
+            </div>
+            <!-- Team Preview Card -->
+            <div class="bg-white rounded-lg shadow-md p-3 mb-3 border">
+              <div class="font-semibold text-black border-b border-gray-200 mb-2 pb-1">Team Preview</div>
+              <div class="w-full">
+                <div class="font-semibold text-black">Landscaping Team A <span class="float-right text-gray-700">$450.00/day</span></div>
+                <div class="text-xs text-gray-600">Lawn Mowing Service</div>
+                <div class="text-xs text-gray-600">Lead: John Smith</div>
+                <div class="text-xs text-gray-400">5 members <span class="float-right text-green-600">Active</span></div>
+              </div>
+            </div>
+        </div>
+
+        <!-- Accordion Sections -->
+        <div id="accordion-container" class="flex flex-col gap-1 w-full">
+          <!-- Team Members Accordion -->
+          <div class="rounded-lg shadow-md bg-white border">
+            <button type="button" onclick="toggleAccordion(0)" class="w-full text-left px-4 py-2 font-semibold border-b flex items-center justify-between rounded-t-lg focus:outline-none">
+              <span>Team Members</span>
+              <svg id="accordion-arrow-0" class="transition-transform duration-200 w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="accordion-content-0" class="hidden bg-blue-50 rounded-b-lg px-4 py-2">
+              <div class="flex justify-between border-b border-blue-200 pb-1 mb-2">
+                <span class="text-blue-900 font-semibold">Member Name</span>
+                <span class="text-blue-900 font-semibold">Role</span>
+                <span class="text-blue-900 font-semibold">Rate</span>
+              </div>
+              <div class="bg-blue-50 rounded p-2 mb-2 flex justify-between items-start">
+                <div>
+                  <div class="text-blue-900 font-semibold">John Smith</div>
+                  <div class="text-xs text-blue-900">Team Lead</div>
+                </div>
+                <div class="text-blue-900 font-semibold text-right">$120.00</div>
+              </div>
+              <div class="bg-blue-50 rounded p-2 mb-2 flex justify-between items-start">
+                <div>
+                  <div class="text-blue-900 font-semibold">Mike Johnson</div>
+                  <div class="text-xs text-blue-900">Member</div>
+                </div>
+                <div class="text-blue-900 font-semibold text-right">$90.00</div>
+              </div>
+              <div class="bg-blue-50 rounded p-2 mb-2 flex justify-between items-start">
+                <div>
+                  <div class="text-blue-900 font-semibold">Sarah Wilson</div>
+                  <div class="text-xs text-blue-900">Member</div>
+                </div>
+                <div class="text-blue-900 font-semibold text-right">$85.00</div>
+              </div>
+              <button class="bg-blue-400 text-white px-2 py-1 rounded text-xs mb-2 ml-auto block">Add New Member</button>
+              <div class="clear-both"></div>
+              <div class="flex justify-between items-center mt-4">
+                <span class="text-blue-700 font-semibold">Total daily rate:</span>
+                <input type="text" class="rounded px-2 py-1 border w-24 text-right" readonly value="$450.00" />
+              </div>
+              <div class="flex justify-end mt-2">
+                <button class="bg-purple-700 text-white px-4 py-1 rounded">Save</button>
+              </div>
+            </div>
+          </div>
+          <!-- Assigned Services Accordion -->
+          <div class="rounded-lg shadow-md bg-white border">
+            <button type="button" onclick="toggleAccordion(1)" class="w-full text-left px-4 py-2 font-semibold border-b flex items-center justify-between rounded-t-lg focus:outline-none">
+              <span>Assigned Services</span>
+              <svg id="accordion-arrow-1" class="transition-transform duration-200 w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="accordion-content-1" class="hidden bg-blue-50 rounded-b-lg px-4 py-2">
+              <div class="flex justify-between border-b border-blue-200 pb-1 mb-2">
+                <span class="text-blue-900 font-semibold">Service Name</span>
+                <span class="text-blue-900 font-semibold">Priority</span>
+                <span class="text-blue-900 font-semibold">Status</span>
+              </div>
+              <div class="bg-blue-50 rounded p-2 mb-2 flex justify-between items-start">
+                <div>
+                  <div class="text-blue-900 font-semibold">Lawn Mowing</div>
+                  <div class="text-xs text-blue-900">Primary Service</div>
+                </div>
+                <div class="text-blue-900 font-semibold text-right">High</div>
+              </div>
+              <div class="bg-blue-50 rounded p-2 mb-2 flex justify-between items-start">
+                <div>
+                  <div class="text-blue-900 font-semibold">Weed Control</div>
+                  <div class="text-xs text-blue-900">Secondary Service</div>
+                </div>
+                <div class="text-blue-900 font-semibold text-right">Medium</div>
+              </div>
+              <button class="bg-blue-400 text-white px-2 py-1 rounded text-xs mb-2 ml-auto block">Assign New Service</button>
+              <div class="clear-both"></div>
+              <div class="flex justify-end mt-2">
+                <button class="bg-purple-700 text-white px-4 py-1 rounded">Save</button>
+              </div>
+            </div>
+          </div>
+          <!-- Performance Metrics Accordion -->
+          <div class="rounded-lg shadow-md bg-white border">
+            <button type="button" onclick="toggleAccordion(2)" class="w-full text-left px-4 py-2 font-semibold border-b flex items-center justify-between rounded-t-lg focus:outline-none">
+              <span>Performance Metrics</span>
+              <svg id="accordion-arrow-2" class="transition-transform duration-200 w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="accordion-content-2" class="hidden bg-blue-50 rounded-b-lg px-4 py-2">
+              <div class="grid grid-cols-2 gap-4 mb-4">
+                <div class="bg-white rounded p-3 text-center">
+                  <div class="text-2xl font-bold text-blue-600">95%</div>
+                  <div class="text-xs text-gray-600">Completion Rate</div>
+                </div>
+                <div class="bg-white rounded p-3 text-center">
+                  <div class="text-2xl font-bold text-green-600">4.8</div>
+                  <div class="text-xs text-gray-600">Avg Rating</div>
+                </div>
+                <div class="bg-white rounded p-3 text-center">
+                  <div class="text-2xl font-bold text-orange-600">12</div>
+                  <div class="text-xs text-gray-600">Projects This Month</div>
+                </div>
+                <div class="bg-white rounded p-3 text-center">
+                  <div class="text-2xl font-bold text-purple-600">$5,400</div>
+                  <div class="text-xs text-gray-600">Revenue This Month</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </main>
+
+    <!-- Desktop View -->
+    <main class="hidden md:block container-fluid mx-auto px-4 md:px-6 py-2 md:py-4 relative-z-1">
+        <!-- Desktop Header -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
+            <div class="flex items-center gap-4">
+                <button id="backBtn" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <h1 class="text-xl md:text-2xl font-bold text-gray-800">Team Details</h1>
+            </div>
+            <div class="flex items-center gap-2">
+                <!-- Action buttons moved to bottom left -->
+            </div>
+        </div>
+
+        <!-- Team Details Container -->
+        <div id="teamDetailsContainer" class="space-y-8">
+            <!-- Team Info Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 border border-blue-100 w-full">
+                <h2 class="text-2xl font-bold text-blue-700 mb-6 flex items-center gap-2">
+                    <i class="fas fa-users text-blue-400"></i> Team Information
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                    <div>
+                        <div class="text-xs text-gray-500 mb-1">Team Name</div>
+                        <input type="text" class="w-full border border-black rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="Landscaping Team A" readonly />
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-500 mb-1">Default Service</div>
+                        <input type="text" class="w-full border border-black rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="Lawn Mowing" readonly />
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-500 mb-1">Team Lead</div>
+                        <input type="text" class="w-full border border-black rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="John Smith" readonly />
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-500 mb-1">Total Members</div>
+                        <input type="text" class="w-full border border-black rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="5" readonly />
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-500 mb-1">Rate Per Day</div>
+                        <input type="text" class="w-full border border-black rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="$450.00" readonly />
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-500 mb-1">Status</div>
+                        <input type="text" class="w-full border border-black rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="Active" readonly />
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-500 mb-1">Created Date</div>
+                        <input type="text" class="w-full border border-black rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="March 15, 2025" readonly />
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-500 mb-1">Last Updated</div>
+                        <input type="text" class="w-full border border-black rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" value="March 20, 2025" readonly />
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <div class="text-xs text-gray-500 mb-1">Team Description</div>
+                        <textarea class="w-full border border-black rounded-lg px-3 py-2 bg-gray-50 text-gray-800 font-semibold" rows="3" readonly>Specialized landscaping team focused on lawn maintenance and garden care services. Experienced in residential and commercial properties.</textarea>
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-500 mb-1">Team Photo</div>
+                        <div class="flex items-center gap-4 bg-gray-50 rounded-lg p-4">
+                            <img src="https://via.placeholder.com/120x80?text=Team+Photo" alt="Team Photo" class="rounded-lg border shadow-sm" />
+                            <span class="text-xs text-gray-400">(Photo upload disabled)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Members Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 border border-blue-100 w-full">
+                <h2 class="text-xl font-bold text-blue-700 mb-4">Team Members</h2>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-xs mb-2" id="teamMembersTable">
+                        <thead>
+                            <tr class="bg-blue-500 text-white">
+                                <th class="px-4 py-2 text-left">Member Name</th>
+                                <th class="px-4 py-2 text-left">Role</th>
+                                <th class="px-4 py-2 text-left">Contact</th>
+                                <th class="px-4 py-2 text-left">Daily Rate</th>
+                                <th class="px-4 py-2 text-left">Status</th>
+                                <th class="px-4 py-2 text-left" id="memberActionsHeader" style="display:none;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-gray-50">
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="John Smith" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Team Lead" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="john.smith@email.com" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="$120.00" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Active" readonly /></td>
+                                <td class="px-4 py-2 member-action" style="display:none;"></td>
+                            </tr>
+                            <tr class="bg-gray-50">
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Mike Johnson" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Member" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="mike.johnson@email.com" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="$90.00" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Active" readonly /></td>
+                                <td class="px-4 py-2 member-action" style="display:none;"></td>
+                            </tr>
+                            <tr class="bg-gray-50">
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Sarah Wilson" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Member" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="sarah.wilson@email.com" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="$85.00" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Active" readonly /></td>
+                                <td class="px-4 py-2 member-action" style="display:none;"></td>
+                            </tr>
+                            <tr class="bg-gray-50">
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="David Brown" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Member" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="david.brown@email.com" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="$80.00" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Active" readonly /></td>
+                                <td class="px-4 py-2 member-action" style="display:none;"></td>
+                            </tr>
+                            <tr class="bg-gray-50">
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Lisa Garcia" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Member" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="lisa.garcia@email.com" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="$75.00" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Active" readonly /></td>
+                                <td class="px-4 py-2 member-action" style="display:none;"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="flex justify-end items-center gap-2 mt-2">
+                        <span class="font-semibold text-gray-700">TOTAL DAILY RATE</span>
+                        <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-lg font-bold">$450.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Assigned Services Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 border border-blue-100 w-full">
+                <h2 class="text-xl font-bold text-blue-700 mb-4">Assigned Services</h2>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-xs mb-2" id="assignedServicesTable">
+                        <thead>
+                            <tr class="bg-blue-500 text-white">
+                                <th class="px-4 py-2 text-left">Service Name</th>
+                                <th class="px-4 py-2 text-left">Category</th>
+                                <th class="px-4 py-2 text-left">Priority</th>
+                                <th class="px-4 py-2 text-left">Status</th>
+                                <th class="px-4 py-2 text-left" id="serviceActionsHeader" style="display:none;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-gray-50">
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Lawn Mowing" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Landscaping" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="High" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Active" readonly /></td>
+                                <td class="px-4 py-2 service-action" style="display:none;"></td>
+                            </tr>
+                            <tr class="bg-gray-50">
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Weed Control" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Landscaping" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Medium" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Active" readonly /></td>
+                                <td class="px-4 py-2 service-action" style="display:none;"></td>
+                            </tr>
+                            <tr class="bg-gray-50">
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Garden Maintenance" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Landscaping" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Low" readonly /></td>
+                                <td><input type="text" class="w-full border border-black rounded-lg px-2 py-1 bg-gray-50 text-gray-800 font-semibold" value="Active" readonly /></td>
+                                <td class="px-4 py-2 service-action" style="display:none;"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Performance Metrics Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 border border-blue-100 w-full">
+                <h2 class="text-xl font-bold text-blue-700 mb-4">Performance Metrics</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-blue-50 rounded-lg p-6 text-center">
+                        <div class="text-3xl font-bold text-blue-600 mb-2">95%</div>
+                        <div class="text-sm text-gray-600">Completion Rate</div>
+                    </div>
+                    <div class="bg-green-50 rounded-lg p-6 text-center">
+                        <div class="text-3xl font-bold text-green-600 mb-2">4.8</div>
+                        <div class="text-sm text-gray-600">Average Rating</div>
+                    </div>
+                    <div class="bg-orange-50 rounded-lg p-6 text-center">
+                        <div class="text-3xl font-bold text-orange-600 mb-2">12</div>
+                        <div class="text-sm text-gray-600">Projects This Month</div>
+                    </div>
+                    <div class="bg-purple-50 rounded-lg p-6 text-center">
+                        <div class="text-3xl font-bold text-purple-600 mb-2">$5,400</div>
+                        <div class="text-sm text-gray-600">Revenue This Month</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Action buttons at bottom left -->
+        <div class="mt-8 flex justify-start gap-4">
+            <button class="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors">
+                <i class="fas fa-edit mr-2"></i>Edit
+            </button>
+            <button class="px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 transition-colors">
+                <i class="fas fa-trash-alt mr-2"></i>Delete
+            </button>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../js/team.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html> 

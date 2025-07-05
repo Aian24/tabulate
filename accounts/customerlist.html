@@ -29,9 +29,9 @@
     <main class="container-fluid mx-auto px-4 md:px-6 py-2 md:py-4" style="position: relative; z-index: 1;">
       <!-- Mobile Controls and Card List (Mobile Only) -->
       <div class="md:hidden block">
-        <div class="p-4">
+        <div class="p-2">
           <div class="flex justify-between items-center mb-4">
-            <span class="text-lg font-semibold">Customer List</span>
+            <span class="text-lg font-semibold">Customer</span>
             <div class="relative inline-block text-left">
               <button id="mobileMoreBtn" type="button" class="inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700">
                 More
@@ -45,13 +45,13 @@
             <input id="mobileSearchInput" type="text" placeholder="Search" class="flex-1 px-3 py-2 border border-gray-300 rounded-md text-sm mr-2" />
             <button id="mobileFilterBtn" class="bg-blue-100 px-3 py-2 rounded-md text-blue-700 flex items-center"><i class="fas fa-filter mr-1"></i></button>
           </div>
-          <div class="flex space-x-2 mb-4">
-            <button id="mobileDeletedBtn" class="bg-blue-100 text-blue-700 px-4 py-1 rounded-md text-sm">Deleted Customers</button>
+          <div class="flex space-x-2 mb-4 justify-center">
+            <button id="mobileDeletedBtn" class="bg-red-100 text-red-700 px-4 py-1 rounded-md text-sm">Deleted</button>
             <button id="mobileCreateBtn" class="bg-blue-600 text-white px-4 py-1 rounded-md text-sm">Create +</button>
             <button id="mobileActionsBtn" class="bg-blue-100 text-blue-700 px-4 py-1 rounded-md text-sm">Actions</button>
           </div>
         </div>
-        <div class="mobile-card-view max-w-sm mx-auto space-y-3 px-2 pb-4">
+        <div class="mobile-card-view max-w-sm mx-auto space-y-3 px-2">
           <!-- Mobile cards will be rendered here by JS -->
         </div>
       </div>
@@ -61,7 +61,7 @@
         <!-- Combined header with search -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
           <div class="flex items-center gap-4">
-            <h1 class="text-xl md:text-2xl font-bold text-gray-800">Customers List</h1>
+            <h1 class="text-xl md:text-2xl font-bold text-gray-800">Customers</h1>
           </div>
           <div class="flex items-center gap-2">
             <div class="relative">
@@ -108,17 +108,17 @@
                     <select id="entries" class="border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="10">10</option>
                         <option value="25">25</option>
-                        <option value="50">50</option>
+                        <option value="50" selected>50</option>
                         <option value="100">100</option>
                     </select>
                 </div>
                 <!-- Action buttons -->
                 <div class="flex flex-wrap justify-center md:justify-start gap-2">
                     <button id="createCustomerBtn" class="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors" onclick="window.location.href='create-customer.html'">
-                        <i class="fas fa-user-plus mr-1"></i> Create Customer
+                        <i class="fas fa-user-plus mr-1"></i> Create
                     </button>
                     <button id="deletedCustomersBtn" class="px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 transition-colors" onclick="window.location.href='deleted-customers.html'">
-                        <i class="fas fa-trash-alt mr-1"></i> Deleted Customers
+                        <i class="fas fa-trash-alt mr-1"></i> Deleted
                     </button>
                     <button id="openFilter" class="calendar-button border-2 border-gray-400 text-gray-700 flex items-center gap-1 px-3 py-1 rounded-lg">
                         <i class="fas fa-filter"></i>

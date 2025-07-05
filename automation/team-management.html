@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>Team Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/themes/light.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="min-h-screen bg-sky-50">
+    <!-- Include header -->
+    <div id="header-container"></div>
+
+    <!-- Include navigation -->
+    <div id="nav-container"></div>
+
+    <!-- Main content -->
+    <main class="container-fluid mx-auto px-4 md:px-6 py-2 md:py-4 relative-z-1">
+        <!-- Desktop Header -->
+        <div class="hidden md:flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
+            <div class="flex items-center gap-4">
+                <h1 class="text-xl md:text-2xl font-bold text-gray-800">Team Management</h1>
+            </div>
+            <div class="flex items-center gap-2">
+                <div class="relative">
+                    <button id="actionsDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
+                        <span>Actions</span>
+                        <i class="fas fa-chevron-down ml-1"></i>
+                    </button>
+                    <div id="actionsMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-file-invoice w-5"></i>
+                            <span>Create Invoice</span>
+                        </button>
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-trash-alt w-5"></i>
+                            <span>Delete</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="relative">
+                    <button id="moreDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
+                        <span>More</span>
+                        <i class="fas fa-chevron-down ml-1"></i>
+                    </button>
+                    <div id="moreMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-cog w-5"></i>
+                            <span>Settings</span>
+                        </button>
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-chart-bar w-5"></i>
+                            <span>Report</span>
+                        </button>
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-history w-5"></i>
+                            <span>Audit Trail</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desktop Controls Section -->
+        <div class="hidden md:flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
+            <!-- Left side: Controls -->
+            <div class="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
+                <!-- Show entries dropdown -->
+                <div class="hidden md:flex items-center mr-4">
+                    <label class="text-sm text-gray-600 mr-2">Show entries:</label>
+                    <select class="pagination-entries-select border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50" selected>50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+                <!-- Action buttons -->
+                <div class="flex flex-wrap justify-center md:justify-start gap-2">
+                    <button id="createTeamBtn" class="px-2 py-1 text-xs font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors" onclick="window.location.href='create-team.html'">
+                        <i class="fas fa-plus mr-0.5"></i> Create
+                    </button>
+                    <button id="deletedTeamsBtn" class="px-2 py-1 text-xs font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 transition-colors" onclick="window.location.href='deleted-teams.html'">
+                        <i class="fas fa-trash-alt mr-0.5"></i> Deleted
+                    </button>
+                    <button id="openFilter" class="calendar-button border-2 border-gray-400 text-gray-700 flex items-center gap-1 px-2 py-1 rounded-lg text-xs">
+                        <i class="fas fa-filter"></i>
+                        <span>Filter</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Right side: Search -->
+            <div id="search-container" class="relative w-full md:w-auto">
+                <input type="search" 
+                       placeholder="Search..." 
+                       class="w-full h-[42px] pl-10 pr-4 rounded-lg border border-green-500 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300"
+                />
+                <button class="absolute left-3 top-1/2 -translate-y-1/2 text-blue-500 hover:text-blue-600 transition-colors">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Desktop Table View -->
+        <div class="hidden md:block bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
+            <div class="overflow-x-auto">
+                <table class="w-full min-w-[800px]">
+                    <thead class="bg-gradient-to-r from-sky-500 to-blue-600 text-white">
+                        <tr>
+                            <th class="px-6 py-4 text-left">
+                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold">Name</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold">Default Service</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold">Team Lead</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold">Team Members</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold">Total Rate Per Day</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        <tr>
+                            <td class="px-6 py-4"><input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"></td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Landscaping Team A</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Lawn Mowing</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">John Smith</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">5 members</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">$450.00</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4"><input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"></td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Cleaning Team B</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Office Cleaning</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Sarah Johnson</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">3 members</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">$320.00</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4"><input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"></td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Maintenance Team C</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Plumbing Repair</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Mike Davis</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">4 members</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">$380.00</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4"><input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"></td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Electrical Team D</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Electrical Wiring</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Lisa Wilson</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">6 members</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">$520.00</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4"><input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"></td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Painting Team E</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">House Painting</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Tom Brown</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">7 members</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">$650.00</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4"><input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"></td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Roofing Team F</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Roofing Installation</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">David Miller</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">8 members</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">$720.00</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4"><input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"></td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Weed Control Team G</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Weed Control</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Emma Garcia</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">4 members</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">$280.00</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4"><input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"></td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Lawn Maintenance Team H</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Lawn Maintenance</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">Alex Rodriguez</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">5 members</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">$400.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="bg-gray-50 px-4 md:px-6 py-4 flex flex-col md:flex-row justify-between items-center border-t border-gray-100 gap-4">
+                <div class="flex items-center gap-2 text-sm text-gray-600 order-2 md:order-1">
+                    Showing <span class="font-medium">1</span> to <span class="font-medium">8</span> of <span class="font-medium">8</span> entries
+                </div>
+                <div class="flex items-center gap-2 order-1 md:order-2">
+                    <button class="px-3 py-1 text-sm text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        Previous
+                    </button>
+                    <button class="px-3 py-1 text-sm text-white bg-blue-500 border border-blue-500 rounded-lg">1</button>
+                    <button class="px-3 py-1 text-sm text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        Next
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile View -->
+        <div class="md:hidden space-y-4">
+            <!-- Mobile Header -->
+            <div class="flex justify-between items-center">
+                <h1 class="text-xl font-bold text-gray-800">Team Management</h1>
+                <div class="flex gap-2">
+                    <button class="px-3 py-1 text-xs font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors">
+                        <i class="fas fa-plus mr-1"></i> Create
+                    </button>
+                    <button class="px-3 py-1 text-xs font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 transition-colors">
+                        <i class="fas fa-trash-alt mr-1"></i> Deleted
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Search -->
+            <div class="relative">
+                <input type="search" 
+                       placeholder="Search teams..." 
+                       class="w-full h-12 pl-10 pr-4 rounded-lg border border-green-500 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300"
+                />
+                <button class="absolute left-3 top-1/2 -translate-y-1/2 text-blue-500 hover:text-blue-600 transition-colors">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Team Cards -->
+            <div class="space-y-3">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-semibold text-gray-900">Landscaping Team A</h3>
+                        <span class="text-sm text-green-600 font-medium">$450.00/day</span>
+                    </div>
+                    <div class="space-y-1 text-sm text-gray-600">
+                        <div><span class="font-medium">Service:</span> Lawn Mowing</div>
+                        <div><span class="font-medium">Lead:</span> John Smith</div>
+                        <div><span class="font-medium">Members:</span> 5 members</div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-semibold text-gray-900">Cleaning Team B</h3>
+                        <span class="text-sm text-green-600 font-medium">$320.00/day</span>
+                    </div>
+                    <div class="space-y-1 text-sm text-gray-600">
+                        <div><span class="font-medium">Service:</span> Office Cleaning</div>
+                        <div><span class="font-medium">Lead:</span> Sarah Johnson</div>
+                        <div><span class="font-medium">Members:</span> 3 members</div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-semibold text-gray-900">Maintenance Team C</h3>
+                        <span class="text-sm text-green-600 font-medium">$380.00/day</span>
+                    </div>
+                    <div class="space-y-1 text-sm text-gray-600">
+                        <div><span class="font-medium">Service:</span> Plumbing Repair</div>
+                        <div><span class="font-medium">Lead:</span> Mike Davis</div>
+                        <div><span class="font-medium">Members:</span> 4 members</div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-semibold text-gray-900">Electrical Team D</h3>
+                        <span class="text-sm text-green-600 font-medium">$520.00/day</span>
+                    </div>
+                    <div class="space-y-1 text-sm text-gray-600">
+                        <div><span class="font-medium">Service:</span> Electrical Wiring</div>
+                        <div><span class="font-medium">Lead:</span> Lisa Wilson</div>
+                        <div><span class="font-medium">Members:</span> 6 members</div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-semibold text-gray-900">Painting Team E</h3>
+                        <span class="text-sm text-green-600 font-medium">$650.00/day</span>
+                    </div>
+                    <div class="space-y-1 text-sm text-gray-600">
+                        <div><span class="font-medium">Service:</span> House Painting</div>
+                        <div><span class="font-medium">Lead:</span> Tom Brown</div>
+                        <div><span class="font-medium">Members:</span> 7 members</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../js/team.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

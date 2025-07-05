@@ -301,7 +301,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <td class="px-6 py-4 text-sm text-gray-900">${pkg.amount}</td>
                     <td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">${pkg.status}</span></td>
                     <td class="px-6 py-4 text-sm text-gray-900">${pkg.created}</td>
-                    <td class="px-6 py-4"><button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn" data-idx="${idx}"><i class="fas fa-undo-alt mr-1"></i> Restore</button></td>
+                    <td class="px-6 py-4"><button class="px-2 py-1 text-xs font-medium text-white bg-green-500 rounded hover:bg-green-600 transition-colors restore-btn" data-idx="${idx}"><i class="fas fa-undo mr-1"></i>Restore</button></td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -350,7 +350,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     </div>
                     <div class="mt-1 flex justify-between items-center">
                         <div><span class="text-gray-500 text-xs">Created:</span><span class="text-gray-900 text-xs">${pkg.created}</span></div>
-                        <button class="text-xs text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn" data-idx="${idx}"><i class="fas fa-undo-alt mr-1"></i> Restore</button>
+                        <button class="flex-1 px-3 py-1 text-xs font-medium text-white bg-green-500 rounded hover:bg-green-600 transition-colors restore-btn" data-idx="${idx}"><i class="fas fa-undo mr-1"></i>Restore</button>
                     </div>
                 `;
                 container.appendChild(card);

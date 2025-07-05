@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>Create Team</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/themes/light.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="min-h-screen bg-sky-50">
+    <!-- Include header -->
+    <div id="header-container"></div>
+
+    <!-- Include navigation -->
+    <div id="nav-container"></div>
+
+    <!-- Main content -->
+    <main class="container-fluid mx-auto px-4 md:px-6 py-2 md:py-4 relative-z-1">
+        <!-- Desktop Header -->
+        <div class="hidden md:flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
+            <div class="flex items-center gap-4">
+                <button onclick="window.location.href='team-management.html'" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <h1 class="text-xl md:text-2xl font-bold text-gray-800">Create New Team</h1>
+            </div>
+            <div class="flex items-center gap-2">
+                <!-- Action buttons moved to bottom left -->
+            </div>
+        </div>
+
+        <!-- Mobile Header -->
+                    <div class="md:hidden flex justify-between items-center mb-4">
+            <div class="flex items-center gap-2">
+                <button onclick="window.location.href='team-management.html'" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <h1 class="text-xl font-bold text-gray-800">Create Team</h1>
+            </div>
+        </div>
+
+        <!-- Team Creation Form -->
+        <form id="createTeamForm" class="space-y-6">
+            <!-- Basic Information Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 border border-blue-100">
+                <h2 class="text-xl font-bold text-blue-700 mb-6 flex items-center gap-2">
+                    <i class="fas fa-info-circle text-blue-400"></i> Basic Information
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Team Name <span class="text-red-500">*</span></label>
+                        <input type="text" name="teamName" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter team name"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Default Service <span class="text-red-500">*</span></label>
+                        <select name="defaultService" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option value="">Select a service</option>
+                            <option value="lawn-mowing">Lawn Mowing</option>
+                            <option value="weed-control">Weed Control</option>
+                            <option value="office-cleaning">Office Cleaning</option>
+                            <option value="plumbing-repair">Plumbing Repair</option>
+                            <option value="electrical-wiring">Electrical Wiring</option>
+                            <option value="house-painting">House Painting</option>
+                            <option value="roofing-installation">Roofing Installation</option>
+                            <option value="garden-maintenance">Garden Maintenance</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Team Lead <span class="text-red-500">*</span></label>
+                        <select name="teamLead" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option value="">Select team lead</option>
+                            <option value="john-smith">John Smith</option>
+                            <option value="sarah-johnson">Sarah Johnson</option>
+                            <option value="mike-davis">Mike Davis</option>
+                            <option value="lisa-wilson">Lisa Wilson</option>
+                            <option value="tom-brown">Tom Brown</option>
+                            <option value="david-miller">David Miller</option>
+                            <option value="emma-garcia">Emma Garcia</option>
+                            <option value="alex-rodriguez">Alex Rodriguez</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                        <select name="status" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Team Description</label>
+                        <textarea name="description" rows="3" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Describe the team's purpose and responsibilities"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Team Photo</label>
+                        <input type="file" name="teamPhoto" accept="image/*" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"/>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Members Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 border border-blue-100">
+                <h2 class="text-xl font-bold text-blue-700 mb-6 flex items-center gap-2">
+                    <i class="fas fa-users text-blue-400"></i> Team Members
+                </h2>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-sm mb-4" id="teamMembersTable">
+                        <thead>
+                            <tr class="bg-blue-500 text-white">
+                                <th class="px-4 py-2 text-left">Member Name</th>
+                                <th class="px-4 py-2 text-left">Role</th>
+                                <th class="px-4 py-2 text-left">Contact</th>
+                                <th class="px-4 py-2 text-left">Daily Rate</th>
+                                <th class="px-4 py-2 text-left">Status</th>
+                                <th class="px-4 py-2 text-left">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-gray-50">
+                                <td><input type="text" name="members[0][name]" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Member name"/></td>
+                                <td>
+                                    <select name="members[0][role]" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        <option value="member">Member</option>
+                                        <option value="team-lead">Team Lead</option>
+                                        <option value="supervisor">Supervisor</option>
+                                    </select>
+                                </td>
+                                <td><input type="email" name="members[0][contact]" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Email"/></td>
+                                <td><input type="number" name="members[0][rate]" step="0.01" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="0.00"/></td>
+                                <td>
+                                    <select name="members[0][status]" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        <option value="active">Active</option>
+                                        <option value="inactive">Inactive</option>
+                                    </select>
+                                </td>
+                                <td class="px-4 py-2">
+                                    <button type="button" class="text-red-500 hover:text-red-700" onclick="removeMember(this)">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="flex justify-between items-center">
+                        <button type="button" onclick="addMember()" class="px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-600 transition-colors">
+                            <i class="fas fa-plus mr-2"></i>Add Member
+                        </button>
+                        <div class="flex items-center gap-2">
+                            <span class="font-semibold text-gray-700">Total Daily Rate:</span>
+                            <span id="totalRate" class="bg-blue-100 text-blue-700 px-4 py-2 rounded-lg font-bold">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Assigned Services Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 border border-blue-100">
+                <h2 class="text-xl font-bold text-blue-700 mb-6 flex items-center gap-2">
+                    <i class="fas fa-tasks text-blue-400"></i> Assigned Services
+                </h2>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-sm mb-4" id="assignedServicesTable">
+                        <thead>
+                            <tr class="bg-blue-500 text-white">
+                                <th class="px-4 py-2 text-left">Service Name</th>
+                                <th class="px-4 py-2 text-left">Category</th>
+                                <th class="px-4 py-2 text-left">Priority</th>
+                                <th class="px-4 py-2 text-left">Status</th>
+                                <th class="px-4 py-2 text-left">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-gray-50">
+                                <td>
+                                    <select name="services[0][name]" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        <option value="">Select service</option>
+                                        <option value="lawn-mowing">Lawn Mowing</option>
+                                        <option value="weed-control">Weed Control</option>
+                                        <option value="office-cleaning">Office Cleaning</option>
+                                        <option value="plumbing-repair">Plumbing Repair</option>
+                                        <option value="electrical-wiring">Electrical Wiring</option>
+                                        <option value="house-painting">House Painting</option>
+                                        <option value="roofing-installation">Roofing Installation</option>
+                                        <option value="garden-maintenance">Garden Maintenance</option>
+                                    </select>
+                                </td>
+                                <td><input type="text" name="services[0][category]" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Category"/></td>
+                                <td>
+                                    <select name="services[0][priority]" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        <option value="low">Low</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="high">High</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="services[0][status]" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        <option value="active">Active</option>
+                                        <option value="inactive">Inactive</option>
+                                    </select>
+                                </td>
+                                <td class="px-4 py-2">
+                                    <button type="button" class="text-red-500 hover:text-red-700" onclick="removeService(this)">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button type="button" onclick="addService()" class="px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-600 transition-colors">
+                        <i class="fas fa-plus mr-2"></i>Assign Service
+                    </button>
+                </div>
+            </div>
+
+            <!-- Performance Settings Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 border border-blue-100">
+                <h2 class="text-xl font-bold text-blue-700 mb-6 flex items-center gap-2">
+                    <i class="fas fa-chart-line text-blue-400"></i> Performance Settings
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Target Completion Rate (%)</label>
+                        <input type="number" name="targetCompletionRate" min="0" max="100" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="95"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Minimum Rating</label>
+                        <input type="number" name="minimumRating" min="1" max="5" step="0.1" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="4.0"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Monthly Project Target</label>
+                        <input type="number" name="monthlyProjectTarget" min="1" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="10"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Revenue Target ($)</label>
+                        <input type="number" name="revenueTarget" min="0" step="0.01" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="5000.00"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Working Hours per Day</label>
+                        <input type="number" name="workingHours" min="1" max="24" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="8"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Break Time (minutes)</label>
+                        <input type="number" name="breakTime" min="0" max="120" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="30"/>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action buttons at bottom left -->
+            <div class="mt-8 flex justify-start gap-4">
+                <button onclick="window.location.href='team-management.html'" class="px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 transition-colors">
+                    <i class="fas fa-times mr-2"></i>Cancel
+                </button>
+                <button type="submit" form="createTeamForm" class="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors">
+                    <i class="fas fa-save mr-2"></i>Save Team
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../js/team.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        // Team creation specific functions
+        let memberCount = 1;
+        let serviceCount = 1;
+
+        function addMember() {
+            const tbody = document.querySelector('#teamMembersTable tbody');
+            const newRow = document.createElement('tr');
+            newRow.className = 'bg-gray-50';
+            newRow.innerHTML = `
+                <td><input type="text" name="members[${memberCount}][name]" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Member name"/></td>
+                <td>
+                    <select name="members[${memberCount}][role]" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="member">Member</option>
+                        <option value="team-lead">Team Lead</option>
+                        <option value="supervisor">Supervisor</option>
+                    </select>
+                </td>
+                <td><input type="email" name="members[${memberCount}][contact]" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Email"/></td>
+                <td><input type="number" name="members[${memberCount}][rate]" step="0.01" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="0.00"/></td>
+                <td>
+                    <select name="members[${memberCount}][status]" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </td>
+                <td class="px-4 py-2">
+                    <button type="button" class="text-red-500 hover:text-red-700" onclick="removeMember(this)">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </td>
+            `;
+            tbody.appendChild(newRow);
+            memberCount++;
+            updateTotalRate();
+        }
+
+        function removeMember(button) {
+            const row = button.closest('tr');
+            if (document.querySelectorAll('#teamMembersTable tbody tr').length > 1) {
+                row.remove();
+                updateTotalRate();
+            }
+        }
+
+        function addService() {
+            const tbody = document.querySelector('#assignedServicesTable tbody');
+            const newRow = document.createElement('tr');
+            newRow.className = 'bg-gray-50';
+            newRow.innerHTML = `
+                <td>
+                    <select name="services[${serviceCount}][name]" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Select service</option>
+                        <option value="lawn-mowing">Lawn Mowing</option>
+                        <option value="weed-control">Weed Control</option>
+                        <option value="office-cleaning">Office Cleaning</option>
+                        <option value="plumbing-repair">Plumbing Repair</option>
+                        <option value="electrical-wiring">Electrical Wiring</option>
+                        <option value="house-painting">House Painting</option>
+                        <option value="roofing-installation">Roofing Installation</option>
+                        <option value="garden-maintenance">Garden Maintenance</option>
+                    </select>
+                </td>
+                <td><input type="text" name="services[${serviceCount}][category]" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Category"/></td>
+                <td>
+                    <select name="services[${serviceCount}][priority]" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="services[${serviceCount}][status]" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </td>
+                <td class="px-4 py-2">
+                    <button type="button" class="text-red-500 hover:text-red-700" onclick="removeService(this)">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </td>
+            `;
+            tbody.appendChild(newRow);
+            serviceCount++;
+        }
+
+        function removeService(button) {
+            const row = button.closest('tr');
+            if (document.querySelectorAll('#assignedServicesTable tbody tr').length > 1) {
+                row.remove();
+            }
+        }
+
+        function updateTotalRate() {
+            const rateInputs = document.querySelectorAll('input[name*="[rate]"]');
+            let total = 0;
+            rateInputs.forEach(input => {
+                total += parseFloat(input.value) || 0;
+            });
+            document.getElementById('totalRate').textContent = `$${total.toFixed(2)}`;
+        }
+
+        // Add event listeners for rate calculation
+        document.addEventListener('input', function(e) {
+            if (e.target.name && e.target.name.includes('[rate]')) {
+                updateTotalRate();
+            }
+        });
+
+        // Form submission
+        document.getElementById('createTeamForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate required fields
+            const requiredFields = this.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.classList.add('border-red-500');
+                    isValid = false;
+                } else {
+                    field.classList.remove('border-red-500');
+                }
+            });
+
+            if (!isValid) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            // Collect form data
+            const formData = new FormData(this);
+            
+            // Simulate API call
+            console.log('Creating team with data:', Object.fromEntries(formData));
+            
+            // Show success message and redirect
+            alert('Team created successfully!');
+            window.location.href = 'team-management.html';
+        });
+    </script>
+</body>
+</html> 

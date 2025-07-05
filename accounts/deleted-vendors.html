@@ -18,7 +18,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </head>
-<body class="min-h-screen bg-gray-50">
+<body class="min-h-screen bg-sky-50">
     <!-- Include header -->
     <div id="header-container"></div>
 
@@ -26,7 +26,7 @@
     <div id="nav-container"></div>
 
     <!-- Main content -->
-    <main class="mobile-container">
+    <main class="container-fluid mx-auto px-4 md:px-6 py-2 md:py-4 relative-z-1">
         <!-- Mobile Header -->
         <div class="mobile-header md:hidden">
             <div class="flex items-center justify-between mb-2">
@@ -50,57 +50,48 @@
             </div>
         </div>
 
-        <!-- Desktop Header (hidden on mobile) -->
-        <div class="hidden md:block container-fluid mx-auto px-4 md:px-6 py-2 md:py-4">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
+        <!-- Desktop Header -->
+        <div class="hidden md:flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
                 <div class="flex items-center gap-4">
-                    <button onclick="window.location.href='vendors.html'" class="back-button text-sm px-4 py-2 text-white rounded-md flex items-center gap-2">
-                        <i class="fas fa-arrow-left"></i>Back to List
+                <button onclick="window.location.href='vendors.html'" class="px-4 py-2 bg-purple-600 text-white rounded-lg shadow hover:bg-purple-700 flex items-center gap-2 transition font-medium">
+                    <i class="fas fa-arrow-left"></i> Back to List
                     </button>
-                    <h1 class="text-xl md:text-2xl font-bold text-gray-800">Deleted Vendors</h1>
+                <h1 class="text-2xl font-bold text-gray-800">Deleted Vendors</h1>
                 </div>
                 <div class="flex items-center gap-2">
-                    <div class="relative">
-                        <button id="actionsDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
-                            <span>Actions</span>
-                            <i class="fas fa-chevron-down ml-1"></i>
-                        </button>
-                        <div id="actionsMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10">
-                            <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                                <i class="fas fa-trash-alt w-5"></i>
-                                <span>Delete</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <!-- Restore Selected button will be shown/hidden by JavaScript -->
             </div>
         </div>
 
-        <!-- Controls Section -->
-        <div class="hidden md:flex flex-col md:flex-row items-center justify-between gap-4 mb-6 container-fluid mx-auto px-4 md:px-6">
+        <!-- Desktop Controls Section -->
+        <div class="hidden md:flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
             <!-- Left side: Controls -->
             <div class="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
                 <!-- Show entries dropdown -->
                 <div class="hidden md:flex items-center mr-4">
-                    <label for="entries" class="text-sm text-gray-600 mr-2">Show entries:</label>
-                    <select id="entries" class="border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <label class="text-sm text-gray-600 mr-2">Show entries:</label>
+                    <select class="pagination-entries-select border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
                         <option value="10">10</option>
                         <option value="25">25</option>
-                        <option value="50">50</option>
+                        <option value="50" selected>50</option>
                         <option value="100">100</option>
                     </select>
                 </div>
-                <!-- Restore Selected button -->
+                <!-- Action buttons -->
                 <div class="flex flex-wrap justify-center md:justify-start gap-2">
                     <button id="restoreSelectedBtn" class="px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors hidden">
                         <i class="fas fa-undo-alt mr-1"></i> Restore Selected
+                    </button>
+                    <button id="openFilter" class="calendar-button border-2 border-gray-400 text-gray-700 flex items-center gap-1 px-2 py-1 rounded-lg text-xs">
+                        <i class="fas fa-filter"></i>
+                        <span>Filter</span>
                     </button>
                 </div>
             </div>
             <!-- Right side: Search -->
             <div id="search-container" class="relative w-full md:w-auto">
                 <input type="search" 
-                       placeholder="Search..." 
+                       placeholder="Search deleted vendors..." 
                        class="w-full h-[42px] pl-10 pr-4 rounded-lg border border-green-500 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300"
                 />
                 <button class="absolute left-3 top-1/2 -translate-y-1/2 text-blue-500 hover:text-blue-600 transition-colors">
@@ -109,150 +100,37 @@
             </div>
         </div>
 
-        <!-- Mobile Deleted Vendors List -->
-        <div class="md:hidden pb-20">
-            <div class="mobile-card">
-                <div class="mobile-table-header">
-                    <h2 class="text-white font-semibold">Deleted Vendors</h2>
-                    <p class="text-white/80 text-sm mt-1">3 vendors found</p>
+        <!-- Mobile View -->
+        <div class="md:hidden space-y-4">
+            <!-- Mobile Header -->
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <button onclick="window.location.href='vendors.html'" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <h1 class="text-xl font-bold text-gray-800">Deleted Vendors</h1>
                 </div>
-                
-                <!-- Mobile Deleted Vendor Cards -->
-                <div class="p-3 space-y-2">
-                    <!-- Deleted Vendor Card 1 -->
-                    <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
-                        <div class="flex items-center justify-between mb-1">
-                            <div class="flex items-center gap-3">
-                                <input type="checkbox" class="vendor-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
-                                <div class="w-8 h-8 bg-gradient-to-br from-red-400 to-pink-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
-                                    OS
-                                </div>
-                                <div>
-                                    <h3 class="font-semibold text-gray-900 text-sm">Oshwald</h3>
-                                    <p class="text-xs text-gray-500">ID: 8</p>
-                                </div>
-                            </div>
-                            <span class="mobile-status bg-red-100 text-red-800 text-xs">Deactivated</span>
-                        </div>
-                        <div class="space-y-1 text-xs">
-                            <div>
-                                <span class="text-gray-500">Contact:</span>
-                                <span class="text-gray-900">Spartlings</span>
-                            </div>
-                             <div>
-                                <span class="text-gray-500">Phone:</span>
-                                <span class="text-gray-900">09156864121</span>
-                            </div>
-                            <div>
-                                <span class="text-gray-500">Email:</span>
-                                <span class="text-gray-900">Oshwald22203@gmail.com</span>
-                            </div>
-                        </div>
-                        <div class="mt-1 flex justify-between items-center">
-                            <div>
-                                <span class="text-gray-500 text-xs">Deleted:</span>
-                                <span class="text-gray-900 text-xs">March 12, 2025</span>
-                            </div>
-                            <button class="text-xs text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
-                                <i class="fas fa-undo-alt mr-1"></i> Restore
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Deleted Vendor Card 2 -->
-                    <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
-                        <div class="flex items-center justify-between mb-1">
-                            <div class="flex items-center gap-3">
-                                <input type="checkbox" class="vendor-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
-                                <div class="w-8 h-8 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
-                                    TI
-                                </div>
-                                <div>
-                                    <h3 class="font-semibold text-gray-900 text-sm">TechSource Inc.</h3>
-                                    <p class="text-xs text-gray-500">ID: 9</p>
-                                </div>
-                            </div>
-                            <span class="mobile-status bg-red-100 text-red-800 text-xs">Deactivated</span>
-                        </div>
-                        <div class="space-y-1 text-xs">
-                             <div>
-                                <span class="text-gray-500">Contact:</span>
-                                <span class="text-gray-900">Jane Doe</span>
-                            </div>
-                            <div>
-                                <span class="text-gray-500">Phone:</span>
-                                <span class="text-gray-900">09123456789</span>
-                            </div>
-                            <div>
-                                <span class="text-gray-500">Email:</span>
-                                <span class="text-gray-900">jane.d@techsource.com</span>
-                            </div>
-                        </div>
-                        <div class="mt-1 flex justify-between items-center">
-                            <div>
-                                <span class="text-gray-500 text-xs">Deleted:</span>
-                                <span class="text-gray-900 text-xs">March 10, 2025</span>
-                            </div>
-                            <button class="text-xs text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
-                                <i class="fas fa-undo-alt mr-1"></i> Restore
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Deleted Vendor Card 3 -->
-                    <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
-                        <div class="flex items-center justify-between mb-1">
-                            <div class="flex items-center gap-3">
-                                <input type="checkbox" class="vendor-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
-                                <div class="w-8 h-8 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
-                                    IS
-                                </div>
-                                <div>
-                                    <h3 class="font-semibold text-gray-900 text-sm">Innovate Solutions</h3>
-                                    <p class="text-xs text-gray-500">ID: 10</p>
-                                </div>
-                            </div>
-                            <span class="mobile-status bg-red-100 text-red-800 text-xs">Deactivated</span>
-                        </div>
-                        <div class="space-y-1 text-xs">
-                             <div>
-                                <span class="text-gray-500">Contact:</span>
-                                <span class="text-gray-900">John Smith</span>
-                            </div>
-                            <div>
-                                <span class="text-gray-500">Phone:</span>
-                                <span class="text-gray-900">09987654321</span>
-                            </div>
-                            <div>
-                                <span class="text-gray-500">Email:</span>
-                                <span class="text-gray-900">j.smith@innovate.com</span>
-                            </div>
-                        </div>
-                        <div class="mt-1 flex justify-between items-center">
-                            <div>
-                                <span class="text-gray-500 text-xs">Deleted:</span>
-                                <span class="text-gray-900 text-xs">March 8, 2025</span>
-                            </div>
-                            <button class="text-xs text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
-                                <i class="fas fa-undo-alt mr-1"></i> Restore
-                            </button>
-                        </div>
-                    </div>
+                <div class="flex gap-2">
+                    <button id="restoreSelectedBtnMobile" class="px-3 py-1 text-xs font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors hidden">
+                        <i class="fas fa-undo-alt mr-1"></i> Restore Selected
+                    </button>
                 </div>
             </div>
-        </div>
 
-        <!-- Mobile Action Buttons -->
-        <div class="md:hidden mobile-actions">
-            <div class="flex gap-3">
-                <button onclick="window.location.href='vendors.html'" class="mobile-button flex-1 bg-gray-500 text-white flex items-center justify-center gap-2 text-sm py-2">
-                    <i class="fas fa-arrow-left text-xs"></i>
-                    <span>Back</span>
+            <!-- Mobile Search -->
+            <div class="relative">
+                <input type="search" 
+                       placeholder="Search deleted vendors..." 
+                       class="w-full h-12 pl-10 pr-4 rounded-lg border border-green-500 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300"
+                />
+                <button class="absolute left-3 top-1/2 -translate-y-1/2 text-blue-500 hover:text-blue-600 transition-colors">
+                    <i class="fas fa-search"></i>
                 </button>
-                <button id="restoreSelectedBtnMobile" class="mobile-button flex-1 bg-purple-600 text-white flex items-center justify-center gap-2 text-sm py-2">
-                    <i class="fas fa-undo-alt text-xs"></i>
-                    <span>Restore Selected</span>
-                </button>
+            </div>
+
+            <!-- Mobile Deleted Vendor Cards -->
+            <div class="space-y-3" id="mobile-deleted-vendors-list">
+                <!-- Cards will be rendered by JS -->
             </div>
         </div>
 
@@ -261,7 +139,7 @@
             <div class="bg-white rounded-xl overflow-hidden">
                 <div class="overflow-x-auto">
                     <table class="w-full min-w-[800px]">
-                        <thead class="bg-gradient-to-r from-sky-500 to-blue-600 text-white">
+                        <thead class="bg-gradient-to-r from-red-500 to-red-600 text-white">
                             <tr>
                                 <th class="px-6 py-4 text-left">
                                     <input type="checkbox" id="selectAllDeleted" class="w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
@@ -293,7 +171,7 @@
                                 </td>
                                 <td class="px-6 py-4 text-sm text-gray-600">March 12, 2025</td>
                                 <td class="px-6 py-4">
-                                    <button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
+                                    <button class="text-sm text-white bg-green-600 hover:bg-green-700 font-medium transition-colors restore-btn px-3 py-1 rounded-lg">
                                         <i class="fas fa-undo-alt mr-1"></i> Restore
                                     </button>
                                 </td>
@@ -314,7 +192,7 @@
                                 </td>
                                 <td class="px-6 py-4 text-sm text-gray-600">March 10, 2025</td>
                                 <td class="px-6 py-4">
-                                    <button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
+                                    <button class="text-sm text-white bg-green-600 hover:bg-green-700 font-medium transition-colors restore-btn px-3 py-1 rounded-lg">
                                         <i class="fas fa-undo-alt mr-1"></i> Restore
                                     </button>
                                 </td>
@@ -335,7 +213,7 @@
                                 </td>
                                 <td class="px-6 py-4 text-sm text-gray-600">March 8, 2025</td>
                                 <td class="px-6 py-4">
-                                    <button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn">
+                                    <button class="text-sm text-white bg-green-600 hover:bg-green-700 font-medium transition-colors restore-btn px-3 py-1 rounded-lg">
                                         <i class="fas fa-undo-alt mr-1"></i> Restore
                                     </button>
                                 </td>
@@ -355,7 +233,7 @@
                             <i class="fas fa-chevron-left mr-1"></i>
                             <span class="hidden sm:inline">Previous</span>
                         </button>
-                        <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-white bg-purple-600 border border-purple-600 rounded-lg hover:bg-purple-700 transition-colors duration-200">
+                        <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-white bg-red-500 border border-red-500 rounded-lg hover:bg-red-600 transition-colors duration-200">
                             1
                         </button>
                         <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
@@ -381,7 +259,7 @@
             <p class="mb-6 text-gray-600">Are you sure you want to restore this vendor?</p>
             <div class="flex justify-center gap-4">
                 <button id="cancelRestoreVendor" class="px-6 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition">Cancel</button>
-                <button id="confirmRestoreVendor" class="px-6 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition">Restore</button>
+                <button id="confirmRestoreVendor" class="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">Restore</button>
             </div>
         </div>
     </div>
@@ -394,7 +272,7 @@
             <p class="mb-6 text-gray-600">Are you sure you want to restore the selected vendors?</p>
             <div class="flex justify-center gap-4">
                 <button id="cancelRestoreSelectedVendor" class="px-6 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition">Cancel</button>
-                <button id="confirmRestoreSelectedVendor" class="px-6 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition">Restore</button>
+                <button id="confirmRestoreSelectedVendor" class="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">Restore</button>
             </div>
         </div>
     </div>
