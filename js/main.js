@@ -1,15 +1,47 @@
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM Content Loaded - Starting navigation initialization');
     // Function to load HTML content
     async function loadHTML(url, containerId) {
         try {
-            // Always load from the project root
-            const adjustedUrl = '/tabulate/' + url.replace(/^\/+/,'');
+            console.log('Loading HTML:', url, 'into container:', containerId);
+            
+            // Get the current page's directory to build relative paths
+            const currentPath = window.location.pathname;
+            const currentDir = currentPath.substring(0, currentPath.lastIndexOf('/'));
+            
+            // Build the correct relative path
+            let adjustedUrl;
+            if (url.startsWith('../')) {
+                // If URL already has relative path, use it as is
+                adjustedUrl = url;
+            } else {
+                // Otherwise, build relative path from current directory
+                adjustedUrl = currentDir + '/' + url.replace(/^\/+/,'');
+            }
+            
+            console.log('Adjusted URL:', adjustedUrl);
+            
             const response = await fetch(adjustedUrl);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            const html = await response.text();
-            document.getElementById(containerId).innerHTML = html;
+            let html = await response.text();
+            
+            // Fix image paths in loaded HTML based on current page location
+            // If we're in a subdirectory, adjust image paths
+            if (currentDir !== '') {
+                const relativePath = currentDir.split('/').slice(0, -1).join('/') + '/images/';
+                html = html.replace(/src="images\//g, `src="${relativePath}images/`);
+            }
+            
+            const container = document.getElementById(containerId);
+            if (container) {
+                container.innerHTML = html;
+                console.log('Successfully loaded HTML into:', containerId);
+            } else {
+                console.error('Container not found:', containerId);
+            }
+            
             return Promise.resolve();
         } catch (error) {
             console.error('Error loading ' + url + ':', error);
@@ -117,6 +149,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize Desktop Dropdown Menu
     function initializeDesktopNav() {
+        console.log('Initializing desktop navigation...');
+        
         const projectButton = document.getElementById('projectButton');
         const dropdownMenu = document.getElementById('dropdownMenu');
         const salesButton = document.getElementById('salesButton');
@@ -126,6 +160,18 @@ document.addEventListener('DOMContentLoaded', function() {
         const accountsDropdownMenu = document.getElementById('accountsDropdownMenu');
         const automationButton = document.getElementById('automationButton');
         const automationDropdownMenu = document.getElementById('automationDropdownMenu');
+        
+        console.log('Navigation elements found:', {
+            projectButton: !!projectButton,
+            dropdownMenu: !!dropdownMenu,
+            salesButton: !!salesButton,
+            salesDropdownMenu: !!salesDropdownMenu,
+            financialButton: !!financialButton,
+            accountsButton: !!accountsButton,
+            accountsDropdownMenu: !!accountsDropdownMenu,
+            automationButton: !!automationButton,
+            automationDropdownMenu: !!automationDropdownMenu
+        });
 
         // Set active state based on current page
         const currentPage = window.location.pathname.split('/').pop();
@@ -186,36 +232,54 @@ document.addEventListener('DOMContentLoaded', function() {
         // for dropdown functionality and hiding.
 
         // Sales & Estimates Dropdown
-        tippy('#salesButton', {
-            content: salesDropdownMenu.innerHTML,
-            allowHTML: true,
-            interactive: true,
-            trigger: 'click',
-            placement: 'bottom-start',
-            animation: 'scale',
-            theme: 'light',
-            onShow(instance) {
-                instance.popper.addEventListener('mouseleave', () => {
-                    instance.hide();
+        if (salesButton && salesDropdownMenu) {
+            try {
+                tippy('#salesButton', {
+                    content: salesDropdownMenu.innerHTML,
+                    allowHTML: true,
+                    interactive: true,
+                    trigger: 'click',
+                    placement: 'bottom-start',
+                    animation: 'scale',
+                    theme: 'light',
+                    onShow(instance) {
+                        instance.popper.addEventListener('mouseleave', () => {
+                            instance.hide();
+                        });
+                    }
                 });
+                console.log('Sales dropdown initialized');
+            } catch (error) {
+                console.error('Error initializing sales dropdown:', error);
             }
-        });
+        } else {
+            console.warn('Sales button or dropdown menu not found');
+        }
 
         // Project & Dispatch Dropdown
-        tippy('#projectButton', {
-            content: dropdownMenu.innerHTML,
-            allowHTML: true,
-            interactive: true,
-            trigger: 'click',
-            placement: 'bottom-start',
-            animation: 'scale',
-            theme: 'light',
-            onShow(instance) {
-                instance.popper.addEventListener('mouseleave', () => {
-                    instance.hide();
+        if (projectButton && dropdownMenu) {
+            try {
+                tippy('#projectButton', {
+                    content: dropdownMenu.innerHTML,
+                    allowHTML: true,
+                    interactive: true,
+                    trigger: 'click',
+                    placement: 'bottom-start',
+                    animation: 'scale',
+                    theme: 'light',
+                    onShow(instance) {
+                        instance.popper.addEventListener('mouseleave', () => {
+                            instance.hide();
+                        });
+                    }
                 });
+                console.log('Project dropdown initialized');
+            } catch (error) {
+                console.error('Error initializing project dropdown:', error);
             }
-        });
+        } else {
+            console.warn('Project button or dropdown menu not found');
+        }
 
         // Financial Dropdown
         const financialDropdownMenu = document.getElementById('financialDropdownMenu');
@@ -275,11 +339,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize Mobile Side Navigation and Dropdowns
     function initializeMobileNav() {
+        console.log('Initializing mobile navigation...');
+        
         const sideNav = document.getElementById('sideNav');
         const sideNavOverlay = document.getElementById('sideNavOverlay');
         const closeSideNavBtn = document.getElementById('closeSideNav');
         // Use the correct burger menu button id from header
         const openSideNavBtn = document.getElementById('burgerMenuBtn');
+        
+        console.log('Mobile navigation elements found:', {
+            sideNav: !!sideNav,
+            sideNavOverlay: !!sideNavOverlay,
+            closeSideNavBtn: !!closeSideNavBtn,
+            openSideNavBtn: !!openSideNavBtn
+        });
 
         // Open side nav
         if (openSideNavBtn && sideNav && sideNavOverlay) {
@@ -303,30 +376,11 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Dropdown logic for each main section
-        const sections = [
-            {
-                headerSelector: '.text-sky-500.font-semibold.mb-2', // Sales & Estimates
-                submenuSelector: '.text-sky-500.font-semibold.mb-2 + .pl-2'
-            },
-            {
-                headerSelector: '.text-white.font-semibold.mb-2 i.fa-cogs', // Project & Dispatch
-                submenuSelector: '.text-white.font-semibold.mb-2 i.fa-cogs'
-            },
-            {
-                headerSelector: '.text-white.font-semibold.mb-2 i.fa-chart-line', // Financial
-                submenuSelector: '.text-white.font-semibold.mb-2 i.fa-chart-line'
-            },
-            {
-                headerSelector: '.text-white.font-semibold.mb-2 i.fa-users', // Accounts
-                submenuSelector: '.text-white.font-semibold.mb-2 i.fa-users'
-            }
-        ];
-
-        // Improved: Find all px-2 py-1 blocks and add toggle to their header
+        // Mobile navigation dropdown functionality
         document.querySelectorAll('#sideNav .px-2.py-1').forEach((section, idx) => {
             const header = section.querySelector('div.font-semibold');
             const submenu = section.querySelector('div.pl-2');
+            
             if (header && submenu) {
                 // Add a chevron if not present
                 if (!header.querySelector('.fa-chevron-down')) {
@@ -334,16 +388,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     chevron.className = 'fas fa-chevron-down ml-2';
                     header.appendChild(chevron);
                 }
+                
                 // Start collapsed except first section
                 if (idx !== 0) {
                     submenu.style.display = 'none';
                 } else {
                     submenu.style.display = 'block';
                 }
+                
                 header.style.cursor = 'pointer';
                 header.style.display = 'flex';
                 header.style.alignItems = 'center';
                 header.style.justifyContent = 'flex-start';
+                
                 header.addEventListener('click', () => {
                     const isOpen = submenu.style.display !== 'none';
                     // Collapse all
@@ -357,12 +414,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Load header and navigation
     Promise.all([
-        loadHTML('nav/header.html', 'header-container'),
-        loadHTML('nav/navigation.html', 'nav-container')
+        loadHTML('../nav/header.html', 'header-container'),
+        loadHTML('../nav/navigation.html', 'nav-container')
     ]).then(() => {
+        console.log('Navigation loaded successfully');
+        
         // Initialize navigation functionality after loading
-        initializeDesktopNav();
-        initializeMobileNav();
+        try {
+            initializeDesktopNav();
+            console.log('Desktop navigation initialized');
+        } catch (error) {
+            console.error('Error initializing desktop navigation:', error);
+        }
+        
+        try {
+            initializeMobileNav();
+            console.log('Mobile navigation initialized');
+        } catch (error) {
+            console.error('Error initializing mobile navigation:', error);
+        }
         
         // Initialize other functionality
         initializeCalendar();

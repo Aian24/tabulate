@@ -111,18 +111,8 @@
             </div>
         </div>
     </main>
-    <script>
-    // Load header and navigation
-    fetch('../nav/header.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('header-container').innerHTML = data;
-        });
-    fetch('../nav/navigation.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('nav-container').innerHTML = data;
-        });
-    </script>
+        <!-- Load JavaScript files -->
+        <script src="../js/main.js"></script>
+        <script src="../js/customerlist.js"></script>
 </body>
 </html>
