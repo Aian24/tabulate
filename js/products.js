@@ -594,7 +594,7 @@ function renderDeletedProductsTable() {
       </td>
       <td class="px-6 py-4 text-sm text-gray-900">${product.deletedDate}</td>
       <td class="px-6 py-4">
-        <button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn"><i class="fas fa-undo-alt mr-1"></i> Restore</button>
+        <button class="px-2 py-1 text-xs font-medium text-white bg-green-500 rounded hover:bg-green-600 transition-colors restore-btn"><i class="fas fa-undo mr-1"></i>Restore</button>
       </td>
     `;
     tbody.appendChild(tr);
@@ -625,7 +625,7 @@ function renderDeletedProductsMobileCards() {
         <div><span class="text-gray-500">Deleted Date:</span><span class="text-gray-900">${product.deletedDate}</span></div>
       </div>
       <div class="mt-1 flex justify-between items-center">
-        <button class="text-xs text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn"><i class="fas fa-undo-alt mr-1"></i> Restore</button>
+        <button class="flex-1 px-3 py-1 text-xs font-medium text-white bg-green-500 rounded hover:bg-green-600 transition-colors restore-btn"><i class="fas fa-undo mr-1"></i>Restore</button>
       </div>
     `;
     container.appendChild(card);
@@ -809,7 +809,7 @@ function renderDeletedServicesTable() {
       <td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">${service.status}</span></td>
       <td class="px-6 py-4 text-sm text-gray-900">${service.dateCreated}</td>
       <td class="px-6 py-4">
-        <button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn"><i class="fas fa-undo-alt mr-1"></i> Restore</button>
+        <button class="px-2 py-1 text-xs font-medium text-white bg-green-500 rounded hover:bg-green-600 transition-colors restore-btn"><i class="fas fa-undo mr-1"></i>Restore</button>
       </td>
     `;
     tbody.appendChild(tr);
@@ -841,7 +841,7 @@ function renderDeletedServicesMobileCards() {
         <div><span class="text-gray-500">Date Created:</span><span class="text-gray-900 ml-1">${service.dateCreated}</span></div>
       </div>
       <div class="mt-1 flex justify-between items-center">
-        <button class="text-xs text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn"><i class="fas fa-undo-alt mr-1"></i> Restore</button>
+        <button class="flex-1 px-3 py-1 text-xs font-medium text-white bg-green-500 rounded hover:bg-green-600 transition-colors restore-btn"><i class="fas fa-undo mr-1"></i>Restore</button>
       </div>
     `;
     container.appendChild(card);

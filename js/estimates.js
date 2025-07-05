@@ -481,7 +481,7 @@ if (window.location.pathname.includes('deleted-estimates.html')) {
                 <td class="px-6 py-4 text-sm text-gray-900">${est.address}</td>
                 <td class="px-6 py-4 text-sm text-gray-900">${est.category}</td>
                 <td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusColor}">${est.status}</span></td>
-                <td class="px-6 py-4"><button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn" data-idx="${idx}"><i class="fas fa-undo-alt mr-1"></i> Restore</button></td>
+                <td class="px-6 py-4"><button class="text-sm bg-green-600 text-white rounded-lg px-3 py-1 hover:bg-green-700 font-medium transition-colors restore-btn" data-idx="${idx}"><i class="fas fa-undo-alt mr-1"></i> Restore</button></td>
             `;
             tbody.appendChild(tr);
         });
@@ -535,7 +535,7 @@ if (window.location.pathname.includes('deleted-estimates.html')) {
                 </div>
                 <div class="mt-1 flex justify-between items-center">
                     <div><span class="text-gray-500 text-xs">Status:</span><span class="text-gray-900 text-xs">${est.status}</span></div>
-                    <button class="text-xs text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn" data-idx="${idx}"><i class="fas fa-undo-alt mr-1"></i> Restore</button>
+                    <button class="text-xs bg-green-600 text-white rounded-lg px-3 py-1 hover:bg-green-700 font-medium transition-colors restore-btn" data-idx="${idx}"><i class="fas fa-undo-alt mr-1"></i> Restore</button>
                 </div>
             `;
             container.appendChild(card);

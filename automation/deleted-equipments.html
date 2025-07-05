@@ -18,7 +18,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </head>
-<body class="min-h-screen bg-gray-50">
+<body class="min-h-screen bg-sky-50">
     <!-- Include header -->
     <div id="header-container"></div>
 
@@ -26,7 +26,7 @@
     <div id="nav-container"></div>
 
     <!-- Main content -->
-    <main class="mobile-container">
+    <main class="container-fluid mx-auto px-4 md:px-6 py-2 md:py-4 relative-z-1">
         <!-- Mobile Header -->
         <div class="mobile-header md:hidden">
             <div class="flex items-center justify-between mb-2">
@@ -50,57 +50,48 @@
             </div>
         </div>
 
-        <!-- Desktop Header (hidden on mobile) -->
-        <div class="hidden md:block container-fluid mx-auto px-4 md:px-6 py-2 md:py-4">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
-                <div class="flex items-center gap-4">
-                    <button onclick="window.location.href='equipment.html'" class="back-button text-sm px-4 py-2 text-white rounded-md flex items-center gap-2">
-                        <i class="fas fa-arrow-left"></i>Back to List
-                    </button>
-                    <h1 class="text-xl md:text-2xl font-bold text-gray-800">Deleted Equipments</h1>
-                </div>
-                <div class="flex items-center gap-2">
-                    <div class="relative">
-                        <button id="actionsDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
-                            <span>Actions</span>
-                            <i class="fas fa-chevron-down ml-1"></i>
-                        </button>
-                        <div id="actionsMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10">
-                            <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                                <i class="fas fa-trash-alt w-5"></i>
-                                <span>Delete</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+        <!-- Desktop Header -->
+        <div class="hidden md:flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
+            <div class="flex items-center gap-4">
+                <button onclick="window.location.href='equipment.html'" class="px-4 py-2 bg-purple-600 text-white rounded-lg shadow hover:bg-purple-700 flex items-center gap-2 transition font-medium">
+                    <i class="fas fa-arrow-left"></i> Back to List
+                </button>
+                <h1 class="text-2xl font-bold text-gray-800">Deleted Equipments</h1>
+            </div>
+            <div class="flex items-center gap-2">
+                <!-- Restore Selected button will be shown/hidden by JavaScript -->
             </div>
         </div>
 
-        <!-- Controls Section -->
-        <div class="hidden md:flex flex-col md:flex-row items-center justify-between gap-4 mb-6 container-fluid mx-auto px-4 md:px-6">
+        <!-- Desktop Controls Section -->
+        <div class="hidden md:flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
             <!-- Left side: Controls -->
             <div class="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
                 <!-- Show entries dropdown -->
                 <div class="hidden md:flex items-center mr-4">
-                    <label for="entries" class="text-sm text-gray-600 mr-2">Show entries:</label>
-                    <select id="entries" class="border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <label class="text-sm text-gray-600 mr-2">Show entries:</label>
+                    <select class="pagination-entries-select border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
                         <option value="10">10</option>
                         <option value="25">25</option>
-                        <option value="50">50</option>
+                        <option value="50" selected>50</option>
                         <option value="100">100</option>
                     </select>
                 </div>
-                <!-- Restore Selected button -->
+                <!-- Action buttons -->
                 <div class="flex flex-wrap justify-center md:justify-start gap-2">
                     <button id="restoreSelectedBtn" class="px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors hidden">
                         <i class="fas fa-undo-alt mr-1"></i> Restore Selected
+                    </button>
+                    <button id="openFilter" class="calendar-button border-2 border-gray-400 text-gray-700 flex items-center gap-1 px-2 py-1 rounded-lg text-xs">
+                        <i class="fas fa-filter"></i>
+                        <span>Filter</span>
                     </button>
                 </div>
             </div>
             <!-- Right side: Search -->
             <div id="search-container" class="relative w-full md:w-auto">
                 <input type="search" 
-                       placeholder="Search..." 
+                       placeholder="Search deleted equipments..." 
                        class="w-full h-[42px] pl-10 pr-4 rounded-lg border border-green-500 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300"
                 />
                 <button class="absolute left-3 top-1/2 -translate-y-1/2 text-blue-500 hover:text-blue-600 transition-colors">
@@ -109,120 +100,115 @@
             </div>
         </div>
 
-        <!-- Mobile Deleted Equipments List -->
-        <div class="md:hidden pb-20">
-            <div class="mobile-card">
-                <div class="mobile-table-header">
-                    <h2 class="text-white font-semibold">Deleted Equipments</h2>
-                    <p class="text-white/80 text-sm mt-1">2 equipments found</p>
+        <!-- Mobile View -->
+        <div class="md:hidden space-y-4">
+            <!-- Mobile Header -->
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <button onclick="window.location.href='equipment.html'" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <h1 class="text-xl font-bold text-gray-800">Deleted Equipments</h1>
                 </div>
-                <!-- Mobile Deleted Equipment Cards -->
-                <div class="p-3 space-y-2">
-                    <!-- Example Card 1 -->
-                    <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
-                        <div class="flex items-center justify-between mb-1">
-                            <div class="flex items-center gap-3">
-                                <input type="checkbox" class="equipment-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
-                                <div class="w-8 h-8 bg-gradient-to-br from-red-400 to-pink-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">HS</div>
-                                <div>
-                                    <h3 class="font-semibold text-gray-900 text-sm">Hose</h3>
-                                    <p class="text-xs text-gray-500">Code: 2234</p>
-                                </div>
-                            </div>
-                            <span class="mobile-status bg-green-100 text-green-800 text-xs">On Stock</span>
-                        </div>
-                        <div class="space-y-1 text-xs">
-                             <div><span class="text-gray-500">Specification:</span><span class="text-gray-900">PVC Hose Connector</span></div>
-                            <div><span class="text-gray-500">Status:</span><span class="text-gray-900">Active</span></div>
-                        </div>
-                        <div class="mt-1 flex justify-between items-center">
-                            <div><span class="text-gray-500 text-xs">Acquisition Date:</span><span class="text-gray-900 text-xs">March 14, 2025</span></div>
-                            <button class="text-xs text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn"><i class="fas fa-undo-alt mr-1"></i> Restore</button>
-                        </div>
+                <div class="flex gap-2">
+                    <button id="restoreSelectedBtnMobile" class="px-3 py-1 text-xs font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors hidden">
+                        <i class="fas fa-undo-alt mr-1"></i> Restore Selected
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Search -->
+            <div class="relative">
+                <input type="search" 
+                       placeholder="Search deleted equipments..." 
+                       class="w-full h-12 pl-10 pr-4 rounded-lg border border-green-500 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300"
+                />
+                <button class="absolute left-3 top-1/2 -translate-y-1/2 text-blue-500 hover:text-blue-600 transition-colors">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Deleted Equipment Cards -->
+            <div class="space-y-3">
+                <!-- Example Card 1 -->
+                <div class="bg-white rounded-lg shadow-sm border border-red-200 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-semibold text-gray-900">Hose</h3>
+                        <span class="text-sm text-red-600 font-medium">Deleted</span>
                     </div>
-                    <!-- Example Card 2 -->
-                    <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
-                        <div class="flex items-center justify-between mb-1">
-                            <div class="flex items-center gap-3">
-                                <input type="checkbox" class="equipment-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
-                                <div class="w-8 h-8 bg-gradient-to-br from-blue-400 to-green-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">12</div>
-                                <div>
-                                    <h3 class="font-semibold text-gray-900 text-sm">12345</h3>
-                                    <p class="text-xs text-gray-500">Code: 12345</p>
-                                </div>
-                            </div>
-                            <span class="mobile-status bg-yellow-100 text-yellow-800 text-xs">Borrowed</span>
-                        </div>
-                        <div class="space-y-1 text-xs">
-                             <div><span class="text-gray-500">Specification:</span><span class="text-gray-900">Test Only</span></div>
-                            <div><span class="text-gray-500">Status:</span><span class="text-gray-900">Active</span></div>
-                        </div>
-                        <div class="mt-1 flex justify-between items-center">
-                            <div><span class="text-gray-500 text-xs">Acquisition Date:</span><span class="text-gray-900 text-xs">March 13, 2025</span></div>
-                            <button class="text-xs text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn"><i class="fas fa-undo-alt mr-1"></i> Restore</button>
-                        </div>
+                    <div class="space-y-1 text-sm text-gray-600">
+                        <div><span class="font-medium">Code:</span> 2234</div>
+                        <div><span class="font-medium">Specification:</span> PVC Hose Connector</div>
+                        <div><span class="font-medium">Status:</span> On Stock</div>
+                        <div><span class="font-medium">Active:</span> Active</div>
+                        <div><span class="font-medium">Acquisition Date:</span> March 14, 2025</div>
+                    </div>
+                    <div class="flex gap-2 mt-3">
+                        <button class="flex-1 px-3 py-1 text-xs font-medium text-white bg-green-500 rounded hover:bg-green-600 transition-colors restore-btn">
+                            <i class="fas fa-undo mr-1"></i>Restore
+                        </button>
+                    </div>
+                </div>
+                <!-- Example Card 2 -->
+                <div class="bg-white rounded-lg shadow-sm border border-red-200 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-semibold text-gray-900">12345</h3>
+                        <span class="text-sm text-red-600 font-medium">Deleted</span>
+                    </div>
+                    <div class="space-y-1 text-sm text-gray-600">
+                        <div><span class="font-medium">Code:</span> 12345</div>
+                        <div><span class="font-medium">Specification:</span> Test Only</div>
+                        <div><span class="font-medium">Status:</span> Borrowed</div>
+                        <div><span class="font-medium">Active:</span> Active</div>
+                        <div><span class="font-medium">Acquisition Date:</span> March 13, 2025</div>
+                    </div>
+                    <div class="flex gap-2 mt-3">
+                        <button class="flex-1 px-3 py-1 text-xs font-medium text-white bg-green-500 rounded hover:bg-green-600 transition-colors restore-btn">
+                            <i class="fas fa-undo mr-1"></i>Restore
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Mobile Action Buttons -->
-        <div class="md:hidden mobile-actions">
-            <div class="flex gap-3">
-                <button onclick="window.location.href='equipment.html'" class="mobile-button flex-1 bg-gray-500 text-white flex items-center justify-center gap-2 text-sm py-2">
-                    <i class="fas fa-arrow-left text-xs"></i>
-                    <span>Back</span>
-                </button>
-                <button id="restoreSelectedBtnMobile" class="mobile-button flex-1 bg-purple-600 text-white flex items-center justify-center gap-2 text-sm py-2">
-                    <i class="fas fa-undo-alt text-xs"></i>
-                    <span>Restore Selected</span>
-                </button>
+        <!-- Desktop Table View -->
+        <div class="hidden md:block bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
+            <div class="overflow-x-auto">
+                <table class="w-full min-w-[800px]">
+                    <thead class="bg-gradient-to-r from-red-500 to-red-600 text-white">
+                        <tr>
+                            <th class="px-6 py-4 text-left">
+                                <input type="checkbox" id="selectAllDeleted" class="w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold">Name</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold">Specification</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold">Equipment Code</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold">Status</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold">Active</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold">Acquisition Date</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        <tr><td class="px-6 py-4"><input type="checkbox" class="equipment-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500"></td><td class="px-6 py-4 text-sm font-medium text-gray-900">Hose</td><td class="px-6 py-4 text-sm text-gray-600">PVC Hose Connector</td><td class="px-6 py-4 text-sm text-gray-600">2234</td><td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">On Stock</span></td><td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span></td><td class="px-6 py-4 text-sm text-gray-600">March 14, 2025</td><td class="px-6 py-4"><button class="px-2 py-1 text-xs font-medium text-white bg-green-500 rounded hover:bg-green-600 transition-colors restore-btn"><i class="fas fa-undo mr-1"></i>Restore</button></td></tr>
+                        <tr><td class="px-6 py-4"><input type="checkbox" class="equipment-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500"></td><td class="px-6 py-4 text-sm font-medium text-gray-900">12345</td><td class="px-6 py-4 text-sm text-gray-600">Test Only</td><td class="px-6 py-4 text-sm text-gray-600">12345</td><td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Borrowed</span></td><td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span></td><td class="px-6 py-4 text-sm text-gray-600">March 13, 2025</td><td class="px-6 py-4"><button class="px-2 py-1 text-xs font-medium text-white bg-green-500 rounded hover:bg-green-600 transition-colors restore-btn"><i class="fas fa-undo mr-1"></i>Restore</button></td></tr>
+                    </tbody>
+                </table>
             </div>
-        </div>
-
-        <!-- Desktop Table content -->
-        <div class="hidden md:block container-fluid mx-auto px-4 md:px-6">
-            <div class="bg-white rounded-xl overflow-hidden">
-                <div class="overflow-x-auto">
-                    <table class="w-full min-w-[800px] rounded-xl">
-                        <thead class="bg-gradient-to-r from-sky-500 to-blue-600 text-white">
-                            <tr>
-                                <th class="px-6 py-4 text-left"><input type="checkbox" id="selectAllDeleted" class="w-4 h-4 text-purple-600 rounded focus:ring-purple-500"></th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold">Name</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold">Specification</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold">Equipment Code</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold">Status</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold">Active</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold">Acquisition Date</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-100">
-                            <tr><td class="px-6 py-4"><input type="checkbox" class="equipment-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500"></td><td class="px-6 py-4 text-sm font-medium text-gray-900">Hose</td><td class="px-6 py-4 text-sm text-gray-600">PVC Hose Connector</td><td class="px-6 py-4 text-sm text-gray-600">2234</td><td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">On Stock</span></td><td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span></td><td class="px-6 py-4 text-sm text-gray-600">March 14, 2025</td><td class="px-6 py-4"><button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn"><i class="fas fa-undo-alt mr-1"></i> Restore</button></td></tr>
-                            <tr><td class="px-6 py-4"><input type="checkbox" class="equipment-checkbox w-4 h-4 text-purple-600 rounded focus:ring-purple-500"></td><td class="px-6 py-4 text-sm font-medium text-gray-900">12345</td><td class="px-6 py-4 text-sm text-gray-600">Test Only</td><td class="px-6 py-4 text-sm text-gray-600">12345</td><td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Borrowed</span></td><td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span></td><td class="px-6 py-4 text-sm text-gray-600">March 13, 2025</td><td class="px-6 py-4"><button class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors restore-btn"><i class="fas fa-undo-alt mr-1"></i> Restore</button></td></tr>
-                        </tbody>
-                    </table>
+            
+            <!-- Pagination -->
+            <div class="bg-gray-50 px-4 md:px-6 py-4 flex flex-col md:flex-row justify-between items-center border-t border-gray-100 gap-4">
+                <div class="flex items-center gap-2 text-sm text-gray-600 order-2 md:order-1">
+                    Showing <span class="font-medium">1</span> to <span class="font-medium">1</span> of <span class="font-medium">1</span> entries
                 </div>
-                
-                <!-- Pagination -->
-                <div class="bg-gray-50 px-4 md:px-6 py-4 flex flex-col md:flex-row justify-between items-center border-t border-gray-100 gap-4 rounded-b-xl">
-                    <div class="flex items-center gap-2 text-sm text-gray-600 order-2 md:order-1">
-                        
-                        Showing <span class="font-medium">1</span> to <span class="font-medium">1</span> of <span class="font-medium">1</span> entries
-                    </div>
-                    <div class="flex space-x-2 order-1 md:order-2">
-                        <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
-                            <i class="fas fa-chevron-left mr-1"></i>
-                            <span class="hidden sm:inline">Previous</span>
-                        </button>
-                        <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-white bg-purple-600 border border-purple-600 rounded-lg hover:bg-purple-700 transition-colors duration-200">
-                            1
-                        </button>
-                        <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
-                            <span class="hidden sm:inline">Next</span>
-                            <i class="fas fa-chevron-right ml-1"></i>
-                        </button>
-                    </div>
+                <div class="flex items-center gap-2 order-1 md:order-2">
+                    <button class="px-3 py-1 text-sm text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        Previous
+                    </button>
+                    <button class="px-3 py-1 text-sm text-white bg-red-500 border border-red-500 rounded-lg">1</button>
+                    <button class="px-3 py-1 text-sm text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        Next
+                    </button>
                 </div>
             </div>
         </div>

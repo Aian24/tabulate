@@ -27,47 +27,77 @@
 
     <!-- Main content -->
     <main class="container-fluid mx-auto px-4 md:px-6 py-2 md:py-4" style="position: relative; z-index: 1;">
+      <!-- Mobile Controls and Card List (Mobile Only) -->
+      <div class="md:hidden block">
+        <div class="p-2">
+          <div class="flex justify-between items-center mb-4">
+            <span class="text-lg font-semibold">Customer</span>
+            <div class="relative inline-block text-left">
+              <button id="mobileMoreBtn" type="button" class="inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700">
+                More
+                <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="mb-4 flex items-center">
+            <input id="mobileSearchInput" type="text" placeholder="Search" class="flex-1 px-3 py-2 border border-gray-300 rounded-md text-sm mr-2" />
+            <button id="mobileFilterBtn" class="bg-blue-100 px-3 py-2 rounded-md text-blue-700 flex items-center"><i class="fas fa-filter mr-1"></i></button>
+          </div>
+          <div class="flex space-x-2 mb-4 justify-center">
+            <button id="mobileDeletedBtn" class="bg-red-100 text-red-700 px-4 py-1 rounded-md text-sm">Deleted</button>
+            <button id="mobileCreateBtn" class="bg-blue-600 text-white px-4 py-1 rounded-md text-sm">Create +</button>
+            <button id="mobileActionsBtn" class="bg-blue-100 text-blue-700 px-4 py-1 rounded-md text-sm">Actions</button>
+          </div>
+        </div>
+        <div class="mobile-card-view max-w-sm mx-auto space-y-3 px-2">
+          <!-- Mobile cards will be rendered here by JS -->
+        </div>
+      </div>
+
+      <!-- Desktop/Table Controls and Table (hidden on mobile) -->
+      <div class="hidden md:block">
         <!-- Combined header with search -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
-            <div class="flex items-center gap-4">
-                <h1 class="text-xl md:text-2xl font-bold text-gray-800">Customers</h1>
+          <div class="flex items-center gap-4">
+            <h1 class="text-xl md:text-2xl font-bold text-gray-800">Customers</h1>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="relative">
+              <button id="actionsDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
+                <span>Actions</span>
+                <i class="fas fa-chevron-down ml-1"></i>
+              </button>
+              <div id="actionsMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
+                <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                  <i class="fas fa-trash-alt w-5"></i>
+                  <span>Delete</span>
+                </button>
+              </div>
             </div>
-            <div class="flex items-center gap-2">
-                <div class="relative">
-                    <button id="actionsDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
-                        <span>Actions</span>
-                        <i class="fas fa-chevron-down ml-1"></i>
-                    </button>
-                    <div id="actionsMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
-                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                            <i class="fas fa-trash-alt w-5"></i>
-                            <span>Delete</span>
-                        </button>
-                    </div>
-                </div>
-                <div class="relative">
-                    <button id="moreDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
-                        <span>More</span>
-                        <i class="fas fa-chevron-down ml-1"></i>
-                    </button>
-                    <div id="moreMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
-                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                            <i class="fas fa-cog w-5"></i>
-                            <span>Settings</span>
-                        </button>
-                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                            <i class="fas fa-chart-bar w-5"></i>
-                            <span>Report</span>
-                        </button>
-                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                            <i class="fas fa-history w-5"></i>
-                            <span>Audit Trail</span>
-                        </button>
-                    </div>
-                </div>
+            <div class="relative">
+              <button id="moreDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
+                <span>More</span>
+                <i class="fas fa-chevron-down ml-1"></i>
+              </button>
+              <div id="moreMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
+                <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                  <i class="fas fa-cog w-5"></i>
+                  <span>Settings</span>
+                </button>
+                <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                  <i class="fas fa-chart-bar w-5"></i>
+                  <span>Report</span>
+                </button>
+                <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                  <i class="fas fa-history w-5"></i>
+                  <span>Audit Trail</span>
+                </button>
+              </div>
             </div>
+          </div>
         </div>
-
         <!-- Controls Section -->
         <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
             <!-- Left side: Controls -->
@@ -78,17 +108,17 @@
                     <select id="entries" class="border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="10">10</option>
                         <option value="25">25</option>
-                        <option value="50">50</option>
+                        <option value="50" selected>50</option>
                         <option value="100">100</option>
                     </select>
                 </div>
                 <!-- Action buttons -->
                 <div class="flex flex-wrap justify-center md:justify-start gap-2">
                     <button id="createCustomerBtn" class="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors" onclick="window.location.href='create-customer.html'">
-                        <i class="fas fa-user-plus mr-1"></i> Create Customer
+                        <i class="fas fa-user-plus mr-1"></i> Create
                     </button>
                     <button id="deletedCustomersBtn" class="px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 transition-colors" onclick="window.location.href='deleted-customers.html'">
-                        <i class="fas fa-trash-alt mr-1"></i> Deleted Customers
+                        <i class="fas fa-trash-alt mr-1"></i> Deleted
                     </button>
                     <button id="openFilter" class="calendar-button border-2 border-gray-400 text-gray-700 flex items-center gap-1 px-3 py-1 rounded-lg">
                         <i class="fas fa-filter"></i>
@@ -714,7 +744,7 @@
                 </div>
             </div>
         </div>
-    </main>
+    </div>
 
     <!-- Modal for viewing dispatch details -->
     <div id="dispatchModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
@@ -727,17 +757,7 @@
         </div>
     </div>
 
-    <!-- Toast Notification -->
-    <div class="toast fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 flex items-center space-x-3 border-l-4 border-green-500">
-        <i class="fas fa-check-circle text-green-500 text-xl"></i>
-        <div>
-            <h4 class="font-medium text-gray-800">Success!</h4>
-            <p class="text-sm text-gray-600">New dispatch has been assigned to Team A</p>
-        </div>
-        <button class="text-gray-400 hover:text-gray-600 ml-4">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
+   
 
     <!-- Date Range Modal -->
     <div id="dateRangeModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
@@ -770,11 +790,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Mobile Card View -->
-    <div class="mobile-card-view hidden md:hidden max-w-sm mx-auto">
-        <!-- Mobile cards will be rendered here -->
-                                </div>
 
     <!-- Invoice Details Modal -->
     <div id="invoiceDetailsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
