@@ -24,13 +24,15 @@
             <!-- Header -->
             <div class="p-4 border-b border-gray-100 bg-gradient-to-r from-purple-50 to-indigo-50">
                 <div class="flex justify-between items-center">
-                    <div>
-                        <h1 class="text-xl font-bold text-gray-800">Create New Estimate</h1>
-                        <p class="text-sm text-gray-600 mt-0.5">Create a new estimate for your customer</p>
+                    <div class="flex items-center gap-4">
+                        <button onclick="window.location.href='estimates.html'" class="back-button text-sm px-4 py-2 text-white rounded-md flex items-center gap-2">
+                            <i class="fas fa-arrow-left"></i>Back
+                        </button>
+                        <div>
+                            <h1 class="text-xl font-bold text-gray-800">Create New Estimate</h1>
+                            <p class="text-sm text-gray-600 mt-0.5">Create a new estimate for your customer</p>
+                        </div>
                     </div>
-                    <button onclick="window.location.href='estimates.html'" class="back-button text-sm px-4 py-2 text-white rounded-md flex items-center gap-2">
-                        <i class="fas fa-arrow-left"></i>Back
-                    </button>
                 </div>
             </div>
 
@@ -118,7 +120,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <button type="button" id="addItem" class="mt-4 px-4 py-2 bg-purple-500 text-white rounded-md hover:bg-purple-600 transition-colors text-sm">
+                    <button type="button" id="addItem" class="mt-4 px-4 py-2 bg-purple-500 text-white rounded-md hover:bg-purple-600 transition-colors text-sm flex items-center gap-2">
                         <i class="fas fa-plus mr-2"></i>Add Item
                     </button>
                 </div>
@@ -156,12 +158,12 @@
                 </div>
 
                 <!-- Form Actions -->
-                <div class="flex justify-end gap-2 p-4 bg-gray-50">
-                    <button type="button" onclick="window.location.href='estimates.html'" class="text-sm px-3 py-1.5 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors">
-                        Cancel
+                <div class="flex justify-start gap-2 p-4 bg-gray-50">
+                    <button type="button" onclick="window.location.href='estimates.html'" class="text-sm px-3 py-1.5 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors flex items-center gap-2">
+                        <i class="fas fa-times"></i> Cancel
                     </button>
-                    <button type="submit" class="submit-button text-sm px-4 py-2 text-white rounded-md">
-                        Create Estimate
+                    <button type="submit" class="submit-button text-sm px-4 py-2 text-white rounded-md flex items-center gap-2">
+                        <i class="fas fa-save"></i> Create Estimate
                     </button>
                 </div>
             </form>

@@ -52,31 +52,18 @@
             <!-- Basic Information Card -->
             <div class="bg-white rounded-2xl shadow-lg p-8 border border-blue-100">
                 <h2 class="text-xl font-bold text-blue-700 mb-6 flex items-center gap-2">
-                    <i class="fas fa-info-circle text-blue-400"></i> Basic Information
+                    <i class="fas fa-info-circle text-blue-400"></i> Team Details
                 </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Team Name <span class="text-red-500">*</span></label>
+                <!-- First row: Name and Team Lead -->
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="w-full md:w-1/2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Name <span class="text-red-500">*</span></label>
                         <input type="text" name="teamName" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter team name"/>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Default Service <span class="text-red-500">*</span></label>
-                        <select name="defaultService" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                            <option value="">Select a service</option>
-                            <option value="lawn-mowing">Lawn Mowing</option>
-                            <option value="weed-control">Weed Control</option>
-                            <option value="office-cleaning">Office Cleaning</option>
-                            <option value="plumbing-repair">Plumbing Repair</option>
-                            <option value="electrical-wiring">Electrical Wiring</option>
-                            <option value="house-painting">House Painting</option>
-                            <option value="roofing-installation">Roofing Installation</option>
-                            <option value="garden-maintenance">Garden Maintenance</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Team Lead <span class="text-red-500">*</span></label>
+                    <div class="w-full md:w-1/2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Select a Team Lead <span class="text-red-500">*</span></label>
                         <select name="teamLead" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                            <option value="">Select team lead</option>
+                            <option value="">Select a team lead</option>
                             <option value="john-smith">John Smith</option>
                             <option value="sarah-johnson">Sarah Johnson</option>
                             <option value="mike-davis">Mike Davis</option>
@@ -87,177 +74,44 @@
                             <option value="alex-rodriguez">Alex Rodriguez</option>
                         </select>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
-                        <select name="status" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
-                        </select>
+                </div>
+                <!-- Second row: Total Rate and Default Service -->
+                <div class="flex flex-col md:flex-row gap-6 mt-6">
+                    <div class="w-full md:w-1/2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Total Rate</label>
+                        <input type="text" id="totalRateInput" class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-gray-100" value="0.00" readonly />
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Team Description</label>
-                        <textarea name="description" rows="3" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Describe the team's purpose and responsibilities"></textarea>
+                    <div class="w-full md:w-1/2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Please Select Team Default Service</label>
+                        <input type="text" name="defaultService" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Search for a service..."/>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Team Photo</label>
-                        <input type="file" name="teamPhoto" accept="image/*" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"/>
+                </div>
+                <!-- Last row: Select Members -->
+                <div class="mt-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Select Members</label>
+                    <div id="membersCheckboxList" class="flex flex-col gap-2">
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="members[]" value="renitas" data-rate="1.00" class="form-checkbox h-5 w-5 text-blue-600">
+                            <span class="ml-2 flex items-center"><span class="inline-block w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center font-bold mr-2">R</span>Renitas<span class="ml-1 text-gray-500">($1.00)</span></span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="members[]" value="john-smith" data-rate="2.00" class="form-checkbox h-5 w-5 text-blue-600">
+                            <span class="ml-2 flex items-center"><span class="inline-block w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center font-bold mr-2">J</span>John Smith<span class="ml-1 text-gray-500">($2.00)</span></span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="members[]" value="sarah-johnson" data-rate="1.50" class="form-checkbox h-5 w-5 text-blue-600">
+                            <span class="ml-2 flex items-center"><span class="inline-block w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center font-bold mr-2">S</span>Sarah Johnson<span class="ml-1 text-gray-500">($1.50)</span></span>
+                        </label>
                     </div>
                 </div>
             </div>
 
-            <!-- Team Members Card -->
-            <div class="bg-white rounded-2xl shadow-lg p-8 border border-blue-100">
-                <h2 class="text-xl font-bold text-blue-700 mb-6 flex items-center gap-2">
-                    <i class="fas fa-users text-blue-400"></i> Team Members
-                </h2>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full text-sm mb-4" id="teamMembersTable">
-                        <thead>
-                            <tr class="bg-blue-500 text-white">
-                                <th class="px-4 py-2 text-left">Member Name</th>
-                                <th class="px-4 py-2 text-left">Role</th>
-                                <th class="px-4 py-2 text-left">Contact</th>
-                                <th class="px-4 py-2 text-left">Daily Rate</th>
-                                <th class="px-4 py-2 text-left">Status</th>
-                                <th class="px-4 py-2 text-left">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="bg-gray-50">
-                                <td><input type="text" name="members[0][name]" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Member name"/></td>
-                                <td>
-                                    <select name="members[0][role]" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                        <option value="member">Member</option>
-                                        <option value="team-lead">Team Lead</option>
-                                        <option value="supervisor">Supervisor</option>
-                                    </select>
-                                </td>
-                                <td><input type="email" name="members[0][contact]" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Email"/></td>
-                                <td><input type="number" name="members[0][rate]" step="0.01" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="0.00"/></td>
-                                <td>
-                                    <select name="members[0][status]" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                        <option value="active">Active</option>
-                                        <option value="inactive">Inactive</option>
-                                    </select>
-                                </td>
-                                <td class="px-4 py-2">
-                                    <button type="button" class="text-red-500 hover:text-red-700" onclick="removeMember(this)">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="flex justify-between items-center">
-                        <button type="button" onclick="addMember()" class="px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-600 transition-colors">
-                            <i class="fas fa-plus mr-2"></i>Add Member
-                        </button>
-                        <div class="flex items-center gap-2">
-                            <span class="font-semibold text-gray-700">Total Daily Rate:</span>
-                            <span id="totalRate" class="bg-blue-100 text-blue-700 px-4 py-2 rounded-lg font-bold">$0.00</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Assigned Services Card -->
-            <div class="bg-white rounded-2xl shadow-lg p-8 border border-blue-100">
-                <h2 class="text-xl font-bold text-blue-700 mb-6 flex items-center gap-2">
-                    <i class="fas fa-tasks text-blue-400"></i> Assigned Services
-                </h2>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full text-sm mb-4" id="assignedServicesTable">
-                        <thead>
-                            <tr class="bg-blue-500 text-white">
-                                <th class="px-4 py-2 text-left">Service Name</th>
-                                <th class="px-4 py-2 text-left">Category</th>
-                                <th class="px-4 py-2 text-left">Priority</th>
-                                <th class="px-4 py-2 text-left">Status</th>
-                                <th class="px-4 py-2 text-left">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="bg-gray-50">
-                                <td>
-                                    <select name="services[0][name]" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                        <option value="">Select service</option>
-                                        <option value="lawn-mowing">Lawn Mowing</option>
-                                        <option value="weed-control">Weed Control</option>
-                                        <option value="office-cleaning">Office Cleaning</option>
-                                        <option value="plumbing-repair">Plumbing Repair</option>
-                                        <option value="electrical-wiring">Electrical Wiring</option>
-                                        <option value="house-painting">House Painting</option>
-                                        <option value="roofing-installation">Roofing Installation</option>
-                                        <option value="garden-maintenance">Garden Maintenance</option>
-                                    </select>
-                                </td>
-                                <td><input type="text" name="services[0][category]" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Category"/></td>
-                                <td>
-                                    <select name="services[0][priority]" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                        <option value="low">Low</option>
-                                        <option value="medium">Medium</option>
-                                        <option value="high">High</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select name="services[0][status]" class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                        <option value="active">Active</option>
-                                        <option value="inactive">Inactive</option>
-                                    </select>
-                                </td>
-                                <td class="px-4 py-2">
-                                    <button type="button" class="text-red-500 hover:text-red-700" onclick="removeService(this)">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <button type="button" onclick="addService()" class="px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-600 transition-colors">
-                        <i class="fas fa-plus mr-2"></i>Assign Service
-                    </button>
-                </div>
-            </div>
-
-            <!-- Performance Settings Card -->
-            <div class="bg-white rounded-2xl shadow-lg p-8 border border-blue-100">
-                <h2 class="text-xl font-bold text-blue-700 mb-6 flex items-center gap-2">
-                    <i class="fas fa-chart-line text-blue-400"></i> Performance Settings
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Target Completion Rate (%)</label>
-                        <input type="number" name="targetCompletionRate" min="0" max="100" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="95"/>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Minimum Rating</label>
-                        <input type="number" name="minimumRating" min="1" max="5" step="0.1" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="4.0"/>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Monthly Project Target</label>
-                        <input type="number" name="monthlyProjectTarget" min="1" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="10"/>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Revenue Target ($)</label>
-                        <input type="number" name="revenueTarget" min="0" step="0.01" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="5000.00"/>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Working Hours per Day</label>
-                        <input type="number" name="workingHours" min="1" max="24" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="8"/>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Break Time (minutes)</label>
-                        <input type="number" name="breakTime" min="0" max="120" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="30"/>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Action buttons at bottom left -->
-            <div class="mt-8 flex justify-start gap-4">
-                <button onclick="window.location.href='team-management.html'" class="px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 transition-colors">
+            <!-- Action buttons at bottom left, below the team members table -->
+            <div class="mt-4 flex justify-start gap-4">
+                <button onclick="window.location.href='team-management.html'" class="px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 transition-colors flex items-center gap-2">
                     <i class="fas fa-times mr-2"></i>Cancel
                 </button>
-                <button type="submit" form="createTeamForm" class="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors">
+                <button type="submit" form="createTeamForm" class="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors flex items-center gap-2">
                     <i class="fas fa-save mr-2"></i>Save Team
                 </button>
             </div>
