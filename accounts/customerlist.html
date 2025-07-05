@@ -17,380 +17,280 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <style>
-        /* Custom mobile optimizations */
-        @media (max-width: 768px) {
-            .mobile-card {
-                background: white;
-                border-radius: 12px;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-                margin-bottom: 12px;
-                overflow: hidden;
-                transition: all 0.3s ease;
-            }
-            
-            .mobile-card:active {
-                transform: scale(0.98);
-                box-shadow: 0 1px 4px rgba(0,0,0,0.15);
-            }
-            
-            .mobile-card-header {
-                padding: 16px;
-                border-bottom: 1px solid #f3f4f6;
-                background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-            }
-            
-            .mobile-card-body {
-                padding: 16px;
-            }
-            
-            .mobile-card-footer {
-                padding: 12px 16px;
-                background: #f8fafc;
-                border-top: 1px solid #e5e7eb;
-            }
-            
-            .mobile-status-badge {
-                padding: 4px 8px;
-                border-radius: 6px;
-                font-size: 11px;
-                font-weight: 600;
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
-            }
-            
-            .mobile-action-btn {
-                padding: 8px 12px;
-                border-radius: 8px;
-                font-size: 13px;
-                font-weight: 500;
-                transition: all 0.2s ease;
-                border: none;
-                cursor: pointer;
-            }
-            
-            .mobile-action-btn:active {
-                transform: scale(0.95);
-            }
-            
-            .mobile-search-container {
-                position: relative;
-                margin-bottom: 16px;
-            }
-            
-            .mobile-search-input {
-                width: 100%;
-                padding: 12px 16px 12px 44px;
-                border: 2px solid #e5e7eb;
-                border-radius: 12px;
-                font-size: 16px;
-                background: white;
-                transition: all 0.3s ease;
-            }
-            
-            .mobile-search-input:focus {
-                outline: none;
-                border-color: #3b82f6;
-                box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-            }
-            
-            .mobile-search-icon {
-                position: absolute;
-                left: 16px;
-                top: 50%;
-                transform: translateY(-50%);
-                color: #6b7280;
-                font-size: 16px;
-            }
-            
-            .mobile-filter-section {
-                background: white;
-                border-radius: 12px;
-                padding: 16px;
-                margin-bottom: 16px;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            }
-            
-            .mobile-button-group {
-                display: flex;
-                gap: 8px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .mobile-button {
-                flex: 1;
-                min-width: 120px;
-                padding: 12px 16px;
-                border-radius: 10px;
-                font-size: 14px;
-                font-weight: 600;
-                text-align: center;
-                transition: all 0.3s ease;
-                border: none;
-                cursor: pointer;
-            }
-            
-            .mobile-button:active {
-                transform: scale(0.95);
-            }
-            
-            .mobile-info-row {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 8px 0;
-                border-bottom: 1px solid #f3f4f6;
-            }
-            
-            .mobile-info-row:last-child {
-                border-bottom: none;
-            }
-            
-            .mobile-info-label {
-                font-size: 13px;
-                color: #6b7280;
-                font-weight: 500;
-            }
-            
-            .mobile-info-value {
-                font-size: 14px;
-                color: #1f2937;
-                font-weight: 500;
-                text-align: right;
-                max-width: 60%;
-                word-break: break-word;
-            }
-        }
-        
-        /* Tablet optimizations */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .tablet-container {
-                padding: 0 16px;
-            }
-            
-            .tablet-card {
-                background: white;
-                border-radius: 16px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-                margin-bottom: 16px;
-                overflow: hidden;
-                transition: all 0.3s ease;
-            }
-            
-            .tablet-card:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-            }
-            
-            .tablet-card-header {
-                padding: 20px;
-                background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-                border-bottom: 1px solid #e5e7eb;
-            }
-            
-            .tablet-card-body {
-                padding: 20px;
-            }
-            
-            .tablet-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 16px;
-            }
-        }
-        
-        /* Enhanced responsive breakpoints */
-        @media (max-width: 480px) {
-            .mobile-card {
-                margin: 0 8px 12px 8px;
-            }
-            
-            .mobile-button {
-                min-width: 100px;
-                padding: 10px 12px;
-                font-size: 13px;
-            }
-            
-            .mobile-search-input {
-                padding: 10px 12px 10px 40px;
-                font-size: 15px;
-            }
-        }
-        
-        @media (min-width: 481px) and (max-width: 768px) {
-            .mobile-card {
-                margin: 0 12px 16px 12px;
-            }
-            
-            .mobile-button {
-                min-width: 130px;
-                padding: 12px 16px;
-                font-size: 14px;
-            }
-        }
-    </style>
 </head>
-<body class="min-h-screen bg-gray-50">
+<body class="min-h-screen">
     <!-- Include header -->
     <div id="header-container"></div>
     
     <!-- Include navigation -->
     <div id="nav-container"></div>
-
-    <!-- Main content -->
-    <main class="container-fluid mx-auto px-2 sm:px-4 md:px-6 py-2 md:py-4" style="position: relative; z-index: 1;">
-      <!-- Mobile Controls and Card List (Mobile & Tablet) -->
-      <div class="block lg:hidden">
-        <div class="p-3 sm:p-4">
-          <!-- Header Section -->
-          <div class="flex justify-between items-center mb-4">
-            <div class="flex items-center gap-2">
-                <button id="deletedVendorsBtn" class="px-3 py-1 text-sm bg-gray-200 rounded-md">Deleted</button>
-                <button id="createVendorBtn" class="px-3 py-1 text-sm bg-blue-500 text-white rounded-md">Create</button>
-                <button id="actionsBtn" class="px-3 py-1 text-sm bg-blue-500 text-white rounded-md">Actions</button>
-            </div>
-            <div class="relative inline-block text-left">
-                <button type="button" class="inline-flex justify-center rounded border border-violet-600 shadow-sm px-2 py-2 bg-violet-600 text-sm font-medium text-white hover:bg-violet-700 transition-colors">
+    
+    <!-- MOBILE VIEW - Visible only on mobile screens (hidden on md and up) -->
+    <main class="md:hidden block p-4" style="position: relative; z-index: 1;">
+        <div class="flex justify-between items-center mb-4">
+            <span class="text-lg font-semibold">Customers</span>
+            <div class="flex gap-2">
+                <button id="mobileActionsBtn" class="bg-blue-200 text-blue-800 rounded text-sm font-medium px-3 py-1.5 flex items-center">
+                    <i class="fas fa-caret-down mr-1"></i>Actions
+                </button>
+                <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700" id="mobileMoreBtn" aria-expanded="false" aria-haspopup="true">
                     More
-                    <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                     </svg>
                 </button>
             </div>
         </div>
-          
-          <!-- Search Section -->
-          <div class="mobile-search-container">
-            <i class="fas fa-search mobile-search-icon"></i>
-            <input id="mobileSearchInput" type="text" placeholder="Search customers..." class="mobile-search-input" />
-          </div>
-          
-          <!-- Filter Section -->
-
-        
-        <!-- Mobile Card View -->
-        <div class="mobile-card-view sm:px-4 pb-8">
-          <!-- Sample Mobile Card -->
-          <div class="mobile-card">
-            <div class="mobile-card-header">
-              <div class="flex justify-between items-start">
-                <div class="flex-1">
-                  <h3 class="text-lg font-semibold text-gray-900 mb-1">Jamie Dora</h3>
-                  <p class="text-sm text-gray-600">(032) 415 8877</p>
-                </div>
-                <div class="flex flex-col items-end space-y-2">
-                  <span class="mobile-status-badge bg-green-100 text-green-800">Active</span>
-                  <span class="mobile-status-badge bg-yellow-100 text-yellow-800">Unverified</span>
-                </div>
-              </div>
-            </div>
-            <div class="mobile-card-body">
-              <div class="space-y-3">
-                <div class="mobile-info-row">
-                  <span class="mobile-info-label">Email</span>
-                  <span class="mobile-info-value">trixpy890@gmail.com</span>
-                </div>
-                <div class="mobile-info-row">
-                  <span class="mobile-info-label">Registered</span>
-                  <span class="mobile-info-value">March 12, 2025</span>
-                </div>
-                <div class="mobile-info-row">
-                  <span class="mobile-info-label">Status</span>
-                  <span class="mobile-info-value">
-                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                      Active
-                    </span>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div class="mobile-card-footer">
-              <div class="flex justify-between items-center">
-                <div class="flex space-x-2">
-                  <button class="mobile-action-btn bg-blue-50 text-blue-700 hover:bg-blue-100">
-                    <i class="fas fa-eye mr-1"></i>
-                    <span class="hidden sm:inline">View</span>
-                  </button>
-                  <button class="mobile-action-btn bg-gray-50 text-gray-700 hover:bg-gray-100">
-                    <i class="fas fa-edit mr-1"></i>
-                    <span class="hidden sm:inline">Edit</span>
-                  </button>
-                </div>
-                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
-              </div>
-            </div>
-          </div>
-          
-          <!-- More sample cards for demonstration -->
-          <div class="mobile-card">
-            <div class="mobile-card-header">
-              <div class="flex justify-between items-start">
-                <div class="flex-1">
-                  <h3 class="text-lg font-semibold text-gray-900 mb-1">Bria Salsalani</h3>
-                  <p class="text-sm text-gray-600">3756844</p>
-                </div>
-                <div class="flex flex-col items-end space-y-2">
-                  <span class="mobile-status-badge bg-green-100 text-green-800">Active</span>
-                  <span class="mobile-status-badge bg-yellow-100 text-yellow-800">Unverified</span>
-                </div>
-              </div>
-            </div>
-            <div class="mobile-card-body">
-              <div class="space-y-3">
-                <div class="mobile-info-row">
-                  <span class="mobile-info-label">Email</span>
-                  <span class="mobile-info-value">sallie@bria.com</span>
-                </div>
-                <div class="mobile-info-row">
-                  <span class="mobile-info-label">Registered</span>
-                  <span class="mobile-info-value">March 12, 2025</span>
-                </div>
-                <div class="mobile-info-row">
-                  <span class="mobile-info-label">Status</span>
-                  <span class="mobile-info-value">
-                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                      Active
-                    </span>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div class="mobile-card-footer">
-              <div class="flex justify-between items-center">
-                <div class="flex space-x-2">
-                  <button class="mobile-action-btn bg-blue-50 text-blue-700 hover:bg-blue-100">
-                    <i class="fas fa-eye mr-1"></i>
-                    <span class="hidden sm:inline">View</span>
-                  </button>
-                  <button class="mobile-action-btn bg-gray-50 text-gray-700 hover:bg-gray-100">
-                    <i class="fas fa-edit mr-1"></i>
-                    <span class="hidden sm:inline">Edit</span>
-                  </button>
-                </div>
-                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
-              </div>
-            </div>
-          </div>
-          
-          <!-- Pagination for mobile -->
-          <div class="mt-6 flex justify-center">
-            <div class="flex space-x-2">
-              <button class="mobile-action-btn bg-white border border-gray-300 text-gray-700">
-                <i class="fas fa-chevron-left"></i>
-              </button>
-              <button class="mobile-action-btn bg-blue-600 text-white">1</button>
-              <button class="mobile-action-btn bg-white border border-gray-300 text-gray-700">
-                <i class="fas fa-chevron-right"></i>
-              </button>
-            </div>
-          </div>
+        <div class="mb-2 flex w-full gap-2">
+            <button id="mobileCreateBtn" class="bg-blue-500 text-white rounded text-sm font-medium flex items-center justify-center flex-1 min-w-0" onclick="window.location.href='create-customer.html'">
+                <i class="fas fa-plus mr-1"></i>Create
+            </button>
+            <button id="mobileDeletedBtn" class="bg-red-100 text-red-700 rounded text-sm font-medium flex items-center justify-center flex-1 min-w-0" onclick="window.location.href='deleted-customers.html'">
+                <i class="fas fa-trash-alt mr-1"></i>Deleted
+            </button>
+            <input id="mobileSearchInput" type="text" placeholder="Search" class="rounded border border-gray-300 text-sm flex-[2] min-w-0 px-3 py-2" />
         </div>
-      </div>
-
-      <!-- Desktop/Table Controls and Table (hidden on mobile) -->
-      <div class="hidden lg:block">
-        <!-- Combined header with search -->
+        
+        <div class="space-y-2 max-w-2xl mx-auto">
+            <!-- Customer Card 1 -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-3 cursor-pointer hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-medium text-gray-900">kaz .</h3>
+                    <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
+                </div>
+                <div class="space-y-1 text-sm text-gray-600">
+                    <p><i class="fas fa-phone w-4 text-blue-500"></i> 09237645442</p>
+                    <p><i class="fas fa-envelope w-4 text-blue-500"></i> customerone@gmail.com</p>
+                    <div class="flex justify-between items-center mt-3">
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Unverified</span>
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">Deactive</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2"><i class="fas fa-calendar w-4"></i> March 13, 2025</p>
+                </div>
+            </div>
+            
+            <!-- Customer Card 2 -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-3 cursor-pointer hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-medium text-gray-900">Jamie Dora</h3>
+                    <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
+                </div>
+                <div class="space-y-1 text-sm text-gray-600">
+                    <p><i class="fas fa-phone w-4 text-blue-500"></i> (032) 415 8877</p>
+                    <p><i class="fas fa-envelope w-4 text-blue-500"></i> trixpy890@gmail.com</p>
+                    <div class="flex justify-between items-center mt-3">
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Unverified</span>
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2"><i class="fas fa-calendar w-4"></i> March 12, 2025</p>
+                </div>
+            </div>
+            
+            <!-- Customer Card 3 -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-3 cursor-pointer hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-medium text-gray-900">Bria Salsalani</h3>
+                    <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
+                </div>
+                <div class="space-y-1 text-sm text-gray-600">
+                    <p><i class="fas fa-phone w-4 text-blue-500"></i> 3756844</p>
+                    <p><i class="fas fa-envelope w-4 text-blue-500"></i> sallie@bria.com</p>
+                    <div class="flex justify-between items-center mt-3">
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Unverified</span>
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2"><i class="fas fa-calendar w-4"></i> March 12, 2025</p>
+                </div>
+            </div>
+            
+            <!-- Customer Card 4 -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-3 cursor-pointer hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-medium text-gray-900">Tina Moran</h3>
+                    <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
+                </div>
+                <div class="space-y-1 text-sm text-gray-600">
+                    <p><i class="fas fa-phone w-4 text-blue-500"></i> 78314124</p>
+                    <p><i class="fas fa-envelope w-4 text-blue-500"></i> degamoaljune14@gmail.com</p>
+                    <div class="flex justify-between items-center mt-3">
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Unverified</span>
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2"><i class="fas fa-calendar w-4"></i> March 12, 2025</p>
+                </div>
+            </div>
+            
+            <!-- Customer Card 5 -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 cursor-pointer hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-medium text-gray-900">qqq qwe2343456</h3>
+                    <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
+                </div>
+                <div class="space-y-1 text-sm text-gray-600">
+                    <p><i class="fas fa-phone w-4 text-blue-500"></i> 123123213123213</p>
+                    <p><i class="fas fa-envelope w-4 text-blue-500"></i> eee@gmail.com</p>
+                    <div class="flex justify-between items-center mt-3">
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Unverified</span>
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2"><i class="fas fa-calendar w-4"></i> March 12, 2025</p>
+                </div>
+            </div>
+            
+            <!-- Customer Card 6 -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-3 cursor-pointer hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-medium text-gray-900">qqq qwe2343456</h3>
+                    <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
+                </div>
+                <div class="space-y-1 text-sm text-gray-600">
+                    <p><i class="fas fa-phone w-4 text-blue-500"></i> 123123213123213</p>
+                    <p><i class="fas fa-envelope w-4 text-blue-500"></i> eee3@gmail.com</p>
+                    <div class="flex justify-between items-center mt-3">
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Unverified</span>
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2"><i class="fas fa-calendar w-4"></i> March 12, 2025</p>
+                </div>
+            </div>
+            
+            <!-- Customer Card 7 -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-3 cursor-pointer hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-medium text-gray-900">Paget Zowie</h3>
+                    <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
+                </div>
+                <div class="space-y-1 text-sm text-gray-600">
+                    <p><i class="fas fa-phone w-4 text-blue-500"></i> 09234234234</p>
+                    <p><i class="fas fa-envelope w-4 text-blue-500"></i> dabidbell5656@gmail.com</p>
+                    <div class="flex justify-between items-center mt-3">
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Unverified</span>
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2"><i class="fas fa-calendar w-4"></i> March 12, 2025</p>
+                </div>
+            </div>
+            
+            <!-- Customer Card 8 -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-3 cursor-pointer hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-medium text-gray-900">N/A N/A</h3>
+                    <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
+                </div>
+                <div class="space-y-1 text-sm text-gray-600">
+                    <p><i class="fas fa-phone w-4 text-blue-500"></i> N/A</p>
+                    <p><i class="fas fa-envelope w-4 text-blue-500"></i> admin@premiumdesignscape.com</p>
+                    <div class="flex justify-between items-center mt-3">
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Unverified</span>
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2"><i class="fas fa-calendar w-4"></i> March 13, 2025</p>
+                </div>
+            </div>
+            
+            <!-- Customer Card 9 -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-3 cursor-pointer hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-medium text-gray-900">Osh briones</h3>
+                    <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
+                </div>
+                <div class="space-y-1 text-sm text-gray-600">
+                    <p><i class="fas fa-phone w-4 text-blue-500"></i> N123123</p>
+                    <p><i class="fas fa-envelope w-4 text-blue-500"></i> Customerten@gmail.com</p>
+                    <div class="flex justify-between items-center mt-3">
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Unverified</span>
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2"><i class="fas fa-calendar w-4"></i> March 13, 2025</p>
+                </div>
+            </div>
+            
+            <!-- Customer Card 10 -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-3 cursor-pointer hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-medium text-gray-900">N/A N/A</h3>
+                    <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
+                </div>
+                <div class="space-y-1 text-sm text-gray-600">
+                    <p><i class="fas fa-phone w-4 text-blue-500"></i> N/A</p>
+                    <p><i class="fas fa-envelope w-4 text-blue-500"></i> Oshwald22203@gmail.com</p>
+                    <div class="flex justify-between items-center mt-3">
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Unverified</span>
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2"><i class="fas fa-calendar w-4"></i> March 13, 2025</p>
+                </div>
+            </div>
+            
+            <!-- Continue with remaining customers... -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-3 cursor-pointer hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-medium text-gray-900">carl louis manuel</h3>
+                    <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
+                </div>
+                <div class="space-y-1 text-sm text-gray-600">
+                    <p><i class="fas fa-phone w-4 text-blue-500"></i> 09953076751</p>
+                    <p><i class="fas fa-envelope w-4 text-blue-500"></i> carllouismanuel09@gmail.com</p>
+                    <div class="flex justify-between items-center mt-3">
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Unverified</span>
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2"><i class="fas fa-calendar w-4"></i> March 13, 2025</p>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-3 cursor-pointer hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-medium text-gray-900">oshwald briones</h3>
+                    <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
+                </div>
+                <div class="space-y-1 text-sm text-gray-600">
+                    <p><i class="fas fa-phone w-4 text-blue-500"></i> 09262626262</p>
+                    <p><i class="fas fa-envelope w-4 text-blue-500"></i> oshwaldo@gmail.ocm</p>
+                    <div class="flex justify-between items-center mt-3">
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Unverified</span>
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2"><i class="fas fa-calendar w-4"></i> March 13, 2025</p>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-3 cursor-pointer hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-medium text-gray-900">Joshua Rolluqui</h3>
+                    <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
+                </div>
+                <div class="space-y-1 text-sm text-gray-600">
+                    <p><i class="fas fa-phone w-4 text-blue-500"></i> 09753565927</p>
+                    <p><i class="fas fa-envelope w-4 text-blue-500"></i> joshrolluqui@gmail.com</p>
+                    <div class="flex justify-between items-center mt-3">
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Unverified</span>
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2"><i class="fas fa-calendar w-4"></i> March 13, 2025</p>
+                </div>
+            </div>
+            
+            <!-- Add remaining customers following the same pattern... -->
+        </div>
+        
+        <!-- Mobile Pagination -->
+        <div class="flex justify-center items-center mt-6 space-x-2">
+            <button class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="px-3 py-2 text-sm font-medium text-white bg-sky-500 border border-sky-500 rounded-lg">
+                1
+            </button>
+            <button class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </main>
+    
+    <!-- DESKTOP VIEW - Hidden on mobile, visible on md screens and up -->
+    <main class="hidden md:block container-fluid mx-auto px-4 md:px-6 py-2 md:py-4" style="position: relative; z-index: 1;">
+        <!-- Desktop Header with Actions -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
             <div class="flex items-center gap-4">
                 <h1 class="text-xl md:text-2xl font-bold text-gray-800">Customers</h1>
