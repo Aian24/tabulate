@@ -315,5 +315,20 @@
     <!-- Load JavaScript files -->
     <script src="../js/main.js"></script>
     <script src="../js/unscheduled.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const moreBtn = document.getElementById('moreBtn');
+            const moreDropdown = document.getElementById('moreDropdown');
+            document.addEventListener('click', function(event) {
+                if (moreBtn && moreDropdown) {
+                    if (moreBtn.contains(event.target)) {
+                        moreDropdown.classList.toggle('hidden');
+                    } else if (!moreDropdown.contains(event.target)) {
+                        moreDropdown.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
