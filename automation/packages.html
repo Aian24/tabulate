@@ -29,7 +29,7 @@
             <div class="flex items-center gap-4">
                 <h1 class="text-xl md:text-2xl font-bold text-gray-800">Packages</h1>
             </div>
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 ml-auto">
                 <div class="relative">
                     <button id="actionsDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
                         <span>Actions</span>
@@ -68,6 +68,21 @@
                 </div>
             </div>
         </div>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const moreBtn = document.getElementById('moreBtn');
+            const moreDropdown = document.getElementById('moreDropdown');
+            document.addEventListener('click', function(event) {
+                if (moreBtn && moreDropdown) {
+                    if (moreBtn.contains(event.target)) {
+                        moreDropdown.classList.toggle('hidden');
+                    } else if (!moreDropdown.contains(event.target)) {
+                        moreDropdown.classList.add('hidden');
+                    }
+                }
+            });
+        });
+        </script>
 
         <!-- Desktop Controls Section -->
         <div class="hidden md:flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
