@@ -15,7 +15,7 @@
     <div class="w-full px-4 md:px-8 py-">
         <div class="mb-6 flex items-center justify-between gap-2">
             <div class="flex items-center gap-2">
-                <button id="backBtn" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition" onclick="window.location.href='customer-details.html'">
+                <button id="backBtn" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition" onclick="goBackToCustomerDetails()">
                     <i class="fas fa-arrow-left"></i> Back
                 </button>
             </div>
@@ -187,8 +187,230 @@
         opacity: 1 !important;
         transform: scale(1) !important;
     }
+    
+    .section-highlight {
+        animation: highlightPulse 0.5s ease-in-out;
+        border: 2px solid #41B6FF !important;
+        box-shadow: 0 0 10px rgba(65, 182, 255, 0.3) !important;
+    }
+    
+    @keyframes highlightPulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.02); }
+        100% { transform: scale(1); }
+    }
     </style>
     <script src="../js/customerlist.js"></script>
     <script src="../js/main.js"></script>
+    <script>
+        // Function to get URL parameters
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Function to go back to customer details with preserved data
+        function goBackToCustomerDetails() {
+            // Get all current customer data from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const customerData = {};
+            
+            // Copy all existing parameters except 'section' (which is only for edit page)
+            for (const [key, value] of urlParams.entries()) {
+                if (key !== 'section') {
+                    customerData[key] = value;
+                }
+            }
+            
+            // Navigate back to customer details page with all customer data
+            const detailsUrl = `customer-details.html?${new URLSearchParams(customerData).toString()}`;
+            window.location.href = detailsUrl;
+        }
+
+        // Function to populate form fields from URL parameters
+        function populateFormFromURL() {
+            const customerId = getUrlParameter('id');
+            const customerName = getUrlParameter('name');
+            const phone = getUrlParameter('phone');
+            const email = getUrlParameter('email');
+            const status = getUrlParameter('status');
+            const date = getUrlParameter('date');
+            const address = getUrlParameter('address');
+            const buildingAddress = getUrlParameter('buildingAddress');
+            const language = getUrlParameter('language');
+            const communication = getUrlParameter('communication');
+            const paymentTerms = getUrlParameter('paymentTerms');
+            const paymentMethod = getUrlParameter('paymentMethod');
+            const taxable = getUrlParameter('taxable');
+            const tags = getUrlParameter('tags');
+            const salesPerson = getUrlParameter('salesPerson');
+            const contractor = getUrlParameter('contractor');
+            const invoiceFrequency = getUrlParameter('invoiceFrequency');
+            const balance = getUrlParameter('balance');
+            const jobsCount = getUrlParameter('jobsCount');
+            const invoicesCount = getUrlParameter('invoicesCount');
+            const transactionsCount = getUrlParameter('transactionsCount');
+            const section = getUrlParameter('section');
+
+            if (customerName) {
+                // Set customer name header
+                const customerNameHeader = document.getElementById('customerNameHeader');
+                if (customerNameHeader) customerNameHeader.textContent = decodeURIComponent(customerName);
+
+                // Populate Personal Information fields
+                const personalFirstName = document.getElementById('personalFirstName');
+                const personalLastName = document.getElementById('personalLastName');
+                const personalPhone = document.getElementById('personalPhone');
+                const personalEmail = document.getElementById('personalEmail');
+                const personalAddress = document.getElementById('personalAddress');
+                const personalBuildingAddress = document.getElementById('personalBuildingAddress');
+
+                if (personalFirstName) {
+                    const nameParts = decodeURIComponent(customerName).split(' ');
+                    personalFirstName.value = nameParts[0] || '';
+                    personalLastName.value = nameParts.slice(1).join(' ') || '';
+                }
+                if (personalPhone) personalPhone.value = decodeURIComponent(phone || '');
+                if (personalEmail) personalEmail.value = decodeURIComponent(email || '');
+                if (personalAddress) personalAddress.value = decodeURIComponent(address || '');
+                if (personalBuildingAddress) personalBuildingAddress.value = decodeURIComponent(buildingAddress || '');
+
+                // Populate Preferences fields
+                const prefClientSince = document.getElementById('prefClientSince');
+                const prefLeadAcquiredDate = document.getElementById('prefLeadAcquiredDate');
+                const prefMainLanguage = document.getElementById('prefMainLanguage');
+                const prefPreferredCommunication = document.getElementById('prefPreferredCommunication');
+                const prefPaymentTerms = document.getElementById('prefPaymentTerms');
+                const prefPaymentMethod = document.getElementById('prefPaymentMethod');
+                const prefTaxable = document.getElementById('prefTaxable');
+                const prefTags = document.getElementById('prefTags');
+                const prefSalesPerson = document.getElementById('prefSalesPerson');
+                const prefContractor = document.getElementById('prefContractor');
+                const prefInvoiceFrequency = document.getElementById('prefInvoiceFrequency');
+
+                if (prefClientSince) prefClientSince.value = decodeURIComponent(date || '');
+                if (prefLeadAcquiredDate) prefLeadAcquiredDate.value = decodeURIComponent(date || '');
+                if (prefMainLanguage) prefMainLanguage.value = decodeURIComponent(language || 'English');
+                if (prefPreferredCommunication) prefPreferredCommunication.value = decodeURIComponent(communication || 'Email');
+                if (prefPaymentTerms) prefPaymentTerms.value = decodeURIComponent(paymentTerms || 'Net 30');
+                if (prefPaymentMethod) prefPaymentMethod.value = decodeURIComponent(paymentMethod || 'Credit Card');
+                if (prefTaxable) prefTaxable.value = decodeURIComponent(taxable || 'Yes');
+                if (prefTags) prefTags.value = decodeURIComponent(tags || 'Regular Customer');
+                if (prefSalesPerson) prefSalesPerson.value = decodeURIComponent(salesPerson || 'John Doe');
+                if (prefContractor) prefContractor.value = decodeURIComponent(contractor || 'ABC Contractors');
+                if (prefInvoiceFrequency) prefInvoiceFrequency.value = decodeURIComponent(invoiceFrequency || 'Monthly');
+
+                // Populate Billing Information fields
+                const billingFirstName = document.getElementById('billingFirstName');
+                const billingLastName = document.getElementById('billingLastName');
+                const billingPhone = document.getElementById('billingPhone');
+                const billingEmail = document.getElementById('billingEmail');
+                const billingAddress = document.getElementById('billingAddress');
+                const billingCompanyName = document.getElementById('billingCompanyName');
+
+                if (billingFirstName) {
+                    const nameParts = decodeURIComponent(customerName).split(' ');
+                    billingFirstName.value = nameParts[0] || '';
+                    billingLastName.value = nameParts.slice(1).join(' ') || '';
+                }
+                if (billingPhone) billingPhone.value = decodeURIComponent(phone || '');
+                if (billingEmail) billingEmail.value = decodeURIComponent(email || '');
+                if (billingAddress) billingAddress.value = decodeURIComponent(address || '');
+                if (billingCompanyName) billingCompanyName.value = 'Individual';
+
+                // Populate Customer Notes
+                const customerNotes = document.getElementById('customerNotes');
+                if (customerNotes) {
+                    customerNotes.value = `Customer ${decodeURIComponent(customerName)} has been a client since ${decodeURIComponent(date || 'recently')}. They prefer ${decodeURIComponent(communication || 'email')} communication and have been responsive to our services.`;
+                }
+
+                // Scroll to the appropriate section if specified
+                if (section) {
+                    setTimeout(() => {
+                        scrollToSection(section);
+                        highlightSection(section);
+                    }, 100);
+                }
+            }
+        }
+
+        // Function to scroll to specific section
+        function scrollToSection(section) {
+            let targetElement = null;
+            
+            switch(section) {
+                case 'personal':
+                    targetElement = document.getElementById('personalFirstName');
+                    break;
+                case 'billing':
+                    targetElement = document.getElementById('billingFirstName');
+                    break;
+                case 'preferences':
+                    targetElement = document.getElementById('prefClientSince');
+                    break;
+                case 'custom':
+                    targetElement = document.getElementById('addCustomFieldBtn');
+                    break;
+                case 'notes':
+                    targetElement = document.getElementById('customerNotes');
+                    break;
+            }
+            
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                targetElement.focus();
+            }
+        }
+
+        // Function to highlight the selected section
+        function highlightSection(section) {
+            // Remove any existing highlights
+            document.querySelectorAll('.section-highlight').forEach(el => {
+                el.classList.remove('section-highlight');
+            });
+            
+            let targetContainer = null;
+            
+            switch(section) {
+                case 'personal':
+                    targetContainer = document.querySelector('.bg-white.rounded-lg.shadow.border.p-4:has(#personalFirstName)');
+                    break;
+                case 'billing':
+                    targetContainer = document.querySelector('.bg-white.rounded-lg.shadow.border.p-4:has(#billingFirstName)');
+                    break;
+                case 'preferences':
+                    targetContainer = document.querySelector('.bg-white.rounded-lg.shadow.border.p-4:has(#prefClientSince)');
+                    break;
+                case 'custom':
+                    targetContainer = document.querySelector('.bg-white.rounded-lg.shadow.border.p-4:has(#addCustomFieldBtn)');
+                    break;
+                case 'notes':
+                    targetContainer = document.querySelector('.bg-white.rounded-lg.shadow.border.p-4:has(#customerNotes)');
+                    break;
+            }
+            
+            if (targetContainer) {
+                targetContainer.classList.add('section-highlight');
+                // Remove highlight after 3 seconds
+                setTimeout(() => {
+                    targetContainer.classList.remove('section-highlight');
+                }, 3000);
+            }
+        }
+
+        // Initialize form when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            populateFormFromURL();
+            
+            // Add event listener for back button (for mobile compatibility)
+            const backBtn = document.getElementById('backBtn');
+            if (backBtn) {
+                backBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    goBackToCustomerDetails();
+                });
+            }
+        });
+    </script>
 </body>
 </html> 

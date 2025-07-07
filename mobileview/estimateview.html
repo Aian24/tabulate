@@ -25,15 +25,16 @@
     <!-- Include navigation -->
     <div id="nav-container"></div>
 
-    <main class="p-4">
-        <div class="flex justify-between items-center mb-4">
-            <a href="estimates.html" class="text-gray-600 flex items-center">
-                <i class="fas fa-chevron-left text-lg"></i>
-                <span class="ml-2 font-semibold">Back</span>
+    <main class="p-4 max-w-4xl mx-auto">
+        <!-- Header Section with Back Button and Actions -->
+        <div class="flex justify-between items-center mb-6">
+            <a href="estimates.html" class="text-gray-600 flex items-center hover:text-blue-600 transition-colors duration-200">
+                <i class="fas fa-chevron-left text-lg mr-2"></i>
+                <span class="font-semibold">Back to Estimates</span>
             </a>
             <div class="relative inline-block text-left">
-                <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700" id="menu-button" aria-expanded="true" aria-haspopup="true">
-                  More
+                <button type="button" class="inline-flex justify-center w-full rounded-lg border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors duration-200" id="menu-button" aria-expanded="true" aria-haspopup="true">
+                  <i class="fas fa-ellipsis-h mr-2"></i>More
                   <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                   </svg>
@@ -41,87 +42,288 @@
             </div>
         </div>
 
-        <h1 class="text-xl text-gray-800 mb-4 font-semibold">Estimate No. 1048</h1>
+        <!-- Estimate Title with Status Badge -->
+        <div class="bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl shadow-lg p-6 mb-6 text-white">
+            <div class="flex justify-between items-start">
+                <div>
+                    <h1 class="text-2xl font-bold mb-2">Estimate No. 1048</h1>
+                    <p class="text-blue-100 text-sm">Modified last December 15, 2024</p>
+                </div>
+                <span class="px-3 py-1 text-xs font-semibold text-yellow-800 bg-yellow-200 rounded-full">Pending Approval</span>
+            </div>
+        </div>
 
         <!-- Customer Information Card -->
-        <div class="bg-sky-100 rounded-lg shadow p-4 mb-4">
-            <h2 class="text-md font-semibold border-b border-gray-300 pb-2 mb-3">Customer Information</h2>
-            <div class="text-sm text-gray-700 space-y-2">
-                <p><span class="font-semibold">Customer Name:</span> Billy Mamaril</p>
-                <p><span class="font-semibold">Phone:</span> 09293422436</p>
-                <p><span class="font-semibold">Email Address:</span> billymamaril23@gmail.com</p>
-                <p><span class="font-semibold">Address:</span> Pabahay 2000 Muzon</p>
+        <div class="bg-white rounded-xl shadow-md p-6 mb-6 border-l-4 border-blue-500">
+            <div class="flex items-center mb-4">
+                <div class="bg-blue-100 p-2 rounded-lg mr-3">
+                    <i class="fas fa-user text-blue-600 text-lg"></i>
+                </div>
+                <h2 class="text-lg font-bold text-gray-800">Customer Information</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <i class="fas fa-user-circle text-gray-400 mr-3 w-5"></i>
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase tracking-wide">Customer Name</p>
+                            <p class="font-semibold text-gray-800">Billy Mamaril</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-phone text-gray-400 mr-3 w-5"></i>
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase tracking-wide">Phone</p>
+                            <p class="font-semibold text-gray-800">09293422436</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <i class="fas fa-envelope text-gray-400 mr-3 w-5"></i>
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase tracking-wide">Email Address</p>
+                            <p class="font-semibold text-gray-800">billymamaril23@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-map-marker-alt text-gray-400 mr-3 w-5"></i>
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase tracking-wide">Address</p>
+                            <p class="font-semibold text-gray-800">Pabahay 2000 Muzon</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- Estimated Items Card -->
-        <div class="bg-sky-100 rounded-lg shadow p-4 mb-4">
-            <div class="flex items-center border-b border-gray-300 pb-2 mb-3">
-                <input type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
-                <h2 class="text-md font-semibold ml-2">Estimated Items</h2>
-            </div>
-            <div class="space-y-3">
-                <div class="flex items-center justify-between text-sm">
-                    <div class="flex items-center">
-                        <input type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
-                        <span class="ml-3">Lawn Maintenance Service</span>
+        <div class="bg-white rounded-xl shadow-md p-6 mb-6">
+            <div class="flex items-center justify-between border-b border-gray-200 pb-4 mb-4">
+                <div class="flex items-center">
+                    <div class="bg-green-100 p-2 rounded-lg mr-3">
+                        <i class="fas fa-clipboard-list text-green-600 text-lg"></i>
                     </div>
-                    <i class="fas fa-chevron-right text-gray-400"></i>
+                    <h2 class="text-lg font-bold text-gray-800">Estimated Items</h2>
                 </div>
-                <div class="flex items-center justify-between text-sm">
-                    <div class="flex items-center">
-                        <input type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
-                        <span class="ml-3">Lawn Maintenance Service</span>
+                <div class="flex items-center">
+                    <input type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" id="select-all-items">
+                    <label for="select-all-items" class="ml-2 text-sm text-gray-600">Select All</label>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <!-- Service Item 1 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-200">
+                    <div class="flex items-center justify-between text-sm p-4 cursor-pointer service-header bg-gray-50 hover:bg-gray-100 transition-colors duration-200" data-service="1">
+                        <div class="flex items-center">
+                            <input type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded service-checkbox mr-3" data-service="1">
+                            <div>
+                                <span class="font-semibold text-gray-800">Lawn Maintenance Service</span>
+                                <p class="text-gray-500 text-xs mt-1">Monthly maintenance package</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-green-600 font-bold text-lg mr-3">$350.00</span>
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-200" id="chevron-1"></i>
+                        </div>
                     </div>
-                    <i class="fas fa-chevron-right text-gray-400"></i>
+                    <div class="service-details hidden bg-white" id="service-details-1">
+                        <div class="p-4 border-t border-gray-200">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                <div class="space-y-3">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Service Type:</span>
+                                        <span class="font-semibold text-gray-800">Monthly Maintenance</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Frequency:</span>
+                                        <span class="font-semibold text-gray-800">Weekly</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Duration:</span>
+                                        <span class="font-semibold text-gray-800">3 months</span>
+                                    </div>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Labor Cost:</span>
+                                        <span class="font-semibold text-gray-800">$280.00</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Materials:</span>
+                                        <span class="font-semibold text-gray-800">$45.00</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Equipment:</span>
+                                        <span class="font-semibold text-gray-800">$25.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-t border-gray-200 mt-4 pt-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-lg font-bold text-gray-800">Total:</span>
+                                    <span class="text-2xl font-bold text-green-600">$350.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service Item 2 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-200">
+                    <div class="flex items-center justify-between text-sm p-4 cursor-pointer service-header bg-gray-50 hover:bg-gray-100 transition-colors duration-200" data-service="2">
+                        <div class="flex items-center">
+                            <input type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded service-checkbox mr-3" data-service="2">
+                            <div>
+                                <span class="font-semibold text-gray-800">Tree Trimming Service</span>
+                                <p class="text-gray-500 text-xs mt-1">One-time tree maintenance</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-green-600 font-bold text-lg mr-3">$350.00</span>
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-200" id="chevron-2"></i>
+                        </div>
+                    </div>
+                    <div class="service-details hidden bg-white" id="service-details-2">
+                        <div class="p-4 border-t border-gray-200">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                <div class="space-y-3">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Service Type:</span>
+                                        <span class="font-semibold text-gray-800">One-time Service</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Scope:</span>
+                                        <span class="font-semibold text-gray-800">3 Trees</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Estimated Time:</span>
+                                        <span class="font-semibold text-gray-800">4-6 hours</span>
+                                    </div>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Labor Cost:</span>
+                                        <span class="font-semibold text-gray-800">$280.00</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Materials:</span>
+                                        <span class="font-semibold text-gray-800">$45.00</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Equipment:</span>
+                                        <span class="font-semibold text-gray-800">$25.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-t border-gray-200 mt-4 pt-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-lg font-bold text-gray-800">Total:</span>
+                                    <span class="text-2xl font-bold text-green-600">$350.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Grand Total Card -->
-        <div class="bg-sky-100 rounded-lg shadow p-4 mb-4">
-            <div class="flex justify-between items-center text-sm mb-2 font-semibold">
-                <span>Grand Total</span>
-                <span class="text-blue-600">$ 700.00</span>
-            </div>
-            <hr class="border-gray-300">
-            <div class="text-sm text-gray-700 space-y-2 mt-2">
-                <div class="flex justify-between">
-                    <span>Deposit ( Upfront Payment)</span>
-                    <span>$ 35.00</span>
+        <!-- Financial Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <!-- Grand Total Card -->
+            <div class="bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl shadow-lg p-6 text-white">
+                <div class="flex items-center mb-4">
+                    <div class="bg-white bg-opacity-20 p-2 rounded-lg mr-3">
+                        <i class="fas fa-calculator text-white text-lg"></i>
+                    </div>
+                    <h3 class="text-lg font-bold">Grand Total</h3>
                 </div>
-                <div class="flex justify-between font-semibold">
-                    <span>Remaining Balance</span>
-                    <span>$ 665.00</span>
+                <div class="text-3xl font-bold mb-2">$700.00</div>
+                <p class="text-green-100 text-sm">Total estimate value</p>
+            </div>
+
+            <!-- Payment Breakdown Card -->
+            <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-blue-500">
+                <div class="flex items-center mb-4">
+                    <div class="bg-blue-100 p-2 rounded-lg mr-3">
+                        <i class="fas fa-credit-card text-blue-600 text-lg"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800">Payment Breakdown</h3>
+                </div>
+                <div class="space-y-3 text-sm">
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">Deposit (Upfront Payment)</span>
+                        <span class="font-semibold text-gray-800">$35.00</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">Remaining Balance</span>
+                        <span class="font-semibold text-gray-800">$665.00</span>
+                    </div>
+                    <div class="border-t border-gray-200 pt-3 mt-3">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-gray-800">Total Amount</span>
+                            <span class="text-xl font-bold text-blue-600">$700.00</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Terms and Conditions Card -->
-        <div class="bg-sky-100 rounded-lg shadow p-4 mb-4">
-            <h2 class="text-md font-semibold border-b border-gray-300 pb-2 mb-3">Terms and Conditions</h2>
-            <div class="text-sm space-y-3">
-                <div>
-                    <p class="font-semibold">Lawn Maintenance Service</p>
-                    <ul class="list-disc list-inside ml-4 mt-1">
-                        <li>Service subject to weather</li>
+        <div class="bg-white rounded-xl shadow-md p-6 mb-6 border-l-4 border-orange-500">
+            <div class="flex items-center mb-4">
+                <div class="bg-orange-100 p-2 rounded-lg mr-3">
+                    <i class="fas fa-file-contract text-orange-600 text-lg"></i>
+                </div>
+                <h2 class="text-lg font-bold text-gray-800">Terms and Conditions</h2>
+            </div>
+            <div class="space-y-4 text-sm">
+                <div class="bg-orange-50 rounded-lg p-4">
+                    <p class="font-semibold text-orange-800 mb-2">Lawn Maintenance Service</p>
+                    <ul class="list-disc list-inside ml-4 text-orange-700 space-y-1">
+                        <li>Service subject to weather conditions</li>
+                        <li>24-hour notice required for rescheduling</li>
+                        <li>Payment due upon completion</li>
                     </ul>
                 </div>
-                <div>
-                    <p class="font-semibold">Lawn Maintenance Service</p>
-                    <ul class="list-disc list-inside ml-4 mt-1">
-                        <li>Service subject to weather</li>
+                <div class="bg-orange-50 rounded-lg p-4">
+                    <p class="font-semibold text-orange-800 mb-2">Tree Trimming Service</p>
+                    <ul class="list-disc list-inside ml-4 text-orange-700 space-y-1">
+                        <li>Service subject to weather conditions</li>
+                        <li>Proper disposal of trimmed branches included</li>
+                        <li>Safety equipment and insurance coverage provided</li>
                     </ul>
                 </div>
             </div>
         </div>
         
         <!-- Action Buttons -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-sm">
-            <button class="bg-teal-400 text-white font-semibold py-2 px-4 rounded-md">Approve</button>
-            <button class="bg-slate-600 text-white font-semibold py-2 px-4 rounded-md">Edit</button>
-            <button class="bg-purple-500 text-white font-semibold py-2 px-4 rounded-md">Download Pdf</button>
-            <button class="bg-amber-400 text-white font-semibold py-2 px-4 rounded-md">Send Email</button>
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <h3 class="text-lg font-bold text-gray-800 mb-4 text-center">Estimate Actions</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <button class="bg-gradient-to-r from-teal-400 to-teal-500 text-white font-semibold py-3 px-4 rounded-lg hover:from-teal-500 hover:to-teal-600 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-1" onclick="approveEstimate()">
+                    <i class="fas fa-check mr-2"></i>Approve
+                </button>
+                <button class="bg-gradient-to-r from-slate-500 to-slate-600 text-white font-semibold py-3 px-4 rounded-lg hover:from-slate-600 hover:to-slate-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-1" onclick="window.location.href='edit-estimate.html'">
+                    <i class="fas fa-edit mr-2"></i>Edit
+                </button>
+                <button class="bg-gradient-to-r from-purple-500 to-purple-600 text-white font-semibold py-3 px-4 rounded-lg hover:from-purple-600 hover:to-purple-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-1" onclick="downloadPDF()">
+                    <i class="fas fa-download mr-2"></i>Download PDF
+                </button>
+                <button class="bg-gradient-to-r from-amber-400 to-amber-500 text-white font-semibold py-3 px-4 rounded-lg hover:from-amber-500 hover:to-amber-600 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-1" onclick="sendEmail()">
+                    <i class="fas fa-envelope mr-2"></i>Send Email
+                </button>
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <div class="flex items-center">
+                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mr-3"></div>
+                    <span id="loading-text">Processing...</span>
+                </div>
+            </div>
         </div>
     </main>
     <script>
@@ -136,6 +338,152 @@
             .then(data => {
                 document.getElementById('nav-container').innerHTML = data;
             });
+
+        // Service dropdown functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Service header click handlers
+            const serviceHeaders = document.querySelectorAll('.service-header');
+            serviceHeaders.forEach(header => {
+                header.addEventListener('click', function(e) {
+                    // Don't toggle if clicking on checkbox
+                    if (e.target.type === 'checkbox') return;
+                    
+                    const serviceId = this.getAttribute('data-service');
+                    const details = document.getElementById(`service-details-${serviceId}`);
+                    const chevron = document.getElementById(`chevron-${serviceId}`);
+                    
+                    // Toggle visibility
+                    if (details.classList.contains('hidden')) {
+                        details.classList.remove('hidden');
+                        chevron.style.transform = 'rotate(180deg)';
+                    } else {
+                        details.classList.add('hidden');
+                        chevron.style.transform = 'rotate(0deg)';
+                    }
+                });
+            });
+
+            // Select all functionality
+            const selectAllCheckbox = document.getElementById('select-all-items');
+            const serviceCheckboxes = document.querySelectorAll('.service-checkbox');
+            
+            selectAllCheckbox.addEventListener('change', function() {
+                serviceCheckboxes.forEach(checkbox => {
+                    checkbox.checked = this.checked;
+                });
+            });
+
+            // Individual checkbox functionality
+            serviceCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const allChecked = Array.from(serviceCheckboxes).every(cb => cb.checked);
+                    const anyChecked = Array.from(serviceCheckboxes).some(cb => cb.checked);
+                    
+                    selectAllCheckbox.checked = allChecked;
+                    selectAllCheckbox.indeterminate = anyChecked && !allChecked;
+                });
+            });
+        });
+
+        // Show loading overlay
+        function showLoading(message = 'Processing...') {
+            document.getElementById('loading-text').textContent = message;
+            document.getElementById('loading-overlay').classList.remove('hidden');
+        }
+
+        // Hide loading overlay
+        function hideLoading() {
+            document.getElementById('loading-overlay').classList.add('hidden');
+        }
+
+        // Approve Estimate Function
+        function approveEstimate() {
+            const selectedServices = Array.from(document.querySelectorAll('.service-checkbox:checked'))
+                .map(cb => cb.getAttribute('data-service'));
+            
+            if (selectedServices.length === 0) {
+                alert('Please select at least one service to approve.');
+                return;
+            }
+
+            showLoading('Approving estimate...');
+            
+            // Simulate API call
+            setTimeout(() => {
+                hideLoading();
+                
+                // Update UI to show approved status
+                document.querySelector('h1').innerHTML = 'Estimate No. 1048 <span class="text-green-600 text-sm">(Approved)</span>';
+                
+                // Disable approve button and change its appearance
+                const approveBtn = document.querySelector('button[onclick="approveEstimate()"]');
+                approveBtn.disabled = true;
+                approveBtn.classList.remove('bg-teal-400', 'hover:bg-teal-500');
+                approveBtn.classList.add('bg-gray-400', 'cursor-not-allowed');
+                approveBtn.innerHTML = '<i class="fas fa-check mr-1"></i>Approved';
+                
+                alert('Estimate approved successfully!');
+            }, 2000);
+        }
+
+        // Edit Estimate Function
+        function editEstimate() {
+            showLoading('Opening editor...');
+            
+            setTimeout(() => {
+                hideLoading();
+                // In a real application, this would redirect to an edit page
+                // For now, we'll show a modal or alert
+                alert('Edit functionality would open the estimate editor. In a real application, this would navigate to an edit page.');
+            }, 1000);
+        }
+
+        // Download PDF Function
+        function downloadPDF() {
+            showLoading('Generating PDF...');
+            
+            setTimeout(() => {
+                hideLoading();
+                
+                // Create a temporary link to simulate download
+                const link = document.createElement('a');
+                link.href = 'data:application/pdf;base64,JVBERi0xLjQKJcOkw7zDtsO...'; // Placeholder
+                link.download = 'Estimate_1048.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                alert('PDF downloaded successfully!');
+            }, 3000);
+        }
+
+        // Send Email Function
+        function sendEmail() {
+            const customerEmail = 'billymamaril23@gmail.com'; // Get from customer info
+            
+            showLoading('Sending email...');
+            
+            setTimeout(() => {
+                hideLoading();
+                
+                // In a real application, this would send an actual email
+                alert(`Email sent successfully to ${customerEmail}!`);
+            }, 2000);
+        }
+
+        // Add touch feedback for mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.95)';
+                });
+                
+                button.addEventListener('touchend', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+        });
     </script>
 </body>
 </html> 

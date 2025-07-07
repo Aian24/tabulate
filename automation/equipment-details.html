@@ -28,7 +28,7 @@
         <!-- Mobile Header -->
         <div class="block md:hidden mb-4 px-4">
             <div class="flex justify-between items-center">
-                <a href="equipments.html" class="text-gray-600 flex items-center">
+                <a href="equipment.html" class="text-gray-600 flex items-center">
                     <i class="fas fa-chevron-left text-lg"></i>
                     <span class="ml-2 font-semibold">Back</span>
                 </a>
@@ -125,72 +125,55 @@
         <!-- Mobile Layout -->
         <div class="block md:hidden px-4">
             <!-- Equipment Information Section -->
-            <div class="bg-white border-2 border-blue-200 rounded-xl shadow mb-6 max-w-2xl mx-auto">
+            <form id="mobile-equipment-form" class="bg-white border-2 border-blue-200 rounded-xl shadow mb-6 max-w-2xl mx-auto flex flex-col">
                 <div class="px-4 pt-3 pb-2 border-b border-blue-100 bg-blue-50 rounded-t-xl">
-                    <span class="text-blue-700 font-semibold text-base">Equipment Information</span>
+                    <span class="text-blue-700 font-semibold text-base">Edit Equipment Information</span>
                 </div>
-                <div class="p-4">
-                    <div class="grid grid-cols-1 gap-4">
-                        <div>
-                            <label class="block text-gray-500 text-xs mb-1" for="mobile-equipment-name">Equipment Name</label>
-                            <input id="mobile-equipment-name" type="text" value="Lawn Mower" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
-                        </div>
-
-                        <div>
-                            <label class="block text-gray-500 text-xs mb-1" for="mobile-equipment-code">Equipment Code</label>
-                            <input id="mobile-equipment-code" type="text" value="LM100" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
-                        </div>
-
-                        <div>
-                            <label class="block text-gray-500 text-xs mb-1" for="mobile-specification">Specification</label>
-                            <input id="mobile-specification" type="text" value="Self-propelled Gas-powered Mower For Residential Lawns" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
-                        </div>
-
-                        <div>
-                            <label class="block text-gray-500 text-xs mb-1" for="mobile-acquisition-date">Acquisition Date</label>
-                            <input id="mobile-acquisition-date" type="text" value="March 12, 2025" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
-                        </div>
-
-                        <div>
-                            <label class="block text-gray-500 text-xs mb-1" for="mobile-available-quantity">Available Quantity</label>
-                            <input id="mobile-available-quantity" type="text" value="1" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
-                        </div>
-
-                        <div>
-                            <label class="block text-gray-500 text-xs mb-1" for="mobile-power-type">Power Type</label>
-                            <input id="mobile-power-type" type="text" value="Gas" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
-                        </div>
-
-                        <div>
-                            <label class="block text-gray-500 text-xs mb-1" for="mobile-condition">Condition</label>
-                            <input id="mobile-condition" type="text" value="Brand New" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
-                        </div>
-
-                        <div>
-                            <label class="block text-gray-500 text-xs mb-1" for="mobile-status">Status</label>
-                            <input id="mobile-status" type="text" value="On Stock" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
-                        </div>
-
-                        <div>
-                            <label class="block text-gray-500 text-xs mb-1" for="mobile-vendor">Vendor</label>
-                            <input id="mobile-vendor" type="text" value="Ace Hardware" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
-                        </div>
+                <div class="p-4 grid grid-cols-1 gap-4">
+                    <div>
+                        <label class="block text-gray-500 text-xs mb-1" for="mobile-equipment-name">Equipment Name</label>
+                        <input id="mobile-equipment-name" name="name" type="text" value="Lawn Mower" class="w-full border border-gray-300 rounded px-2 py-2 text-base mb-2 bg-white" />
                     </div>
-                    
-                    <!-- Mobile Edit Button -->
-                    <div class="mt-4 flex justify-start">
-                        <button id="mobileEditBtn" class="px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center gap-2 text-sm">
-                            <i class="fas fa-edit"></i> Edit
-                        </button>
+                    <div>
+                        <label class="block text-gray-500 text-xs mb-1" for="mobile-equipment-code">Equipment Code</label>
+                        <input id="mobile-equipment-code" name="code" type="text" value="LM100" class="w-full border border-gray-300 rounded px-2 py-2 text-base mb-2 bg-white" />
+                    </div>
+                    <div>
+                        <label class="block text-gray-500 text-xs mb-1" for="mobile-specification">Specification</label>
+                        <input id="mobile-specification" name="specification" type="text" value="Self-propelled Gas-powered Mower For Residential Lawns" class="w-full border border-gray-300 rounded px-2 py-2 text-base mb-2 bg-white" />
+                    </div>
+                    <div>
+                        <label class="block text-gray-500 text-xs mb-1" for="mobile-acquisition-date">Acquisition Date</label>
+                        <input id="mobile-acquisition-date" name="acquisitionDate" type="text" value="March 12, 2025" class="w-full border border-gray-300 rounded px-2 py-2 text-base mb-2 bg-white" />
+                    </div>
+                    <div>
+                        <label class="block text-gray-500 text-xs mb-1" for="mobile-available-quantity">Available Quantity</label>
+                        <input id="mobile-available-quantity" name="quantity" type="text" value="1" class="w-full border border-gray-300 rounded px-2 py-2 text-base mb-2 bg-white" />
+                    </div>
+                    <div>
+                        <label class="block text-gray-500 text-xs mb-1" for="mobile-power-type">Power Type</label>
+                        <input id="mobile-power-type" name="powerType" type="text" value="Gas" class="w-full border border-gray-300 rounded px-2 py-2 text-base mb-2 bg-white" />
+                    </div>
+                    <div>
+                        <label class="block text-gray-500 text-xs mb-1" for="mobile-condition">Condition</label>
+                        <input id="mobile-condition" name="condition" type="text" value="Brand New" class="w-full border border-gray-300 rounded px-2 py-2 text-base mb-2 bg-white" />
+                    </div>
+                    <div>
+                        <label class="block text-gray-500 text-xs mb-1" for="mobile-status">Status</label>
+                        <input id="mobile-status" name="status" type="text" value="On Stock" class="w-full border border-gray-300 rounded px-2 py-2 text-base mb-2 bg-white" />
+                    </div>
+                    <div>
+                        <label class="block text-gray-500 text-xs mb-1" for="mobile-vendor">Vendor</label>
+                        <input id="mobile-vendor" name="vendor" type="text" value="Ace Hardware" class="w-full border border-gray-300 rounded px-2 py-2 text-base mb-2 bg-white" />
                     </div>
                 </div>
-            </div>
-            
-            <!-- Upload Image Section -->
-            <div class="bg-white rounded-lg shadow border border-blue-200 p-4 mb-4 max-w-2xl mx-auto">
-                <label class="block text-gray-600 text-xs mb-1" for="mobile-upload-image">Upload Image</label>
-                <input id="mobile-upload-image" type="file" class="w-full border border-gray-300 rounded px-2 py-1 text-base"/>
-            </div>
+                <div class="flex flex-col gap-3 px-4 pb-6">
+                    <button id="saveChangesBtn" type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg shadow transition disabled:opacity-60 disabled:cursor-not-allowed" disabled>Save Changes</button>
+                    <button type="button" onclick="window.location.href='equipment.html'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 rounded-lg shadow transition">Cancel</button>
+                </div>
+            </form>
+            <!-- Save Notification -->
+            <div id="saveNotification" class="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-green-500 text-white px-6 py-3 rounded-xl shadow-lg z-50 hidden text-center font-semibold">Changes saved!</div>
         </div>
     </main>
     <script>
@@ -207,5 +190,29 @@
     </script>
     <script src="../js/main.js"></script>
     <script src="../js/equipments.js"></script>
+    <script>
+    // Enable Save Changes button if any field is edited
+    const form = document.getElementById('mobile-equipment-form');
+    const saveBtn = document.getElementById('saveChangesBtn');
+    let initialData = {};
+    Array.from(form.elements).forEach(el => {
+        if (el.name) initialData[el.name] = el.value;
+    });
+    form.addEventListener('input', () => {
+        let changed = false;
+        Array.from(form.elements).forEach(el => {
+            if (el.name && el.value !== initialData[el.name]) changed = true;
+        });
+        saveBtn.disabled = !changed;
+    });
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        document.getElementById('saveNotification').classList.remove('hidden');
+        setTimeout(() => {
+            document.getElementById('saveNotification').classList.add('hidden');
+            window.location.href = 'equipment.html';
+        }, 1500);
+    });
+    </script>
 </body>
 </html>

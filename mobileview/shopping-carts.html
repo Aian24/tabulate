@@ -42,7 +42,7 @@
             <button class="bg-blue-100 px-3 py-2 rounded-md text-blue-700 flex items-center"><i class="fas fa-filter mr-1"></i></button>
         </div>
         <div id="cart-list" class="space-y-3">
-            <!-- Cart 1 (expanded by default for demo) -->
+            <!-- Cart 1 (collapsed by default) -->
             <div class="bg-white rounded-lg shadow p-3 border border-blue-200">
                 <div class="flex justify-between items-center cursor-pointer" onclick="toggleCartDetails(0)">
                     <div>
@@ -53,13 +53,13 @@
                     </div>
                     <i id="arrow-0" class="fas fa-chevron-right text-gray-400 transition-transform duration-300"></i>
                 </div>
-                <div id="cart-details-0" class="mt-4">
+                <div id="cart-details-0" class="hidden mt-4">
                     <div class="bg-sky-100 rounded-lg shadow p-3 mb-3">
                         <div class="flex justify-between items-center mb-2">
                             <div class="font-semibold text-sm">Customer Information</div>
                             <div>
-                                <button class="bg-red-100 text-red-600 text-xs px-2 py-1 rounded mr-1">Delete</button>
-                                <a href="edit-customer-cart.html" class="bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded">Edit</a>
+                                <button onclick="confirmDelete(0)" class="bg-red-100 text-red-600 text-xs px-2 py-1 rounded mr-1 hover:bg-red-200 transition-colors">Delete</button>
+                                <a href="edit-customer-cart.html" class="bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded hover:bg-blue-200 transition-colors">Edit</a>
                             </div>
                         </div>
                         <div class="text-xs text-gray-700 space-y-1">
@@ -94,7 +94,35 @@
                     </div>
                     <i id="arrow-1" class="fas fa-chevron-right text-gray-400 transition-transform duration-300"></i>
                 </div>
-                <div id="cart-details-1" class="hidden mt-4"></div>
+                <div id="cart-details-1" class="hidden mt-4">
+                    <div class="bg-sky-100 rounded-lg shadow p-3 mb-3">
+                        <div class="flex justify-between items-center mb-2">
+                            <div class="font-semibold text-sm">Customer Information</div>
+                            <div>
+                                <button onclick="confirmDelete(1)" class="bg-red-100 text-red-600 text-xs px-2 py-1 rounded mr-1 hover:bg-red-200 transition-colors">Delete</button>
+                                <a href="edit-customer-cart.html" class="bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded hover:bg-blue-200 transition-colors">Edit</a>
+                            </div>
+                        </div>
+                        <div class="text-xs text-gray-700 space-y-1">
+                            <div><span class="font-semibold">Customer Name:</span> Jamie Dora</div>
+                            <div><span class="font-semibold">Phone:</span> 09293422436</div>
+                            <div><span class="font-semibold">Email Address:</span> <span class="font-semibold">jamie@gmail.com</span></div>
+                            <div><span class="font-semibold">Address:</span> Pabahay 2000 Muzon</div>
+                            <div><span class="font-semibold">Order Date:</span> mm/dd/yyyy</div>
+                        </div>
+                    </div>
+                    <div class="bg-sky-100 rounded-lg shadow p-3 mb-3">
+                        <div class="font-semibold text-sm mb-2">Services</div>
+                        <div class="flex justify-between text-xs mb-1">
+                            <span>Garden Landscaping Package</span>
+                            <span>$ 200.00</span>
+                        </div>
+                        <div class="flex justify-between text-xs font-semibold border-t border-gray-300 pt-2">
+                            <span>Total</span>
+                            <span class="text-blue-700">$ 200.00</span>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- Cart 3 (collapsed) -->
             <div class="bg-white rounded-lg shadow p-3 border border-blue-200">
@@ -107,11 +135,66 @@
                     </div>
                     <i id="arrow-2" class="fas fa-chevron-right text-gray-400 transition-transform duration-300"></i>
                 </div>
-                <div id="cart-details-2" class="hidden mt-4"></div>
+                <div id="cart-details-2" class="hidden mt-4">
+                    <div class="bg-sky-100 rounded-lg shadow p-3 mb-3">
+                        <div class="flex justify-between items-center mb-2">
+                            <div class="font-semibold text-sm">Customer Information</div>
+                            <div>
+                                <button onclick="confirmDelete(2)" class="bg-red-100 text-red-600 text-xs px-2 py-1 rounded mr-1 hover:bg-red-200 transition-colors">Delete</button>
+                                <a href="edit-customer-cart.html" class="bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded hover:bg-blue-200 transition-colors">Edit</a>
+                            </div>
+                        </div>
+                        <div class="text-xs text-gray-700 space-y-1">
+                            <div><span class="font-semibold">Customer Name:</span> Jamie Dora</div>
+                            <div><span class="font-semibold">Phone:</span> 09293422436</div>
+                            <div><span class="font-semibold">Email Address:</span> <span class="font-semibold">jamie@gmail.com</span></div>
+                            <div><span class="font-semibold">Address:</span> Pabahay 2000 Muzon</div>
+                            <div><span class="font-semibold">Order Date:</span> mm/dd/yyyy</div>
+                        </div>
+                    </div>
+                    <div class="bg-sky-100 rounded-lg shadow p-3 mb-3">
+                        <div class="font-semibold text-sm mb-2">Services</div>
+                        <div class="flex justify-between text-xs mb-1">
+                            <span>Garden Landscaping Package</span>
+                            <span>$ 200.00</span>
+                        </div>
+                        <div class="flex justify-between text-xs font-semibold border-t border-gray-300 pt-2">
+                            <span>Total</span>
+                            <span class="text-blue-700">$ 200.00</span>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- Add more carts as needed -->
         </div>
     </main>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg shadow-lg max-w-sm w-full mx-4 p-6">
+            <div class="flex items-center mb-4">
+                <div class="bg-red-100 rounded-full p-3 mr-4">
+                    <i class="fas fa-exclamation-triangle text-red-600 text-xl"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900">Delete Shopping Cart</h3>
+                    <p class="text-sm text-gray-600">This action cannot be undone.</p>
+                </div>
+            </div>
+            <div class="mb-6">
+                <p class="text-sm text-gray-700">Are you sure you want to delete this shopping cart for <span id="deleteCustomerName" class="font-semibold"></span>?</p>
+            </div>
+            <div class="flex justify-end gap-3">
+                <button id="cancelDelete" class="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded transition-colors">
+                    Cancel
+                </button>
+                <button id="confirmDelete" class="px-4 py-2 text-sm text-white bg-red-600 hover:bg-red-700 rounded transition-colors">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Load header and navigation
         fetch('../nav/header.html')
@@ -124,6 +207,19 @@
             .then(data => {
                 document.getElementById('nav-container').innerHTML = data;
             });
+
+        // Initialize all cart details as collapsed when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ensure all cart details are hidden by default
+            for (let i = 0; i < 3; i++) {
+                const details = document.getElementById('cart-details-' + i);
+                const arrow = document.getElementById('arrow-' + i);
+                if (details && arrow) {
+                    details.classList.add('hidden');
+                    arrow.classList.remove('rotate-90');
+                }
+            }
+        });
 
         // Expand/collapse cart details with arrow animation
         function toggleCartDetails(idx) {
@@ -146,6 +242,115 @@
                 }
             }
         }
+
+        // Delete functionality
+        let currentDeleteIndex = -1;
+
+        function confirmDelete(cartIndex) {
+            currentDeleteIndex = cartIndex;
+            
+            // Get customer name from the cart
+            const cartElement = document.querySelector(`#cart-details-${cartIndex}`).closest('.bg-white');
+            const customerNameElement = cartElement.querySelector('.text-blue-700.font-semibold.text-lg');
+            const customerName = customerNameElement ? customerNameElement.textContent : 'this customer';
+            
+            // Update modal content
+            document.getElementById('deleteCustomerName').textContent = customerName;
+            
+            // Show modal
+            document.getElementById('deleteModal').classList.remove('hidden');
+        }
+
+        function hideDeleteModal() {
+            document.getElementById('deleteModal').classList.add('hidden');
+            currentDeleteIndex = -1;
+        }
+
+        function deleteCart() {
+            if (currentDeleteIndex >= 0) {
+                // Find the cart element to remove
+                const cartElement = document.querySelector(`#cart-details-${currentDeleteIndex}`).closest('.bg-white');
+                
+                if (cartElement) {
+                    // Add fade-out animation
+                    cartElement.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+                    cartElement.style.opacity = '0';
+                    cartElement.style.transform = 'translateX(-100%)';
+                    
+                    // Remove element after animation
+                    setTimeout(() => {
+                        cartElement.remove();
+                        
+                        // Show success notification
+                        showNotification('Shopping cart deleted successfully!', 'success');
+                    }, 300);
+                }
+                
+                hideDeleteModal();
+            }
+        }
+
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg max-w-sm transform transition-all duration-300 translate-x-full`;
+            
+            if (type === 'success') {
+                notification.className += ' bg-green-500 text-white';
+            } else if (type === 'error') {
+                notification.className += ' bg-red-500 text-white';
+            } else {
+                notification.className += ' bg-blue-500 text-white';
+            }
+            
+            notification.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'} mr-2"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 100);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Event listeners for modal buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ensure all cart details are hidden by default
+            for (let i = 0; i < 3; i++) {
+                const details = document.getElementById('cart-details-' + i);
+                const arrow = document.getElementById('arrow-' + i);
+                if (details && arrow) {
+                    details.classList.add('hidden');
+                    arrow.classList.remove('rotate-90');
+                }
+            }
+
+            // Add event listeners for delete modal
+            document.getElementById('cancelDelete').addEventListener('click', hideDeleteModal);
+            document.getElementById('confirmDelete').addEventListener('click', deleteCart);
+            
+            // Close modal when clicking outside
+            document.getElementById('deleteModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    hideDeleteModal();
+                }
+            });
+        });
     </script>
 </body>
 </html> 

@@ -199,67 +199,132 @@
             </div>
             
             <!-- Mobile Product Cards -->
-            <div class="space-y-1">
+            <div class="space-y-4 md:hidden">
                 <!-- Product Card 1 -->
-                <div class="bg-white rounded-lg shadow p-2 mb-1">
-                    <div class="flex justify-between items-center">
-                        <span class="text-sky-500 font-semibold text-lg">Plant Cutters 1.</span>
-                        <span class="text-sky-400 font-semibold text-lg">$ 97.34</span>
+                <a href="#" class="block group">
+                <div class="bg-white rounded-2xl shadow-lg p-4 border border-blue-100 flex flex-col gap-2 group-hover:bg-blue-50 transition-colors relative" data-product-name="Plant Cutters 1.">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sky-600 font-bold text-lg">Plant Cutters 1.</span>
+                        <span class="text-sky-500 font-bold text-lg">$97.34</span>
                     </div>
-                    <hr class="my-0.5 border-gray-300">
-                    <div class="flex justify-between items-center mt-1">
+                    <hr class="my-2 border-blue-100">
+                    <div class="flex justify-between items-center">
                         <span class="text-gray-700 text-xs">Supplier: Global</span>
                         <span class="text-gray-700 text-xs">Date Created: June 27, 2025</span>
                     </div>
-                </div>
-                <!-- Product Card 2 -->
-                <div class="bg-white rounded-lg shadow p-2 mb-1">
-                    <div class="flex justify-between items-center">
-                        <span class="text-sky-500 font-semibold text-lg">Garden Shears</span>
-                        <span class="text-sky-400 font-semibold text-lg">$ 45.99</span>
+                    <div class="flex gap-2 mt-2">
+                        <button onclick="event.stopPropagation(); window.location.href='products-details.html';" class="flex-1 flex items-center justify-center gap-1 bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Edit">
+                            <i class="fas fa-pen"></i> Edit
+                        </button>
+                        <button onclick="event.stopPropagation(); openDeleteModal('Plant Cutters 1.', this);" class="flex-1 flex items-center justify-center gap-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Delete">
+                            <i class="fas fa-trash-alt"></i> Delete
+                        </button>
+                        <button onclick="event.stopPropagation(); window.location.href='create-invoice.html';" class="flex-1 flex items-center justify-center gap-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Invoice">
+                            <i class="fas fa-file-invoice"></i> Invoice
+                        </button>
                     </div>
-                    <hr class="my-0.5 border-gray-300">
-                    <div class="flex justify-between items-center mt-1">
+                </div>
+                </a>
+                <!-- Product Card 2 -->
+                <a href="#" class="block group">
+                <div class="bg-white rounded-2xl shadow-lg p-4 border border-blue-100 flex flex-col gap-2 group-hover:bg-blue-50 transition-colors relative" data-product-name="Garden Shears">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sky-600 font-bold text-lg">Garden Shears</span>
+                        <span class="text-sky-500 font-bold text-lg">$45.99</span>
+                    </div>
+                    <hr class="my-2 border-blue-100">
+                    <div class="flex justify-between items-center">
                         <span class="text-gray-700 text-xs">Supplier: Ace Hardware</span>
                         <span class="text-gray-700 text-xs">Date Created: June 25, 2025</span>
                     </div>
-                </div>
-                <!-- Product Card 3 -->
-                <div class="bg-white rounded-lg shadow p-2 mb-1">
-                    <div class="flex justify-between items-center">
-                        <span class="text-sky-500 font-semibold text-lg">Watering Can</span>
-                        <span class="text-sky-400 font-semibold text-lg">$ 23.50</span>
+                    <div class="flex gap-2 mt-2">
+                        <button onclick="event.stopPropagation(); window.location.href='products-details.html';" class="flex-1 flex items-center justify-center gap-1 bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Edit">
+                            <i class="fas fa-pen"></i> Edit
+                        </button>
+                        <button onclick="event.stopPropagation(); openDeleteModal('Garden Shears', this);" class="flex-1 flex items-center justify-center gap-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Delete">
+                            <i class="fas fa-trash-alt"></i> Delete
+                        </button>
+                        <button onclick="event.stopPropagation(); window.location.href='create-invoice.html';" class="flex-1 flex items-center justify-center gap-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Invoice">
+                            <i class="fas fa-file-invoice"></i> Invoice
+                        </button>
                     </div>
-                    <hr class="my-0.5 border-gray-300">
-                    <div class="flex justify-between items-center mt-1">
+                </div>
+                </a>
+                <!-- Product Card 3 -->
+                <a href="#" class="block group">
+                <div class="bg-white rounded-2xl shadow-lg p-4 border border-blue-100 flex flex-col gap-2 group-hover:bg-blue-50 transition-colors relative" data-product-name="Watering Can">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sky-600 font-bold text-lg">Watering Can</span>
+                        <span class="text-sky-500 font-bold text-lg">$23.50</span>
+                    </div>
+                    <hr class="my-2 border-blue-100">
+                    <div class="flex justify-between items-center">
                         <span class="text-gray-700 text-xs">Supplier: Home Depot</span>
                         <span class="text-gray-700 text-xs">Date Created: June 20, 2025</span>
                     </div>
-                </div>
-                <!-- Product Card 4 -->
-                <div class="bg-white rounded-lg shadow p-2 mb-1">
-                    <div class="flex justify-between items-center">
-                        <span class="text-sky-500 font-semibold text-lg">Fertilizer Spreader</span>
-                        <span class="text-sky-400 font-semibold text-lg">$ 89.99</span>
+                    <div class="flex gap-2 mt-2">
+                        <button onclick="event.stopPropagation(); window.location.href='products-details.html';" class="flex-1 flex items-center justify-center gap-1 bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Edit">
+                            <i class="fas fa-pen"></i> Edit
+                        </button>
+                        <button onclick="event.stopPropagation(); openDeleteModal('Watering Can', this);" class="flex-1 flex items-center justify-center gap-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Delete">
+                            <i class="fas fa-trash-alt"></i> Delete
+                        </button>
+                        <button onclick="event.stopPropagation(); window.location.href='create-invoice.html';" class="flex-1 flex items-center justify-center gap-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Invoice">
+                            <i class="fas fa-file-invoice"></i> Invoice
+                        </button>
                     </div>
-                    <hr class="my-0.5 border-gray-300">
-                    <div class="flex justify-between items-center mt-1">
+                </div>
+                </a>
+                <!-- Product Card 4 -->
+                <a href="#" class="block group">
+                <div class="bg-white rounded-2xl shadow-lg p-4 border border-blue-100 flex flex-col gap-2 group-hover:bg-blue-50 transition-colors relative" data-product-name="Fertilizer Spreader">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sky-600 font-bold text-lg">Fertilizer Spreader</span>
+                        <span class="text-sky-500 font-bold text-lg">$89.99</span>
+                    </div>
+                    <hr class="my-2 border-blue-100">
+                    <div class="flex justify-between items-center">
                         <span class="text-gray-700 text-xs">Supplier: Lowe's</span>
                         <span class="text-gray-700 text-xs">Date Created: June 18, 2025</span>
                     </div>
-                </div>
-                <!-- Product Card 5 -->
-                <div class="bg-white rounded-lg shadow p-2 mb-1">
-                    <div class="flex justify-between items-center">
-                        <span class="text-sky-500 font-semibold text-lg">Hedge Trimmer</span>
-                        <span class="text-sky-400 font-semibold text-lg">$ 156.75</span>
+                    <div class="flex gap-2 mt-2">
+                        <button onclick="event.stopPropagation(); window.location.href='products-details.html';" class="flex-1 flex items-center justify-center gap-1 bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Edit">
+                            <i class="fas fa-pen"></i> Edit
+                        </button>
+                        <button onclick="event.stopPropagation(); openDeleteModal('Fertilizer Spreader', this);" class="flex-1 flex items-center justify-center gap-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Delete">
+                            <i class="fas fa-trash-alt"></i> Delete
+                        </button>
+                        <button onclick="event.stopPropagation(); window.location.href='create-invoice.html';" class="flex-1 flex items-center justify-center gap-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Invoice">
+                            <i class="fas fa-file-invoice"></i> Invoice
+                        </button>
                     </div>
-                    <hr class="my-0.5 border-gray-300">
-                    <div class="flex justify-between items-center mt-1">
+                </div>
+                </a>
+                <!-- Product Card 5 -->
+                <a href="#" class="block group">
+                <div class="bg-white rounded-2xl shadow-lg p-4 border border-blue-100 flex flex-col gap-2 group-hover:bg-blue-50 transition-colors relative" data-product-name="Hedge Trimmer">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sky-600 font-bold text-lg">Hedge Trimmer</span>
+                        <span class="text-sky-500 font-bold text-lg">$156.75</span>
+                    </div>
+                    <hr class="my-2 border-blue-100">
+                    <div class="flex justify-between items-center">
                         <span class="text-gray-700 text-xs">Supplier: Global</span>
                         <span class="text-gray-700 text-xs">Date Created: June 15, 2025</span>
                     </div>
+                    <div class="flex gap-2 mt-2">
+                        <button onclick="event.stopPropagation(); window.location.href='products-details.html';" class="flex-1 flex items-center justify-center gap-1 bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Edit">
+                            <i class="fas fa-pen"></i> Edit
+                        </button>
+                        <button onclick="event.stopPropagation(); openDeleteModal('Hedge Trimmer', this);" class="flex-1 flex items-center justify-center gap-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Delete">
+                            <i class="fas fa-trash-alt"></i> Delete
+                        </button>
+                        <button onclick="event.stopPropagation(); window.location.href='create-invoice.html';" class="flex-1 flex items-center justify-center gap-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Invoice">
+                            <i class="fas fa-file-invoice"></i> Invoice
+                        </button>
+                    </div>
                 </div>
+                </a>
             </div>
         </div>
     </main>
@@ -283,6 +348,56 @@
         .then(data => {
             document.getElementById('nav-container').innerHTML = data;
         });
+
+    let productToDelete = '';
+    let deleteBtnRef = null;
+    function openDeleteModal(productName, btn) {
+        productToDelete = productName;
+        deleteBtnRef = btn;
+        document.getElementById('deleteModalProduct').textContent = `Are you sure you want to delete "${productName}"? This action cannot be undone.`;
+        document.getElementById('deleteModal').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeDeleteModal() {
+        document.getElementById('deleteModal').classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+    function confirmDelete() {
+        closeDeleteModal();
+        if (deleteBtnRef) {
+            // Find the card div to remove
+            let cardDiv = deleteBtnRef.closest('[data-product-name]');
+            if (cardDiv) {
+                // Remove the parent <a> as well
+                let cardAnchor = cardDiv.closest('a');
+                if (cardAnchor) {
+                    cardAnchor.remove();
+                } else {
+                    cardDiv.remove();
+                }
+            }
+        }
+        document.getElementById('deleteNotification').classList.remove('hidden');
+        setTimeout(() => {
+            document.getElementById('deleteNotification').classList.add('hidden');
+        }, 2000);
+        deleteBtnRef = null;
+    }
     </script>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-40 z-50 hidden items-center justify-center">
+        <div class="bg-white rounded-xl shadow-xl p-6 w-80 max-w-full flex flex-col items-center">
+            <div class="text-red-500 text-3xl mb-2"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="text-lg font-semibold mb-2">Delete Product?</div>
+            <div class="text-gray-700 mb-4 text-center" id="deleteModalProduct"></div>
+            <div class="flex gap-3 w-full">
+                <button onclick="closeDeleteModal()" class="flex-1 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold">Cancel</button>
+                <button onclick="confirmDelete()" class="flex-1 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white font-semibold">Delete</button>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Notification -->
+    <div id="deleteNotification" class="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-green-500 text-white px-6 py-3 rounded-xl shadow-lg z-50 hidden text-center font-semibold">Product deleted!</div>
 </body>
 </html>

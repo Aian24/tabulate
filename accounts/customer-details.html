@@ -29,18 +29,14 @@
         </div>
       <!-- Mobile Profile Container -->
       <div class="md:hidden">
-        <div class="w-full max-w-md mx-auto mt-">
+        <div class="w-full max-w-md mx-auto mt-4">
             <div class="bg-white rounded shadow p-4">
-                <div class="rounded-t flex flex-col items-center pt-8 pb-6 -mx-4 -mt-8" style="background-color: #41B6FF;">
-                    <div class="bg-white rounded border-4 flex items-center justify-center" style="border-color: #41B6FF; width: 80px; height: 80px;" >
-                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="32" cy="32" r="32" fill="white"/>
-                            <circle cx="32" cy="24" r="12" fill="#d1d5db"/>
-                            <ellipse cx="32" cy="48" rx="20" ry="12" fill="#d1d5db"/>
-                        </svg>
+                <div class="rounded-t flex flex-col items-center justify-center pt-8 pb-6 -mx-4 -mt-8" style="background-color: #41B6FF;">
+                    <div class="bg-white rounded-full border-4 flex items-center justify-center" style="border-color: #41B6FF; width: 96px; height: 96px;">
+                        <i class="fas fa-user text-5xl text-sky-400"></i>
                     </div>
-                    <div class="text-2xl font-bold text-gray-800 mt-4" id="mobileCustomerName">Customer Name</div>
-                    <div class="text-gray-600 text-sm mb-2" id="mobileCustomerEmail">customer@email.com</div>
+                    <div class="text-2xl font-bold text-gray-800 mt-4 text-center" id="mobileCustomerName">Customer Name</div>
+                    <div class="text-gray-600 text-sm mb-2 text-center" id="mobileCustomerEmail">customer@email.com</div>
                 </div>
                 <div class="flex flex-col items-center py-6">
                     <div class="text-3xl font-bold" style="color: #41B6FF;" id="mobileCustomerBalance">$0</div>
@@ -67,11 +63,11 @@
                 <div class="mt-4">
                     <div class="font-bold text-gray-700 mb-3 text-lg">Customer Information</div>
                     <div class="divide-y divide-blue-100 rounded overflow-hidden flex flex-col">
-                        <a href="customer-edit.html" class="bg-blue-50 py-4 px-3 font-medium flex justify-between items-center hover:bg-blue-100 transition cursor-pointer">Personal Information <span>&gt;</span></a>
-                        <a href="customer-edit.html" class="bg-blue-50 py-4 px-3 font-medium flex justify-between items-center hover:bg-blue-100 transition cursor-pointer">Billing Information <span>&gt;</span></a>
-                        <a href="customer-edit.html" class="bg-blue-50 py-4 px-3 font-medium flex justify-between items-center hover:bg-blue-100 transition cursor-pointer">Preferences <span>&gt;</span></a>
-                        <a href="customer-edit.html" class="bg-blue-50 py-4 px-3 font-medium flex justify-between items-center hover:bg-blue-100 transition cursor-pointer">Custom Fields <span>&gt;</span></a>
-                        <a href="customer-edit.html" class="bg-blue-50 py-4 px-3 font-medium flex justify-between items-center hover:bg-blue-100 transition cursor-pointer">Customer Notes <span>&gt;</span></a>
+                        <a href="#" onclick="navigateToEdit('personal')" class="bg-blue-50 py-4 px-3 font-medium flex justify-between items-center hover:bg-blue-100 transition cursor-pointer">Personal Information <span>&gt;</span></a>
+                        <a href="#" onclick="navigateToEdit('billing')" class="bg-blue-50 py-4 px-3 font-medium flex justify-between items-center hover:bg-blue-100 transition cursor-pointer">Billing Information <span>&gt;</span></a>
+                        <a href="#" onclick="navigateToEdit('preferences')" class="bg-blue-50 py-4 px-3 font-medium flex justify-between items-center hover:bg-blue-100 transition cursor-pointer">Preferences <span>&gt;</span></a>
+                        <a href="#" onclick="navigateToEdit('custom')" class="bg-blue-50 py-4 px-3 font-medium flex justify-between items-center hover:bg-blue-100 transition cursor-pointer">Custom Fields <span>&gt;</span></a>
+                        <a href="#" onclick="navigateToEdit('notes')" class="bg-blue-50 py-4 px-3 font-medium flex justify-between items-center hover:bg-blue-100 transition cursor-pointer">Customer Notes <span>&gt;</span></a>
                     </div>
                 </div>
             </div>
@@ -265,7 +261,7 @@
             </div>
         </div>
         <div class="flex justify-start">
-            <button id="editBtn" onclick="window.location.href='customer-edit.html'" class="px-8 py-4 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center gap-3 text-sm font-medium transition-colors">
+            <button id="editBtn" onclick="navigateToEdit('personal')" class="px-8 py-4 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center gap-3 text-sm font-medium transition-colors">
                 <i class="fas fa-edit"></i> Edit Customer
             </button>
         </div>
@@ -281,8 +277,148 @@
     <script src="../js/customerlist.js"></script>
     <script src="../js/main.js"></script>
     <script>
+        // Function to get URL parameters
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Function to navigate to edit page with customer data
+        function navigateToEdit(section) {
+            // Get all current customer data from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const customerData = {};
+            
+            // Copy all existing parameters
+            for (const [key, value] of urlParams.entries()) {
+                customerData[key] = value;
+            }
+            
+            // Add the section parameter to indicate which section to focus on
+            customerData.section = section;
+            
+            // Navigate to edit page with all customer data
+            const editUrl = `customer-edit.html?${new URLSearchParams(customerData).toString()}`;
+            window.location.href = editUrl;
+        }
+
+        // Function to populate customer data from URL parameters
+        function populateCustomerDataFromURL() {
+            const customerId = getUrlParameter('id');
+            const customerName = getUrlParameter('name');
+            const phone = getUrlParameter('phone');
+            const email = getUrlParameter('email');
+            const status = getUrlParameter('status');
+            const date = getUrlParameter('date');
+            const address = getUrlParameter('address');
+            const buildingAddress = getUrlParameter('buildingAddress');
+            const language = getUrlParameter('language');
+            const communication = getUrlParameter('communication');
+            const paymentTerms = getUrlParameter('paymentTerms');
+            const paymentMethod = getUrlParameter('paymentMethod');
+            const taxable = getUrlParameter('taxable');
+            const tags = getUrlParameter('tags');
+            const salesPerson = getUrlParameter('salesPerson');
+            const contractor = getUrlParameter('contractor');
+            const invoiceFrequency = getUrlParameter('invoiceFrequency');
+            const balance = getUrlParameter('balance');
+            const jobsCount = getUrlParameter('jobsCount');
+            const invoicesCount = getUrlParameter('invoicesCount');
+            const transactionsCount = getUrlParameter('transactionsCount');
+
+            if (customerName) {
+                // Populate mobile view elements
+                const mobileCustomerName = document.getElementById('mobileCustomerName');
+                const mobileCustomerEmail = document.getElementById('mobileCustomerEmail');
+                const mobileCustomerBalance = document.getElementById('mobileCustomerBalance');
+                const customerNameHeader = document.getElementById('customerNameHeader');
+
+                if (mobileCustomerName) mobileCustomerName.textContent = decodeURIComponent(customerName);
+                if (mobileCustomerEmail) mobileCustomerEmail.textContent = decodeURIComponent(email || '');
+                if (mobileCustomerBalance) mobileCustomerBalance.textContent = decodeURIComponent(balance || '$0');
+                if (customerNameHeader) customerNameHeader.textContent = decodeURIComponent(customerName);
+
+                // Populate desktop view elements
+                const personalFirstName = document.getElementById('personalFirstName');
+                const personalLastName = document.getElementById('personalLastName');
+                const personalPhone = document.getElementById('personalPhone');
+                const personalEmail = document.getElementById('personalEmail');
+                const personalAddress = document.getElementById('personalAddress');
+                const personalBuildingAddress = document.getElementById('personalBuildingAddress');
+                const prefClientSince = document.getElementById('prefClientSince');
+
+                if (personalFirstName) {
+                    const nameParts = decodeURIComponent(customerName).split(' ');
+                    personalFirstName.textContent = nameParts[0] || '';
+                    personalLastName.textContent = nameParts.slice(1).join(' ') || '';
+                }
+                if (personalPhone) personalPhone.textContent = decodeURIComponent(phone || 'N/A');
+                if (personalEmail) personalEmail.textContent = decodeURIComponent(email || 'N/A');
+                if (personalAddress) personalAddress.textContent = decodeURIComponent(address || 'N/A');
+                if (personalBuildingAddress) personalBuildingAddress.textContent = decodeURIComponent(buildingAddress || 'N/A');
+                if (prefClientSince) prefClientSince.textContent = decodeURIComponent(date || 'N/A');
+
+                // Populate preferences
+                const prefMainLanguage = document.getElementById('prefMainLanguage');
+                const prefPreferredCommunication = document.getElementById('prefPreferredCommunication');
+                const prefPaymentTerms = document.getElementById('prefPaymentTerms');
+                const prefPaymentMethod = document.getElementById('prefPaymentMethod');
+                const prefTaxable = document.getElementById('prefTaxable');
+                const prefTags = document.getElementById('prefTags');
+                const prefSalesPerson = document.getElementById('prefSalesPerson');
+                const prefContractor = document.getElementById('prefContractor');
+                const prefInvoiceFrequency = document.getElementById('prefInvoiceFrequency');
+
+                if (prefMainLanguage) prefMainLanguage.textContent = decodeURIComponent(language || 'English');
+                if (prefPreferredCommunication) prefPreferredCommunication.textContent = decodeURIComponent(communication || 'Email');
+                if (prefPaymentTerms) prefPaymentTerms.textContent = decodeURIComponent(paymentTerms || 'Net 30');
+                if (prefPaymentMethod) prefPaymentMethod.textContent = decodeURIComponent(paymentMethod || 'Credit Card');
+                if (prefTaxable) prefTaxable.textContent = decodeURIComponent(taxable || 'Yes');
+                if (prefTags) prefTags.textContent = decodeURIComponent(tags || 'Regular Customer');
+                if (prefSalesPerson) prefSalesPerson.textContent = decodeURIComponent(salesPerson || 'John Doe');
+                if (prefContractor) prefContractor.textContent = decodeURIComponent(contractor || 'ABC Contractors');
+                if (prefInvoiceFrequency) prefInvoiceFrequency.textContent = decodeURIComponent(invoiceFrequency || 'Monthly');
+
+                // Populate billing information (same as personal for now)
+                const billingFirstName = document.getElementById('billingFirstName');
+                const billingLastName = document.getElementById('billingLastName');
+                const billingPhone = document.getElementById('billingPhone');
+                const billingEmail = document.getElementById('billingEmail');
+                const billingAddress = document.getElementById('billingAddress');
+                const billingCompanyName = document.getElementById('billingCompanyName');
+
+                if (billingFirstName) {
+                    const nameParts = decodeURIComponent(customerName).split(' ');
+                    billingFirstName.textContent = nameParts[0] || '';
+                    billingLastName.textContent = nameParts.slice(1).join(' ') || '';
+                }
+                if (billingPhone) billingPhone.textContent = decodeURIComponent(phone || 'N/A');
+                if (billingEmail) billingEmail.textContent = decodeURIComponent(email || 'N/A');
+                if (billingAddress) billingAddress.textContent = decodeURIComponent(address || 'N/A');
+                if (billingCompanyName) billingCompanyName.textContent = 'Individual';
+
+                // Populate jobs, invoices, and transactions totals
+                const jobsTotal = document.getElementById('jobsTotal');
+                const invoicesTotal = document.getElementById('invoicesTotal');
+                const transactionsTotal = document.getElementById('transactionsTotal');
+
+                if (jobsTotal) jobsTotal.textContent = decodeURIComponent(jobsCount || '0');
+                if (invoicesTotal) invoicesTotal.textContent = decodeURIComponent(invoicesCount || '0');
+                if (transactionsTotal) transactionsTotal.textContent = decodeURIComponent(transactionsCount || '0');
+
+                // Populate customer notes
+                const customerNotes = document.getElementById('customerNotes');
+                if (customerNotes) {
+                    customerNotes.value = `Customer ${decodeURIComponent(customerName)} has been a client since ${decodeURIComponent(date || 'recently')}. They prefer ${decodeURIComponent(communication || 'email')} communication and have been responsive to our services.`;
+                }
+            }
+        }
+
         // Mobile card actions
         document.addEventListener('DOMContentLoaded', function() {
+            // Populate customer data from URL parameters
+            populateCustomerDataFromURL();
+
             const cardActionBtns = document.querySelectorAll('.card-action-btn');
             cardActionBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
