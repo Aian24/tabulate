@@ -207,20 +207,9 @@
                 <button class="bg-blue-500 text-white rounded text-sm font-medium flex items-center justify-center flex-1 min-w-0 py-2" onclick="window.location.href='create-product.html'">
                     <i class="fas fa-plus mr-1"></i>Create
                 </button>
-                <button class="bg-red-500 text-white rounded text-sm font-medium flex items-center justify-center flex-1 min-w-0 py-2" onclick="window.location.href='deleted-products.html'">
-                    <i class="fas fa-trash-alt mr-1"></i>Deleted
+                <button class="bg-blue-200 text-blue-800 rounded text-sm font-medium flex items-center justify-center flex-1 min-w-0 py-2" id="mobile-actions-button">
+                    <i class="fas fa-caret-down mr-1"></i>Actions
                 </button>
-                <button class="calendar-button border-2 border-gray-400 text-gray-700 flex items-center gap-1 px-2 py-1 rounded-lg text-xs flex-1 min-w-0" id="mobile-actions-button">
-                    <i class="fas fa-filter"></i>
-                    <span>Filter</span>
-                </button>
-                <div id="mobile-actions-dropdown" class="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10 hidden">
-                    <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="mobile-actions-button">
-                        <button class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 flex items-center gap-2" id="mobile-filter-action" role="menuitem">
-                            <i class="fas fa-filter"></i> Filter
-                        </button>
-                    </div>
-                </div>
                 <input type="text" placeholder="Search" class="rounded border border-gray-300 text-sm flex-[2] min-w-0 px-3 py-2" id="mobile-search" />
             </div>
             
@@ -242,11 +231,11 @@
                         <button onclick="event.stopPropagation(); window.location.href='products-details.html';" class="flex-1 flex items-center justify-center gap-1 bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Edit">
                             <i class="fas fa-pen"></i> Edit
                         </button>
-                        <button onclick="event.stopPropagation(); openMobileDeleteModal('Plant Cutters 1.', this);" class="flex-1 flex items-center justify-center gap-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Delete">
-                            <i class="fas fa-trash-alt"></i> Delete
-                        </button>
                         <button onclick="event.stopPropagation(); window.location.href='create-invoice.html';" class="flex-1 flex items-center justify-center gap-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Invoice">
                             <i class="fas fa-file-invoice"></i> Invoice
+                        </button>
+                        <button onclick="event.stopPropagation(); openMobileDeleteModal(this);" class="flex-1 flex items-center justify-center gap-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Delete">
+                            <i class="fas fa-trash-alt"></i> Delete
                         </button>
                     </div>
                 </div>
@@ -267,11 +256,11 @@
                         <button onclick="event.stopPropagation(); window.location.href='products-details.html';" class="flex-1 flex items-center justify-center gap-1 bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Edit">
                             <i class="fas fa-pen"></i> Edit
                         </button>
-                        <button onclick="event.stopPropagation(); openMobileDeleteModal('Garden Shears', this);" class="flex-1 flex items-center justify-center gap-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Delete">
-                            <i class="fas fa-trash-alt"></i> Delete
-                        </button>
                         <button onclick="event.stopPropagation(); window.location.href='create-invoice.html';" class="flex-1 flex items-center justify-center gap-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Invoice">
                             <i class="fas fa-file-invoice"></i> Invoice
+                        </button>
+                        <button onclick="event.stopPropagation(); openMobileDeleteModal(this);" class="flex-1 flex items-center justify-center gap-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Delete">
+                            <i class="fas fa-trash-alt"></i> Delete
                         </button>
                     </div>
                 </div>
@@ -292,11 +281,11 @@
                         <button onclick="event.stopPropagation(); window.location.href='products-details.html';" class="flex-1 flex items-center justify-center gap-1 bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Edit">
                             <i class="fas fa-pen"></i> Edit
                         </button>
-                        <button onclick="event.stopPropagation(); openMobileDeleteModal('Watering Can', this);" class="flex-1 flex items-center justify-center gap-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Delete">
-                            <i class="fas fa-trash-alt"></i> Delete
-                        </button>
                         <button onclick="event.stopPropagation(); window.location.href='create-invoice.html';" class="flex-1 flex items-center justify-center gap-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Invoice">
                             <i class="fas fa-file-invoice"></i> Invoice
+                        </button>
+                        <button onclick="event.stopPropagation(); openMobileDeleteModal(this);" class="flex-1 flex items-center justify-center gap-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Delete">
+                            <i class="fas fa-trash-alt"></i> Delete
                         </button>
                     </div>
                 </div>
@@ -317,11 +306,11 @@
                         <button onclick="event.stopPropagation(); window.location.href='products-details.html';" class="flex-1 flex items-center justify-center gap-1 bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Edit">
                             <i class="fas fa-pen"></i> Edit
                         </button>
-                        <button onclick="event.stopPropagation(); openMobileDeleteModal('Fertilizer Spreader', this);" class="flex-1 flex items-center justify-center gap-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Delete">
-                            <i class="fas fa-trash-alt"></i> Delete
-                        </button>
                         <button onclick="event.stopPropagation(); window.location.href='create-invoice.html';" class="flex-1 flex items-center justify-center gap-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Invoice">
                             <i class="fas fa-file-invoice"></i> Invoice
+                        </button>
+                        <button onclick="event.stopPropagation(); openMobileDeleteModal(this);" class="flex-1 flex items-center justify-center gap-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Delete">
+                            <i class="fas fa-trash-alt"></i> Delete
                         </button>
                     </div>
                 </div>
@@ -342,11 +331,11 @@
                         <button onclick="event.stopPropagation(); window.location.href='products-details.html';" class="flex-1 flex items-center justify-center gap-1 bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Edit">
                             <i class="fas fa-pen"></i> Edit
                         </button>
-                        <button onclick="event.stopPropagation(); openMobileDeleteModal('Hedge Trimmer', this);" class="flex-1 flex items-center justify-center gap-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Delete">
-                            <i class="fas fa-trash-alt"></i> Delete
-                        </button>
                         <button onclick="event.stopPropagation(); window.location.href='create-invoice.html';" class="flex-1 flex items-center justify-center gap-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Invoice">
                             <i class="fas fa-file-invoice"></i> Invoice
+                        </button>
+                        <button onclick="event.stopPropagation(); openMobileDeleteModal(this);" class="flex-1 flex items-center justify-center gap-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Delete">
+                            <i class="fas fa-trash-alt"></i> Delete
                         </button>
                     </div>
                 </div>
@@ -403,88 +392,46 @@
                 }
             }
         }
-        
-        // Show notification with animation
-        const notification = document.getElementById('deleteNotification');
-        const notificationContent = document.getElementById('deleteNotificationContent');
-        
-        notification.classList.remove('hidden');
-        
-        // Trigger animation
+        document.getElementById('deleteNotification').classList.remove('hidden');
         setTimeout(() => {
-            notificationContent.classList.remove('scale-95', 'opacity-0');
-            notificationContent.classList.add('scale-100', 'opacity-100');
-        }, 10);
-        
-        // Hide notification after 3 seconds
-        setTimeout(() => {
-            notificationContent.classList.remove('scale-100', 'opacity-100');
-            notificationContent.classList.add('scale-95', 'opacity-0');
-            
-            setTimeout(() => {
-                notification.classList.add('hidden');
-            }, 300);
-        }, 3000);
-        
+            document.getElementById('deleteNotification').classList.add('hidden');
+        }, 2000);
         deleteBtnRef = null;
     }
 
-    let mobileProductToDelete = '';
-    let mobileDeleteBtnRef = null;
-    function openMobileDeleteModal(productName, btn) {
-        mobileProductToDelete = productName;
-        mobileDeleteBtnRef = btn;
-        document.getElementById('mobileDeleteModalProduct').textContent = `Are you sure you want to delete "${productName}"? This action cannot be undone.`;
-        const modal = document.getElementById('mobileDeleteModal');
-        const modalContent = modal.querySelector('.modal-content-modern');
-        modal.classList.remove('hidden');
-        setTimeout(() => {
-            modalContent.classList.add('scale-100', 'opacity-100');
-            modalContent.classList.remove('scale-95', 'opacity-0');
-        }, 10);
-        document.body.style.overflow = 'hidden';
-    }
-    function closeMobileDeleteModal() {
-        const modal = document.getElementById('mobileDeleteModal');
-        const modalContent = modal.querySelector('.modal-content-modern');
-        modalContent.classList.remove('scale-100', 'opacity-100');
-        modalContent.classList.add('scale-95', 'opacity-0');
-        setTimeout(() => {
-            modal.classList.add('hidden');
+    // Mobile Delete Modal logic (robust event binding)
+    document.addEventListener('DOMContentLoaded', function() {
+        let mobileDeleteBtnRef = null;
+        window.openMobileDeleteModal = function(btn) {
+            mobileDeleteBtnRef = btn;
+            const card = btn.closest('[data-product-name]');
+            const productName = card ? card.getAttribute('data-product-name') : '';
+            document.getElementById('mobileDeleteModalTitle').textContent = `Delete ${productName}?`;
+            document.getElementById('mobileDeleteModalText').textContent = `Are you sure you want to delete this product? This action cannot be undone and will permanently remove the product.`;
+            document.getElementById('mobileDeleteModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        };
+        document.getElementById('mobileDeleteCancelBtn').addEventListener('click', function() {
+            document.getElementById('mobileDeleteModal').classList.add('hidden');
             document.body.style.overflow = '';
-        }, 300);
-    }
-    function confirmMobileDelete() {
-        closeMobileDeleteModal();
-        if (mobileDeleteBtnRef) {
-            // Find the card div to remove
-            let cardDiv = mobileDeleteBtnRef.closest('[data-product-name]');
-            if (cardDiv) {
-                // Remove the parent <a> as well
-                let cardAnchor = cardDiv.closest('a');
-                if (cardAnchor) {
-                    cardAnchor.remove();
-                } else {
-                    cardDiv.remove();
+        });
+        document.getElementById('mobileDeleteConfirmBtn').addEventListener('click', function() {
+            document.getElementById('mobileDeleteModal').classList.add('hidden');
+            document.body.style.overflow = '';
+            if (mobileDeleteBtnRef) {
+                let cardDiv = mobileDeleteBtnRef.closest('[data-product-name]');
+                if (cardDiv) {
+                    let cardAnchor = cardDiv.closest('a');
+                    if (cardAnchor) {
+                        cardAnchor.remove();
+                    } else {
+                        cardDiv.remove();
+                    }
                 }
             }
-        }
-        // Show notification with animation
-        const notification = document.getElementById('mobileDeleteNotification');
-        const notificationContent = document.getElementById('mobileDeleteNotificationContent');
-        notification.classList.remove('hidden');
-        void notificationContent.offsetWidth;
-        notificationContent.classList.remove('opacity-0', 'scale-95');
-        notificationContent.classList.add('opacity-100', 'scale-100');
-        setTimeout(() => {
-            notificationContent.classList.remove('opacity-100', 'scale-100');
-            notificationContent.classList.add('opacity-0', 'scale-95');
-            setTimeout(() => {
-                notification.classList.add('hidden');
-            }, 300);
-        }, 2000);
-        mobileDeleteBtnRef = null;
-    }
+            mobileDeleteBtnRef = null;
+        });
+    });
     </script>
 
     <!-- Delete Confirmation Modal -->
@@ -500,35 +447,20 @@
         </div>
     </div>
     <!-- Delete Notification -->
-    <div id="deleteNotification" class="fixed inset-0 flex items-center justify-center z-50 hidden">
-        <div class="bg-green-500 text-white px-8 py-4 rounded-xl shadow-2xl text-center font-semibold text-lg transform transition-all duration-300 scale-95 opacity-0" id="deleteNotificationContent">
-            <div class="flex items-center gap-3">
-                <i class="fas fa-check-circle text-xl"></i>
-                <span>Product deleted successfully!</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Mobile Delete Modal -->
-    <div id="mobileDeleteModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
-        <div class="modal-content-modern bg-white rounded-2xl shadow-2xl max-w-sm w-full p-8 text-center transform scale-95 opacity-0 transition-all duration-300">
+    <div id="deleteNotification" class="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-green-500 text-white px-6 py-3 rounded-xl shadow-lg z-50 hidden text-center font-semibold">Product deleted!</div>
+    <!-- Mobile Delete Confirmation Modal -->
+    <div id="mobileDeleteModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-40">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-xs w-full p-6 text-center relative">
             <div class="flex justify-center mb-3">
-                <i class="fas fa-exclamation-triangle text-red-500 text-4xl animate-bounce"></i>
+                <div class="bg-red-100 rounded-full p-4 flex items-center justify-center mx-auto">
+                    <i class="fas fa-exclamation-triangle text-red-500 text-3xl"></i>
+                </div>
             </div>
-            <h2 class="text-2xl font-bold mb-2">Delete Product?</h2>
-            <p class="mb-6 text-gray-600" id="mobileDeleteModalProduct">Are you sure you want to delete this product?</p>
-            <div class="flex justify-center gap-4">
-                <button onclick="closeMobileDeleteModal()" class="px-6 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition">Cancel</button>
-                <button onclick="confirmMobileDelete()" class="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">Delete</button>
-            </div>
-        </div>
-    </div>
-    <!-- Mobile Delete Notification -->
-    <div id="mobileDeleteNotification" class="fixed inset-0 flex items-center justify-center z-50 hidden">
-        <div class="bg-green-500 text-white px-8 py-4 rounded-xl shadow-2xl text-center font-semibold text-lg transform transition-all duration-300 scale-95 opacity-0" id="mobileDeleteNotificationContent">
-            <div class="flex items-center gap-3">
-                <i class="fas fa-check-circle text-xl"></i>
-                <span>Product deleted successfully!</span>
+            <h2 class="text-xl font-bold mb-2" id="mobileDeleteModalTitle">Delete?</h2>
+            <p class="mb-6 text-gray-600 text-sm" id="mobileDeleteModalText">Are you sure you want to delete this product? This action cannot be undone and will permanently remove the product.</p>
+            <div class="flex gap-3 w-full">
+                <button id="mobileDeleteCancelBtn" class="flex-1 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold">Cancel</button>
+                <button id="mobileDeleteConfirmBtn" class="flex-1 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white font-semibold">Delete</button>
             </div>
         </div>
     </div>
