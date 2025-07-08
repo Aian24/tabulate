@@ -154,41 +154,88 @@
         <!-- Mobile Layout -->
         <div class="block md:hidden px-4">
             <!-- Product Information Section -->
-            <div class="bg-white rounded-lg shadow border border-blue-200 mb-4">
-                <div class="bg-blue-50 px-4 py-2 rounded-t-lg border-b border-blue-100">
-                    <span class="text-blue-700 font-semibold text-base">Product Information</span>
+            <div class="bg-white rounded-lg shadow-lg border border-gray-200 mb-4">
+                <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-t-lg px-4 py-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <div class="bg-white bg-opacity-20 p-2 rounded-lg">
+                                <i class="fas fa-box text-white text-lg"></i>
+                            </div>
+                            <span class="text-white font-semibold text-base">Product Information</span>
+                        </div>
+                        <div class="bg-white bg-opacity-20 px-2 py-1 rounded-full">
+                            <span class="text-white text-xs font-medium">5 fields</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="p-4">
-                    <div class="grid grid-cols-1 gap-4">
-                        <div>
-                            <label class="block text-gray-500 text-xs mb-1" for="mobile-item-name">Item Name</label>
-                            <input id="mobile-item-name" type="text" value="Plant Cutters 1." class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
+                    <div class="space-y-4">
+                        <!-- Item Name Field -->
+                        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-3">
+                            <div class="flex items-center justify-between mb-2">
+                                <label class="text-blue-700 font-medium text-sm flex items-center gap-2">
+                                    <i class="fas fa-tag text-blue-600 text-xs"></i>
+                                    Item Name
+                                </label>
+                                <span class="text-blue-600 text-xs font-medium">Required</span>
+                            </div>
+                            <input id="mobile-item-name" type="text" value="Plant Cutters 1." class="w-full bg-white bg-opacity-80 border border-blue-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" readonly />
                         </div>
 
-                        <div>
-                            <label class="block text-gray-500 text-xs mb-1" for="mobile-specification">Specification</label>
-                            <input id="mobile-specification" type="text" value="Cool amazing 67x3 size." class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
+                        <!-- Specification Field -->
+                        <div class="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-lg p-3">
+                            <div class="flex items-center justify-between mb-2">
+                                <label class="text-purple-700 font-medium text-sm flex items-center gap-2">
+                                    <i class="fas fa-info-circle text-purple-600 text-xs"></i>
+                                    Specification
+                                </label>
+                                <span class="text-purple-600 text-xs font-medium">Required</span>
+                            </div>
+                            <input id="mobile-specification" type="text" value="Cool amazing 67x3 size." class="w-full bg-white bg-opacity-80 border border-purple-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200" readonly />
                         </div>
 
-                        <div>
-                            <label class="block text-gray-500 text-xs mb-1" for="mobile-notes">Notes</label>
-                            <input id="mobile-notes" type="text" value="This product was updated via Selenium." class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
+                        <!-- Notes Field -->
+                        <div class="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-3">
+                            <div class="flex items-center justify-between mb-2">
+                                <label class="text-green-700 font-medium text-sm flex items-center gap-2">
+                                    <i class="fas fa-sticky-note text-green-600 text-xs"></i>
+                                    Notes
+                                </label>
+                                <span class="text-green-600 text-xs font-medium">Optional</span>
+                            </div>
+                            <input id="mobile-notes" type="text" value="This product was updated via Selenium." class="w-full bg-white bg-opacity-80 border border-green-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200" readonly />
                         </div>
 
-                        <div>
-                            <label class="block text-gray-500 text-xs mb-1" for="mobile-business-category">Business Category</label>
-                            <input id="mobile-business-category" type="text" value="Construction Services, Plumbing Services" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
+                        <!-- Business Category Field -->
+                        <div class="bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200 rounded-lg p-3">
+                            <div class="flex items-center justify-between mb-2">
+                                <label class="text-orange-700 font-medium text-sm flex items-center gap-2">
+                                    <i class="fas fa-briefcase text-orange-600 text-xs"></i>
+                                    Business Category
+                                </label>
+                                <span class="text-orange-600 text-xs font-medium">Required</span>
+                            </div>
+                            <input id="mobile-business-category" type="text" value="Construction Services, Plumbing Services" class="w-full bg-white bg-opacity-80 border border-orange-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200" readonly />
                         </div>
 
-                        <div>
-                            <label class="block text-gray-500 text-xs mb-1" for="mobile-status">Status</label>
-                            <input id="mobile-status" type="text" value="Active" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2 bg-gray-100" readonly />
+                        <!-- Status Field -->
+                        <div class="bg-gradient-to-r from-teal-50 to-cyan-50 border border-teal-200 rounded-lg p-3">
+                            <div class="flex items-center justify-between mb-2">
+                                <label class="text-teal-700 font-medium text-sm flex items-center gap-2">
+                                    <i class="fas fa-toggle-on text-teal-600 text-xs"></i>
+                                    Status
+                                </label>
+                                <div class="flex items-center gap-2">
+                                    <span class="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-medium">Active</span>
+                                </div>
+                            </div>
+                            <input id="mobile-status" type="text" value="Active" class="w-full bg-white bg-opacity-80 border border-teal-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200" readonly />
                         </div>
                     </div>
                     
                     <!-- Mobile Edit Button -->
-                    <div class="mt-4 flex justify-start">
-                        <button id="mobileEditBtn" class="px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center gap-2 text-sm">
+                    <div class="mt-6 flex justify-start">
+                        <button id="mobileEditBtn" class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-3 rounded-lg shadow-lg hover:shadow-xl flex items-center gap-2 text-sm font-semibold transition-all duration-200">
                             <i class="fas fa-edit"></i> Edit
                         </button>
                     </div>
@@ -197,52 +244,188 @@
 
             <!-- Vendors Section -->
             <div class="bg-white rounded-lg shadow border border-blue-200 mb-4">
-                <div class="bg-purple-400 rounded-t-lg px-4 py-2">
-                    <span class="text-white font-semibold text-base">Vendors</span>
+                <div class="bg-gradient-to-r from-purple-500 to-purple-600 rounded-t-lg px-4 py-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-white font-semibold text-base">Vendors</span>
+                        <span class="bg-white bg-opacity-20 text-white text-xs px-2 py-1 rounded-full">2 vendors</span>
+                    </div>
                 </div>
                 <div class="p-4">
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full text-xs mb-2">
-                            <thead>
-                                <tr class="bg-blue-100 text-blue-900">
-                                    <th class="px-2 py-1 text-left">Vendor</th>
-                                    <th class="px-2 py-1 text-left">Price</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="border-b">
-                                    <td class="px-2 py-1 align-top w-2/3">
-                                        <span class="block text-blue-700 font-semibold">Global</span>
-                                        <span class="block text-gray-700 text-xs">Item Number: ITEM-6377</span>
-                                        <span class="block text-gray-700 text-xs">Qty Type: Box</span>
-                                        <span class="block text-gray-700 text-xs">Qty Per Item: 6</span>
-                                    </td>
-                                    <td class="px-2 py-1 align-top w-1/3 text-blue-700 font-semibold text-right">$97.34</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-2 py-1 align-top w-2/3">
-                                        <span class="block text-blue-700 font-semibold">Ace Hardware</span>
-                                        <span class="block text-gray-700 text-xs">Item Number: ITEM-8901</span>
-                                        <span class="block text-gray-700 text-xs">Qty Type: Each</span>
-                                        <span class="block text-gray-700 text-xs">Qty Per Item: 1</span>
-                                    </td>
-                                    <td class="px-2 py-1 align-top w-1/3 text-blue-700 font-semibold text-right">$89.99</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <!-- Vendor Cards -->
+                    <div class="space-y-3 mb-4">
+                        <!-- Vendor Card 1 -->
+                        <div class="vendor-card bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-3 relative group" data-vendor-id="1">
+                            <div class="flex justify-between items-start">
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h3 class="text-blue-700 font-semibold text-sm">Global</h3>
+                                        <div class="relative">
+                                            <button class="vendor-options-btn text-gray-500 hover:text-gray-700 p-1 rounded-full hover:bg-gray-100 transition-colors" data-vendor-id="1">
+                                                <i class="fas fa-ellipsis-v text-xs"></i>
+                                            </button>
+                                            <div class="vendor-dropdown hidden absolute right-0 mt-1 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                                                <button class="w-full text-left px-3 py-2 text-xs text-gray-700 hover:bg-blue-50 flex items-center" onclick="editVendorInline(1)">
+                                                    <i class="fas fa-edit mr-2 text-blue-500"></i> Edit Inline
+                                                </button>
+                                                <button class="w-full text-left px-3 py-2 text-xs text-purple-600 hover:bg-purple-50 flex items-center" onclick="editVendorModal(1)">
+                                                    <i class="fas fa-external-link-alt mr-2 text-purple-500"></i> Edit in Modal
+                                                </button>
+                                                <button class="w-full text-left px-3 py-2 text-xs text-red-600 hover:bg-red-50 flex items-center" onclick="deleteVendor(1)">
+                                                    <i class="fas fa-trash mr-2"></i> Delete
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-2 text-xs">
+                                        <div class="bg-white bg-opacity-60 rounded px-2 py-1">
+                                            <span class="text-gray-600">Item #:</span>
+                                            <span class="text-gray-800 font-medium" data-field="item-number">ITEM-6377</span>
+                                        </div>
+                                        <div class="bg-white bg-opacity-60 rounded px-2 py-1">
+                                            <span class="text-gray-600">Qty Type:</span>
+                                            <span class="text-gray-800 font-medium" data-field="qty-type">Box</span>
+                                        </div>
+                                        <div class="bg-white bg-opacity-60 rounded px-2 py-1">
+                                            <span class="text-gray-600">Qty Per Item:</span>
+                                            <span class="text-gray-800 font-medium" data-field="qty-per-item">6</span>
+                                        </div>
+                                        <div class="bg-white bg-opacity-60 rounded px-2 py-1">
+                                            <span class="text-gray-600">Price:</span>
+                                            <span class="text-green-600 font-semibold" data-field="price">$97.34</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Vendor Card 2 -->
+                        <div class="vendor-card bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-3 relative group" data-vendor-id="2">
+                            <div class="flex justify-between items-start">
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h3 class="text-green-700 font-semibold text-sm">Ace Hardware</h3>
+                                        <div class="relative">
+                                            <button class="vendor-options-btn text-gray-500 hover:text-gray-700 p-1 rounded-full hover:bg-gray-100 transition-colors" data-vendor-id="2">
+                                                <i class="fas fa-ellipsis-v text-xs"></i>
+                                            </button>
+                                            <div class="vendor-dropdown hidden absolute right-0 mt-1 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                                                <button class="w-full text-left px-3 py-2 text-xs text-gray-700 hover:bg-blue-50 flex items-center" onclick="editVendorInline(2)">
+                                                    <i class="fas fa-edit mr-2 text-blue-500"></i> Edit Inline
+                                                </button>
+                                                <button class="w-full text-left px-3 py-2 text-xs text-purple-600 hover:bg-purple-50 flex items-center" onclick="editVendorModal(2)">
+                                                    <i class="fas fa-external-link-alt mr-2 text-purple-500"></i> Edit in Modal
+                                                </button>
+                                                <button class="w-full text-left px-3 py-2 text-xs text-red-600 hover:bg-red-50 flex items-center" onclick="deleteVendor(2)">
+                                                    <i class="fas fa-trash mr-2"></i> Delete
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-2 text-xs">
+                                        <div class="bg-white bg-opacity-60 rounded px-2 py-1">
+                                            <span class="text-gray-600">Item #:</span>
+                                            <span class="text-gray-800 font-medium" data-field="item-number">ITEM-8901</span>
+                                        </div>
+                                        <div class="bg-white bg-opacity-60 rounded px-2 py-1">
+                                            <span class="text-gray-600">Qty Type:</span>
+                                            <span class="text-gray-800 font-medium" data-field="qty-type">Each</span>
+                                        </div>
+                                        <div class="bg-white bg-opacity-60 rounded px-2 py-1">
+                                            <span class="text-gray-600">Qty Per Item:</span>
+                                            <span class="text-gray-800 font-medium" data-field="qty-per-item">1</span>
+                                        </div>
+                                        <div class="bg-white bg-opacity-60 rounded px-2 py-1">
+                                            <span class="text-gray-600">Price:</span>
+                                            <span class="text-green-600 font-semibold" data-field="price">$89.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex items-center gap-2 mb-2">
-                        <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded text-xs font-semibold">
-                            <i class="fas fa-plus mr-1"></i> Add Vendor
+
+                    <!-- Add Vendor Button -->
+                    <div class="flex items-center gap-2">
+                        <button id="addVendorBtn" class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 transition-all duration-200 shadow-md hover:shadow-lg">
+                            <i class="fas fa-plus"></i> Add Vendor
                         </button>
                     </div>
                 </div>
             </div>
             
             <!-- Upload Image Section -->
-            <div class="bg-white rounded-lg shadow border border-blue-200 p-4 mb-4">
-                <label class="block text-gray-600 text-xs mb-1" for="mobile-upload-image">Upload Image</label>
-                <input id="mobile-upload-image" type="file" class="w-full border border-gray-300 rounded px-2 py-1 text-base"/>
+            <div class="bg-white rounded-lg shadow-lg border border-gray-200 p-4 mb-4">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-2">
+                        <div class="bg-blue-100 p-2 rounded-lg">
+                            <i class="fas fa-image text-blue-600 text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-gray-800 font-semibold text-sm">Product Image</h3>
+                            <p class="text-gray-500 text-xs">Upload a high-quality image</p>
+                        </div>
+                    </div>
+                    <div class="bg-green-100 px-2 py-1 rounded-full">
+                        <span class="text-green-700 text-xs font-medium">Optional</span>
+                    </div>
+                </div>
+                
+                <!-- Image Upload Area -->
+                <div id="imageUploadArea" class="relative">
+                    <!-- Current Image Display (if exists) -->
+                    <div id="currentImageContainer" class="hidden mb-3">
+                        <div class="relative inline-block">
+                            <img id="currentImage" src="" alt="Current product image" class="w-24 h-24 object-cover rounded-lg border-2 border-gray-200">
+                            <button id="removeImageBtn" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600 transition-colors">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Upload Zone -->
+                    <div id="uploadZone" class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-400 hover:bg-blue-50 transition-all duration-200 cursor-pointer">
+                        <div class="space-y-3">
+                            <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto">
+                                <i class="fas fa-cloud-upload-alt text-blue-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-700 font-medium text-sm">Drop your image here</p>
+                                <p class="text-gray-500 text-xs mt-1">or click to browse</p>
+                            </div>
+                            <div class="text-xs text-gray-400">
+                                <p>Supports: JPG, PNG, GIF (Max 5MB)</p>
+                            </div>
+                        </div>
+                        <input id="mobile-upload-image" type="file" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+                    </div>
+                    
+                    <!-- Upload Progress (hidden by default) -->
+                    <div id="uploadProgress" class="hidden mt-3">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="flex-1 bg-gray-200 rounded-full h-2">
+                                <div id="progressBar" class="bg-blue-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                            </div>
+                            <span id="progressText" class="text-xs text-gray-600">0%</span>
+                        </div>
+                        <p class="text-xs text-gray-500">Uploading image...</p>
+                    </div>
+                </div>
+                
+                <!-- Image Preview -->
+                <div id="imagePreview" class="hidden mt-3">
+                    <div class="bg-gray-50 rounded-lg p-3">
+                        <div class="flex items-center gap-3">
+                            <img id="previewImage" src="" alt="Preview" class="w-16 h-16 object-cover rounded-lg border border-gray-200">
+                            <div class="flex-1">
+                                <p id="previewFileName" class="text-sm font-medium text-gray-800"></p>
+                                <p id="previewFileSize" class="text-xs text-gray-500"></p>
+                            </div>
+                            <button id="changeImageBtn" class="text-blue-600 hover:text-blue-700 text-sm font-medium">
+                                Change
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -250,15 +433,134 @@
     <!-- Delete Vendor Modal -->
     <div id="deleteVendorModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
         <div class="modal-content-modern bg-white rounded-2xl shadow-2xl max-w-sm w-full p-8 text-center transform scale-95 opacity-0 transition-all duration-300">
-            <div class="flex justify-center mb-3">
-                <i class="fas fa-trash-alt text-red-500 text-4xl animate-bounce"></i>
+            <div class="flex justify-center mb-4">
+                <div class="bg-red-100 p-4 rounded-full">
+                    <i class="fas fa-exclamation-triangle text-red-500 text-4xl"></i>
+                </div>
             </div>
-            <h2 class="text-2xl font-bold mb-2">Delete Vendor?</h2>
-            <p class="mb-6 text-gray-600">Are you sure you want to delete this vendor?</p>
-            <div class="flex justify-center gap-4">
-                <button id="cancelDeleteVendor" class="px-6 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition">Cancel</button>
-                <button id="confirmDeleteVendor" class="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">Delete</button>
+            <h2 class="text-2xl font-bold mb-3 text-gray-800" id="deleteVendorTitle">Delete Vendor?</h2>
+            <p class="mb-6 text-gray-600 text-sm leading-relaxed">Are you sure you want to delete this vendor? This action cannot be undone and will permanently remove the vendor from this product.</p>
+            <div class="flex justify-center gap-3">
+                <button id="cancelDeleteVendor" class="px-6 py-3 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors font-medium">
+                    <i class="fas fa-times mr-2"></i>Cancel
+                </button>
+                <button id="confirmDeleteVendor" class="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors font-medium">
+                    <i class="fas fa-trash mr-2"></i>Delete
+                </button>
             </div>
+        </div>
+    </div>
+
+    <!-- Edit Vendor Modal -->
+    <div id="editVendorModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="modal-content-modern bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 transform scale-95 opacity-0 transition-all duration-300">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-bold text-gray-800" id="editVendorTitle">Edit Vendor</h2>
+                <button class="text-gray-400 hover:text-gray-600 transition-colors" onclick="closeEditVendorModal()">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+            </div>
+            
+            <form id="editVendorForm" class="space-y-4">
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Vendor Name</label>
+                    <input type="text" id="editVendorName" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" readonly>
+                </div>
+                
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Item Number <span class="text-red-500">*</span></label>
+                    <input type="text" id="editVendorItemNumber" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                </div>
+                
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Quantity Type <span class="text-red-500">*</span></label>
+                    <select id="editVendorQtyType" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        <option value="Each">Each</option>
+                        <option value="Box">Box</option>
+                        <option value="Pack">Pack</option>
+                        <option value="Case">Case</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Quantity Per Item <span class="text-red-500">*</span></label>
+                    <input type="number" id="editVendorQtyPerItem" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" min="1" required>
+                </div>
+                
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Price <span class="text-red-500">*</span></label>
+                    <div class="relative">
+                        <span class="absolute left-3 top-2 text-gray-500">$</span>
+                        <input type="number" id="editVendorPrice" class="w-full border border-gray-300 rounded-lg pl-8 pr-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" step="0.01" min="0" required>
+                    </div>
+                </div>
+                
+                <div class="flex justify-end gap-3 pt-4">
+                    <button type="button" onclick="closeEditVendorModal()" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition">
+                        Cancel
+                    </button>
+                    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
+                        <i class="fas fa-save mr-2"></i>Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Vendor Modal -->
+    <div id="addVendorModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="modal-content-modern bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 transform scale-95 opacity-0 transition-all duration-300">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-bold text-gray-800">Add New Vendor</h2>
+                <button class="text-gray-400 hover:text-gray-600 transition-colors" onclick="closeAddVendorModal()">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+            </div>
+            
+            <form id="addVendorForm" class="space-y-4">
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Vendor Name <span class="text-red-500">*</span></label>
+                    <input type="text" id="addVendorName" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Enter vendor name" required>
+                </div>
+                
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Item Number <span class="text-red-500">*</span></label>
+                    <input type="text" id="addVendorItemNumber" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="e.g., ITEM-1234" required>
+                </div>
+                
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Quantity Type <span class="text-red-500">*</span></label>
+                    <select id="addVendorQtyType" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        <option value="">Select quantity type</option>
+                        <option value="Each">Each</option>
+                        <option value="Box">Box</option>
+                        <option value="Pack">Pack</option>
+                        <option value="Case">Case</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Quantity Per Item <span class="text-red-500">*</span></label>
+                    <input type="number" id="addVendorQtyPerItem" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" min="1" placeholder="1" required>
+                </div>
+                
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Price <span class="text-red-500">*</span></label>
+                    <div class="relative">
+                        <span class="absolute left-3 top-2 text-gray-500">$</span>
+                        <input type="number" id="addVendorPrice" class="w-full border border-gray-300 rounded-lg pl-8 pr-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" step="0.01" min="0" placeholder="0.00" required>
+                    </div>
+                </div>
+                
+                <div class="flex justify-end gap-3 pt-4">
+                    <button type="button" onclick="closeAddVendorModal()" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition">
+                        Cancel
+                    </button>
+                    <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">
+                        <i class="fas fa-plus mr-2"></i>Add Vendor
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
     
@@ -281,6 +583,782 @@
         .then(response => response.text())
         .then(data => {
             document.getElementById('nav-container').innerHTML = data;
+        });
+
+        // Mobile Edit Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileEditBtn = document.getElementById('mobileEditBtn');
+            const mobileFields = [
+                'mobile-item-name',
+                'mobile-specification', 
+                'mobile-notes',
+                'mobile-business-category',
+                'mobile-status'
+            ];
+            
+            let originalValues = {};
+            let isEditing = false;
+
+            // Store original values
+            mobileFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (field) {
+                    originalValues[fieldId] = field.value;
+                }
+            });
+
+            mobileEditBtn.addEventListener('click', function() {
+                if (!isEditing) {
+                    // Enter edit mode
+                    enterEditMode();
+                } else {
+                    // Save changes
+                    saveChanges();
+                }
+            });
+
+            function enterEditMode() {
+                isEditing = true;
+                
+                // Change button to Save
+                mobileEditBtn.innerHTML = '<i class="fas fa-save"></i> Save';
+                mobileEditBtn.className = 'px-4 py-2 bg-green-500 text-white rounded shadow hover:bg-green-600 flex items-center gap-2 text-sm';
+                
+                // Add Cancel button
+                if (!document.getElementById('mobileCancelBtn')) {
+                    const cancelBtn = document.createElement('button');
+                    cancelBtn.id = 'mobileCancelBtn';
+                    cancelBtn.className = 'px-4 py-2 bg-gray-500 text-white rounded shadow hover:bg-gray-600 flex items-center gap-2 text-sm ml-2';
+                    cancelBtn.innerHTML = '<i class="fas fa-times"></i> Cancel';
+                    cancelBtn.addEventListener('click', cancelEdit);
+                    mobileEditBtn.parentNode.appendChild(cancelBtn);
+                }
+                
+                // Make fields editable
+                mobileFields.forEach(fieldId => {
+                    const field = document.getElementById(fieldId);
+                    if (field) {
+                        field.readOnly = false;
+                        field.className = 'w-full bg-white border-2 border-blue-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200';
+                        field.style.backgroundColor = 'white';
+                    }
+                });
+            }
+
+            function saveChanges() {
+                isEditing = false;
+                
+                // Change button back to Edit
+                mobileEditBtn.innerHTML = '<i class="fas fa-edit"></i> Edit';
+                mobileEditBtn.className = 'px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center gap-2 text-sm';
+                
+                // Remove Cancel button
+                const cancelBtn = document.getElementById('mobileCancelBtn');
+                if (cancelBtn) {
+                    cancelBtn.remove();
+                }
+                
+                // Make fields read-only again
+                mobileFields.forEach(fieldId => {
+                    const field = document.getElementById(fieldId);
+                    if (field) {
+                        field.readOnly = true;
+                        field.className = 'w-full bg-white bg-opacity-80 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200';
+                        field.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+                        
+                        // Update original values with new values
+                        originalValues[fieldId] = field.value;
+                    }
+                });
+                
+                // Show success message
+                showNotification('Changes saved successfully!', 'success');
+            }
+
+            function cancelEdit() {
+                isEditing = false;
+                
+                // Change button back to Edit
+                mobileEditBtn.innerHTML = '<i class="fas fa-edit"></i> Edit';
+                mobileEditBtn.className = 'px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center gap-2 text-sm';
+                
+                // Remove Cancel button
+                const cancelBtn = document.getElementById('mobileCancelBtn');
+                if (cancelBtn) {
+                    cancelBtn.remove();
+                }
+                
+                // Restore original values and make fields read-only
+                mobileFields.forEach(fieldId => {
+                    const field = document.getElementById(fieldId);
+                    if (field) {
+                        field.value = originalValues[fieldId];
+                        field.readOnly = true;
+                        field.className = 'w-full bg-white bg-opacity-80 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200';
+                        field.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+                    }
+                });
+                
+                showNotification('Changes cancelled', 'info');
+            }
+
+            function showNotification(message, type) {
+                // Create notification element
+                const notification = document.createElement('div');
+                notification.className = `fixed top-4 right-4 px-6 py-3 rounded-lg shadow-lg z-50 transform transition-all duration-300 translate-x-full`;
+                
+                // Set background color based on type
+                if (type === 'success') {
+                    notification.className += ' bg-green-500 text-white';
+                } else if (type === 'info') {
+                    notification.className += ' bg-blue-500 text-white';
+                } else if (type === 'error') {
+                    notification.className += ' bg-red-500 text-white';
+                }
+                
+                notification.textContent = message;
+                
+                // Add to page
+                document.body.appendChild(notification);
+                
+                // Animate in
+                setTimeout(() => {
+                    notification.classList.remove('translate-x-full');
+                }, 100);
+                
+                // Remove after 3 seconds
+                setTimeout(() => {
+                    notification.classList.add('translate-x-full');
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 300);
+                }, 3000);
+            }
+
+            // Vendor dropdown functionality
+            document.addEventListener('click', function(event) {
+                const vendorOptionsBtns = document.querySelectorAll('.vendor-options-btn');
+                const vendorDropdowns = document.querySelectorAll('.vendor-dropdown');
+                
+                // Close all dropdowns if clicking outside
+                if (!event.target.closest('.vendor-options-btn') && !event.target.closest('.vendor-dropdown')) {
+                    vendorDropdowns.forEach(dropdown => {
+                        dropdown.classList.add('hidden');
+                    });
+                }
+                
+                // Toggle dropdown when clicking on options button
+                vendorOptionsBtns.forEach(btn => {
+                    if (btn.contains(event.target)) {
+                        const vendorId = btn.getAttribute('data-vendor-id');
+                        const dropdown = btn.parentNode.querySelector('.vendor-dropdown');
+                        
+                        // Close other dropdowns
+                        vendorDropdowns.forEach(otherDropdown => {
+                            if (otherDropdown !== dropdown) {
+                                otherDropdown.classList.add('hidden');
+                            }
+                        });
+                        
+                        // Toggle current dropdown
+                        dropdown.classList.toggle('hidden');
+                    }
+                });
+            });
+
+            // Edit vendor modal form submission
+            document.getElementById('editVendorForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const vendorId = this.getAttribute('data-vendor-id');
+                const vendorCard = document.querySelector(`[data-vendor-id="${vendorId}"]`);
+                
+                if (!vendorCard) return;
+                
+                // Get form values
+                const itemNumber = document.getElementById('editVendorItemNumber').value;
+                const qtyType = document.getElementById('editVendorQtyType').value;
+                const qtyPerItem = document.getElementById('editVendorQtyPerItem').value;
+                const price = document.getElementById('editVendorPrice').value;
+                
+                // Validate inputs
+                if (!itemNumber || !qtyPerItem || !price) {
+                    showNotification('Please fill in all required fields', 'error');
+                    return;
+                }
+                
+                // Format price
+                const formattedPrice = `$${parseFloat(price).toFixed(2)}`;
+                
+                // Update vendor card
+                vendorCard.querySelector('[data-field="item-number"]').textContent = itemNumber;
+                vendorCard.querySelector('[data-field="qty-type"]').textContent = qtyType;
+                vendorCard.querySelector('[data-field="qty-per-item"]').textContent = qtyPerItem;
+                vendorCard.querySelector('[data-field="price"]').textContent = formattedPrice;
+                
+                // Close modal
+                closeEditVendorModal();
+                
+                // Show success message
+                showNotification('Vendor updated successfully!', 'success');
+            });
+
+            // Add vendor button click handler
+            document.getElementById('addVendorBtn').addEventListener('click', function() {
+                openAddVendorModal();
+            });
+
+            // Add vendor form submission
+            document.getElementById('addVendorForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const vendorName = document.getElementById('addVendorName').value.trim();
+                const itemNumber = document.getElementById('addVendorItemNumber').value.trim();
+                const qtyType = document.getElementById('addVendorQtyType').value;
+                const qtyPerItem = document.getElementById('addVendorQtyPerItem').value;
+                const price = document.getElementById('addVendorPrice').value;
+                
+                // Validate inputs
+                if (!vendorName || !itemNumber || !qtyType || !qtyPerItem || !price) {
+                    showNotification('Please fill in all required fields', 'error');
+                    return;
+                }
+                
+                // Format price
+                const formattedPrice = `$${parseFloat(price).toFixed(2)}`;
+                
+                // Generate new vendor ID
+                const existingVendors = document.querySelectorAll('.vendor-card');
+                const newVendorId = existingVendors.length + 1;
+                
+                // Create new vendor card
+                const newVendorCard = createVendorCard(newVendorId, vendorName, itemNumber, qtyType, qtyPerItem, formattedPrice);
+                
+                // Add to vendor list
+                const vendorContainer = document.querySelector('.space-y-3.mb-4');
+                vendorContainer.appendChild(newVendorCard);
+                
+                // Update vendor count
+                const vendorCount = document.querySelectorAll('.vendor-card').length;
+                const countBadge = document.querySelector('.bg-gradient-to-r.from-purple-500.to-purple-600 span:last-child');
+                if (countBadge) {
+                    countBadge.textContent = `${vendorCount} vendor${vendorCount !== 1 ? 's' : ''}`;
+                }
+                
+                // Close modal and reset form
+                closeAddVendorModal();
+                
+                // Show success message
+                showNotification(`${vendorName} added successfully!`, 'success');
+            });
+
+            // Function to create new vendor card
+            function createVendorCard(vendorId, vendorName, itemNumber, qtyType, qtyPerItem, price) {
+                // Determine color scheme based on vendor ID
+                const isEven = vendorId % 2 === 0;
+                const colorScheme = isEven ? 'green' : 'blue';
+                const bgGradient = isEven ? 'from-green-50 to-emerald-50' : 'from-blue-50 to-indigo-50';
+                const borderColor = isEven ? 'border-green-200' : 'border-blue-200';
+                
+                const card = document.createElement('div');
+                card.className = `vendor-card bg-gradient-to-r ${bgGradient} ${borderColor} rounded-lg p-3 relative group`;
+                card.setAttribute('data-vendor-id', vendorId);
+                
+                card.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-${colorScheme}-700 font-semibold text-sm">${vendorName}</h3>
+                                <div class="relative">
+                                    <button class="vendor-options-btn text-gray-500 hover:text-gray-700 p-1 rounded-full hover:bg-gray-100 transition-colors" data-vendor-id="${vendorId}">
+                                        <i class="fas fa-ellipsis-v text-xs"></i>
+                                    </button>
+                                    <div class="vendor-dropdown hidden absolute right-0 mt-1 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                                        <button class="w-full text-left px-3 py-2 text-xs text-gray-700 hover:bg-blue-50 flex items-center" onclick="editVendorInline('${vendorId}')">
+                                            <i class="fas fa-edit mr-2 text-blue-500"></i> Edit Inline
+                                        </button>
+                                        <button class="w-full text-left px-3 py-2 text-xs text-purple-600 hover:bg-purple-50 flex items-center" onclick="editVendorModal('${vendorId}')">
+                                            <i class="fas fa-external-link-alt mr-2 text-purple-500"></i> Edit in Modal
+                                        </button>
+                                        <button class="w-full text-left px-3 py-2 text-xs text-red-600 hover:bg-red-50 flex items-center" onclick="deleteVendor('${vendorId}')">
+                                            <i class="fas fa-trash mr-2"></i> Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 text-xs">
+                                <div class="bg-white bg-opacity-60 rounded px-2 py-1">
+                                    <span class="text-gray-600">Item #:</span>
+                                    <span class="text-gray-800 font-medium" data-field="item-number">${itemNumber}</span>
+                                </div>
+                                <div class="bg-white bg-opacity-60 rounded px-2 py-1">
+                                    <span class="text-gray-600">Qty Type:</span>
+                                    <span class="text-gray-800 font-medium" data-field="qty-type">${qtyType}</span>
+                                </div>
+                                <div class="bg-white bg-opacity-60 rounded px-2 py-1">
+                                    <span class="text-gray-600">Qty Per Item:</span>
+                                    <span class="text-gray-800 font-medium" data-field="qty-per-item">${qtyPerItem}</span>
+                                </div>
+                                <div class="bg-white bg-opacity-60 rounded px-2 py-1">
+                                    <span class="text-gray-600">Price:</span>
+                                    <span class="text-green-600 font-semibold" data-field="price">${price}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                return card;
+            }
+
+            // Image Upload Functionality
+            document.addEventListener('DOMContentLoaded', function() {
+                const uploadZone = document.getElementById('uploadZone');
+                const fileInput = document.getElementById('mobile-upload-image');
+                const imagePreview = document.getElementById('imagePreview');
+                const previewImage = document.getElementById('previewImage');
+                const previewFileName = document.getElementById('previewFileName');
+                const previewFileSize = document.getElementById('previewFileSize');
+                const changeImageBtn = document.getElementById('changeImageBtn');
+                const uploadProgress = document.getElementById('uploadProgress');
+                const progressBar = document.getElementById('progressBar');
+                const progressText = document.getElementById('progressText');
+                const currentImageContainer = document.getElementById('currentImageContainer');
+                const currentImage = document.getElementById('currentImage');
+                const removeImageBtn = document.getElementById('removeImageBtn');
+
+                // Drag and drop functionality
+                uploadZone.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    uploadZone.classList.add('border-blue-400', 'bg-blue-50');
+                });
+
+                uploadZone.addEventListener('dragleave', function(e) {
+                    e.preventDefault();
+                    uploadZone.classList.remove('border-blue-400', 'bg-blue-50');
+                });
+
+                uploadZone.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    uploadZone.classList.remove('border-blue-400', 'bg-blue-50');
+                    
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0) {
+                        handleFileSelect(files[0]);
+                    }
+                });
+
+                // File input change
+                fileInput.addEventListener('change', function(e) {
+                    if (e.target.files.length > 0) {
+                        handleFileSelect(e.target.files[0]);
+                    }
+                });
+
+                // Change image button
+                changeImageBtn.addEventListener('click', function() {
+                    fileInput.click();
+                });
+
+                // Remove image button
+                removeImageBtn.addEventListener('click', function() {
+                    removeCurrentImage();
+                });
+
+                function handleFileSelect(file) {
+                    // Validate file type
+                    if (!file.type.startsWith('image/')) {
+                        showNotification('Please select a valid image file', 'error');
+                        return;
+                    }
+
+                    // Validate file size (5MB limit)
+                    if (file.size > 5 * 1024 * 1024) {
+                        showNotification('File size must be less than 5MB', 'error');
+                        return;
+                    }
+
+                    // Show upload progress
+                    showUploadProgress();
+
+                    // Simulate upload progress
+                    let progress = 0;
+                    const interval = setInterval(() => {
+                        progress += Math.random() * 30;
+                        if (progress >= 100) {
+                            progress = 100;
+                            clearInterval(interval);
+                            
+                            // Hide progress and show preview
+                            setTimeout(() => {
+                                hideUploadProgress();
+                                showImagePreview(file);
+                                showNotification('Image uploaded successfully!', 'success');
+                            }, 500);
+                        }
+                        updateProgress(progress);
+                    }, 200);
+                }
+
+                function showUploadProgress() {
+                    uploadProgress.classList.remove('hidden');
+                    uploadZone.classList.add('hidden');
+                }
+
+                function hideUploadProgress() {
+                    uploadProgress.classList.add('hidden');
+                    uploadZone.classList.remove('hidden');
+                }
+
+                function updateProgress(percentage) {
+                    progressBar.style.width = percentage + '%';
+                    progressText.textContent = Math.round(percentage) + '%';
+                }
+
+                function showImagePreview(file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewImage.src = e.target.result;
+                        previewFileName.textContent = file.name;
+                        previewFileSize.textContent = formatFileSize(file.size);
+                        imagePreview.classList.remove('hidden');
+                        uploadZone.classList.add('hidden');
+                    };
+                    reader.readAsDataURL(file);
+                }
+
+                function formatFileSize(bytes) {
+                    if (bytes === 0) return '0 Bytes';
+                    const k = 1024;
+                    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                    const i = Math.floor(Math.log(bytes) / Math.log(k));
+                    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+                }
+
+                function removeCurrentImage() {
+                    currentImageContainer.classList.add('hidden');
+                    uploadZone.classList.remove('hidden');
+                    fileInput.value = '';
+                    showNotification('Image removed', 'info');
+                }
+
+                // Show current image if exists (for demo purposes)
+                function showCurrentImage(imageSrc) {
+                    if (imageSrc) {
+                        currentImage.src = imageSrc;
+                        currentImageContainer.classList.remove('hidden');
+                        uploadZone.classList.add('hidden');
+                    }
+                }
+
+                // Demo: Show a sample current image (remove this in production)
+                // showCurrentImage('https://via.placeholder.com/150x150?text=Product+Image');
+            });
+
+            // Global functions for vendor actions
+            window.editVendorInline = function(vendorId) {
+                const vendorCard = document.querySelector(`[data-vendor-id="${vendorId}"]`);
+                if (!vendorCard) return;
+                
+                // Close dropdown
+                const dropdown = vendorCard.querySelector('.vendor-dropdown');
+                if (dropdown) {
+                    dropdown.classList.add('hidden');
+                }
+                
+                // Check if already in edit mode
+                if (vendorCard.classList.contains('editing')) {
+                    return;
+                }
+                
+                // Enter edit mode for this vendor
+                enterVendorEditMode(vendorCard, vendorId);
+            };
+
+            window.editVendorModal = function(vendorId) {
+                const vendorCard = document.querySelector(`[data-vendor-id="${vendorId}"]`);
+                if (!vendorCard) return;
+                
+                // Close dropdown
+                const dropdown = vendorCard.querySelector('.vendor-dropdown');
+                if (dropdown) {
+                    dropdown.classList.add('hidden');
+                }
+                
+                // Get vendor data
+                const vendorName = vendorCard.querySelector('h3').textContent;
+                const itemNumber = vendorCard.querySelector('[data-field="item-number"]').textContent;
+                const qtyType = vendorCard.querySelector('[data-field="qty-type"]').textContent;
+                const qtyPerItem = vendorCard.querySelector('[data-field="qty-per-item"]').textContent;
+                const price = vendorCard.querySelector('[data-field="price"]').textContent.replace('$', '');
+                
+                // Populate modal
+                document.getElementById('editVendorTitle').textContent = `Edit ${vendorName}`;
+                document.getElementById('editVendorName').value = vendorName;
+                document.getElementById('editVendorItemNumber').value = itemNumber;
+                document.getElementById('editVendorQtyType').value = qtyType;
+                document.getElementById('editVendorQtyPerItem').value = qtyPerItem;
+                document.getElementById('editVendorPrice').value = price;
+                
+                // Store vendor ID for form submission
+                document.getElementById('editVendorForm').setAttribute('data-vendor-id', vendorId);
+                
+                // Show modal
+                const editModal = document.getElementById('editVendorModal');
+                editModal.classList.remove('hidden');
+                setTimeout(() => {
+                    editModal.querySelector('.modal-content-modern').classList.add('show');
+                }, 10);
+            };
+
+            window.closeEditVendorModal = function() {
+                const editModal = document.getElementById('editVendorModal');
+                editModal.classList.add('hidden');
+                editModal.querySelector('.modal-content-modern').classList.remove('show');
+            };
+
+            // Add Vendor functionality
+            window.openAddVendorModal = function() {
+                const addModal = document.getElementById('addVendorModal');
+                addModal.classList.remove('hidden');
+                setTimeout(() => {
+                    addModal.querySelector('.modal-content-modern').classList.add('show');
+                }, 10);
+            };
+
+            window.closeAddVendorModal = function() {
+                const addModal = document.getElementById('addVendorModal');
+                addModal.classList.add('hidden');
+                addModal.querySelector('.modal-content-modern').classList.remove('show');
+                
+                // Reset form
+                document.getElementById('addVendorForm').reset();
+            };
+
+            window.deleteVendor = function(vendorId) {
+                // Show delete confirmation modal
+                const deleteModal = document.getElementById('deleteVendorModal');
+                const confirmBtn = document.getElementById('confirmDeleteVendor');
+                const cancelBtn = document.getElementById('cancelDeleteVendor');
+                
+                // Update modal content
+                const vendorName = vendorId === '1' ? 'Global' : 'Ace Hardware';
+                const modalTitle = deleteModal.querySelector('#deleteVendorTitle');
+                modalTitle.textContent = `Delete ${vendorName}?`;
+                
+                // Show modal
+                deleteModal.classList.remove('hidden');
+                setTimeout(() => {
+                    deleteModal.querySelector('.modal-content-modern').classList.add('show');
+                }, 10);
+                
+                // Handle confirm delete
+                const handleConfirmDelete = () => {
+                    const vendorCard = document.querySelector(`[data-vendor-id="${vendorId}"]`);
+                    if (vendorCard) {
+                        // Add smooth deletion animation
+                        vendorCard.style.transition = 'all 0.3s ease-in-out';
+                        vendorCard.style.transform = 'scale(0.95) translateY(-10px)';
+                        vendorCard.style.opacity = '0';
+                        vendorCard.style.filter = 'blur(2px)';
+                        
+                        setTimeout(() => {
+                            vendorCard.remove();
+                            showNotification(`${vendorName} deleted successfully!`, 'success');
+                            
+                            // Update vendor count
+                            const vendorCount = document.querySelectorAll('.vendor-card').length;
+                            const countBadge = document.querySelector('.bg-gradient-to-r.from-purple-500.to-purple-600 span:last-child');
+                            if (countBadge) {
+                                countBadge.textContent = `${vendorCount} vendor${vendorCount !== 1 ? 's' : ''}`;
+                            }
+                        }, 300);
+                    }
+                    
+                    // Hide modal
+                    deleteModal.classList.add('hidden');
+                    deleteModal.querySelector('.modal-content-modern').classList.remove('show');
+                    
+                    // Remove event listeners
+                    confirmBtn.removeEventListener('click', handleConfirmDelete);
+                    cancelBtn.removeEventListener('click', handleCancelDelete);
+                };
+                
+                // Handle cancel delete
+                const handleCancelDelete = () => {
+                    deleteModal.classList.add('hidden');
+                    deleteModal.querySelector('.modal-content-modern').classList.remove('show');
+                    
+                    // Remove event listeners
+                    confirmBtn.removeEventListener('click', handleConfirmDelete);
+                    cancelBtn.removeEventListener('click', handleCancelDelete);
+                };
+                
+                // Add event listeners
+                confirmBtn.addEventListener('click', handleConfirmDelete);
+                cancelBtn.addEventListener('click', handleCancelDelete);
+                
+                // Close dropdown
+                const dropdown = document.querySelector(`[data-vendor-id="${vendorId}"] .vendor-dropdown`);
+                if (dropdown) {
+                    dropdown.classList.add('hidden');
+                }
+            };
+
+            // Vendor edit mode functions
+            function enterVendorEditMode(vendorCard, vendorId) {
+                vendorCard.classList.add('editing');
+                
+                // Store original values
+                const originalData = {
+                    vendorName: vendorCard.querySelector('h3').textContent,
+                    itemNumber: vendorCard.querySelector('[data-field="item-number"]').textContent,
+                    qtyType: vendorCard.querySelector('[data-field="qty-type"]').textContent,
+                    qtyPerItem: vendorCard.querySelector('[data-field="qty-per-item"]').textContent,
+                    price: vendorCard.querySelector('[data-field="price"]').textContent
+                };
+                
+                vendorCard.setAttribute('data-original-values', JSON.stringify(originalData));
+                
+                // Replace content with editable fields
+                const contentArea = vendorCard.querySelector('.flex-1');
+                const vendorName = vendorCard.querySelector('h3').textContent;
+                
+                contentArea.innerHTML = `
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-blue-700 font-semibold text-sm">${vendorName}</h3>
+                            <div class="flex gap-2">
+                                <button class="vendor-save-btn px-3 py-1 bg-green-500 text-white rounded text-xs font-semibold hover:bg-green-600 transition-colors">
+                                    <i class="fas fa-save mr-1"></i> Save
+                                </button>
+                                <button class="vendor-cancel-btn px-3 py-1 bg-gray-500 text-white rounded text-xs font-semibold hover:bg-gray-600 transition-colors">
+                                    <i class="fas fa-times mr-1"></i> Cancel
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-gray-600 text-xs mb-1">Item Number</label>
+                                <input type="text" class="vendor-item-number w-full border border-gray-300 rounded px-2 py-1 text-xs bg-white" value="${originalData.itemNumber}">
+                            </div>
+                            <div>
+                                <label class="block text-gray-600 text-xs mb-1">Qty Type</label>
+                                <select class="vendor-qty-type w-full border border-gray-300 rounded px-2 py-1 text-xs bg-white">
+                                    <option value="Each" ${originalData.qtyType === 'Each' ? 'selected' : ''}>Each</option>
+                                    <option value="Box" ${originalData.qtyType === 'Box' ? 'selected' : ''}>Box</option>
+                                    <option value="Pack" ${originalData.qtyType === 'Pack' ? 'selected' : ''}>Pack</option>
+                                    <option value="Case" ${originalData.qtyType === 'Case' ? 'selected' : ''}>Case</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-gray-600 text-xs mb-1">Qty Per Item</label>
+                                <input type="number" class="vendor-qty-per-item w-full border border-gray-300 rounded px-2 py-1 text-xs bg-white" value="${originalData.qtyPerItem}">
+                            </div>
+                            <div>
+                                <label class="block text-gray-600 text-xs mb-1">Price</label>
+                                <input type="text" class="vendor-price w-full border border-gray-300 rounded px-2 py-1 text-xs bg-white" value="${originalData.price.replace('$', '')}" placeholder="0.00">
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                // Add event listeners for save and cancel
+                const saveBtn = vendorCard.querySelector('.vendor-save-btn');
+                const cancelBtn = vendorCard.querySelector('.vendor-cancel-btn');
+                
+                saveBtn.addEventListener('click', () => saveVendorChanges(vendorCard, vendorId));
+                cancelBtn.addEventListener('click', () => cancelVendorEdit(vendorCard, vendorId));
+            }
+
+            function saveVendorChanges(vendorCard, vendorId) {
+                // Get new values
+                const itemNumber = vendorCard.querySelector('.vendor-item-number').value;
+                const qtyType = vendorCard.querySelector('.vendor-qty-type').value;
+                const qtyPerItem = vendorCard.querySelector('.vendor-qty-per-item').value;
+                const price = vendorCard.querySelector('.vendor-price').value;
+                
+                // Validate inputs
+                if (!itemNumber || !qtyPerItem || !price) {
+                    showNotification('Please fill in all fields', 'error');
+                    return;
+                }
+                
+                // Format price
+                const formattedPrice = price.startsWith('$') ? price : `$${parseFloat(price).toFixed(2)}`;
+                
+                // Exit edit mode and update display
+                exitVendorEditMode(vendorCard, vendorId, {
+                    itemNumber: itemNumber,
+                    qtyType: qtyType,
+                    qtyPerItem: qtyPerItem,
+                    price: formattedPrice
+                });
+                
+                showNotification('Vendor updated successfully!', 'success');
+            }
+
+            function cancelVendorEdit(vendorCard, vendorId) {
+                // Restore original values
+                const originalData = JSON.parse(vendorCard.getAttribute('data-original-values') || '{}');
+                exitVendorEditMode(vendorCard, vendorId, originalData);
+                showNotification('Changes cancelled', 'info');
+            }
+
+            function exitVendorEditMode(vendorCard, vendorId, newData) {
+                vendorCard.classList.remove('editing');
+                
+                // Get vendor name and color scheme
+                const vendorName = vendorId === '1' ? 'Global' : 'Ace Hardware';
+                const isGlobal = vendorId === '1';
+                const colorScheme = isGlobal ? 'blue' : 'green';
+                
+                // Restore original card structure with updated data
+                const contentArea = vendorCard.querySelector('.flex-1');
+                contentArea.innerHTML = `
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-${colorScheme}-700 font-semibold text-sm">${vendorName}</h3>
+                        <div class="relative">
+                            <button class="vendor-options-btn text-gray-500 hover:text-gray-700 p-1 rounded-full hover:bg-gray-100 transition-colors" data-vendor-id="${vendorId}">
+                                <i class="fas fa-ellipsis-v text-xs"></i>
+                            </button>
+                            <div class="vendor-dropdown hidden absolute right-0 mt-1 w-32 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                                <button class="w-full text-left px-3 py-2 text-xs text-gray-700 hover:bg-blue-50 flex items-center" onclick="editVendorInline('${vendorId}')">
+                                    <i class="fas fa-edit mr-2 text-blue-500"></i> Edit Inline
+                                </button>
+                                <button class="w-full text-left px-3 py-2 text-xs text-purple-600 hover:bg-purple-50 flex items-center" onclick="editVendorModal('${vendorId}')">
+                                    <i class="fas fa-external-link-alt mr-2 text-purple-500"></i> Edit in Modal
+                                </button>
+                                <button class="w-full text-left px-3 py-2 text-xs text-red-600 hover:bg-red-50 flex items-center" onclick="deleteVendor('${vendorId}')">
+                                    <i class="fas fa-trash mr-2"></i> Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div class="bg-white bg-opacity-60 rounded px-2 py-1">
+                            <span class="text-gray-600">Item #:</span>
+                            <span class="text-gray-800 font-medium" data-field="item-number">${newData.itemNumber}</span>
+                        </div>
+                        <div class="bg-white bg-opacity-60 rounded px-2 py-1">
+                            <span class="text-gray-600">Qty Type:</span>
+                            <span class="text-gray-800 font-medium" data-field="qty-type">${newData.qtyType}</span>
+                        </div>
+                        <div class="bg-white bg-opacity-60 rounded px-2 py-1">
+                            <span class="text-gray-600">Qty Per Item:</span>
+                            <span class="text-gray-800 font-medium" data-field="qty-per-item">${newData.qtyPerItem}</span>
+                        </div>
+                        <div class="bg-white bg-opacity-60 rounded px-2 py-1">
+                            <span class="text-gray-600">Price:</span>
+                            <span class="text-green-600 font-semibold" data-field="price">${newData.price}</span>
+                        </div>
+                    </div>
+                `;
+            }
         });
     </script>
 </body>
