@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>Role Permissions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/themes/light.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    
+</head>
+<body class="min-h-screen">
+    <!-- Include header -->
+    <div id="header-container"></div>
+
+    <!-- Include navigation -->
+    <div id="nav-container"></div>
+
+    <!-- Main content -->
+    <main class="container-fluid mx-auto px-4 md:px-6 py-2 md:py-4" style="position: relative; z-index: 1;">
+        <!-- Combined header with search -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
+            <div class="flex items-center gap-4">
+                <h1 class="text-lg md:text-2xl font-bold text-gray-800">Permissions</h1>
+            </div>
+            <div class="flex items-center gap-2">
+                <button id="createRoleButton" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
+                    <i class="fas fa-plus mr-1"></i>
+                    <span>Create</span>
+                </button>
+                <div class="relative">
+                    <button id="actionsDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
+                        <span>Actions</span>
+                        <i class="fas fa-chevron-down ml-1"></i>
+                    </button>
+                    <div id="actionsMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-trash-alt w-5"></i>
+                            <span>Delete</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="relative">
+                    <button id="moreDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
+                        <span>More</span>
+                        <i class="fas fa-chevron-down ml-1"></i>
+                    </button>
+                    <div id="moreMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-cog w-5"></i>
+                            <span>Settings</span>
+                        </button>
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-chart-bar w-5"></i>
+                            <span>Report</span>
+                        </button>
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-history w-5"></i>
+                            <span>Audit Trail</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls Section (Show Entries, Search) -->
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6 max-w-sm md:max-w-full md:mx-0">
+            <div class="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
+                <div class="flex flex-wrap justify-start gap-2">
+                    <div class="hidden md:flex items-center gap-2 mr-4">
+                        <label class="text-sm text-gray-600">
+                            Show
+                            <select class="mx-2 px-3 py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500" id="showEntriesSelect">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50" selected>50</option>
+                                <option value="100">100</option>
+                            </select>
+                            entries
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div id="search-container" class="relative w-full">
+                <input type="search" 
+                       placeholder="Search..." 
+                       class="w-full h-[42px] pl-10 pr-4 rounded-lg border border-green-500 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300"
+                />
+                <button class="absolute left-3 top-1/2 -translate-y-1/2 text-blue-500 hover:text-blue-600 transition-colors">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Table content -->
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
+            <div class="overflow-x-auto">
+                <table class="w-full min-w-[800px]">
+                    <thead class="bg-gradient-to-r from-sky-500 to-blue-600 text-white">
+                        <tr>
+                            <th class="px-6 py-4 text-left">
+                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold">ROLE NAME</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold">DESCRIPTION</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        <tr>
+                            <td class="px-6 py-4">
+                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
+                            </td>
+                            <td class="px-6 py-4">Root</td>
+                            <td class="px-6 py-4">Root User</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4">
+                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
+                            </td>
+                            <td class="px-6 py-4">Intern</td>
+                            <td class="px-6 py-4">Intern</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4">
+                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
+                            </td>
+                            <td class="px-6 py-4">Accounting</td>
+                            <td class="px-6 py-4">Accounting</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Pagination -->
+            <div class="bg-gray-50 px-4 md:px-6 py-4 flex flex-col md:flex-row justify-between items-center border-t border-gray-100 gap-4">
+                <div class="flex items-center gap-2 text-sm text-gray-600 order-2 md:order-1">
+                    Showing <span class="font-medium">1</span> to <span class="font-medium">3</span> of <span class="font-medium">3</span> entries
+                </div>
+                <div class="flex space-x-2 order-1 md:order-2">
+                    <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                        <i class="fas fa-chevron-left mr-1"></i>
+                        <span class="hidden sm:inline">Previous</span>
+                    </button>
+                    <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-white bg-sky-500 border border-sky-500 rounded-lg hover:bg-sky-600 transition-colors duration-200">
+                        1
+                    </button>
+                    <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                        <span class="hidden sm:inline">Next</span>
+                        <i class="fas fa-chevron-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for viewing dispatch details -->
+    <div id="dispatchModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg shadow-lg max-w-lg w-full p-6 relative">
+            <button id="closeModal" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-xl font-bold">&times;</button>
+            <h2 class="text-xl font-semibold mb-4">Dispatch Details</h2>
+            <div id="modalContent" class="space-y-2 text-gray-700 text-sm max-h-96 overflow-y-auto">
+                <!-- Details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Date Range Modal -->
+    <div id="dateRangeModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg shadow-xl p-6 w-[800px] max-w-[90vw]">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-semibold text-gray-800">Select Date Range</h3>
+                <button id="closeDateRangeModal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="grid grid-cols-2 gap-6">
+                <!-- From Date -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">From Date</label>
+                    <input type="text" id="fromDatePicker" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Select date">
+                </div>
+                <!-- To Date -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">To Date</label>
+                    <input type="text" id="toDatePicker" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Select date">
+                </div>
+            </div>
+            <div class="flex justify-end gap-2 mt-4">
+                <button id="resetDateRange" class="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded transition-colors">
+                    <i class="fas fa-undo"></i> Reset
+                </button>
+                <button id="applyDateRange" class="px-4 py-2 text-sm text-white bg-blue-500 hover:bg-blue-600 rounded transition-colors">
+                    <i class="fas fa-check"></i> Apply
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add New Role Modal -->
+    <div id="addRoleModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden animate-fade-in">
+        <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative">
+            <button id="closeAddRoleModal" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-xl font-bold">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="text-lg font-semibold mb-4">Add New Role</h2>
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Auth Role Name</label>
+                <input type="text" id="roleNameInput" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter Role Name">
+            </div>
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                <textarea id="roleDescriptionInput" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter Description"></textarea>
+            </div>
+            <div class="flex justify-end gap-2">
+                <button id="closeAddRoleModalBtn" class="flex items-center gap-2 px-4 py-2 text-sm text-white bg-red-500 hover:bg-red-600 rounded transition-colors">
+                    <i class="fas fa-times-circle"></i> Close
+                </button>
+                <button id="saveRoleBtn" class="flex items-center gap-2 px-4 py-2 text-sm text-white bg-sky-500 hover:bg-sky-600 rounded transition-colors">
+                    <i class="fas fa-save"></i> Save changes
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Card View -->
+    <div class="mobile-card-view hidden md:hidden max-w-sm mx-auto">
+        <!-- Mobile cards will be rendered here -->
+                                </div>
+
+    <!-- Load JavaScript files -->
+    <script src="../js/main.js"></script>
+    <script src="../js/roles.js"></script>
+    
+</body>
+</html>

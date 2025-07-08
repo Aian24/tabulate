@@ -48,6 +48,13 @@
                     }
                 }
             });
+            // Back button logic
+            const backBtn = document.getElementById('backBtn');
+            if (backBtn) {
+                backBtn.addEventListener('click', function() {
+                    window.location.href = 'services.html';
+                });
+            }
         });
         </script>
         <form class="bg-white rounded-xl shadow-md p-6 space-y-8" enctype="multipart/form-data">
