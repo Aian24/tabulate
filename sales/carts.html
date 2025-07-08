@@ -37,6 +37,10 @@
                     </button>
                     <div id="actionsMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
                         <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-file-invoice w-5"></i>
+                            <span>Create Invoice</span>
+                        </button>
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
                             <i class="fas fa-trash-alt w-5"></i>
                             <span>Delete</span>
                         </button>
@@ -280,5 +284,20 @@
     <!-- Load JavaScript files -->
     <script src="../js/main.js"></script>
     <script src="../js/carts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const moreBtn = document.getElementById('moreBtn');
+            const moreDropdown = document.getElementById('moreDropdown');
+            document.addEventListener('click', function(event) {
+                if (moreBtn && moreDropdown) {
+                    if (moreBtn.contains(event.target)) {
+                        moreDropdown.classList.toggle('hidden');
+                    } else if (!moreDropdown.contains(event.target)) {
+                        moreDropdown.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>

@@ -29,24 +29,42 @@
             <div class="flex items-center gap-4">
                 <h1 class="text-xl md:text-2xl font-bold text-gray-800">Active Dispatches</h1>
             </div>
-            <div class="relative">
-                <button id="moreDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
-                    <span>More</span>
-                    <i class="fas fa-chevron-down ml-1"></i>
-                </button>
-                <div id="moreMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10">
-                    <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                        <i class="fas fa-cog w-5"></i>
-                        <span>Settings</span>
+            <div class="flex items-center gap-2">
+                <div class="relative">
+                    <button id="actionsDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
+                        <span>Actions</span>
+                        <i class="fas fa-chevron-down ml-1"></i>
                     </button>
-                    <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                        <i class="fas fa-chart-bar w-5"></i>
-                        <span>Report</span>
+                    <div id="actionsMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-file-invoice w-5"></i>
+                            <span>Create Invoice</span>
+                        </button>
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-trash-alt w-5"></i>
+                            <span>Delete</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="relative">
+                    <button id="moreDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
+                        <span>More</span>
+                        <i class="fas fa-chevron-down ml-1"></i>
                     </button>
-                    <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                        <i class="fas fa-history w-5"></i>
-                        <span>Audit Trail</span>
-                    </button>
+                    <div id="moreMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-cog w-5"></i>
+                            <span>Settings</span>
+                        </button>
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-chart-bar w-5"></i>
+                            <span>Report</span>
+                        </button>
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-history w-5"></i>
+                            <span>Audit Trail</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -336,97 +354,20 @@
     <!-- Load JavaScript files -->
     <script src="../js/main.js"></script>
     <script src="../js/activeprojects.js"></script>
-
-    <!-- More dropdown functionality -->
     <script>
-        const moreDropdown = document.getElementById('moreDropdown');
-        const moreMenu = document.getElementById('moreMenu');
-
-        // Toggle more menu
-        moreDropdown.addEventListener('click', () => {
-            moreMenu.classList.toggle('hidden');
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!moreDropdown.contains(e.target)) {
-                moreMenu.classList.add('hidden');
-            }
-        });
-
-        // Function to show dispatch modal
-        function showDispatchModal(row) {
-            const modal = document.getElementById('dispatchModal');
-            const modalContent = document.getElementById('modalContent');
-            
-            // Get data from the row
-            const priority = row.cells[0].querySelector('.status-badge').textContent;
-            const category = row.cells[1].textContent.trim();
-            const address = row.cells[2].textContent.trim();
-            const startDate = row.cells[3].textContent.trim();
-            const hours = row.cells[4].textContent.trim();
-            const distance = row.cells[5].textContent.trim();
-            const eta = row.cells[6].textContent.trim();
-            const team = row.cells[7].textContent.trim();
-            const jobType = row.cells[8].textContent.trim();
-
-            // Populate modal content
-            modalContent.innerHTML = `
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <p class="font-medium">Priority</p>
-                        <p>${priority}</p>
-                    </div>
-                    <div>
-                        <p class="font-medium">Service Category</p>
-                        <p>${category}</p>
-                    </div>
-                    <div class="col-span-2">
-                        <p class="font-medium">Address</p>
-                        <p>${address}</p>
-                    </div>
-                    <div>
-                        <p class="font-medium">Start Date</p>
-                        <p>${startDate}</p>
-                    </div>
-                    <div>
-                        <p class="font-medium">B. Hours</p>
-                        <p>${hours}</p>
-                    </div>
-                    <div>
-                        <p class="font-medium">Distance</p>
-                        <p>${distance}</p>
-                    </div>
-                    <div>
-                        <p class="font-medium">ETA</p>
-                        <p>${eta}</p>
-                    </div>
-                    <div>
-                        <p class="font-medium">Team</p>
-                        <p>${team}</p>
-                    </div>
-                    <div>
-                        <p class="font-medium">Job Type</p>
-                        <p>${jobType}</p>
-                    </div>
-                </div>
-            `;
-
-            // Show modal
-            modal.classList.remove('hidden');
-
-            // Close modal when clicking the close button
-            document.getElementById('closeModal').onclick = () => {
-                modal.classList.add('hidden');
-            };
-
-            // Close modal when clicking outside
-            modal.onclick = (e) => {
-                if (e.target === modal) {
-                    modal.classList.add('hidden');
+        document.addEventListener('DOMContentLoaded', function() {
+            const moreBtn = document.getElementById('moreBtn');
+            const moreDropdown = document.getElementById('moreDropdown');
+            document.addEventListener('click', function(event) {
+                if (moreBtn && moreDropdown) {
+                    if (moreBtn.contains(event.target)) {
+                        moreDropdown.classList.toggle('hidden');
+                    } else if (!moreDropdown.contains(event.target)) {
+                        moreDropdown.classList.add('hidden');
+                    }
                 }
-            };
-        }
+            });
+        });
     </script>
 </body>
 </html>
