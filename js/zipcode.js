@@ -22,6 +22,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 <td class="px-6 py-4">${data.created}</td>
                 <td class="px-6 py-4">${data.updated}</td>
             `;
+            // Add click event to row (excluding the checkbox)
+            row.style.cursor = 'pointer';
+            row.addEventListener('click', function(e) {
+                // Prevent navigation if checkbox is clicked
+                if (e.target.tagName.toLowerCase() === 'input' && e.target.type === 'checkbox') return;
+                window.location.href = `zip-details.html?zip=${encodeURIComponent(data.zip)}`;
+            });
             tableBody.appendChild(row);
         });
     }
