@@ -444,9 +444,15 @@ document.addEventListener('DOMContentLoaded', function() {
         // Profile Dropdown Logic (MOVED HERE)
         const profileDropdownBtn = document.getElementById('profileDropdownBtn');
         const profileDropdownMenu = document.getElementById('profileDropdownMenu');
-        if (profileDropdownBtn && profileDropdownMenu) {
+        const categoriesDropdownBtn = document.getElementById('categoriesDropdownBtn');
+        const categoriesDropdownMenu = document.getElementById('categoriesDropdownMenu');
+
+        if (profileDropdownBtn && profileDropdownMenu && categoriesDropdownMenu) {
             profileDropdownBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
+                // Hide categories dropdown if open
+                categoriesDropdownMenu.classList.add('hidden');
+                // Toggle profile dropdown
                 profileDropdownMenu.classList.toggle('hidden');
             });
             document.addEventListener('click', function(e) {
@@ -456,11 +462,12 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        const categoriesDropdownBtn = document.getElementById('categoriesDropdownBtn');
-        const categoriesDropdownMenu = document.getElementById('categoriesDropdownMenu');
-        if (categoriesDropdownBtn && categoriesDropdownMenu) {
+        if (categoriesDropdownBtn && categoriesDropdownMenu && profileDropdownMenu) {
             categoriesDropdownBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
+                // Hide profile dropdown if open
+                profileDropdownMenu.classList.add('hidden');
+                // Toggle categories dropdown
                 categoriesDropdownMenu.classList.toggle('hidden');
             });
             document.addEventListener('click', function(e) {
