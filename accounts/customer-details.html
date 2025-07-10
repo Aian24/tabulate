@@ -1,518 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Customer Details</title>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>Customer Profile</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../css/styles.css">
-    <style>
-        /* Modal animations */
-        .modal-content {
-            animation: modalSlideIn 0.3s ease-out;
-        }
-        
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-        
-        /* Modal backdrop click */
-        .modal-backdrop {
-            cursor: pointer;
-        }
-        
-        .modal-content {
-            cursor: default;
-        }
-    </style>
-</head>
-<body class="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
-    <!-- Header and Navigation -->
-    <div id="header-container"></div>
-    <div id="nav-container"></div>
-
-    <!-- Main content -->
-    <div id="nav-container"></div>
-
-    <main class="p-4 md:p-6 lg:p-8">
-        <!-- Mobile Header -->
-        <div class="md:hidden mb-6">
-            <div class="flex justify-between items-center">
-                <a href="customerlist.html" class="text-gray-600 flex items-center">
-                    <i class="fas fa-chevron-left text-lg"></i>
-                    <span class="ml-2 font-semibold">Customers</span>
-                </a>
-                <div class="relative">
-                    <button type="button" class="inline-flex justify-center rounded-lg border border-gray-300 shadow-sm px-3 py-2 bg-white text-sm font-medium text-gray-700">
-                        <i class="fas fa-ellipsis-h"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Desktop Header -->
-        <div class="hidden md:flex justify-between items-center mb-6">
-            <a href="customerlist.html" class="text-gray-600 flex items-center">
-                <i class="fas fa-chevron-left text-lg"></i>
-                <span class="ml-2 font-semibold">Customers</span>
-            </a>
-            <div class="relative inline-block text-left">
-                <button type="button" class="inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700">
-                    More
-                    <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-      <!-- Mobile Profile Container -->
-      <div class="md:hidden">
-        <div class="w-full max-w-md mx-auto mt-4">
-            <div class="bg-white rounded shadow p-4">
-                <div class="rounded-t flex flex-col items-center justify-center pt-8 pb-6 -mx-4 -mt-8" style="background-color: #41B6FF;">
-                    <div class="bg-white rounded-full border-4 flex items-center justify-center" style="border-color: #41B6FF; width: 96px; height: 96px;">
-                        <i class="fas fa-user text-5xl text-sky-400"></i>
-                    </div>
-                    <div class="text-2xl font-bold text-gray-800 mt-4 text-center" id="mobileCustomerName">Customer Name</div>
-                    <div class="text-gray-600 text-sm mb-2 text-center" id="mobileCustomerEmail">customer@email.com</div>
-                </div>
-                <div class="flex flex-col items-center py-6">
-                    <div class="text-3xl font-bold" style="color: #41B6FF;" id="mobileCustomerBalance">$0</div>
-                    <div class="w-full border-t border-gray-200 my-4"></div>
-                    <div class="grid grid-cols-4 gap-4 w-full text-center">
-                        <button class="flex flex-col items-center card-action-btn p-3" data-action="jobs" type="button" style="background:none;border:none;outline:none;cursor:pointer;">
-                            <i class="fa fa-file-invoice-dollar text-2xl mb-2" style="color: #41B6FF;"></i>
-                            <span class="text-xs font-semibold text-gray-700">Jobs</span>
-                        </button>
-                        <button class="flex flex-col items-center card-action-btn p-3" data-action="estimates" type="button" style="background:none;border:none;outline:none;cursor:pointer;">
-                            <i class="fa fa-file-signature text-2xl mb-2" style="color: #41B6FF;"></i>
-                            <span class="text-xs font-semibold text-gray-700">Estimates</span>
-                        </button>
-                        <button class="flex flex-col items-center card-action-btn p-3" data-action="invoices" type="button" style="background:none;border:none;outline:none;cursor:pointer;">
-                            <i class="fa fa-file-invoice text-2xl mb-2" style="color: #41B6FF;"></i>
-                            <span class="text-xs font-semibold text-gray-700">Invoices</span>
-                        </button>
-                        <button class="flex flex-col items-center card-action-btn p-3" data-action="transactions" type="button" style="background:none;border:none;outline:none;cursor:pointer;">
-                            <i class="fa fa-exchange-alt text-2xl mb-2" style="color: #41B6FF;"></i>
-                            <span class="text-xs font-semibold text-gray-700">Transactions</span>
-                        </button>
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <div class="font-bold text-gray-700 mb-3 text-lg">Customer Information</div>
-                    <div class="divide-y divide-blue-100 rounded overflow-hidden flex flex-col">
-                        <a href="#" onclick="showCustomerModal('personal')" class="bg-blue-50 py-4 px-3 font-medium flex justify-between items-center hover:bg-blue-100 transition cursor-pointer">Personal Information <span>&gt;</span></a>
-                        <a href="#" onclick="showCustomerModal('billing')" class="bg-blue-50 py-4 px-3 font-medium flex justify-between items-center hover:bg-blue-100 transition cursor-pointer">Billing Information <span>&gt;</span></a>
-                        <a href="#" onclick="showCustomerModal('preferences')" class="bg-blue-50 py-4 px-3 font-medium flex justify-between items-center hover:bg-blue-100 transition cursor-pointer">Preferences <span>&gt;</span></a>
-                        <a href="#" onclick="showCustomerModal('custom')" class="bg-blue-50 py-4 px-3 font-medium flex justify-between items-center hover:bg-blue-100 transition cursor-pointer">Custom Fields <span>&gt;</span></a>
-                        <a href="#" onclick="showCustomerModal('notes')" class="bg-blue-50 py-4 px-3 font-medium flex justify-between items-center hover:bg-blue-100 transition cursor-pointer">Customer Notes <span>&gt;</span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-      </div>
-      
-            <!-- Desktop/Tablet content -->
-      <div class="hidden md:block">
-       <!-- Top Section: Jobs, Invoices, Transactions -->
-       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-            <!-- Jobs -->
-            <div class="bg-white rounded shadow border p-6 flex flex-col">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="font-semibold text-gray-800 text-lg">Jobs</h2>
-                    <span class="text-sky-500 font-bold" id="jobsTotal"></span>
-                </div>
-                <div id="jobsList" class="flex-1 overflow-y-auto max-h-40 text-sm space-y-4"></div>
-            </div>
-            <!-- Invoices -->
-            <div class="bg-white rounded shadow border p-6 flex flex-col">
-                <div class="flex justify-between items-center mb-4">
-                    <div class="flex items-center gap-3">
-                        <h2 class="font-semibold text-gray-800 text-lg">Invoices</h2>
-                        <span class="bg-gray-200 text-xs px-3 py-1.5 rounded font-semibold">Paid / Pending</span>
-                    </div>
-                    <span class="text-sky-500 font-bold" id="invoicesTotal"></span>
-                </div>
-                <div id="invoicesList" class="flex-1 overflow-y-auto max-h-40 text-sm space-y-4"></div>
-            </div>
-            <!-- Transactions -->
-            <div class="bg-white rounded shadow border p-6 flex flex-col">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="font-semibold text-gray-800 text-lg">Transactions</h2>
-                    <span class="text-sky-500 font-bold" id="transactionsTotal"></span>
-                </div>
-                <div id="transactionsList" class="flex-1 overflow-y-auto max-h-40 text-sm space-y-4"></div>
-            </div>
-        </div>
-               <!-- Main Details Section -->
-       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-                         <!-- Left Column: Personal Info & Preferences -->
-             <div class="flex flex-col gap-6">
-                <!-- Personal Information -->
-                <div class="bg-white rounded shadow border p-6">
-                    <h3 class="font-semibold text-gray-700 mb-6 text-lg">Personal Information</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <div class="text-xs text-gray-500 mb-2">First Name</div>
-                            <div class="font-medium" id="personalFirstName"></div>
-                        </div>
-                        <div>
-                            <div class="text-xs text-gray-500 mb-2">Last Name</div>
-                            <div class="font-medium" id="personalLastName"></div>
-                        </div>
-                        <div>
-                            <div class="text-xs text-gray-500 mb-2">Phone</div>
-                            <div class="font-medium" id="personalPhone"></div>
-                        </div>
-                        <div>
-                            <div class="text-xs text-gray-500 mb-2">Email</div>
-                            <div class="font-medium" id="personalEmail"></div>
-                        </div>
-                        <div class="md:col-span-2">
-                            <div class="text-xs text-gray-500 mb-2">Address</div>
-                            <div class="font-medium" id="personalAddress"></div>
-                        </div>
-                        <div class="md:col-span-2">
-                            <div class="text-xs text-gray-500 mb-2">Building Address</div>
-                            <div class="font-medium" id="personalBuildingAddress"></div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Preferences -->
-                <div class="bg-white rounded shadow border p-6">
-                    <h3 class="font-semibold text-gray-700 mb-6 text-lg">Preferences</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <div class="text-xs text-gray-500 mb-2">Client Since</div>
-                            <div class="font-medium" id="prefClientSince"></div>
-                        </div>
-                        <div>
-                            <div class="text-xs text-gray-500 mb-2">Lead Acquired Date</div>
-                            <div class="font-medium" id="prefLeadAcquiredDate"></div>
-                        </div>
-                        <div>
-                            <div class="text-xs text-gray-500 mb-2">Main Language</div>
-                            <div class="font-medium" id="prefMainLanguage"></div>
-                        </div>
-                        <div>
-                            <div class="text-xs text-gray-500 mb-2">Preferred Communication</div>
-                            <div class="font-medium" id="prefPreferredCommunication"></div>
-                        </div>
-                        <div>
-                            <div class="text-xs text-gray-500 mb-2">Payment Terms</div>
-                            <div class="font-medium" id="prefPaymentTerms"></div>
-                        </div>
-                        <div>
-                            <div class="text-xs text-gray-500 mb-2">Payment Method</div>
-                            <div class="font-medium" id="prefPaymentMethod"></div>
-                        </div>
-                        <div>
-                            <div class="text-xs text-gray-500 mb-2">Taxable</div>
-                            <div class="font-medium" id="prefTaxable"></div>
-                        </div>
-                        <div>
-                            <div class="text-xs text-gray-500 mb-2">Tags</div>
-                            <div class="font-medium" id="prefTags"></div>
-                        </div>
-                        <div>
-                            <div class="text-xs text-gray-500 mb-2">Sales Person</div>
-                            <div class="font-medium" id="prefSalesPerson"></div>
-                        </div>
-                        <div>
-                            <div class="text-xs text-gray-500 mb-2">Contractor</div>
-                            <div class="font-medium" id="prefContractor"></div>
-                        </div>
-                        <div class="md:col-span-2">
-                            <div class="text-xs text-gray-500 mb-2">Invoice Frequency</div>
-                            <div class="font-medium" id="prefInvoiceFrequency"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                         <!-- Right Column: Billing, Notes, Custom Fields -->
-             <div class="flex flex-col gap-6">
-                <!-- Billing Information -->
-                <div class="bg-white rounded shadow border p-6">
-                    <h3 class="font-semibold text-gray-700 mb-6 text-lg">Billing Information</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <div class="text-xs text-gray-500 mb-2">First Name</div>
-                            <div class="font-medium" id="billingFirstName"></div>
-                        </div>
-                        <div>
-                            <div class="text-xs text-gray-500 mb-2">Last Name</div>
-                            <div class="font-medium" id="billingLastName"></div>
-                        </div>
-                        <div>
-                            <div class="text-xs text-gray-500 mb-2">Phone</div>
-                            <div class="font-medium" id="billingPhone"></div>
-                        </div>
-                        <div>
-                            <div class="text-xs text-gray-500 mb-2">Email</div>
-                            <div class="font-medium" id="billingEmail"></div>
-                        </div>
-                        <div class="md:col-span-2">
-                            <div class="text-xs text-gray-500 mb-2">Address</div>
-                            <div class="font-medium" id="billingAddress"></div>
-                        </div>
-                        <div class="md:col-span-2">
-                            <div class="text-xs text-gray-500 mb-2">Company Name</div>
-                            <div class="font-medium" id="billingCompanyName"></div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Customer Notes -->
-                <div class="bg-white rounded shadow border p-6">
-                    <h3 class="font-semibold text-gray-700 mb-6 text-lg">Customer Notes</h3>
-                    <textarea id="customerNotes" class="w-full border rounded-lg p-6 min-h-[100px] resize-none focus:outline-none focus:ring-2 focus:ring-blue-500" readonly></textarea>
-                </div>
-                <!-- Custom Fields -->
-                <div class="bg-white rounded shadow border p-6">
-                    <h3 class="font-semibold text-gray-700 mb-6 text-lg">Custom Fields</h3>
-                    <table class="min-w-full text-sm">
-                        <thead>
-                            <tr class="bg-blue-200">
-                                                            <th class="px-4 py-3 text-left font-semibold">Field Name</th>
-                            <th class="px-4 py-3 text-left font-semibold">Value</th>
-                            </tr>
-                        </thead>
-                        <tbody id="customFields" class="divide-y divide-gray-200"></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="flex justify-start">
-            <button id="editBtn" onclick="navigateToEdit('personal')" class="px-8 py-4 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center gap-3 text-sm font-medium transition-colors">
-                <i class="fas fa-edit"></i> Edit Customer
-            </button>
-                 </div>
-       </div>
-     </main>
-     <!-- Bottom spacing for mobile -->
-     <div class="md:hidden h-8"></div>
-     
-     <!-- Customer Information Modals -->
-     <!-- Personal Information Modal -->
-     <div id="personalModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 modal-backdrop" onclick="closeModal('personalModal')">
-         <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full mx-4 max-h-[90vh] overflow-y-auto modal-content" onclick="event.stopPropagation()">
-             <div class="px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100 border-b border-blue-200 rounded-t-2xl">
-                 <div class="flex justify-between items-center">
-                     <h2 class="text-xl font-bold text-gray-800 flex items-center">
-                         <i class="fas fa-user-circle mr-2 text-blue-500"></i>
-                         Personal Information
-                     </h2>
-                     <button onclick="closeModal('personalModal')" class="text-gray-500 hover:text-gray-700">
-                         <i class="fas fa-times text-xl"></i>
-                     </button>
-                 </div>
-             </div>
-             <div class="p-6 space-y-4">
-                 <div class="flex justify-between items-center py-3 border-b border-gray-100">
-                     <span class="text-sm text-gray-600">Full Name</span>
-                     <span class="text-sm font-medium text-gray-800" id="modalPersonalName">-</span>
-                 </div>
-                 <div class="flex justify-between items-center py-3 border-b border-gray-100">
-                     <span class="text-sm text-gray-600">Phone</span>
-                     <span class="text-sm font-medium text-gray-800" id="modalPersonalPhone">-</span>
-                 </div>
-                 <div class="flex justify-between items-center py-3 border-b border-gray-100">
-                     <span class="text-sm text-gray-600">Email</span>
-                     <span class="text-sm font-medium text-gray-800" id="modalPersonalEmail">-</span>
-                 </div>
-                 <div class="flex justify-between items-center py-3 border-b border-gray-100">
-                     <span class="text-sm text-gray-600">Address</span>
-                     <span class="text-sm font-medium text-gray-800 text-right" id="modalPersonalAddress">-</span>
-                 </div>
-                 <div class="flex justify-between items-center py-3">
-                     <span class="text-sm text-gray-600">Building Address</span>
-                     <span class="text-sm font-medium text-gray-800 text-right" id="modalPersonalBuildingAddress">-</span>
-                 </div>
-             </div>
-             <div class="px-6 py-4 bg-gray-50 rounded-b-2xl">
-                 <button onclick="navigateToEdit('personal')" class="w-full bg-blue-500 text-white py-3 rounded-lg font-medium hover:bg-blue-600 transition-colors">
-                     Edit Information
-                 </button>
-             </div>
-         </div>
-     </div>
-     
-     <!-- Billing Information Modal -->
-     <div id="billingModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 modal-backdrop" onclick="closeModal('billingModal')">
-         <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full mx-4 max-h-[90vh] overflow-y-auto modal-content" onclick="event.stopPropagation()">
-             <div class="px-6 py-4 bg-gradient-to-r from-green-50 to-green-100 border-b border-green-200 rounded-t-2xl">
-                 <div class="flex justify-between items-center">
-                     <h2 class="text-xl font-bold text-gray-800 flex items-center">
-                         <i class="fas fa-credit-card mr-2 text-green-500"></i>
-                         Billing Information
-                     </h2>
-                     <button onclick="closeModal('billingModal')" class="text-gray-500 hover:text-gray-700">
-                         <i class="fas fa-times text-xl"></i>
-                     </button>
-                 </div>
-             </div>
-             <div class="p-6 space-y-4">
-                 <div class="flex justify-between items-center py-3 border-b border-gray-100">
-                     <span class="text-sm text-gray-600">First Name</span>
-                     <span class="text-sm font-medium text-gray-800" id="modalBillingFirstName">-</span>
-                 </div>
-                 <div class="flex justify-between items-center py-3 border-b border-gray-100">
-                     <span class="text-sm text-gray-600">Last Name</span>
-                     <span class="text-sm font-medium text-gray-800" id="modalBillingLastName">-</span>
-                 </div>
-                 <div class="flex justify-between items-center py-3 border-b border-gray-100">
-                     <span class="text-sm text-gray-600">Phone</span>
-                     <span class="text-sm font-medium text-gray-800" id="modalBillingPhone">-</span>
-                 </div>
-                 <div class="flex justify-between items-center py-3 border-b border-gray-100">
-                     <span class="text-sm text-gray-600">Email</span>
-                     <span class="text-sm font-medium text-gray-800" id="modalBillingEmail">-</span>
-                 </div>
-                 <div class="flex justify-between items-center py-3 border-b border-gray-100">
-                     <span class="text-sm text-gray-600">Address</span>
-                     <span class="text-sm font-medium text-gray-800 text-right" id="modalBillingAddress">-</span>
-                 </div>
-                 <div class="flex justify-between items-center py-3">
-                     <span class="text-sm text-gray-600">Company Name</span>
-                     <span class="text-sm font-medium text-gray-800" id="modalBillingCompanyName">-</span>
-                 </div>
-             </div>
-             <div class="px-6 py-4 bg-gray-50 rounded-b-2xl">
-                 <button onclick="navigateToEdit('billing')" class="w-full bg-green-500 text-white py-3 rounded-lg font-medium hover:bg-green-600 transition-colors">
-                     Edit Information
-                 </button>
-             </div>
-         </div>
-     </div>
-     
-     <!-- Preferences Modal -->
-     <div id="preferencesModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 modal-backdrop" onclick="closeModal('preferencesModal')">
-         <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full mx-4 max-h-[90vh] overflow-y-auto modal-content" onclick="event.stopPropagation()">
-             <div class="px-6 py-4 bg-gradient-to-r from-purple-50 to-purple-100 border-b border-purple-200 rounded-t-2xl">
-                 <div class="flex justify-between items-center">
-                     <h2 class="text-xl font-bold text-gray-800 flex items-center">
-                         <i class="fas fa-sliders-h mr-2 text-purple-500"></i>
-                         Preferences
-                     </h2>
-                     <button onclick="closeModal('preferencesModal')" class="text-gray-500 hover:text-gray-700">
-                         <i class="fas fa-times text-xl"></i>
-                     </button>
-                 </div>
-             </div>
-             <div class="p-6 space-y-4">
-                 <div class="flex justify-between items-center py-3 border-b border-gray-100">
-                     <span class="text-sm text-gray-600">Client Since</span>
-                     <span class="text-sm font-medium text-gray-800" id="modalClientSince">-</span>
-                 </div>
-                 <div class="flex justify-between items-center py-3 border-b border-gray-100">
-                     <span class="text-sm text-gray-600">Lead Acquired</span>
-                     <span class="text-sm font-medium text-gray-800" id="modalLeadAcquired">-</span>
-                 </div>
-                 <div class="flex justify-between items-center py-3 border-b border-gray-100">
-                     <span class="text-sm text-gray-600">Language</span>
-                     <span class="text-sm font-medium text-gray-800" id="modalLanguage">-</span>
-                 </div>
-                 <div class="flex justify-between items-center py-3 border-b border-gray-100">
-                     <span class="text-sm text-gray-600">Communication</span>
-                     <span class="text-sm font-medium text-gray-800" id="modalCommunication">-</span>
-                 </div>
-                 <div class="flex justify-between items-center py-3 border-b border-gray-100">
-                     <span class="text-sm text-gray-600">Payment Terms</span>
-                     <span class="text-sm font-medium text-gray-800" id="modalPaymentTerms">-</span>
-                 </div>
-                 <div class="flex justify-between items-center py-3 border-b border-gray-100">
-                     <span class="text-sm text-gray-600">Payment Method</span>
-                     <span class="text-sm font-medium text-gray-800" id="modalPaymentMethod">-</span>
-                 </div>
-                 <div class="flex justify-between items-center py-3 border-b border-gray-100">
-                     <span class="text-sm text-gray-600">Taxable</span>
-                     <span class="text-sm font-medium text-gray-800" id="modalTaxable">-</span>
-                 </div>
-                 <div class="flex justify-between items-center py-3 border-b border-gray-100">
-                     <span class="text-sm text-gray-600">Tags</span>
-                     <span class="text-sm font-medium text-gray-800" id="modalTags">-</span>
-                 </div>
-                 <div class="flex justify-between items-center py-3 border-b border-gray-100">
-                     <span class="text-sm text-gray-600">Sales Person</span>
-                     <span class="text-sm font-medium text-gray-800" id="modalSalesPerson">-</span>
-                 </div>
-                 <div class="flex justify-between items-center py-3 border-b border-gray-100">
-                     <span class="text-sm text-gray-600">Contractor</span>
-                     <span class="text-sm font-medium text-gray-800" id="modalContractor">-</span>
-                 </div>
-                 <div class="flex justify-between items-center py-3">
-                     <span class="text-sm text-gray-600">Invoice Frequency</span>
-                     <span class="text-sm font-medium text-gray-800" id="modalInvoiceFrequency">-</span>
-                 </div>
-             </div>
-             <div class="px-6 py-4 bg-gray-50 rounded-b-2xl">
-                 <button onclick="navigateToEdit('preferences')" class="w-full bg-purple-500 text-white py-3 rounded-lg font-medium hover:bg-purple-600 transition-colors">
-                     Edit Information
-                 </button>
-             </div>
-         </div>
-     </div>
-     
-     <!-- Customer Notes Modal -->
-     <div id="notesModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 modal-backdrop" onclick="closeModal('notesModal')">
-         <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full mx-4 max-h-[90vh] overflow-y-auto modal-content" onclick="event.stopPropagation()">
-             <div class="px-6 py-4 bg-gradient-to-r from-yellow-50 to-yellow-100 border-b border-yellow-200 rounded-t-2xl">
-                 <div class="flex justify-between items-center">
-                     <h2 class="text-xl font-bold text-gray-800 flex items-center">
-                         <i class="fas fa-sticky-note mr-2 text-yellow-500"></i>
-                         Customer Notes
-                     </h2>
-                     <button onclick="closeModal('notesModal')" class="text-gray-500 hover:text-gray-700">
-                         <i class="fas fa-times text-xl"></i>
-                     </button>
-                 </div>
-             </div>
-             <div class="p-6">
-                 <div class="text-sm text-gray-700 leading-relaxed" id="modalCustomerNotes">
-                     No notes available for this customer.
-                 </div>
-             </div>
-             <div class="px-6 py-4 bg-gray-50 rounded-b-2xl">
-                 <button onclick="navigateToEdit('notes')" class="w-full bg-yellow-500 text-white py-3 rounded-lg font-medium hover:bg-yellow-600 transition-colors">
-                     Edit Notes
-                 </button>
-             </div>
-         </div>
-     </div>
-     
-     <!-- Custom Fields Modal -->
-     <div id="customModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 modal-backdrop" onclick="closeModal('customModal')">
-         <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full mx-4 max-h-[90vh] overflow-y-auto modal-content" onclick="event.stopPropagation()">
-             <div class="px-6 py-4 bg-gradient-to-r from-indigo-50 to-indigo-100 border-b border-indigo-200 rounded-t-2xl">
-                 <div class="flex justify-between items-center">
-                     <h2 class="text-xl font-bold text-gray-800 flex items-center">
-                         <i class="fas fa-tags mr-2 text-indigo-500"></i>
-                         Custom Fields
-                     </h2>
-                     <button onclick="closeModal('customModal')" class="text-gray-500 hover:text-gray-700">
-                         <i class="fas fa-times text-xl"></i>
-                     </button>
-                 </div>
-             </div>
-             <div class="p-6">
-                 <div class="text-sm text-gray-700" id="modalCustomFields">
-                     No custom fields available for this customer.
-                 </div>
-             </div>
-             <div class="px-6 py-4 bg-gray-50 rounded-b-2xl">
-                 <button onclick="navigateToEdit('custom')" class="w-full bg-indigo-500 text-white py-3 rounded-lg font-medium hover:bg-indigo-600 transition-colors">
-                     Manage Custom Fields
-                 </button>
-             </div>
-         </div>
-     </div>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://unpkg.com/tippy.js@6"></script>
     <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
@@ -520,379 +13,385 @@
     <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="../js/customerlist.js"></script>
-    <script src="../js/main.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+</head>
+<body class="min-h-screen bg-gray-50">
+    <div id="header-container" class="w-full"></div>
+    <div id="nav-container" class="w-full"></div>
+
+    <!-- Mobile View -->
+    <div class="md:hidden">
+        <div class="w-full max-w-md mx-auto mt-4">
+            <div class="bg-white rounded-2xl shadow p-4">
+                <div class="rounded-t-2xl flex flex-col items-center pt-6 pb-4 -mx-4 -mt-4" style="background-color: #41B6FF;">
+                    <div class="bg-white rounded-full border-4 flex items-center justify-center" style="border-color: #41B6FF; width: 80px; height: 80px;" >
+                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="32" cy="32" r="32" fill="white"/>
+                            <circle cx="32" cy="24" r="12" fill="#d1d5db"/>
+                            <ellipse cx="32" cy="48" rx="20" ry="12" fill="#d1d5db"/>
+                        </svg>
+                    </div>
+                    <div class="text-2xl font-bold text-gray-800">Bria Salsalani</div>
+                    <div class="text-gray-600 text-sm mb-2">sallie@bria.com</div>
+                </div>
+                <div class="flex flex-col items-center py-4">
+                    <div class="text-3xl font-bold" style="color: #41B6FF;">$0</div>
+                    <div class="w-full border-t border-gray-200 my-3"></div>
+                    <div class="grid grid-cols-4 gap-2 w-full text-center">
+                        <button class="flex flex-col items-center card-action-btn" data-action="jobs" type="button" style="background:none;border:none;outline:none;cursor:pointer;">
+                            <i class="fa fa-file-invoice-dollar text-2xl mb-1" style="color: #41B6FF;"></i>
+                            <span class="text-xs font-semibold text-gray-700">Jobs</span>
+                        </button>
+                        <button class="flex flex-col items-center card-action-btn" data-action="estimates" type="button" style="background:none;border:none;outline:none;cursor:pointer;">
+                            <i class="fa fa-file-signature text-2xl mb-1" style="color: #41B6FF;"></i>
+                            <span class="text-xs font-semibold text-gray-700">Estimates</span>
+                        </button>
+                        <button class="flex flex-col items-center card-action-btn" data-action="invoices" type="button" style="background:none;border:none;outline:none;cursor:pointer;">
+                            <i class="fa fa-file-invoice text-2xl mb-1" style="color: #41B6FF;"></i>
+                            <span class="text-xs font-semibold text-gray-700">Invoices</span>
+                        </button>
+                        <button class="flex flex-col items-center card-action-btn" data-action="transactions" type="button" style="background:none;border:none;outline:none;cursor:pointer;">
+                            <i class="fa fa-exchange-alt text-2xl mb-1" style="color: #41B6FF;"></i>
+                            <span class="text-xs font-semibold text-gray-700">Transactions</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <div class="font-bold text-gray-700 mb-1">Customer Information</div>
+                    <div class="divide-y divide-blue-100 rounded overflow-hidden flex flex-col">
+                        <a href="personal-information-mobile.html" class="bg-blue-50 py-2 px-3 font-medium flex justify-between items-center hover:bg-blue-100 transition cursor-pointer">Personal Information <span>&gt;</span></a>
+                        <a href="billing-information-mobile.html" class="bg-blue-50 py-2 px-3 font-medium flex justify-between items-center hover:bg-blue-100 transition cursor-pointer">Billing Information <span>&gt;</span></a>
+                        <a href="preferences-mobile.html" class="bg-blue-50 py-2 px-3 font-medium flex justify-between items-center hover:bg-blue-100 transition cursor-pointer">Preferences <span>&gt;</span></a>
+                        <a href="custom-fields-mobile.html" class="bg-blue-50 py-2 px-3 font-medium flex justify-between items-center hover:bg-blue-100 transition cursor-pointer">Custom Fields <span>&gt;</span></a>
+                        <a href="customer-notes-mobile.html" class="bg-blue-50 py-2 px-3 font-medium flex justify-between items-center hover:bg-blue-100 transition cursor-pointer">Customer Notes <span>&gt;</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Desktop View -->
+    <div class="hidden md:block">
+        <div class="pt-4 pb-2 px-2">
+            <h1 class="text-lg md:text-xl font-semibold text-gray-800">Customer Details</h1>
+        </div>
+        <main class="container-fluid mx-auto px-2 md:px-6 pb-4" style="position: relative; z-index: 1;">
+            <div class="border border-blue-200 rounded-lg bg-white p-4 flex flex-col gap-4 h-full">
+                <div class="overflow-x-auto max-w-full flex-1 h-full">
+                    <div class="min-w-[900px] flex flex-col gap-4 h-full">
+    
+                        <!-- Profile Section (always at the top, full width) -->
+                        <div class="flex items-center gap-3 pb-2 border-b-2 border-blue-200">
+                            <div class="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center text-3xl text-blue-500">
+                                <i class="fa fa-user"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-xl font-bold">Bria Salsalani</h2>
+                            </div>
+                        </div>
+    
+                        <!-- Main Content Area - Contains two primary grid rows -->
+                        <div class="flex-1 flex flex-col gap-4">
+    
+                            <!-- PRIMARY ROW 1: Jobs/Estimates (left) & Invoices/Transactions (right) -->
+                            <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                                <!-- Left part of Row 1 -->
+                                <div class="md:col-span-3 flex flex-row gap-4 w-full h-full">
+                                    <!-- Column for Search + Jobs -->
+                                    <div class="md:w-2/3 w-full flex flex-col">
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <select class="border border-blue-300 rounded px-2 py-1 bg-white text-gray-700 outline-none focus:ring-0">
+                                                <option>Filter</option>
+                                            </select>
+                                            <input type="text" placeholder="Search customer details..." class="flex-1 border border-blue-300 rounded px-2 py-1 bg-white text-gray-700 outline-none focus:ring-0" />
+                                            <span class="ml-3 text-blue-500 font-bold whitespace-nowrap">$3107.9</span>
+                                        </div>
+                                        <div class="border border-blue-300 rounded bg-white p-4 flex flex-col relative" style="height: 336px;">
+                                            <div class="text-lg font-semibold text-blue-500 mb-2">Jobs</div>
+                                            <div class="overflow-y-auto" style="flex: 1 1 auto; min-height: 0; padding-bottom: 56px;">
+                                                <!-- Project 1 -->
+                                                <div class="border-b py-2">
+                                                    <div class="font-bold">Project #: 1002</div>
+                                                    <div><span class="font-semibold">Date Started:</span> March 12, 2025</div>
+                                                    <div><span class="font-semibold">End Target:</span> March 19, 2025</div>
+                                                    <div><span class="font-semibold">Status:</span> <span class="text-blue-500">Undispatched</span></div>
+                                                    <div><span class="font-semibold">Team Assigned:</span> <span class="text-blue-600 font-semibold">Team B</span></div>
+                                                </div>
+                                                <!-- Project 2 -->
+                                                <div class="border-b py-2">
+                                                    <div class="font-bold">Project #: 1002</div>
+                                                    <div><span class="font-semibold">Date Started:</span> March 12, 2025</div>
+                                                    <div><span class="font-semibold">End Target:</span> March 19, 2025</div>
+                                                    <div><span class="font-semibold">Status:</span> <span class="text-blue-500">Unassigned</span></div>
+                                                    <div><span class="font-semibold">Team Assigned:</span> <span class="text-blue-600 font-semibold">Team B</span></div>
+                                                </div>
+                                                <!-- Project 3 -->
+                                                <div class="border-b py-2">
+                                                    <div class="font-bold">Project #: 1002</div>
+                                                    <div><span class="font-semibold">Date Started:</span> March 13, 2025</div>
+                                                    <div><span class="font-semibold">End Target:</span> March 21, 2025</div>
+                                                    <div><span class="font-semibold">Status:</span> <span class="text-blue-500">Unassigned</span></div>
+                                                    <div><span class="font-semibold">Team Assigned:</span> <span class="text-blue-600 font-semibold">Team A</span></div>
+                                                </div>
+                                            </div>
+                                            <div class="flex justify-end items-center gap-2 absolute bottom-4 right-4 bg-white" style="z-index:10;">
+                                                <button class="flex items-center justify-center border border-blue-200 text-blue-800 rounded-full bg-white" style="height:32px;width:32px;">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                                <button class="border border-blue-200 text-blue-800 px-4 py-1 rounded bg-white" style="height:32px;">edit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Column for Estimates -->
+                                    <div class="md:w-1/3 w-full border border-blue-300 rounded bg-white p-4 flex flex-col h-full" style="height: 377px;">
+                                        <div>
+                                            <div class="text-lg font-semibold text-blue-500 mb-2">Estimates</div>
+                                            <!-- Estimates content -->
+                                            <div class="text-gray-500">No estimates available.</div>
+                                        </div>
+                                        <div class="flex justify-end items-center gap-2 mt-auto pt-4">
+                                            <button class="flex items-center justify-center border border-blue-200 text-blue-800 rounded-full bg-white" style="height:32px;width:32px;">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                            <button class="border border-blue-200 text-blue-800 px-4 py-1 rounded bg-white" style="height:32px;">edit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Right part of Row 1 -->
+                                <div class="md:col-span-2 grid grid-cols-2 gap-4 h-full">
+                                    <div class="border border-blue-200 rounded bg-white p-4 flex flex-col h-full" style="height: 377px;">
+                                        <div>
+                                            <div class="text-blue-400 font-semibold mb-2">Invoices</div>
+                                        </div>
+                                        <div class="flex justify-end items-center gap-2 mt-auto pt-4">
+                                            <button class="flex items-center justify-center border border-blue-200 text-blue-800 rounded-full bg-white" style="height:32px;width:32px;">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                            <button class="border border-blue-200 text-blue-800 px-4 py-1 rounded bg-white" style="height:32px;">edit</button>
+                                        </div>
+                                    </div>
+                                    <div class="border border-blue-200 rounded bg-white p-4 flex flex-col h-full" style="height: 377px;">
+                                        <div>
+                                            <div class="text-blue-400 font-semibold mb-2">Transactions</div>
+                                        </div>
+                                        <div class="flex justify-end items-center gap-2 mt-auto pt-4">
+                                            <button class="flex items-center justify-center border border-blue-200 text-blue-800 rounded-full bg-white" style="height:32px;width:32px;">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                            <button class="border border-blue-200 text-blue-800 px-4 py-1 rounded bg-white" style="height:32px;">edit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <!-- PRIMARY ROW 2: Tabs/Info (left) & Customer Notes/Custom Fields (right) -->
+                            <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                                <!-- Left part of Row 2 -->
+                                <div class="md:col-span-3 border border-blue-200 rounded bg-white p-4 flex flex-col h-full">
+                                    <!-- Tabs -->
+                                    <div class="flex border-b border-blue-200 bg-blue-100 rounded-t overflow-hidden" id="profile-tabs">
+                                        <button class="flex-1 px-4 py-2 bg-blue-400 text-white font-semibold" id="tab-personal">Personal Information</button>
+                                        <button class="flex-1 px-4 py-2 text-blue-700 font-semibold bg-blue-100" id="tab-billing">Billing Information</button>
+                                        <button class="flex-1 px-4 py-2 text-blue-700 font-semibold bg-blue-100" id="tab-preferences">Preferences</button>
+                                    </div>
+                                    <!-- Info Card -->
+                                    <div class="p-0 pt-4 flex-1 flex flex-col">
+                                        <!-- Personal Information Tab -->
+                                        <div id="content-personal" class="h-[300px] overflow-y-auto flex flex-col">
+                                            <div>
+                                                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mb-2">
+                                                    <div>
+                                                        <div class="text-xs font-bold text-gray-700">First Name</div>
+                                                        <div class="bg-gray-200 rounded px-2 py-1">Bria</div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="text-xs font-bold text-gray-700">Last Name</div>
+                                                        <div class="bg-gray-200 rounded px-2 py-1">Salsalani</div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="text-xs font-bold text-gray-700">Phone Number</div>
+                                                        <div class="bg-gray-200 rounded px-2 py-1">3756644</div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="text-xs font-bold text-gray-700">Email Address</div>
+                                                        <div class="bg-gray-200 rounded px-2 py-1">sallie@bria.com</div>
+                                                    </div>
+                                                    <div class="md:col-span-2">
+                                                        <div class="text-xs font-bold text-gray-700">Current Address</div>
+                                                        <div class="bg-gray-200 rounded px-2 py-1">Pinayahan, Diliman, Quezon, Metro Manila, Philippines 1008</div>
+                                                    </div>
+                                                    <div class="md:col-span-2">
+                                                        <div class="text-xs font-bold text-gray-700">Billing Address</div>
+                                                        <div class="bg-gray-200 rounded px-2 py-1">Armal Building</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex justify-end mt-4">
+                                                <button class="border border-blue-200 text-blue-800 px-4 py-1 rounded bg-white">edit</button>
+                                            </div>
+                                        </div>
+                                        <!-- Billing Information Tab -->
+                                        <div id="content-billing" class="hidden h-[300px] overflow-y-auto flex flex-col">
+                                            <div>
+                                                <div class="mb-4 text-lg font-semibold text-gray-800">Billing Information</div>
+                                                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mb-2">
+                                                    <div>
+                                                        <div class="text-xs font-bold text-gray-700">First Name</div>
+                                                        <div class="bg-gray-200 rounded px-2 py-1">Janet</div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="text-xs font-bold text-gray-700">Last Name</div>
+                                                        <div class="bg-gray-200 rounded px-2 py-1">Aleesha</div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="text-xs font-bold text-gray-700">Phone</div>
+                                                        <div class="bg-gray-200 rounded px-2 py-1">(02) 456-8582</div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="text-xs font-bold text-gray-700">Email</div>
+                                                        <div class="bg-gray-200 rounded px-2 py-1">janet@aleesha.com</div>
+                                                    </div>
+                                                    <div class="md:col-span-2">
+                                                        <div class="text-xs font-bold text-gray-700">Address</div>
+                                                        <div class="bg-gray-200 rounded px-2 py-1">888 Mindanao Avenue, Barangay Talipapa, Quezon City, MM 7784</div>
+                                                    </div>
+                                                    <div class="md:col-span-2">
+                                                        <div class="text-xs font-bold text-gray-700">Company Name</div>
+                                                        <div class="bg-gray-200 rounded px-2 py-1">Yrrecrerre Building</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex justify-end mt-4">
+                                                <button class="border border-blue-200 text-blue-800 px-4 py-1 rounded bg-white">edit</button>
+                                            </div>
+                                        </div>
+                                        <!-- Preferences Tab -->
+                                        <div id="content-preferences" class="hidden h-[300px] overflow-y-auto flex flex-col">
+                                            <div>
+                                                <div class="mb-4 text-lg font-semibold text-gray-800">Preferences</div>
+                                                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mb-2">
+                                                    <div>
+                                                        <div class="text-xs font-bold text-gray-700">Client Since</div>
+                                                        <div class="bg-gray-200 rounded px-2 py-1">N/A</div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="text-xs font-bold text-gray-700">Lead Acquired Date</div>
+                                                        <div class="bg-gray-200 rounded px-2 py-1">N/A</div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="text-xs font-bold text-gray-700">Main Language</div>
+                                                        <div class="bg-gray-200 rounded px-2 py-1">English</div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="text-xs font-bold text-gray-700">Preferred Communication</div>
+                                                        <div class="bg-gray-200 rounded px-2 py-1">call</div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="text-xs font-bold text-gray-700">Payment Terms</div>
+                                                        <div class="bg-gray-200 rounded px-2 py-1">N/A</div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="text-xs font-bold text-gray-700">Payment Method</div>
+                                                        <div class="bg-gray-200 rounded px-2 py-1">N/A</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex justify-end mt-4">
+                                                <button class="border border-blue-200 text-blue-800 px-4 py-1 rounded bg-white">edit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Right part of Row 2 -->
+                                <div class="md:col-span-2 flex flex-col gap-4">
+                                    <!-- Customer Notes -->
+                                    <div class="border border-blue-200 rounded bg-white p-4 flex-1 flex flex-col">
+                                        <div class="text-lg font-semibold text-blue-500 mb-2">Customer Notes</div>
+                                        <textarea class="w-full flex-1 border border-blue-300 rounded p-2" placeholder="Add notes here..."></textarea>
+                                        <div class="flex justify-end mt-2">
+                                            <button class="border border-blue-200 text-blue-800 px-4 py-1 rounded bg-white">save</button>
+                                        </div>
+                                    </div>
+                                    <!-- Custom Fields -->
+                                    <div class="border border-blue-200 rounded bg-white p-4 flex-1 flex flex-col">
+                                        <div class="text-lg font-semibold text-blue-500 mb-2">Custom Fields</div>
+                                        <div class="flex justify-end mt-auto">
+                                            <button class="border border-blue-200 text-blue-800 px-4 py-1 rounded bg-white">edit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
     <script>
-        // Function to get URL parameters
-        function getUrlParameter(name) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
-        }
-
-        // Function to navigate to edit page with customer data
-        function navigateToEdit(section) {
-            // Get customer data from localStorage or create empty object
-            let customerData = {};
-            try {
-                const storedData = localStorage.getItem('selectedCustomerData');
-                if (storedData) {
-                    customerData = JSON.parse(storedData);
-                }
-            } catch (e) {
-                console.log('No localStorage data found');
-            }
-            
-            // Add the section parameter to indicate which section to focus on
-            customerData.section = section;
-            
-            // Store the data for the edit page
-            localStorage.setItem('editCustomerData', JSON.stringify(customerData));
-            
-            // Navigate to edit page
-            window.location.href = 'customer-edit.html';
-        }
-
-        // Function to populate customer data from localStorage or URL parameters
-        function populateCustomerData() {
-            // First try to get data from localStorage (from mobile customer list)
-            let customerData = null;
-            try {
-                const storedData = localStorage.getItem('selectedCustomerData');
-                if (storedData) {
-                    customerData = JSON.parse(storedData);
-                }
-            } catch (e) {
-                console.log('No localStorage data found, using URL parameters');
-            }
-            
-            // If no localStorage data, fall back to URL parameters
-            if (!customerData) {
-                customerData = {
-                    name: getUrlParameter('name'),
-                    phone: getUrlParameter('phone'),
-                    email: getUrlParameter('email'),
-                    status: getUrlParameter('status'),
-                    date: getUrlParameter('date'),
-                    address: getUrlParameter('address'),
-                    buildingAddress: getUrlParameter('buildingAddress'),
-                    language: getUrlParameter('language'),
-                    communication: getUrlParameter('communication'),
-                    paymentTerms: getUrlParameter('paymentTerms'),
-                    paymentMethod: getUrlParameter('paymentMethod'),
-                    taxable: getUrlParameter('taxable'),
-                    tags: getUrlParameter('tags'),
-                    salesPerson: getUrlParameter('salesPerson'),
-                    contractor: getUrlParameter('contractor'),
-                    invoiceFrequency: getUrlParameter('invoiceFrequency'),
-                    balance: getUrlParameter('balance'),
-                    jobsCount: getUrlParameter('jobsCount'),
-                    invoicesCount: getUrlParameter('invoicesCount'),
-                    transactionsCount: getUrlParameter('transactionsCount')
-                };
-            }
-            
-            const customerName = customerData.name;
-            const phone = customerData.phone;
-            const email = customerData.email;
-            const status = customerData.status;
-            const date = customerData.date;
-            const address = customerData.address;
-            const buildingAddress = customerData.buildingAddress;
-            const language = customerData.language;
-            const communication = customerData.communication;
-            const paymentTerms = customerData.paymentTerms;
-            const paymentMethod = customerData.paymentMethod;
-            const taxable = customerData.taxable;
-            const tags = customerData.tags;
-            const salesPerson = customerData.salesPerson;
-            const contractor = customerData.contractor;
-            const invoiceFrequency = customerData.invoiceFrequency;
-            const balance = customerData.balance;
-            const jobsCount = customerData.jobsCount;
-            const invoicesCount = customerData.invoicesCount;
-            const transactionsCount = customerData.transactionsCount;
-            const leadAcquiredDate = customerData.leadAcquiredDate;
-
-            if (customerName) {
-                // Populate mobile view elements
-                const mobileCustomerName = document.getElementById('mobileCustomerName');
-                const mobileCustomerEmail = document.getElementById('mobileCustomerEmail');
-                const mobileCustomerBalance = document.getElementById('mobileCustomerBalance');
-                const customerNameHeader = document.getElementById('customerNameHeader');
-
-                if (mobileCustomerName) mobileCustomerName.textContent = decodeURIComponent(customerName);
-                if (mobileCustomerEmail) mobileCustomerEmail.textContent = decodeURIComponent(email || '');
-                if (mobileCustomerBalance) mobileCustomerBalance.textContent = decodeURIComponent(balance || '$0');
-                if (customerNameHeader) customerNameHeader.textContent = decodeURIComponent(customerName);
-
-                // Populate desktop view elements
-                const personalFirstName = document.getElementById('personalFirstName');
-                const personalLastName = document.getElementById('personalLastName');
-                const personalPhone = document.getElementById('personalPhone');
-                const personalEmail = document.getElementById('personalEmail');
-                const personalAddress = document.getElementById('personalAddress');
-                const personalBuildingAddress = document.getElementById('personalBuildingAddress');
-                const prefClientSince = document.getElementById('prefClientSince');
-
-                if (personalFirstName) {
-                    const nameParts = decodeURIComponent(customerName).split(' ');
-                    personalFirstName.textContent = nameParts[0] || '';
-                    personalLastName.textContent = nameParts.slice(1).join(' ') || '';
-                }
-                if (personalPhone) personalPhone.textContent = decodeURIComponent(phone || 'N/A');
-                if (personalEmail) personalEmail.textContent = decodeURIComponent(email || 'N/A');
-                if (personalAddress) personalAddress.textContent = decodeURIComponent(address || 'N/A');
-                if (personalBuildingAddress) personalBuildingAddress.textContent = decodeURIComponent(buildingAddress || 'N/A');
-                if (prefClientSince) prefClientSince.textContent = decodeURIComponent(date || 'N/A');
-
-                // Populate preferences
-                const prefMainLanguage = document.getElementById('prefMainLanguage');
-                const prefPreferredCommunication = document.getElementById('prefPreferredCommunication');
-                const prefPaymentTerms = document.getElementById('prefPaymentTerms');
-                const prefPaymentMethod = document.getElementById('prefPaymentMethod');
-                const prefTaxable = document.getElementById('prefTaxable');
-                const prefTags = document.getElementById('prefTags');
-                const prefSalesPerson = document.getElementById('prefSalesPerson');
-                const prefContractor = document.getElementById('prefContractor');
-                const prefInvoiceFrequency = document.getElementById('prefInvoiceFrequency');
-
-                if (prefMainLanguage) prefMainLanguage.textContent = decodeURIComponent(language || 'English');
-                if (prefPreferredCommunication) prefPreferredCommunication.textContent = decodeURIComponent(communication || 'Email');
-                if (prefPaymentTerms) prefPaymentTerms.textContent = decodeURIComponent(paymentTerms || 'Net 30');
-                if (prefPaymentMethod) prefPaymentMethod.textContent = decodeURIComponent(paymentMethod || 'Credit Card');
-                if (prefTaxable) prefTaxable.textContent = decodeURIComponent(taxable || 'Yes');
-                if (prefTags) prefTags.textContent = decodeURIComponent(tags || 'Regular Customer');
-                if (prefSalesPerson) prefSalesPerson.textContent = decodeURIComponent(salesPerson || 'John Doe');
-                if (prefContractor) prefContractor.textContent = decodeURIComponent(contractor || 'ABC Contractors');
-                if (prefInvoiceFrequency) prefInvoiceFrequency.textContent = decodeURIComponent(invoiceFrequency || 'Monthly');
-                
-                // Populate lead acquired date
-                const prefLeadAcquiredDate = document.getElementById('prefLeadAcquiredDate');
-                if (prefLeadAcquiredDate) prefLeadAcquiredDate.textContent = decodeURIComponent(leadAcquiredDate || date || 'N/A');
-
-                // Populate billing information (same as personal for now)
-                const billingFirstName = document.getElementById('billingFirstName');
-                const billingLastName = document.getElementById('billingLastName');
-                const billingPhone = document.getElementById('billingPhone');
-                const billingEmail = document.getElementById('billingEmail');
-                const billingAddress = document.getElementById('billingAddress');
-                const billingCompanyName = document.getElementById('billingCompanyName');
-
-                if (billingFirstName) {
-                    const nameParts = decodeURIComponent(customerName).split(' ');
-                    billingFirstName.textContent = nameParts[0] || '';
-                    billingLastName.textContent = nameParts.slice(1).join(' ') || '';
-                }
-                if (billingPhone) billingPhone.textContent = decodeURIComponent(phone || 'N/A');
-                if (billingEmail) billingEmail.textContent = decodeURIComponent(email || 'N/A');
-                if (billingAddress) billingAddress.textContent = decodeURIComponent(address || 'N/A');
-                if (billingCompanyName) billingCompanyName.textContent = 'Individual';
-
-                // Populate jobs, invoices, and transactions totals
-                const jobsTotal = document.getElementById('jobsTotal');
-                const invoicesTotal = document.getElementById('invoicesTotal');
-                const transactionsTotal = document.getElementById('transactionsTotal');
-
-                if (jobsTotal) jobsTotal.textContent = decodeURIComponent(jobsCount || '0');
-                if (invoicesTotal) invoicesTotal.textContent = decodeURIComponent(invoicesCount || '0');
-                if (transactionsTotal) transactionsTotal.textContent = decodeURIComponent(transactionsCount || '0');
-
-                // Populate customer notes
-                const customerNotes = document.getElementById('customerNotes');
-                if (customerNotes) {
-                    customerNotes.value = `Customer ${decodeURIComponent(customerName)} has been a client since ${decodeURIComponent(date || 'recently')}. They prefer ${decodeURIComponent(communication || 'email')} communication and have been responsive to our services.`;
-                }
-            }
-        }
-
-                 // Function to show customer details in a modal
-         function showCustomerModal(section) {
-             showModalContent(section);
-         }
-
-        // Function to close modals
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.add('hidden');
-        }
-
-        // Function to open modals
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.remove('hidden');
-        }
-
-        // Function to show modal content based on section
-        function showModalContent(section) {
-            closeAllModals(); // Close all modals first
-            if (section === 'personal') {
-                openModal('personalModal');
-                populatePersonalModal();
-            } else if (section === 'billing') {
-                openModal('billingModal');
-                populateBillingModal();
-            } else if (section === 'preferences') {
-                openModal('preferencesModal');
-                populatePreferencesModal();
-            } else if (section === 'notes') {
-                openModal('notesModal');
-                populateNotesModal();
-            } else if (section === 'custom') {
-                openModal('customModal');
-                populateCustomFieldsModal();
-            }
-        }
-
-        // Function to populate personal modal
-        function populatePersonalModal() {
-            const customerData = JSON.parse(localStorage.getItem('selectedCustomerData') || '{}');
-            const personalName = document.getElementById('modalPersonalName');
-            const personalPhone = document.getElementById('modalPersonalPhone');
-            const personalEmail = document.getElementById('modalPersonalEmail');
-            const personalAddress = document.getElementById('modalPersonalAddress');
-            const personalBuildingAddress = document.getElementById('modalPersonalBuildingAddress');
-
-            if (personalName) personalName.textContent = decodeURIComponent(customerData.name || 'N/A');
-            if (personalPhone) personalPhone.textContent = decodeURIComponent(customerData.phone || 'N/A');
-            if (personalEmail) personalEmail.textContent = decodeURIComponent(customerData.email || 'N/A');
-            if (personalAddress) personalAddress.textContent = decodeURIComponent(customerData.address || 'N/A');
-            if (personalBuildingAddress) personalBuildingAddress.textContent = decodeURIComponent(customerData.buildingAddress || 'N/A');
-        }
-
-        // Function to populate billing modal
-        function populateBillingModal() {
-            const customerData = JSON.parse(localStorage.getItem('selectedCustomerData') || '{}');
-            const billingFirstName = document.getElementById('modalBillingFirstName');
-            const billingLastName = document.getElementById('modalBillingLastName');
-            const billingPhone = document.getElementById('modalBillingPhone');
-            const billingEmail = document.getElementById('modalBillingEmail');
-            const billingAddress = document.getElementById('modalBillingAddress');
-            const billingCompanyName = document.getElementById('modalBillingCompanyName');
-
-            if (billingFirstName) {
-                const nameParts = decodeURIComponent(customerData.name || '').split(' ');
-                billingFirstName.textContent = nameParts[0] || '';
-                billingLastName.textContent = nameParts.slice(1).join(' ') || '';
-            }
-            if (billingPhone) billingPhone.textContent = decodeURIComponent(customerData.phone || 'N/A');
-            if (billingEmail) billingEmail.textContent = decodeURIComponent(customerData.email || 'N/A');
-            if (billingAddress) billingAddress.textContent = decodeURIComponent(customerData.address || 'N/A');
-            if (billingCompanyName) billingCompanyName.textContent = decodeURIComponent(customerData.billingCompanyName || 'Individual');
-        }
-
-        // Function to populate preferences modal
-        function populatePreferencesModal() {
-            const customerData = JSON.parse(localStorage.getItem('selectedCustomerData') || '{}');
-            const clientSince = document.getElementById('modalClientSince');
-            const leadAcquiredDate = document.getElementById('modalLeadAcquired');
-            const language = document.getElementById('modalLanguage');
-            const communication = document.getElementById('modalCommunication');
-            const paymentTerms = document.getElementById('modalPaymentTerms');
-            const paymentMethod = document.getElementById('modalPaymentMethod');
-            const taxable = document.getElementById('modalTaxable');
-            const tags = document.getElementById('modalTags');
-            const salesPerson = document.getElementById('modalSalesPerson');
-            const contractor = document.getElementById('modalContractor');
-            const invoiceFrequency = document.getElementById('modalInvoiceFrequency');
-
-            if (clientSince) clientSince.textContent = decodeURIComponent(customerData.date || 'N/A');
-            if (leadAcquiredDate) leadAcquiredDate.textContent = decodeURIComponent(customerData.leadAcquiredDate || 'N/A');
-            if (language) language.textContent = decodeURIComponent(customerData.language || 'English');
-            if (communication) communication.textContent = decodeURIComponent(customerData.communication || 'Email');
-            if (paymentTerms) paymentTerms.textContent = decodeURIComponent(customerData.paymentTerms || 'Net 30');
-            if (paymentMethod) paymentMethod.textContent = decodeURIComponent(customerData.paymentMethod || 'Credit Card');
-            if (taxable) taxable.textContent = decodeURIComponent(customerData.taxable || 'Yes');
-            if (tags) tags.textContent = decodeURIComponent(customerData.tags || 'Regular Customer');
-            if (salesPerson) salesPerson.textContent = decodeURIComponent(customerData.salesPerson || 'John Doe');
-            if (contractor) contractor.textContent = decodeURIComponent(customerData.contractor || 'ABC Contractors');
-            if (invoiceFrequency) invoiceFrequency.textContent = decodeURIComponent(customerData.invoiceFrequency || 'Monthly');
-        }
-
-        // Function to populate notes modal
-        function populateNotesModal() {
-            const customerData = JSON.parse(localStorage.getItem('selectedCustomerData') || '{}');
-            const notes = document.getElementById('modalCustomerNotes');
-            if (notes) {
-                notes.textContent = decodeURIComponent(customerData.customerNotes || 'No notes available for this customer.');
-            }
-        }
-
-        // Function to populate custom fields modal
-        function populateCustomFieldsModal() {
-            const customerData = JSON.parse(localStorage.getItem('selectedCustomerData') || '{}');
-            const customFieldsContainer = document.getElementById('modalCustomFields');
-            if (customFieldsContainer) {
-                customFieldsContainer.innerHTML = ''; // Clear previous content
-                if (customerData.customFields && Object.keys(customerData.customFields).length > 0) {
-                    Object.entries(customerData.customFields).forEach(([key, value]) => {
-                        const row = document.createElement('tr');
-                        row.classList.add('divide-y', 'divide-gray-200');
-                        row.innerHTML = `
-                            <td class="px-4 py-3 text-left font-semibold text-gray-700">${decodeURIComponent(key)}</td>
-                            <td class="px-4 py-3 text-left text-gray-800">${decodeURIComponent(value || 'N/A')}</td>
-                        `;
-                        customFieldsContainer.appendChild(row);
-                    });
-                } else {
-                    customFieldsContainer.textContent = 'No custom fields available for this customer.';
-                }
-            }
-        }
-
-                 // Function to close all modals
-         function closeAllModals() {
-             document.getElementById('personalModal').classList.add('hidden');
-             document.getElementById('billingModal').classList.add('hidden');
-             document.getElementById('preferencesModal').classList.add('hidden');
-             document.getElementById('notesModal').classList.add('hidden');
-             document.getElementById('customModal').classList.add('hidden');
-         }
-         
-         // Add keyboard support for closing modals
-         document.addEventListener('keydown', function(event) {
-             if (event.key === 'Escape') {
-                 closeAllModals();
-             }
-         });
-
+        // Load header and navigation
+        fetch('../nav/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            });
+        fetch('../nav/navigation.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav-container').innerHTML = data;
+            });
+    
         // Mobile card actions
-        document.addEventListener('DOMContentLoaded', function() {
-            // Populate customer data from localStorage or URL parameters
-            populateCustomerData();
-
-            const cardActionBtns = document.querySelectorAll('.card-action-btn');
-            cardActionBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const action = this.getAttribute('data-action');
-                    if (action === 'jobs') {
-                        window.location.href = '../dispatch/activeprojects.html';
-                    } else if (action === 'estimates') {
-                        window.location.href = '../sales/estimates.html';
-                    } else if (action === 'invoices') {
-                        window.location.href = '../financial/invoices.html';
-                    } else if (action === 'transactions') {
-                        window.location.href = '../financial/invoices.html';
-                    }
-                });
-            });
-
-            // More dropdown
-            const moreBtn = document.getElementById('moreBtn');
-            const moreDropdown = document.getElementById('moreDropdown');
-            document.addEventListener('click', function(event) {
-                if (moreBtn && moreDropdown) {
-                    if (moreBtn.contains(event.target)) {
-                        moreDropdown.classList.toggle('hidden');
-                    } else if (!moreDropdown.contains(event.target)) {
-                        moreDropdown.classList.add('hidden');
-                    }
+        const cardActionBtns = document.querySelectorAll('.card-action-btn');
+        cardActionBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const action = this.getAttribute('data-action');
+                if (action === 'jobs') {
+                    window.location.href = 'jobs-mobile.html';
+                } else if (action === 'estimates') {
+                    window.location.href = 'estimates-mobile.html';
+                } else if (action === 'invoices') {
+                    window.location.href = 'invoices-mobile.html';
+                } else if (action === 'transactions') {
+                    window.location.href = 'transactions-mobile.html';
                 }
             });
+        });
 
-            // Show modal content based on URL parameter
-            const section = getUrlParameter('section');
-            if (section) {
-                showModalContent(section);
+        // Desktop tabs
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = {
+                personal: document.getElementById('tab-personal'),
+                billing: document.getElementById('tab-billing'),
+                preferences: document.getElementById('tab-preferences'),
+            };
+            const content = {
+                personal: document.getElementById('content-personal'),
+                billing: document.getElementById('content-billing'),
+                preferences: document.getElementById('content-preferences'),
+            };
+    
+            function switchTab(activeTab) {
+                for (const tab in tabs) {
+                    if (tab === activeTab) {
+                        tabs[tab].classList.add('bg-blue-400', 'text-white');
+                        tabs[tab].classList.remove('bg-blue-100', 'text-blue-700');
+                        content[tab].classList.remove('hidden');
+                    } else {
+                        tabs[tab].classList.remove('bg-blue-400', 'text-white');
+                        tabs[tab].classList.add('bg-blue-100', 'text-blue-700');
+                        content[tab].classList.add('hidden');
+                    }
+                }
             }
+    
+            tabs.personal.addEventListener('click', () => switchTab('personal'));
+            tabs.billing.addEventListener('click', () => switchTab('billing'));
+            tabs.preferences.addEventListener('click', () => switchTab('preferences'));
         });
     </script>
 </body>
-</html> 
+</html>
