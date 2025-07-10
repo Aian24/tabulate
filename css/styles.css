@@ -763,3 +763,19 @@ table tbody tr.dispatch-card td p {
 /* =====================
    Vendor Details Page Custom Styles -End
    ===================== */
+
+/* =====================
+   Glow Animation for Toggle Switch
+   ===================== */
+/* This glow animation is used for the "Toggle Viewport" switch in the profile dropdown menu.
+   It creates a pulsing blue glow effect when the toggle is active/checked.
+   Applied via the .animate-glow class in nav/header.html line 53.
+   Used across multiple pages that include the main navigation header. */
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(56,189,248,0.5); }
+  50% { box-shadow: 0 0 20px rgba(56,189,248,0.8); }
+}
+.animate-glow {
+  animation: glow 1.5s infinite alternate;
+}
