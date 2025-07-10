@@ -258,9 +258,9 @@
             </div>
             
             <!-- Mobile Package Cards -->
-            <div class="space-y-2">
+            <div class="space-y-2" id="package-cards-container">
                 <!-- Card 1 -->
-                <div class="bg-white rounded-lg shadow p-2">
+                <a href="packages-details.html" class="block bg-white rounded-lg shadow p-2 package-card" data-package='{"name":"Deep Clean With Free Hose Package","price":"$7,893.20","date":"March 14, 2025","status":"Active"}'>
                     <div class="flex justify-between items-center">
                         <span class="text-sky-500 font-semibold text-base flex-1">Deep Clean With Free Hose Package</span>
                         <span class="text-sky-400 font-semibold text-base w-32 text-right">$7,893.20</span>
@@ -270,9 +270,9 @@
                         <span>Date Created: March 14, 2025</span>
                         <span class="bg-blue-400 text-white rounded px-3 py-1 text-xs font-semibold ml-2">Active</span>
                     </div>
-                </div>
+                </a>
                 <!-- Card 2 -->
-                <div class="bg-white rounded-lg shadow p-2">
+                <a href="packages-details.html" class="block bg-white rounded-lg shadow p-2 package-card" data-package='{"name":"Garden Landscaping Package","price":"$200.00","date":"March 12, 2025","status":"Active"}'>
                     <div class="flex justify-between items-center">
                         <span class="text-sky-500 font-semibold text-base flex-1">Garden Landscaping Package</span>
                         <span class="text-sky-400 font-semibold text-base w-32 text-right">$200.00</span>
@@ -282,9 +282,9 @@
                         <span>Date Created: March 12, 2025</span>
                         <span class="bg-blue-400 text-white rounded px-3 py-1 text-xs font-semibold ml-2">Active</span>
                     </div>
-                </div>
+                </a>
                 <!-- Card 3 -->
-                <div class="bg-white rounded-lg shadow p-2">
+                <a href="packages-details.html" class="block bg-white rounded-lg shadow p-2 package-card" data-package='{"name":"Office Cleaning Package","price":"$14,266.00","date":"March 12, 2025","status":"Active"}'>
                     <div class="flex justify-between items-center">
                         <span class="text-sky-500 font-semibold text-base flex-1">Office Cleaning Package</span>
                         <span class="text-sky-400 font-semibold text-base w-32 text-right">$14,266.00</span>
@@ -294,9 +294,9 @@
                         <span>Date Created: March 12, 2025</span>
                         <span class="bg-blue-400 text-white rounded px-3 py-1 text-xs font-semibold ml-2">Active</span>
                     </div>
-                </div>
+                </a>
                 <!-- Card 4 -->
-                <div class="bg-white rounded-lg shadow p-2">
+                <a href="packages-details.html" class="block bg-white rounded-lg shadow p-2 package-card" data-package='{"name":"Basic Home Repair Package","price":"$2,139.20","date":"March 12, 2025","status":"Active"}'>
                     <div class="flex justify-between items-center">
                         <span class="text-sky-500 font-semibold text-base flex-1">Basic Home Repair Package</span>
                         <span class="text-sky-400 font-semibold text-base w-32 text-right">$2,139.20</span>
@@ -306,9 +306,9 @@
                         <span>Date Created: March 12, 2025</span>
                         <span class="bg-blue-400 text-white rounded px-3 py-1 text-xs font-semibold ml-2">Active</span>
                     </div>
-                </div>
+                </a>
                 <!-- Card 5 -->
-                <div class="bg-white rounded-lg shadow p-2">
+                <a href="packages-details.html" class="block bg-white rounded-lg shadow p-2 package-card" data-package='{"name":"Electrical Installation Package","price":"$6,230.00","date":"March 12, 2025","status":"Active"}'>
                     <div class="flex justify-between items-center">
                         <span class="text-sky-500 font-semibold text-base flex-1">Electrical Installation Package</span>
                         <span class="text-sky-400 font-semibold text-base w-32 text-right">$6,230.00</span>
@@ -318,9 +318,9 @@
                         <span>Date Created: March 12, 2025</span>
                         <span class="bg-blue-400 text-white rounded px-3 py-1 text-xs font-semibold ml-2">Active</span>
                     </div>
-                </div>
+                </a>
                 <!-- Card 6 -->
-                <div class="bg-white rounded-lg shadow p-2">
+                <a href="packages-details.html" class="block bg-white rounded-lg shadow p-2 package-card" data-package='{"name":"Buten Package","price":"$14,081.20","date":"June 27, 2025","status":"Active"}'>
                     <div class="flex justify-between items-center">
                         <span class="text-sky-500 font-semibold text-base flex-1">Buten Package</span>
                         <span class="text-sky-400 font-semibold text-base w-32 text-right">$14,081.20</span>
@@ -330,7 +330,7 @@
                         <span>Date Created: June 27, 2025</span>
                         <span class="bg-blue-400 text-white rounded px-3 py-1 text-xs font-semibold ml-2">Active</span>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </main>
@@ -353,6 +353,14 @@
         .then(response => response.text())
         .then(data => {
             document.getElementById('nav-container').innerHTML = data;
+        });
+
+        // Store package details in localStorage on card click
+        document.querySelectorAll('.package-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                const data = this.getAttribute('data-package');
+                localStorage.setItem('selectedPackage', data);
+            });
         });
     </script>
 </body>

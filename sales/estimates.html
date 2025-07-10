@@ -288,7 +288,7 @@
         <!-- Mobile Estimates List -->
         <div class="space-y-4">
             <!-- Estimate Card 1 -->
-            <div class="bg-sky-50 rounded-lg shadow p-4">
+            <div class="bg-sky-50 rounded-lg shadow p-4 estimate-card cursor-pointer" data-estimate='{"number":"1013","customer":"Jamie Dora","address":"Pabahay 2000 Muzon","dateCreated":"March 19, 2025","dateSent":"N/A","category":"No category available","price":"$7,162.40","status":"Pending"}'>
                 <div class="flex justify-between items-start">
                     <h2 class="text-xl font-bold text-cyan-600">Estimate No. 1013</h2>
                     <span class="px-2 py-0.5 text-xs font-semibold text-yellow-800 bg-yellow-200 rounded-md">Pending</span>
@@ -309,7 +309,7 @@
             </div>
 
             <!-- Estimate Card 2 -->
-            <div class="bg-sky-50 rounded-lg shadow p-4">
+            <div class="bg-sky-50 rounded-lg shadow p-4 estimate-card cursor-pointer" data-estimate='{"number":"1014","customer":"Alex Cruz","address":"Greenfields Subd.","dateCreated":"March 20, 2025","dateSent":"March 21, 2025","category":"Electrical","price":"$2,500.00","status":"Approved"}'>
                 <div class="flex justify-between items-start">
                     <h2 class="text-xl font-bold text-cyan-600">Estimate No. 1014</h2>
                     <span class="px-2 py-0.5 text-xs font-semibold text-green-800 bg-green-200 rounded-md">Approved</span>
@@ -330,7 +330,7 @@
             </div>
 
             <!-- Estimate Card 3 -->
-            <div class="bg-sky-50 rounded-lg shadow p-4">
+            <div class="bg-sky-50 rounded-lg shadow p-4 estimate-card cursor-pointer" data-estimate='{"number":"1015","customer":"Maria Lopez","address":"Sunrise Villas","dateCreated":"March 22, 2025","dateSent":"N/A","category":"Plumbing","price":"$4,800.00","status":"Rejected"}'>
                 <div class="flex justify-between items-start">
                     <h2 class="text-xl font-bold text-cyan-600">Estimate No. 1015</h2>
                     <span class="px-2 py-0.5 text-xs font-semibold text-red-800 bg-red-200 rounded-md">Rejected</span>
@@ -381,6 +381,17 @@
             document.getElementById('mobile-menu-button').addEventListener('click', function() {
                 const dropdown = document.getElementById('mobile-dropdown-menu');
                 dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+            });
+
+            // Make estimate cards clickable and link to estimate-details.html
+            document.querySelectorAll('.estimate-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // Prevent button click from triggering card click
+                    if (e.target.tagName === 'BUTTON') return;
+                    const data = this.getAttribute('data-estimate');
+                    localStorage.setItem('selectedEstimate', data);
+                    window.location.href = 'estimate-details.html';
+                });
             });
         </script>
 

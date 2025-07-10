@@ -17,6 +17,23 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <style>
+            /* Filter button active state */
+            .filter-btn.active {
+                background-color: #3b82f6;
+                color: white;
+            }
+            
+            /* Purchase order card hover effect */
+            .po-card {
+                transition: all 0.2s ease-in-out;
+            }
+            
+            .po-card:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            }
+        </style>
     </head>
 <body class="min-h-screen bg-sky-50">
     <!-- Include header -->
@@ -27,75 +44,44 @@
 
     <main class="p-4">
         <div class="flex justify-between items-center mb-4">
-            <a href="vendor-profile.html" class="text-gray-600 flex items-center">
+            <a href="../accounts/vendor-details.html" class="text-gray-600 flex items-center">
                 <i class="fas fa-chevron-left text-lg"></i>
                 <span class="ml-2 font-semibold">Back</span>
             </a>
-            <h1 class="text-xl font-semibold">Purchase Orders</h1>
+            <h1 class="text-s font-semibold">Purchase Orders</h1>
         </div>
 
         <!-- Vendor Profile -->
         <div class="bg-white rounded-lg shadow p-6 text-center mb-4">
-            <div class="w-24 h-24 mx-auto mb-4 bg-gray-200 rounded-full flex items-center justify-center">
-                <i class="fas fa-user text-4xl text-gray-400"></i>
+            <div class="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center">
+                <i class="fas fa-user text-4xl text-white"></i>
             </div>
-            <h2 class="text-xl font-semibold">Vendor Name</h2>
+            <h2 class="text-xl font-semibold" id="vendorName">Vendor Name</h2>
+            <p class="text-gray-600 text-sm" id="vendorEmail">vendor@email.com</p>
         </div>
 
         <!-- Search and Filter Section -->
         <div class="bg-white rounded-lg shadow mb-4">
             <div class="p-4">
-                <input type="search" placeholder="Search" class="w-full px-3 py-2 border border-gray-300 rounded-md mb-3">
+                <input type="search" id="searchInput" placeholder="Search purchase orders..." class="w-full px-3 py-2 border border-gray-300 rounded-md mb-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                 <div class="flex space-x-2">
-                    <button class="flex-1 py-2 px-4 bg-blue-100 text-blue-600 rounded-md">Draft</button>
-                    <button class="flex-1 py-2 px-4 bg-blue-100 text-blue-600 rounded-md">Ordered</button>
-                    <button class="flex-1 py-2 px-4 bg-blue-100 text-blue-600 rounded-md">Received</button>
+                    <button class="filter-btn flex-1 py-2 px-4 bg-blue-100 text-blue-600 rounded-md transition-colors" data-filter="all">All</button>
+                    <button class="filter-btn flex-1 py-2 px-4 bg-blue-100 text-blue-600 rounded-md transition-colors" data-filter="draft">Draft</button>
+                    <button class="filter-btn flex-1 py-2 px-4 bg-blue-100 text-blue-600 rounded-md transition-colors" data-filter="ordered">Ordered</button>
+                    <button class="filter-btn flex-1 py-2 px-4 bg-blue-100 text-blue-600 rounded-md transition-colors" data-filter="received">Received</button>
                 </div>
             </div>
         </div>
 
         <!-- Purchase Orders List -->
-        <div class="space-y-3">
-            <!-- Purchase Order Item -->
-            <div class="bg-white rounded-lg shadow p-4">
-                <div class="flex justify-between items-start mb-2">
-                    <div>
-                        <h3 class="text-lg font-semibold text-blue-600">31400114</h3>
-                        <p class="text-sm text-gray-500">Order Date: 07-29-2025</p>
-                    </div>
-                    <span class="px-2 py-1 bg-blue-100 text-blue-600 rounded text-sm">Active</span>
-                </div>
-                <div class="flex justify-between items-center">
-                    <span class="text-lg font-semibold">$456.00</span>
-                </div>
-            </div>
+        <div id="purchaseOrdersList" class="space-y-3">
+            <!-- Purchase orders will be dynamically loaded here -->
+        </div>
 
-            <!-- Repeat Purchase Order Items -->
-            <div class="bg-white rounded-lg shadow p-4">
-                <div class="flex justify-between items-start mb-2">
-                    <div>
-                        <h3 class="text-lg font-semibold text-blue-600">31400114</h3>
-                        <p class="text-sm text-gray-500">Order Date: 07-29-2025</p>
-                    </div>
-                    <span class="px-2 py-1 bg-blue-100 text-blue-600 rounded text-sm">Active</span>
-                </div>
-                <div class="flex justify-between items-center">
-                    <span class="text-lg font-semibold">$456.00</span>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-lg shadow p-4">
-                <div class="flex justify-between items-start mb-2">
-                    <div>
-                        <h3 class="text-lg font-semibold text-blue-600">31400114</h3>
-                        <p class="text-sm text-gray-500">Order Date: 07-29-2025</p>
-                    </div>
-                    <span class="px-2 py-1 bg-blue-100 text-blue-600 rounded text-sm">Active</span>
-                </div>
-                <div class="flex justify-between items-center">
-                    <span class="text-lg font-semibold">$456.00</span>
-                </div>
-            </div>
+        <!-- Empty State -->
+        <div id="emptyState" class="hidden text-center py-8">
+            <i class="fas fa-file-invoice text-4xl text-gray-300 mb-4"></i>
+            <p class="text-gray-500">No purchase orders found</p>
         </div>
     </main>
 
@@ -111,6 +97,184 @@
             .then(data => {
                 document.getElementById('nav-container').innerHTML = data;
             });
+
+        // Sample purchase order data
+        const samplePurchaseOrders = [
+            {
+                id: 'PO-001',
+                orderDate: '2025-03-15',
+                status: 'ordered',
+                amount: 1250.00,
+                items: 5,
+                description: 'Office supplies and equipment'
+            },
+            {
+                id: 'PO-002',
+                orderDate: '2025-03-10',
+                status: 'received',
+                amount: 890.50,
+                items: 3,
+                description: 'Hardware and tools'
+            },
+            {
+                id: 'PO-003',
+                orderDate: '2025-03-08',
+                status: 'draft',
+                amount: 2340.75,
+                items: 8,
+                description: 'Construction materials'
+            },
+            {
+                id: 'PO-004',
+                orderDate: '2025-03-05',
+                status: 'ordered',
+                amount: 567.25,
+                items: 2,
+                description: 'Safety equipment'
+            },
+            {
+                id: 'PO-005',
+                orderDate: '2025-03-01',
+                status: 'received',
+                amount: 1890.00,
+                items: 6,
+                description: 'Landscaping supplies'
+            }
+        ];
+
+        // Load vendor data from localStorage
+        function loadVendorData() {
+            const vendorData = localStorage.getItem('selectedVendor');
+            if (vendorData) {
+                const vendor = JSON.parse(vendorData);
+                
+                // Update vendor profile
+                document.getElementById('vendorName').textContent = vendor.vendorName || 'Vendor Name';
+                document.getElementById('vendorEmail').textContent = vendor.email || 'vendor@email.com';
+            }
+        }
+
+        // Get status badge HTML
+        function getStatusBadge(status) {
+            const statusConfig = {
+                'draft': { class: 'bg-gray-100 text-gray-600', text: 'Draft' },
+                'ordered': { class: 'bg-blue-100 text-blue-600', text: 'Ordered' },
+                'received': { class: 'bg-green-100 text-green-600', text: 'Received' }
+            };
+            
+            const config = statusConfig[status] || statusConfig['draft'];
+            return `<span class="px-2 py-1 ${config.class} rounded text-sm font-medium">${config.text}</span>`;
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: '2-digit', 
+                day: '2-digit' 
+            });
+        }
+
+        // Format currency
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD'
+            }).format(amount);
+        }
+
+        // Render purchase orders
+        function renderPurchaseOrders(orders = samplePurchaseOrders) {
+            const container = document.getElementById('purchaseOrdersList');
+            const emptyState = document.getElementById('emptyState');
+            
+            if (orders.length === 0) {
+                container.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                return;
+            }
+            
+            container.classList.remove('hidden');
+            emptyState.classList.add('hidden');
+            
+            container.innerHTML = orders.map(po => `
+                <div class="po-card bg-white rounded-lg shadow p-4 cursor-pointer" data-status="${po.status}">
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-600">${po.id}</h3>
+                            <p class="text-sm text-gray-500">Order Date: ${formatDate(po.orderDate)}</p>
+                            <p class="text-sm text-gray-600 mt-1">${po.description}</p>
+                        </div>
+                        ${getStatusBadge(po.status)}
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="text-sm text-gray-600">
+                            <span class="font-medium">${po.items}</span> items
+                        </div>
+                        <span class="text-lg font-semibold text-gray-800">${formatCurrency(po.amount)}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter purchase orders
+        function filterPurchaseOrders(filter) {
+            let filteredOrders = samplePurchaseOrders;
+            
+            if (filter !== 'all') {
+                filteredOrders = samplePurchaseOrders.filter(po => po.status === filter);
+            }
+            
+            renderPurchaseOrders(filteredOrders);
+        }
+
+        // Search purchase orders
+        function searchPurchaseOrders(query) {
+            const filteredOrders = samplePurchaseOrders.filter(po => 
+                po.id.toLowerCase().includes(query.toLowerCase()) ||
+                po.description.toLowerCase().includes(query.toLowerCase())
+            );
+            
+            renderPurchaseOrders(filteredOrders);
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load vendor data
+            loadVendorData();
+            
+            // Render initial purchase orders
+            renderPurchaseOrders();
+            
+            // Set up filter buttons
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const filter = this.getAttribute('data-filter');
+                    filterPurchaseOrders(filter);
+                });
+            });
+            
+            // Set up search
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', function() {
+                const query = this.value.trim();
+                if (query === '') {
+                    renderPurchaseOrders();
+                } else {
+                    searchPurchaseOrders(query);
+                }
+            });
+            
+            // Set "All" as default active filter
+            document.querySelector('[data-filter="all"]').classList.add('active');
+        });
     </script>
 </body>
 </html> 

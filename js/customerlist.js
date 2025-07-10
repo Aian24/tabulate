@@ -1,3 +1,45 @@
+// Function to navigate to customer details with data
+function navigateToCustomerDetails(name, phone, email, verification, status, date) {
+    // Generate some realistic data based on the customer
+    const balance = Math.floor(Math.random() * 5000) + 100;
+    const jobsCount = Math.floor(Math.random() * 5) + 1;
+    const invoicesCount = Math.floor(Math.random() * 3) + 1;
+    const transactionsCount = Math.floor(Math.random() * 10);
+    
+    // Store customer data in localStorage
+    const customerData = {
+        name: name,
+        phone: phone,
+        email: email,
+        verification: verification,
+        status: status,
+        date: date,
+        // Add additional data for the details page
+        address: 'Pinyahan, Diliman, Quezon, Metro Manila, Philippines 1008',
+        buildingAddress: 'Amall Building',
+        language: 'English',
+        communication: 'Email',
+        paymentTerms: 'Net 30',
+        paymentMethod: 'Credit Card',
+        taxable: 'Yes',
+        tags: 'Regular Customer',
+        salesPerson: 'John Doe',
+        contractor: 'ABC Contractors',
+        invoiceFrequency: 'Monthly',
+        balance: `$${balance}`,
+        jobsCount: jobsCount.toString(),
+        invoicesCount: invoicesCount.toString(),
+        transactionsCount: transactionsCount.toString(),
+        // Add lead acquired date (same as registration date for now)
+        leadAcquiredDate: date
+    };
+    
+    localStorage.setItem('selectedCustomerData', JSON.stringify(customerData));
+    
+    // Navigate to customer details page
+    window.location.href = 'customer-details.html';
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Load header and navigation only in the main container
     if (typeof loadHTML === 'function') {

@@ -269,9 +269,9 @@
             </div>
             
             <!-- Mobile Service Cards -->
-            <div class="space-y-1">
+            <div class="space-y-1" id="service-cards-container">
                 <!-- Service Card 1 -->
-                <div class="bg-white rounded-lg shadow p-2 mb-1">
+                <div class="bg-white rounded-lg shadow p-2 mb-1 cursor-pointer service-card" data-service='{"name":"Weed Control","price":"$708.40","priceMatrix":false,"date":"June 03, 2025","status":"Active"}'>
                     <div class="flex justify-between items-center">
                         <span class="text-sky-500 font-semibold text-lg">Weed Control</span>
                         <span class="text-sky-400 font-semibold text-lg">$708.40</span>
@@ -290,7 +290,7 @@
                 </div>
 
                 <!-- Service Card 2 -->
-                <div class="bg-white rounded-lg shadow p-2 mb-1">
+                <div class="bg-white rounded-lg shadow p-2 mb-1 cursor-pointer service-card" data-service='{"name":"Lawn Mowing","price":"$78.40","priceMatrix":true,"date":"March 13, 2025","status":"Active"}'>
                     <div class="flex justify-between items-center">
                         <span class="text-sky-500 font-semibold text-lg">Lawn Mowing</span>
                         <span class="text-sky-400 font-semibold text-lg">$78.40</span>
@@ -309,7 +309,7 @@
                 </div>
 
                 <!-- Service Card 3 -->
-                <div class="bg-white rounded-lg shadow p-2 mb-1">
+                <div class="bg-white rounded-lg shadow p-2 mb-1 cursor-pointer service-card" data-service='{"name":"Roofing Installation","price":"$6,230.00","priceMatrix":false,"date":"March 13, 2025","status":"Active"}'>
                     <div class="flex justify-between items-center">
                         <span class="text-sky-500 font-semibold text-lg">Roofing Installation</span>
                         <span class="text-sky-400 font-semibold text-lg">$6,230.00</span>
@@ -328,7 +328,7 @@
                 </div>
 
                 <!-- Service Card 4 -->
-                <div class="bg-white rounded-lg shadow p-2 mb-1">
+                <div class="bg-white rounded-lg shadow p-2 mb-1 cursor-pointer service-card" data-service='{"name":"Office Cleaning Service","price":"$5,712.00","priceMatrix":false,"date":"March 13, 2025","status":"Active"}'>
                     <div class="flex justify-between items-center">
                         <span class="text-sky-500 font-semibold text-lg">Office Cleaning Service</span>
                         <span class="text-sky-400 font-semibold text-lg">$5,712.00</span>
@@ -347,7 +347,7 @@
                 </div>
 
                 <!-- Service Card 5 -->
-                <div class="bg-white rounded-lg shadow p-2 mb-1">
+                <div class="bg-white rounded-lg shadow p-2 mb-1 cursor-pointer service-card" data-service='{"name":"Residential House Painting","price":"$1,652.00","priceMatrix":false,"date":"March 13, 2025","status":"Active"}'>
                     <div class="flex justify-between items-center">
                         <span class="text-sky-500 font-semibold text-lg">Residential House Painting</span>
                         <span class="text-sky-400 font-semibold text-lg">$1,652.00</span>
@@ -366,7 +366,7 @@
                 </div>
 
                 <!-- Service Card 6 -->
-                <div class="bg-white rounded-lg shadow p-2 mb-1">
+                <div class="bg-white rounded-lg shadow p-2 mb-1 cursor-pointer service-card" data-service='{"name":"Lawn Maintenance Service","price":"$2,139.20","priceMatrix":false,"date":"March 12, 2025","status":"Active"}'>
                     <div class="flex justify-between items-center">
                         <span class="text-sky-500 font-semibold text-lg">Lawn Maintenance Service</span>
                         <span class="text-sky-400 font-semibold text-lg">$2,139.20</span>
@@ -385,7 +385,7 @@
                 </div>
 
                 <!-- Service Card 7 -->
-                <div class="bg-white rounded-lg shadow p-2 mb-1">
+                <div class="bg-white rounded-lg shadow p-2 mb-1 cursor-pointer service-card" data-service='{"name":"Electrical Wiring Installation","price":"$1,663.20","priceMatrix":false,"date":"March 12, 2025","status":"Active"}'>
                     <div class="flex justify-between items-center">
                         <span class="text-sky-500 font-semibold text-lg">Electrical Wiring Installation</span>
                         <span class="text-sky-400 font-semibold text-lg">$1,663.20</span>
@@ -404,7 +404,7 @@
                 </div>
 
                 <!-- Service Card 8 -->
-                <div class="bg-white rounded-lg shadow p-2 mb-1">
+                <div class="bg-white rounded-lg shadow p-2 mb-1 cursor-pointer service-card" data-service='{"name":"Plumbing Repair","price":"$932.40","priceMatrix":false,"date":"March 12, 2025","status":"Active"}'>
                     <div class="flex justify-between items-center">
                         <span class="text-sky-500 font-semibold text-lg">Plumbing Repair</span>
                         <span class="text-sky-400 font-semibold text-lg">$932.40</span>
@@ -419,6 +419,32 @@
                             <div class="text-xs text-gray-500">Date Created: March 12, 2025</div>
                         </div>
                         <span class="bg-sky-400 text-white text-xs px-2 py-0.5 rounded-full font-semibold">Active</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service Details Modal -->
+            <div id="service-details-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 hidden">
+                <div class="bg-white rounded-xl shadow-lg w-[95vw] max-w-sm mx-auto p-4 relative animate-fadeInUp">
+                    <button id="close-service-modal" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700 text-2xl font-bold focus:outline-none">&times;</button>
+                    <div class="flex flex-col items-center gap-2 mb-2">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-sky-400 to-blue-500 flex items-center justify-center text-white text-3xl font-bold mb-2">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="text-lg font-semibold text-sky-700" id="modal-service-name">Service Name</div>
+                        <div class="text-base font-bold text-sky-500" id="modal-service-price">$0.00</div>
+                    </div>
+                    <div class="mb-2 flex items-center gap-2">
+                        <span id="modal-service-status" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Active</span>
+                    </div>
+                    <div class="mb-2 flex items-center gap-2">
+                        <span id="modal-service-matrix"></span>
+                    </div>
+                    <div class="mb-2 text-xs text-gray-500">
+                        <span id="modal-service-date">Date Created: </span>
+                    </div>
+                    <div class="mt-4 flex justify-center">
+                        <a href="services-details.html" id="view-full-details-btn" class="bg-sky-500 hover:bg-sky-600 text-white font-semibold px-4 py-2 rounded-lg text-sm transition">View Full Details</a>
                     </div>
                 </div>
             </div>
@@ -443,6 +469,37 @@
         .then(response => response.text())
         .then(data => {
             document.getElementById('nav-container').innerHTML = data;
+        });
+
+        // Service Card Modal Logic
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const data = JSON.parse(this.getAttribute('data-service'));
+                document.getElementById('modal-service-name').textContent = data.name;
+                document.getElementById('modal-service-price').textContent = data.price;
+                document.getElementById('modal-service-date').textContent = 'Date Created: ' + data.date;
+                // Status
+                const statusSpan = document.getElementById('modal-service-status');
+                statusSpan.textContent = data.status;
+                statusSpan.className = 'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ' + (data.status === 'Active' ? 'bg-blue-100 text-blue-800' : 'bg-gray-200 text-gray-600');
+                // Price Matrix
+                const matrixSpan = document.getElementById('modal-service-matrix');
+                if (data.priceMatrix) {
+                    matrixSpan.innerHTML = '<span class="text-sky-500 mr-1"><i class="fas fa-check-circle"></i></span><span class="text-sky-500">Price Matrix Available</span>';
+                } else {
+                    matrixSpan.innerHTML = '<span class="text-red-500 mr-1"><i class="fas fa-exclamation-circle"></i></span><span class="text-red-500 font-semibold">No Price Matrix</span>';
+                }
+                document.getElementById('service-details-modal').classList.remove('hidden');
+            });
+        });
+        document.getElementById('close-service-modal').addEventListener('click', function() {
+            document.getElementById('service-details-modal').classList.add('hidden');
+        });
+        // Close modal on backdrop click
+        document.getElementById('service-details-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.add('hidden');
+            }
         });
     </script>
 </body>

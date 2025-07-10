@@ -42,115 +42,115 @@
 
         <div id="service-info-tab">
             <!-- Service Information Card (Always 2 columns) -->
-            <div class="bg-blue-50 rounded-lg shadow-md p-3 mb-3 border">
-              <div class="grid grid-cols-2 gap-x-4 gap-y-0 mb-2">
-                <div class="mb-1">
-                  <label class="text-[18px] text-gray-400 font-normal leading-tight">Service Name</label>
-                  <input type="text" placeholder="Service Name" class="w-full font-bold text-black bg-white px-2 py-1 rounded border"/>
+            <div class="bg-gradient-to-br from-blue-100 to-blue-50 rounded-2xl shadow-lg p-4 mb-4 border border-blue-200">
+              <div class="grid grid-cols-2 gap-x-4 gap-y-2 mb-2">
+                <div class="mb-1 flex flex-col">
+                  <label class="text-xs text-gray-500 font-medium mb-0.5 flex items-center gap-1"><i class="fas fa-briefcase"></i> Service Name</label>
+                  <input type="text" placeholder="Service Name" class="w-full font-bold text-black bg-white px-2 py-1 rounded-lg border border-gray-200 text-sm"/>
                 </div>
-                <div class="mb-1">
-                  <label class="text-[18px] text-gray-400 font-normal leading-tight">Estimate Name</label>
-                  <input type="text" placeholder="Estimate Name" class="w-full font-bold text-black bg-white px-2 py-1 rounded border"/>
+                <div class="mb-1 flex flex-col">
+                  <label class="text-xs text-gray-500 font-medium mb-0.5 flex items-center gap-1"><i class="fas fa-file-invoice"></i> Estimate Name</label>
+                  <input type="text" placeholder="Estimate Name" class="w-full font-bold text-black bg-white px-2 py-1 rounded-lg border border-gray-200 text-sm"/>
                 </div>
-                <div class="mb-1">
-                  <label class="text-[18px] text-gray-400 font-normal leading-tight">Tag(s)</label>
-                  <input type="text" placeholder="Tags" class="w-full font-bold text-black bg-white px-2 py-1 rounded border"/>
+                <div class="mb-1 flex flex-col">
+                  <label class="text-xs text-gray-500 font-medium mb-0.5 flex items-center gap-1"><i class="fas fa-tags"></i> Tag(s)</label>
+                  <input type="text" placeholder="Tags" class="w-full font-bold text-black bg-white px-2 py-1 rounded-lg border border-gray-200 text-sm"/>
                 </div>
-                <div class="mb-1">
-                  <label class="text-[18px] text-gray-400 font-normal leading-tight">Business Category</label>
-                  <input type="text" placeholder="Business Category" class="w-full font-bold text-black bg-white px-2 py-1 rounded border"/>
+                <div class="mb-1 flex flex-col">
+                  <label class="text-xs text-gray-500 font-medium mb-0.5 flex items-center gap-1"><i class="fas fa-briefcase"></i> Business Category</label>
+                  <input type="text" placeholder="Business Category" class="w-full font-bold text-black bg-white px-2 py-1 rounded-lg border border-gray-200 text-sm"/>
                 </div>
-                <div class="mb-1">
-                  <label class="text-[18px] text-gray-400 font-normal leading-tight">Budget Hour(s)</label>
-                  <input type="text" placeholder="Budget Hours" class="w-full font-bold text-black bg-white px-2 py-1 rounded border"/>
+                <div class="mb-1 flex flex-col">
+                  <label class="text-xs text-gray-500 font-medium mb-0.5 flex items-center gap-1"><i class="fas fa-clock"></i> Budget Hour(s)</label>
+                  <input type="text" placeholder="Budget Hours" class="w-full font-bold text-black bg-white px-2 py-1 rounded-lg border border-gray-200 text-sm"/>
                 </div>
-                <div class="mb-1">
-                  <label class="text-[18px] text-gray-400 font-normal leading-tight">Rate per Hour</label>
-                  <input type="text" placeholder="Rate per Hour" class="w-full font-bold text-black bg-white px-2 py-1 rounded border"/>
+                <div class="mb-1 flex flex-col">
+                  <label class="text-xs text-gray-500 font-medium mb-0.5 flex items-center gap-1"><i class="fas fa-dollar-sign"></i> Rate per Hour</label>
+                  <input type="text" placeholder="Rate per Hour" class="w-full font-bold text-black bg-white px-2 py-1 rounded-lg border border-gray-200 text-sm"/>
                 </div>
-                <div class="mb-1">
-                  <label class="text-[18px] text-gray-400 font-normal leading-tight">Billing Mode</label>
-                  <select class="w-full font-bold text-black bg-white px-2 py-1 rounded border">
+                <div class="mb-1 flex flex-col">
+                  <label class="text-xs text-gray-500 font-medium mb-0.5 flex items-center gap-1"><i class="fas fa-receipt"></i> Billing Mode</label>
+                  <select class="w-full font-bold text-black bg-white px-2 py-1 rounded-lg border border-gray-200 text-sm">
                     <option>Flat Rate</option>
                   </select>
                 </div>
-                <div class="mb-1">
-                  <label class="text-[18px] text-gray-400 font-normal leading-tight">Tax</label>
-                  <select class="w-full font-bold text-black bg-white px-2 py-1 rounded border">
+                <div class="mb-1 flex flex-col">
+                  <label class="text-xs text-gray-500 font-medium mb-0.5 flex items-center gap-1"><i class="fas fa-percent"></i> Tax</label>
+                  <select class="w-full font-bold text-black bg-white px-2 py-1 rounded-lg border border-gray-200 text-sm">
                     <option>No</option>
                   </select>
                 </div>
               </div>
               <div class="mb-2">
-                <label class="text-base text-gray-400 font-normal leading-tight">Upload Image</label>
-                <input type="file" class="w-full font-semibold text-black bg-white mb-1 px-2 py-1 rounded border"/>
+                <label class="text-xs text-gray-500 font-medium mb-0.5 flex items-center gap-1"><i class="fas fa-image"></i> Upload Image</label>
+                <input type="file" class="w-full font-semibold text-black bg-white mb-1 px-2 py-1 rounded-lg border border-gray-200 text-sm"/>
               </div>
               <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mb-2">
-                <div>
-                  <label class="text-base text-gray-400 font-normal leading-tight">Season</label>
-                  <input type="text" placeholder="Season" class="w-full font-semibold text-black bg-white mb-1 px-2 py-1 rounded border"/>
+                <div class="flex flex-col">
+                  <label class="text-xs text-gray-500 font-medium mb-0.5 flex items-center gap-1"><i class="fas fa-calendar"></i> Season</label>
+                  <input type="text" placeholder="Season" class="w-full font-semibold text-black bg-white mb-1 px-2 py-1 rounded-lg border border-gray-200 text-sm"/>
                 </div>
                 <div class="col-span-2 flex gap-2">
-                  <div class="flex-1">
-                    <label class="text-base text-gray-400 font-normal leading-tight">Service Duration</label>
-                    <input type="text" placeholder="Start Date" class="w-full font-semibold text-black bg-white mb-1 px-2 py-1 rounded border"/>
+                  <div class="flex-1 flex flex-col">
+                    <label class="text-xs text-gray-500 font-medium mb-0.5 flex items-center gap-1"><i class="fas fa-calendar-alt"></i> Service Duration</label>
+                    <input type="text" placeholder="Start Date" class="w-full font-semibold text-black bg-white mb-1 px-2 py-1 rounded-lg border border-gray-200 text-sm"/>
                   </div>
-                  <div class="flex-1 flex items-end">
-                    <input type="text" placeholder="End Date" class="w-full font-semibold text-black bg-white mb-1 px-2 py-1 rounded border"/>
+                  <div class="flex-1 flex flex-col items-end">
+                    <input type="text" placeholder="End Date" class="w-full font-semibold text-black bg-white mb-1 px-2 py-1 rounded-lg border border-gray-200 text-sm"/>
                   </div>
                 </div>
               </div>
               <div class="mb-2">
-                <label class="text-base text-gray-400 font-normal leading-tight">Scheduling Settings</label>
-                <select class="w-full font-semibold text-black bg-white mb-1 px-2 py-1 rounded border">
+                <label class="text-xs text-gray-500 font-medium mb-0.5 flex items-center gap-1"><i class="fas fa-cog"></i> Scheduling Settings</label>
+                <select class="w-full font-semibold text-black bg-white mb-1 px-2 py-1 rounded-lg border border-gray-200 text-sm">
                   <option>Monthly</option>
                 </select>
               </div>
               <div class="mb-2">
-                <label class="text-base text-gray-400 font-normal leading-tight">Service Description</label>
-                <textarea class="w-full h-24 font-semibold text-black bg-white rounded border" placeholder="Max. of 500 Characters"></textarea>
+                <label class="text-xs text-gray-500 font-medium mb-0.5 flex items-center gap-1"><i class="fas fa-align-left"></i> Service Description</label>
+                <textarea class="w-full h-20 font-semibold text-black bg-white rounded-lg border border-gray-200 text-sm" placeholder="Max. of 500 Characters"></textarea>
               </div>
               <div class="mb-2">
-                <label class="text-base text-gray-400 font-normal leading-tight">Terms and Conditions</label>
-                <textarea class="w-full h-24 font-semibold text-black bg-white rounded border" placeholder="Max. of 500 Characters"></textarea>
+                <label class="text-xs text-gray-500 font-medium mb-0.5 flex items-center gap-1"><i class="fas fa-file-contract"></i> Terms and Conditions</label>
+                <textarea class="w-full h-20 font-semibold text-black bg-white rounded-lg border border-gray-200 text-sm" placeholder="Max. of 500 Characters"></textarea>
               </div>
             </div>
             <!-- Service Preview Card -->
-            <div class="bg-white rounded-lg shadow-md p-3 mb-3 border">
-              <div class="font-semibold text-black border-b border-gray-200 mb-2 pb-1">Service Preview</div>
-              <img src="/placeholder.svg?height=120&width=300" alt="Service Preview" class="rounded mb-2 w-full h-[120px] object-cover"/>
+            <div class="bg-white rounded-2xl shadow p-4 mb-4 border border-blue-100">
+              <div class="font-semibold text-blue-700 border-b border-blue-100 mb-2 pb-1 flex items-center gap-2"><i class="fas fa-eye"></i> Service Preview</div>
+              <img src="/placeholder.svg?height=120&width=300" alt="Service Preview" class="rounded-xl mb-2 w-full h-[120px] object-cover border border-blue-100"/>
               <div class="w-full">
-                <div class="font-semibold text-black">Landscaping <span class="float-right text-gray-700">$0.00</span></div>
+                <div class="font-semibold text-black flex items-center justify-between"><span>Landscaping</span> <span class="text-blue-700">$0.00</span></div>
                 <div class="text-xs text-gray-600">Garden Beautification</div>
                 <div class="text-xs text-gray-600">Landscape & Maintenance</div>
-                <div class="text-xs text-gray-400">218046737 <span class="float-right text-green-600">Active</span></div>
+                <div class="text-xs text-gray-400 flex items-center justify-between"><span>218046737</span> <span class="text-green-600">Active</span></div>
               </div>
             </div>
             <!-- Related Services Card -->
-            <div class="bg-white rounded-lg shadow-md p-3 mb-3 border">
-              <div class="font-semibold text-black mb-1">Related Services</div>
-              <select class="w-full mb-2 px-2 py-1 rounded border text-black">
+            <div class="bg-white rounded-2xl shadow p-4 mb-4 border border-blue-100">
+              <div class="font-semibold text-blue-700 mb-2 flex items-center gap-2"><i class="fas fa-link"></i> Related Services</div>
+              <select class="w-full mb-2 px-2 py-1 rounded-lg border border-gray-200 text-black text-sm">
                 <option>Select More Services</option>
               </select>
               <div class="flex flex-wrap gap-1">
-                <span class="bg-blue-300 text-white px-2 py-1 rounded text-xs">Weed Control</span>
-                <span class="bg-blue-300 text-white px-2 py-1 rounded text-xs">Lawn Mowing</span>
-                <span class="bg-blue-300 text-white px-2 py-1 rounded text-xs">Washing Machine Maintenance</span>
-                <span class="bg-blue-300 text-white px-2 py-1 rounded text-xs">Residential House Planning</span>
-                <span class="bg-blue-300 text-white px-2 py-1 rounded text-xs">Roofing Installation</span>
+                <span class="bg-blue-300 text-white px-2 py-1 rounded-full text-xs">Weed Control</span>
+                <span class="bg-blue-300 text-white px-2 py-1 rounded-full text-xs">Lawn Mowing</span>
+                <span class="bg-blue-300 text-white px-2 py-1 rounded-full text-xs">Washing Machine Maintenance</span>
+                <span class="bg-blue-300 text-white px-2 py-1 rounded-full text-xs">Residential House Planning</span>
+                <span class="bg-blue-300 text-white px-2 py-1 rounded-full text-xs">Roofing Installation</span>
               </div>
             </div>
         </div>
 
         <!-- Accordion Sections -->
-        <div id="accordion-container" class="flex flex-col gap-1 w-full">
+        <div id="accordion-container" class="flex flex-col gap-2 w-full">
           <!-- Material Accordion -->
-          <div class="rounded-lg shadow-md bg-white border">
-            <button type="button" onclick="toggleAccordion(0)" class="w-full text-left px-4 py-2 font-semibold border-b flex items-center justify-between rounded-t-lg focus:outline-none">
-              <span>Material</span>
+          <div class="rounded-2xl shadow bg-white border border-blue-100">
+            <button type="button" onclick="toggleAccordion(0)" class="w-full text-left px-4 py-2 font-semibold border-b flex items-center justify-between rounded-t-2xl focus:outline-none text-blue-700">
+              <span><i class="fas fa-cubes mr-2"></i>Material</span>
               <svg id="accordion-arrow-0" class="transition-transform duration-200 w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
             </button>
-            <div id="accordion-content-0" class="hidden bg-blue-50 rounded-b-lg px-4 py-2">
+            <div id="accordion-content-0" class="hidden bg-blue-50 rounded-b-2xl px-4 py-2">
               <div class="flex justify-between border-b border-blue-200 pb-1 mb-2">
                 <span class="text-blue-900 font-semibold">Material x Quantity</span>
                 <span class="text-blue-900 font-semibold">Total Price</span>
@@ -171,24 +171,24 @@
                 </div>
                 <div class="text-blue-900 font-semibold text-right">$500.00</div>
               </div>
-              <button class="bg-blue-400 text-white px-2 py-1 rounded text-xs mb-2 ml-auto block">Add New Materials</button>
+              <button class="bg-blue-400 text-white px-2 py-1 rounded-full text-xs mb-2 ml-auto block">Add New Materials</button>
               <div class="clear-both"></div>
               <div class="flex justify-between items-center mt-4">
                 <span class="text-blue-700 font-semibold">Grand total:</span>
-                <input type="text" class="rounded px-2 py-1 border w-24 text-right" readonly value="" />
+                <input type="text" class="rounded-lg px-2 py-1 border w-24 text-right bg-blue-50" readonly value="" />
               </div>
               <div class="flex justify-end mt-2">
-                <button class="bg-purple-700 text-white px-4 py-1 rounded">Save</button>
+                <button class="bg-purple-700 text-white px-4 py-1 rounded-full">Save</button>
               </div>
             </div>
           </div>
           <!-- Equipment Accordion -->
-          <div class="rounded-lg shadow-md bg-white border">
-            <button type="button" onclick="toggleAccordion(1)" class="w-full text-left px-4 py-2 font-semibold border-b flex items-center justify-between rounded-t-lg focus:outline-none">
-              <span>Equipment</span>
+          <div class="rounded-2xl shadow bg-white border border-blue-100">
+            <button type="button" onclick="toggleAccordion(1)" class="w-full text-left px-4 py-2 font-semibold border-b flex items-center justify-between rounded-t-2xl focus:outline-none text-blue-700">
+              <span><i class="fas fa-tools mr-2"></i>Equipment</span>
               <svg id="accordion-arrow-1" class="transition-transform duration-200 w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
             </button>
-            <div id="accordion-content-1" class="hidden bg-blue-50 rounded-b-lg px-4 py-2">
+            <div id="accordion-content-1" class="hidden bg-blue-50 rounded-b-2xl px-4 py-2">
               <div class="flex justify-between border-b border-blue-200 pb-1 mb-2">
                 <span class="text-blue-900 font-semibold">Equipment x Quantity</span>
                 <span class="text-blue-900 font-semibold">Total Price</span>
@@ -208,24 +208,24 @@
                 </div>
                 <div class="text-blue-900 font-semibold text-right">$500.00</div>
               </div>
-              <button class="bg-blue-400 text-white px-2 py-1 rounded text-xs mb-2 ml-auto block">Add New Equipment</button>
+              <button class="bg-blue-400 text-white px-2 py-1 rounded-full text-xs mb-2 ml-auto block">Add New Equipment</button>
               <div class="clear-both"></div>
               <div class="flex justify-between items-center mt-4">
                 <span class="text-blue-700 font-semibold">Grand total:</span>
-                <input type="text" class="rounded px-2 py-1 border w-24 text-right" readonly value="" />
+                <input type="text" class="rounded-lg px-2 py-1 border w-24 text-right bg-blue-50" readonly value="" />
               </div>
               <div class="flex justify-end mt-2">
-                <button class="bg-purple-700 text-white px-4 py-1 rounded">Save</button>
+                <button class="bg-purple-700 text-white px-4 py-1 rounded-full">Save</button>
               </div>
             </div>
           </div>
           <!-- Manpower Accordion -->
-          <div class="rounded-lg shadow-md bg-white border">
-            <button type="button" onclick="toggleAccordion(2)" class="w-full text-left px-4 py-2 font-semibold border-b flex items-center justify-between rounded-t-lg focus:outline-none">
-              <span>Manpower</span>
+          <div class="rounded-2xl shadow bg-white border border-blue-100">
+            <button type="button" onclick="toggleAccordion(2)" class="w-full text-left px-4 py-2 font-semibold border-b flex items-center justify-between rounded-t-2xl focus:outline-none text-blue-700">
+              <span><i class="fas fa-users mr-2"></i>Manpower</span>
               <svg id="accordion-arrow-2" class="transition-transform duration-200 w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
             </button>
-            <div id="accordion-content-2" class="hidden bg-blue-50 rounded-b-lg px-4 py-2">
+            <div id="accordion-content-2" class="hidden bg-blue-50 rounded-b-2xl px-4 py-2">
               <div class="flex justify-between border-b border-blue-200 pb-1 mb-2">
                 <span class="text-blue-900 font-semibold">Job Position x Quantity</span>
                 <span class="text-blue-900 font-semibold">Total Price</span>
@@ -256,24 +256,24 @@
                 </div>
                 <div class="text-blue-900 font-semibold text-right">$2.80</div>
               </div>
-              <button class="bg-blue-400 text-white px-2 py-1 rounded text-xs mb-2 ml-auto block">Add New Job Position</button>
+              <button class="bg-blue-400 text-white px-2 py-1 rounded-full text-xs mb-2 ml-auto block">Add New Job Position</button>
               <div class="clear-both"></div>
               <div class="flex justify-between items-center mt-4">
                 <span class="text-blue-700 font-semibold">Grand total:</span>
-                <input type="text" class="rounded px-2 py-1 border w-24 text-right" readonly value="" />
+                <input type="text" class="rounded-lg px-2 py-1 border w-24 text-right bg-blue-50" readonly value="" />
               </div>
               <div class="flex justify-end mt-2">
-                <button class="bg-purple-700 text-white px-4 py-1 rounded">Save</button>
+                <button class="bg-purple-700 text-white px-4 py-1 rounded-full">Save</button>
               </div>
             </div>
           </div>
           <!-- Custom Fields Accordion -->
-          <div class="rounded-lg shadow-md bg-white border">
-            <button type="button" onclick="toggleAccordion(3)" class="w-full text-left px-4 py-2 font-semibold border-b flex items-center justify-between rounded-t-lg focus:outline-none">
-              <span>Custom Fields</span>
+          <div class="rounded-2xl shadow bg-white border border-blue-100">
+            <button type="button" onclick="toggleAccordion(3)" class="w-full text-left px-4 py-2 font-semibold border-b flex items-center justify-between rounded-t-2xl focus:outline-none text-blue-700">
+              <span><i class="fas fa-sliders-h mr-2"></i>Custom Fields</span>
               <svg id="accordion-arrow-3" class="transition-transform duration-200 w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
             </button>
-            <div id="accordion-content-3" class="hidden bg-blue-50 rounded-b-lg px-4 py-2">
+            <div id="accordion-content-3" class="hidden bg-blue-50 rounded-b-2xl px-4 py-2">
               <div class="flex flex-col gap-1 mb-2">
                 <div class="flex justify-between bg-blue-50 rounded p-2">
                   <span class="text-blue-900">Lot Size</span>
@@ -284,13 +284,19 @@
                   <span class="text-blue-600">(In sqm.)</span>
                 </div>
               </div>
-              <button class="bg-blue-400 text-white px-2 py-1 rounded text-xs mb-2 ml-auto block">Add Field</button>
+              <button class="bg-blue-400 text-white px-2 py-1 rounded-full text-xs mb-2 ml-auto block">Add Field</button>
               <div class="clear-both"></div>
               <div class="flex justify-end mt-2">
-                <button class="bg-purple-700 text-white px-4 py-1 rounded">Save</button>
+                <button class="bg-purple-700 text-white px-4 py-1 rounded-full">Save</button>
               </div>
             </div>
           </div>
+        </div>
+
+        <!-- Sticky Action Bar for Mobile -->
+        <div class="fixed bottom-0 left-0 w-full bg-white border-t border-blue-200 shadow-lg flex justify-around items-center py-2 z-40 md:hidden">
+            <button id="mobileEditBtn" class="flex-1 mx-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-full shadow transition flex items-center justify-center gap-2"><i class="fas fa-edit"></i> Edit</button>
+            <button id="mobileDeleteBtn" class="flex-1 mx-2 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-full shadow transition flex items-center justify-center gap-2"><i class="fas fa-trash-alt"></i> Delete</button>
         </div>
     </main>
 
@@ -396,5 +402,37 @@
     </script>
     <script src="../js/main.js"></script>
     <script src="../js/services.js"></script>
+    <script>
+        // Mobile Edit button: scroll to top and focus first input
+        document.getElementById('mobileEditBtn').addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(function() {
+                const firstInput = document.querySelector('#service-info-tab input, #service-info-tab select, #service-info-tab textarea');
+                if (firstInput) firstInput.focus();
+            }, 400);
+        });
+        // Mobile Delete button: open delete modal
+        document.getElementById('mobileDeleteBtn').addEventListener('click', function() {
+            document.getElementById('deleteServiceModal').classList.remove('hidden');
+            setTimeout(function() {
+                document.querySelector('#deleteServiceModal .modal-content-modern').classList.add('show');
+            }, 10);
+        });
+        // Delete modal: cancel
+        document.getElementById('cancelDeleteService').addEventListener('click', function() {
+            document.querySelector('#deleteServiceModal .modal-content-modern').classList.remove('show');
+            setTimeout(function() {
+                document.getElementById('deleteServiceModal').classList.add('hidden');
+            }, 200);
+        });
+        // Delete modal: confirm delete (for demo, just close modal)
+        document.getElementById('confirmDeleteService').addEventListener('click', function() {
+            document.querySelector('#deleteServiceModal .modal-content-modern').classList.remove('show');
+            setTimeout(function() {
+                document.getElementById('deleteServiceModal').classList.add('hidden');
+                // TODO: Add actual delete logic here
+            }, 200);
+        });
+    </script>
 </body>
 </html>

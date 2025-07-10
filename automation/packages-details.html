@@ -184,25 +184,27 @@
         <!-- Mobile Layout -->
         <div class="block md:hidden px-4">
             <!-- Total Package Cost Bar -->
-            <div class="rounded-lg bg-blue-400 text-white text-center font-semibold text-lg py-2 mb-3 shadow border border-blue-300">
-                Total Package Cost: $7,893.20
+            <div id="mobile-total-cost-bar" class="rounded-2xl bg-gradient-to-r from-blue-400 to-sky-500 text-white text-center font-bold text-lg py-3 mb-4 shadow border border-blue-300 flex items-center justify-center gap-2">
+                <i class="fas fa-money-bill-wave"></i>
+                <span id="mobile-total-cost">Total Package Cost: $7,893.20</span>
             </div>
 
             <!-- Package Information Section -->
-            <div class="bg-white rounded-lg shadow border border-blue-200 mb-4">
-                <div class="bg-blue-50 px-4 py-2 rounded-t-lg border-b border-blue-100">
+            <div class="bg-white rounded-2xl shadow-lg border border-blue-200 mb-4">
+                <div class="bg-blue-50 px-4 py-2 rounded-t-2xl border-b border-blue-100 flex items-center gap-2">
+                    <i class="fas fa-box"></i>
                     <span class="text-blue-700 font-semibold text-base">Package Information</span>
                 </div>
                 <div class="p-4">
                     <label class="block text-gray-600 text-xs mb-1" for="mobile-package-name">Package Name</label>
-                    <input id="mobile-package-name" type="text" value="Deep Clean with Free Hose Package" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-3"/>
+                    <input id="mobile-package-name" type="text" value="Deep Clean with Free Hose Package" class="w-full border border-gray-300 rounded-lg px-2 py-1 text-base mb-3 font-semibold"/>
 
                     <label class="block text-gray-600 text-xs mb-1" for="mobile-service-description">Service Description</label>
-                    <textarea id="mobile-service-description" rows="3" maxlength="500" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-1 resize-none">Comprehensive cleaning package with professional equipment and free garden hose included.</textarea>
+                    <textarea id="mobile-service-description" rows="3" maxlength="500" class="w-full border border-gray-300 rounded-lg px-2 py-1 text-base mb-1 resize-none font-semibold">Comprehensive cleaning package with professional equipment and free garden hose included.</textarea>
                     <div class="text-xs text-gray-400 mb-3">Max of 500 Characters</div>
 
                     <label class="block text-gray-600 text-xs mb-1" for="mobile-renewal-date">Package Renewal Date</label>
-                    <input id="mobile-renewal-date" type="text" value="June 29, 2025" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2"/>
+                    <input id="mobile-renewal-date" type="text" value="June 29, 2025" class="w-full border border-gray-300 rounded-lg px-2 py-1 text-base mb-2 font-semibold"/>
 
                     <div class="flex items-center gap-4 mb-3">
                         <label class="inline-flex items-center text-sm text-blue-600 font-medium">
@@ -214,28 +216,25 @@
                             Active
                         </label>
                     </div>
-                    <div class="flex gap-2 justify-end">
-                        <button class="bg-blue-400 hover:bg-blue-500 text-white px-6 py-1 rounded text-base font-semibold">Edit</button>
-                        <button class="bg-fuchsia-600 hover:bg-fuchsia-700 text-white px-6 py-1 rounded text-base font-semibold">Save</button>
-                    </div>
                 </div>
             </div>
 
             <!-- Project Inclusions Section -->
-            <div class="bg-white rounded-lg shadow border border-blue-200 mb-4">
-                <div class="bg-blue-400 rounded-t-lg px-4 py-2">
+            <div class="bg-white rounded-2xl shadow-lg border border-blue-200 mb-4">
+                <div class="bg-blue-400 rounded-t-2xl px-4 py-2 flex items-center gap-2">
+                    <i class="fas fa-list"></i>
                     <span class="text-white font-semibold text-base">Project Inclusions</span>
                 </div>
                 <div class="p-4">
                     <div class="overflow-x-auto">
-                        <table class="min-w-full text-xs mb-2">
+                        <table class="min-w-full text-xs mb-2" id="mobile-inclusions-table">
                             <thead>
                                 <tr class="bg-blue-100 text-blue-900">
                                     <th class="px-2 py-1 text-left">Service Type</th>
                                     <th class="px-2 py-1 text-left">Price</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="mobile-inclusions-tbody">
                                 <tr class="border-b">
                                     <td class="px-2 py-1 align-top w-2/3">
                                         <span class="block text-blue-700 font-semibold">Electrical Wiring Installation</span>
@@ -260,22 +259,51 @@
                         </table>
                     </div>
                     <div class="flex items-center gap-2 mb-2">
-                        <button class="bg-blue-300 hover:bg-blue-400 text-blue-900 px-4 py-1 rounded text-xs font-semibold">Add Service</button>
+                        <button id="addServiceBtn" class="bg-blue-300 hover:bg-blue-400 text-blue-900 px-4 py-1 rounded-full text-xs font-semibold">Add Service</button>
                     </div>
                     <div class="flex justify-between items-center">
                         <span class="text-cyan-700 font-semibold text-base">Grand total:</span>
-                        <span class="text-cyan-700 font-semibold text-base">$7,893.20</span>
+                        <span class="text-cyan-700 font-semibold text-base" id="mobile-grand-total">$7,893.20</span>
                     </div>
-                    <div class="flex justify-end mt-2">
-                        <button class="bg-fuchsia-600 hover:bg-fuchsia-700 text-white px-6 py-1 rounded text-base font-semibold">Save</button>
+                </div>
+            </div>
+
+            <!-- Add Service Modal -->
+            <div id="addServiceModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 hidden">
+                <div class="bg-white rounded-xl shadow-lg w-[95vw] max-w-sm mx-auto p-4 relative animate-fadeInUp">
+                    <button id="closeAddServiceModal" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700 text-2xl font-bold focus:outline-none">&times;</button>
+                    <div class="mb-2 text-lg font-semibold text-blue-700 flex items-center gap-2"><i class="fas fa-plus"></i> Add Service</div>
+                    <div class="mb-2">
+                        <label class="block text-xs text-gray-600 mb-1">Service Type</label>
+                        <input id="addServiceType" type="text" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2" placeholder="Service Type" />
+                        <label class="block text-xs text-gray-600 mb-1">Start Date</label>
+                        <input id="addServiceStart" type="date" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2" />
+                        <label class="block text-xs text-gray-600 mb-1">End Date</label>
+                        <input id="addServiceEnd" type="date" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2" />
+                        <label class="block text-xs text-gray-600 mb-1">Default Hours</label>
+                        <input id="addServiceHours" type="text" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2" placeholder="Default Hours" />
+                        <label class="block text-xs text-gray-600 mb-1">Rate</label>
+                        <input id="addServiceRate" type="text" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2" placeholder="Rate" />
+                        <label class="block text-xs text-gray-600 mb-1">Price</label>
+                        <input id="addServicePrice" type="text" class="w-full border border-gray-300 rounded px-2 py-1 text-base mb-2" placeholder="Price" />
+                    </div>
+                    <div class="flex justify-end gap-2 mt-4">
+                        <button id="cancelAddService" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-1 rounded">Cancel</button>
+                        <button id="saveAddService" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded">Save</button>
                     </div>
                 </div>
             </div>
 
             <!-- Upload Image Section -->
-            <div class="bg-white rounded-lg shadow border border-blue-200 p-4 mb-4">
-                <label class="block text-gray-600 text-xs mb-1" for="mobile-upload-image">Upload Image</label>
-                <input id="mobile-upload-image" type="file" class="w-full border border-gray-300 rounded px-2 py-1 text-base"/>
+            <div class="bg-white rounded-2xl shadow-lg border border-blue-200 p-4 mb-4">
+                <label class="block text-gray-600 text-xs mb-1" for="mobile-upload-image"><i class="fas fa-image mr-1"></i>Upload Image</label>
+                <input id="mobile-upload-image" type="file" class="w-full border border-gray-300 rounded-lg px-2 py-1 text-base"/>
+            </div>
+
+            <!-- Sticky Action Bar for Mobile -->
+            <div class="fixed bottom-0 left-0 w-full bg-white border-t border-blue-200 shadow-lg flex justify-around items-center py-2 z-40 md:hidden">
+                <button id="mobileEditBtn" class="flex-1 mx-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-full shadow transition flex items-center justify-center gap-2"><i class="fas fa-edit"></i> Edit</button>
+                <button id="mobileDeleteBtn" class="flex-1 mx-2 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-full shadow transition flex items-center justify-center gap-2"><i class="fas fa-trash-alt"></i> Delete</button>
             </div>
         </div>
     </main>
@@ -314,6 +342,71 @@
         .then(response => response.text())
         .then(data => {
             document.getElementById('nav-container').innerHTML = data;
+        });
+
+        // Mobile Edit button: scroll to top and focus first input
+        document.getElementById('mobileEditBtn').addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(function() {
+                const firstInput = document.querySelector('#mobile-package-name, #mobile-service-description, #mobile-renewal-date');
+                if (firstInput) firstInput.focus();
+            }, 400);
+        });
+        // Mobile Delete button: open delete modal
+        document.getElementById('mobileDeleteBtn').addEventListener('click', function() {
+            document.getElementById('deleteServiceModal').classList.remove('hidden');
+            setTimeout(function() {
+                document.querySelector('#deleteServiceModal .modal-content-modern').classList.add('show');
+            }, 10);
+        });
+        // Delete modal: cancel
+        document.getElementById('cancelDeleteService').addEventListener('click', function() {
+            document.querySelector('#deleteServiceModal .modal-content-modern').classList.remove('show');
+            setTimeout(function() {
+                document.getElementById('deleteServiceModal').classList.add('hidden');
+            }, 200);
+        });
+        // Delete modal: confirm delete (for demo, just close modal)
+        document.getElementById('confirmDeleteService').addEventListener('click', function() {
+            document.querySelector('#deleteServiceModal .modal-content-modern').classList.remove('show');
+            setTimeout(function() {
+                document.getElementById('deleteServiceModal').classList.add('hidden');
+                // TODO: Add actual delete logic here
+            }, 200);
+        });
+
+        // Add Service Modal logic
+        document.getElementById('addServiceBtn').addEventListener('click', function() {
+            document.getElementById('addServiceModal').classList.remove('hidden');
+        });
+        document.getElementById('closeAddServiceModal').addEventListener('click', function() {
+            document.getElementById('addServiceModal').classList.add('hidden');
+        });
+        document.getElementById('cancelAddService').addEventListener('click', function() {
+            document.getElementById('addServiceModal').classList.add('hidden');
+        });
+        document.getElementById('saveAddService').addEventListener('click', function() {
+            // Get values
+            const type = document.getElementById('addServiceType').value;
+            const start = document.getElementById('addServiceStart').value;
+            const end = document.getElementById('addServiceEnd').value;
+            const hours = document.getElementById('addServiceHours').value;
+            const rate = document.getElementById('addServiceRate').value;
+            const price = document.getElementById('addServicePrice').value;
+            if (!type || !start || !end || !hours || !rate || !price) return;
+            // Add row to table
+            const tbody = document.getElementById('mobile-inclusions-tbody');
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td class='px-2 py-1 align-top w-2/3'>
+                <span class='block text-blue-700 font-semibold'>${type}</span>
+                <span class='block text-gray-700 text-xs'>Starting Date: ${start}</span>
+                <span class='block text-gray-700 text-xs'>End Date: ${end}</span>
+                <span class='block text-gray-700 text-xs'>Default B. Hours: ${hours}</span>
+                <span class='block text-gray-700 text-xs'>Default Rate: ${rate}</span>
+            </td>
+            <td class='px-2 py-1 align-top w-1/3 text-blue-700 font-semibold text-right'>${price}</td>`;
+            tbody.appendChild(tr);
+            document.getElementById('addServiceModal').classList.add('hidden');
         });
     </script>
 </body>

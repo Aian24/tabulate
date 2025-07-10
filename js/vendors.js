@@ -1,5 +1,36 @@
 // Vendors JavaScript functionality
 
+// Navigation function for vendor cards
+function navigateToVendorDetails(vendorName, contactPerson, phone, email, status, id) {
+    // Store vendor data in localStorage
+    const vendorData = {
+        vendorName: vendorName,
+        contactPerson: contactPerson,
+        phone: phone,
+        email: email,
+        status: status,
+        id: id,
+        // Add some additional realistic data
+        address: `${vendorName} Headquarters`,
+        city: 'Business City',
+        state: 'BS',
+        zip: '12345',
+        dateCreated: new Date().toLocaleDateString(),
+        lastContact: new Date().toLocaleDateString(),
+        totalOrders: Math.floor(Math.random() * 100) + 10,
+        totalSpent: '$' + (Math.random() * 10000 + 1000).toFixed(2),
+        notes: `Notes for ${vendorName} vendor relationship.`,
+        paymentTerms: 'Net 30',
+        taxId: 'TAX-' + Math.floor(Math.random() * 1000000),
+        website: `https://www.${vendorName.toLowerCase().replace(/\s+/g, '')}.com`
+    };
+    
+    localStorage.setItem('selectedVendor', JSON.stringify(vendorData));
+    
+    // Navigate to vendor details page
+    window.location.href = 'vendor-details.html';
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Actions dropdown functionality
     const actionsDropdown = document.getElementById('actionsDropdown');
