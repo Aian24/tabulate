@@ -327,6 +327,25 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
+    // More dropdown functionality for create-estimate.html
+    function initializeMoreDropdown() {
+        const moreBtn = document.getElementById('moreBtn');
+        const moreDropdown = document.getElementById('moreDropdown');
+        
+        if (moreBtn && moreDropdown) {
+            document.addEventListener('click', function(event) {
+                if (moreBtn.contains(event.target)) {
+                    moreDropdown.classList.toggle('hidden');
+                } else if (!moreDropdown.contains(event.target)) {
+                    moreDropdown.classList.add('hidden');
+                }
+            });
+        }
+    }
+
+    // Initialize more dropdown if on create-estimate page
+    initializeMoreDropdown();
 });
 
 // Developer: Logic for populating estimate-details.html

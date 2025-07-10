@@ -440,6 +440,36 @@ document.addEventListener('DOMContentLoaded', function() {
         handleResponsiveView();
         initializeModal();
         initializeViewButtons();
+
+        // Profile Dropdown Logic (MOVED HERE)
+        const profileDropdownBtn = document.getElementById('profileDropdownBtn');
+        const profileDropdownMenu = document.getElementById('profileDropdownMenu');
+        if (profileDropdownBtn && profileDropdownMenu) {
+            profileDropdownBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                profileDropdownMenu.classList.toggle('hidden');
+            });
+            document.addEventListener('click', function(e) {
+                if (!profileDropdownBtn.contains(e.target) && !profileDropdownMenu.contains(e.target)) {
+                    profileDropdownMenu.classList.add('hidden');
+                }
+            });
+        }
+
+        const categoriesDropdownBtn = document.getElementById('categoriesDropdownBtn');
+        const categoriesDropdownMenu = document.getElementById('categoriesDropdownMenu');
+        if (categoriesDropdownBtn && categoriesDropdownMenu) {
+            categoriesDropdownBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                categoriesDropdownMenu.classList.toggle('hidden');
+            });
+            document.addEventListener('click', function(e) {
+                if (!categoriesDropdownBtn.contains(e.target) && !categoriesDropdownMenu.contains(e.target)) {
+                    categoriesDropdownMenu.classList.add('hidden');
+                }
+            });
+        }
+
     })
     .catch(error => {
         console.error('Error loading navigation:', error);
