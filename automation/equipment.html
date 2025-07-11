@@ -174,161 +174,76 @@
         <!-- Mobile View Only -->
 <div class="block md:hidden">
     <!-- Mobile Header -->
-    <div class="flex justify-between items-center mb-4">
-        <span class="text-lg font-semibold">Equipments</span>
-        <div class="relative inline-block text-left">
-            <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700" id="mobile-menu-button" aria-expanded="false" aria-haspopup="true">
-                More
-                <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-            </button>
+    <main class="md:hidden block p-4" style="position: relative; z-index: 1;">
+        <div class="flex justify-between items-center mb-4">
+            <span class="text-lg font-semibold">Equipment</span>
+            <div class="flex items-center gap-2 ml-auto">
+                <div class="relative">
+                    <button id="mobileMoreDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
+                        <span>More</span>
+                        <i class="fas fa-chevron-down ml-1"></i>
+                    </button>
+                    <div id="mobileMoreMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-cog w-5"></i>
+                            <span>Settings</span>
+                        </button>
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-chart-bar w-5"></i>
+                            <span>Report</span>
+                        </button>
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-history w-5"></i>
+                            <span>Audit Trail</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    
-    <!-- Mobile Controls -->
-    <div class="mb-2 flex w-full gap-2">
-        <button class="bg-blue-500 text-white rounded text-sm font-medium flex items-center justify-center flex-1 min-w-0 py-2" onclick="window.location.href='create-equipment.html'">
-            <i class="fas fa-plus mr-1"></i>Create
-        </button>
-        <button class="bg-blue-200 text-blue-800 rounded text-sm font-medium flex items-center justify-center flex-1 min-w-0 py-2" id="mobile-actions-button">
-            <i class="fas fa-caret-down mr-1"></i>Actions
-        </button>
-        <input type="text" placeholder="Search" class="rounded border border-gray-300 text-sm flex-[2] min-w-0 px-3 py-2" id="mobile-search" />
-    </div>
-
+        <div class="mb-2 flex w-full gap-2">
+            <button id="mobileCreateBtn" class="bg-blue-500 text-white rounded text-sm font-medium flex items-center justify-center flex-1 min-w-0" onclick="window.location.href='create-equipment.html'">
+                <i class="fas fa-plus mr-1"></i>Create
+            </button>
+            <button id="mobileDeletedBtn" class="bg-red-100 text-red-700 rounded text-sm font-medium flex items-center justify-center flex-1 min-w-0" onclick="window.location.href='deleted-equipments.html'">
+                <i class="fas fa-trash-alt mr-1"></i>Deleted
+            </button>
+            <input id="mobileSearchInput" type="text" placeholder="Search" class="rounded border border-gray-300 text-sm flex-[2] min-w-0 px-3 py-2" />
+        </div>
     <!-- Mobile Card Container -->
     <div class="space-y-2 max-w-2xl mx-auto" id="mobile-card-container">
         <!-- Equipment Card 1 -->
-        <div class="equipment-card bg-white border-2 border-blue-200 rounded-xl shadow flex flex-col relative cursor-pointer"
-            data-name="Lawn Mower"
-            data-specification="Self-propelled Gas-powered Mower For Residential Lawns"
-            data-code="LM100"
-            data-status="On Stock"
-            data-acquisition="March 12, 2025"
-            data-active="Active">
-            <div class="px-4 pt-3 pb-2 border-b border-blue-100 bg-blue-50 rounded-t-xl flex justify-between items-center">
-                <span class="text-blue-700 font-semibold text-base">Lawn Mower</span>
-                <span class="bg-blue-400 text-white rounded px-3 py-1 text-xs font-semibold ml-2">Active</span>
+        <div class="equipment-card bg-white border border-blue-200 rounded-2xl shadow-lg flex flex-col relative cursor-pointer transition hover:shadow-xl"
+    data-name="Lawn Mower"
+    data-specification="Self-propelled Gas-powered Mower For Residential Lawns"
+    data-code="LM100"
+    data-status="On Stock"
+    data-acquisition="March 12, 2025"
+    data-active="Active">
+            <div class="flex justify-between items-center px-4 pt-4 pb-2 border-b border-blue-100 bg-gradient-to-r from-blue-50 to-blue-100 rounded-t-2xl">
+                <span class="text-blue-700 font-bold text-lg">Lawn Mower</span>
+                <div class="relative">
+                    <button class="equipment-menu-btn focus:outline-none p-2 rounded-full hover:bg-blue-100 transition" title="Actions" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v text-gray-500 text-lg"></i>
+                    </button>
+                    <div class="equipment-menu-dropdown hidden absolute right-0 mt-2 w-40 bg-white rounded-xl shadow-lg py-2 z-20 border border-blue-100 animate-fadeIn" style="min-width: 150px;">
+                        <a href="equipment-details.html" class="block w-full text-left px-4 py-2 text-sm text-yellow-700 hover:bg-yellow-50 flex items-center gap-2 rounded-t-xl">
+                            <i class="fas fa-pen"></i> Edit
+                        </a>
+                        <a href="create-invoice.html" class="block w-full text-left px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 flex items-center gap-2 equipment-invoice-btn">
+                            <i class="fas fa-file-invoice"></i> Create Invoice
+                        </a>
+                        <div class="border-t my-1 border-gray-200"></div>
+                        <button class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-2 equipment-delete-btn rounded-b-xl">
+                            <i class="fas fa-trash-alt"></i> Delete
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="p-4 grid grid-cols-1 gap-2 text-xs text-gray-700">
+            <div class="p-4 grid grid-cols-1 gap-3 text-sm text-gray-700">
                 <div><span class="font-semibold">Specification:</span> Self-propelled Gas-powered Mower For Residential Lawns</div>
                 <div><span class="font-semibold">Equipment Code:</span> LM100</div>
-                <div><span class="font-semibold">Status:</span> On Stock</div>
+                <div><span class="font-semibold">Status:</span> <span class="inline-block px-2 py-0.5 rounded-full bg-green-100 text-green-700 text-xs font-semibold align-middle">On Stock</span></div>
                 <div><span class="font-semibold">Acquisition Date:</span> March 12, 2025</div>
-            </div>
-            <div class="flex justify-end pr-4 pb-3">
-                <a href="equipment-details.html" class="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-6 rounded-xl text-sm transition-colors shadow" title="View Details">Edit</a>
-            </div>
-        </div>
-        <!-- Equipment Card 2 -->
-        <div class="equipment-card bg-white border-2 border-blue-200 rounded-xl shadow flex flex-col relative cursor-pointer"
-            data-name="Shovel"
-            data-specification="Very Small But Yayay"
-            data-code="1sh0w-b1ll"
-            data-status="On Stock"
-            data-acquisition="March 12, 2025"
-            data-active="Active">
-            <div class="px-4 pt-3 pb-2 border-b border-blue-100 bg-blue-50 rounded-t-xl flex justify-between items-center">
-                <span class="text-blue-700 font-semibold text-base">Shovel</span>
-                <span class="bg-blue-400 text-white rounded px-3 py-1 text-xs font-semibold ml-2">Active</span>
-            </div>
-            <div class="p-4 grid grid-cols-1 gap-2 text-xs text-gray-700">
-                <div><span class="font-semibold">Specification:</span> Very Small But Yayay</div>
-                <div><span class="font-semibold">Equipment Code:</span> 1sh0w-b1ll</div>
-                <div><span class="font-semibold">Status:</span> On Stock</div>
-                <div><span class="font-semibold">Acquisition Date:</span> March 12, 2025</div>
-            </div>
-            <div class="flex justify-end pr-4 pb-3">
-                <a href="equipment-details.html" class="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-6 rounded-xl text-sm transition-colors shadow" title="View Details">Edit</a>
-            </div>
-        </div>
-        <!-- Equipment Card 3 -->
-        <div class="equipment-card bg-white border-2 border-blue-200 rounded-xl shadow flex flex-col relative cursor-pointer"
-            data-name="Garden Hose"
-            data-specification="Thread 1/2, 50 Meters Long"
-            data-code="H0s3"
-            data-status="On Stock"
-            data-acquisition="March 12, 2025"
-            data-active="Active">
-            <div class="px-4 pt-3 pb-2 border-b border-blue-100 bg-blue-50 rounded-t-xl flex justify-between items-center">
-                <span class="text-blue-700 font-semibold text-base">Garden Hose</span>
-                <span class="bg-blue-400 text-white rounded px-3 py-1 text-xs font-semibold ml-2">Active</span>
-            </div>
-            <div class="p-4 grid grid-cols-1 gap-2 text-xs text-gray-700">
-                <div><span class="font-semibold">Specification:</span> Thread 1/2, 50 Meters Long</div>
-                <div><span class="font-semibold">Equipment Code:</span> H0s3</div>
-                <div><span class="font-semibold">Status:</span> On Stock</div>
-                <div><span class="font-semibold">Acquisition Date:</span> March 12, 2025</div>
-            </div>
-            <div class="flex justify-end pr-4 pb-3">
-                <a href="equipment-details.html" class="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-6 rounded-xl text-sm transition-colors shadow" title="View Details">Edit</a>
-            </div>
-        </div>
-        <!-- Equipment Card 4 -->
-        <div class="equipment-card bg-white border-2 border-blue-200 rounded-xl shadow flex flex-col relative cursor-pointer"
-            data-name="Nails"
-            data-specification="Of All Inches 0.5in - 10in"
-            data-code="Nell'sArmstrong"
-            data-status="On Stock"
-            data-acquisition="March 12, 2025"
-            data-active="Active">
-            <div class="px-4 pt-3 pb-2 border-b border-blue-100 bg-blue-50 rounded-t-xl flex justify-between items-center">
-                <span class="text-blue-700 font-semibold text-base">Nails</span>
-                <span class="bg-blue-400 text-white rounded px-3 py-1 text-xs font-semibold ml-2">Active</span>
-            </div>
-            <div class="p-4 grid grid-cols-1 gap-2 text-xs text-gray-700">
-                <div><span class="font-semibold">Specification:</span> Of All Inches 0.5in - 10in</div>
-                <div><span class="font-semibold">Equipment Code:</span> Nell'sArmstrong</div>
-                <div><span class="font-semibold">Status:</span> On Stock</div>
-                <div><span class="font-semibold">Acquisition Date:</span> March 12, 2025</div>
-            </div>
-            <div class="flex justify-end pr-4 pb-3">
-                <a href="equipment-details.html" class="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-6 rounded-xl text-sm transition-colors shadow" title="View Details">Edit</a>
-            </div>
-        </div>
-        <!-- Equipment Card 5 -->
-        <div class="equipment-card bg-white border-2 border-blue-200 rounded-xl shadow flex flex-col relative cursor-pointer"
-            data-name="Concrete Mixer"
-            data-specification="Portable Concrete Mixer, 3 Cubic Ft Capacity"
-            data-code="EQP-0001"
-            data-status="On Stock"
-            data-acquisition="March 12, 2025"
-            data-active="Active">
-            <div class="px-4 pt-3 pb-2 border-b border-blue-100 bg-blue-50 rounded-t-xl flex justify-between items-center">
-                <span class="text-blue-700 font-semibold text-base">Concrete Mixer</span>
-                <span class="bg-blue-400 text-white rounded px-3 py-1 text-xs font-semibold ml-2">Active</span>
-            </div>
-            <div class="p-4 grid grid-cols-1 gap-2 text-xs text-gray-700">
-                <div><span class="font-semibold">Specification:</span> Portable Concrete Mixer, 3 Cubic Ft Capacity</div>
-                <div><span class="font-semibold">Equipment Code:</span> EQP-0001</div>
-                <div><span class="font-semibold">Status:</span> On Stock</div>
-                <div><span class="font-semibold">Acquisition Date:</span> March 12, 2025</div>
-            </div>
-            <div class="flex justify-end pr-4 pb-3">
-                <a href="equipment-details.html" class="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-6 rounded-xl text-sm transition-colors shadow" title="View Details">Edit</a>
-            </div>
-        </div>
-        <!-- Equipment Card 6 -->
-        <div class="equipment-card bg-white border-2 border-blue-200 rounded-xl shadow flex flex-col relative cursor-pointer"
-            data-name="Welding Machine"
-            data-specification="Arc Welding Machine, 300 Amps Output"
-            data-code="EQP-0002"
-            data-status="On Stock"
-            data-acquisition="March 12, 2025"
-            data-active="Active">
-            <div class="px-4 pt-3 pb-2 border-b border-blue-100 bg-blue-50 rounded-t-xl flex justify-between items-center">
-                <span class="text-blue-700 font-semibold text-base">Welding Machine</span>
-                <span class="bg-blue-400 text-white rounded px-3 py-1 text-xs font-semibold ml-2">Active</span>
-            </div>
-            <div class="p-4 grid grid-cols-1 gap-2 text-xs text-gray-700">
-                <div><span class="font-semibold">Specification:</span> Arc Welding Machine, 300 Amps Output</div>
-                <div><span class="font-semibold">Equipment Code:</span> EQP-0002</div>
-                <div><span class="font-semibold">Status:</span> On Stock</div>
-                <div><span class="font-semibold">Acquisition Date:</span> March 12, 2025</div>
-            </div>
-            <div class="flex justify-end pr-4 pb-3">
-                <a href="equipment-details.html" class="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-6 rounded-xl text-sm transition-colors shadow" title="View Details">Edit</a>
             </div>
         </div>
     </div>
@@ -371,6 +286,22 @@
         </div>
     </div>
 </div>
+    <!-- Add this modal after the last equipment card container -->
+    <div id="mobileDeleteModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-40">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-xs w-full p-6 text-center relative">
+            <div class="flex justify-center mb-3">
+                <div class="bg-red-100 rounded-full p-4 flex items-center justify-center mx-auto">
+                    <i class="fas fa-exclamation-triangle text-red-500 text-3xl"></i>
+                </div>
+            </div>
+            <h2 class="text-xl font-bold mb-2" id="mobileDeleteModalTitle">Delete?</h2>
+            <p class="mb-6 text-gray-600 text-sm" id="mobileDeleteModalText">Are you sure you want to delete this equipment? This action cannot be undone and will permanently remove the equipment.</p>
+            <div class="flex gap-3 w-full">
+                <button id="mobileDeleteCancelBtn" class="flex-1 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold">Cancel</button>
+                <button id="mobileDeleteConfirmBtn" class="flex-1 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white font-semibold">Delete</button>
+            </div>
+        </div>
+    </div>
     </main>
 
     <!-- Date Range Modal -->
@@ -513,41 +444,100 @@
     <script src="../js/equipments.js"></script>
     <script>
 // Equipment modal logic for mobile view
-function openEquipmentModal(equipment) {
-    document.getElementById('modalEquipmentName').textContent = equipment.name || '-';
-    document.getElementById('modalEquipmentCode').textContent = equipment.code || '-';
-    document.getElementById('modalEquipmentSpecification').textContent = equipment.specification || '-';
-    document.getElementById('modalEquipmentStatus').textContent = equipment.status || '-';
-    document.getElementById('modalEquipmentAcquisition').textContent = equipment.acquisition || '-';
-    document.getElementById('modalEquipmentActive').textContent = equipment.active || '-';
-    document.getElementById('equipmentDetailsModal').classList.remove('hidden');
-    document.getElementById('equipmentDetailsModal').classList.add('flex');
-}
 function closeEquipmentModal() {
     document.getElementById('equipmentDetailsModal').classList.add('hidden');
     document.getElementById('equipmentDetailsModal').classList.remove('flex');
 }
 document.addEventListener('DOMContentLoaded', function() {
-    // Add click event to equipment cards in mobile view
+    // Equipment Details Modal logic for mobile view
     document.querySelectorAll('.equipment-card').forEach(function(card) {
         card.addEventListener('click', function(e) {
-            // Prevent the edit link from triggering the modal
-            if (e.target.tagName === 'A') return;
-            const equipment = {
-                name: card.getAttribute('data-name'),
-                specification: card.getAttribute('data-specification'),
-                code: card.getAttribute('data-code'),
-                status: card.getAttribute('data-status'),
-                acquisition: card.getAttribute('data-acquisition'),
-                active: card.getAttribute('data-active')
-            };
-            openEquipmentModal(equipment);
+            // Prevent the menu button and dropdown actions from triggering the modal
+            if (e.target.closest('.equipment-menu-btn') || e.target.closest('.equipment-menu-dropdown')) return;
+            // Extract data attributes
+            document.getElementById('modalEquipmentName').textContent = card.getAttribute('data-name') || '-';
+            document.getElementById('modalEquipmentCode').textContent = card.getAttribute('data-code') || '-';
+            document.getElementById('modalEquipmentSpecification').textContent = card.getAttribute('data-specification') || '-';
+            document.getElementById('modalEquipmentStatus').textContent = card.getAttribute('data-status') || '-';
+            document.getElementById('modalEquipmentAcquisition').textContent = card.getAttribute('data-acquisition') || '-';
+            document.getElementById('modalEquipmentActive').textContent = card.getAttribute('data-active') || '-';
+            document.getElementById('equipmentDetailsModal').classList.remove('hidden');
+            document.getElementById('equipmentDetailsModal').classList.add('flex');
         });
     });
     // Close modal on backdrop click
     document.getElementById('equipmentDetailsModal').addEventListener('click', function(event) {
-        if (event.target === this) closeEquipmentModal();
+        if (event.target === this) {
+            document.getElementById('equipmentDetailsModal').classList.add('hidden');
+            document.getElementById('equipmentDetailsModal').classList.remove('flex');
+        }
     });
+    document.querySelector('.equipment-card .equipment-delete-btn').addEventListener('click', function(e) {
+        e.stopPropagation();
+        window.equipmentCardToDelete = this.closest('.equipment-card');
+        document.getElementById('mobileDeleteModal').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    });
+    document.getElementById('mobileDeleteCancelBtn').addEventListener('click', function() {
+        document.getElementById('mobileDeleteModal').classList.add('hidden');
+        document.body.style.overflow = '';
+        window.equipmentCardToDelete = null;
+    });
+    document.getElementById('mobileDeleteConfirmBtn').addEventListener('click', function() {
+        if (window.equipmentCardToDelete) {
+            window.equipmentCardToDelete.remove();
+            window.equipmentCardToDelete = null;
+        }
+        document.getElementById('mobileDeleteModal').classList.add('hidden');
+        document.body.style.overflow = '';
+    });
+    document.getElementById('mobileDeleteModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.classList.add('hidden');
+            document.body.style.overflow = '';
+            window.equipmentCardToDelete = null;
+        }
+    });
+    // Dropdown logic for equipment card actions
+    function closeAllEquipmentMenus() {
+        document.querySelectorAll('.equipment-menu-dropdown').forEach(function(menu) {
+            menu.classList.add('hidden');
+        });
+        document.querySelectorAll('.equipment-menu-btn').forEach(function(btn) {
+            btn.setAttribute('aria-expanded', 'false');
+        });
+    }
+    document.querySelectorAll('.equipment-menu-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            closeAllEquipmentMenus();
+            const dropdown = btn.nextElementSibling;
+            if (dropdown) {
+                dropdown.classList.toggle('hidden');
+                btn.setAttribute('aria-expanded', dropdown.classList.contains('hidden') ? 'false' : 'true');
+            }
+        });
+    });
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.equipment-menu-btn') && !e.target.closest('.equipment-menu-dropdown')) {
+            closeAllEquipmentMenus();
+        }
+    });
+
+    // Mobile More dropdown logic (fix)
+    const mobileMoreDropdown = document.getElementById('mobileMoreDropdown');
+    const mobileMoreMenu = document.getElementById('mobileMoreMenu');
+    if (mobileMoreDropdown && mobileMoreMenu) {
+        mobileMoreDropdown.addEventListener('click', function(e) {
+            e.stopPropagation();
+            mobileMoreMenu.classList.toggle('hidden');
+        });
+        document.addEventListener('click', function(e) {
+            if (!mobileMoreDropdown.contains(e.target) && !mobileMoreMenu.contains(e.target)) {
+                mobileMoreMenu.classList.add('hidden');
+            }
+        });
+    }
 });
 </script>
 </body>
