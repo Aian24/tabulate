@@ -43,11 +43,22 @@
     </div>
     <script src="../js/main.js"></script>
     <script>
-      // Dynamically load the settings navigation
-      fetch('settings-navigation.html')
+      // Dynamically load the settings navigation and highlight the active tab
+      fetch('../nav/settings-navigation.html')
         .then(response => response.text())
         .then(html => {
           document.getElementById('settings-nav-container').innerHTML = html;
+          // Now run the active tab logic
+          var path = window.location.pathname;
+          var page = path.split("/").pop();
+          document.querySelectorAll('.settings-nav-link').forEach(function(link) {
+            var href = link.getAttribute('href');
+            if (href && href === page) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
         });
 
       // Employee Positions logic
