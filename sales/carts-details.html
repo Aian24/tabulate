@@ -46,25 +46,25 @@
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm text-gray-700">
                     <div>
                         <p class="font-semibold">Full Name</p>
-                        <p id="cartCustomerFullName"></p>
+                        <p id="cartCustomerFullName">Emily Carter</p>
                     </div>
                     <div>
                         <p class="font-semibold">Phone</p>
-                        <p id="cartCustomerPhone"></p>
+                        <p id="cartCustomerPhone">(555) 987-6543</p>
                     </div>
                     <div>
                         <p class="font-semibold">Email</p>
-                        <p id="cartCustomerEmail"></p>
+                        <p id="cartCustomerEmail">emily.carter@example.com</p>
                     </div>
                     <div>
                         <p class="font-semibold">Address</p>
-                        <p id="cartCustomerAddress"></p>
+                        <p id="cartCustomerAddress">456 Maple Ave, Rivertown, USA</p>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm text-gray-700 mt-4">
                     <div>
                         <p class="font-semibold">Order Date</p>
-                        <p id="cartOrderDate"></p>
+                        <p id="cartOrderDate">April 15, 2024</p>
                     </div>
                 </div>
             </div>
@@ -80,12 +80,19 @@
                             </tr>
                         </thead>
                         <tbody id="cartServiceItems" class="bg-white divide-y divide-gray-200">
-                            <!-- Service items will be populated here by JS -->
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Lawn Mowing</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">$500.00</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Garden Cleanup</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">$850.00</td>
+                            </tr>
                         </tbody>
                         <tfoot>
                             <tr class="bg-gray-50">
                                 <td class="px-6 py-3 text-right text-base font-semibold text-gray-800">Total Price</td>
-                                <td class="px-6 py-3 text-left text-base font-semibold text-gray-800" id="cartTotalPrice"></td>
+                                <td class="px-6 py-3 text-left text-base font-semibold text-gray-800" id="cartTotalPrice">$1,350.00</td>
                             </tr>
                         </tfoot>
                     </table>

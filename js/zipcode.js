@@ -4,9 +4,10 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Example data for Zip Codes
     const exampleZipCodes = [
-        { zip: '02019', area: 'test test test', created: '2024-06-01', updated: '2024-06-02' },
-        { zip: '12345', area: 'Sample Area 1', created: '2024-05-20', updated: '2024-05-22' },
-        { zip: '67890', area: 'Sample Area 2', created: '2024-04-15', updated: '2024-04-18' }
+        { zip: '90210', area: 'Beverly Hills', created: '2024-04-01', updated: '2024-04-10' },
+        { zip: '10001', area: 'New York', created: '2024-03-15', updated: '2024-04-09' },
+        { zip: '60611', area: 'Chicago', created: '2024-02-20', updated: '2024-03-01' },
+        { zip: '94105', area: 'San Francisco', created: '2024-01-10', updated: '2024-02-15' }
     ];
 
     // Populate the table

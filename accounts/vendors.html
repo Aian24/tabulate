@@ -26,6 +26,25 @@
     <div id="nav-container"></div>
 
     <!-- Main content -->
+    <main class="mobile-container">
+        <!-- Mobile Header -->
+        <div class="mobile-header md:hidden">
+            <div class="flex items-center justify-between mb-2">
+                <h1 class="text-lg font-bold text-white">Vendors</h1>
+                <div class="flex items-center gap-2">
+                    <button class="text-white p-1.5 rounded-full bg-white/20 backdrop-blur-sm">
+                        <i class="fas fa-ellipsis-v text-sm"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="relative">
+                <input type="search" 
+                       placeholder="Search vendors..." 
+                       class="mobile-search w-full h-8 pl-3 pr-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-white/50 text-sm"
+                />
+            </div>
+        </div>
+
         <!-- Desktop Header (hidden on mobile) -->
         <div class="hidden md:block container-fluid mx-auto px-4 md:px-6 py-2 md:py-4">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
@@ -109,422 +128,302 @@
             </div>
         </div>
 
-        <!-- MOBILE VIEW - Visible only on mobile screens (hidden on md and up) -->
-        <main class="md:hidden block p-4" style="position: relative; z-index: 1;">
-            <div class="flex justify-between items-center mb-4">
-                <span class="text-lg font-semibold">Vendors</span>
-                <div class="flex gap-2">
-                    <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700" id="mobileMoreBtn" aria-expanded="false" aria-haspopup="true">
-                        More
-                        <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                    </button>
+        <!-- Mobile Vendors List -->
+        <div class="md:hidden pb-20">
+            <div class="mobile-card">
+                <div class="mobile-table-header">
+                    <h2 class="text-white font-semibold">Active Vendors</h2>
+                    <p class="text-white/80 text-sm mt-1">9 vendors found</p>
                 </div>
-            </div>
-            <div class="mb-2 flex w-full gap-2">
-                <button id="mobileCreateBtn" class="bg-blue-500 text-white rounded text-sm font-medium flex items-center justify-center flex-1 min-w-0" onclick="window.location.href='create-vendor.html'">
-                    <i class="fas fa-plus mr-1"></i>Create
-                </button>
-                <button id="mobileDeletedBtn" class="bg-red-100 text-red-700 rounded text-sm font-medium flex items-center justify-center flex-1 min-w-0" onclick="window.location.href='deleted-vendors.html'">
-                    <i class="fas fa-trash-alt mr-1"></i>Deleted
-                </button>
-                <input id="mobileSearchInput" type="text" placeholder="Search" class="rounded border border-gray-300 text-sm flex-[2] min-w-0 px-3 py-2" />
-            </div>
-            
-            <div class="space-y-3 max-w-2xl mx-auto">
-                <!-- Vendor Card 1 -->
-                <a href="vendor-details.html" class="block" onclick="navigateToVendorDetails('Stanley', 'William Stanley Jr.', '1 (804) 698-7507', 'senatorstanley@senate.virginia.gov', 'Active', '4')">
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 cursor-pointer hover:shadow-lg hover:border-blue-200 transition-all duration-200 group">
-                        <div class="flex justify-between items-start mb-3">
+                
+                <!-- Mobile Vendor Cards -->
+                <div class="p-3 space-y-2">
+                    <!-- Vendor Card 1 -->
+                    <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
+                        <div class="flex items-center justify-between mb-1">
                             <div class="flex items-center gap-3">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
-                                <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white font-semibold text-sm shadow-sm">
+                                <div class="w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
                                     S
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold text-gray-900 text-base group-hover:text-blue-600 transition-colors">Stanley</h3>
+                                    <h3 class="font-semibold text-gray-900 text-sm">Stanley</h3>
                                     <p class="text-xs text-gray-500">ID: 4</p>
                                 </div>
                             </div>
-                            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 border border-green-200">
-                                <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
-                                Active
-                            </span>
+                            <span class="mobile-status bg-green-100 text-green-800 text-xs">Active</span>
                         </div>
-                        <div class="space-y-2.5 text-sm">
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-user text-blue-500 text-xs"></i>
-                                </div>
-                                <span class="font-medium">William Stanley Jr.</span>
+                        <div class="space-y-1 text-xs">
+                            <div>
+                                <span class="text-gray-500">Contact Person:</span>
+                                <span class="text-gray-900">William Stanley Jr.</span>
                             </div>
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-green-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-phone text-green-500 text-xs"></i>
-                                </div>
-                                <span>1 (804) 698-7507</span>
+                            <div>
+                                <span class="text-gray-500">Phone:</span>
+                                <span class="text-gray-900">1 (804) 698-7507</span>
                             </div>
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-purple-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-envelope text-purple-500 text-xs"></i>
-                                </div>
-                                <span class="truncate">senatorstanley@senate.virginia.gov</span>
+                            <div>
+                                <span class="text-gray-500">Email:</span>
+                                <span class="text-gray-900">senatorstanley@senate.virginia.gov</span>
                             </div>
                         </div>
                     </div>
-                </a>
 
-                <!-- Vendor Card 2 -->
-                <a href="vendor-details.html" class="block" onclick="navigateToVendorDetails('Ryobi', 'Akira Urakami', '1-(800)-268-4015', 'reviews@ryobitools.com', 'Active', '6')">
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 cursor-pointer hover:shadow-lg hover:border-green-200 transition-all duration-200 group">
-                        <div class="flex justify-between items-start mb-3">
+                    <!-- Vendor Card 2 -->
+                    <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
+                        <div class="flex items-center justify-between mb-1">
                             <div class="flex items-center gap-3">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
-                                <div class="w-10 h-10 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center text-white font-semibold text-sm shadow-sm">
+                                <div class="w-8 h-8 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
                                     R
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold text-gray-900 text-base group-hover:text-green-600 transition-colors">Ryobi</h3>
+                                    <h3 class="font-semibold text-gray-900 text-sm">Ryobi</h3>
                                     <p class="text-xs text-gray-500">ID: 6</p>
                                 </div>
                             </div>
-                            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 border border-green-200">
-                                <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
-                                Active
-                            </span>
+                            <span class="mobile-status bg-green-100 text-green-800 text-xs">Active</span>
                         </div>
-                        <div class="space-y-2.5 text-sm">
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-user text-blue-500 text-xs"></i>
-                                </div>
-                                <span class="font-medium">Akira Urakami</span>
+                        <div class="space-y-1 text-xs">
+                            <div>
+                                <span class="text-gray-500">Contact Person:</span>
+                                <span class="text-gray-900">Akira Urakami</span>
                             </div>
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-green-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-phone text-green-500 text-xs"></i>
-                                </div>
-                                <span>1-(800)-268-4015</span>
+                            <div>
+                                <span class="text-gray-500">Phone:</span>
+                                <span class="text-gray-900">1-(800)-268-4015</span>
                             </div>
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-purple-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-envelope text-purple-500 text-xs"></i>
-                                </div>
-                                <span class="truncate">reviews@ryobitools.com</span>
+                            <div>
+                                <span class="text-gray-500">Email:</span>
+                                <span class="text-gray-900">reviews@ryobitools.com</span>
                             </div>
                         </div>
                     </div>
-                </a>
 
-                <!-- Vendor Card 3 -->
-                <a href="vendor-details.html" class="block" onclick="navigateToVendorDetails('1', 'Joshua Rolluqui', '097 5356 5927', 'oshwaldo@gmail.ocm', 'Active', '7')">
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 cursor-pointer hover:shadow-lg hover:border-purple-200 transition-all duration-200 group">
-                        <div class="flex justify-between items-start mb-3">
+                    <!-- Vendor Card 3 -->
+                    <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
+                        <div class="flex items-center justify-between mb-1">
                             <div class="flex items-center gap-3">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
-                                <div class="w-10 h-10 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full flex items-center justify-center text-white font-semibold text-sm shadow-sm">
+                                <div class="w-8 h-8 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
                                     1
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold text-gray-900 text-base group-hover:text-purple-600 transition-colors">1</h3>
+                                    <h3 class="font-semibold text-gray-900 text-sm">1</h3>
                                     <p class="text-xs text-gray-500">ID: 7</p>
                                 </div>
                             </div>
-                            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 border border-green-200">
-                                <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
-                                Active
-                            </span>
+                            <span class="mobile-status bg-green-100 text-green-800 text-xs">Active</span>
                         </div>
-                        <div class="space-y-2.5 text-sm">
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-user text-blue-500 text-xs"></i>
-                                </div>
-                                <span class="font-medium">Joshua Rolluqui</span>
+                        <div class="space-y-1 text-xs">
+                            <div>
+                                <span class="text-gray-500">Contact Person:</span>
+                                <span class="text-gray-900">Joshua Rolluqui</span>
                             </div>
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-green-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-phone text-green-500 text-xs"></i>
-                                </div>
-                                <span>097 5356 5927</span>
+                            <div>
+                                <span class="text-gray-500">Phone:</span>
+                                <span class="text-gray-900">097 5356 5927</span>
                             </div>
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-purple-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-envelope text-purple-500 text-xs"></i>
-                                </div>
-                                <span class="truncate">oshwaldo@gmail.ocm</span>
+                            <div>
+                                <span class="text-gray-500">Email:</span>
+                                <span class="text-gray-900">oshwaldo@gmail.ocm</span>
                             </div>
                         </div>
                     </div>
-                </a>
 
-                <!-- Vendor Card 4 -->
-                <a href="vendor-details.html" class="block" onclick="navigateToVendorDetails('Oshwald', 'Oshwald Briones', '09123123', 'Oshwald22203@gmail.com', 'Active', '9')">
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 cursor-pointer hover:shadow-lg hover:border-orange-200 transition-all duration-200 group">
-                        <div class="flex justify-between items-start mb-3">
+                    <!-- Vendor Card 4 -->
+                    <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
+                        <div class="flex items-center justify-between mb-1">
                             <div class="flex items-center gap-3">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
-                                <div class="w-10 h-10 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center text-white font-semibold text-sm shadow-sm">
+                                <div class="w-8 h-8 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
                                     O
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold text-gray-900 text-base group-hover:text-orange-600 transition-colors">Oshwald</h3>
+                                    <h3 class="font-semibold text-gray-900 text-sm">Oshwald</h3>
                                     <p class="text-xs text-gray-500">ID: 9</p>
                                 </div>
                             </div>
-                            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 border border-green-200">
-                                <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
-                                Active
-                            </span>
+                            <span class="mobile-status bg-green-100 text-green-800 text-xs">Active</span>
                         </div>
-                        <div class="space-y-2.5 text-sm">
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-user text-blue-500 text-xs"></i>
-                                </div>
-                                <span class="font-medium">Oshwald Briones</span>
+                        <div class="space-y-1 text-xs">
+                            <div>
+                                <span class="text-gray-500">Contact Person:</span>
+                                <span class="text-gray-900">Oshwald Briones</span>
                             </div>
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-green-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-phone text-green-500 text-xs"></i>
-                                </div>
-                                <span>09123123</span>
+                            <div>
+                                <span class="text-gray-500">Phone:</span>
+                                <span class="text-gray-900">09123123</span>
                             </div>
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-purple-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-envelope text-purple-500 text-xs"></i>
-                                </div>
-                                <span class="truncate">Oshwald22203@gmail.com</span>
+                            <div>
+                                <span class="text-gray-500">Email:</span>
+                                <span class="text-gray-900">Oshwald22203@gmail.com</span>
                             </div>
                         </div>
                     </div>
-                </a>
 
-                <!-- Vendor Card 5 -->
-                <a href="vendor-details.html" class="block" onclick="navigateToVendorDetails('Global', 'Eric Smith', '12345678900000000000000000000000000000000000000', 'eric.smith@gmail.com', 'Active', '10')">
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 cursor-pointer hover:shadow-lg hover:border-teal-200 transition-all duration-200 group">
-                        <div class="flex justify-between items-start mb-3">
+                    <!-- Vendor Card 5 -->
+                    <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
+                        <div class="flex items-center justify-between mb-1">
                             <div class="flex items-center gap-3">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
-                                <div class="w-10 h-10 bg-gradient-to-br from-teal-400 to-cyan-500 rounded-full flex items-center justify-center text-white font-semibold text-sm shadow-sm">
+                                <div class="w-8 h-8 bg-gradient-to-br from-teal-400 to-cyan-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
                                     G
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold text-gray-900 text-base group-hover:text-teal-600 transition-colors">Global</h3>
+                                    <h3 class="font-semibold text-gray-900 text-sm">Global</h3>
                                     <p class="text-xs text-gray-500">ID: 10</p>
                                 </div>
                             </div>
-                            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 border border-green-200">
-                                <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
-                                Active
-                            </span>
+                            <span class="mobile-status bg-green-100 text-green-800 text-xs">Active</span>
                         </div>
-                        <div class="space-y-2.5 text-sm">
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-user text-blue-500 text-xs"></i>
-                                </div>
-                                <span class="font-medium">Eric Smith</span>
+                        <div class="space-y-1 text-xs">
+                            <div>
+                                <span class="text-gray-500">Contact Person:</span>
+                                <span class="text-gray-900">Eric Smith</span>
                             </div>
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-green-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-phone text-green-500 text-xs"></i>
-                                </div>
-                                <span class="truncate">12345678900000000000000000000000000000000000000</span>
+                            <div>
+                                <span class="text-gray-500">Phone:</span>
+                                <span class="text-gray-900">12345678900000000000000000000000000000000000000</span>
                             </div>
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-purple-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-envelope text-purple-500 text-xs"></i>
-                                </div>
-                                <span class="truncate">eric.smith@gmail.com</span>
+                            <div>
+                                <span class="text-gray-500">Email:</span>
+                                <span class="text-gray-900">eric.smith@gmail.com</span>
                             </div>
                         </div>
                     </div>
-                </a>
 
-                <!-- Vendor Card 6 -->
-                <a href="vendor-details.html" class="block" onclick="navigateToVendorDetails('LIXIL', 'Kinya Seto', '092352342', 'customer.helpdesk@lixil.com', 'Active', '5')">
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 cursor-pointer hover:shadow-lg hover:border-pink-200 transition-all duration-200 group">
-                        <div class="flex justify-between items-start mb-3">
+                    <!-- Vendor Card 6 -->
+                    <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
+                        <div class="flex items-center justify-between mb-1">
                             <div class="flex items-center gap-3">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
-                                <div class="w-10 h-10 bg-gradient-to-br from-pink-400 to-yellow-500 rounded-full flex items-center justify-center text-white font-semibold text-sm shadow-sm">
+                                <div class="w-8 h-8 bg-gradient-to-br from-pink-400 to-yellow-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
                                     L
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold text-gray-900 text-base group-hover:text-pink-600 transition-colors">LIXIL</h3>
+                                    <h3 class="font-semibold text-gray-900 text-sm">LIXIL</h3>
                                     <p class="text-xs text-gray-500">ID: 5</p>
                                 </div>
                             </div>
-                            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 border border-green-200">
-                                <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
-                                Active
-                            </span>
+                            <span class="mobile-status bg-green-100 text-green-800 text-xs">Active</span>
                         </div>
-                        <div class="space-y-2.5 text-sm">
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-user text-blue-500 text-xs"></i>
-                                </div>
-                                <span class="font-medium">Kinya Seto</span>
+                        <div class="space-y-1 text-xs">
+                            <div>
+                                <span class="text-gray-500">Contact Person:</span>
+                                <span class="text-gray-900">Kinya Seto</span>
                             </div>
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-green-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-phone text-green-500 text-xs"></i>
-                                </div>
-                                <span>092352342</span>
+                            <div>
+                                <span class="text-gray-500">Phone:</span>
+                                <span class="text-gray-900">092352342</span>
                             </div>
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-purple-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-envelope text-purple-500 text-xs"></i>
-                                </div>
-                                <span class="truncate">customer.helpdesk@lixil.com</span>
+                            <div>
+                                <span class="text-gray-500">Email:</span>
+                                <span class="text-gray-900">customer.helpdesk@lixil.com</span>
                             </div>
                         </div>
                     </div>
-                </a>
 
-                <!-- Vendor Card 7 -->
-                <a href="vendor-details.html" class="block" onclick="navigateToVendorDetails('Citi Hardware', 'Citi Dagupan', '091237652', 'citi@harware.com', 'Active', '2')">
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 cursor-pointer hover:shadow-lg hover:border-blue-200 transition-all duration-200 group">
-                        <div class="flex justify-between items-start mb-3">
+                    <!-- Vendor Card 7 -->
+                    <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
+                        <div class="flex items-center justify-between mb-1">
                             <div class="flex items-center gap-3">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
-                                <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-green-500 rounded-full flex items-center justify-center text-white font-semibold text-sm shadow-sm">
+                                <div class="w-8 h-8 bg-gradient-to-br from-blue-400 to-green-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
                                     C
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold text-gray-900 text-base group-hover:text-blue-600 transition-colors">Citi Hardware</h3>
+                                    <h3 class="font-semibold text-gray-900 text-sm">Citi Hardware</h3>
                                     <p class="text-xs text-gray-500">ID: 2</p>
                                 </div>
                             </div>
-                            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 border border-green-200">
-                                <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
-                                Active
-                            </span>
+                            <span class="mobile-status bg-green-100 text-green-800 text-xs">Active</span>
                         </div>
-                        <div class="space-y-2.5 text-sm">
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-user text-blue-500 text-xs"></i>
-                                </div>
-                                <span class="font-medium">Citi Dagupan</span>
+                        <div class="space-y-1 text-xs">
+                            <div>
+                                <span class="text-gray-500">Contact Person:</span>
+                                <span class="text-gray-900">Citi Dagupan</span>
                             </div>
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-green-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-phone text-green-500 text-xs"></i>
-                                </div>
-                                <span>091237652</span>
+                            <div>
+                                <span class="text-gray-500">Phone:</span>
+                                <span class="text-gray-900">091237652</span>
                             </div>
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-purple-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-envelope text-purple-500 text-xs"></i>
-                                </div>
-                                <span class="truncate">citi@harware.com</span>
+                            <div>
+                                <span class="text-gray-500">Email:</span>
+                                <span class="text-gray-900">citi@harware.com</span>
                             </div>
                         </div>
                     </div>
-                </a>
 
-                <!-- Vendor Card 8 -->
-                <a href="vendor-details.html" class="block" onclick="navigateToVendorDetails('DIYI', 'Aljune Mutilaptalib', '09672334565', 'aljune@diyi.com', 'Active', '3')">
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 cursor-pointer hover:shadow-lg hover:border-yellow-200 transition-all duration-200 group">
-                        <div class="flex justify-between items-start mb-3">
+                    <!-- Vendor Card 8 -->
+                    <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
+                        <div class="flex items-center justify-between mb-1">
                             <div class="flex items-center gap-3">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
-                                <div class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-white font-semibold text-sm shadow-sm">
+                                <div class="w-8 h-8 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
                                     D
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold text-gray-900 text-base group-hover:text-yellow-600 transition-colors">DIYI</h3>
+                                    <h3 class="font-semibold text-gray-900 text-sm">DIYI</h3>
                                     <p class="text-xs text-gray-500">ID: 3</p>
                                 </div>
                             </div>
-                            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 border border-green-200">
-                                <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
-                                Active
-                            </span>
+                            <span class="mobile-status bg-green-100 text-green-800 text-xs">Active</span>
                         </div>
-                        <div class="space-y-2.5 text-sm">
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-user text-blue-500 text-xs"></i>
-                                </div>
-                                <span class="font-medium">Aljune Mutilaptalib</span>
+                        <div class="space-y-1 text-xs">
+                            <div>
+                                <span class="text-gray-500">Contact Person:</span>
+                                <span class="text-gray-900">Aljune Mutilaptalib</span>
                             </div>
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-green-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-phone text-green-500 text-xs"></i>
-                                </div>
-                                <span>09672334565</span>
+                            <div>
+                                <span class="text-gray-500">Phone:</span>
+                                <span class="text-gray-900">09672334565</span>
                             </div>
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-purple-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-envelope text-purple-500 text-xs"></i>
-                                </div>
-                                <span class="truncate">aljune@diyi.com</span>
+                            <div>
+                                <span class="text-gray-500">Email:</span>
+                                <span class="text-gray-900">aljune@diyi.com</span>
                             </div>
                         </div>
                     </div>
-                </a>
 
-                <!-- Vendor Card 9 -->
-                <a href="vendor-details.html" class="block" onclick="navigateToVendorDetails('Ace Hardware', 'Ace Tilap', '69696969', 'ace@hardware.com', 'Active', '1')">
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 cursor-pointer hover:shadow-lg hover:border-gray-200 transition-all duration-200 group">
-                        <div class="flex justify-between items-start mb-3">
+                    <!-- Vendor Card 9 -->
+                    <div class="mobile-table-row bg-white rounded-lg border border-gray-100">
+                        <div class="flex items-center justify-between mb-1">
                             <div class="flex items-center gap-3">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" onclick="event.stopPropagation()">
-                                <div class="w-10 h-10 bg-gradient-to-br from-gray-400 to-blue-500 rounded-full flex items-center justify-center text-white font-semibold text-sm shadow-sm">
+                                <div class="w-8 h-8 bg-gradient-to-br from-gray-400 to-blue-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
                                     A
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold text-gray-900 text-base group-hover:text-gray-600 transition-colors">Ace Hardware</h3>
+                                    <h3 class="font-semibold text-gray-900 text-sm">Ace Hardware</h3>
                                     <p class="text-xs text-gray-500">ID: 1</p>
                                 </div>
                             </div>
-                            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 border border-green-200">
-                                <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
-                                Active
-                            </span>
+                            <span class="mobile-status bg-green-100 text-green-800 text-xs">Active</span>
                         </div>
-                        <div class="space-y-2.5 text-sm">
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-user text-blue-500 text-xs"></i>
-                                </div>
-                                <span class="font-medium">Ace Tilap</span>
+                        <div class="space-y-1 text-xs">
+                            <div>
+                                <span class="text-gray-500">Contact Person:</span>
+                                <span class="text-gray-900">Ace Tilap</span>
                             </div>
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-green-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-phone text-green-500 text-xs"></i>
-                                </div>
-                                <span>69696969</span>
+                            <div>
+                                <span class="text-gray-500">Phone:</span>
+                                <span class="text-gray-900">69696969</span>
                             </div>
-                            <div class="flex items-center gap-3 text-gray-600">
-                                <div class="w-8 h-8 bg-purple-50 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-envelope text-purple-500 text-xs"></i>
-                                </div>
-                                <span class="truncate">ace@hardware.com</span>
+                            <div>
+                                <span class="text-gray-500">Email:</span>
+                                <span class="text-gray-900">ace@hardware.com</span>
                             </div>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
-            
-            <!-- Mobile Pagination -->
-            <div class="flex justify-center items-center mt-6 space-x-2">
-                <button class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-                    <i class="fas fa-chevron-left"></i>
+        </div>
+
+        <!-- Mobile Action Buttons -->
+        <div class="md:hidden mobile-actions">
+            <div class="flex gap-3">
+                <button onclick="window.location.href='deleted-vendors.html'" class="mobile-button flex-1 bg-red-500 text-white flex items-center justify-center gap-2">
+                    <i class="fas fa-trash-alt"></i>
+                    <span>Deleted</span>
                 </button>
-                <button class="px-3 py-2 text-sm font-medium text-white bg-sky-500 border border-sky-500 rounded-lg">
-                    1
-                </button>
-                <button class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-                    <i class="fas fa-chevron-right"></i>
+                <button onclick="window.location.href='create-vendor.html'" class="mobile-button flex-1 bg-purple-600 text-white flex items-center justify-center gap-2">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Create</span>
                 </button>
             </div>
-        </main>
+        </div>
 
         <!-- Desktop Table content -->
         <div class="hidden md:block  rounded-xl container-fluid mx-auto">
