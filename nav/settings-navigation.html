@@ -10,11 +10,11 @@
             <li><a href="payment.html" class="settings-nav-link flex items-center px-6 py-3 hover:bg-[#223355] rounded-r-full font-medium"><span class="arrow-indicator"></span><i class="fas fa-credit-card mr-3"></i> Payment</a></li>
             <li><a href="tone.html" class="settings-nav-link flex items-center px-6 py-3 hover:bg-[#223355] rounded-r-full font-medium"><span class="arrow-indicator"></span><i class="fas fa-palette mr-3"></i> Tone</a></li>
             <li><a href="businesscategories.html" class="settings-nav-link flex items-center px-6 py-3 hover:bg-[#223355] rounded-r-full font-medium"><span class="arrow-indicator"></span><i class="fas fa-layer-group mr-3"></i> Business Categories</a></li>
-            <li><a href="#" class="settings-nav-link flex items-center px-6 py-3 hover:bg-[#223355] rounded-r-full font-medium"><span class="arrow-indicator"></span><i class="fas fa-calendar-alt mr-3"></i> Seasonal Availability</a></li>
-            <li><a href="#" class="settings-nav-link flex items-center px-6 py-3 hover:bg-[#223355] rounded-r-full font-medium"><span class="arrow-indicator"></span><i class="fas fa-file-contract mr-3"></i> Terms and Conditions</a></li>
-            <li><a href="#" class="settings-nav-link flex items-center px-6 py-3 hover:bg-[#223355] rounded-r-full font-medium"><span class="arrow-indicator"></span><i class="fas fa-cogs mr-3"></i> Custom Fields</a></li>
-            <li><a href="#" class="settings-nav-link flex items-center px-6 py-3 hover:bg-[#223355] rounded-r-full font-medium"><span class="arrow-indicator"></span><i class="fas fa-share-alt mr-3"></i> Social Media</a></li>
-            <li><a href="#" class="settings-nav-link flex items-center px-6 py-3 hover:bg-[#223355] rounded-r-full font-medium"><span class="arrow-indicator"></span><i class="fas fa-money-check-alt mr-3"></i> Payroll</a></li>
+            <li><a href="seasonalavailability.html" class="settings-nav-link flex items-center px-6 py-3 hover:bg-[#223355] rounded-r-full font-medium"><span class="arrow-indicator"></span><i class="fas fa-calendar-alt mr-3"></i> Seasonal Availability</a></li>
+            <li><a href="terms.html" class="settings-nav-link flex items-center px-6 py-3 hover:bg-[#223355] rounded-r-full font-medium"><span class="arrow-indicator"></span><i class="fas fa-file-contract mr-3"></i> Terms and Conditions</a></li>
+            <li><a href="customfields.html" class="settings-nav-link flex items-center px-6 py-3 hover:bg-[#223355] rounded-r-full font-medium"><span class="arrow-indicator"></span><i class="fas fa-cogs mr-3"></i> Custom Fields</a></li>
+            <li><a href="socialmedia.html" class="settings-nav-link flex items-center px-6 py-3 hover:bg-[#223355] rounded-r-full font-medium"><span class="arrow-indicator"></span><i class="fas fa-share-alt mr-3"></i> Social Media</a></li>
+            <li><a href="payroll.html" class="settings-nav-link flex items-center px-6 py-3 hover:bg-[#223355] rounded-r-full font-medium"><span class="arrow-indicator"></span><i class="fas fa-money-check-alt mr-3"></i> Payroll</a></li>
         </ul>
     </nav>
 </aside> 
@@ -27,7 +27,8 @@
   // Loop through all sidebar links
   document.querySelectorAll('.settings-nav-link').forEach(function(link) {
     var href = link.getAttribute('href');
-    if (href && href === page) {
+    // Only match if href is not '#' and matches the end of the path
+    if (href && href !== '#' && path.endsWith(href)) {
       link.classList.add('active');
     } else {
       link.classList.remove('active');
