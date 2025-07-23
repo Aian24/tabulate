@@ -277,6 +277,13 @@
                     viewToneDetails(page, section, subsection, content, tone, category, description);
                 });
             });
+
+            var addToneBtn = document.getElementById('addToneBtn');
+            if (addToneBtn) {
+                addToneBtn.addEventListener('click', function() {
+                    window.location.href = 'create-tone.html';
+                });
+            }
         });
     </script>
 </body>
