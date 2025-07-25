@@ -1,0 +1,207 @@
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>Expense Categories</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/themes/light.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+</head>
+<body class="min-h-screen bg-sky-50">
+    <!-- Include header -->
+    <div id="header-container"></div>
+    <!-- Include navigation -->
+    <div id="nav-container"></div>
+    <!-- Main content -->
+    <main class="container-fluid mx-auto px-4 md:px-6 py-2 md:py-4 relative-z-1">
+        <!-- Desktop Header -->
+        <div class="hidden md:flex flex-row justify-between items-center mb-4 gap-3">
+            <div class="flex items-center gap-2">
+                <h1 class="text-xl md:text-2xl font-bold text-gray-800 ml-0">Expense Categories</h1>
+            </div>
+            <div class="flex items-center gap-2 ml-auto">
+                <button id="addCategoryBtn" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
+                    <i class="fas fa-plus mr-1"></i>
+                    <span>Create</span>
+                </button>
+                <div class="relative">
+                    <button id="actionsDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
+                        <span>Actions</span>
+                        <i class="fas fa-chevron-down ml-1"></i>
+                    </button>
+                    <div id="actionsMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-trash-alt w-5"></i>
+                            <span>Delete</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="relative">
+                    <button id="moreDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
+                        <span>More</span>
+                        <i class="fas fa-chevron-down ml-1"></i>
+                    </button>
+                    <div id="moreMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-cog w-5"></i>
+                            <span>Settings</span>
+                        </button>
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-chart-bar w-5"></i>
+                            <span>Report</span>
+                        </button>
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-history w-5"></i>
+                            <span>Audit Trail</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Controls: Show entries and Search -->
+        <div class="hidden md:flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
+            <div class="flex items-center gap-2 mr-4">
+                <label class="text-sm text-gray-600 mr-2">Show entries:</label>
+                <select class="border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500" id="show-entries">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50" selected>50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <div id="search-container" class="relative w-full md:w-auto">
+                <input type="search" 
+                       placeholder="Search..." 
+                       class="w-full h-[42px] pl-10 pr-4 rounded-lg border border-green-500 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300"
+                />
+                <button class="absolute left-3 top-1/2 -translate-y-1/2 text-blue-500 hover:text-blue-600 transition-colors">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Table -->
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
+            <div class="overflow-x-auto">
+                <table class="w-full min-w-[900px]">
+                    <thead class="bg-sky-500 text-white">
+                        <tr>
+                            <th class="px-4 py-3 text-left"><input type="checkbox" class="w-4 h-4"></th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold">Category</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold">Category Name</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold">Category Description</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        <tr>
+                            <td class="px-4 py-3"><input type="checkbox" class="w-4 h-4"></td>
+                            <td class="px-4 py-3 text-sm">Materials</td>
+                            <td class="px-4 py-3 text-sm">Materials</td>
+                            <td class="px-4 py-3 text-sm">Materials</td>
+                            <td class="px-4 py-3 text-sm"><span class="inline-block px-3 py-1 rounded-full bg-green-100 text-green-800 font-semibold">Active</span></td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3"><input type="checkbox" class="w-4 h-4"></td>
+                            <td class="px-4 py-3 text-sm">Electrical Services</td>
+                            <td class="px-4 py-3 text-sm">Electrical Parts & Materials</td>
+                            <td class="px-4 py-3 text-sm">Expenses related to purchasing wires, breakers, outlets, switches, and other electrical components.</td>
+                            <td class="px-4 py-3 text-sm"><span class="inline-block px-3 py-1 rounded-full bg-green-100 text-green-800 font-semibold">Active</span></td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3"><input type="checkbox" class="w-4 h-4"></td>
+                            <td class="px-4 py-3 text-sm">Maintenance Services</td>
+                            <td class="px-4 py-3 text-sm">Equipment Maintenance & Repair</td>
+                            <td class="px-4 py-3 text-sm">Costs related to maintaining and repairing company equipment and tools.</td>
+                            <td class="px-4 py-3 text-sm"><span class="inline-block px-3 py-1 rounded-full bg-green-100 text-green-800 font-semibold">Active</span></td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3"><input type="checkbox" class="w-4 h-4"></td>
+                            <td class="px-4 py-3 text-sm">Landscaping & Maintenance</td>
+                            <td class="px-4 py-3 text-sm">Plant & Material Purchas</td>
+                            <td class="px-4 py-3 text-sm">Purchases for landscaping projects, including plants, soil, fertilizers, and tools.</td>
+                            <td class="px-4 py-3 text-sm"><span class="inline-block px-3 py-1 rounded-full bg-green-100 text-green-800 font-semibold">Active</span></td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3"><input type="checkbox" class="w-4 h-4"></td>
+                            <td class="px-4 py-3 text-sm">Plumbing Services</td>
+                            <td class="px-4 py-3 text-sm">Tools & Parts Purchase</td>
+                            <td class="px-4 py-3 text-sm">Expenses for buying plumbing tools, PVC pipes, fittings, and accessories.</td>
+                            <td class="px-4 py-3 text-sm"><span class="inline-block px-3 py-1 rounded-full bg-green-100 text-green-800 font-semibold">Active</span></td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3"><input type="checkbox" class="w-4 h-4"></td>
+                            <td class="px-4 py-3 text-sm">Electrical Services</td>
+                            <td class="px-4 py-3 text-sm">Material Purchase</td>
+                            <td class="px-4 py-3 text-sm">Expenses related to purchasing construction materials such as cement, steel, plywood, etc.</td>
+                            <td class="px-4 py-3 text-sm"><span class="inline-block px-3 py-1 rounded-full bg-green-100 text-green-800 font-semibold">Active</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Pagination -->
+        <div class="bg-gray-50 px-4 md:px-6 py-4 flex flex-col md:flex-row justify-between items-center border-t border-gray-100 gap-4">
+            <div class="flex items-center gap-2 text-sm text-gray-600 order-2 md:order-1">
+                Showing <span class="font-medium">1</span> to <span class="font-medium">6</span> of <span class="font-medium">6</span> entries
+            </div>
+            <div class="flex space-x-2 order-1 md:order-2">
+                <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                    <i class="fas fa-chevron-left mr-1"></i>
+                    <span class="hidden sm:inline">Previous</span>
+                </button>
+                <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-white bg-sky-500 border border-sky-500 rounded-lg hover:bg-sky-600 transition-colors duration-200">
+                    1
+                </button>
+                <button class="px-3 py-2 md:px-4 md:py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                    <span class="hidden sm:inline">Next</span>
+                    <i class="fas fa-chevron-right ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Select all table rows in tbody
+            const rows = document.querySelectorAll('table tbody tr');
+            rows.forEach(row => {
+                row.style.cursor = 'pointer'; // Indicate clickable
+                row.addEventListener('click', function(e) {
+                    // Prevent checkbox clicks from triggering row click
+                    if (e.target.tagName.toLowerCase() === 'input') return;
+                    const cells = row.querySelectorAll('td');
+                    // Extract data from cells
+                    const category = cells[1]?.textContent.trim() || '';
+                    const categoryName = cells[2]?.textContent.trim() || '';
+                    const categoryDescription = cells[3]?.textContent.trim() || '';
+                    const status = cells[4]?.textContent.trim() || '';
+                    // Redirect to details page with params
+                    const params = new URLSearchParams({
+                        category,
+                        categoryName,
+                        categoryDescription,
+                        status
+                    });
+                    window.location.href = `expensecategories-details.html?${params.toString()}`;
+                });
+            });
+
+            var addCategoryBtn = document.getElementById('addCategoryBtn');
+            if (addCategoryBtn) {
+                addCategoryBtn.addEventListener('click', function() {
+                    window.location.href = 'create-expense-category.html';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
