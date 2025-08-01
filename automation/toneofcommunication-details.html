@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tone of Communication Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
+    <!-- Header and Navigation -->
+    <div id="header-container"></div>
+    <div id="nav-container"></div>
+
+    <!-- Main content -->
+    <main class="w-full px-0 md:px-6 py-8">
+        <!-- Desktop Header -->
+        <div class="hidden md:block mb-6">
+            <div class="flex items-center justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <button id="backBtn" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <h1 id="toneDetailsTitle" class="text-2xl md:text-3xl font-bold text-gray-800">Tone of Communication Details</h1>
+                </div>
+                <div class="relative">
+                    <button id="moreBtn" type="button" class="inline-flex justify-center rounded border shadow-sm px-6 py-2 text-sm font-medium text-white transition-colors bg-blue-600 hover:bg-blue-700">
+                        More <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                    </button>
+                    <div id="moreDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
+                        <a href="#" class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 transition"><i class="fas fa-cog mr-3 text-gray-500"></i> Settings</a>
+                        <a href="#" class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 transition"><i class="fas fa-file-alt mr-3 text-gray-500"></i> Report</a>
+                        <a href="#" class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 transition"><i class="fas fa-history mr-3 text-gray-500"></i> Audit Trail</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Header -->
+        <div class="block md:hidden mb-4 px-4">
+            <div class="flex justify-between items-center">
+                <a href="tone-of-communication.html" class="text-gray-600 flex items-center">
+                    <i class="fas fa-chevron-left text-lg"></i>
+                    <span class="ml-2 font-semibold">Back</span>
+                </a>
+                <div class="relative inline-block text-left">
+                    <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700" id="mobile-menu-button" aria-expanded="false" aria-haspopup="true">
+                        More
+                        <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desktop Layout -->
+        <div class="hidden md:block">
+            <div class="flex flex-col md:flex-row gap-6">
+                <!-- Left: Tone Details -->
+                <div class="flex-1 bg-white rounded-xl shadow p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-1">Page</label>
+                            <input id="tonePage" type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" readonly />
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-1">Section</label>
+                            <input id="toneSection" type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" readonly />
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-gray-700 font-semibold mb-1">Sub Section</label>
+                            <input id="toneSubSection" type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" readonly />
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-1">Tone Type</label>
+                            <div id="toneTypeContainer" class="relative">
+                              <input id="toneType" type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" readonly />
+                              <span class="dropdown-chevron absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none hidden">
+                                <svg width="20" height="20" fill="none" stroke="#6B7280" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                              </span>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-1">Category</label>
+                            <div id="categoryContainer" class="relative">
+                              <input id="category" type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" readonly />
+                              <span class="dropdown-chevron absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none hidden">
+                                <svg width="20" height="20" fill="none" stroke="#6B7280" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                              </span>
+                            </div>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-gray-700 font-semibold mb-1">Content</label>
+                            <textarea id="toneContent" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" rows="4" readonly></textarea>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-gray-700 font-semibold mb-1">Description</label>
+                            <textarea id="toneDescription" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" rows="3" readonly></textarea>
+                        </div>
+                    </div>
+                    <!-- Edit button moved to bottom left inside the card -->
+                    <div class="mt-2 flex justify-start">
+                        <button id="editBtn" class="px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center gap-2 text-sm">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
+                </div>
+                <!-- Right: Additional Info -->
+                <div class="w-full md:w-1/3 bg-white rounded-xl shadow p-6 h-fit">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Additional Information</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-1">Created Date</label>
+                            <input id="createdDate" type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" readonly />
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-1">Last Modified</label>
+                            <input id="lastModified" type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" readonly />
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-1">Status</label>
+                            <input id="status" type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" readonly />
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <h4 class="text-base font-semibold text-gray-700 mb-2">Preview Website Image</h4>
+                        <div id="previewImageSection">
+                            <div id="previewImageDisplay" class="bg-gray-100 rounded-lg p-4 flex items-center justify-center min-h-[80px]">
+                                <span id="previewImageMessage" class="text-gray-500 text-sm">Section A not Available for this page.</span>
+                                <img id="previewImage" src="" alt="Preview" class="hidden w-32 h-32 object-cover rounded-lg border border-gray-200" />
+                            </div>
+                            <input id="previewImageInput" type="file" accept="image/*" class="hidden mt-2" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Layout -->
+        <div class="block md:hidden px-4">
+            <!-- Tone Information Section -->
+            <form id="mobile-tone-form" class="bg-white border-2 border-blue-200 rounded-xl shadow mb-6 max-w-2xl mx-auto flex flex-col">
+                <div class="px-4 pt-3 pb-2 border-b border-blue-100 bg-blue-50 rounded-t-xl">
+                    <span class="text-blue-700 font-semibold text-base">Edit Tone Information</span>
+                </div>
+                <div class="p-4 grid grid-cols-1 gap-4">
+                    <div>
+                        <label class="block text-gray-500 text-xs mb-1" for="mobile-tone-page">Page</label>
+                        <input id="mobile-tone-page" name="page" type="text" class="w-full border border-gray-300 rounded px-2 py-2 text-base mb-2 bg-white" />
+                    </div>
+                    <div>
+                        <label class="block text-gray-500 text-xs mb-1" for="mobile-tone-section">Section</label>
+                        <input id="mobile-tone-section" name="section" type="text" class="w-full border border-gray-300 rounded px-2 py-2 text-base mb-2 bg-white" />
+                    </div>
+                    <div>
+                        <label class="block text-gray-500 text-xs mb-1" for="mobile-tone-subsection">Sub Section</label>
+                        <input id="mobile-tone-subsection" name="subsection" type="text" class="w-full border border-gray-300 rounded px-2 py-2 text-base mb-2 bg-white" />
+                    </div>
+                    <div>
+                        <label class="block text-gray-500 text-xs mb-1" for="mobile-tone-type">Tone Type</label>
+                        <input id="mobile-tone-type" name="toneType" type="text" class="w-full border border-gray-300 rounded px-2 py-2 text-base mb-2 bg-white" />
+                    </div>
+                    <div>
+                        <label class="block text-gray-500 text-xs mb-1" for="mobile-category">Category</label>
+                        <input id="mobile-category" name="category" type="text" class="w-full border border-gray-300 rounded px-2 py-2 text-base mb-2 bg-white" />
+                    </div>
+                    <div>
+                        <label class="block text-gray-500 text-xs mb-1" for="mobile-content">Content</label>
+                        <textarea id="mobile-content" name="content" rows="4" class="w-full border border-gray-300 rounded px-2 py-2 text-base mb-2 bg-white"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-gray-500 text-xs mb-1" for="mobile-description">Description</label>
+                        <textarea id="mobile-description" name="description" rows="3" class="w-full border border-gray-300 rounded px-2 py-2 text-base mb-2 bg-white"></textarea>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-3 px-4 pb-6">
+                    <button id="saveChangesBtn" type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg shadow transition disabled:opacity-60 disabled:cursor-not-allowed" disabled>Save Changes</button>
+                    <button type="button" onclick="window.location.href='tone-of-communication.html'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 rounded-lg shadow transition">Cancel</button>
+                </div>
+            </form>
+            <!-- Save Notification -->
+            <div id="saveNotification" class="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-green-500 text-white px-6 py-3 rounded-xl shadow-lg z-50 hidden text-center font-semibold">Changes saved!</div>
+        </div>
+    </main>
+    <script>
+        fetch('../nav/header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-container').innerHTML = data;
+        });
+    fetch('../nav/navigation.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('nav-container').innerHTML = data;
+        });
+    </script>
+    <script src="../js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const moreBtn = document.getElementById('moreBtn');
+            const moreDropdown = document.getElementById('moreDropdown');
+            document.addEventListener('click', function(event) {
+                if (moreBtn && moreDropdown) {
+                    if (moreBtn.contains(event.target)) {
+                        moreDropdown.classList.toggle('hidden');
+                    } else if (!moreDropdown.contains(event.target)) {
+                        moreDropdown.classList.add('hidden');
+                    }
+                }
+            });
+
+            // Get data from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const page = urlParams.get('page');
+            const section = urlParams.get('section');
+            const subsection = urlParams.get('subsection');
+            const content = urlParams.get('content');
+            const tone = urlParams.get('tone');
+            const category = urlParams.get('category');
+            const description = urlParams.get('description');
+
+            // Populate fields
+            document.getElementById('tonePage').value = page || 'Home';
+            document.getElementById('toneSection').value = section || 'Section A';
+            document.getElementById('toneSubSection').value = subsection || 'Enhance Your Outdoor Spaces With Excellence!';
+            document.getElementById('toneContent').value = content || 'This section uses a direct, action-oriented tone to motivate users.';
+            document.getElementById('toneType').value = tone || 'Active';
+            document.getElementById('category').value = category || 'Construction Services';
+            document.getElementById('toneDescription').value = description || 'Uses energetic and motivating language to encourage user engagement.';
+
+            // Populate mobile fields
+            document.getElementById('mobile-tone-page').value = page || 'Home';
+            document.getElementById('mobile-tone-section').value = section || 'Section A';
+            document.getElementById('mobile-tone-subsection').value = subsection || 'Enhance Your Outdoor Spaces With Excellence!';
+            document.getElementById('mobile-content').value = content || 'This section uses a direct, action-oriented tone to motivate users.';
+            document.getElementById('mobile-tone-type').value = tone || 'Active';
+            document.getElementById('mobile-category').value = category || 'Construction Services';
+            document.getElementById('mobile-description').value = description || 'Uses energetic and motivating language to encourage user engagement.';
+
+            // Set title
+            document.getElementById('toneDetailsTitle').textContent = `${page || 'Home'} - ${section || 'Section A'}`;
+
+            // Set default dates
+            const today = new Date().toLocaleDateString();
+            document.getElementById('createdDate').value = today;
+            document.getElementById('lastModified').value = today;
+            document.getElementById('status').value = 'Active';
+
+            // Back button functionality
+            document.getElementById('backBtn').addEventListener('click', function() {
+                window.location.href = 'tone-of-communication.html';
+            });
+        });
+    </script>
+    <script>
+// Enable editing on desktop when Edit button is clicked
+    document.addEventListener('DOMContentLoaded', function() {
+        const editBtn = document.getElementById('editBtn');
+        // Dropdown options
+        const categoryOptions = [
+            'Select Category',
+            'Construction Services',
+            'Plumbing Services',
+            'Landscaping & Maintenance',
+            'Maintenance Services',
+            'Electrical Services',
+            'Laundry'
+        ];
+        const toneOptions = [
+            'Professional',
+            'Active',
+            'Casual',
+            'Humor',
+            'Friendly'
+        ];
+        const pageOptions = [
+            'Home',
+            'About',
+            'Package',
+            'Services',
+            'Contact',
+            'Get Quote'
+        ];
+        const sectionOptions = [
+            'Section A', 'Section B', 'Section C', 'Section D', 'Section E', 'Section F', 'Section G', 'Section H', 'Section I', 'Section J', 'Section K', 'Section L'
+        ];
+        // Helper to create select
+        function createSelect(id, options, selectedValue) {
+            const select = document.createElement('select');
+            select.id = id;
+            select.className = 'w-full rounded border border-gray-400 bg-white px-3 py-2 text-base';
+            options.forEach(opt => {
+                const option = document.createElement('option');
+                option.value = opt;
+                option.textContent = opt;
+                if (opt === selectedValue) option.selected = true;
+                select.appendChild(option);
+            });
+            return select;
+        }
+        if (editBtn) {
+            editBtn.addEventListener('click', function() {
+                // Desktop: Replace inputs with selects
+                const desktopFields = [
+                    {id: 'category', options: categoryOptions},
+                    {id: 'toneType', options: toneOptions},
+                    {id: 'tonePage', options: pageOptions},
+                    {id: 'toneSection', options: sectionOptions}
+                ];
+                desktopFields.forEach(f => {
+                    const input = document.getElementById(f.id);
+                    if (input && input.tagName.toLowerCase() === 'input') {
+                        const value = input.value;
+                        const select = createSelect(f.id, f.options, value);
+                        input.parentNode.replaceChild(select, input);
+                    }
+                });
+                // Mobile: Replace inputs with selects
+                const mobileFields = [
+                    {id: 'mobile-category', options: categoryOptions},
+                    {id: 'mobile-tone-type', options: toneOptions},
+                    {id: 'mobile-tone-page', options: pageOptions},
+                    {id: 'mobile-tone-section', options: sectionOptions}
+                ];
+                mobileFields.forEach(f => {
+                    const input = document.getElementById(f.id);
+                    if (input && input.tagName.toLowerCase() === 'input') {
+                        const value = input.value;
+                        const select = createSelect(f.id, f.options, value);
+                        input.parentNode.replaceChild(select, input);
+                    }
+                });
+                // Desktop fields
+                [
+                    'tonePage',
+                    'toneSection',
+                    'toneSubSection',
+                    'toneType',
+                    'category',
+                    'toneContent',
+                    'toneDescription'
+                ].forEach(function(id) {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.removeAttribute('readonly');
+                        el.classList.remove('bg-gray-100');
+                        el.classList.add('bg-white');
+                    }
+                });
+                // Optionally, focus the first field
+                const first = document.getElementById('tonePage');
+                if (first) first.focus();
+                // Enable Save button on mobile
+                const saveBtn = document.getElementById('saveChangesBtn');
+                if (saveBtn) saveBtn.removeAttribute('disabled');
+
+                // Make preview image input visible
+                if (previewImageInput) previewImageInput.classList.remove('hidden');
+                // Make created/last modified/status editable and calendar for dates
+                [createdDate, lastModified].forEach(function(el) {
+                    if (el) {
+                        el.removeAttribute('readonly');
+                        el.classList.remove('bg-gray-100');
+                        el.classList.add('bg-white');
+                        flatpickr(el, {});
+                    }
+                });
+                // Make status editable
+                if (status) {
+                    status.removeAttribute('readonly');
+                    status.classList.remove('bg-gray-100');
+                    status.classList.add('bg-white');
+                }
+            });
+        }
+        // Image preview logic
+        if (previewImageInput) {
+            previewImageInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(ev) {
+                        previewImage.src = ev.target.result;
+                        previewImage.classList.remove('hidden');
+                        previewImageMessage.classList.add('hidden');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>

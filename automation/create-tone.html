@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Create Tone of Communication</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="min-h-screen bg-blue-50">
+    <!-- Header and Navigation -->
+    <div id="header-container"></div>
+    <div id="nav-container"></div>
+    <!-- Main Content -->
+    <main class="w-full px-0 md:px-6 py-8">
+        <div class="hidden md:block mb-6">
+            <div class="flex items-center justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <button id="backBtn" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Create Tone of Communication</h1>
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Left: Tone Form -->
+            <div class="md:col-span-2">
+                <form id="createToneForm" class="bg-white rounded-xl shadow-lg p-6 space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Category <span class="text-red-500">*</span></label>
+                            <select name="category" required class="w-full border border-gray-300 rounded-lg px-4 py-2 text-base font-medium text-gray-800">
+                                <option>Select Category</option>
+                                <option>Construction Services</option>
+                                <option>Plumbing Services</option>
+                                <option>Landscaping & Maintenance</option>
+                                <option>Maintenance Services</option>
+                                <option>Electrical Services</option>
+                                <option>Laundry</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Tone <span class="text-red-500">*</span></label>
+                            <select name="tone" required class="w-full border border-gray-300 rounded-lg px-4 py-2 text-base font-medium text-gray-800">
+                                <option>Professional</option>
+                                <option>Active</option>
+                                <option>Casual</option>
+                                <option>Humor</option>
+                                <option>Friendly</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Page Name <span class="text-red-500">*</span></label>
+                            <select name="page" required class="w-full border border-gray-300 rounded-lg px-4 py-2 text-base font-medium text-gray-800">
+                                <option>Home</option>
+                                <option>About</option>
+                                <option>Package</option>
+                                <option>Services</option>
+                                <option>Contact</option>
+                                <option>Get Quote</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Section <span class="text-red-500">*</span></label>
+                            <select name="section" required class="w-full border border-gray-300 rounded-lg px-4 py-2 text-base font-medium text-gray-800">
+                                <option>Section A</option>
+                                <option>Section B</option>
+                                <option>Section C</option>
+                                <option>Section D</option>
+                                <option>Section E</option>
+                                <option>Section F</option>
+                                <option>Section G</option>
+                                <option>Section H</option>
+                                <option>Section I</option>
+                                <option>Section J</option>
+                                <option>Section K</option>
+                                <option>Section L</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Sub Section <span class="text-red-500">*</span></label>
+                            <input type="text" name="subsection" required placeholder="Sub Section" class="w-full border border-gray-300 rounded-lg px-4 py-2 text-base font-medium text-gray-800" />
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Content <span class="text-red-500">*</span></label>
+                            <textarea name="content" required rows="5" class="w-full border border-gray-300 rounded-lg px-4 py-2 text-base font-medium text-gray-800" placeholder="Content"></textarea>
+                        </div>
+                    </div>
+                    <div class="pt-4 flex justify-start">
+                        <button type="submit" class="px-6 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 font-semibold text-lg flex items-center gap-2">
+                            <i class="fas fa-save"></i> Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <!-- Right: Preview Website Image -->
+            <div class="md:col-span-1">
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <label class="block text-base font-semibold text-gray-700 mb-2">Preview Website Image</label>
+                    <div class="w-full flex items-center justify-center bg-gray-50 rounded-lg border border-gray-200 min-h-[56px]">
+                        <span class="text-gray-500 text-sm">Section A not Available for this page.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="../js/main.js"></script>
+    <script>
+        document.getElementById('backBtn').onclick = function() {
+            window.location.href = 'tone-of-communication.html';
+        };
+    </script>
+</body>
+</html> 

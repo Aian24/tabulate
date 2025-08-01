@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Categories</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+</head>
+<body class="bg-[#f2f8fc] min-h-screen">
+    <div id="header-container"></div>
+    <div id="nav-container"></div>
+    <div class="w-full h-2 bg-transparent"></div>
+    <div class="flex min-h-screen">
+        <!-- Side Navigation -->
+        <aside class="w-64 bg-[#16243a] text-white flex flex-col py-6 px-0 shadow-lg">
+            <div id="settings-nav-container"></div>
+        </aside>
+        <!-- Main Content -->
+        <main class="flex-1 p-0">
+            <div class="bg-white rounded-xl shadow-md p-8 mt-0 mx-8 max-w-full md:mx-8 sm:mx-2">
+                <h1 class="text-2xl font-bold mb-6 text-gray-800">Business Categories</h1>
+                <hr class="mb-6">
+                <form>
+                  <div class="mb-8">
+                    <label class="block text-gray-700 font-semibold mb-2">Landscape</label>
+                    <select id="landscape-select" name="landscape[]" multiple placeholder="No options selected" class="w-full border border-gray-300 rounded-lg px-4 py-2 pr-10 appearance-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                      <option value="all" data-custom-select-all style="color: #2563eb; font-weight: bold;">Select All</option>
+                      <option value="Spring">Spring</option>
+                      <option value="Summer">Summer</option>
+                      <option value="Autumn">Autumn</option>
+                      <option value="Winter">Winter</option>
+                    </select>
+                  </div>
+                  <div class="mb-8">
+                    <label class="block text-gray-700 font-semibold mb-2">Construction</label>
+                    <select id="construction-select" name="construction[]" multiple placeholder="No options selected" class="w-full border border-gray-300 rounded-lg px-4 py-2 pr-10 appearance-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                      <option value="all" data-custom-select-all style="color: #2563eb; font-weight: bold;">Select All</option>
+                      <option value="Spring">Spring</option>
+                      <option value="Summer">Summer</option>
+                      <option value="Autumn">Autumn</option>
+                      <option value="Winter">Winter</option>
+                    </select>
+                  </div>
+                  <div class="mb-8">
+                    <label class="block text-gray-700 font-semibold mb-2">Maintenance</label>
+                    <select id="maintenance-select" name="maintenance[]" multiple placeholder="No options selected" class="w-full border border-gray-300 rounded-lg px-4 py-2 pr-10 appearance-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                      <option value="all" data-custom-select-all style="color: #2563eb; font-weight: bold;">Select All</option>
+                      <option value="Spring">Spring</option>
+                      <option value="Summer">Summer</option>
+                      <option value="Autumn">Autumn</option>
+                      <option value="Winter">Winter</option>
+                    </select>
+                  </div>
+                  <hr class="mb-8">
+                  <div class="flex justify-start gap-4">
+                    <button type="reset" class="px-6 py-2 rounded-lg bg-red-100 text-red-700 font-semibold hover:bg-red-200 flex items-center gap-2">
+                      <i class="fas fa-undo text-red-500"></i> Reset Changes
+                    </button>
+                    <button type="submit" class="px-6 py-2 rounded-lg bg-sky-500 text-white font-semibold hover:bg-sky-600 flex items-center gap-2">
+                      <i class="fas fa-save"></i> Save Changes
+                    </button>
+                  </div>
+                </form>
+            </div>
+        </main>
+    </div>
+    <script src="../js/main.js"></script>
+    <!-- Multi-select plugin JS (placeholder, replace with your preferred plugin) -->
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+    <style>
+      /* Style the Select All option in the dropdown */
+      .choices__list--dropdown .choices__item[data-value="all"] {
+        color: #2563eb !important;
+        font-weight: bold;
+        background: #e0e7ff;
+      }
+      /* Hide Select All from appearing as a selected tag */
+      .choices__list--multiple .choices__item[data-value="all"] {
+        display: none !important;
+      }
+    </style>
+    <script>
+      // Dynamically load the settings navigation and highlight the active tab
+      fetch('../nav/settings-navigation.html')
+        .then(response => response.text())
+        .then(html => {
+          document.getElementById('settings-nav-container').innerHTML = html;
+          // Now run the active tab logic
+          var path = window.location.pathname;
+          var page = path.split("/").pop();
+          document.querySelectorAll('.settings-nav-link').forEach(function(link) {
+            var href = link.getAttribute('href');
+            if (href && href === page) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        });
+
+      // Helper to handle Select All logic for Choices.js
+      function setupSelectAll(choicesInstance, selectElement) {
+        selectElement.addEventListener('change', function(e) {
+          const values = Array.from(selectElement.selectedOptions).map(opt => opt.value);
+          const allOption = selectElement.querySelector('option[value="all"]');
+          const allValues = Array.from(selectElement.options).filter(opt => opt.value !== 'all').map(opt => opt.value);
+          if (values.includes('all')) {
+            // Select all options except 'all'
+            choicesInstance.setChoiceByValue(allValues);
+            // Remove 'Select All' from selected tags
+            setTimeout(() => {
+              choicesInstance.removeActiveItemsByValue('all');
+            }, 0);
+          } else {
+            // If not all options are selected, deselect 'all'
+            if (allOption.selected) {
+              allOption.selected = false;
+              choicesInstance.removeActiveItemsByValue('all');
+            }
+          }
+
+          // Disable 'Select All' if all options are selected, enable otherwise
+          setTimeout(() => {
+            const selected = Array.from(selectElement.selectedOptions).map(opt => opt.value).filter(v => v !== 'all');
+            if (selected.length === allValues.length) {
+              // Disable 'Select All' option in the dropdown
+              const choiceAll = choicesInstance.dropdown.element.querySelector('.choices__item[data-value="all"]');
+              if (choiceAll) {
+                choiceAll.classList.add('is-disabled');
+                choiceAll.setAttribute('aria-disabled', 'true');
+                choiceAll.style.pointerEvents = 'none';
+                choiceAll.style.opacity = '0.5';
+              }
+            } else {
+              // Enable 'Select All' option in the dropdown
+              const choiceAll = choicesInstance.dropdown.element.querySelector('.choices__item[data-value="all"]');
+              if (choiceAll) {
+                choiceAll.classList.remove('is-disabled');
+                choiceAll.removeAttribute('aria-disabled');
+                choiceAll.style.pointerEvents = '';
+                choiceAll.style.opacity = '';
+              }
+            }
+          }, 0);
+        });
+        // Deselect 'Select All' if any option is deselected
+        selectElement.addEventListener('removeItem', function(e) {
+          if (e.detail.value === 'all') {
+            choicesInstance.removeActiveItemsByValue('all');
+          }
+        });
+      }
+
+      // Initialize Choices.js for multi-selects and setup Select All logic
+      const landscapeChoices = new Choices('#landscape-select', { removeItemButton: true, searchEnabled: true, shouldSort: false, placeholder: true });
+      const constructionChoices = new Choices('#construction-select', { removeItemButton: true, searchEnabled: true, shouldSort: false, placeholder: true });
+      const maintenanceChoices = new Choices('#maintenance-select', { removeItemButton: true, searchEnabled: true, shouldSort: false, placeholder: true });
+
+      setupSelectAll(landscapeChoices, document.getElementById('landscape-select'));
+      setupSelectAll(constructionChoices, document.getElementById('construction-select'));
+      setupSelectAll(maintenanceChoices, document.getElementById('maintenance-select'));
+
+      // Custom placeholder logic for multi-selects
+      function addCustomPlaceholder(choicesInstance, placeholderText) {
+        const container = choicesInstance.containerOuter.element;
+        let placeholderSpan = container.querySelector('.custom-placeholder');
+        if (!placeholderSpan) {
+          placeholderSpan = document.createElement('span');
+          placeholderSpan.className = 'custom-placeholder text-gray-400';
+          placeholderSpan.style.marginLeft = '8px';
+          placeholderSpan.style.userSelect = 'none';
+          placeholderSpan.textContent = placeholderText;
+          container.querySelector('.choices__inner').appendChild(placeholderSpan);
+        }
+        function togglePlaceholder() {
+          const values = choicesInstance.getValue(true).filter(v => v !== 'all');
+          placeholderSpan.style.display = values.length === 0 ? 'inline' : 'none';
+        }
+        // Initial state
+        togglePlaceholder();
+        // Listen for changes
+        choicesInstance.passedElement.element.addEventListener('change', togglePlaceholder);
+      }
+      addCustomPlaceholder(landscapeChoices, 'No options selected');
+      addCustomPlaceholder(constructionChoices, 'No options selected');
+      addCustomPlaceholder(maintenanceChoices, 'No options selected');
+
+      // Display selected options or 'No options selected' for each select
+      function updateDisplay(choicesInstance, displayId) {
+        const values = choicesInstance.getValue(true); // array of selected values
+        const filtered = values.filter(v => v !== 'all');
+        const display = document.getElementById(displayId);
+        if (filtered.length === 0) {
+          display.textContent = 'No options selected';
+        } else {
+          display.textContent = 'Selected: ' + filtered.join(', ');
+        }
+      }
+      // Initial update
+      updateDisplay(landscapeChoices, 'landscape-display');
+      updateDisplay(constructionChoices, 'construction-display');
+      updateDisplay(maintenanceChoices, 'maintenance-display');
+      // Listen for changes
+      landscapeChoices.passedElement.element.addEventListener('change', function() {
+        updateDisplay(landscapeChoices, 'landscape-display');
+      });
+      constructionChoices.passedElement.element.addEventListener('change', function() {
+        updateDisplay(constructionChoices, 'construction-display');
+      });
+      maintenanceChoices.passedElement.element.addEventListener('change', function() {
+        updateDisplay(maintenanceChoices, 'maintenance-display');
+      });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Create Expense Category</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/themes/light.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
+    <!-- Header and Navigation -->
+    <div id="header-container"></div>
+    <div id="nav-container"></div>
+    <!-- Main content -->
+    <main class="w-full px-0 md:px-6 py-8">
+        <div class="bg-white rounded-xl shadow p-6">
+            <div class="flex items-center gap-4 mb-6">
+                <button id="backBtn" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Create Expense Category</h1>
+            </div>
+            <form id="createExpenseCategoryForm">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-1">Category</label>
+                        <select id="category" name="category" class="w-full rounded border border-gray-400 bg-white px-3 py-2 text-base">
+                            <option>Construction Services</option>
+                            <option>Plumbing Services</option>
+                            <option>Landscaping & Maintenance</option>
+                            <option>Maintenance Services</option>
+                            <option>Electrical Services</option>
+                            <option>Laundry</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-1">Title</label>
+                        <input id="categoryName" name="categoryName" type="text" class="w-full rounded border border-gray-400 bg-white px-3 py-2 text-base" required />
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-gray-700 font-semibold mb-1">Category Description</label>
+                        <textarea id="categoryDescription" name="categoryDescription" class="w-full rounded border border-gray-400 bg-white px-3 py-2 text-base" rows="3" required></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-1">Status</label>
+                        <select id="status" name="status" class="w-full rounded border border-gray-400 bg-white px-3 py-2 text-base">
+                            <option>Select Status</option>
+                            <option>Active</option>
+                            <option>Disabled</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- Custom Form Section (full width, below details) -->
+                <div class="mt-8">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-semibold text-gray-700">Custom Form</span>
+                        <div class="flex gap-2">
+                            <button id="previewCustomForm" type="button" class="px-3 py-1 bg-indigo-500 text-white rounded hover:bg-indigo-600 text-sm"><i class="fas fa-eye mr-1"></i>Preview</button>
+                            <button id="addCustomFieldBtn" type="button" class="px-3 py-1 bg-purple-500 text-white rounded hover:bg-purple-600 text-sm"><i class="fas fa-plus mr-1"></i>Add Fields</button>
+                        </div>
+                    </div>
+                    <div id="customFieldsContainer"></div>
+                </div>
+                <div class="mt-6 flex justify-start">
+                    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center gap-2 text-sm">
+                        <i class="fas fa-save"></i> Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <script>
+        function initCreateExpenseCategory() {
+            // Custom Fields Logic
+            const addBtn = document.getElementById('addCustomFieldBtn');
+            const container = document.getElementById('customFieldsContainer');
+            let fieldCount = 0;
+            function createFieldBlock(id) {
+                return `
+                <div class="mb-4 border rounded bg-blue-50">
+                    <div class="flex justify-between items-center px-4 py-2 bg-blue-100 rounded-t">
+                        <span class="font-semibold">New Fields</span>
+                        <button type="button" class="toggle-collapse" data-id="${id}"><i class="fas fa-chevron-up"></i></button>
+                    </div>
+                    <div class="p-4 field-body" id="field-body-${id}">
+                        <div class="mb-3">
+                            <label class="block text-gray-700 text-sm mb-1">Input Column Width</label>
+                            <select class="w-full border rounded px-2 py-1" name="inputWidth">
+                                <option>25% width of the row (4 columns per row)</option>
+                                <option>33% width of the row (3 columns per row)</option>
+                                <option>50% width of the row (2 columns per row)</option>
+                                <option>100% width of the row (1 column per row)</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="block text-gray-700 text-sm mb-1">Field Name</label>
+                            <input type="text" class="w-full border rounded px-2 py-1" placeholder="Enter field name" name="fieldName" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="block text-gray-700 text-sm mb-1">Field Type</label>
+                            <select class="w-full border rounded px-2 py-1" name="fieldType">
+                                <option>Text Box</option>
+                                <option>Dropdown</option>
+                                <option>Checkbox</option>
+                                <option>Date Picker</option>
+                            </select>
+                        </div>
+                        <button type="button" class="bg-red-500 text-white px-4 py-2 rounded mt-2 remove-field-btn" data-id="${id}"><i class='fas fa-trash-alt mr-1'></i>Remove Field</button>
+                    </div>
+                </div>
+                `;
+            }
+            addBtn.addEventListener('click', function() {
+                fieldCount++;
+                const id = `field${fieldCount}`;
+                container.insertAdjacentHTML('beforeend', createFieldBlock(id));
+            });
+            container.addEventListener('click', function(e) {
+                if (e.target.classList.contains('remove-field-btn')) {
+                    const id = e.target.getAttribute('data-id');
+                    const block = e.target.closest('.mb-4');
+                    if (block) block.remove();
+                }
+                if (e.target.classList.contains('toggle-collapse')) {
+                    const id = e.target.getAttribute('data-id');
+                    const body = document.getElementById(`field-body-${id}`);
+                    if (body) {
+                        body.classList.toggle('hidden');
+                        e.target.querySelector('i').classList.toggle('fa-chevron-up');
+                        e.target.querySelector('i').classList.toggle('fa-chevron-down');
+                    }
+                }
+            });
+            // Back button
+            var backBtn = document.getElementById('backBtn');
+            if (backBtn) {
+                backBtn.addEventListener('click', function() {
+                    window.location.href = 'expense-categories.html';
+                });
+            }
+            // Form submit
+            document.getElementById('createExpenseCategoryForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                // You can handle form submission here
+                alert('Expense category created!');
+            });
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            let loaded = 0;
+            function tryInit() {
+                loaded++;
+                if (loaded === 2) {
+                    initCreateExpenseCategory();
+                }
+            }
+            fetch('../nav/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                    tryInit();
+                });
+            fetch('../nav/navigation.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('nav-container').innerHTML = data;
+                    tryInit();
+                });
+        });
+    </script>
+</body>
+</html> 

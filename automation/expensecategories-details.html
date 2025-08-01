@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Expense Category Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/themes/light.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
+    <!-- Header and Navigation -->
+    <div id="header-container"></div>
+    <div id="nav-container"></div>
+
+    <!-- Main content -->
+    <main class="w-full px-0 md:px-6 py-8">
+        <!-- Desktop Header -->
+        <div class="hidden md:block mb-6">
+            <div class="flex items-center justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <button id="backBtn" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2 transition">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <h1 id="detailsTitle" class="text-2xl md:text-3xl font-bold text-gray-800">Expense Category Details</h1>
+                </div>
+                <div class="relative">
+                    <button id="moreBtn" type="button" class="inline-flex justify-center rounded border shadow-sm px-6 py-2 text-sm font-medium text-white transition-colors bg-blue-600 hover:bg-blue-700">
+                        More <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                    </button>
+                    <div id="moreDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
+                        <a href="#" class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 transition"><i class="fas fa-cog mr-3 text-gray-500"></i> Settings</a>
+                        <a href="#" class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 transition"><i class="fas fa-file-alt mr-3 text-gray-500"></i> Report</a>
+                        <a href="#" class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 transition"><i class="fas fa-history mr-3 text-gray-500"></i> Audit Trail</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Header -->
+        <div class="block md:hidden mb-4 px-4">
+            <div class="flex justify-between items-center">
+                <a href="expense-categories.html" class="text-gray-600 flex items-center">
+                    <i class="fas fa-chevron-left text-lg"></i>
+                    <span class="ml-2 font-semibold">Back</span>
+                </a>
+                <div class="relative inline-block text-left">
+                    <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700" id="mobile-menu-button" aria-expanded="false" aria-haspopup="true">
+                        More
+                        <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desktop Layout -->
+        <div class="hidden md:block">
+            <div class="flex flex-col md:flex-row gap-6">
+                <!-- Left: Details -->
+                <div class="flex-1 bg-white rounded-xl shadow p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-1">Category</label>
+                            <select id="category" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" disabled>
+                                <option>Construction Services</option>
+                                <option>Plumbing Services</option>
+                                <option>Landscaping & Maintenance</option>
+                                <option>Maintenance Services</option>
+                                <option>Electrical Services</option>
+                                <option>Laundry</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-1">Title</label>
+                            <input id="categoryName" type="text" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" readonly />
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-gray-700 font-semibold mb-1">Category Description</label>
+                            <textarea id="categoryDescription" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" rows="3" readonly></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-1">Status</label>
+                            <select id="status" class="w-full rounded border border-gray-400 bg-gray-100 px-3 py-2 text-base" disabled>
+                                <option>Select Status</option>
+                                <option>Active</option>
+                                <option>Disabled</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mt-2 flex justify-start">
+                        <!-- Edit/Submit button moved below custom fields -->
+                    </div>
+
+                    <!-- Custom Form Section -->
+                    <div class="mt-8">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-semibold text-gray-700">Custom Form</span>
+                            <div class="flex gap-2">
+                                <button id="previewCustomForm" class="px-3 py-1 bg-indigo-500 text-white rounded hover:bg-indigo-600 text-sm"><i class="fas fa-eye mr-1"></i>Preview</button>
+                                <button id="addCustomFieldBtn" class="px-3 py-1 bg-purple-500 text-white rounded hover:bg-purple-600 text-sm"><i class="fas fa-plus mr-1"></i>Add Fields</button>
+                            </div>
+                        </div>
+                        <div id="customFieldsContainer"></div>
+                        <div class="mt-6 flex gap-2 justify-start">
+                            <button id="editSubmitBtn" class="px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center gap-2 text-sm">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button id="cancelEditBtn" class="px-4 py-2 bg-red-500 text-white rounded shadow hover:bg-red-600 flex items-center gap-2 text-sm hidden">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Layout -->
+        <div class="block md:hidden px-4">
+            <!-- Information Section -->
+            <form id="mobile-form" class="bg-white border-2 border-blue-200 rounded-xl shadow mb-6 max-w-2xl mx-auto flex flex-col">
+                <div class="px-4 pt-3 pb-2 border-b border-blue-100 bg-blue-50 rounded-t-xl">
+                    <span class="text-blue-700 font-semibold text-base">Edit Expense Category</span>
+                </div>
+                <div class="p-4 grid grid-cols-1 gap-4">
+                    <div>
+                        <label class="block text-gray-500 text-xs mb-1" for="mobile-category">Category</label>
+                        <select id="mobile-category" name="category" class="w-full border border-gray-300 rounded px-2 py-2 text-base mb-2 bg-white" disabled>
+                            <option>Construction Services</option>
+                            <option>Plumbing Services</option>
+                            <option>Landscaping & Maintenance</option>
+                            <option>Maintenance Services</option>
+                            <option>Electrical Services</option>
+                            <option>Laundry</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-500 text-xs mb-1" for="mobile-categoryName">Title</label>
+                        <input id="mobile-categoryName" name="categoryName" type="text" class="w-full border border-gray-300 rounded px-2 py-2 text-base mb-2 bg-white" />
+                    </div>
+                    <div>
+                        <label class="block text-gray-500 text-xs mb-1" for="mobile-categoryDescription">Category Description</label>
+                        <textarea id="mobile-categoryDescription" name="categoryDescription" rows="3" class="w-full border border-gray-300 rounded px-2 py-2 text-base mb-2 bg-white"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-gray-500 text-xs mb-1" for="mobile-status">Status</label>
+                        <select id="mobile-status" name="status" class="w-full border border-gray-300 rounded px-2 py-2 text-base mb-2 bg-white" disabled>
+                            <option>Select Status</option>
+                            <option>Active</option>
+                            <option>Disabled</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-3 px-4 pb-6">
+                    <button id="saveChangesBtn" type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg shadow transition disabled:opacity-60 disabled:cursor-not-allowed" disabled>Save Changes</button>
+                    <button type="button" onclick="window.location.href='expense-categories.html'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 rounded-lg shadow transition">Cancel</button>
+                </div>
+            </form>
+            <div id="saveNotification" class="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-green-500 text-white px-6 py-3 rounded-xl shadow-lg z-50 hidden text-center font-semibold">Changes saved!</div>
+        </div>
+    </main>
+    <script>
+        function initExpenseCategoryDetails() {
+            const moreBtn = document.getElementById('moreBtn');
+            const moreDropdown = document.getElementById('moreDropdown');
+            document.addEventListener('click', function(event) {
+                if (moreBtn && moreDropdown) {
+                    if (moreBtn.contains(event.target)) {
+                        moreDropdown.classList.toggle('hidden');
+                    } else if (!moreDropdown.contains(event.target)) {
+                        moreDropdown.classList.add('hidden');
+                    }
+                }
+            });
+
+            // Get data from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category');
+            const categoryName = urlParams.get('categoryName');
+            const categoryDescription = urlParams.get('categoryDescription');
+            const status = urlParams.get('status');
+
+            // Populate fields
+            function setSelectValue(selectId, value) {
+                const select = document.getElementById(selectId);
+                if (select) {
+                    for (let i = 0; i < select.options.length; i++) {
+                        if (select.options[i].value === value) {
+                            select.selectedIndex = i;
+                            break;
+                        }
+                    }
+                }
+            }
+            // Example data defaults
+            const exampleCategory = 'Construction Services';
+            const exampleTitle = 'Materials';
+            const exampleDescription = 'Materials';
+            const exampleStatus = 'Active';
+            setSelectValue('category', category || exampleCategory);
+            const catName = document.getElementById('categoryName');
+            if (catName) catName.value = categoryName || exampleTitle;
+            const catDesc = document.getElementById('categoryDescription');
+            if (catDesc) catDesc.value = categoryDescription || exampleDescription;
+            setSelectValue('status', status || exampleStatus);
+            // Populate mobile fields
+            setSelectValue('mobile-category', category || exampleCategory);
+            const mobCatName = document.getElementById('mobile-categoryName');
+            if (mobCatName) mobCatName.value = categoryName || exampleTitle;
+            const mobCatDesc = document.getElementById('mobile-categoryDescription');
+            if (mobCatDesc) mobCatDesc.value = categoryDescription || exampleDescription;
+            setSelectValue('mobile-status', status || exampleStatus);
+
+            // Set title
+            const detailsTitle = document.getElementById('detailsTitle');
+            if (detailsTitle) detailsTitle.textContent = `${categoryName || 'Expense Category Details'}`;
+
+            // Back button functionality
+            var backBtn = document.getElementById('backBtn');
+            if (backBtn) {
+                backBtn.addEventListener('click', function() {
+                    window.location.href = 'expense-categories.html';
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            let loaded = 0;
+            function tryInit() {
+                loaded++;
+                if (loaded === 2) {
+                    initExpenseCategoryDetails();
+                }
+            }
+            fetch('../nav/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                    tryInit();
+                });
+            fetch('../nav/navigation.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('nav-container').innerHTML = data;
+                    tryInit();
+                });
+        });
+    </script>
+    <script src="../js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const editSubmitBtn = document.getElementById('editSubmitBtn');
+            const cancelEditBtn = document.getElementById('cancelEditBtn');
+            let editMode = false;
+            let originalValues = {};
+            function storeOriginalValues() {
+                originalValues = {
+                    categoryName: document.getElementById('categoryName').value,
+                    categoryDescription: document.getElementById('categoryDescription').value,
+                    category: document.getElementById('category').value,
+                    status: document.getElementById('status').value
+                };
+            }
+            function restoreOriginalValues() {
+                document.getElementById('categoryName').value = originalValues.categoryName;
+                document.getElementById('categoryDescription').value = originalValues.categoryDescription;
+                document.getElementById('category').value = originalValues.category;
+                document.getElementById('status').value = originalValues.status;
+            }
+            editSubmitBtn.addEventListener('click', function() {
+                if (!editMode) {
+                    // Switch to edit mode
+                    editMode = true;
+                    editSubmitBtn.innerHTML = '<i class="fas fa-save"></i> Submit';
+                    cancelEditBtn.classList.remove('hidden');
+                    storeOriginalValues();
+                    // Make all fields editable
+                    ['categoryName', 'categoryDescription'].forEach(function(id) {
+                        const el = document.getElementById(id);
+                        if (el) {
+                            el.removeAttribute('readonly');
+                            el.classList.remove('bg-gray-100');
+                            el.classList.add('bg-white');
+                        }
+                    });
+                    // Enable selects
+                    ['category', 'status'].forEach(function(id) {
+                        const el = document.getElementById(id);
+                        if (el) {
+                            el.removeAttribute('disabled');
+                            el.classList.remove('bg-gray-100');
+                            el.classList.add('bg-white');
+                        }
+                    });
+                    // Optionally, focus the first field
+                    const first = document.getElementById('categoryName');
+                    if (first) first.focus();
+                    // Enable Save button on mobile
+                    const saveBtn = document.getElementById('saveChangesBtn');
+                    if (saveBtn) saveBtn.removeAttribute('disabled');
+                } else {
+                    // Submit logic here (for now, just switch back to view mode)
+                    editMode = false;
+                    editSubmitBtn.innerHTML = '<i class="fas fa-edit"></i> Edit';
+                    cancelEditBtn.classList.add('hidden');
+                    // Make all fields readonly/disabled again
+                    ['categoryName', 'categoryDescription'].forEach(function(id) {
+                        const el = document.getElementById(id);
+                        if (el) {
+                            el.setAttribute('readonly', 'readonly');
+                            el.classList.remove('bg-white');
+                            el.classList.add('bg-gray-100');
+                        }
+                    });
+                    ['category', 'status'].forEach(function(id) {
+                        const el = document.getElementById(id);
+                        if (el) {
+                            el.setAttribute('disabled', 'disabled');
+                            el.classList.remove('bg-white');
+                            el.classList.add('bg-gray-100');
+                        }
+                    });
+                    // Optionally, show a notification or handle form submission here
+                }
+            });
+            cancelEditBtn.addEventListener('click', function() {
+                editMode = false;
+                editSubmitBtn.innerHTML = '<i class="fas fa-edit"></i> Edit';
+                cancelEditBtn.classList.add('hidden');
+                restoreOriginalValues();
+                // Make all fields readonly/disabled again
+                ['categoryName', 'categoryDescription'].forEach(function(id) {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.setAttribute('readonly', 'readonly');
+                        el.classList.remove('bg-white');
+                        el.classList.add('bg-gray-100');
+                    }
+                });
+                ['category', 'status'].forEach(function(id) {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.setAttribute('disabled', 'disabled');
+                        el.classList.remove('bg-white');
+                        el.classList.add('bg-gray-100');
+                    }
+                });
+                // Optionally, disable Save button on mobile
+                const saveBtn = document.getElementById('saveChangesBtn');
+                if (saveBtn) saveBtn.setAttribute('disabled', 'disabled');
+            });
+        });
+    </script>
+    <script>
+    // Custom Fields Logic
+    document.addEventListener('DOMContentLoaded', function() {
+        const addBtn = document.getElementById('addCustomFieldBtn');
+        const container = document.getElementById('customFieldsContainer');
+        let fieldCount = 0;
+
+        function createFieldBlock(id) {
+            return `
+            <div class="mb-4 border rounded bg-blue-50">
+                <div class="flex justify-between items-center px-4 py-2 bg-blue-100 rounded-t">
+                    <span class="font-semibold">New Fields</span>
+                    <button type="button" class="toggle-collapse" data-id="${id}"><i class="fas fa-chevron-up"></i></button>
+                </div>
+                <div class="p-4 field-body" id="field-body-${id}">
+                    <div class="mb-3">
+                        <label class="block text-gray-700 text-sm mb-1">Input Column Width</label>
+                        <select class="w-full border rounded px-2 py-1" name="inputWidth">
+                            <option>25% width of the row (4 columns per row)</option>
+                            <option>33% width of the row (3 columns per row)</option>
+                            <option>50% width of the row (2 columns per row)</option>
+                            <option>100% width of the row (1 column per row)</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="block text-gray-700 text-sm mb-1">Field Name</label>
+                        <input type="text" class="w-full border rounded px-2 py-1" placeholder="Enter field name" name="fieldName" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="block text-gray-700 text-sm mb-1">Field Type</label>
+                        <select class="w-full border rounded px-2 py-1" name="fieldType">
+                            <option>Text Box</option>
+                            <option>Dropdown</option>
+                            <option>Checkbox</option>
+                            <option>Date Picker</option>
+                        </select>
+                    </div>
+                    <button type="button" class="bg-red-500 text-white px-4 py-2 rounded mt-2 remove-field-btn" data-id="${id}"><i class='fas fa-trash-alt mr-1'></i>Remove Field</button>
+                </div>
+            </div>
+            `;
+        }
+
+        addBtn.addEventListener('click', function() {
+            fieldCount++;
+            const id = `field${fieldCount}`;
+            container.insertAdjacentHTML('beforeend', createFieldBlock(id));
+        });
+
+        container.addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-field-btn')) {
+                const id = e.target.getAttribute('data-id');
+                const block = e.target.closest('.mb-4');
+                if (block) block.remove();
+            }
+            if (e.target.classList.contains('toggle-collapse')) {
+                const id = e.target.getAttribute('data-id');
+                const body = document.getElementById(`field-body-${id}`);
+                if (body) {
+                    body.classList.toggle('hidden');
+                    e.target.querySelector('i').classList.toggle('fa-chevron-up');
+                    e.target.querySelector('i').classList.toggle('fa-chevron-down');
+                }
+            }
+        });
+    });
+    </script>
+</body>
+</html> 

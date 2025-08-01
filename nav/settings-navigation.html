@@ -1,0 +1,38 @@
+<!-- Settings Side Navigation -->
+<aside class="w-64 bg-[#16243a] text-white flex flex-col py-0 px-0 shadow-lg min-h-screen">
+
+    <nav class="flex-1">
+        <ul class="space-y-4"> <!-- Increased spacing between nav items -->
+            <!-- Add 'active' class to the current tab. Add .settings-nav-link and arrow indicator. -->
+            <li><a href="companyinfo.html" class="settings-nav-link active flex items-center px-6 py-3 hover:bg-[#223355] rounded-r-full font-medium"><span class="arrow-indicator"></span><i class="fas fa-building mr-3"></i> Company Information</a></li>
+            <li><a href="employeepositions.html" class="settings-nav-link flex items-center px-6 py-3 hover:bg-[#223355] rounded-r-full font-medium"><span class="arrow-indicator"></span><i class="fas fa-user-tie mr-3"></i> Employee Positions</a></li>
+            <li><a href="preferences.html" class="settings-nav-link flex items-center px-6 py-3 hover:bg-[#223355] rounded-r-full font-medium"><span class="arrow-indicator"></span><i class="fas fa-sliders-h mr-3"></i> Preferences</a></li>
+            <li><a href="payment.html" class="settings-nav-link flex items-center px-6 py-3 hover:bg-[#223355] rounded-r-full font-medium"><span class="arrow-indicator"></span><i class="fas fa-credit-card mr-3"></i> Payment</a></li>
+            <li><a href="tone.html" class="settings-nav-link flex items-center px-6 py-3 hover:bg-[#223355] rounded-r-full font-medium"><span class="arrow-indicator"></span><i class="fas fa-palette mr-3"></i> Tone</a></li>
+            <li><a href="businesscategories.html" class="settings-nav-link flex items-center px-6 py-3 hover:bg-[#223355] rounded-r-full font-medium"><span class="arrow-indicator"></span><i class="fas fa-layer-group mr-3"></i> Business Categories</a></li>
+            <li><a href="seasonalavailability.html" class="settings-nav-link flex items-center px-6 py-3 hover:bg-[#223355] rounded-r-full font-medium"><span class="arrow-indicator"></span><i class="fas fa-calendar-alt mr-3"></i> Seasonal Availability</a></li>
+            <li><a href="terms.html" class="settings-nav-link flex items-center px-6 py-3 hover:bg-[#223355] rounded-r-full font-medium"><span class="arrow-indicator"></span><i class="fas fa-file-contract mr-3"></i> Terms and Conditions</a></li>
+            <li><a href="customfields.html" class="settings-nav-link flex items-center px-6 py-3 hover:bg-[#223355] rounded-r-full font-medium"><span class="arrow-indicator"></span><i class="fas fa-cogs mr-3"></i> Custom Fields</a></li>
+            <li><a href="socialmedia.html" class="settings-nav-link flex items-center px-6 py-3 hover:bg-[#223355] rounded-r-full font-medium"><span class="arrow-indicator"></span><i class="fas fa-share-alt mr-3"></i> Social Media</a></li>
+            <li><a href="payroll.html" class="settings-nav-link flex items-center px-6 py-3 hover:bg-[#223355] rounded-r-full font-medium"><span class="arrow-indicator"></span><i class="fas fa-money-check-alt mr-3"></i> Payroll</a></li>
+        </ul>
+    </nav>
+</aside> 
+<script>
+// Dynamically highlight the active tab in the settings sidebar
+(function() {
+  // Get current file name (e.g., 'employeepositions.html')
+  var path = window.location.pathname;
+  var page = path.split("/").pop();
+  // Loop through all sidebar links
+  document.querySelectorAll('.settings-nav-link').forEach(function(link) {
+    var href = link.getAttribute('href');
+    // Only match if href is not '#' and matches the end of the path
+    if (href && href !== '#' && path.endsWith(href)) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+})();
+</script> 

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preferences</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link href="https://unpkg.com/tippy.js@6/dist/tippy.css" rel="stylesheet"/>
+</head>
+<body class="bg-[#f2f8fc] min-h-screen">
+    <div id="header-container"></div>
+    <div id="nav-container"></div>
+    <div class="w-full h-2 bg-transparent"></div>
+    <div class="flex min-h-screen">
+        <!-- Side Navigation -->
+        <aside class="w-64 bg-[#16243a] text-white flex flex-col py-6 px-0 shadow-lg">
+            <div id="settings-nav-container"></div>
+        </aside>
+        <!-- Main Content -->
+        <main class="flex-1 p-0">
+            <div class="bg-white rounded-xl shadow-md p-8 mt-0 mx-8 max-w-full md:mx-8 sm:mx-2">
+                <h1 class="text-2xl font-bold mb-6 text-gray-800">Preferences</h1>
+                <form>
+                  <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                    <div>
+                      <label class="block text-gray-700 font-medium mb-2">Date Format</label>
+                      <div class="relative">
+                        <select class="w-full border border-gray-300 rounded-lg px-4 py-2 appearance-none">
+                          <option value="Month Day, Year" selected>Month Day, Year (November 14, 2024)</option>
+                          <option value="Day Month Year">Day Month Year (14 November 2024)</option>
+                          <option value="YYYY-MM-DD">YYYY-MM-DD (2024-11-14)</option>
+                          <option value="MM/DD/YYYY">MM/DD/YYYY (11/14/2024)</option>
+                          <option value="DD/MM/YYYY">DD/MM/YYYY (14/11/2024)</option>
+                        </select>
+                        <span class="pointer-events-none absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"><i class="fas fa-chevron-down"></i></span>
+                      </div>
+                    </div>
+                    <div>
+                      <label class="block text-gray-700 font-medium mb-2">Time Format</label>
+                      <div class="relative">
+                        <select class="w-full border border-gray-300 rounded-lg px-4 py-2 appearance-none">
+                          <option value="12-hour" selected>12-hour (HH:MM:SS AM/PM)</option>
+                          <option value="24-hour">24-hour (HH:MM:SS)</option>
+                        </select>
+                        <span class="pointer-events-none absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"><i class="fas fa-chevron-down"></i></span>
+                      </div>
+                    </div>
+                    <div>
+                      <label class="block text-gray-700 font-medium mb-2">Time Zone</label>
+                      <div class="relative">
+                        <select class="w-full border border-gray-300 rounded-lg px-4 py-2 appearance-none">
+                          <option value="UTC">UTC</option>
+                          <option value="EST" selected>EST</option>
+                          <option value="CST">CST</option>
+                          <option value="MST">MST</option>
+                          <option value="PST">PST</option>
+                        </select>
+                        <span class="pointer-events-none absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"><i class="fas fa-chevron-down"></i></span>
+                      </div>
+                    </div>
+                    <div>
+                      <label class="block text-gray-700 font-medium mb-2">Language</label>
+                      <div class="relative">
+                        <select class="w-full border border-gray-300 rounded-lg px-4 py-2 appearance-none">
+                          <option value="Afrikaans" selected>Afrikaans</option>
+                          <option value="English">English</option>
+                          <option value="Spanish">Spanish</option>
+                          <option value="French">French</option>
+                          <option value="German">German</option>
+                          <option value="Chinese">Chinese</option>
+                          <option value="Hindi">Hindi</option>
+                          <option value="Arabic">Arabic</option>
+                        </select>
+                        <span class="pointer-events-none absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"><i class="fas fa-chevron-down"></i></span>
+                      </div>
+                    </div>
+                    <div>
+                      <label class="block text-gray-700 font-medium mb-2">Default Country</label>
+                      <div class="relative">
+                        <select class="w-full border border-gray-300 rounded-lg px-4 py-2 appearance-none">
+                          <option value="United States" selected>United States</option>
+                          <option value="Canada">Canada</option>
+                          <option value="United Kingdom">United Kingdom</option>
+                          <option value="Australia">Australia</option>
+                          <option value="South Africa">South Africa</option>
+                          <option value="India">India</option>
+                          <option value="Philippines">Philippines</option>
+                          <option value="Other">Other</option>
+                        </select>
+                        <span class="pointer-events-none absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"><i class="fas fa-chevron-down"></i></span>
+                      </div>
+                    </div>
+                    <div>
+                      <label class="block text-gray-700 font-medium mb-2">Business Hours (Start)</label>
+                      <div class="relative">
+                        <select class="w-full border border-gray-300 rounded-lg px-4 py-2 appearance-none">
+                          <option value="12 AM">12 AM</option>
+                          <option value="1 AM" selected>1 AM</option>
+                          <option value="2 AM">2 AM</option>
+                          <option value="3 AM">3 AM</option>
+                          <option value="4 AM">4 AM</option>
+                          <option value="5 AM">5 AM</option>
+                          <option value="6 AM">6 AM</option>
+                          <option value="7 AM">7 AM</option>
+                          <option value="8 AM">8 AM</option>
+                          <option value="9 AM">9 AM</option>
+                          <option value="10 AM">10 AM</option>
+                          <option value="11 AM">11 AM</option>
+                        </select>
+                        <span class="pointer-events-none absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"><i class="fas fa-chevron-down"></i></span>
+                      </div>
+                    </div>
+                    <div>
+                      <label class="block text-gray-700 font-medium mb-2">Business Hours (End)</label>
+                      <div class="relative">
+                        <select class="w-full border border-gray-300 rounded-lg px-4 py-2 appearance-none">
+                          <option value="12 PM">12 PM</option>
+                          <option value="1 PM" selected>1 PM</option>
+                          <option value="2 PM">2 PM</option>
+                          <option value="3 PM">3 PM</option>
+                          <option value="4 PM">4 PM</option>
+                          <option value="5 PM">5 PM</option>
+                          <option value="6 PM">6 PM</option>
+                          <option value="7 PM">7 PM</option>
+                          <option value="8 PM">8 PM</option>
+                          <option value="9 PM">9 PM</option>
+                          <option value="10 PM">10 PM</option>
+                          <option value="11 PM">11 PM</option>
+                        </select>
+                        <span class="pointer-events-none absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"><i class="fas fa-chevron-down"></i></span>
+                      </div>
+                    </div>
+                    <div class="md:col-span-2">
+                      <label class="block text-gray-700 font-medium mb-2">Business Days</label>
+                      <div class="flex gap-4">
+                        <div class="relative w-full">
+                          <select class="w-full border border-gray-300 rounded-lg px-4 py-2 appearance-none">
+                            <option value="Monday" selected>Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday">Saturday</option>
+                            <option value="Sunday">Sunday</option>
+                          </select>
+                          <span class="pointer-events-none absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="relative w-full">
+                          <select class="w-full border border-gray-300 rounded-lg px-4 py-2 appearance-none">
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday" selected>Saturday</option>
+                            <option value="Sunday">Sunday</option>
+                          </select>
+                          <span class="pointer-events-none absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div>
+                      <label class="block text-gray-700 font-medium mb-2">Default Currency</label>
+                      <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-2 mb-4" value="$" placeholder="Default Currency">
+                    </div>
+                    <div>
+                      <label class="block text-gray-700 font-medium mb-2">Tax Settings</label>
+                      <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-2 mb-4" value="1" placeholder="Tax Settings">
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div>
+                      <label class="block text-gray-700 font-medium mb-2">Email Notification</label>
+                      <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-2 mb-4" value="0" placeholder="Email Notification">
+                    </div>
+                    <div>
+                      <label class="block text-gray-700 font-medium mb-2">Task and Event Reminders</label>
+                      <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-2 mb-4" value="0" placeholder="Task and Event Reminders">
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div>
+                      <label class="block text-gray-700 font-medium mb-2">Two-Factor Authentication (2FA)</label>
+                      <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-2 mb-4" value="0" placeholder="2FA">
+                    </div>
+                    <div>
+                      <label class="block text-gray-700 font-medium mb-2">Database Backup</label>
+                      <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-2 mb-4" value="0" placeholder="Database Backup">
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div>
+                      <label class="block text-gray-700 font-medium mb-2">Invoice Due Date Default</label>
+                      <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-2 mb-4" value="7" placeholder="Invoice Due Date Default">
+                    </div>
+                    <div>
+                      <label class="block text-gray-700 font-medium mb-2">Terms</label>
+                      <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-2 mb-4" value="1" placeholder="Terms">
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                    <div>
+                      <label class="block text-gray-700 font-medium mb-2">Leader Rate</label>
+                      <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-2 mb-4" value="1.00" placeholder="Leader Rate">
+                    </div>
+                    <div>
+                      <label class="block text-gray-700 font-medium mb-2">Labor Rate</label>
+                      <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-2 mb-4" value="1.00" placeholder="Labor Rate">
+                    </div>
+                    <div>
+                      <label class="block text-gray-700 font-medium mb-2">Track Driver</label>
+                      <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-2 mb-4" value="1.00" placeholder="Track Driver">
+                    </div>
+                  </div>
+                  <div class="mt-6">
+                    <label class="block text-gray-700 font-medium mb-2">Tax Rate</label>
+                    <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-2 mb-4" value="1.0" placeholder="Tax Rate">
+                  </div>
+                  <div class="flex justify-start mt-8 gap-4">
+                    <button type="reset" class="px-6 py-2 rounded-lg bg-red-100 text-red-700 font-semibold hover:bg-red-200 flex items-center gap-2">
+                      <i class="fas fa-undo text-red-500"></i> Reset Changes
+                    </button>
+                    <button type="submit" class="px-6 py-2 rounded-lg bg-sky-500 text-white font-semibold hover:bg-sky-600 flex items-center gap-2">
+                      <i class="fas fa-save"></i> Save Changes
+                    </button>
+                  </div>
+                </form>
+            </div>
+        </main>
+    </div>
+    <script src="../js/main.js"></script>
+    <script>
+      // Dynamically load the settings navigation and highlight the active tab
+      fetch('../nav/settings-navigation.html')
+        .then(response => response.text())
+        .then(html => {
+          document.getElementById('settings-nav-container').innerHTML = html;
+          // Now run the active tab logic
+          var path = window.location.pathname;
+          var page = path.split("/").pop();
+          document.querySelectorAll('.settings-nav-link').forEach(function(link) {
+            var href = link.getAttribute('href');
+            if (href && href === page) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        });
+    </script>
+</body>
+</html> 

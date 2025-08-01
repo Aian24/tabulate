@@ -138,115 +138,17 @@
                             <th class="px-6 py-4 text-left text-sm font-semibold">Prices</th>
                             <th class="px-6 py-4 text-left text-sm font-semibold">Status</th>
                             <th class="px-6 py-4 text-left text-sm font-semibold">Created Date</th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold">Actions</th>
                         </tr>
                     </thead>
                     <tbody id="products-table-body" class="divide-y divide-gray-100">
                         <!-- Sample product data -->
-                        <tr data-product-name="Plant Cutters 1.">
+                        <tr>
                             <td class="px-6 py-4"><input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"></td>
                             <td class="px-6 py-4 text-sm text-gray-900">Plant Cutters 1.</td>
                             <td class="px-6 py-4 text-sm text-gray-900">Global</td>
                             <td class="px-6 py-4 text-sm text-gray-900">$97.34</td>
                             <td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Active</span></td>
                             <td class="px-6 py-4 text-sm text-gray-900">June 27, 2025</td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-2">
-                                    <button onclick="window.location.href='products-details.html';" class="text-yellow-600 hover:text-yellow-700 transition-colors" title="Edit">
-                                        <i class="fas fa-pen"></i>
-                                    </button>
-                                    <button onclick="window.location.href='create-invoice.html';" class="text-blue-600 hover:text-blue-700 transition-colors" title="Invoice">
-                                        <i class="fas fa-file-invoice"></i>
-                                    </button>
-                                    <button onclick="openDeleteModal('Plant Cutters 1.', this)" class="text-red-600 hover:text-red-700 transition-colors" title="Delete">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr data-product-name="Garden Shears">
-                            <td class="px-6 py-4"><input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"></td>
-                            <td class="px-6 py-4 text-sm text-gray-900">Garden Shears</td>
-                            <td class="px-6 py-4 text-sm text-gray-900">Ace Hardware</td>
-                            <td class="px-6 py-4 text-sm text-gray-900">$45.99</td>
-                            <td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Active</span></td>
-                            <td class="px-6 py-4 text-sm text-gray-900">June 25, 2025</td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-2">
-                                    <button onclick="window.location.href='products-details.html';" class="text-yellow-600 hover:text-yellow-700 transition-colors" title="Edit">
-                                        <i class="fas fa-pen"></i>
-                                    </button>
-                                    <button onclick="window.location.href='create-invoice.html';" class="text-blue-600 hover:text-blue-700 transition-colors" title="Invoice">
-                                        <i class="fas fa-file-invoice"></i>
-                                    </button>
-                                    <button onclick="openDeleteModal('Garden Shears', this)" class="text-red-600 hover:text-red-700 transition-colors" title="Delete">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr data-product-name="Watering Can">
-                            <td class="px-6 py-4"><input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"></td>
-                            <td class="px-6 py-4 text-sm text-gray-900">Watering Can</td>
-                            <td class="px-6 py-4 text-sm text-gray-900">Home Depot</td>
-                            <td class="px-6 py-4 text-sm text-gray-900">$23.50</td>
-                            <td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Active</span></td>
-                            <td class="px-6 py-4 text-sm text-gray-900">June 20, 2025</td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-2">
-                                    <button onclick="window.location.href='products-details.html';" class="text-yellow-600 hover:text-yellow-700 transition-colors" title="Edit">
-                                        <i class="fas fa-pen"></i>
-                                    </button>
-                                    <button onclick="window.location.href='create-invoice.html';" class="text-blue-600 hover:text-blue-700 transition-colors" title="Invoice">
-                                        <i class="fas fa-file-invoice"></i>
-                                    </button>
-                                    <button onclick="openDeleteModal('Watering Can', this)" class="text-red-600 hover:text-red-700 transition-colors" title="Delete">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr data-product-name="Fertilizer Spreader">
-                            <td class="px-6 py-4"><input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"></td>
-                            <td class="px-6 py-4 text-sm text-gray-900">Fertilizer Spreader</td>
-                            <td class="px-6 py-4 text-sm text-gray-900">Lowe's</td>
-                            <td class="px-6 py-4 text-sm text-gray-900">$89.99</td>
-                            <td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Active</span></td>
-                            <td class="px-6 py-4 text-sm text-gray-900">June 18, 2025</td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-2">
-                                    <button onclick="window.location.href='products-details.html';" class="text-yellow-600 hover:text-yellow-700 transition-colors" title="Edit">
-                                        <i class="fas fa-pen"></i>
-                                    </button>
-                                    <button onclick="window.location.href='create-invoice.html';" class="text-blue-600 hover:text-blue-700 transition-colors" title="Invoice">
-                                        <i class="fas fa-file-invoice"></i>
-                                    </button>
-                                    <button onclick="openDeleteModal('Fertilizer Spreader', this)" class="text-red-600 hover:text-red-700 transition-colors" title="Delete">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr data-product-name="Hedge Trimmer">
-                            <td class="px-6 py-4"><input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"></td>
-                            <td class="px-6 py-4 text-sm text-gray-900">Hedge Trimmer</td>
-                            <td class="px-6 py-4 text-sm text-gray-900">Global</td>
-                            <td class="px-6 py-4 text-sm text-gray-900">$156.75</td>
-                            <td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Active</span></td>
-                            <td class="px-6 py-4 text-sm text-gray-900">June 15, 2025</td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-2">
-                                    <button onclick="window.location.href='products-details.html';" class="text-yellow-600 hover:text-yellow-700 transition-colors" title="Edit">
-                                        <i class="fas fa-pen"></i>
-                                    </button>
-                                    <button onclick="window.location.href='create-invoice.html';" class="text-blue-600 hover:text-blue-700 transition-colors" title="Invoice">
-                                        <i class="fas fa-file-invoice"></i>
-                                    </button>
-                                    <button onclick="openDeleteModal('Hedge Trimmer', this)" class="text-red-600 hover:text-red-700 transition-colors" title="Delete">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </div>
-                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -274,46 +176,47 @@
         </div>
 
         <!-- Mobile View Only -->
-        <main class="md:hidden block p-4" style="position: relative; z-index: 1;">
-            <div class="flex justify-between items-center mb-4">
+        <div class="block md:hidden">
+            <!-- Mobile Header -->
+            <div class="flex justify-between items-center mb-4 w-full">
                 <span class="text-lg font-semibold">Products</span>
-                <div class="flex items-center gap-2 ml-auto">
-                    <div class="relative">
-                        <button id="mobileMoreDropdown" class="animated-button text-white px-2 py-1 rounded-lg flex items-center space-x-1 text-sm">
-                            <span>More</span>
-                            <i class="fas fa-chevron-down ml-1"></i>
+                <div class="flex items-center gap-2">
+                    <div class="relative inline-block text-left">
+                        <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700" id="mobile-menu-button" aria-expanded="false" aria-haspopup="true">
+                            More
+                            <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
                         </button>
-                        <div id="mobileMoreMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
-                            <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                                <i class="fas fa-cog w-5"></i>
-                                <span>Settings</span>
-                            </button>
-                            <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                                <i class="fas fa-chart-bar w-5"></i>
-                                <span>Report</span>
-                            </button>
-                            <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                                <i class="fas fa-history w-5"></i>
-                                <span>Audit Trail</span>
-                            </button>
+                        <!-- Dropdown menu -->
+                        <div id="mobile-dropdown-menu"
+                            class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10"
+                            style="display: none;">
+                            <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="mobile-menu-button">
+                                <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem">Export</a>
+                                <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem">Print</a>
+                                <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem">Settings</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            
+            <!-- Mobile Controls -->
             <div class="mb-2 flex w-full gap-2">
-                <button id="mobileCreateBtn" class="bg-blue-500 text-white rounded text-sm font-medium flex items-center justify-center flex-1 min-w-0" onclick="window.location.href='create-equipment.html'">
+                <button class="bg-blue-500 text-white rounded text-sm font-medium flex items-center justify-center flex-1 min-w-0 py-2" onclick="window.location.href='create-product.html'">
                     <i class="fas fa-plus mr-1"></i>Create
                 </button>
-                <button id="mobileDeletedBtn" class="bg-red-100 text-red-700 rounded text-sm font-medium flex items-center justify-center flex-1 min-w-0" onclick="window.location.href='deleted-equipments.html'">
-                    <i class="fas fa-trash-alt mr-1"></i>Deleted
+                <button class="bg-blue-200 text-blue-800 rounded text-sm font-medium flex items-center justify-center flex-1 min-w-0 py-2" id="mobile-actions-button">
+                    <i class="fas fa-caret-down mr-1"></i>Actions
                 </button>
-                <input id="mobileSearchInput" type="text" placeholder="Search" class="rounded border border-gray-300 text-sm flex-[2] min-w-0 px-3 py-2" />
+                <input type="text" placeholder="Search" class="rounded border border-gray-300 text-sm flex-[2] min-w-0 px-3 py-2" id="mobile-search" />
             </div>
             
             <!-- Mobile Product Cards -->
             <div class="space-y-4 md:hidden">
                 <!-- Product Card 1 -->
-                <a href="products-details.html" class="block group">
+                <a href="#" class="block group">
                 <div class="bg-white rounded-2xl shadow-lg p-4 border border-blue-100 flex flex-col gap-2 group-hover:bg-blue-50 transition-colors relative" data-product-name="Plant Cutters 1.">
                     <div class="flex justify-between items-center mb-1">
                         <span class="text-sky-600 font-bold text-lg">Plant Cutters 1.</span>
@@ -328,6 +231,9 @@
                         <button onclick="event.stopPropagation(); window.location.href='products-details.html';" class="flex-1 flex items-center justify-center gap-1 bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Edit">
                             <i class="fas fa-pen"></i> Edit
                         </button>
+                        <button onclick="event.stopPropagation(); window.location.href='create-invoice.html';" class="flex-1 flex items-center justify-center gap-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Invoice">
+                            <i class="fas fa-file-invoice"></i> Invoice
+                        </button>
                         <button onclick="event.stopPropagation(); openMobileDeleteModal(this);" class="flex-1 flex items-center justify-center gap-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Delete">
                             <i class="fas fa-trash-alt"></i> Delete
                         </button>
@@ -335,396 +241,97 @@
                 </div>
                 </a>
             </div>
-        </main>
+        </div>
     </main>
 
     <!-- Load JavaScript files -->
     <script src="../js/main.js"></script>
     <script src="../js/products.js"></script>
     <script>
-        // Global variables for delete functionality
-        let productToDelete = '';
-        let deleteBtnRef = null;
-        let mobileDeleteBtnRef = null;
-
-        // Initialize when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            // Load header and navigation
-            fetch('../nav/header.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('header-container').innerHTML = data;
-                });
-            
-            fetch('../nav/navigation.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('nav-container').innerHTML = data;
-                });
-
-            // Mobile dropdown functionality
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            if (mobileMenuButton) {
-                mobileMenuButton.addEventListener('click', function() {
-                    const dropdown = document.getElementById('mobile-dropdown-menu');
-                    if (dropdown) {
-                        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
-                    }
-                });
-            }
-
-            // Set up mobile delete modal functionality
-            setupMobileDeleteModal();
-            
-            // Set up click outside to close modals
-            setupModalClickOutside();
-            
-            // Set up escape key to close modals
-            setupEscapeKeyClose();
-
-            // Load and display restored products
-            loadRestoredProducts();
-
-            // Mobile More dropdown logic (fix)
-            const mobileMoreDropdown = document.getElementById('mobileMoreDropdown');
-            const mobileMoreMenu = document.getElementById('mobileMoreMenu');
-            if (mobileMoreDropdown && mobileMoreMenu) {
-                mobileMoreDropdown.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    mobileMoreMenu.classList.toggle('hidden');
-                });
-                document.addEventListener('click', function(e) {
-                    if (!mobileMoreDropdown.contains(e.target) && !mobileMoreMenu.contains(e.target)) {
-                        mobileMoreMenu.classList.add('hidden');
-                    }
-                });
-            }
+        // Mobile dropdown functionality
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const dropdown = document.getElementById('mobile-dropdown-menu');
+            dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+        });
+        fetch('../nav/header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-container').innerHTML = data;
+        });
+    fetch('../nav/navigation.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('nav-container').innerHTML = data;
         });
 
-        // Load and display restored products
-        function loadRestoredProducts() {
-            try {
-                const restoredProducts = JSON.parse(localStorage.getItem('restoredProducts') || '[]');
-                console.log('Loaded restored products:', restoredProducts);
-                
-                // Add restored products to the main products list
-                restoredProducts.forEach(product => {
-                    addProductToMainList(product);
-                });
-                
-                // Clear the restored products from localStorage after adding them
-                localStorage.removeItem('restoredProducts');
-            } catch (error) {
-                console.error('Error loading restored products:', error);
-            }
-        }
-
-        // Add product to main products list
-        function addProductToMainList(productData) {
-            // Add to desktop table
-            const tableBody = document.getElementById('products-table-body');
-            if (tableBody) {
-                const newRow = document.createElement('tr');
-                newRow.setAttribute('data-product-name', productData.name);
-                
-                newRow.innerHTML = `
-                    <td class="px-6 py-4"><input type="checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"></td>
-                    <td class="px-6 py-4 text-sm text-gray-900">${productData.name}</td>
-                    <td class="px-6 py-4 text-sm text-gray-900">${productData.vendor}</td>
-                    <td class="px-6 py-4 text-sm text-gray-900">${productData.price}</td>
-                    <td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Active</span></td>
-                    <td class="px-6 py-4 text-sm text-gray-900">${productData.createdDate || new Date().toLocaleDateString()}</td>
-                    <td class="px-6 py-4">
-                        <div class="flex items-center gap-2">
-                            <button onclick="window.location.href='products-details.html';" class="text-yellow-600 hover:text-yellow-700 transition-colors" title="Edit">
-                                <i class="fas fa-pen"></i>
-                            </button>
-                            <button onclick="window.location.href='create-invoice.html';" class="text-blue-600 hover:text-blue-700 transition-colors" title="Invoice">
-                                <i class="fas fa-file-invoice"></i>
-                            </button>
-                            <button onclick="openDeleteModal('${productData.name}', this)" class="text-red-600 hover:text-red-700 transition-colors" title="Delete">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </div>
-                    </td>
-                `;
-                
-                tableBody.appendChild(newRow);
-            }
-
-            // Add to mobile cards
-            const mobileContainer = document.querySelector('.space-y-4.md\\:hidden');
-            if (mobileContainer) {
-                const newCard = document.createElement('a');
-                newCard.href = '#';
-                newCard.className = 'block group';
-                newCard.setAttribute('data-product-name', productData.name);
-                
-                newCard.innerHTML = `
-                    <div class="bg-white rounded-2xl shadow-lg p-4 border border-blue-100 flex flex-col gap-2 group-hover:bg-blue-50 transition-colors relative">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="text-sky-600 font-bold text-lg">${productData.name}</span>
-                            <span class="text-sky-500 font-bold text-lg">${productData.price}</span>
-                        </div>
-                        <hr class="my-2 border-blue-100">
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-700 text-xs">Supplier: ${productData.vendor}</span>
-                            <span class="text-gray-700 text-xs">Date Created: ${productData.createdDate || new Date().toLocaleDateString()}</span>
-                        </div>
-                        <div class="flex gap-2 mt-2">
-                            <button onclick="event.stopPropagation(); window.location.href='products-details.html';" class="flex-1 flex items-center justify-center gap-1 bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Edit">
-                                <i class="fas fa-pen"></i> Edit
-                            </button>
-                            <button onclick="event.stopPropagation(); openMobileDeleteModal(this);" class="flex-1 flex items-center justify-center gap-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-xl text-sm transition-colors" title="Delete">
-                                <i class="fas fa-trash-alt"></i> Delete
-                            </button>
-                        </div>
-                    </div>
-                `;
-                
-                mobileContainer.appendChild(newCard);
-            }
-        }
-
-        // Desktop delete modal functions
-        function openDeleteModal(productName, btn) {
-            productToDelete = productName;
-            deleteBtnRef = btn;
-            const modalProduct = document.getElementById('deleteModalProduct');
-            if (modalProduct) {
-                modalProduct.textContent = `Are you sure you want to delete "${productName}"? This action cannot be undone.`;
-            }
-            const deleteModal = document.getElementById('deleteModal');
-            if (deleteModal) {
-                deleteModal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-        function closeDeleteModal() {
-            const deleteModal = document.getElementById('deleteModal');
-            if (deleteModal) {
-                deleteModal.classList.add('hidden');
-                document.body.style.overflow = '';
-            }
-        }
-
-        function confirmDelete() {
-            closeDeleteModal();
-            if (deleteBtnRef) {
-                // Find the table row to remove
-                let tableRow = deleteBtnRef.closest('tr[data-product-name]');
-                if (tableRow) {
-                    // Store product data before removing
-                    const productData = extractProductData(tableRow);
-                    storeDeletedProduct(productData);
-                    tableRow.remove();
+    let productToDelete = '';
+    let deleteBtnRef = null;
+    function openDeleteModal(productName, btn) {
+        productToDelete = productName;
+        deleteBtnRef = btn;
+        document.getElementById('deleteModalProduct').textContent = `Are you sure you want to delete "${productName}"? This action cannot be undone.`;
+        document.getElementById('deleteModal').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeDeleteModal() {
+        document.getElementById('deleteModal').classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+    function confirmDelete() {
+        closeDeleteModal();
+        if (deleteBtnRef) {
+            // Find the card div to remove
+            let cardDiv = deleteBtnRef.closest('[data-product-name]');
+            if (cardDiv) {
+                // Remove the parent <a> as well
+                let cardAnchor = cardDiv.closest('a');
+                if (cardAnchor) {
+                    cardAnchor.remove();
                 } else {
-                    // Fallback for mobile cards
-                    let cardDiv = deleteBtnRef.closest('[data-product-name]');
-                    if (cardDiv) {
-                        // Store product data before removing
-                        const productData = extractProductData(cardDiv);
-                        storeDeletedProduct(productData);
-                        let cardAnchor = cardDiv.closest('a');
-                        if (cardAnchor) {
-                            cardAnchor.remove();
-                        } else {
-                            cardDiv.remove();
-                        }
+                    cardDiv.remove();
+                }
+            }
+        }
+        document.getElementById('deleteNotification').classList.remove('hidden');
+        setTimeout(() => {
+            document.getElementById('deleteNotification').classList.add('hidden');
+        }, 2000);
+        deleteBtnRef = null;
+    }
+
+    // Mobile Delete Modal logic (robust event binding)
+    document.addEventListener('DOMContentLoaded', function() {
+        let mobileDeleteBtnRef = null;
+        window.openMobileDeleteModal = function(btn) {
+            mobileDeleteBtnRef = btn;
+            const card = btn.closest('[data-product-name]');
+            const productName = card ? card.getAttribute('data-product-name') : '';
+            document.getElementById('mobileDeleteModalTitle').textContent = `Delete ${productName}?`;
+            document.getElementById('mobileDeleteModalText').textContent = `Are you sure you want to delete this product? This action cannot be undone and will permanently remove the product.`;
+            document.getElementById('mobileDeleteModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        };
+        document.getElementById('mobileDeleteCancelBtn').addEventListener('click', function() {
+            document.getElementById('mobileDeleteModal').classList.add('hidden');
+            document.body.style.overflow = '';
+        });
+        document.getElementById('mobileDeleteConfirmBtn').addEventListener('click', function() {
+            document.getElementById('mobileDeleteModal').classList.add('hidden');
+            document.body.style.overflow = '';
+            if (mobileDeleteBtnRef) {
+                let cardDiv = mobileDeleteBtnRef.closest('[data-product-name]');
+                if (cardDiv) {
+                    let cardAnchor = cardDiv.closest('a');
+                    if (cardAnchor) {
+                        cardAnchor.remove();
+                    } else {
+                        cardDiv.remove();
                     }
                 }
             }
-            showDeleteNotification();
-            deleteBtnRef = null;
-        }
-
-        // Mobile delete modal functions
-        function setupMobileDeleteModal() {
-            window.openMobileDeleteModal = function(btn) {
-                mobileDeleteBtnRef = btn;
-                const card = btn.closest('[data-product-name]');
-                const productName = card ? card.getAttribute('data-product-name') : '';
-                
-                const modalTitle = document.getElementById('mobileDeleteModalTitle');
-                const modalText = document.getElementById('mobileDeleteModalText');
-                const mobileDeleteModal = document.getElementById('mobileDeleteModal');
-                
-                if (modalTitle) modalTitle.textContent = `Delete ${productName}?`;
-                if (modalText) modalText.textContent = `Are you sure you want to delete this product? This action cannot be undone and will permanently remove the product.`;
-                if (mobileDeleteModal) {
-                    mobileDeleteModal.classList.remove('hidden');
-                    document.body.style.overflow = 'hidden';
-                }
-            };
-
-            // Set up mobile delete modal buttons
-            const mobileDeleteCancelBtn = document.getElementById('mobileDeleteCancelBtn');
-            const mobileDeleteConfirmBtn = document.getElementById('mobileDeleteConfirmBtn');
-
-            if (mobileDeleteCancelBtn) {
-                mobileDeleteCancelBtn.addEventListener('click', function() {
-                    const mobileDeleteModal = document.getElementById('mobileDeleteModal');
-                    if (mobileDeleteModal) {
-                        mobileDeleteModal.classList.add('hidden');
-                        document.body.style.overflow = '';
-                    }
-                });
-            }
-
-            if (mobileDeleteConfirmBtn) {
-                mobileDeleteConfirmBtn.addEventListener('click', function() {
-                    const mobileDeleteModal = document.getElementById('mobileDeleteModal');
-                    if (mobileDeleteModal) {
-                        mobileDeleteModal.classList.add('hidden');
-                        document.body.style.overflow = '';
-                    }
-                    
-                    if (mobileDeleteBtnRef) {
-                        let cardDiv = mobileDeleteBtnRef.closest('[data-product-name]');
-                        if (cardDiv) {
-                            // Store product data before removing
-                            const productData = extractProductData(cardDiv);
-                            storeDeletedProduct(productData);
-                            let cardAnchor = cardDiv.closest('a');
-                            if (cardAnchor) {
-                                cardAnchor.remove();
-                            } else {
-                                cardDiv.remove();
-                            }
-                        }
-                    }
-                    showDeleteNotification();
-                    mobileDeleteBtnRef = null;
-                });
-            }
-        }
-
-        // Utility functions
-        function showDeleteNotification() {
-            const notification = document.getElementById('deleteNotification');
-            if (notification) {
-                notification.classList.remove('hidden');
-                setTimeout(() => {
-                    notification.classList.add('hidden');
-                }, 2000);
-            }
-        }
-
-        // Store deleted product in localStorage
-        function storeDeletedProduct(productData) {
-            try {
-                // Get existing deleted products from localStorage
-                let deletedProducts = JSON.parse(localStorage.getItem('deletedProducts') || '[]');
-                
-                // Add deletion timestamp
-                productData.deletedAt = new Date().toISOString();
-                productData.deletedDate = new Date().toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                });
-                
-                // Add to deleted products array
-                deletedProducts.push(productData);
-                
-                // Store back to localStorage
-                localStorage.setItem('deletedProducts', JSON.stringify(deletedProducts));
-                
-                console.log('Product stored in deleted products:', productData);
-                console.log('Total deleted products:', deletedProducts.length);
-            } catch (error) {
-                console.error('Error storing deleted product:', error);
-            }
-        }
-
-        // Extract product data from DOM element
-        function extractProductData(element) {
-            const productName = element.getAttribute('data-product-name') || 
-                               element.querySelector('[data-product-name]')?.getAttribute('data-product-name') || 
-                               'Unknown Product';
-            
-            // Try to extract data from table row
-            if (element.tagName === 'TR') {
-                const cells = element.querySelectorAll('td');
-                if (cells.length >= 6) {
-                    return {
-                        name: cells[1]?.textContent?.trim() || productName,
-                        vendor: cells[2]?.textContent?.trim() || 'Unknown',
-                        price: cells[3]?.textContent?.trim() || '$0.00',
-                        status: cells[4]?.textContent?.trim() || 'Active',
-                        createdDate: cells[5]?.textContent?.trim() || new Date().toLocaleDateString(),
-                        type: 'table-row'
-                    };
-                }
-            }
-            
-            // Try to extract data from mobile card
-            if (element.querySelector('.text-sky-600')) {
-                const nameElement = element.querySelector('.text-sky-600');
-                const priceElement = element.querySelector('.text-sky-500');
-                const supplierElement = element.querySelector('.text-gray-700');
-                const dateElement = element.querySelectorAll('.text-gray-700')[1];
-                
-                return {
-                    name: nameElement?.textContent?.trim() || productName,
-                    vendor: supplierElement?.textContent?.replace('Supplier: ', '')?.trim() || 'Unknown',
-                    price: priceElement?.textContent?.trim() || '$0.00',
-                    status: 'Active',
-                    createdDate: dateElement?.textContent?.replace('Date Created: ', '')?.trim() || new Date().toLocaleDateString(),
-                    type: 'mobile-card'
-                };
-            }
-            
-            // Fallback
-            return {
-                name: productName,
-                vendor: 'Unknown',
-                price: '$0.00',
-                status: 'Active',
-                createdDate: new Date().toLocaleDateString(),
-                type: 'unknown'
-            };
-        }
-
-        function setupModalClickOutside() {
-            const deleteModal = document.getElementById('deleteModal');
-            const mobileDeleteModal = document.getElementById('mobileDeleteModal');
-            
-            if (deleteModal) {
-                deleteModal.addEventListener('click', function(e) {
-                    if (e.target === deleteModal) {
-                        closeDeleteModal();
-                    }
-                });
-            }
-            
-            if (mobileDeleteModal) {
-                mobileDeleteModal.addEventListener('click', function(e) {
-                    if (e.target === mobileDeleteModal) {
-                        mobileDeleteModal.classList.add('hidden');
-                        document.body.style.overflow = '';
-                    }
-                });
-            }
-        }
-
-        function setupEscapeKeyClose() {
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    const deleteModal = document.getElementById('deleteModal');
-                    const mobileDeleteModal = document.getElementById('mobileDeleteModal');
-                    
-                    if (deleteModal && !deleteModal.classList.contains('hidden')) {
-                        closeDeleteModal();
-                    }
-                    if (mobileDeleteModal && !mobileDeleteModal.classList.contains('hidden')) {
-                        mobileDeleteModal.classList.add('hidden');
-                        document.body.style.overflow = '';
-                    }
-                }
-            });
-        }
+            mobileDeleteBtnRef = null;
+        });
+    });
     </script>
 
     <!-- Delete Confirmation Modal -->
