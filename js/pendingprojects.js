@@ -6,33 +6,12 @@
 const isPendingProjectsPage = window.location.pathname.includes('pendingprojects.html');
 const isPendingDetailsPage = window.location.pathname.includes('pending-details.html');
 
-// --- 1. On pendingprojects.html: Row click to details page ---
+// --- 1. On pendingprojects.html: Row click to show job details modal ---
 if (isPendingProjectsPage) {
     document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.dispatch-card').forEach(row => {
-            row.addEventListener('click', function() {
-                // Gather data from the row's cells (adjust indices as needed for your table)
-                const data = {
-                    team: row.cells[8]?.innerText.trim() || '',
-                    vip: row.cells[0]?.innerText.trim() || '', // Adjust if VIP is present
-                    startDate: row.cells[4]?.innerText.trim() || '',
-                    status: row.cells[9]?.innerText.trim() || '',
-                    billingType: '', // Not present in table, can be set later
-                    customer: row.cells[2]?.innerText.trim() || '',
-                    address: row.cells[3]?.innerText.trim() || '',
-                    service: row.cells[1]?.innerText.trim() || '',
-                    jobStatus: '',
-                    jobTeam: row.cells[8]?.innerText.trim() || '',
-                    jobStartDate: '',
-                    priorityType: row.cells[0]?.innerText.trim() || '',
-                    budgetHours: row.cells[5]?.innerText.trim() || '',
-                    distance: row.cells[6]?.innerText.trim() || '',
-                    eta: row.cells[7]?.innerText.trim() || ''
-                };
-                localStorage.setItem('pendingJobDetails', JSON.stringify(data));
-                window.location.href = 'pending-details.html';
-            });
-        });
+        // The row click functionality is now handled by the onclick="showJobDetailsModal(this)" 
+        // attribute in the HTML, so we don't need to attach event listeners here
+        console.log('Pending Projects page loaded - modal functionality ready');
     });
 }
 

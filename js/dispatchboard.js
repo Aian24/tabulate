@@ -87,29 +87,9 @@ function initializeTableInteractions() {
     const headers = table.querySelectorAll('th');
     const rows = table.querySelectorAll('tbody tr');
 
-    // Add click event to rows
-    rows.forEach(row => {
-        row.addEventListener('click', (e) => {
-            if (!e.target.closest('button') && !e.target.closest('input[type="checkbox"]')) {
-                const data = {
-                    route: row.querySelector('td:nth-child(2)').textContent,
-                    priority: row.querySelector('td:nth-child(3)').textContent,
-                    category: row.querySelector('td:nth-child(4)').textContent,
-                    client: row.querySelector('td:nth-child(5)').textContent,
-                    address: row.querySelector('td:nth-child(6)').textContent,
-                    startDate: row.querySelector('td:nth-child(7)').textContent,
-                    hours: row.querySelector('td:nth-child(8)').textContent,
-                    distance: row.querySelector('td:nth-child(9)').textContent,
-                    eta: row.querySelector('td:nth-child(10)').textContent,
-                    team: row.querySelector('td:nth-child(11)').textContent,
-                    status: row.querySelector('td:nth-child(12)').textContent
-                };
-
-                localStorage.setItem('dispatchJobDetails', JSON.stringify(data));
-                window.location.href = 'dispatchboard-details.html';
-            }
-        });
-    });
+    // Row click functionality is now handled by the onclick="showJobDetailsModal(this)" 
+    // attribute in the HTML, so we don't need to attach event listeners here
+    console.log('Dispatch board table interactions initialized - modal functionality ready');
 
     // Add click event to headers for sorting
     headers.forEach(header => {
@@ -347,33 +327,12 @@ document.addEventListener('DOMContentLoaded', function() {
 const isDispatchBoardPage = window.location.pathname.includes('dispatchboard.html');
 const isDispatchBoardDetailsPage = window.location.pathname.includes('dispatchboard-details.html');
 
-// --- 1. On dispatchboard.html: Row click to details page ---
+// --- 1. On dispatchboard.html: Row click to show job details modal ---
 if (isDispatchBoardPage) {
     document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.dispatch-card').forEach(row => {
-            row.addEventListener('click', function() {
-                // Gather data from the row's cells (adjust indices as needed for your table)
-                const data = {
-                    team: row.cells[10]?.innerText.trim() || '',
-                    vip: row.cells[2]?.innerText.trim() || '', // Adjust if VIP is present
-                    startDate: row.cells[6]?.innerText.trim() || '',
-                    status: row.cells[11]?.innerText.trim() || '',
-                    billingType: '', // Not present in table, can be set later
-                    customer: row.cells[4]?.innerText.trim() || '',
-                    address: row.cells[5]?.innerText.trim() || '',
-                    service: row.cells[3]?.innerText.trim() || '',
-                    jobStatus: '',
-                    jobTeam: row.cells[10]?.innerText.trim() || '',
-                    jobStartDate: '',
-                    priorityType: row.cells[2]?.innerText.trim() || '',
-                    budgetHours: row.cells[7]?.innerText.trim() || '',
-                    distance: row.cells[8]?.innerText.trim() || '',
-                    eta: row.cells[9]?.innerText.trim() || ''
-                };
-                localStorage.setItem('dispatchJobDetails', JSON.stringify(data));
-                window.location.href = 'dispatchboard-details.html';
-            });
-        });
+        // The row click functionality is now handled by the onclick="showJobDetailsModal(this)" 
+        // attribute in the HTML, so we don't need to attach event listeners here
+        console.log('Dispatch Board page loaded - modal functionality ready');
     });
 }
 

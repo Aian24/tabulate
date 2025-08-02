@@ -180,37 +180,13 @@ document.addEventListener('DOMContentLoaded', function() {
 const isActiveProjectsPage = window.location.pathname.includes('activeprojects.html');
 const isActiveDetailsPage = window.location.pathname.includes('active-details.html');
 
-// --- 1. On activeprojects.html: Row click to details page ---
+// --- 1. On activeprojects.html: Row click to show job details modal ---
 if (isActiveProjectsPage) {
     // Wait for DOM to load
     document.addEventListener('DOMContentLoaded', function() {
-        // Attach click event to each dispatch row
-        document.querySelectorAll('.dispatch-card').forEach(row => {
-            row.addEventListener('click', function() {
-                // Gather data from the row's cells
-                const data = {
-                    team: row.cells[7]?.innerText.trim() || '',
-                    vip: row.cells[0]?.innerText.trim() || '',
-                    startDate: row.cells[3]?.innerText.trim() || '',
-                    status: 'Pending', // Default or update as needed
-                    billingType: row.cells[8]?.innerText.trim() || '',
-                    customer: row.cells[4]?.innerText.trim() || '',
-                    address: row.cells[2]?.innerText.trim() || '',
-                    service: row.cells[1]?.innerText.trim() || '',
-                    jobStatus: '', // Not available in table, can be set later
-                    jobTeam: row.cells[7]?.innerText.trim() || '',
-                    jobStartDate: '', // Not available in table, can be set later
-                    priorityType: row.cells[2]?.innerText.trim() || '',
-                    budgetHours: row.cells[7]?.innerText.trim() || '',
-                    distance: row.cells[5]?.innerText.trim() || '',
-                    eta: row.cells[6]?.innerText.trim() || ''
-                };
-                // Store in localStorage
-                localStorage.setItem('activeJobDetails', JSON.stringify(data));
-                // Redirect to details page
-                window.location.href = 'active-details.html';
-            });
-        });
+        // The row click functionality is now handled by the onclick="showJobDetailsModal(this)" 
+        // attribute in the HTML, so we don't need to attach event listeners here
+        console.log('Active Projects page loaded - modal functionality ready');
     });
 }
 
