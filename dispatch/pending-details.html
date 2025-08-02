@@ -15,150 +15,201 @@
     <div id="nav-container"></div>
 
     <!-- Main content -->
-    <main class="w-full px-0 md:px-6 py-8">
-        <div class="mb-6 flex justify-between items-center gap-2">
-            <div class="flex items-center gap-2">
-                <button onclick="window.history.back()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 flex items-center gap-2 transition">
-                    <i class="fas fa-arrow-left"></i> Back
-                </button>
-                <h1 class="text-2xl md:text-3xl font-bold text-gray-800 ml-4">Update Job Details</h1>
-            </div>
-            <div class="relative">
-                <button id="moreBtn" type="button" class="inline-flex justify-center rounded border shadow-sm px-6 py-2 text-sm font-medium text-white transition-colors bg-blue-600 hover:bg-blue-700">
-                    More <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
-                </button>
-                <div id="moreDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
-                    <a href="#" class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 transition"><i class="fas fa-cog mr-3 text-gray-500"></i> Settings</a>
-                    <a href="#" class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 transition"><i class="fas fa-file-alt mr-3 text-gray-500"></i> Report</a>
-                    <a href="#" class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 transition"><i class="fas fa-history mr-3 text-gray-500"></i> Audit Trail</a>
-                </div>
-            </div>
-        </div>
-        <!-- Toggle Job Details Button: prominent, right-aligned -->
-        <div class="flex justify-end mb-4">
-            <button type="button" id="toggleJobDetails" class="px-3 py-1 bg-blue-500 text-white rounded-lg text-sm hover:bg-blue-600 transition flex items-center gap-2">
-                <i class="fas fa-eye" id="toggleIcon"></i>
-                <span id="toggleText">Show Details</span>
-            </button>
-        </div>
-        <form class="bg-white/90 rounded-2xl shadow-2xl p-4 md:p-8 border border-blue-100 w-full">
-            <!-- Main Form Fields -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div class="relative">
-                    <label class="block text-sm font-semibold mb-1">Select Team *</label>
-                    <select id="teamField" class="w-full px-3 py-2 border rounded-lg appearance-none">
-                        <option value="" disabled hidden>Select a Team</option>
-                        <option value="Team A">Team A</option>
-                        <option value="Team B">Team B</option>
-                        <option value="Team C">Team C</option>
-                        <option value="Team D">Team D</option>
-                        <option value="Team E">Team E</option>
-                        <option value="Ma i">Ma i</option>
-                    </select>
-                    <span class="pointer-events-none absolute right-3 top-9 text-gray-500"><i class="fas fa-chevron-down"></i></span>
+    <main class="w-full px-4 md:px-6 py-8">
+        <div class="w-full">
+            <!-- Header Section -->
+            <div class="mb-6 flex justify-between items-center gap-2">
+                <div class="flex items-center gap-2">
+                    <button onclick="window.history.back()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 flex items-center gap-2 transition">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-800 ml-4">Update Job Details</h1>
                 </div>
                 <div class="relative">
-                    <label class="block text-sm font-semibold mb-1">VIP *</label>
-                    <select id="vipField" class="w-full px-3 py-2 border rounded-lg appearance-none">
-                        <option value="" disabled hidden>Select VIP</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                    </select>
-                    <span class="pointer-events-none absolute right-3 top-9 text-gray-500"><i class="fas fa-chevron-down"></i></span>
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold mb-1">Start Date *</label>
-                    <input id="startDateField" type="date" class="w-full px-3 py-2 border rounded-lg" />
-                </div>
-                <div class="relative">
-                    <label class="block text-sm font-semibold mb-1">Status *</label>
-                    <select id="statusField" class="w-full px-3 py-2 border rounded-lg appearance-none">
-                        <option value="" disabled hidden>Select Status</option>
-                        <option value="Pending">Pending</option>
-                        <option value="Queued">Queued</option>
-                        <option value="Approved">Approved</option>
-                        <option value="Assigned">Assigned</option>
-                        <option value="In Progress">In Progress</option>
-                        <option value="On Hold">On Hold</option>
-                        <option value="Completed">Completed</option>
-                        <option value="Verified">Verified</option>
-                        <option value="Cancelled">Cancelled</option>
-                        <option value="Rejected">Rejected</option>
-                        <option value="Undispatched">Undispatched</option>
-                        <option value="Skipped">Skipped</option>
-                        <option value="Dispatched">Dispatched</option>
-                        <option value="Waiting List">Waiting List</option>
-                        <option value="Projects">Projects</option>
-                    </select>
-                    <span class="pointer-events-none absolute right-3 top-9 text-gray-500"><i class="fas fa-chevron-down"></i></span>
-                </div>
-                <div class="relative">
-                    <label class="block text-sm font-semibold mb-1">Billing Type</label>
-                    <select id="billingTypeField" class="w-full px-3 py-2 border rounded-lg appearance-none">
-                        <option value="" disabled hidden>Select Billing Type</option>
-                        <option value="One Time">One Time</option>
-                        <option value="Recurring">Recurring</option>
-                        <option value="Long Term">Long Term</option>
-                    </select>
-                    <span class="pointer-events-none absolute right-3 top-9 text-gray-500"><i class="fas fa-chevron-down"></i></span>
+                    <button id="moreBtn" type="button" class="inline-flex justify-center rounded border shadow-sm px-6 py-2 text-sm font-medium text-white transition-colors bg-blue-600 hover:bg-blue-700">
+                        More <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                    </button>
+                    <div id="moreDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
+                        <a href="#" class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 transition"><i class="fas fa-cog mr-3 text-gray-500"></i> Settings</a>
+                        <a href="#" class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 transition"><i class="fas fa-file-alt mr-3 text-gray-500"></i> Report</a>
+                        <a href="#" class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 transition"><i class="fas fa-history mr-3 text-gray-500"></i> Audit Trail</a>
+                    </div>
                 </div>
             </div>
-            <!-- Job Details Section -->
-            <div class="mb-6">
-                <div id="jobDetailsContent" class="hidden">
-                    <h3 class="text-lg font-semibold text-gray-700 mb-3">Job Details</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
-                        <div>
-                            <label class="font-semibold">Customer</label>
-                            <input id="customerField" type="text" class="w-full px-3 py-2 border rounded-lg bg-gray-100 text-gray-500" readonly />
+
+            <!-- Main Form Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <!-- Left Column - Update Fields Panel -->
+                <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+                    <h2 class="text-xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+                        <i class="fas fa-edit text-blue-600"></i>
+                        UPDATE FIELDS
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="relative">
+                            <label class="block text-xs font-semibold mb-1 text-gray-700 uppercase tracking-wide">Select Team *</label>
+                            <select id="teamField" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md appearance-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                                <option value="" disabled hidden>Select a Team</option>
+                                <option value="Team A" selected>Team A</option>
+                                <option value="Team B">Team B</option>
+                                <option value="Team C">Team C</option>
+                                <option value="Team D">Team D</option>
+                                <option value="Team E">Team E</option>
+                                <option value="Maintenance">Maintenance</option>
+                            </select>
+                            <span class="pointer-events-none absolute right-3 top-8 text-gray-400"><i class="fas fa-chevron-down text-xs"></i></span>
+                        </div>
+                        <div class="relative">
+                            <label class="block text-xs font-semibold mb-1 text-gray-700 uppercase tracking-wide">VIP *</label>
+                            <select id="vipField" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md appearance-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                                <option value="" disabled hidden>Select VIP</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No" selected>No</option>
+                            </select>
+                            <span class="pointer-events-none absolute right-3 top-8 text-gray-400"><i class="fas fa-chevron-down text-xs"></i></span>
                         </div>
                         <div>
-                            <label class="font-semibold">Address</label>
-                            <input id="addressField" type="text" class="w-full px-3 py-2 border rounded-lg bg-gray-100 text-gray-500" readonly />
+                            <label class="block text-xs font-semibold mb-1 text-gray-700 uppercase tracking-wide">Start Date *</label>
+                            <input id="startDateField" type="date" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all" value="2024-04-20" />
+                        </div>
+                        <div class="relative">
+                            <label class="block text-xs font-semibold mb-1 text-gray-700 uppercase tracking-wide">Status *</label>
+                            <select id="statusField" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md appearance-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                                <option value="" disabled hidden>Select Status</option>
+                                <option value="Pending" selected>Pending</option>
+                                <option value="Queued">Queued</option>
+                                <option value="Approved">Approved</option>
+                                <option value="Assigned">Assigned</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="On Hold">On Hold</option>
+                                <option value="Completed">Completed</option>
+                                <option value="Verified">Verified</option>
+                                <option value="Cancelled">Cancelled</option>
+                                <option value="Rejected">Rejected</option>
+                                <option value="Undispatched">Undispatched</option>
+                                <option value="Skipped">Skipped</option>
+                                <option value="Dispatched">Dispatched</option>
+                                <option value="Waiting List">Waiting List</option>
+                                <option value="Projects">Projects</option>
+                            </select>
+                            <span class="pointer-events-none absolute right-3 top-8 text-gray-400"><i class="fas fa-chevron-down text-xs"></i></span>
+                        </div>
+                        <div class="relative">
+                            <label class="block text-xs font-semibold mb-1 text-gray-700 uppercase tracking-wide">Billing Type</label>
+                            <select id="billingTypeField" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md appearance-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                                <option value="" disabled hidden>Select Billing Type</option>
+                                <option value="One Time" selected>One Time</option>
+                                <option value="Recurring">Recurring</option>
+                                <option value="Long Term">Long Term</option>
+                            </select>
+                            <span class="pointer-events-none absolute right-3 top-8 text-gray-400"><i class="fas fa-chevron-down text-xs"></i></span>
+                        </div>
+                        
+                        <!-- Customer Notes Section -->
+                        <div class="mt-4">
+                            <label class="block text-xs font-semibold mb-1 text-gray-700 uppercase tracking-wide">Customer Notes</label>
+                            <textarea id="customerNotesField" rows="2" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all resize-none" placeholder="Enter customer notes here...">Customer requested afternoon appointment. No pets in the yard.</textarea>
+                        </div>
+                        
+                        <!-- Employee Notes Section -->
+                        <div class="mt-4">
+                            <label class="block text-xs font-semibold mb-1 text-gray-700 uppercase tracking-wide">Employee Notes</label>
+                            <textarea id="employeeNotesField" rows="2" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all resize-none" placeholder="Enter employee notes here..."></textarea>
+                        </div>
+                    </div>
+                    <div class="flex gap-3 mt-8">
+                        <button type="button" class="flex items-center gap-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all shadow-md text-sm" onclick="window.history.back()">
+                            <i class="fas fa-times"></i>
+                            Cancel
+                        </button>
+                        <button type="button" class="flex items-center gap-2 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-all shadow-md text-sm">
+                            <i class="fas fa-plus"></i>
+                            Create Job
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Column - Job Details Panel -->
+                <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+                    <h2 class="text-xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+                        <i class="fas fa-info-circle text-blue-600"></i>
+                        JOB DETAILS
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-700">
+                        <div>
+                            <label class="text-xs font-semibold text-gray-700 mb-1 block uppercase tracking-wide">Customer</label>
+                            <input id="customerField" type="text" class="w-full px-3 py-2 text-sm border border-gray-200 rounded-md bg-gray-50 text-gray-600" value="Michael Johnson" readonly />
                         </div>
                         <div>
-                            <label class="font-semibold">Service</label>
-                            <input id="serviceField" type="text" class="w-full px-3 py-2 border rounded-lg bg-gray-100 text-gray-500" readonly />
+                            <label class="text-xs font-semibold text-gray-700 mb-1 block uppercase tracking-wide">Address</label>
+                            <input id="addressField" type="text" class="w-full px-3 py-2 text-sm border border-gray-200 rounded-md bg-gray-50 text-gray-600" value="456 Pine Avenue, Chicago, IL 60601" readonly />
                         </div>
                         <div>
-                            <label class="font-semibold">Status</label>
-                            <input id="jobStatusField" type="text" class="w-full px-3 py-2 border rounded-lg bg-gray-100 text-gray-500" readonly />
+                            <label class="text-xs font-semibold text-gray-700 mb-1 block uppercase tracking-wide">Service</label>
+                            <input id="serviceField" type="text" class="w-full px-3 py-2 text-sm border border-gray-200 rounded-md bg-gray-50 text-gray-600" value="Lawn Maintenance" readonly />
                         </div>
                         <div>
-                            <label class="font-semibold">Team</label>
-                            <input id="jobTeamField" type="text" class="w-full px-3 py-2 border rounded-lg bg-gray-100 text-gray-500" readonly />
+                            <label class="text-xs font-semibold text-gray-700 mb-1 block uppercase tracking-wide">Priority Type</label>
+                            <input id="priorityTypeField" type="text" class="w-full px-3 py-2 text-sm border border-gray-200 rounded-md bg-gray-50 text-gray-600" value="Standard" readonly />
                         </div>
                         <div>
-                            <label class="font-semibold">Start Date</label>
-                            <input id="jobStartDateField" type="text" class="w-full px-3 py-2 border rounded-lg bg-gray-100 text-gray-500" readonly />
+                            <label class="text-xs font-semibold text-gray-700 mb-1 block uppercase tracking-wide">Budget Hours</label>
+                            <input id="budgetHoursField" type="text" class="w-full px-3 py-2 text-sm border border-gray-200 rounded-md bg-gray-50 text-gray-600" value="2.0 hours" readonly />
                         </div>
                         <div>
-                            <label class="font-semibold">Priority Type</label>
-                            <input id="priorityTypeField" type="text" class="w-full px-3 py-2 border rounded-lg bg-gray-100 text-gray-500" readonly />
+                            <label class="text-xs font-semibold text-gray-700 mb-1 block uppercase tracking-wide">Distance</label>
+                            <input id="distanceField" type="text" class="w-full px-3 py-2 text-sm border border-gray-200 rounded-md bg-gray-50 text-gray-600" value="15.8 km" readonly />
                         </div>
                         <div>
-                            <label class="font-semibold">Budget Hours</label>
-                            <input id="budgetHoursField" type="text" class="w-full px-3 py-2 border rounded-lg bg-gray-100 text-gray-500" readonly />
+                            <label class="text-xs font-semibold text-gray-700 mb-1 block uppercase tracking-wide">ETA</label>
+                            <input id="etaField" type="text" class="w-full px-3 py-2 text-sm border border-gray-200 rounded-md bg-gray-50 text-gray-600" value="25 mins" readonly />
                         </div>
-                        <div>
-                            <label class="font-semibold">Distance</label>
-                            <input id="distanceField" type="text" class="w-full px-3 py-2 border rounded-lg bg-gray-100 text-gray-500" readonly />
-                        </div>
-                        <div>
-                            <label class="font-semibold">ETA</label>
-                            <input id="etaField" type="text" class="w-full px-3 py-2 border rounded-lg bg-gray-100 text-gray-500" readonly />
+                    </div>
+                    
+                    <!-- History Details Section -->
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <h3 class="text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                            <i class="fas fa-history text-blue-600 text-xs"></i>
+                            History Details
+                        </h3>
+                        <div class="space-y-2">
+                            <div class="flex items-start gap-2 p-2 bg-gray-50 rounded-md">
+                                <div class="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-start">
+                                        <span class="font-semibold text-xs text-gray-800">Job Created</span>
+                                        <span class="text-xs text-gray-500">Apr 20, 2024 - 11:00 AM</span>
+                                    </div>
+                                    <p class="text-xs text-gray-600 mt-0.5">Job queued for Team A assignment</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-2 p-2 bg-gray-50 rounded-md">
+                                <div class="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-start">
+                                        <span class="font-semibold text-xs text-gray-800">Customer Contacted</span>
+                                        <span class="text-xs text-gray-500">Apr 19, 2024 - 03:45 PM</span>
+                                    </div>
+                                    <p class="text-xs text-gray-600 mt-0.5">Confirmed appointment preferences and requirements</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-2 p-2 bg-gray-50 rounded-md">
+                                <div class="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-start">
+                                        <span class="font-semibold text-xs text-gray-800">Quote Approved</span>
+                                        <span class="text-xs text-gray-500">Apr 18, 2024 - 10:30 AM</span>
+                                    </div>
+                                    <p class="text-xs text-gray-600 mt-0.5">Customer approved the service quote</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Action Buttons -->
-            <div class="flex justify-start space-x-3 mt-6">
-                <button type="button" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg" onclick="window.history.back()">Cancel</button>
-                <button type="submit" class="bg-sky-400 text-white px-4 py-2 rounded-lg">Save</button>
-                <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Create Job</button>
-            </div>
-        </form>
+        </div>
     </main>
+
     <!-- Load JavaScript files -->
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://unpkg.com/tippy.js@6"></script>
@@ -190,43 +241,15 @@
                 document.getElementById('customerField').value = data.customer || '';
                 document.getElementById('addressField').value = data.address || '';
                 document.getElementById('serviceField').value = data.service || '';
-                document.getElementById('jobStatusField').value = data.jobStatus || '';
-                document.getElementById('jobTeamField').value = data.jobTeam || '';
-                document.getElementById('jobStartDateField').value = data.jobStartDate || '';
                 document.getElementById('priorityTypeField').value = data.priorityType || '';
                 document.getElementById('budgetHoursField').value = data.budgetHours || '';
                 document.getElementById('distanceField').value = data.distance || '';
                 document.getElementById('etaField').value = data.eta || '';
-            }
-
-            // Toggle Job Details functionality
-            const toggleButton = document.getElementById('toggleJobDetails');
-            const jobDetailsContent = document.getElementById('jobDetailsContent');
-            const toggleIcon = document.getElementById('toggleIcon');
-            const toggleText = document.getElementById('toggleText');
-            const jobDetailsHeading = jobDetailsContent.querySelector('h3');
-
-            toggleButton.addEventListener('click', function() {
-                const isHidden = jobDetailsContent.classList.contains('hidden');
                 
-                if (isHidden) {
-                    // Show details
-                    jobDetailsContent.classList.remove('hidden');
-                    if (jobDetailsHeading) jobDetailsHeading.classList.remove('hidden');
-                    toggleIcon.classList.remove('fa-eye');
-                    toggleIcon.classList.add('fa-eye-slash');
-                    toggleText.textContent = 'Hide Details';
-                } else {
-                    // Hide details
-                    jobDetailsContent.classList.add('hidden');
-                    if (jobDetailsHeading) jobDetailsHeading.classList.add('hidden');
-                    toggleIcon.classList.remove('fa-eye-slash');
-                    toggleIcon.classList.add('fa-eye');
-                    toggleText.textContent = 'Show Details';
-                }
-            });
-            // Hide heading by default
-            if (jobDetailsHeading) jobDetailsHeading.classList.add('hidden');
+                // Customer and Employee Notes
+                document.getElementById('customerNotesField').value = data.customerNotes || 'Customer requested afternoon appointment. No pets in the yard.';
+                document.getElementById('employeeNotesField').value = data.employeeNotes || '';
+            }
         });
     }
     </script>

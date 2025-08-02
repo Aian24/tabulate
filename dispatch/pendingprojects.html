@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <title>Pending Projects</title>
+    <title>Waiting List Projects</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
@@ -27,7 +27,7 @@
         <!-- Combined header with search -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
             <div class="flex items-center gap-4">
-                <h1 class="text-xl md:text-2xl font-bold text-gray-800">Pending Dispatches</h1>
+                <h1 class="text-xl md:text-2xl font-bold text-gray-800">Waiting List</h1>
             </div>
             <div class="flex items-center gap-2 ml-auto">
                 <div class="relative">
@@ -90,16 +90,75 @@
                 <div id="weekDays" class="grid grid-cols-7 w-full md:w-auto gap-1">
                     <!-- Week days will be rendered here -->
                 </div>
-                <!-- Date Range and Filter -->
+                <!-- Date Range and Controls -->
                 <div class="flex gap-2 w-full md:w-auto">
                     <button id="openDateRangePicker" class="calendar-button flex-grow md:flex-grow-0">
                         <i class="fas fa-calendar"></i>
                         <span>Select Date Range</span>
                     </button>
-                    <button id="openFilter" class="calendar-button flex-grow md:flex-grow-0">
-                        <i class="fas fa-filter"></i>
-                        <span>Filter</span>
-                    </button>
+                    <div class="relative">
+                        <button id="columnFilterDropdown" class="calendar-button flex-grow md:flex-grow-0">
+                            <i class="fas fa-columns"></i>
+                            <span>Columns</span>
+                        </button>
+                        <div id="columnFilterMenu" class="hidden absolute left-1/2 transform -translate-x-1/2 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
+                            <!-- Arrow pointing up to the button -->
+                            <div class="absolute -top-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-blue-500"></div>
+                            <div class="px-4 py-2 border-b border-gray-100">
+                                <h4 class="text-sm font-medium text-gray-800">Toggle Columns</h4>
+                            </div>
+                            <div class="py-2">
+                                <label class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                    <input type="checkbox" class="column-toggle mr-3" data-column="priority" checked>
+                                    <span>Priority Type</span>
+                                </label>
+                                <label class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                    <input type="checkbox" class="column-toggle mr-3" data-column="category" checked>
+                                    <span>Service Category</span>
+                                </label>
+                                <label class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                    <input type="checkbox" class="column-toggle mr-3" data-column="client" checked>
+                                    <span>Client Name</span>
+                                </label>
+                                <label class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                    <input type="checkbox" class="column-toggle mr-3" data-column="address" checked>
+                                    <span>Address</span>
+                                </label>
+                                <label class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                    <input type="checkbox" class="column-toggle mr-3" data-column="start-date" checked>
+                                    <span>Start Date</span>
+                                </label>
+                                <label class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                    <input type="checkbox" class="column-toggle mr-3" data-column="hours" checked>
+                                    <span>B. Hours</span>
+                                </label>
+                                <label class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                    <input type="checkbox" class="column-toggle mr-3" data-column="distance" checked>
+                                    <span>Distance</span>
+                                </label>
+                                <label class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                    <input type="checkbox" class="column-toggle mr-3" data-column="eta" checked>
+                                    <span>ETA</span>
+                                </label>
+                                <label class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                    <input type="checkbox" class="column-toggle mr-3" data-column="team" checked>
+                                    <span>Team Assigned</span>
+                                </label>
+                                <label class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                    <input type="checkbox" class="column-toggle mr-3" data-column="status" checked>
+                                    <span>Status</span>
+                                </label>
+                                <label class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                    <input type="checkbox" class="column-toggle mr-3" data-column="notes" checked>
+                                    <span>Notes</span>
+                                </label>
+                            </div>
+                            <div class="px-4 py-2 border-t border-gray-100">
+                                <button id="showAllColumns" class="text-sm text-blue-600 hover:text-blue-800 mr-3">Show All</button>
+                                <button id="hideAllColumns" class="text-sm text-red-600 hover:text-red-800">Hide All</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- Right side: Search -->
@@ -174,16 +233,22 @@
                                     <i class="fas fa-sort text-xs opacity-70"></i>
                                 </div>
                             </th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="status">
-                                <div class="flex items-center space-x-2">
-                                    <span>Status</span>
-                                    <i class="fas fa-sort text-xs opacity-70"></i>
-                                </div>
-                            </th>
+                                        <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="status">
+                <div class="flex items-center space-x-2">
+                    <span>Status</span>
+                    <i class="fas fa-sort text-xs opacity-70"></i>
+                </div>
+            </th>
+            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="notes">
+                <div class="flex items-center space-x-2">
+                    <span>Notes</span>
+                    <i class="fas fa-sort text-xs opacity-70"></i>
+                </div>
+            </th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100">
-                        <tr class="dispatch-card hover:bg-gradient-to-r hover:from-blue-50 hover:to-sky-50 transition-all duration-300">
+                        <tr class="dispatch-card hover:bg-gradient-to-r hover:from-blue-50 hover:to-sky-50 transition-all duration-300 cursor-pointer" onclick="showJobDetailsModal(this)" data-route="101" data-address="1024 Elm St, Beverly Hills, CA" data-lat="34.0736" data-lng="-118.4004" data-customer="Emily Carter" data-notes="Customer requested early morning service. VIP customer - priority service required.">
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="status-badge text-white text-xs font-semibold px-3 py-1 rounded-full">VIP</span>
                             </td>
@@ -194,7 +259,12 @@
                                 <span class="text-sm text-gray-600">Emily Carter</span>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <p class="text-sm text-gray-600 truncate max-w-[300px]" title="1024 Elm St, Beverly Hills, CA">1024 Elm St, Beverly Hills, CA</p>
+                                <span class="address-cell cursor-pointer hover:text-blue-600 transition-colors text-sm text-gray-600" 
+                                      title="1024 Elm St, Beverly Hills, CA"
+                                      data-address="1024 Elm St, Beverly Hills, CA"
+                                      data-route="101">
+                                    1024 Elm St, Beverly Hills, CA
+                                </span>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="text-sm text-gray-600">June 10, 2024</span>
@@ -214,8 +284,17 @@
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Pending</span>
                             </td>
+                            <td class="px-6 py-4 text-sm text-gray-900" onclick="event.stopPropagation();">
+                                <button class="notes-btn text-blue-600 hover:text-blue-800 transition-colors" 
+                                        data-route="101" 
+                                        onclick="event.stopPropagation(); showNotesModal('101')"
+                                        title="Click to view/add notes">
+                                    <i class="fas fa-sticky-note mr-1"></i>
+                                    <span class="text-xs">3 notes</span>
+                                </button>
+                            </td>
                         </tr>
-                        <tr class="dispatch-card hover:bg-gradient-to-r hover:from-blue-50 hover:to-sky-50 transition-all duration-300">
+                        <tr class="dispatch-card hover:bg-gradient-to-r hover:from-blue-50 hover:to-sky-50 transition-all duration-300 cursor-pointer" onclick="showJobDetailsModal(this)" data-route="202" data-address="221B Baker St, New York, NY" data-lat="40.7589" data-lng="-73.9851" data-customer="Michael Thompson" data-notes="Regular residential painting service. Customer prefers afternoon appointments.">
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="status-badge text-white text-xs font-semibold px-3 py-1 rounded-full">Non-VIP</span>
                             </td>
@@ -226,7 +305,12 @@
                                 <span class="text-sm text-gray-600">Michael Thompson</span>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <p class="text-sm text-gray-600 truncate max-w-[300px]" title="221B Baker St, New York, NY">221B Baker St, New York, NY</p>
+                                <span class="address-cell cursor-pointer hover:text-blue-600 transition-colors text-sm text-gray-600" 
+                                      title="221B Baker St, New York, NY"
+                                      data-address="221B Baker St, New York, NY"
+                                      data-route="202">
+                                    221B Baker St, New York, NY
+                                </span>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="text-sm text-gray-600">June 12, 2024</span>
@@ -245,6 +329,15 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Pending</span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-900" onclick="event.stopPropagation();">
+                                <button class="notes-btn text-blue-600 hover:text-blue-800 transition-colors" 
+                                        data-route="202" 
+                                        onclick="event.stopPropagation(); showNotesModal('202')"
+                                        title="Click to view/add notes">
+                                    <i class="fas fa-sticky-note mr-1"></i>
+                                    <span class="text-xs">1 note</span>
+                                </button>
                             </td>
                         </tr>
                     </tbody>
@@ -339,7 +432,593 @@
                     }
                 }
             });
+
+            // Column Filter Functionality
+            const columnFilterDropdown = document.getElementById('columnFilterDropdown');
+            const columnFilterMenu = document.getElementById('columnFilterMenu');
+            const columnToggles = document.querySelectorAll('.column-toggle');
+            const showAllColumns = document.getElementById('showAllColumns');
+            const hideAllColumns = document.getElementById('hideAllColumns');
+
+            // Toggle column filter dropdown
+            if (columnFilterDropdown && columnFilterMenu) {
+                columnFilterDropdown.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    columnFilterMenu.classList.toggle('hidden');
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!columnFilterDropdown.contains(event.target) && !columnFilterMenu.contains(event.target)) {
+                        columnFilterMenu.classList.add('hidden');
+                    }
+                });
+            }
+
+            // Handle individual column toggles
+            columnToggles.forEach(toggle => {
+                toggle.addEventListener('change', function() {
+                    const columnName = this.getAttribute('data-column');
+                    const isVisible = this.checked;
+                    
+                    // Find all table headers and cells with this column
+                    const headers = document.querySelectorAll(`th[data-column="${columnName}"]`);
+                    const cells = document.querySelectorAll(`td:nth-child(${getColumnIndex(columnName)})`);
+                    
+                    headers.forEach(header => {
+                        header.style.display = isVisible ? '' : 'none';
+                    });
+                    
+                    cells.forEach(cell => {
+                        cell.style.display = isVisible ? '' : 'none';
+                    });
+                });
+            });
+
+            // Show all columns
+            if (showAllColumns) {
+                showAllColumns.addEventListener('click', function() {
+                    columnToggles.forEach(toggle => {
+                        toggle.checked = true;
+                        toggle.dispatchEvent(new Event('change'));
+                    });
+                });
+            }
+
+            // Hide all columns
+            if (hideAllColumns) {
+                hideAllColumns.addEventListener('click', function() {
+                    columnToggles.forEach(toggle => {
+                        toggle.checked = false;
+                        toggle.dispatchEvent(new Event('change'));
+                    });
+                });
+            }
+
+            // Helper function to get column index
+            function getColumnIndex(columnName) {
+                const columnMap = {
+                    'priority': 1,
+                    'category': 2,
+                    'client': 3,
+                    'address': 4,
+                    'start-date': 5,
+                    'hours': 6,
+                    'distance': 7,
+                    'eta': 8,
+                    'team': 9,
+                    'status': 10,
+                    'notes': 11
+                };
+                return columnMap[columnName] || 1;
+            }
+
+            // Address hover functionality
+            document.addEventListener('DOMContentLoaded', function() {
+                const addressCells = document.querySelectorAll('.address-cell');
+                
+                addressCells.forEach(cell => {
+                    // Show tooltip on hover
+                    cell.addEventListener('mouseenter', function() {
+                        const address = this.getAttribute('data-address');
+                        const route = this.getAttribute('data-route');
+                        
+                        // Create tooltip
+                        const tooltip = document.createElement('div');
+                        tooltip.className = 'fixed z-50 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg shadow-lg pointer-events-none';
+                        tooltip.innerHTML = `
+                            <div class="font-semibold">Route ${route}</div>
+                            <div>${address}</div>
+                            <div class="text-xs text-gray-300 mt-1">Click for details</div>
+                        `;
+                        tooltip.id = 'address-tooltip';
+                        document.body.appendChild(tooltip);
+                        
+                        // Position tooltip
+                        const rect = this.getBoundingClientRect();
+                        tooltip.style.left = rect.left + 'px';
+                        tooltip.style.top = (rect.top - tooltip.offsetHeight - 10) + 'px';
+                    });
+                    
+                    cell.addEventListener('mouseleave', function() {
+                        // Remove tooltip
+                        const tooltip = document.getElementById('address-tooltip');
+                        if (tooltip) {
+                            tooltip.remove();
+                        }
+                    });
+                    
+                    // Click to show details
+                    cell.addEventListener('click', function() {
+                        const address = this.getAttribute('data-address');
+                        const route = this.getAttribute('data-route');
+                        
+                        // Create and show modal with details
+                        showAddressModal(address, route, this.closest('tr'));
+                    });
+                });
+            });
+
+            // Show address details modal
+            function showAddressModal(address, route, row) {
+                // Get row data
+                const priority = row.querySelector('td:nth-child(1) span').textContent;
+                const category = row.querySelector('td:nth-child(2) span').textContent;
+                const client = row.querySelector('td:nth-child(3) span').textContent;
+                const startDate = row.querySelector('td:nth-child(5) span').textContent;
+                const hours = row.querySelector('td:nth-child(6) span').textContent;
+                const distance = row.querySelector('td:nth-child(7) span').textContent;
+                const eta = row.querySelector('td:nth-child(8) span').textContent;
+                const team = row.querySelector('td:nth-child(9) span').textContent;
+                const status = row.querySelector('td:nth-child(10) span').textContent;
+                
+                // Create modal if it doesn't exist
+                let modal = document.getElementById('addressModal');
+                if (!modal) {
+                    modal = document.createElement('div');
+                    modal.id = 'addressModal';
+                    modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+                    modal.innerHTML = `
+                        <div class="bg-white rounded-lg shadow-xl p-6 w-[500px] max-w-[90vw]">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="text-lg font-semibold text-gray-800">Dispatch Details</h3>
+                                <button id="closeAddressModal" class="text-gray-500 hover:text-gray-700">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div id="addressModalContent" class="space-y-4">
+                                <!-- Content will be populated here -->
+                            </div>
+                            <div class="flex justify-end gap-2 mt-6">
+                                <button id="viewOnMap" class="px-4 py-2 text-sm text-white bg-blue-500 hover:bg-blue-600 rounded transition-colors">
+                                    <i class="fas fa-map-marker-alt mr-2"></i>View on Map
+                                </button>
+                                <button id="editDispatch" class="px-4 py-2 text-sm text-white bg-green-500 hover:bg-green-600 rounded transition-colors">
+                                    <i class="fas fa-edit mr-2"></i>Edit
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    document.body.appendChild(modal);
+                    
+                    // Close modal functionality
+                    document.getElementById('closeAddressModal').addEventListener('click', function() {
+                        modal.classList.add('hidden');
+                    });
+                    
+                    // Close modal when clicking outside
+                    modal.addEventListener('click', function(e) {
+                        if (e.target === modal) {
+                            modal.classList.add('hidden');
+                        }
+                    });
+                }
+                
+                // Populate modal content
+                const content = document.getElementById('addressModalContent');
+                content.innerHTML = `
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-gray-50 p-3 rounded-lg">
+                            <div class="text-sm font-medium text-gray-600">Route</div>
+                            <div class="text-lg font-bold text-gray-800">${route}</div>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded-lg">
+                            <div class="text-sm font-medium text-gray-600">Priority</div>
+                            <div class="text-lg font-bold text-gray-800">${priority}</div>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="text-sm font-medium text-gray-600">Address</div>
+                            <div class="text-gray-800">${address}</div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <div class="text-sm font-medium text-gray-600">Client</div>
+                                <div class="text-gray-800">${client}</div>
+                            </div>
+                            <div>
+                                <div class="text-sm font-medium text-gray-600">Service</div>
+                                <div class="text-gray-800">${category}</div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div>
+                                <div class="text-sm font-medium text-gray-600">Start Date</div>
+                                <div class="text-gray-800">${startDate}</div>
+                            </div>
+                            <div>
+                                <div class="text-sm font-medium text-gray-600">Hours</div>
+                                <div class="text-gray-800">${hours}</div>
+                            </div>
+                            <div>
+                                <div class="text-sm font-medium text-gray-600">Distance</div>
+                                <div class="text-gray-800">${distance}</div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <div class="text-sm font-medium text-gray-600">ETA</div>
+                                <div class="text-gray-800">${eta}</div>
+                            </div>
+                            <div>
+                                <div class="text-sm font-medium text-gray-600">Team</div>
+                                <div class="text-gray-800">${team}</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium text-gray-600">Status</div>
+                            <div class="text-gray-800">${status}</div>
+                        </div>
+                    </div>
+                `;
+                
+                // Show modal
+                modal.classList.remove('hidden');
+            }
         });
+    </script>
+    
+    <!-- Job Details Modal -->
+    <div id="jobDetailsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-xl shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden">
+            <!-- Modal Header -->
+            <div class="bg-gradient-to-r from-sky-500 to-blue-600 text-white px-6 py-4 flex justify-between items-center">
+                <h2 class="text-xl font-semibold">Job Details</h2>
+                <button id="closeJobModal" onclick="closeJobModal()" class="text-white hover:text-gray-200 text-2xl font-bold">&times;</button>
+            </div>
+            
+            <!-- Modal Content -->
+            <div class="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
+                <!-- Job Details Card -->
+                <div id="jobDetailsCard" class="bg-gray-50 rounded-lg p-4 mb-4">
+                    <h3 class="text-md font-semibold text-gray-800 mb-3 flex items-center">
+                        <i class="fas fa-info-circle text-blue-500 mr-2"></i>
+                        Current Job Information
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">Customer</label>
+                            <div id="customerName" class="text-sm text-gray-800 font-medium">John Doe</div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">Address</label>
+                            <div id="jobAddress" class="text-sm text-gray-800">1024 Elm St, Beverly Hills, CA</div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">Service</label>
+                            <div id="serviceCategory" class="text-sm text-gray-800">Weed Control</div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">Team</label>
+                            <div id="jobTeam" class="text-sm text-gray-800">Team Alpha</div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">Start Date</label>
+                            <div id="startDate" class="text-sm text-gray-800">June 10, 2024</div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">Hours</label>
+                            <div id="budgetHours" class="text-sm text-gray-800">2.5 hrs.</div>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <label class="block text-xs font-medium text-gray-600 mb-1">Notes</label>
+                        <div id="jobNotes" class="bg-white p-2 rounded border text-xs text-gray-700">
+                            Customer requested special attention to the front yard area. Please ensure all weeds are properly removed and apply pre-emergent treatment.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Update Details Form -->
+                <div id="updateDetailsForm" class="bg-white border border-gray-200 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-edit text-green-500 mr-2"></i>
+                        Update Job Details
+                    </h3>
+                    <form id="jobUpdateForm" class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="updateCustomerName" class="block text-sm font-medium text-gray-700 mb-1">Customer Name</label>
+                                <input type="text" id="updateCustomerName" name="customerName" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label for="updateJobAddress" class="block text-sm font-medium text-gray-700 mb-1">Job Address</label>
+                                <input type="text" id="updateJobAddress" name="jobAddress" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="updateServiceCategory" class="block text-sm font-medium text-gray-700 mb-1">Service Category</label>
+                                <select id="updateServiceCategory" name="serviceCategory" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                    <option value="Office Cleaning Service">Office Cleaning Service</option>
+                                    <option value="Residential House Painting">Residential House Painting</option>
+                                    <option value="Landscaping">Landscaping</option>
+                                    <option value="Roofing Installation">Roofing Installation</option>
+                                    <option value="General Maintenance">General Maintenance</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="updatePriority" class="block text-sm font-medium text-gray-700 mb-1">Priority</label>
+                                <select id="updatePriority" name="priority" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                    <option value="VIP">VIP</option>
+                                    <option value="Non-VIP">Non-VIP</option>
+                                    <option value="Low">Low</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="updateTeam" class="block text-sm font-medium text-gray-700 mb-1">Team</label>
+                                <select id="updateTeam" name="team" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                    <option value="Team Alpha">Team Alpha</option>
+                                    <option value="Team Beta">Team Beta</option>
+                                    <option value="Team Gamma">Team Gamma</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="updateStartDate" class="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+                                <input type="date" id="updateStartDate" name="startDate" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="updateBudgetHours" class="block text-sm font-medium text-gray-700 mb-1">Budget Hours</label>
+                                <input type="number" id="updateBudgetHours" name="budgetHours" step="0.5" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label for="updateJobType" class="block text-sm font-medium text-gray-700 mb-1">Job Type</label>
+                                <select id="updateJobType" name="jobType" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                    <option value="Recurring">Recurring</option>
+                                    <option value="One-Time">One-Time</option>
+                                    <option value="Emergency">Emergency</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="updateJobNotes" class="block text-sm font-medium text-gray-700 mb-1">Job Notes</label>
+                            <textarea id="updateJobNotes" name="jobNotes" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"></textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="bg-gray-50 px-6 py-4 flex justify-end gap-3 border-t border-gray-200">
+                <button id="cancelUpdate" onclick="closeJobModal()" class="px-4 py-2 text-sm text-white bg-red-500 hover:bg-red-600 rounded-lg transition-colors">
+                    <i class="fas fa-times mr-2"></i>Cancel
+                </button>
+                <button id="saveUpdate" class="px-4 py-2 text-sm text-white bg-blue-500 hover:bg-blue-600 rounded-lg transition-colors">
+                    <i class="fas fa-save mr-2"></i>Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 flex items-center space-x-3 border-l-4 border-green-500 hidden">
+        <i class="fas fa-check-circle text-green-500 text-xl"></i>
+        <div>
+            <h4 class="font-medium text-gray-800">Success!</h4>
+            <p class="text-sm text-gray-600">Job details updated successfully!</p>
+        </div>
+        <button class="text-gray-400 hover:text-gray-600 ml-4" onclick="this.parentElement.classList.add('hidden')">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Job Details Modal Functionality -->
+    <script>
+        // Job Details Modal Functionality - Global function
+        window.showJobDetailsModal = function(row) {
+            // Get data from the row
+            const route = row.getAttribute('data-route');
+            const address = row.getAttribute('data-address');
+            const customer = row.getAttribute('data-customer');
+            const notes = row.getAttribute('data-notes');
+            const priority = row.querySelector('td:nth-child(1) span').textContent;
+            const category = row.querySelector('td:nth-child(2) span').textContent;
+            const startDate = row.querySelector('td:nth-child(5) span').textContent;
+            const hours = row.querySelector('td:nth-child(6) span').textContent;
+            const team = row.querySelector('td:nth-child(9) span').textContent;
+            
+            // Populate the job details card
+            document.getElementById('customerName').textContent = customer;
+            document.getElementById('jobAddress').textContent = address;
+            document.getElementById('serviceCategory').textContent = category;
+            document.getElementById('jobTeam').textContent = team;
+            document.getElementById('startDate').textContent = startDate;
+            document.getElementById('budgetHours').textContent = hours + ' hrs.';
+            document.getElementById('jobNotes').textContent = notes;
+            
+            // Populate the update form
+            document.getElementById('updateCustomerName').value = customer;
+            document.getElementById('updateJobAddress').value = address;
+            document.getElementById('updateServiceCategory').value = category;
+            document.getElementById('updatePriority').value = priority;
+            document.getElementById('updateTeam').value = team;
+            document.getElementById('updateStartDate').value = formatDateForInput(startDate);
+            document.getElementById('updateBudgetHours').value = parseFloat(hours);
+            document.getElementById('updateJobType').value = 'One-Time';
+            document.getElementById('updateJobNotes').value = notes;
+            
+            // Show the modal
+            document.getElementById('jobDetailsModal').classList.remove('hidden');
+        };
+        
+        // Helper function to format date for input field - Global function
+        window.formatDateForInput = function(dateString) {
+            const date = new Date(dateString);
+            return date.toISOString().split('T')[0];
+        };
+        
+        // Toast notification function - Global function
+        window.showToast = function(message, type = 'success') {
+            const toast = document.querySelector('.toast');
+            if (toast) {
+                const messageEl = toast.querySelector('p');
+                const icon = toast.querySelector('i');
+                
+                messageEl.textContent = message;
+                
+                if (type === 'success') {
+                    icon.className = 'fas fa-check-circle text-green-500 text-xl';
+                    toast.className = 'toast fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 flex items-center space-x-3 border-l-4 border-green-500';
+                } else if (type === 'error') {
+                    icon.className = 'fas fa-exclamation-circle text-red-500 text-xl';
+                    toast.className = 'toast fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 flex items-center space-x-3 border-l-4 border-red-500';
+                }
+                
+                toast.classList.remove('hidden');
+                
+                // Auto hide after 3 seconds
+                setTimeout(() => {
+                    toast.classList.add('hidden');
+                }, 3000);
+            }
+        };
+        
+        // Modal event listeners - Global functions
+        window.closeJobModal = function() {
+            const modal = document.getElementById('jobDetailsModal');
+            if (modal) {
+                modal.classList.add('hidden');
+            }
+        };
+        
+        // Initialize modal event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('jobDetailsModal');
+            const saveBtn = document.getElementById('saveUpdate');
+            
+            // Close modal when clicking outside
+            if (modal) {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        window.closeJobModal();
+                    }
+                });
+            }
+            
+            // Save changes
+            if (saveBtn) {
+                saveBtn.addEventListener('click', function() {
+                    // Get form data
+                    const formData = {
+                        customerName: document.getElementById('updateCustomerName').value,
+                        jobAddress: document.getElementById('updateJobAddress').value,
+                        serviceCategory: document.getElementById('updateServiceCategory').value,
+                        priority: document.getElementById('updatePriority').value,
+                        team: document.getElementById('updateTeam').value,
+                        startDate: document.getElementById('updateStartDate').value,
+                        budgetHours: document.getElementById('updateBudgetHours').value,
+                        jobType: document.getElementById('updateJobType').value,
+                        jobNotes: document.getElementById('updateJobNotes').value
+                    };
+                    
+                    // Here you would typically send the data to your backend
+                    console.log('Saving job details:', formData);
+                    
+                    // Show success message
+                    showToast('Job details updated successfully!', 'success');
+                    
+                    // Close modal
+                    window.closeJobModal();
+                });
+            }
+        });
+    </script>
+
+    <!-- Notes functionality -->
+    <script>
+        // Simple notes modal function
+        function showNotesModal(route) {
+            console.log('Opening notes modal for route:', route);
+            
+            // Create simple modal
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white rounded-lg shadow-xl p-6 w-[600px] max-w-[90vw]">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Notes - Route ${route}</h3>
+                        <button onclick="this.parentElement.parentElement.parentElement.remove()" class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h4 class="font-medium text-gray-800 mb-2">Notes History</h4>
+                        <div class="space-y-2 max-h-60 overflow-y-auto">
+                            <div class="bg-gray-50 rounded p-3 border-l-4 border-blue-500">
+                                <div class="flex justify-between items-start mb-1">
+                                    <span class="text-sm font-medium">John Smith</span>
+                                    <span class="text-xs text-gray-500">2024-06-10 09:30</span>
+                                </div>
+                                <p class="text-sm text-gray-700">Customer requested early morning service</p>
+                            </div>
+                            <div class="bg-gray-50 rounded p-3 border-l-4 border-green-500">
+                                <div class="flex justify-between items-start mb-1">
+                                    <span class="text-sm font-medium">Admin</span>
+                                    <span class="text-xs text-gray-500">2024-06-09 14:20</span>
+                                </div>
+                                <p class="text-sm text-gray-700">VIP customer - priority service required</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t pt-4">
+                        <h4 class="font-medium text-gray-800 mb-2">Add New Note</h4>
+                        <textarea id="newNote" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg mb-3" placeholder="Enter your note here..."></textarea>
+                        <div class="flex justify-end">
+                            <button onclick="addNote('${route}')" class="px-4 py-2 text-sm text-white bg-blue-500 hover:bg-blue-600 rounded">
+                                Add Note
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Close when clicking outside
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
+        }
+
+        // Simple add note function
+        function addNote(route) {
+            const noteText = document.getElementById('newNote').value;
+            if (noteText.trim()) {
+                alert('Note added successfully!');
+                document.getElementById('newNote').value = '';
+            } else {
+                alert('Please enter a note');
+            }
+        }
     </script>
 </body>
 </html>
