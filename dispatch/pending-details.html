@@ -60,11 +60,13 @@
                             <span class="pointer-events-none absolute right-3 top-8 text-gray-400"><i class="fas fa-chevron-down text-xs"></i></span>
                         </div>
                         <div class="relative">
-                            <label class="block text-xs font-semibold mb-1 text-gray-700 uppercase tracking-wide">VIP *</label>
-                            <select id="vipField" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md appearance-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
-                                <option value="" disabled hidden>Select VIP</option>
-                                <option value="Yes">Yes</option>
-                                <option value="No" selected>No</option>
+                            <label class="block text-xs font-semibold mb-1 text-gray-700 uppercase tracking-wide">Priority *</label>
+                            <select id="priorityField" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md appearance-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                                <option value="" disabled hidden>Select Priority</option>
+                                <option value="Low">Low</option>
+                                <option value="Medium" selected>Medium</option>
+                                <option value="High">High</option>
+                                <option value="Urgent">Urgent</option>
                             </select>
                             <span class="pointer-events-none absolute right-3 top-8 text-gray-400"><i class="fas fa-chevron-down text-xs"></i></span>
                         </div>
@@ -76,21 +78,10 @@
                             <label class="block text-xs font-semibold mb-1 text-gray-700 uppercase tracking-wide">Status *</label>
                             <select id="statusField" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md appearance-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
                                 <option value="" disabled hidden>Select Status</option>
-                                <option value="Pending" selected>Pending</option>
-                                <option value="Queued">Queued</option>
-                                <option value="Approved">Approved</option>
-                                <option value="Assigned">Assigned</option>
-                                <option value="In Progress">In Progress</option>
-                                <option value="On Hold">On Hold</option>
                                 <option value="Completed">Completed</option>
-                                <option value="Verified">Verified</option>
                                 <option value="Cancelled">Cancelled</option>
-                                <option value="Rejected">Rejected</option>
-                                <option value="Undispatched">Undispatched</option>
-                                <option value="Skipped">Skipped</option>
-                                <option value="Dispatched">Dispatched</option>
                                 <option value="Waiting List">Waiting List</option>
-                                <option value="Projects">Projects</option>
+                                <option value="Skipped">Skipped</option>
                             </select>
                             <span class="pointer-events-none absolute right-3 top-8 text-gray-400"><i class="fas fa-chevron-down text-xs"></i></span>
                         </div>
@@ -147,6 +138,10 @@
                         <div>
                             <label class="text-xs font-semibold text-gray-700 mb-1 block uppercase tracking-wide">Service</label>
                             <input id="serviceField" type="text" class="w-full px-3 py-2 text-sm border border-gray-200 rounded-md bg-gray-50 text-gray-600" value="Lawn Maintenance" readonly />
+                        </div>
+                        <div>
+                            <label class="text-xs font-semibold text-gray-700 mb-1 block uppercase tracking-wide">VIP Status</label>
+                            <input id="vipStatusField" type="text" class="w-full px-3 py-2 text-sm border border-gray-200 rounded-md bg-gray-50 text-gray-600" value="Standard Customer" readonly />
                         </div>
                         <div>
                             <label class="text-xs font-semibold text-gray-700 mb-1 block uppercase tracking-wide">Priority Type</label>
@@ -234,13 +229,14 @@
             const data = JSON.parse(localStorage.getItem('pendingJobDetails') || '{}');
             if (data) {
                 setSelectValueOrPlaceholder(document.getElementById('teamField'), data.team);
-                setSelectValueOrPlaceholder(document.getElementById('vipField'), data.vip);
+                setSelectValueOrPlaceholder(document.getElementById('priorityField'), data.priority);
                 document.getElementById('startDateField').value = data.startDate || '';
                 setSelectValueOrPlaceholder(document.getElementById('statusField'), data.status);
                 setSelectValueOrPlaceholder(document.getElementById('billingTypeField'), data.billingType);
                 document.getElementById('customerField').value = data.customer || '';
                 document.getElementById('addressField').value = data.address || '';
                 document.getElementById('serviceField').value = data.service || '';
+                document.getElementById('vipStatusField').value = data.vipStatus || 'Standard Customer';
                 document.getElementById('priorityTypeField').value = data.priorityType || '';
                 document.getElementById('budgetHoursField').value = data.budgetHours || '';
                 document.getElementById('distanceField').value = data.distance || '';
