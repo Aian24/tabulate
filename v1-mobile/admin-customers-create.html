@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Customer | Tabulate CRM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            300: '#c4b5fd',
+                            400: '#a78bfa',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            800: '#5b21b6',
+                            900: '#4c1d95'
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        /* Form Controls */
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            transition: all 0.15s ease-in-out;
+            background-color: #fff;
+        }
+        
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.5);
+            border-color: transparent;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0.25rem;
+        }
+        
+        .form-label.required:after {
+            content: '*';
+            color: #ef4444;
+            margin-left: 0.25rem;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border-radius: 0.375rem;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            color: white;
+            transition: all 0.2s;
+            cursor: pointer;
+            height: 2.5rem;
+        }
+        
+        .btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.5);
+        }
+        
+        .btn-primary {
+            background-color: #7c3aed;
+        }
+        
+        .btn-primary:hover {
+            background-color: #6d28d9;
+        }
+        
+        .btn-primary:focus {
+            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.5);
+        }
+        
+        .btn-outline {
+            border: 1px solid #d1d5db;
+            color: #374151;
+            background-color: white;
+        }
+        
+        .btn-outline:hover {
+            background-color: #f9fafb;
+        }
+        
+        .btn-outline:focus {
+            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.5);
+        }
+        
+        /* Section headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-header i {
+            color: #8b5cf6;
+            font-size: 0.875rem;
+        }
+        
+        .section-header h3 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1f2937;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50">
+    <!-- Header -->
+    <div class="bg-white shadow-sm">
+        <div class="px-4 py-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <h1 class="text-xl font-semibold text-gray-900">Create New Customer</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="px-4 py-6 sm:px-6 lg:px-8">
+        <form id="customerForm" class="space-y-6">
+            <!-- Personal Information Section -->
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                <div class="px-4 py-5 sm:px-6 bg-gray-50">
+                    <div class="section-header">
+                        <i class="fas fa-user"></i>
+                        <h3>Personal Information</h3>
+                    </div>
+                </div>
+                <div class="border-t border-gray-200 px-4 py-5 sm:p-6">
+                    <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                        <div class="sm:col-span-3">
+                            <label for="firstName" class="form-label required">First Name</label>
+                            <input type="text" id="firstName" class="form-input" placeholder="John" required>
+                        </div>
+                        <div class="sm:col-span-3">
+                            <label for="lastName" class="form-label required">Last Name</label>
+                            <input type="text" id="lastName" class="form-input" placeholder="Doe" required>
+                        </div>
+                        <div class="sm:col-span-3">
+                            <label for="phone" class="form-label required">Phone</label>
+                            <div class="mt-1 relative rounded-md shadow-sm">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <span class="text-gray-500 sm:text-sm">+63</span>
+                                </div>
+                                <input type="tel" id="phone" class="form-input pl-12" placeholder="912 345 6789" required>
+                            </div>
+                        </div>
+                        <div class="sm:col-span-3">
+                            <label for="email" class="form-label required">Email</label>
+                            <input type="email" id="email" class="form-input" placeholder="john.doe@example.com" required>
+                        </div>
+                        <div class="sm:col-span-6">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" id="address" class="form-input" placeholder="123 Main St">
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label for="city" class="form-label">City</label>
+                            <input type="text" id="city" class="form-input" placeholder="City">
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label for="state" class="form-label">State/Province</label>
+                            <input type="text" id="state" class="form-input" placeholder="State">
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label for="zip" class="form-label">ZIP/Postal Code</label>
+                            <input type="text" id="zip" class="form-input" placeholder="12345">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Billing Information Section -->
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                <div class="px-4 py-5 sm:px-6 bg-gray-50">
+                    <div class="section-header">
+                        <i class="fas fa-credit-card"></i>
+                        <h3>Billing Information</h3>
+                    </div>
+                </div>
+                <div class="border-t border-gray-200 px-4 py-5 sm:p-6">
+                    <div class="flex items-start mb-6">
+                        <div class="flex items-center h-5">
+                            <input id="sameAsCustomer" type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                        </div>
+                        <div class="ml-3 text-sm">
+                            <label for="sameAsCustomer" class="font-medium text-gray-700">Same as customer information</label>
+                            <p class="text-gray-500">Use the same details for billing information</p>
+                        </div>
+                    </div>
+                    <div id="billingFields" class="space-y-6">
+                        <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                            <div class="sm:col-span-3">
+                                <label for="billingFirstName" class="form-label">First Name</label>
+                                <input type="text" id="billingFirstName" class="form-input" placeholder="John">
+                            </div>
+                            <div class="sm:col-span-3">
+                                <label for="billingLastName" class="form-label">Last Name</label>
+                                <input type="text" id="billingLastName" class="form-input" placeholder="Doe">
+                            </div>
+                            <div class="sm:col-span-3">
+                                <label for="billingPhone" class="form-label">Phone</label>
+                                <div class="mt-1 relative rounded-md shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span class="text-gray-500 sm:text-sm">+63</span>
+                                    </div>
+                                    <input type="tel" id="billingPhone" class="form-input pl-12" placeholder="912 345 6789">
+                                </div>
+                            </div>
+                            <div class="sm:col-span-3">
+                                <label for="billingEmail" class="form-label">Email</label>
+                                <input type="email" id="billingEmail" class="form-input" placeholder="billing@example.com">
+                            </div>
+                            <div class="sm:col-span-6">
+                                <label for="billingAddress" class="form-label">Billing Address</label>
+                                <input type="text" id="billingAddress" class="form-input" placeholder="123 Billing St">
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label for="billingCity" class="form-label">City</label>
+                                <input type="text" id="billingCity" class="form-input" placeholder="City">
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label for="billingState" class="form-label">State/Province</label>
+                                <input type="text" id="billingState" class="form-input" placeholder="State">
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label for="billingZip" class="form-label">ZIP/Postal Code</label>
+                                <input type="text" id="billingZip" class="form-input" placeholder="12345">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preferences Section -->
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                <div class="px-4 py-5 sm:px-6 bg-gray-50">
+                    <div class="section-header">
+                        <i class="fas fa-cog"></i>
+                        <h3>Preferences</h3>
+                    </div>
+                </div>
+                <div class="px-4 py-5 sm:p-6">
+                    <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                        <div class="sm:col-span-3">
+                            <label for="clientSince" class="form-label">Client Since</label>
+                            <div class="relative mt-1">
+                                <input type="date" id="clientSince" class="form-input pl-3 pr-10 py-2" placeholder="Select date">
+                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                    <i class="far fa-calendar-alt text-gray-400"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sm:col-span-3">
+                            <label for="leadAcquiredDate" class="form-label">Lead Acquired Date</label>
+                            <div class="relative mt-1">
+                                <input type="date" id="leadAcquiredDate" class="form-input pl-3 pr-10 py-2" placeholder="Select date">
+                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                    <i class="far fa-calendar-alt text-gray-400"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sm:col-span-3">
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="preferredLanguage" class="block text-sm font-medium text-gray-700 mb-1">Preferred Language</label>
+                                    <select id="preferredLanguage" class="form-select">
+                                        <option value="en">English</option>
+                                        <option value="es">Spanish</option>
+                                        <option value="fr">French</option>
+                                        <option value="de">German</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sm:col-span-3">
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="preferredLanguage" class="block text-sm font-medium text-gray-700 mb-1">Preferred Communication</label>
+                                    <select id="preferredLanguage" class="form-select">
+                                        <option value="en">Email</option>
+                                        <option value="es">SMS</option>
+                                        <option value="fr">Phone</option>
+                                        <option value="de">All</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sm:col-span-3">
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="paymentTerms" class="block text-sm font-medium text-gray-700 mb-1">Payment Method</label>
+                                    <select id="paymentTerms" class="form-select">
+                                        <option value="en">Cash</option>
+                                        <option value="es">Credit</option>
+                                        <option value="fr">Credit Card</option>
+                                        <option value="de">Bank Transfer</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sm:col-span-3">
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="paymentTerms" class="block text-sm font-medium text-gray-700 mb-1">Payment Terms</label>
+                                    <select id="paymentTerms" class="form-select">
+                                        <option value="en">Weekly</option>
+                                        <option value="es">Monthly</option>
+                                        <option value="fr">Quarterly</option>
+                                        <option value="de">Yearly</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sm:col-span-3">
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="paymentTerms" class="block text-sm font-medium text-gray-700 mb-1">Invoice Frequency </label>
+                                    <select id="paymentTerms" class="form-select">
+                                        <option value="en">One-Time</option>
+                                        <option value="es">Weekly</option>
+                                        <option value="fr">Monthly</option>
+                                        <option value="de">Quarterly</option>
+                                        <option value="de">Yearly</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sm:col-span-3">
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="paymentTerms" class="block text-sm font-medium text-gray-700 mb-1">Taxable</label>
+                                    <select id="paymentTerms" class="form-select">
+                                        <option value="en">Yes</option>
+                                        <option value="es">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sm:col-span-3">
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="billingAddress" class="form-label">Tags</label>
+                                    <input type="text" id="billingAddress" class="form-input" placeholder="Tag1, Tag2">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sm:col-span-3">
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="billingAddress" class="form-label">Sales Person</label>
+                                    <input type="text" id="billingAddress" class="form-input" placeholder="John Doe">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sm:col-span-3">
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="billingAddress" class="form-label">Sales Person</label>
+                                    <input type="text" id="billingAddress" class="form-input" placeholder="John Doe">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                <!-- Custom Fields Section -->
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                <div class="px-4 py-5 sm:px-6 bg-gray-50">
+                    <div class="section-header">
+                        <i class="fas fa-plus-circle"></i>
+                        <h3>Custom Fields</h3>
+                    </div>
+                </div>
+                <div class="px-4 py-5 sm:p-6">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Field Name</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Value</th>
+                                    <th scope="col" class="relative px-6 py-3">
+                                        <span class="sr-only">Actions</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="customFieldsTable" class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <input type="text" class="form-input" placeholder="Field Name">
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <input type="text" class="form-input" placeholder="Value">
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <button type="button" class="text-red-600 hover:text-red-900 remove-field">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4">
+                        <button type="button" id="addFieldBtn" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-primary-700 bg-primary-100 hover:bg-primary-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                            <i class="fas fa-plus mr-2"></i> Add Field
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="flex space-x-3">
+                <button type="button" class="btn btn-outline border-gray-300 text-gray-700 hover:bg-gray-50">
+                    <i class="fas fa-times mr-2"></i> Cancel
+                </button>
+                <button type="submit" form="customerForm" class="btn btn-primary">
+                    <i class="fas fa-save mr-2"></i> Save Customer
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- JavaScript Dependencies -->
+    
+    <script>
+        // Copy billing info from personal info when checkbox is checked
+        document.getElementById('sameAsCustomer').addEventListener('change', function() {
+            const isChecked = this.checked;
+            const personalFields = {
+                'firstName': 'billingFirstName',
+                'lastName': 'billingLastName',
+                'phone': 'billingPhone',
+                'email': 'billingEmail',
+                'address': 'billingAddress',
+                'city': 'billingCity',
+                'state': 'billingState',
+                'zip': 'billingZip'
+            };
+
+            for (const [personalId, billingId] of Object.entries(personalFields)) {
+                const personalField = document.getElementById(personalId);
+                const billingField = document.getElementById(billingId);
+                
+                if (isChecked && personalField) {
+                    billingField.value = personalField.value;
+                    billingField.disabled = true;
+                    billingField.classList.add('bg-gray-100');
+                } else if (billingField) {
+                    billingField.disabled = false;
+                    billingField.classList.remove('bg-gray-100');
+                }
+            }
+        });
+
+        // Add new custom field row
+        document.getElementById('addFieldBtn').addEventListener('click', function() {
+            const tbody = document.getElementById('customFieldsTable');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <input type="text" class="form-input" placeholder="Field Name">
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <input type="text" class="form-input" placeholder="Value">
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <button type="button" class="text-red-600 hover:text-red-900 remove-field">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </td>
+            `;
+            tbody.appendChild(newRow);
+        });
+
+        // Remove custom field row
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.remove-field')) {
+                const row = e.target.closest('tr');
+                if (row) {
+                    row.remove();
+                } else if (e.target.closest('button').classList.contains('remove-field')) {
+                    e.target.closest('button').closest('tr').remove();
+                }
+            }
+        });
+
+        // Initialize date pickers
+        document.addEventListener('DOMContentLoaded', function() {
+            flatpickr("input[type='date']", {
+                dateFormat: "Y-m-d",
+                allowInput: true
+            });
+        });
+
+        // Handle form submission
+        document.getElementById('customerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add form validation and submission logic here
+            alert('Customer created successfully!');
+            // Uncomment the following line to submit the form
+            // this.submit();
+        });
+    </script>
+</body>
+</html>
