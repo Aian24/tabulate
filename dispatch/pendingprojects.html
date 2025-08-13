@@ -36,11 +36,15 @@
                         <i class="fas fa-chevron-down ml-1"></i>
                     </button>
                     <div id="actionsMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
-                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                            <i class="fas fa-file-invoice w-5"></i>
-                            <span>Create Invoice</span>
+                        <button id="setActiveBtn" class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-play w-5"></i>
+                            <span>Set Active</span>
                         </button>
-                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                        <button id="deactivateBtn" class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-pause w-5"></i>
+                            <span>Deactivate</span>
+                        </button>
+                        <button id="deleteBtn" class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
                             <i class="fas fa-trash-alt w-5"></i>
                             <span>Delete</span>
                         </button>
@@ -51,20 +55,20 @@
                         <span>More</span>
                         <i class="fas fa-chevron-down ml-1"></i>
                     </button>
-                    <div id="moreMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
-                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                            <i class="fas fa-cog w-5"></i>
-                            <span>Settings</span>
-                        </button>
-                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                            <i class="fas fa-chart-bar w-5"></i>
-                            <span>Report</span>
-                        </button>
-                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                            <i class="fas fa-history w-5"></i>
-                            <span>Audit Trail</span>
-                        </button>
-                    </div>
+                                            <div id="moreMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
+                            <button id="settingsBtn" class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                                <i class="fas fa-cog w-5"></i>
+                                <span>Settings</span>
+                            </button>
+                            <button id="reportBtn" class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                                <i class="fas fa-chart-bar w-5"></i>
+                                <span>Report</span>
+                            </button>
+                            <button id="auditTrailBtn" class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                                <i class="fas fa-history w-5"></i>
+                                <span>Audit Trail</span>
+                            </button>
+                        </div>
                 </div>
             </div>
         </div>
@@ -179,6 +183,11 @@
                 <table class="w-full min-w-[800px]">
                     <thead class="bg-gradient-to-r from-sky-500 to-blue-600 text-white">
                         <tr>
+                            <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="checkbox">
+                                <div class="flex items-center space-x-2">
+                                    <input type="checkbox" id="selectAllCheckbox" class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-300 mr-2">
+                                </div>
+                            </th>
                             <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="priority">
                                 <div class="flex items-center space-x-2">
                                     <span>Priority Type</span>
@@ -250,6 +259,9 @@
                     <tbody class="divide-y divide-gray-100">
                         <tr class="dispatch-card hover:bg-gradient-to-r hover:from-blue-50 hover:to-sky-50 transition-all duration-300 cursor-pointer" onclick="showJobDetailsModal(this)" data-route="101" data-address="1024 Elm St, Beverly Hills, CA" data-lat="34.0736" data-lng="-118.4004" data-customer="Emily Carter" data-notes="Customer requested early morning service. VIP customer - priority service required.">
                             <td class="px-6 py-4 whitespace-nowrap">
+                                <input type="checkbox" class="row-checkbox form-checkbox h-4 w-4 text-blue-600 rounded border-gray-300" data-route="101">
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="status-badge text-white text-xs font-semibold px-3 py-1 rounded-full">VIP</span>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
@@ -295,6 +307,9 @@
                             </td>
                         </tr>
                         <tr class="dispatch-card hover:bg-gradient-to-r hover:from-blue-50 hover:to-sky-50 transition-all duration-300 cursor-pointer" onclick="showJobDetailsModal(this)" data-route="202" data-address="221B Baker St, New York, NY" data-lat="40.7589" data-lng="-73.9851" data-customer="Michael Thompson" data-notes="Regular residential painting service. Customer prefers afternoon appointments.">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <input type="checkbox" class="row-checkbox form-checkbox h-4 w-4 text-blue-600 rounded border-gray-300" data-route="202">
+                            </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="status-badge text-white text-xs font-semibold px-3 py-1 rounded-full">Non-VIP</span>
                             </td>
@@ -411,25 +426,163 @@
         </div>
     </div>
 
-    <!-- Mobile Card View -->
+        <!-- Mobile Card View -->
     <div class="mobile-card-view hidden md:hidden max-w-sm mx-auto">
         <!-- Mobile cards will be rendered here -->
-                                </div>
+    </div>
+
+    <!-- Job Details Modal -->
+    <div id="jobDetailsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-xl shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden">
+            <!-- Modal Header -->
+            <div class="bg-gradient-to-r from-sky-500 to-blue-600 text-white px-6 py-4 flex justify-between items-center">
+                <h2 class="text-xl font-semibold">Job Details</h2>
+                <button id="closeJobModal" onclick="closeJobModal()" class="text-white hover:text-gray-200 text-2xl font-bold">&times;</button>
+            </div>
+            
+            <!-- Modal Content -->
+            <div class="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
+                <!-- Job Details Card -->
+                <div id="jobDetailsCard" class="bg-gray-50 rounded-lg p-4 mb-4">
+                    <h3 class="text-md font-semibold text-gray-800 mb-3 flex items-center">
+                        <i class="fas fa-info-circle text-blue-500 mr-2"></i>
+                        Current Job Information
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">Customer</label>
+                            <div id="customerName" class="text-sm text-gray-800 font-medium">-</div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">Address</label>
+                            <div id="jobAddress" class="text-sm text-gray-800">-</div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">Service</label>
+                            <div id="serviceCategory" class="text-sm text-gray-800">-</div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">Team</label>
+                            <div id="jobTeam" class="text-sm text-gray-800">-</div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">Start Date</label>
+                            <div id="startDate" class="text-sm text-gray-800">-</div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">Hours</label>
+                            <div id="budgetHours" class="text-sm text-gray-800">-</div>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <label class="block text-xs font-medium text-gray-600 mb-1">Notes</label>
+                        <div id="jobNotes" class="bg-white p-2 rounded border text-xs text-gray-700">
+                            -
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Update Details Form -->
+                <div id="updateDetailsForm" class="bg-white border border-gray-200 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-edit text-green-500 mr-2"></i>
+                        Update Job Details
+                    </h3>
+                    <form id="jobUpdateForm" class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="updatePriority" class="block text-sm font-medium text-gray-700 mb-1">Priority</label>
+                                <select id="updatePriority" name="priority" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                    <option value="Low">Low</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="High">High</option>
+                                    <option value="Urgent">Urgent</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="updateStatus" class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                                <select id="updateStatus" name="status" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                    <option value="Completed">Completed</option>
+                                    <option value="Cancelled">Cancelled</option>
+                                    <option value="Waiting List">Waiting List</option>
+                                    <option value="Skipped">Skipped</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="updateTeam" class="block text-sm font-medium text-gray-700 mb-1">Team</label>
+                                <select id="updateTeam" name="team" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                    <option value="Team Alpha">Team Alpha</option>
+                                    <option value="Team Beta">Team Beta</option>
+                                    <option value="Team Gamma">Team Gamma</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="updateStartDate" class="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+                                <input type="date" id="updateStartDate" name="startDate" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="updateBudgetHours" class="block text-sm font-medium text-gray-700 mb-1">Budget Hours (This Instance Only)</label>
+                                <input type="number" id="updateBudgetHours" name="budgetHours" step="0.5" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="bg-gray-50 px-6 py-4 flex justify-end gap-3 border-t border-gray-200">
+                <button id="cancelUpdate" onclick="closeJobModal()" class="px-4 py-2 text-sm text-white bg-red-500 hover:bg-red-600 rounded-lg transition-colors">
+                    <i class="fas fa-times mr-2"></i>Cancel
+                </button>
+                <button id="saveUpdate" class="px-4 py-2 text-sm text-white bg-blue-500 hover:bg-blue-600 rounded-lg transition-colors">
+                    <i class="fas fa-save mr-2"></i>Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Load JavaScript files -->
     <script src="../js/main.js"></script>
     <script src="../js/pendingprojects.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const moreBtn = document.getElementById('moreBtn');
-            const moreDropdown = document.getElementById('moreDropdown');
+            // Actions dropdown functionality
+            const actionsBtn = document.getElementById('actionsDropdown');
+            const actionsMenu = document.getElementById('actionsMenu');
+            
+            if (actionsBtn && actionsMenu) {
+                actionsBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    // Close more menu if open
+                    if (moreMenu) moreMenu.classList.add('hidden');
+                    actionsMenu.classList.toggle('hidden');
+                });
+            }
+
+            // More dropdown functionality
+            const moreBtn = document.getElementById('moreDropdown');
+            const moreMenu = document.getElementById('moreMenu');
+            
+            if (moreBtn && moreMenu) {
+                moreBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    // Close actions menu if open
+                    if (actionsMenu) actionsMenu.classList.add('hidden');
+                    moreMenu.classList.toggle('hidden');
+                });
+            }
+
+            // Close dropdowns when clicking outside
             document.addEventListener('click', function(event) {
-                if (moreBtn && moreDropdown) {
-                    if (moreBtn.contains(event.target)) {
-                        moreDropdown.classList.toggle('hidden');
-                    } else if (!moreDropdown.contains(event.target)) {
-                        moreDropdown.classList.add('hidden');
-                    }
+                if (actionsMenu && !actionsBtn.contains(event.target) && !actionsMenu.contains(event.target)) {
+                    actionsMenu.classList.add('hidden');
+                }
+                if (moreMenu && !moreBtn.contains(event.target) && !moreMenu.contains(event.target)) {
+                    moreMenu.classList.add('hidden');
                 }
             });
 
@@ -498,20 +651,27 @@
             // Helper function to get column index
             function getColumnIndex(columnName) {
                 const columnMap = {
-                    'priority': 1,
-                    'category': 2,
-                    'client': 3,
-                    'address': 4,
-                    'start-date': 5,
-                    'hours': 6,
-                    'distance': 7,
-                    'eta': 8,
-                    'team': 9,
-                    'status': 10,
-                    'notes': 11
+                    'checkbox': 1,
+                    'priority': 2,
+                    'category': 3,
+                    'client': 4,
+                    'address': 5,
+                    'start-date': 6,
+                    'hours': 7,
+                    'distance': 8,
+                    'eta': 9,
+                    'team': 10,
+                    'status': 11,
+                    'notes': 12
                 };
                 return columnMap[columnName] || 1;
             }
+            
+            // Initialize Actions and More button functionality
+            initializeActionsAndMore();
+            
+            // Initialize select all functionality
+            initializeSelectAll();
 
             // Address hover functionality
             document.addEventListener('DOMContentLoaded', function() {
@@ -562,15 +722,15 @@
             // Show address details modal
             function showAddressModal(address, route, row) {
                 // Get row data
-                const priority = row.querySelector('td:nth-child(1) span').textContent;
-                const category = row.querySelector('td:nth-child(2) span').textContent;
-                const client = row.querySelector('td:nth-child(3) span').textContent;
-                const startDate = row.querySelector('td:nth-child(5) span').textContent;
-                const hours = row.querySelector('td:nth-child(6) span').textContent;
-                const distance = row.querySelector('td:nth-child(7) span').textContent;
-                const eta = row.querySelector('td:nth-child(8) span').textContent;
-                const team = row.querySelector('td:nth-child(9) span').textContent;
-                const status = row.querySelector('td:nth-child(10) span').textContent;
+                const priority = row.querySelector('td:nth-child(2) span').textContent;
+                const category = row.querySelector('td:nth-child(3) span').textContent;
+                const client = row.querySelector('td:nth-child(4) span').textContent;
+                const startDate = row.querySelector('td:nth-child(6) span').textContent;
+                const hours = row.querySelector('td:nth-child(7) span').textContent;
+                const distance = row.querySelector('td:nth-child(8) span').textContent;
+                const eta = row.querySelector('td:nth-child(9) span').textContent;
+                const team = row.querySelector('td:nth-child(10) span').textContent;
+                const status = row.querySelector('td:nth-child(11) span').textContent;
                 
                 // Create modal if it doesn't exist
                 let modal = document.getElementById('addressModal');
@@ -866,10 +1026,10 @@
                 
                 toast.classList.remove('hidden');
                 
-                // Auto hide after 3 seconds
-                setTimeout(() => {
-                    toast.classList.add('hidden');
-                }, 3000);
+                            // Auto hide after 5 seconds
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 5000);
             }
         };
         
@@ -989,6 +1149,627 @@
             } else {
                 alert('Please enter a note');
             }
+        }
+    </script>
+    
+    <!-- Actions and More functionality -->
+    <script>
+        // Initialize Actions and More button functionality
+        function initializeActionsAndMore() {
+            // Actions buttons
+            const setActiveBtn = document.getElementById('setActiveBtn');
+            const deactivateBtn = document.getElementById('deactivateBtn');
+            const deleteBtn = document.getElementById('deleteBtn');
+
+            // More buttons
+            const settingsBtn = document.getElementById('settingsBtn');
+            const reportBtn = document.getElementById('reportBtn');
+            const auditTrailBtn = document.getElementById('auditTrailBtn');
+
+            // Set Active functionality
+            if (setActiveBtn) {
+                setActiveBtn.addEventListener('click', function() {
+                    const selectedRoutes = getSelectedRoutes();
+                    if (selectedRoutes.length === 0) {
+                        showSuccessModal('Please select at least one project to activate', 'error');
+                        return;
+                    }
+                    
+                    // Static functionality - in real app this would call an API
+                    selectedRoutes.forEach(route => {
+                        const row = document.querySelector(`tr[data-route="${route}"]`);
+                        if (row) {
+                            // Update priority to VIP
+                            const priorityCell = row.querySelector('td:nth-child(2)');
+                            if (priorityCell) {
+                                priorityCell.innerHTML = '<span class="status-badge text-white text-xs font-semibold px-3 py-1 rounded-full">VIP</span>';
+                            }
+                            // Update status to Active
+                            const statusCell = row.querySelector('td:nth-child(11)');
+                            if (statusCell) {
+                                statusCell.innerHTML = '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span>';
+                            }
+                        }
+                    });
+                    
+                    showActivateConfirmation(selectedRoutes.length, () => {
+                        // Static functionality - in real app this would call an API
+                        selectedRoutes.forEach(route => {
+                            const row = document.querySelector(`tr[data-route="${route}"]`);
+                            if (row) {
+                                // Update priority to VIP
+                                const priorityCell = row.querySelector('td:nth-child(2)');
+                                if (priorityCell) {
+                                    priorityCell.innerHTML = '<span class="status-badge text-white text-xs font-semibold px-3 py-1 rounded-full">VIP</span>';
+                                }
+                                // Update status to Active
+                                const statusCell = row.querySelector('td:nth-child(11)');
+                                if (statusCell) {
+                                    statusCell.innerHTML = '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span>';
+                                }
+                            }
+                        });
+                        
+                        showSuccessModal(`Successfully activated ${selectedRoutes.length} project(s)`, 'success');
+                        clearSelection();
+                        closeDropdowns();
+                    });
+                });
+            }
+
+            // Deactivate functionality
+            if (deactivateBtn) {
+                deactivateBtn.addEventListener('click', function() {
+                    const selectedRoutes = getSelectedRoutes();
+                    if (selectedRoutes.length === 0) {
+                        showSuccessModal('Please select at least one project to deactivate', 'error');
+                        return;
+                    }
+                    
+                    // Static functionality - in real app this would call an API
+                    selectedRoutes.forEach(route => {
+                        const row = document.querySelector(`tr[data-route="${route}"]`);
+                        if (row) {
+                            // Update priority to Non-VIP
+                            const priorityCell = row.querySelector('td:nth-child(2)');
+                            if (priorityCell) {
+                                priorityCell.innerHTML = '<span class="status-badge text-white text-xs font-semibold px-3 py-1 rounded-full">Non-VIP</span>';
+                            }
+                            // Update status to Pending
+                            const statusCell = row.querySelector('td:nth-child(11)');
+                            if (statusCell) {
+                                statusCell.innerHTML = '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Pending</span>';
+                            }
+                        }
+                    });
+                    
+                    showDeactivateConfirmation(selectedRoutes.length, () => {
+                        // Static functionality - in real app this would call an API
+                        selectedRoutes.forEach(route => {
+                            const row = document.querySelector(`tr[data-route="${route}"]`);
+                            if (row) {
+                                // Update priority to Non-VIP
+                                const priorityCell = row.querySelector('td:nth-child(2)');
+                                if (priorityCell) {
+                                    priorityCell.innerHTML = '<span class="status-badge text-white text-xs font-semibold px-3 py-1 rounded-full">Non-VIP</span>';
+                                }
+                                // Update status to Pending
+                                const statusCell = row.querySelector('td:nth-child(11)');
+                                if (statusCell) {
+                                    statusCell.innerHTML = '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Pending</span>';
+                                }
+                            }
+                        });
+                        
+                        showSuccessModal(`Successfully deactivated ${selectedRoutes.length} project(s)`, 'success');
+                        clearSelection();
+                        closeDropdowns();
+                    });
+                });
+            }
+
+            // Delete functionality
+            if (deleteBtn) {
+                deleteBtn.addEventListener('click', function() {
+                    const selectedRoutes = getSelectedRoutes();
+                    if (selectedRoutes.length === 0) {
+                        showSuccessModal('Please select at least one project to delete', 'error');
+                        return;
+                    }
+                    
+                    showDeleteConfirmation(selectedRoutes.length, () => {
+                        // Static functionality - in real app this would call an API
+                        selectedRoutes.forEach(route => {
+                            const row = document.querySelector(`tr[data-route="${route}"]`);
+                            if (row) {
+                                row.remove();
+                            }
+                        });
+                        
+                        showSuccessModal(`Successfully deleted ${selectedRoutes.length} project(s)`, 'success');
+                        clearSelection();
+                        closeDropdowns();
+                    });
+                });
+            }
+
+            // Settings functionality
+            if (settingsBtn) {
+                settingsBtn.addEventListener('click', function() {
+                    showSuccessModal('Settings page would open here', 'success');
+                    closeDropdowns();
+                    // In real app, this would navigate to settings page or open settings modal
+                });
+            }
+
+            // Report functionality
+            if (reportBtn) {
+                reportBtn.addEventListener('click', function() {
+                    showSuccessModal('Report generation started', 'success');
+                    closeDropdowns();
+                    // In real app, this would generate and download a report
+                });
+            }
+
+            // Audit Trail functionality
+            if (auditTrailBtn) {
+                auditTrailBtn.addEventListener('click', function() {
+                    showSuccessModal('Audit trail would open here', 'success');
+                    closeDropdowns();
+                    // In real app, this would open audit trail modal or page
+                });
+            }
+        }
+
+        // Helper functions for Actions and More
+        function getSelectedRoutes() {
+            const selectedCheckboxes = document.querySelectorAll('.row-checkbox:checked');
+            return Array.from(selectedCheckboxes).map(checkbox => checkbox.getAttribute('data-route'));
+        }
+
+        function clearSelection() {
+            const allCheckboxes = document.querySelectorAll('.row-checkbox');
+            allCheckboxes.forEach(checkbox => checkbox.checked = false);
+            
+            const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+            if (selectAllCheckbox) {
+                selectAllCheckbox.checked = false;
+                selectAllCheckbox.indeterminate = false;
+            }
+        }
+
+        // Close all dropdowns
+        function closeDropdowns() {
+            const actionsMenu = document.getElementById('actionsMenu');
+            const moreMenu = document.getElementById('moreMenu');
+            
+            if (actionsMenu) actionsMenu.classList.add('hidden');
+            if (moreMenu) moreMenu.classList.add('hidden');
+        }
+
+        // Show success/error modal
+        function showSuccessModal(message, type = 'success') {
+            // Remove existing modal if any
+            const existingModal = document.querySelector('.success-modal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+
+            const modal = document.createElement('div');
+            modal.className = 'success-modal fixed inset-0 bg-black bg-opacity-0 flex items-center justify-center z-50 transition-all duration-300';
+            
+            const iconClass = type === 'success' ? 'fas fa-check-circle text-green-500' : 'fas fa-exclamation-circle text-red-500';
+            const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
+            
+            modal.innerHTML = `
+                <div class="bg-white rounded-lg shadow-xl p-6 w-96 max-w-[90vw] transform scale-75 opacity-0 transition-all duration-300">
+                    <div class="text-center">
+                        <i class="${iconClass} text-4xl mb-4 animate-bounce"></i>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">${type === 'success' ? 'Success!' : 'Error!'}</h3>
+                        <p class="text-gray-600 mb-6">${message}</p>
+                        <button onclick="closeSuccessModal(this)" class="px-6 py-2 ${bgColor} text-white rounded-lg hover:opacity-90 transition-all duration-200 hover:scale-105">
+                            OK
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Animate in
+            requestAnimationFrame(() => {
+                modal.classList.remove('bg-opacity-0');
+                modal.classList.add('bg-opacity-50');
+                const modalContent = modal.querySelector('div');
+                modalContent.classList.remove('scale-75', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            });
+            
+            // Auto hide after 3 seconds
+            setTimeout(() => {
+                if (modal.parentNode) {
+                    closeSuccessModal(modal);
+                }
+            }, 3000);
+        }
+
+        // Close success modal with animation
+        function closeSuccessModal(element) {
+            const modal = element.closest('.success-modal');
+            if (modal) {
+                const modalContent = modal.querySelector('div');
+                modalContent.classList.add('scale-95', 'opacity-0');
+                modal.classList.add('bg-opacity-0');
+                
+                setTimeout(() => {
+                    if (modal.parentNode) {
+                        modal.remove();
+                    }
+                }, 200);
+            }
+        }
+
+        // Show delete confirmation modal
+        function showDeleteConfirmation(count, onConfirm) {
+            const modal = document.createElement('div');
+            modal.className = 'delete-modal fixed inset-0 bg-black bg-opacity-0 flex items-center justify-center z-50 transition-all duration-300';
+            
+            modal.innerHTML = `
+                <div class="bg-white rounded-lg shadow-xl p-6 w-96 max-w-[90vw] transform scale-75 opacity-0 transition-all duration-300">
+                    <div class="text-center">
+                        <i class="fas fa-exclamation-triangle text-yellow-500 text-4xl mb-4 animate-pulse"></i>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Confirm Delete</h3>
+                        <p class="text-gray-600 mb-6">Are you sure you want to delete ${count} selected project(s)?</p>
+                        <div class="flex gap-3 justify-center">
+                            <button onclick="closeDeleteModal(this)" class="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-all duration-200 hover:scale-105">
+                                Cancel
+                            </button>
+                            <button onclick="confirmDelete(this, ${count})" class="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all duration-200 hover:scale-105">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Animate in
+            requestAnimationFrame(() => {
+                modal.classList.remove('bg-opacity-0');
+                modal.classList.add('bg-opacity-50');
+                const modalContent = modal.querySelector('div');
+                modalContent.classList.remove('scale-75', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            });
+            
+            // Store the callback for the confirm button
+            window.confirmDelete = function(button, count) {
+                closeDeleteModal(button);
+                onConfirm();
+            };
+        }
+
+        // Close delete modal with animation
+        function closeDeleteModal(element) {
+            const modal = element.closest('.delete-modal');
+            if (modal) {
+                const modalContent = modal.querySelector('div');
+                modalContent.classList.add('scale-95', 'opacity-0');
+                modal.classList.add('bg-opacity-0');
+                
+                setTimeout(() => {
+                    if (modal.parentNode) {
+                        modal.remove();
+                    }
+                }, 200);
+            }
+        }
+
+        // Show activate confirmation modal
+        function showActivateConfirmation(count, onConfirm) {
+            const modal = document.createElement('div');
+            modal.className = 'activate-modal fixed inset-0 bg-black bg-opacity-0 flex items-center justify-center z-50 transition-all duration-300';
+            
+            modal.innerHTML = `
+                <div class="bg-white rounded-lg shadow-xl p-6 w-96 max-w-[90vw] transform scale-75 opacity-0 transition-all duration-300">
+                    <div class="text-center">
+                        <i class="fas fa-play text-green-500 text-4xl mb-4 animate-pulse"></i>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Confirm Activation</h3>
+                        <p class="text-gray-600 mb-6">Are you sure you want to activate ${count} selected project(s)?</p>
+                        <div class="flex gap-3 justify-center">
+                            <button onclick="closeActivateModal(this)" class="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-all duration-200 hover:scale-105">
+                                Cancel
+                            </button>
+                            <button onclick="confirmActivate(this, ${count})" class="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-all duration-200 hover:scale-105">
+                                Activate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Animate in
+            requestAnimationFrame(() => {
+                modal.classList.remove('bg-opacity-0');
+                modal.classList.add('bg-opacity-50');
+                const modalContent = modal.querySelector('div');
+                modalContent.classList.remove('scale-75', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            });
+            
+            // Store the callback for the confirm button
+            window.confirmActivate = function(button, count) {
+                closeActivateModal(button);
+                onConfirm();
+            };
+        }
+
+        // Close activate modal with animation
+        function closeActivateModal(element) {
+            const modal = element.closest('.activate-modal');
+            if (modal) {
+                const modalContent = modal.querySelector('div');
+                modalContent.classList.add('scale-95', 'opacity-0');
+                modal.classList.add('bg-opacity-0');
+                
+                setTimeout(() => {
+                    if (modal.parentNode) {
+                        modal.remove();
+                    }
+                }, 200);
+            }
+        }
+
+        // Show deactivate confirmation modal
+        function showDeactivateConfirmation(count, onConfirm) {
+            const modal = document.createElement('div');
+            modal.className = 'deactivate-modal fixed inset-0 bg-black bg-opacity-0 flex items-center justify-center z-50 transition-all duration-300';
+            
+            modal.innerHTML = `
+                <div class="bg-white rounded-lg shadow-xl p-6 w-96 max-w-[90vw] transform scale-75 opacity-0 transition-all duration-300">
+                    <div class="text-center">
+                        <i class="fas fa-pause text-yellow-500 text-4xl mb-4 animate-pulse"></i>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Confirm Deactivation</h3>
+                        <p class="text-gray-600 mb-6">Are you sure you want to deactivate ${count} selected project(s)?</p>
+                        <div class="flex gap-3 justify-center">
+                            <button onclick="closeDeactivateModal(this)" class="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-all duration-200 hover:scale-105">
+                                Cancel
+                            </button>
+                            <button onclick="confirmDeactivate(this, ${count})" class="px-6 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-all duration-200 hover:scale-105">
+                                Deactivate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Animate in
+            requestAnimationFrame(() => {
+                modal.classList.remove('bg-opacity-0');
+                modal.classList.add('bg-opacity-50');
+                const modalContent = modal.querySelector('div');
+                modalContent.classList.remove('scale-75', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            });
+            
+            // Store the callback for the confirm button
+            window.confirmDeactivate = function(button, count) {
+                closeDeactivateModal(button);
+                onConfirm();
+            };
+        }
+
+        // Close deactivate modal with animation
+        function closeDeactivateModal(element) {
+            const modal = element.closest('.deactivate-modal');
+            if (modal) {
+                const modalContent = modal.querySelector('div');
+                modalContent.classList.add('scale-95', 'opacity-0');
+                modal.classList.add('bg-opacity-0');
+                
+                setTimeout(() => {
+                    if (modal.parentNode) {
+                        modal.remove();
+                    }
+                }, 200);
+            }
+        }
+
+        // Initialize select all functionality
+        function initializeSelectAll() {
+            const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+            const rowCheckboxes = document.querySelectorAll('.row-checkbox');
+
+            if (selectAllCheckbox) {
+                selectAllCheckbox.addEventListener('change', function() {
+                    rowCheckboxes.forEach(checkbox => {
+                        checkbox.checked = this.checked;
+                    });
+                });
+            }
+
+            // Update select all checkbox state when individual checkboxes change
+            rowCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const checkedCount = document.querySelectorAll('.row-checkbox:checked').length;
+                    const totalCount = rowCheckboxes.length;
+                    
+                    if (checkedCount === 0) {
+                        selectAllCheckbox.checked = false;
+                        selectAllCheckbox.indeterminate = false;
+                    } else if (checkedCount === totalCount) {
+                        selectAllCheckbox.checked = true;
+                        selectAllCheckbox.indeterminate = false;
+                    } else {
+                        selectAllCheckbox.checked = false;
+                        selectAllCheckbox.indeterminate = true;
+                    }
+                });
+            });
+
+            // Add click handlers to table rows for update modal
+            const tableRows = document.querySelectorAll('tbody tr');
+            tableRows.forEach(row => {
+                row.style.cursor = 'pointer';
+                row.addEventListener('click', function(e) {
+                    // Don't trigger if clicking on checkboxes or buttons
+                    if (e.target.closest('input[type="checkbox"]') || e.target.closest('button')) {
+                        return;
+                    }
+                    showProjectUpdateModal(this);
+                });
+            });
+
+            // Initialize modal functionality
+            initializeModalFunctionality();
+        }
+
+        // Initialize modal functionality
+        function initializeModalFunctionality() {
+            const modal = document.getElementById('jobDetailsModal');
+            const closeBtn = document.getElementById('closeJobModal');
+            const cancelBtn = document.getElementById('cancelUpdate');
+            const saveBtn = document.getElementById('saveUpdate');
+            
+            // Close button
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeJobModal);
+            }
+            
+            // Cancel button
+            if (cancelBtn) {
+                cancelBtn.addEventListener('click', closeJobModal);
+            }
+            
+            // Save button
+            if (saveBtn) {
+                saveBtn.addEventListener('click', function() {
+                    // Get form data
+                    const priority = document.getElementById('updatePriority').value;
+                    const status = document.getElementById('updateStatus').value;
+                    const team = document.getElementById('updateTeam').value;
+                    const startDate = document.getElementById('updateStartDate').value;
+                    const budgetHours = document.getElementById('updateBudgetHours').value;
+                    
+                    // Get the current route from the customer name or create a unique identifier
+                    const customerName = document.getElementById('customerName').textContent;
+                    const route = document.querySelector(`tr[data-route]`)?.getAttribute('data-route') || 'unknown';
+                    
+                    // Update the row data
+                    const row = document.querySelector(`tr[data-route="${route}"]`);
+                    if (row) {
+                        const priorityCell = row.querySelector('td:nth-child(2)');
+                        const teamCell = row.querySelector('td:nth-child(10)');
+                        const startDateCell = row.querySelector('td:nth-child(6)');
+                        const hoursCell = row.querySelector('td:nth-child(7)');
+
+                        if (priorityCell) priorityCell.innerHTML = `<span class="status-badge text-white text-xs font-semibold px-3 py-1 rounded-full">${priority}</span>`;
+                        if (teamCell) teamCell.textContent = team;
+                        if (startDateCell) startDateCell.textContent = startDate;
+                        if (hoursCell) hoursCell.textContent = budgetHours;
+                    }
+                    
+                    // Show success message
+                    showSuccessModal('Job updated successfully!', 'success');
+                    
+                    // Close modal
+                    closeJobModal();
+                });
+            }
+            
+            // Close modal when clicking outside
+            if (modal) {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        closeJobModal();
+                    }
+                });
+            }
+        }
+
+        // Global functions
+        window.closeJobModal = function() {
+            const modal = document.getElementById('jobDetailsModal');
+            if (modal) {
+                modal.classList.add('hidden');
+            }
+        };
+
+        // Show project update modal
+        function showProjectUpdateModal(row) {
+            const route = row.getAttribute('data-route');
+            const client = row.querySelector('td:nth-child(4)')?.textContent || 'N/A';
+            const address = row.querySelector('td:nth-child(5)')?.textContent || 'N/A';
+            const category = row.querySelector('td:nth-child(3)')?.textContent || 'General';
+            const team = row.querySelector('td:nth-child(10)')?.textContent || 'Unassigned';
+            const startDate = row.querySelector('td:nth-child(6)')?.textContent || 'N/A';
+            const hours = row.querySelector('td:nth-child(7)')?.textContent || '0';
+            const priority = row.querySelector('td:nth-child(2) .status-badge')?.textContent || 'Standard';
+
+            // Populate the job details card
+            document.getElementById('customerName').textContent = client;
+            document.getElementById('jobAddress').textContent = address;
+            document.getElementById('serviceCategory').textContent = category;
+            document.getElementById('jobTeam').textContent = team;
+            document.getElementById('startDate').textContent = startDate;
+            document.getElementById('budgetHours').textContent = hours;
+            document.getElementById('jobNotes').textContent = `Job ${route} for ${team}. ${priority} priority service.`;
+            
+            // Populate the update form
+            document.getElementById('updatePriority').value = priority;
+            document.getElementById('updateStatus').value = 'Completed'; // Default status
+            document.getElementById('updateTeam').value = team;
+            document.getElementById('updateStartDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('updateBudgetHours').value = parseFloat(hours);
+            
+            // Show the modal
+            document.getElementById('jobDetailsModal').classList.remove('hidden');
+        }
+
+        // Toast notification function
+        function showToast(message, type = 'success') {
+            // Create toast if it doesn't exist
+            let toast = document.querySelector('.toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.className = 'toast fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 flex items-center space-x-3 border-l-4 border-green-500 z-50';
+                toast.innerHTML = `
+                    <i class="fas fa-check-circle text-green-500 text-xl"></i>
+                    <div>
+                        <h4 class="font-medium text-gray-800">Success!</h4>
+                        <p class="text-sm text-gray-600">${message}</p>
+                    </div>
+                    <button class="text-gray-400 hover:text-gray-600 ml-4" onclick="this.parentElement.remove()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                document.body.appendChild(toast);
+            } else {
+                const messageEl = toast.querySelector('p');
+                const icon = toast.querySelector('i');
+                
+                messageEl.textContent = message;
+                
+                if (type === 'success') {
+                    icon.className = 'fas fa-check-circle text-green-500 text-xl';
+                    toast.className = 'toast fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 flex items-center space-x-3 border-l-4 border-green-500 z-50';
+                } else if (type === 'error') {
+                    icon.className = 'fas fa-exclamation-circle text-red-500 text-xl';
+                    toast.className = 'toast fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 flex items-center space-x-3 border-l-4 border-red-500 z-50';
+                }
+            }
+            
+            toast.classList.remove('hidden');
+            
+            // Auto hide after 3 seconds
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
         }
     </script>
 </body>
