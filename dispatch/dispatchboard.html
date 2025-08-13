@@ -43,11 +43,15 @@
                             <i class="fas fa-chevron-down ml-1"></i>
                         </button>
                         <div id="actionsMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
-                            <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                                <i class="fas fa-file-invoice w-5"></i>
-                                <span>Create Invoice</span>
+                            <button id="setActiveBtn" class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                                <i class="fas fa-play w-5"></i>
+                                <span>Set Active</span>
                             </button>
-                            <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <button id="deactivateBtn" class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                                <i class="fas fa-pause w-5"></i>
+                                <span>Deactivate</span>
+                            </button>
+                            <button id="deleteBtn" class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
                                 <i class="fas fa-trash-alt w-5"></i>
                                 <span>Delete</span>
                             </button>
@@ -59,15 +63,15 @@
                             <i class="fas fa-chevron-down ml-1"></i>
                         </button>
                         <div id="moreMenu" class="hidden absolute right-0 mt-2 w-max bg-white rounded-lg shadow-lg py-2 z-10">
-                            <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <button id="settingsBtn" class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
                                 <i class="fas fa-cog w-5"></i>
                                 <span>Settings</span>
                             </button>
-                            <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <button id="reportBtn" class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
                                 <i class="fas fa-chart-bar w-5"></i>
                                 <span>Report</span>
                             </button>
-                            <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <button id="auditTrailBtn" class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
                                 <i class="fas fa-history w-5"></i>
                                 <span>Audit Trail</span>
                             </button>
@@ -220,9 +224,13 @@
                         <table class="w-full">
                             <thead class="bg-gradient-to-r from-sky-500 to-blue-600 text-white">
                                 <tr>
+                                                                <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="checkbox">
+                                <div class="flex items-center space-x-2">
+                                    <input type="checkbox" id="selectAllCheckbox" class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-300 mr-2">
+                                </div>
+                            </th>
                                     <th class="px-6 py-4 text-left text-sm font-semibold draggable-header" draggable="true" data-column="team">
                                         <div class="flex items-center space-x-2">
-                                            <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-300 mr-2">
                                             <span>Team</span>
                                             <i class="fas fa-sort text-xs opacity-70"></i>
                                         </div>
@@ -253,7 +261,11 @@
                                 <tr class="team-row bg-gradient-to-r from-blue-50 to-sky-50 border-l-4 border-blue-500" data-team="Team Alpha">
                                     <td class="px-6 py-4 text-sm text-gray-900 font-semibold">
                                         <div class="flex items-center space-x-3">
-                                            <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-300 mr-2">
+                                            <input type="checkbox" class="row-checkbox form-checkbox h-4 w-4 text-blue-600 rounded border-gray-300 mr-2" data-team="Team Alpha">
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-900 font-semibold">
+                                        <div class="flex items-center space-x-3">
                                             <button class="team-expand-btn text-blue-600 hover:text-blue-800 transition-colors" data-team="Team Alpha">
                                                 <i class="fas fa-chevron-right"></i>
                                             </button>
@@ -390,7 +402,11 @@
                                 <tr class="team-row bg-gradient-to-r from-green-50 to-emerald-50 border-l-4 border-green-500" data-team="Team Beta">
                                     <td class="px-6 py-4 text-sm text-gray-900 font-semibold">
                                         <div class="flex items-center space-x-3">
-                                            <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-300 mr-2">
+                                            <input type="checkbox" class="row-checkbox form-checkbox h-4 w-4 text-blue-600 rounded border-gray-300 mr-2" data-team="Team Beta">
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-900 font-semibold">
+                                        <div class="flex items-center space-x-3">
                                             <button class="team-expand-btn text-green-600 hover:text-green-800 transition-colors" data-team="Team Beta">
                                                 <i class="fas fa-chevron-right"></i>
                                             </button>
@@ -484,7 +500,11 @@
                                 <tr class="team-row bg-gradient-to-r from-purple-50 to-indigo-50 border-l-4 border-purple-500" data-team="Team Gamma">
                                     <td class="px-6 py-4 text-sm text-gray-900 font-semibold">
                                         <div class="flex items-center space-x-3">
-                                            <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-300 mr-2">
+                                            <input type="checkbox" class="row-checkbox form-checkbox h-4 w-4 text-blue-600 rounded border-gray-300 mr-2" data-team="Team Gamma">
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-900 font-semibold">
+                                        <div class="flex items-center space-x-3">
                                             <button class="team-expand-btn text-purple-600 hover:text-purple-800 transition-colors" data-team="Team Gamma">
                                                 <i class="fas fa-chevron-right"></i>
                                             </button>
@@ -772,15 +792,39 @@
     <script src="../js/dispatchboard.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Actions dropdown functionality
+            const actionsBtn = document.getElementById('actionsDropdown');
+            const actionsMenu = document.getElementById('actionsMenu');
+            
+            if (actionsBtn && actionsMenu) {
+                actionsBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    // Close more menu if open
+                    if (moreMenu) moreMenu.classList.add('hidden');
+                    actionsMenu.classList.toggle('hidden');
+                });
+            }
+
+            // More dropdown functionality
             const moreBtn = document.getElementById('moreDropdown');
-            const moreDropdown = document.getElementById('moreMenu');
+            const moreMenu = document.getElementById('moreMenu');
+            
+            if (moreBtn && moreMenu) {
+                moreBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    // Close actions menu if open
+                    if (actionsMenu) actionsMenu.classList.add('hidden');
+                    moreMenu.classList.toggle('hidden');
+                });
+            }
+
+            // Close dropdowns when clicking outside
             document.addEventListener('click', function(event) {
-                if (moreBtn && moreDropdown) {
-                    if (moreBtn.contains(event.target)) {
-                        moreDropdown.classList.toggle('hidden');
-                    } else if (!moreDropdown.contains(event.target)) {
-                        moreDropdown.classList.add('hidden');
-                    }
+                if (actionsMenu && !actionsBtn.contains(event.target) && !actionsMenu.contains(event.target)) {
+                    actionsMenu.classList.add('hidden');
+                }
+                if (moreMenu && !moreBtn.contains(event.target) && !moreMenu.contains(event.target)) {
+                    moreMenu.classList.add('hidden');
                 }
             });
 
@@ -850,18 +894,10 @@
             function getColumnIndex(columnName) {
                 const columnMap = {
                     'checkbox': 1,
-                    'route': 2,
-                    'priority': 3,
-                    'category': 4,
-                    'client': 5,
-                    'address': 6,
-                    'start-date': 7,
-                    'hours': 8,
-                    'distance': 9,
-                    'eta': 10,
-                    'team': 11,
-                    'status': 12,
-                    'notes': 13
+                    'team': 2,
+                    'jobs-count': 3,
+                    'total-hours': 4,
+                    'status': 5
                 };
                 return columnMap[columnName] || 1;
             }
@@ -879,6 +915,12 @@
             
             // Initialize map controls properly
             initializeMapControls();
+            
+            // Initialize Actions and More functionality
+            initializeActionsAndMore();
+            
+            // Initialize select all functionality
+            initializeSelectAll();
         });
 
         // Team expansion functionality
@@ -1032,6 +1074,419 @@
             }
         }
 
+        // Initialize Actions and More button functionality
+        function initializeActionsAndMore() {
+            // Actions buttons
+            const setActiveBtn = document.getElementById('setActiveBtn');
+            const deactivateBtn = document.getElementById('deactivateBtn');
+            const deleteBtn = document.getElementById('deleteBtn');
+
+            // More buttons
+            const settingsBtn = document.getElementById('settingsBtn');
+            const reportBtn = document.getElementById('reportBtn');
+            const auditTrailBtn = document.getElementById('auditTrailBtn');
+
+            // Set Active functionality
+            if (setActiveBtn) {
+                setActiveBtn.addEventListener('click', function() {
+                    const selectedTeams = getSelectedTeams();
+                    if (selectedTeams.length === 0) {
+                        showSuccessModal('Please select at least one team to activate', 'error');
+                        return;
+                    }
+                    
+                    showActivateConfirmation(selectedTeams.length, () => {
+                        // Static functionality - in real app this would call an API
+                        selectedTeams.forEach(team => {
+                            const teamRow = document.querySelector(`tr[data-team="${team}"]`);
+                            if (teamRow) {
+                                const statusCell = teamRow.querySelector('td:last-child');
+                                if (statusCell) {
+                                    statusCell.innerHTML = '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span>';
+                                }
+                            }
+                        });
+                        
+                        showSuccessModal(`Successfully activated ${selectedTeams.length} team(s)`, 'success');
+                        clearSelection();
+                        closeDropdowns();
+                    });
+                });
+            }
+
+            // Deactivate functionality
+            if (deactivateBtn) {
+                deactivateBtn.addEventListener('click', function() {
+                    const selectedTeams = getSelectedTeams();
+                    if (selectedTeams.length === 0) {
+                        showSuccessModal('Please select at least one team to deactivate', 'error');
+                        return;
+                    }
+                    
+                    showDeactivateConfirmation(selectedTeams.length, () => {
+                        // Static functionality - in real app this would call an API
+                        selectedTeams.forEach(team => {
+                            const teamRow = document.querySelector(`tr[data-team="${team}"]`);
+                            if (teamRow) {
+                                const statusCell = teamRow.querySelector('td:last-child');
+                                if (statusCell) {
+                                    statusCell.innerHTML = '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Pending</span>';
+                                }
+                            }
+                        });
+                        
+                        showSuccessModal(`Successfully deactivated ${selectedTeams.length} team(s)`, 'success');
+                        clearSelection();
+                        closeDropdowns();
+                    });
+                });
+            }
+
+            // Delete functionality
+            if (deleteBtn) {
+                deleteBtn.addEventListener('click', function() {
+                    const selectedTeams = getSelectedTeams();
+                    if (selectedTeams.length === 0) {
+                        showSuccessModal('Please select at least one team to delete', 'error');
+                        return;
+                    }
+                    
+                    showDeleteConfirmation(selectedTeams.length, () => {
+                        // Static functionality - in real app this would call an API
+                        selectedTeams.forEach(team => {
+                            const teamRow = document.querySelector(`tr[data-team="${team}"]`);
+                            if (teamRow) {
+                                teamRow.remove();
+                            }
+                        });
+                        
+                        showSuccessModal(`Successfully deleted ${selectedTeams.length} team(s)`, 'success');
+                        clearSelection();
+                        closeDropdowns();
+                    });
+                });
+            }
+
+            // Settings functionality
+            if (settingsBtn) {
+                settingsBtn.addEventListener('click', function() {
+                    showSuccessModal('Settings page would open here', 'success');
+                    closeDropdowns();
+                    // In real app, this would navigate to settings page or open settings modal
+                });
+            }
+
+            // Report functionality
+            if (reportBtn) {
+                reportBtn.addEventListener('click', function() {
+                    showSuccessModal('Report generation started', 'success');
+                    closeDropdowns();
+                    // In real app, this would generate and download a report
+                });
+            }
+
+            // Audit Trail functionality
+            if (auditTrailBtn) {
+                auditTrailBtn.addEventListener('click', function() {
+                    showSuccessModal('Audit trail would open here', 'success');
+                    closeDropdowns();
+                    // In real app, this would open audit trail modal or page
+                });
+            }
+        }
+
+        // Helper functions for Actions and More
+        function getSelectedTeams() {
+            const selectedCheckboxes = document.querySelectorAll('.row-checkbox:checked');
+            return Array.from(selectedCheckboxes).map(checkbox => checkbox.getAttribute('data-team'));
+        }
+
+        function clearSelection() {
+            const allCheckboxes = document.querySelectorAll('.row-checkbox');
+            allCheckboxes.forEach(checkbox => checkbox.checked = false);
+            
+            const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+            if (selectAllCheckbox) {
+                selectAllCheckbox.checked = false;
+                selectAllCheckbox.indeterminate = false;
+            }
+        }
+
+        // Close all dropdowns
+        function closeDropdowns() {
+            const actionsMenu = document.getElementById('actionsMenu');
+            const moreMenu = document.getElementById('moreMenu');
+            
+            if (actionsMenu) actionsMenu.classList.add('hidden');
+            if (moreMenu) moreMenu.classList.add('hidden');
+        }
+
+        // Show success/error modal
+        function showSuccessModal(message, type = 'success') {
+            // Remove existing modal if any
+            const existingModal = document.querySelector('.success-modal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+
+            const modal = document.createElement('div');
+            modal.className = 'success-modal fixed inset-0 bg-black bg-opacity-0 flex items-center justify-center z-50 transition-all duration-300';
+            
+            const iconClass = type === 'success' ? 'fas fa-check-circle text-green-500' : 'fas fa-exclamation-circle text-red-500';
+            const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
+            
+            modal.innerHTML = `
+                <div class="bg-white rounded-lg shadow-xl p-6 w-96 max-w-[90vw] transform scale-75 opacity-0 transition-all duration-300">
+                    <div class="text-center">
+                        <i class="${iconClass} text-4xl mb-4 animate-bounce"></i>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">${type === 'success' ? 'Success!' : 'Error!'}</h3>
+                        <p class="text-gray-600 mb-6">${message}</p>
+                        <button onclick="closeSuccessModal(this)" class="px-6 py-2 ${bgColor} text-white rounded-lg hover:opacity-90 transition-all duration-200 hover:scale-105">
+                            OK
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Animate in
+            requestAnimationFrame(() => {
+                modal.classList.remove('bg-opacity-0');
+                modal.classList.add('bg-opacity-50');
+                const modalContent = modal.querySelector('div');
+                modalContent.classList.remove('scale-75', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            });
+            
+            // Auto hide after 3 seconds
+            setTimeout(() => {
+                if (modal.parentNode) {
+                    closeSuccessModal(modal);
+                }
+            }, 3000);
+        }
+
+        // Close success modal with animation
+        function closeSuccessModal(element) {
+            const modal = element.closest('.success-modal');
+            if (modal) {
+                const modalContent = modal.querySelector('div');
+                modalContent.classList.add('scale-95', 'opacity-0');
+                modal.classList.add('bg-opacity-0');
+                
+                setTimeout(() => {
+                    if (modal.parentNode) {
+                        modal.remove();
+                    }
+                }, 200);
+            }
+        }
+
+        // Show delete confirmation modal
+        function showDeleteConfirmation(count, onConfirm) {
+            const modal = document.createElement('div');
+            modal.className = 'delete-modal fixed inset-0 bg-black bg-opacity-0 flex items-center justify-center z-50 transition-all duration-300';
+            
+            modal.innerHTML = `
+                <div class="bg-white rounded-lg shadow-xl p-6 w-96 max-w-[90vw] transform scale-75 opacity-0 transition-all duration-300">
+                    <div class="text-center">
+                        <i class="fas fa-exclamation-triangle text-yellow-500 text-4xl mb-4 animate-pulse"></i>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Confirm Delete</h3>
+                        <p class="text-gray-600 mb-6">Are you sure you want to delete ${count} selected team(s)?</p>
+                        <div class="flex gap-3 justify-center">
+                            <button onclick="closeDeleteModal(this)" class="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-all duration-200 hover:scale-105">
+                                Cancel
+                            </button>
+                            <button onclick="confirmDelete(this, ${count})" class="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all duration-200 hover:scale-105">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Animate in
+            requestAnimationFrame(() => {
+                modal.classList.remove('bg-opacity-0');
+                modal.classList.add('bg-opacity-50');
+                const modalContent = modal.querySelector('div');
+                modalContent.classList.remove('scale-75', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            });
+            
+            // Store the callback for the confirm button
+            window.confirmDelete = function(button, count) {
+                closeDeleteModal(button);
+                onConfirm();
+            };
+        }
+
+        // Close delete modal with animation
+        function closeDeleteModal(element) {
+            const modal = element.closest('.delete-modal');
+            if (modal) {
+                const modalContent = modal.querySelector('div');
+                modalContent.classList.add('scale-95', 'opacity-0');
+                modal.classList.add('bg-opacity-0');
+                
+                setTimeout(() => {
+                    if (modal.parentNode) {
+                        modal.remove();
+                    }
+                }, 200);
+            }
+        }
+
+        // Show activate confirmation modal
+        function showActivateConfirmation(count, onConfirm) {
+            const modal = document.createElement('div');
+            modal.className = 'activate-modal fixed inset-0 bg-black bg-opacity-0 flex items-center justify-center z-50 transition-all duration-300';
+            
+            modal.innerHTML = `
+                <div class="bg-white rounded-lg shadow-xl p-6 w-96 max-w-[90vw] transform scale-75 opacity-0 transition-all duration-300">
+                    <div class="text-center">
+                        <i class="fas fa-play text-green-500 text-4xl mb-4 animate-pulse"></i>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Confirm Activation</h3>
+                        <p class="text-gray-600 mb-6">Are you sure you want to activate ${count} selected team(s)?</p>
+                        <div class="flex gap-3 justify-center">
+                            <button onclick="closeActivateModal(this)" class="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-all duration-200 hover:scale-105">
+                                Cancel
+                            </button>
+                            <button onclick="confirmActivate(this, ${count})" class="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-all duration-200 hover:scale-105">
+                                Activate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Animate in
+            requestAnimationFrame(() => {
+                modal.classList.remove('bg-opacity-0');
+                modal.classList.add('bg-opacity-50');
+                const modalContent = modal.querySelector('div');
+                modalContent.classList.remove('scale-75', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            });
+            
+            // Store the callback for the confirm button
+            window.confirmActivate = function(button, count) {
+                closeActivateModal(button);
+                onConfirm();
+            };
+        }
+
+        // Close activate modal with animation
+        function closeActivateModal(element) {
+            const modal = element.closest('.activate-modal');
+            if (modal) {
+                const modalContent = modal.querySelector('div');
+                modalContent.classList.add('scale-95', 'opacity-0');
+                modal.classList.add('bg-opacity-0');
+                
+                setTimeout(() => {
+                    if (modal.parentNode) {
+                        modal.remove();
+                    }
+                }, 200);
+            }
+        }
+
+        // Show deactivate confirmation modal
+        function showDeactivateConfirmation(count, onConfirm) {
+            const modal = document.createElement('div');
+            modal.className = 'deactivate-modal fixed inset-0 bg-black bg-opacity-0 flex items-center justify-center z-50 transition-all duration-300';
+            
+            modal.innerHTML = `
+                <div class="bg-white rounded-lg shadow-xl p-6 w-96 max-w-[90vw] transform scale-75 opacity-0 transition-all duration-300">
+                    <div class="text-center">
+                        <i class="fas fa-pause text-yellow-500 text-4xl mb-4 animate-pulse"></i>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Confirm Deactivation</h3>
+                        <p class="text-gray-600 mb-6">Are you sure you want to deactivate ${count} selected team(s)?</p>
+                        <div class="flex gap-3 justify-center">
+                            <button onclick="closeDeactivateModal(this)" class="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-all duration-200 hover:scale-105">
+                                Cancel
+                            </button>
+                            <button onclick="confirmDeactivate(this, ${count})" class="px-6 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-all duration-200 hover:scale-105">
+                                Deactivate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Animate in
+            requestAnimationFrame(() => {
+                modal.classList.remove('bg-opacity-0');
+                modal.classList.add('bg-opacity-50');
+                const modalContent = modal.querySelector('div');
+                modalContent.classList.remove('scale-75', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            });
+            
+            // Store the callback for the confirm button
+            window.confirmDeactivate = function(button, count) {
+                closeDeactivateModal(button);
+                onConfirm();
+            };
+        }
+
+        // Close deactivate modal with animation
+        function closeDeactivateModal(element) {
+            const modal = element.closest('.deactivate-modal');
+            if (modal) {
+                const modalContent = modal.querySelector('div');
+                modalContent.classList.add('scale-95', 'opacity-0');
+                modal.classList.add('bg-opacity-0');
+                
+                setTimeout(() => {
+                    if (modal.parentNode) {
+                        modal.remove();
+                    }
+                }, 200);
+            }
+        }
+
+        // Initialize select all functionality
+        function initializeSelectAll() {
+            const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+            const rowCheckboxes = document.querySelectorAll('.row-checkbox');
+
+            if (selectAllCheckbox) {
+                selectAllCheckbox.addEventListener('change', function() {
+                    rowCheckboxes.forEach(checkbox => {
+                        checkbox.checked = this.checked;
+                    });
+                });
+            }
+
+            // Update select all checkbox state when individual checkboxes change
+            rowCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const checkedCount = document.querySelectorAll('.row-checkbox:checked').length;
+                    const totalCount = rowCheckboxes.length;
+                    
+                    if (checkedCount === 0) {
+                        selectAllCheckbox.checked = false;
+                        selectAllCheckbox.indeterminate = false;
+                    } else if (checkedCount === totalCount) {
+                        selectAllCheckbox.checked = true;
+                        selectAllCheckbox.indeterminate = false;
+                    } else {
+                        selectAllCheckbox.checked = false;
+                        selectAllCheckbox.indeterminate = true;
+                    }
+                });
+            });
+        }
+
         // Initialize filter function (to fix the error)
         function initializeFilter() {
             console.log('Filter functionality initialized');
@@ -1171,10 +1626,10 @@
                 
                 toast.classList.remove('hidden');
                 
-                // Auto hide after 3 seconds
+                // Auto hide after 5 seconds
                 setTimeout(() => {
                     toast.classList.add('hidden');
-                }, 3000);
+                }, 5000);
             }
         };
         
