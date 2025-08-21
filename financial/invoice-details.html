@@ -84,10 +84,10 @@
                         <h3 class="text-lg font-semibold mb-4">Payment History</h3>
 
                         <!-- Table Container -->
-                        <div class="overflow-y-auto flex-1">
+                        <div class="overflow-x-auto border rounded-lg">
                             <table id="paymentHistoryTable" class="min-w-full text-sm">
-                                <thead class="bg-sky-400 text-white">
-                                    <tr>
+                            <thead class="bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold">
+                                <tr>
                                         <th class="px-4 py-3 text-left font-semibold">Invoice Number</th>
                                         <th class="px-4 py-3 text-left font-semibold">Amount Paid</th>
                                         <th class="px-4 py-3 text-left font-semibold">Payment Date</th>
@@ -148,10 +148,10 @@
                         <h3 class="text-lg font-semibold mb-4">Payment Receipts</h3>
 
                         <!-- Table Container -->
-                        <div class="overflow-y-auto flex-1">
-                            <table id="paymentReceiptsTable" class="min-w-full text-sm">
-                                <thead class="bg-sky-400 text-white">
-                                    <tr>
+                        <div class="overflow-x-auto border rounded-lg">
+                            <table id="paymentHistoryTable" class="min-w-full text-sm">
+                            <thead class="bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold">
+                                <tr>
                                         <th class="px-4 py-3 text-left font-semibold">Invoice Number</th>
                                         <th class="px-4 py-3 text-left font-semibold">Reference Number</th>
                                         <th class="px-4 py-3 text-left font-semibold">Mode of Payment</th>
@@ -191,12 +191,22 @@
 
                 <div id="tab-invoices" class="tab-content hidden">
                     <div class="py-4 overflow-x-auto">
-                        <button class="mb-4 px-4 py-2 bg-sky-500 text-white rounded-md font-semibold flex items-center gap-2 shadow hover:bg-sky-600 transition" onclick="window.location.href='create-invoice.html'">
+                        <button 
+                                  class="bg-gradient-to-r from-blue-400 to-blue-600 text-white font-bold rounded-lg text-sm items-center px-5 py-2 focus:outline-none transition-colors duration-200 mb-2"
+          style="
+            padding: 6px 14px !important;
+            font-size: 14px;
+            border-radius: 6px !important;
+            min-width: 80px;
+            height: 30px;
+            margin-right: 4px;
+          " onclick="window.location.href='create-invoice.html'">
                             <i class="fas fa-plus"></i> Make Invoice
                         </button>
-                        <table class="min-w-full text-sm">
-                            <thead>
-                                <tr class="bg-sky-400 text-white">
+                        <div class="overflow-x-auto border rounded-lg">
+                            <table id="paymentHistoryTable" class="min-w-full text-sm">
+                            <thead class="bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold">
+                                <tr>
                                     <th class="px-4 py-3 text-left font-bold">Invoice PDF</th>
                                     <th class="px-4 py-3 text-left font-bold">Invoice Number</th>
                                     <th class="px-4 py-3 text-left font-bold">Currently Due</th>
@@ -276,6 +286,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>    
                     </div>
                 </div> 
 
