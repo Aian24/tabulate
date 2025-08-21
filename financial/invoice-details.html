@@ -33,25 +33,8 @@
                 </div>
             </div>
         </div>
-        <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const moreBtn = document.getElementById('moreBtn');
-            const moreDropdown = document.getElementById('moreDropdown');
-            document.addEventListener('click', function(event) {
-                if (moreBtn && moreDropdown) {
-                    if (moreBtn.contains(event.target)) {
-                        moreDropdown.classList.toggle('hidden');
-                    } else if (!moreDropdown.contains(event.target)) {
-                        moreDropdown.classList.add('hidden');
-                    }
-                }
-            });
-        });
-        </script>
+
         <div class="bg-white/90 rounded-2xl shadow-2xl border border-blue-100 w-full">
-            <div class="px-6 py-4 border-b bg-gray-100 rounded-t-2xl">
-                <h2 class="text-xl font-semibold text-gray-800" id="invoiceNumber">Invoice #INV-2024-001</h2>
-            </div>
             <div class="px-6 pt-4">
                 <!-- Tabs -->
                 <div class="flex space-x-8 mb-4 mt-2 border-b border-gray-200">
@@ -59,120 +42,162 @@
                         <i class="fas fa-info-circle text-lg"></i>
                         Customer Information
                     </button>
-                    <button class="tab-link flex items-center gap-2 px-4 py-2 rounded-t-lg font-semibold text-black focus:outline-none transition-all border-b-4 border-transparent" data-tab="latest">
-                        <i class="fas fa-file-invoice text-lg"></i>
-                        Latest Invoice Information
-                    </button>
                     <button class="tab-link flex items-center gap-2 px-4 py-2 rounded-t-lg font-semibold text-black focus:outline-none transition-all border-b-4 border-transparent" data-tab="invoices">
                         <i class="fas fa-file-alt text-lg"></i>
                         Invoices
                     </button>
-                    <button class="tab-link flex items-center gap-2 px-4 py-2 rounded-t-lg font-semibold text-black focus:outline-none transition-all border-b-4 border-transparent" data-tab="payments">
-                        <i class="fas fa-receipt text-lg"></i>
-                        Payment History / Receipts
-                    </button>
                 </div>
+                
                 <!-- Tab Contents -->
                 <div id="tab-customer" class="tab-content">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 py-4">
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700">Name</label>
-                            <div class="mt-1 text-gray-900" id="customerName">Samantha Lee</div>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700">Phone</label>
-                            <div class="mt-1 text-gray-900" id="customerPhone">(555) 123-4567</div>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700">Email</label>
-                            <div class="mt-1 text-gray-900" id="customerEmail">samantha.lee@example.com</div>
-                        </div>
-                        <div class="md:col-span-2">
-                            <label class="block text-sm font-semibold text-gray-700">Address</label>
-                            <div class="mt-1 text-gray-900" id="customerAddress">123 Oak St, Springfield, USA</div>
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 py-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700">Name</label>
+                                <input type="text" id="customerName" value="Samantha Lee" 
+                                    class="mt-1 block w-full rounded-md border border-gray-300 bg-gray-100 text-gray-900 px-3 py-2 cursor-not-allowed" 
+                                    disabled>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700">Phone</label>
+                                <input type="text" id="customerPhone" value="(555) 123-4567" 
+                                    class="mt-1 block w-full rounded-md border border-gray-300 bg-gray-100 text-gray-900 px-3 py-2 cursor-not-allowed" 
+                                    disabled>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700">Email</label>
+                                <input type="text" id="customerEmail" value="samantha.lee@example.com" 
+                                    class="mt-1 block w-full rounded-md border border-gray-300 bg-gray-100 text-gray-900 px-3 py-2 cursor-not-allowed" 
+                                    disabled>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700">Address</label>
+                                <input type="text" id="customerAddress" value="123 Oak St, Springfield, USA" 
+                                    class="mt-1 block w-full rounded-md border border-gray-300 bg-gray-100 text-gray-900 px-3 py-2 cursor-not-allowed" 
+                                    disabled>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div id="tab-latest" class="tab-content hidden">
-                    <div class="py-4">
-                        <button class="mb-4 px-4 py-2 bg-sky-500 text-white rounded-md font-semibold flex items-center gap-2 shadow hover:bg-sky-600 transition" onclick="window.location.href='create-invoice.html'">
-                            <i class="fas fa-plus"></i> Make Invoice
-                        </button>
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full border-separate border-spacing-0 text-sm">
-                                <thead>
-                                    <tr class="bg-sky-400 text-white">
-                                        <th class="px-4 py-3 text-left font-bold">Item</th>
-                                        <th class="px-4 py-3 text-center font-bold">Qty</th>
-                                        <th class="px-4 py-3 text-right font-bold">Unit Cost</th>
-                                        <th class="px-4 py-3 text-right font-bold">Tax</th>
-                                        <th class="px-4 py-3 text-right font-bold">Discount</th>
-                                        <th class="px-4 py-3 text-right font-bold">Total Amount</th>
-                                        <th class="px-4 py-3 text-right font-bold">Payment</th>
-                                        <th class="px-4 py-3 text-right font-bold">Deposit Percentage (%)</th>
-                                        <th class="px-4 py-3 text-right font-bold">Deposit Amount</th>
-                                        <th class="px-4 py-3 text-right font-bold">Balance</th>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-2">
+                    <!-- Payment History Table -->
+                    <div class="bg-white rounded-lg shadow p-6 flex flex-col h-[400px] relative">
+                        <h3 class="text-lg font-semibold mb-4">Payment History</h3>
+
+                        <!-- Table Container -->
+                        <div class="overflow-y-auto flex-1">
+                            <table id="paymentHistoryTable" class="min-w-full text-sm">
+                                <thead class="bg-sky-400 text-white">
+                                    <tr>
+                                        <th class="px-4 py-3 text-left font-semibold">Invoice Number</th>
+                                        <th class="px-4 py-3 text-left font-semibold">Amount Paid</th>
+                                        <th class="px-4 py-3 text-left font-semibold">Payment Date</th>
+                                        <th class="px-4 py-3 text-left font-semibold">Item Name</th>
                                     </tr>
                                 </thead>
-                                <tbody class="bg-white">
-                                    <tr class="border-b">
-                                        <td class="px-4 py-2">Tree Trimming Service</td>
-                                        <td class="px-4 py-2 text-center">1</td>
-                                        <td class="px-4 py-2 text-right">$1,200.00</td>
-                                        <td class="px-4 py-2 text-right">$0.00</td>
-                                        <td class="px-4 py-2 text-right">$0.00</td>
-                                        <td class="px-4 py-2 text-right">$1,200.00</td>
-                                        <td class="px-4 py-2 text-right">$1,200.00</td>
-                                        <td class="px-4 py-2 text-right">0.00%</td>
-                                        <td class="px-4 py-2 text-right">$0.00</td>
-                                        <td class="px-4 py-2 text-right">$0.00</td>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-4 py-2">1000-01</td>
+                                        <td class="px-4 py-2">90.00</td>
+                                        <td class="px-4 py-2">2025-03-12</td>
+                                        <td class="px-4 py-2">Office Cleaning Package</td>
                                     </tr>
-                                    <tr class="border-b">
-                                        <td class="px-4 py-2">Tree Trimming Service</td>
-                                        <td class="px-4 py-2 text-center">1</td>
-                                        <td class="px-4 py-2 text-right">$1,200.00</td>
-                                        <td class="px-4 py-2 text-right">$0.00</td>
-                                        <td class="px-4 py-2 text-right">$0.00</td>
-                                        <td class="px-4 py-2 text-right">$1,200.00</td>
-                                        <td class="px-4 py-2 text-right">$1,200.00</td>
-                                        <td class="px-4 py-2 text-right">0.00%</td>
-                                        <td class="px-4 py-2 text-right">$0.00</td>
-                                        <td class="px-4 py-2 text-right">$0.00</td>
+                                    <tr>
+                                        <td class="px-4 py-2">1000-01</td>
+                                        <td class="px-4 py-2">90.00</td>
+                                        <td class="px-4 py-2">2025-03-12</td>
+                                        <td class="px-4 py-2">Office Cleaning Package</td>
                                     </tr>
-                                    <tr class="border-b">
-                                        <td class="px-4 py-2">Tree Trimming Service</td>
-                                        <td class="px-4 py-2 text-center">1</td>
-                                        <td class="px-4 py-2 text-right">$1,200.00</td>
-                                        <td class="px-4 py-2 text-right">$0.00</td>
-                                        <td class="px-4 py-2 text-right">$0.00</td>
-                                        <td class="px-4 py-2 text-right">$1,200.00</td>
-                                        <td class="px-4 py-2 text-right">$1,200.00</td>
-                                        <td class="px-4 py-2 text-right">0.00%</td>
-                                        <td class="px-4 py-2 text-right">$0.00</td>
-                                        <td class="px-4 py-2 text-right">$0.00</td>
+                                    <tr>
+                                        <td class="px-4 py-2">1000-01</td>
+                                        <td class="px-4 py-2">180.00</td>
+                                        <td class="px-4 py-2">2025-03-12</td>
+                                        <td class="px-4 py-2">Office Cleaning Package</td>
                                     </tr>
-                                    <tr class="font-bold bg-white">
-                                        <td class="px-4 py-2">TOTAL</td>
-                                        <td class="px-4 py-2 text-center">3</td>
-                                        <td class="px-4 py-2 text-right">$3,600.00</td>
-                                        <td class="px-4 py-2 text-right">$0.00</td>
-                                        <td class="px-4 py-2 text-right">$0.00</td>
-                                        <td class="px-4 py-2 text-right">$3,600.00</td>
-                                        <td class="px-4 py-2 text-right">$3,600.00</td>
-                                        <td class="px-4 py-2 text-right">Avg: 0.00%</td>
-                                        <td class="px-4 py-2 text-right">$0.00</td>
-                                        <td class="px-4 py-2 text-right">$0.00</td>
+                                    <tr>
+                                        <td class="px-4 py-2">1000-01</td>
+                                        <td class="px-4 py-2">300.00</td>
+                                        <td class="px-4 py-2">2025-04-03</td>
+                                        <td class="px-4 py-2">Office Cleaning Package</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-2">1000-01</td>
+                                        <td class="px-4 py-2">150.00</td>
+                                        <td class="px-4 py-2">2025-04-10</td>
+                                        <td class="px-4 py-2">Office Cleaning Package</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-2">1000-02</td>
+                                        <td class="px-4 py-2">220.00</td>
+                                        <td class="px-4 py-2">2025-05-01</td>
+                                        <td class="px-4 py-2">Office Cleaning Package</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
+
+                        <!-- Pagination Fixed -->
+                        <div class="flex justify-between items-center mt-2 p-2 bg-white border-t sticky bottom-0">
+                            <button class="prevBtn px-3 py-1 bg-gray-200 rounded disabled:opacity-50">Prev</button>
+                            <span class="pageInfo text-sm text-gray-600">Page 1 of 3</span>
+                            <button class="nextBtn px-3 py-1 bg-gray-200 rounded disabled:opacity-50">Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Payment Receipts Table -->
+                    <div class="bg-white rounded-lg shadow p-6 flex flex-col h-[400px] relative">
+                        <h3 class="text-lg font-semibold mb-4">Payment Receipts</h3>
+
+                        <!-- Table Container -->
+                        <div class="overflow-y-auto flex-1">
+                            <table id="paymentReceiptsTable" class="min-w-full text-sm">
+                                <thead class="bg-sky-400 text-white">
+                                    <tr>
+                                        <th class="px-4 py-3 text-left font-semibold">Invoice Number</th>
+                                        <th class="px-4 py-3 text-left font-semibold">Reference Number</th>
+                                        <th class="px-4 py-3 text-left font-semibold">Mode of Payment</th>
+                                        <th class="px-4 py-3 text-center font-semibold">Receipt Image</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-4 py-2">1000-01</td>
+                                        <td class="px-4 py-2">sdf123</td>
+                                        <td class="px-4 py-2">cash</td>
+                                        <td class="px-4 py-2 text-center">
+                                            <button class="bg-sky-500 text-white px-3 py-1 text-xs rounded-md hover:bg-sky-600"><i class="fas fa-eye"></i> View</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-2">1000-01</td>
+                                        <td class="px-4 py-2">123123123</td>
+                                        <td class="px-4 py-2">cash</td>
+                                        <td class="px-4 py-2 text-center">
+                                            <button class="bg-sky-500 text-white px-3 py-1 text-xs rounded-md hover:bg-sky-600"><i class="fas fa-eye"></i> View</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Pagination Fixed -->
+                        <div class="flex justify-between items-center mt-2 p-2 bg-white border-t sticky bottom-0">
+                            <button class="prevBtn px-3 py-1 bg-gray-200 rounded disabled:opacity-50">Prev</button>
+                            <span class="pageInfo text-sm text-gray-600">Page 1 of 1</span>
+                            <button class="nextBtn px-3 py-1 bg-gray-200 rounded disabled:opacity-50">Next</button>
+                        </div>
                     </div>
                 </div>
+            </div> 
+
                 <div id="tab-invoices" class="tab-content hidden">
                     <div class="py-4 overflow-x-auto">
+                        <button class="mb-4 px-4 py-2 bg-sky-500 text-white rounded-md font-semibold flex items-center gap-2 shadow hover:bg-sky-600 transition" onclick="window.location.href='create-invoice.html'">
+                            <i class="fas fa-plus"></i> Make Invoice
+                        </button>
                         <table class="min-w-full text-sm">
                             <thead>
                                 <tr class="bg-sky-400 text-white">
+                                    <th class="px-4 py-3 text-left font-bold">Invoice PDF</th>
                                     <th class="px-4 py-3 text-left font-bold">Invoice Number</th>
                                     <th class="px-4 py-3 text-left font-bold">Currently Due</th>
                                     <th class="px-4 py-3 text-left font-bold">Paid Amount</th>
@@ -184,107 +209,200 @@
                             </thead>
                             <tbody class="bg-white">
                                 <tr class="border-b">
-                                    <td class="px-4 py-2 text-blue-600 underline"><a href="#" class="invoice-pdf-link" id="tableInvoiceNumber"></a></td>
+                                    <td class="px-4 py-2" id="tableInvoiceNumber"></td>
+                                    <td class="px-6 py-4 text-sm text-gray-900 font-semibold">
+                                        <div class="flex items-center space-x-3">
+                                            <button class="team-expand-btn text-blue-600 hover:text-blue-800 transition-colors" data-team="Team Alpha">
+                                                <i class="fas fa-chevron-right transition-transform duration-200"></i>
+                                            </button>
+                                            <span>1000-01</span>
+                                        </div>
+                                    </td>
                                     <td class="px-4 py-2" id="tableCurrentlyDue"></td>
                                     <td class="px-4 py-2" id="tablePaidAmount"></td>
-                                    <td class="px-4 py-2" id="tableDateCreated"></td>
-                                    <td class="px-4 py-2" id="tableDateSent"></td>
+                                    <td class="px-4 py-2" id="tableDateCreated">April 11, 2024</td>
+                                    <td class="px-4 py-2" id="tableDateSent">April 11, 2024</td>
                                     <td class="px-4 py-2 text-center">
-                                        <span class="px-3 py-1 text-xs font-semibold rounded-full" id="tableStatus"></span>
+                                        <span class="px-3 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800" id="tableStatus">Unpaid</span>
                                     </td>
                                     <td class="px-4 py-2 text-center">
-                                        <button onclick="window.location.href='create-refund.html'" class="px-3 py-1 bg-orange-400 text-white rounded-md font-semibold hover:bg-orange-500 transition text-xs">
-                                            <i class="fas fa-undo"></i> Refund
+                                        <button onclick="window.location.href='invoice-add-payments.html'" class="px-3 py-1 bg-green-400 text-white rounded-md font-semibold hover:bg-green-500 transition text-xs">
+                                            <i class="fas fa-plus"></i> Add Payments
                                         </button>
+                                    </td>
+                                </tr>
+                                <!-- Team Alpha Jobs (Hidden by default) -->
+                                <tr class="team-jobs-row hidden" data-team="Team Alpha">
+                                    <td colspan="8" class="px-6 py-0">
+                                        <div class="bg-gray-50 border-l-4 border-blue-500 ml-8 rounded-r-lg shadow-sm">
+                                            <div class="bg-white rounded-lg shadow p-6 flex flex-col h-[400px] relative">
+                                                <h3 class="text-lg font-semibold mb-4">Payment History</h3>
+
+                                                <!-- Table Container -->
+                                                <div class="overflow-y-auto flex-1">
+                                                    <table class="min-w-full text-sm">
+                                                        <thead class="bg-sky-400 text-white">
+                                                            <tr>
+                                                                <th class="px-4 py-3 text-left font-semibold">Reference Number</th>
+                                                                <th class="px-4 py-3 text-left font-semibold">Payment Date</th>
+                                                                <th class="px-4 py-3 text-left font-semibold">Mode of Payment</th>
+                                                                <th class="px-4 py-3 text-left font-semibold">Receipt Image</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="bg-white divide-y divide-gray-200">
+                                                            <tr>
+                                                                <td class="px-4 py-2">sdf123</td>
+                                                                <td class="px-4 py-2">2025-03-12</td>
+                                                                <td class="px-4 py-2">90.00</td>
+                                                                <td class="px-4 py-2">
+                                                                <button class="px-3 py-1 bg-blue-400 text-white rounded-md font-semibold hover:bg-blue-500 transition text-xs">
+                                                                    View
+                                                                </button>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                                <!-- Pagination Fixed -->
+                                                <div class="flex justify-between items-center mt-2 p-2 bg-white border-t sticky bottom-0">
+                                                    <button class="prevBtn px-3 py-1 bg-gray-200 rounded disabled:opacity-50">Prev</button>
+                                                    <span class="pageInfo text-sm text-gray-600">Page 1 of 3</span>
+                                                    <button class="nextBtn px-3 py-1 bg-gray-200 rounded disabled:opacity-50">Next</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                </div>
-                <div id="tab-payments" class="tab-content hidden">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 py-4">
-                        <!-- Payment History Table -->
-                        <div class="bg-white rounded-lg shadow p-6">
-                            <h3 class="text-lg font-semibold mb-4">Payment History</h3>
-                            <div class="overflow-x-auto">
-                                <table class="min-w-full text-sm">
-                                    <thead class="bg-sky-400 text-white">
-                                        <tr>
-                                            <th class="px-4 py-3 text-left font-semibold">Invoice Number</th>
-                                            <th class="px-4 py-3 text-left font-semibold">Amount Paid</th>
-                                            <th class="px-4 py-3 text-left font-semibold">Payment Date</th>
-                                            <th class="px-4 py-3 text-left font-semibold">Item Name</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="bg-white divide-y divide-gray-200">
-                                        <tr>
-                                            <td class="px-4 py-2">1000-01</td>
-                                            <td class="px-4 py-2">90.00</td>
-                                            <td class="px-4 py-2">2025-03-12</td>
-                                            <td class="px-4 py-2">Office Cleaning Package</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-4 py-2">1000-01</td>
-                                            <td class="px-4 py-2">90.00</td>
-                                            <td class="px-4 py-2">2025-03-12</td>
-                                            <td class="px-4 py-2">Office Cleaning Package</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-4 py-2">1000-01</td>
-                                            <td class="px-4 py-2">180.00</td>
-                                            <td class="px-4 py-2">2025-03-12</td>
-                                            <td class="px-4 py-2">Office Cleaning Package</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-4 py-2">1000-01</td>
-                                            <td class="px-4 py-2">300.00</td>
-                                            <td class="px-4 py-2">2025-04-03</td>
-                                            <td class="px-4 py-2">Office Cleaning Package</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <!-- Payment Receipts Table -->
-                        <div class="bg-white rounded-lg shadow p-6">
-                            <h3 class="text-lg font-semibold mb-4">Payment Receipts</h3>
-                            <div class="overflow-x-auto">
-                                <table class="min-w-full text-sm">
-                                    <thead class="bg-sky-400 text-white">
-                                        <tr>
-                                            <th class="px-4 py-3 text-left font-semibold">Invoice Number</th>
-                                            <th class="px-4 py-3 text-left font-semibold">Reference Number</th>
-                                            <th class="px-4 py-3 text-left font-semibold">Mode of Payment</th>
-                                            <th class="px-4 py-3 text-center font-semibold">Receipt Image</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="bg-white divide-y divide-gray-200">
-                                        <tr>
-                                            <td class="px-4 py-2">1000-01</td>
-                                            <td class="px-4 py-2">sdf123</td>
-                                            <td class="px-4 py-2">cash</td>
-                                            <td class="px-4 py-2 text-center">
-                                                <button class="bg-sky-500 text-white px-3 py-1 text-xs rounded-md hover:bg-sky-600"><i class="fas fa-eye"></i> View</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-4 py-2">1000-01</td>
-                                            <td class="px-4 py-2">123123123</td>
-                                            <td class="px-4 py-2">cash</td>
-                                            <td class="px-4 py-2 text-center">
-                                                <button class="bg-sky-500 text-white px-3 py-1 text-xs rounded-md hover:bg-sky-600"><i class="fas fa-eye"></i> View</button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </div> 
+
             </div>
         </div>
     </main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // More dropdown functionality
+        const moreBtn = document.getElementById('moreBtn');
+        const moreDropdown = document.getElementById('moreDropdown');
+        document.addEventListener('click', function(event) {
+            if (moreBtn && moreDropdown) {
+                if (moreBtn.contains(event.target)) {
+                    moreDropdown.classList.toggle('hidden');
+                } else if (!moreDropdown.contains(event.target)) {
+                    moreDropdown.classList.add('hidden');
+                }
+            }
+        });
+
+        // Tab functionality
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                const targetTab = this.getAttribute('data-tab');
+                
+                // Remove active classes from all tabs
+                tabLinks.forEach(tab => {
+                    tab.classList.remove('border-blue-500', 'text-blue-600');
+                    tab.classList.add('border-transparent');
+                });
+                
+                // Add active class to clicked tab
+                this.classList.add('border-blue-500', 'text-blue-600');
+                this.classList.remove('border-transparent');
+                
+                // Hide all tab contents
+                tabContents.forEach(content => {
+                    content.classList.add('hidden');
+                });
+                
+                // Show target tab content
+                document.getElementById(`tab-${targetTab}`).classList.remove('hidden');
+            });
+        });
+
+        // Set default active tab
+        tabLinks[0].classList.add('border-blue-500', 'text-blue-600');
+        tabLinks[0].classList.remove('border-transparent');
+
+        // Accordion functionality for team expand buttons
+        const teamExpandBtns = document.querySelectorAll('.team-expand-btn');
+        
+        teamExpandBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const teamName = this.getAttribute('data-team');
+                const teamJobsRow = document.querySelector(`.team-jobs-row[data-team="${teamName}"]`);
+                const chevronIcon = this.querySelector('i');
+                
+                if (teamJobsRow) {
+                    // Toggle visibility
+                    teamJobsRow.classList.toggle('hidden');
+                    
+                    // Rotate chevron icon
+                    if (teamJobsRow.classList.contains('hidden')) {
+                        chevronIcon.classList.remove('fa-chevron-down');
+                        chevronIcon.classList.add('fa-chevron-right');
+                    } else {
+                        chevronIcon.classList.remove('fa-chevron-right');
+                        chevronIcon.classList.add('fa-chevron-down');
+                    }
+                }
+            });
+        });
+    });
+
+    function setupPagination(tableId, rowsPerPage) {
+        const table = document.getElementById(tableId);
+        const rows = table.querySelectorAll("tbody tr");
+        const container = table.closest("div.bg-white");
+        const prevBtn = container.querySelector(".prevBtn");
+        const nextBtn = container.querySelector(".nextBtn");
+        const pageInfo = container.querySelector(".pageInfo");
+
+        let currentPage = 1;
+        const totalPages = Math.ceil(rows.length / rowsPerPage);
+
+        function showPage(page) {
+            const start = (page - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+
+            rows.forEach((row, index) => {
+                row.style.display = index >= start && index < end ? "" : "none";
+            });
+
+            pageInfo.textContent = `Page ${page} of ${totalPages}`;
+            prevBtn.disabled = page === 1;
+            nextBtn.disabled = page === totalPages;
+        }
+
+        prevBtn.addEventListener("click", () => {
+            if (currentPage > 1) {
+                currentPage--;
+                showPage(currentPage);
+            }
+        });
+
+        nextBtn.addEventListener("click", () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                showPage(currentPage);
+            }
+        });
+
+        showPage(currentPage);
+    }
+
+    // Apply pagination (5 rows per page)
+    setupPagination("paymentHistoryTable", 5);
+    setupPagination("paymentReceiptsTable", 5);
+</script>
+
     <!-- Load JavaScript files -->
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://unpkg.com/tippy.js@6"></script>
@@ -298,4 +416,4 @@
     <script src="../js/main.js"></script>
     <script src="../js/invoices.js"></script>
 </body>
-</html> 
+</html>
