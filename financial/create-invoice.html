@@ -117,8 +117,18 @@
       </script>
       <!-- Invoice Number Header -->
       <div class="bg-white border rounded shadow-sm mb-6 p-3">
-        <span class="font-semibold text-lg">Invoice Number: 1000-02</span>
+        <label for="invoiceSelect" class="block text-sm font-semibold text-gray-700 mb-1">
+            Invoice Number
+        </label>
+        <select id="invoiceSelect" 
+            class="bg-transparent text-base font-medium text-gray-900 px-2 py-1 focus:outline-none focus:ring-0 w-auto">
+            <option value="1000-01">1000-01</option>
+            <option value="1000-02" selected>1000-02</option>
+            <option value="1000-03">1000-03</option>
+            <option value="1000-04">1000-04</option>
+        </select>
       </div>
+
       <!-- Info Cards -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <!-- Customer Information -->
@@ -129,19 +139,19 @@
               <tbody>
                 <tr class="border-b">
                   <td class="py-2 pr-4 font-bold">Name:</td>
-                  <td class="py-2">Paget Zowie</td>
+                  <td class="py-2" id="customerName">Paget Zowie</td>
                 </tr>
                 <tr class="border-b">
                   <td class="py-2 pr-4 font-bold">Phone:</td>
-                  <td class="py-2">09234234234</td>
+                  <td class="py-2" id="customerPhone">09234234234</td>
                 </tr>
                 <tr class="border-b">
                   <td class="py-2 pr-4 font-bold">Email:</td>
-                  <td class="py-2">dabidbell5656@gmail.com</td>
+                  <td class="py-2" id="customerEmail">dabidbell5656@gmail.com</td>
                 </tr>
                 <tr>
                   <td class="py-2 pr-4 font-bold">Address:</td>
-                  <td class="py-2">SM Mall of Asia, Seaside Blvd</td>
+                  <td class="py-2" id="customerAddress">SM Mall of Asia, Seaside Blvd</td>
                 </tr>
               </tbody>
             </table>
@@ -155,6 +165,7 @@
               <label class="w-32 font-bold">Invoice No.:</label>
               <input
                 type="text"
+                id="invoiceNumber"
                 class="flex-1 border rounded px-2 py-1"
                 value="1000-02"
                 readonly
@@ -164,6 +175,7 @@
               <label class="w-32 font-bold">Invoice Date:</label>
               <input
                 type="date"
+                id="invoiceDate"
                 class="flex-1 border rounded px-2 py-1"
                 placeholder="mm/dd/yyyy"
               />
@@ -172,6 +184,7 @@
               <label class="w-32 font-bold">Due Date:</label>
               <input
                 type="date"
+                id="dueDate"
                 class="flex-1 border rounded px-2 py-1"
                 placeholder="mm/dd/yyyy"
               />
@@ -179,13 +192,14 @@
           </div>
         </div>
       </div>
+
       <!-- Invoice Items Table -->
       <div class="bg-white border rounded shadow-sm mb-6 p-4">
         <div class="font-semibold mb-2">Invoice Items</div>
-                        <div class="overflow-x-auto border rounded-lg">
-                            <table id="paymentHistoryTable" class="min-w-full text-sm">
-                            <thead class="bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold">
-                                <tr>
+        <div class="overflow-x-auto border rounded-lg">
+          <table id="invoiceItemsTable" class="min-w-full text-sm">
+            <thead class="bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold">
+              <tr>
                 <th class="px-4 py-2 text-left font-bold">Item</th>
                 <th class="px-4 py-2 text-center font-bold">Qty</th>
                 <th class="px-4 py-2 text-right font-bold">Unit</th>
@@ -193,79 +207,17 @@
                 <th class="px-4 py-2 text-right font-bold">Discount</th>
                 <th class="px-4 py-2 text-right font-bold">Total Amount</th>
                 <th class="px-4 py-2 text-right font-bold">Payment</th>
-                <th class="px-4 py-2 text-right font-bold">
-                  Enter Currently Due
-                </th>
+                <th class="px-4 py-2 text-right font-bold">Enter Currently Due</th>
                 <th class="px-4 py-2 text-right font-bold">Balance</th>
               </tr>
             </thead>
-            <tbody class="bg-white">
-              <tr class="border-b">
-                <td class="px-4 py-2">Office Cleaning Package</td>
-                <td class="px-4 py-2 text-center">1</td>
-                <td class="px-4 py-2 text-right">$300.00</td>
-                <td class="px-4 py-2 text-right">$0.00</td>
-                <td class="px-4 py-2 text-right">$0.00</td>
-                <td class="px-4 py-2 text-right">$300.00</td>
-                <td class="px-4 py-2 text-right">$390.00</td>
-                <td class="px-4 py-2 text-right">
-                  <input
-                    type="text"
-                    class="border rounded px-2 py-1 w-20 text-right"
-                    value="0.00"
-                  />
-                </td>
-                <td class="px-4 py-2 text-right">$-90.00</td>
-              </tr>
-              <tr class="border-b">
-                <td class="px-4 py-2">Office Cleaning Package</td>
-                <td class="px-4 py-2 text-center">1</td>
-                <td class="px-4 py-2 text-right">$300.00</td>
-                <td class="px-4 py-2 text-right">$0.00</td>
-                <td class="px-4 py-2 text-right">$0.00</td>
-                <td class="px-4 py-2 text-right">$300.00</td>
-                <td class="px-4 py-2 text-right">$390.00</td>
-                <td class="px-4 py-2 text-right">
-                  <input
-                    type="text"
-                    class="border rounded px-2 py-1 w-20 text-right"
-                    value="0.00"
-                  />
-                </td>
-                <td class="px-4 py-2 text-right">$-90.00</td>
-              </tr>
-              <tr class="border-b">
-                <td class="px-4 py-2">Office Cleaning Package</td>
-                <td class="px-4 py-2 text-center">1</td>
-                <td class="px-4 py-2 text-right">$300.00</td>
-                <td class="px-4 py-2 text-right">$0.00</td>
-                <td class="px-4 py-2 text-right">$0.00</td>
-                <td class="px-4 py-2 text-right">$300.00</td>
-                <td class="px-4 py-2 text-right">$390.00</td>
-                <td class="px-4 py-2 text-right">
-                  <input
-                    type="text"
-                    class="border rounded px-2 py-1 w-20 text-right"
-                    value="0.00"
-                  />
-                </td>
-                <td class="px-4 py-2 text-right">$-90.00</td>
-              </tr>
-              <tr class="font-bold bg-white">
-                <td class="px-4 py-2">TOTAL</td>
-                <td class="px-4 py-2 text-center">3</td>
-                <td class="px-4 py-2 text-right">$900.00</td>
-                <td class="px-4 py-2 text-right">$0.00</td>
-                <td class="px-4 py-2 text-right">$0.00</td>
-                <td class="px-4 py-2 text-right">$900.00</td>
-                <td class="px-4 py-2 text-right">$1,170.00</td>
-                <td class="px-4 py-2 text-right">$0.00</td>
-                <td class="px-4 py-2 text-right">$-270.00</td>
-              </tr>
+            <tbody class="bg-white" id="invoiceItemsBody">
+              <!-- Items will be populated by JavaScript -->
             </tbody>
           </table>
         </div>
       </div>
+
       <!-- Unpaid Invoices and Total Summary -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Unpaid Invoices -->
@@ -281,21 +233,8 @@
                   <th class="px-4 py-2 text-right font-bold">Due Date</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr class="border-b">
-                  <td class="px-4 py-2 text-blue-600 underline cursor-pointer">
-                    <a href="#" class="unpaid-invoice-link">1000-01</a>
-                  </td>
-                  <td class="px-4 py-2 text-right">$299.96</td>
-                  <td class="px-4 py-2 text-right">2025-03-12</td>
-                  <td class="px-4 py-2 text-right">2025-03-19</td>
-                </tr>
-                <tr class="font-bold">
-                  <td class="px-4 py-2">Total</td>
-                  <td class="px-4 py-2 text-right">$299.96</td>
-                  <td class="px-4 py-2"></td>
-                  <td class="px-4 py-2"></td>
-                </tr>
+              <tbody id="unpaidInvoicesBody">
+                <!-- Unpaid invoices will be populated by JavaScript -->
               </tbody>
             </table>
           </div>
@@ -311,26 +250,15 @@
                   <th class="px-4 py-2 text-right font-bold">Amount</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td class="px-4 py-2">Current Invoice</td>
-                  <td class="px-4 py-2 text-right">$-270.00</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-2">Unpaid Invoice</td>
-                  <td class="px-4 py-2 text-right">$299.96</td>
-                </tr>
-                <tr class="font-bold">
-                  <td class="px-4 py-2">Total</td>
-                  <td class="px-4 py-2 text-right">$29.96</td>
-                </tr>
+              <tbody id="totalSummaryBody">
+                <!-- Total summary will be populated by JavaScript -->
               </tbody>
             </table>
           </div>
         </div>
       </div>
+
       <!-- Action Buttons -->
-        <!-- Action Buttons -->
       <div class="flex justify-start space-x-1 mt-6">
         <button
           type="button"
@@ -376,11 +304,27 @@
           Save and Send Email
         </button>
       </div>
-      </div>
     </div>
-  </body>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const moreBtn = document.getElementById("moreBtn");
+        const moreDropdown = document.getElementById("moreDropdown");
+        document.addEventListener("click", function (event) {
+          if (moreBtn && moreDropdown) {
+            if (moreBtn.contains(event.target)) {
+              moreDropdown.classList.toggle("hidden");
+            } else if (!moreDropdown.contains(event.target)) {
+              moreDropdown.classList.add("hidden");
+            }
+          }
+        });
+      });
+    </script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.7.0/jspdf.plugin.autotable.min.js"></script>
   <script src="../js/invoices.js"></script>
   <script src="../js/main.js"></script>
+    <script src="../js/invoice-data.js"></script>
+  </body>
 </html>
