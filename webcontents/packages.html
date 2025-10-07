@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hero Banner Management</title>
+    <title>Packages Management</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -13,7 +13,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <style>
-        /* Reduced font sizes for hero banner page - using !important to override Tailwind */
+        /* Reduced font sizes for packages page - using !important to override Tailwind */
         .text-3xl { font-size: 1.5rem !important; }
         .text-xl { font-size: 1rem !important; }
         .text-lg { font-size: 0.9rem !important; }
@@ -25,7 +25,7 @@
         .material-icons { font-size: 1.1rem !important; }
         .text-2xl { font-size: 1.1rem !important; }
         
-        /* Specific overrides for hero banner page elements */
+        /* Specific overrides for packages page elements */
         main h1 { font-size: 1.5rem !important; }
         main h2 { font-size: 1rem !important; }
         main h3 { font-size: 0.9rem !important; }
@@ -40,9 +40,9 @@
         
         /* Button and form text */
         main button { font-size: 0.75rem !important; }
-        main input { font-size: 0.75rem !important; }
-        main textarea { font-size: 0.75rem !important; }
-        main select { font-size: 0.75rem !important; }
+        main input { font-size: 0.75rem !important; color: #000000 !important; }
+        main textarea { font-size: 0.75rem !important; color: #000000 !important; }
+        main select { font-size: 0.75rem !important; color: #000000 !important; }
         main label { font-size: 0.75rem !important; }
         
         /* Modal form inputs - ensure black text */
@@ -98,38 +98,38 @@
             color: black !important;
         }
         
-            #searchInput::placeholder {
-                color: #6b7280 !important;
-            }
-            
-            /* Gray styling for table container only */
-            .bg-white.rounded-xl.shadow-lg {
-                background-color: #f8fafc !important;
-                border: 1px solid #9ca3af !important;
-            }
-            
-            /* Form visibility improvements */
-            .modal-content {
-                background: white !important;
-                color: #1f2937 !important;
-                border: 2px solid #3b82f6 !important;
-            }
-            
-            .modal-content input,
-            .modal-content textarea,
-            .modal-content select {
-                background: white !important;
-                color: #1f2937 !important;
-                border: 1px solid #d1d5db !important;
-            }
-            
-            .modal-content input:focus,
-            .modal-content textarea:focus,
-            .modal-content select:focus {
-                border-color: #3b82f6 !important;
-                box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
-            }
-        </style>
+        #searchInput::placeholder {
+            color: #6b7280 !important;
+        }
+        
+        /* Gray styling for table container only */
+        .bg-white.rounded-xl.shadow-lg {
+            background-color: #f8fafc !important;
+            border: 1px solid #9ca3af !important;
+        }
+        
+        /* Form visibility improvements */
+        .modal-content {
+            background: white !important;
+            color: #1f2937 !important;
+            border: 2px solid #3b82f6 !important;
+        }
+        
+        .modal-content input,
+        .modal-content textarea,
+        .modal-content select {
+            background: white !important;
+            color: #1f2937 !important;
+            border: 1px solid #d1d5db !important;
+        }
+        
+        .modal-content input:focus,
+        .modal-content textarea:focus,
+        .modal-content select:focus {
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+        }
+    </style>
 </head>
 
 <body class="min-h-screen bg-[#183153]">
@@ -144,17 +144,17 @@
         <main class="flex-1 p-6 bg-gray-100 min-h-screen text-gray-800">
             <div class="max-w-7xl mx-auto">
 
-                <!-- Hero Banner Management Section -->
+                <!-- Packages Management Section -->
                 <div class="bg-white rounded-xl shadow-lg -mt-5">
                     <div class="bg-gray-100 text-black px-6 py-4 rounded-t-xl flex justify-between items-center">
                         <div class="flex items-center">
-                            <i class="material-icons mr-3 text-2xl text-blue-600">web</i>
+                            <i class="material-icons mr-3 text-2xl text-blue-600">inventory</i>
                             <div>
-                                <p class="text-black text-lg font-bold">MANAGE HERO BANNER</p>
+                                <p class="text-black text-lg font-bold">MANAGE POPULAR PACKAGES</p>
                             </div>
                         </div>
                         <div class="flex items-center space-x-4">
-                            <button id="addBannerBtn" class="bg-blue-600 text-white px-4 py-1 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
+                            <button id="addPackageBtn" class="bg-blue-600 text-white px-4 py-1 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
                                 Add New
                             </button>
                             <button id="previewBtn" class="bg-green-600 text-white px-4 py-1 rounded-lg hover:bg-green-700 transition-colors flex items-center text-sm font-medium">
@@ -186,27 +186,30 @@
                         </div>
                     </div>
                     
-                    <!-- Banner Grid View -->
+                    <!-- Packages Grid View -->
                     <div class="p-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="bannersGrid">
-                            <!-- Banner Card 1 -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="packagesGrid">
+                            <!-- Package Card 1 -->
                             <div class="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                                 <div class="relative">
-                                    <img src="../images/banner4.jpg" 
-                                         alt="Hero Banner" class="w-full h-48 object-cover rounded-t-lg">
+                                    <img src="../images/landscaping.png" 
+                                         alt="Package Image" class="w-full h-48 object-cover rounded-t-lg">
                                     <div class="absolute top-2 right-2">
                                         <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">Active</span>
                                     </div>
                                 </div>
                                 <div class="p-4">
-                                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Transforming Yards, Creating Havens</h3>
-                                    <p class="text-gray-600 text-sm mb-4">Turning Ordinary Spaces into Extraordinary Retreats</p>
+                                    <div class="mb-2">
+                                        <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2 py-1 rounded-full">PACKAGE</span>
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Garden Clean Package</h3>
+                                    <p class="text-gray-600 text-sm mb-4">Professional package designed to deliver exceptional results with our expert team and proven methods.</p>
                                     <div class="flex items-center justify-between">
                                         <div class="flex items-center space-x-2">
                                             <span class="text-xs text-gray-500">Order: 1</span>
                                         </div>
                                         <div class="flex items-center space-x-2">
-                                            <button class="edit-banner-btn text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                            <button class="edit-package-btn text-blue-600 hover:text-blue-800 text-sm font-medium">
                                                 <i class="fas fa-edit mr-1"></i>Edit
                                             </button>
                                             <button class="text-red-600 hover:text-red-800 text-sm font-medium">
@@ -217,52 +220,58 @@
                                 </div>
                             </div>
 
-                            <!-- Banner Card 2 -->
+                            <!-- Package Card 2 -->
                             <div class="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                                 <div class="relative">
-                                    <img src="../images/logo/banner2.jpg" 
-                                         alt="Hero Banner" class="w-full h-48 object-cover rounded-t-lg">
-                                    <div class="absolute top-2 right-2">
-                                        <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-1 rounded-full">Inactive</span>
-                                    </div>
-                                </div>
-                                <div class="p-4">
-                                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Transforming Yards, Creating Havens</h3>
-                                    <p class="text-gray-600 text-sm mb-4">Turning Ordinary Spaces into Extraordinary Retreats</p>
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center space-x-2">
-                                            <span class="text-xs text-gray-500">Order: 2</span>
-                                        </div>
-                                        <div class="flex items-center space-x-2">
-                                            <button class="edit-banner-btn text-blue-600 hover:text-blue-800 text-sm font-medium">
-                                                <i class="fas fa-edit mr-1"></i>Edit
-                                            </button>
-                                            <button class="text-red-600 hover:text-red-800 text-sm font-medium">
-                                                <i class="fas fa-trash mr-1"></i>Delete
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Banner Card 3 -->
-                            <div class="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                                <div class="relative">
-                                    <img src="../images/logo/banner3.jpg" 
-                                         alt="Hero Banner" class="w-full h-48 object-cover rounded-t-lg">
+                                    <img src="../images/landscaping.png" 
+                                         alt="Package Image" class="w-full h-48 object-cover rounded-t-lg">
                                     <div class="absolute top-2 right-2">
                                         <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">Active</span>
                                     </div>
                                 </div>
                                 <div class="p-4">
-                                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Transforming Yards, Creating Havens</h3>
-                                    <p class="text-gray-600 text-sm mb-4">Turning Ordinary Spaces into Extraordinary Retreats</p>
+                                    <div class="mb-2">
+                                        <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2 py-1 rounded-full">PACKAGE</span>
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Full Service Package</h3>
+                                    <p class="text-gray-600 text-sm mb-4">Professional package designed to deliver exceptional results with our expert team and proven methods.</p>
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-2">
+                                            <span class="text-xs text-gray-500">Order: 2</span>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="edit-package-btn text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                                <i class="fas fa-edit mr-1"></i>Edit
+                                            </button>
+                                            <button class="text-red-600 hover:text-red-800 text-sm font-medium">
+                                                <i class="fas fa-trash mr-1"></i>Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Package Card 3 -->
+                            <div class="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                                <div class="relative">
+                                    <img src="../images/landscaping.png" 
+                                         alt="Package Image" class="w-full h-48 object-cover rounded-t-lg">
+                                    <div class="absolute top-2 right-2">
+                                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">Active</span>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="mb-2">
+                                        <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2 py-1 rounded-full">PACKAGE</span>
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Seasonal Cleanup Pack</h3>
+                                    <p class="text-gray-600 text-sm mb-4">Professional package designed to deliver exceptional results with our expert team and proven methods.</p>
                                     <div class="flex items-center justify-between">
                                         <div class="flex items-center space-x-2">
                                             <span class="text-xs text-gray-500">Order: 3</span>
                                         </div>
                                         <div class="flex items-center space-x-2">
-                                            <button class="edit-banner-btn text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                            <button class="edit-package-btn text-blue-600 hover:text-blue-800 text-sm font-medium">
                                                 <i class="fas fa-edit mr-1"></i>Edit
                                             </button>
                                             <button class="text-red-600 hover:text-red-800 text-sm font-medium">
@@ -296,13 +305,13 @@
                     </div>
                 </div>
 
-                <!-- Banner Creation Modal -->
-                <div id="bannerModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+                <!-- Package Creation Modal -->
+                <div id="packageModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
                     <div class="flex items-center justify-center min-h-screen p-4">
                         <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
                             <div class="bg-blue-600 text-white px-6 py-4 rounded-t-lg flex justify-between items-center">
-                                <h3 class="text-xl font-semibold">Add New Banner</h3>
-                                <button id="closeBannerModal" class="text-white hover:text-gray-200">
+                                <h3 class="text-xl font-semibold">Add New Package</h3>
+                                <button id="closePackageModal" class="text-white hover:text-gray-200">
                                     <i class="fas fa-times text-xl"></i>
                                 </button>
                             </div>
@@ -313,15 +322,28 @@
                                     <!-- Left Column -->
                                     <div class="space-y-4">
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Banner Order</label>
-                                            <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter banner order">
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Package Order</label>
+                                            <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter package order">
                                         </div>
                                         
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Banner Title</label>
-                                            <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter banner title">
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Package Title</label>
+                                            <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter package title">
                                         </div>
                                         
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Package Type</label>
+                                            <div class="dropdown-container">
+                                                <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                                    <option value="seasonal">Seasonal</option>
+                                                    <option value="maintenance">Maintenance</option>
+                                                    <option value="premium">Premium</option>
+                                                    <option value="basic">Basic</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
                                         <div>
                                             <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
                                             <div class="dropdown-container">
@@ -331,25 +353,17 @@
                                                 </select>
                                             </div>
                                         </div>
-
-                                        <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Subscribe Option</label>
-                                            <div class="flex items-center">
-                                                <input type="checkbox" id="subscribeOption" class="mr-2">
-                                                <label for="subscribeOption" class="text-sm text-gray-700">Enable subscribe button</label>
-                                            </div>
-                                        </div>
                                     </div>
                                     
                                     <!-- Right Column -->
                                     <div class="space-y-4">
                                         <div>
                                             <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
-                                            <textarea class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-y" rows="1" placeholder="Enter banner description"></textarea>
+                                            <textarea class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-y" rows="3" placeholder="Enter package description"></textarea>
                                         </div>
                                         
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Background Image</label>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Package Image</label>
                                             <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
                                                 <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
                                                 <p class="text-gray-500 text-sm mb-1">Click to upload or drag and drop</p>
@@ -361,11 +375,11 @@
                                 </div>
                                 
                                 <div class="flex justify-end space-x-3 pt-4">
-                                    <button type="button" id="cancelBanner" class="px-4 py-2 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors">
+                                    <button type="button" id="cancelPackage" class="px-4 py-2 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors">
                                         Cancel
                                     </button>
                                     <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                                        Save Banner
+                                        Save Package
                                     </button>
                                 </div>
                             </form>
@@ -373,13 +387,13 @@
                     </div>
                 </div>
 
-                <!-- Edit Banner Modal -->
-                <div id="editBannerModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+                <!-- Edit Package Modal -->
+                <div id="editPackageModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
                     <div class="flex items-center justify-center min-h-screen p-4">
                         <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
                             <div class="bg-blue-600 text-white px-6 py-4 rounded-t-lg flex justify-between items-center">
-                                <h3 class="text-xl font-semibold">Edit Banner</h3>
-                                <button id="closeEditBannerModal" class="text-white hover:text-gray-200">
+                                <h3 class="text-xl font-semibold">Edit Package</h3>
+                                <button id="closeEditPackageModal" class="text-white hover:text-gray-200">
                                     <i class="fas fa-times text-xl"></i>
                                 </button>
                             </div>
@@ -390,30 +404,35 @@
                                     <!-- Left Column -->
                                     <div class="space-y-4">
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Banner Order</label>
-                                            <input type="number" id="editBannerOrder" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter banner order" value="1">
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Package Order</label>
+                                            <input type="number" id="editPackageOrder" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter package order" value="1">
                                         </div>
                                         
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Banner Title</label>
-                                            <input type="text" id="editBannerTitle" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter banner title" value="Transforming Yards, Creating Havens">
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Package Title</label>
+                                            <input type="text" id="editPackageTitle" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter package title" value="Garden Clean Package">
                                         </div>
                                         
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Package Type</label>
                                             <div class="dropdown-container">
-                                                <select id="editBannerStatus" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                                    <option value="active" selected>Active</option>
-                                                    <option value="inactive">Inactive</option>
+                                                <select id="editPackageType" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                                    <option value="seasonal" selected>Seasonal</option>
+                                                    <option value="maintenance">Maintenance</option>
+                                                    <option value="premium">Premium</option>
+                                                    <option value="basic">Basic</option>
                                                 </select>
                                             </div>
                                         </div>
 
+
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Subscribe Option</label>
-                                            <div class="flex items-center">
-                                                <input type="checkbox" id="editSubscribeOption" class="mr-2" checked>
-                                                <label for="editSubscribeOption" class="text-sm text-gray-700">Enable subscribe button</label>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                                            <div class="dropdown-container">
+                                                <select id="editPackageStatus" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                                    <option value="active" selected>Active</option>
+                                                    <option value="inactive">Inactive</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -422,28 +441,28 @@
                                     <div class="space-y-4">
                                         <div>
                                             <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
-                                            <textarea id="editBannerDescription" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-y" rows="1" placeholder="Enter banner description">Turning Ordinary Spaces into Extraordinary Retreats</textarea>
+                                            <textarea id="editPackageDescription" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-y" rows="3" placeholder="Enter package description">Professional package designed to deliver exceptional results with our expert team and proven methods.</textarea>
                                         </div>
                                         
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Background Image</label>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Package Image</label>
                                             <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
-                                                <img id="editBannerImagePreview" src="../images/banner4.jpg" alt="Current Banner" class="w-full h-32 object-cover rounded mb-2">
+                                                <img id="editPackageImagePreview" src="../images/landscaping.png" alt="Current Package" class="w-full h-32 object-cover rounded mb-2">
                                                 <i class="fas fa-cloud-upload-alt text-2xl text-gray-400 mb-2"></i>
                                                 <p class="text-gray-500 text-sm mb-1">Click to upload or drag and drop</p>
                                                 <p class="text-xs text-gray-400">PNG, JPG, GIF up to 10MB</p>
-                                                <input type="file" id="editBannerImage" class="hidden" accept="image/*">
+                                                <input type="file" id="editPackageImage" class="hidden" accept="image/*">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 
                                 <div class="flex justify-end space-x-3 pt-4">
-                                    <button type="button" id="cancelEditBanner" class="px-4 py-2 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors">
+                                    <button type="button" id="cancelEditPackage" class="px-4 py-2 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors">
                                         Cancel
                                     </button>
                                     <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                                        Update Banner
+                                        Update Package
                                     </button>
                                 </div>
                             </form>
@@ -609,83 +628,82 @@
             }
         }, 100);
 
-        // Banner modal functionality
+        // Package modal functionality
         document.addEventListener('DOMContentLoaded', function() {
-            const addBannerBtn = document.getElementById('addBannerBtn');
-            const bannerModal = document.getElementById('bannerModal');
-            const closeBannerModal = document.getElementById('closeBannerModal');
-            const cancelBanner = document.getElementById('cancelBanner');
+            const addPackageBtn = document.getElementById('addPackageBtn');
+            const packageModal = document.getElementById('packageModal');
+            const closePackageModal = document.getElementById('closePackageModal');
+            const cancelPackage = document.getElementById('cancelPackage');
 
             // Edit modal elements
-            const editBannerModal = document.getElementById('editBannerModal');
-            const closeEditBannerModal = document.getElementById('closeEditBannerModal');
-            const cancelEditBanner = document.getElementById('cancelEditBanner');
+            const editPackageModal = document.getElementById('editPackageModal');
+            const closeEditPackageModal = document.getElementById('closeEditPackageModal');
+            const cancelEditPackage = document.getElementById('cancelEditPackage');
 
-            if (addBannerBtn) {
-                addBannerBtn.addEventListener('click', function() {
-                    bannerModal.classList.remove('hidden');
+            if (addPackageBtn) {
+                addPackageBtn.addEventListener('click', function() {
+                    packageModal.classList.remove('hidden');
                 });
             }
 
-            if (closeBannerModal) {
-                closeBannerModal.addEventListener('click', function() {
-                    bannerModal.classList.add('hidden');
+            if (closePackageModal) {
+                closePackageModal.addEventListener('click', function() {
+                    packageModal.classList.add('hidden');
                 });
             }
 
-            if (cancelBanner) {
-                cancelBanner.addEventListener('click', function() {
-                    bannerModal.classList.add('hidden');
+            if (cancelPackage) {
+                cancelPackage.addEventListener('click', function() {
+                    packageModal.classList.add('hidden');
                 });
             }
 
             // Close modal when clicking outside
-            bannerModal.addEventListener('click', function(e) {
-                if (e.target === bannerModal) {
-                    bannerModal.classList.add('hidden');
+            packageModal.addEventListener('click', function(e) {
+                if (e.target === packageModal) {
+                    packageModal.classList.add('hidden');
                 }
             });
 
             // Edit modal functionality
-            if (closeEditBannerModal) {
-                closeEditBannerModal.addEventListener('click', function() {
-                    editBannerModal.classList.add('hidden');
+            if (closeEditPackageModal) {
+                closeEditPackageModal.addEventListener('click', function() {
+                    editPackageModal.classList.add('hidden');
                 });
             }
 
-            if (cancelEditBanner) {
-                cancelEditBanner.addEventListener('click', function() {
-                    editBannerModal.classList.add('hidden');
+            if (cancelEditPackage) {
+                cancelEditPackage.addEventListener('click', function() {
+                    editPackageModal.classList.add('hidden');
                 });
             }
 
             // Close edit modal when clicking outside
-            editBannerModal.addEventListener('click', function(e) {
-                if (e.target === editBannerModal) {
-                    editBannerModal.classList.add('hidden');
+            editPackageModal.addEventListener('click', function(e) {
+                if (e.target === editPackageModal) {
+                    editPackageModal.classList.add('hidden');
                 }
             });
 
             // Handle edit button clicks
             document.addEventListener('click', function(e) {
-                if (e.target.closest('.edit-banner-btn')) {
+                if (e.target.closest('.edit-package-btn')) {
                     e.preventDefault();
-                    editBannerModal.classList.remove('hidden');
+                    editPackageModal.classList.remove('hidden');
                     
-                    // Get banner data from the clicked card
-                    const bannerCard = e.target.closest('.bg-white');
-                    const title = bannerCard.querySelector('h3').textContent;
-                    const description = bannerCard.querySelector('p').textContent;
-                    const status = bannerCard.querySelector('.bg-green-100') ? 'active' : 'inactive';
-                    const order = bannerCard.querySelector('.text-xs').textContent.replace('Order: ', '');
-                    const imageSrc = bannerCard.querySelector('img').src;
-                    
+                    // Get package data from the clicked card
+                    const packageCard = e.target.closest('.bg-white');
+                    const title = packageCard.querySelector('h3').textContent;
+                    const description = packageCard.querySelector('p').textContent;
+                    const status = packageCard.querySelector('.bg-green-100') ? 'active' : 'inactive';
+                    const order = packageCard.querySelector('.text-xs').textContent.replace('Order: ', '');
+                    const imageSrc = packageCard.querySelector('img').src;
                     // Populate edit form
-                    document.getElementById('editBannerTitle').value = title;
-                    document.getElementById('editBannerDescription').value = description;
-                    document.getElementById('editBannerStatus').value = status;
-                    document.getElementById('editBannerOrder').value = order;
-                    document.getElementById('editBannerImagePreview').src = imageSrc;
+                    document.getElementById('editPackageTitle').value = title;
+                    document.getElementById('editPackageDescription').value = description;
+                    document.getElementById('editPackageStatus').value = status;
+                    document.getElementById('editPackageOrder').value = order;
+                    document.getElementById('editPackageImagePreview').src = imageSrc;
                 }
             });
         });

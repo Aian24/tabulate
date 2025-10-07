@@ -76,145 +76,182 @@ I kindly seek your approval and would also appreciate any recommendations or fee
     font-size: 0.875rem;
     font-weight: 500;
 }
+
+/* Collapsible Sections */
+.section-content {
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.section-content.collapsed {
+    display: none;
+}
+
+.section-header .material-icons {
+    transition: transform 0.3s ease;
+}
+
+.section-header.collapsed .material-icons {
+    transform: rotate(-90deg);
+}
+
 </style>
 
 <aside class="w-64 bg-gray-900 text-white flex flex-col py-0 px-0 shadow-lg min-h-screen">
     <nav class="flex-1">
-        <ul class="space-y-0">
+        <ul class="space-y-0" id="navMenu">
             <!-- Section Header -->
             <li>
-                <div class="section-header">HOME PAGE</div>
+                <div class="section-header cursor-pointer collapsed" onclick="toggleSection('home-page')">
+                    <i class="material-icons float-right">chevron_right</i>
+                    HOME PAGE
+                </div>
             </li>
             
-            <!-- Hero Banner -->
-            <li>
-                <a href="hero-banner.html" class="nav-item web-content-nav-link">
-                    <i class="material-icons">web</i>
-                    <span>Hero Banner</span>
-                </a>
-            </li>
-            
-            <!-- Blogs -->
-            <li>
-                <a href="blogs.html" class="nav-item web-content-nav-link">
-                    <i class="material-icons">article</i>
-                    <span>Blogs</span>
-                </a>
-            </li>
-            
-            <!-- Our Top Services -->
-            <li>
-                <a href="#" data-section="our-top-services" class="nav-item web-content-nav-link">
-                    <i class="material-icons">star</i>
-                    <span>Our Top Services</span>
-                </a>
-            </li>
-            
-            <!-- Popular Packages -->
-            <li>
-                <a href="#" data-section="popular-packages" class="nav-item web-content-nav-link">
-                    <i class="material-icons">card_giftcard</i>
-                    <span>Popular Packages</span>
-                </a>
-            </li>
-            
-            <!-- Showcase Gallery -->
-            <li>
-                <a href="#" data-section="showcase-gallery" class="nav-item web-content-nav-link">
-                    <i class="material-icons">photo_library</i>
-                    <span>Showcase Gallery</span>
-                </a>
-            </li>
-            
-            <!-- Proof Stats -->
-            <li>
-                <a href="#" data-section="proof-stats" class="nav-item web-content-nav-link">
-                    <i class="material-icons">analytics</i>
-                    <span>Proof Stats</span>
-                </a>
-            </li>
-            
-            <!-- Call to Action -->
-            <li>
-                <a href="#" data-section="call-to-action" class="nav-item web-content-nav-link">
-                    <i class="material-icons">campaign</i>
-                    <span>Call to Action</span>
-                </a>
-            </li>
-            
-            <!-- Section Header -->
-            <li>
-                <div class="section-header">ABOUT PAGE</div>
-            </li>
-            
-            <!-- About Hero -->
-            <li>
-                <a href="about-hero.html" class="nav-item web-content-nav-link">
-                    <i class="material-icons">info</i>
-                    <span>About Hero</span>
-                </a>
-            </li>
-            
-            <!-- Mission & Vision -->
-            <li>
-                <a href="mission-vision.html" class="nav-item web-content-nav-link">
-                    <i class="material-icons">visibility</i>
-                    <span>Mission & Vision</span>
-                </a>
-            </li>
-            
-            <!-- Why Choose Us -->
-            <li>
-                <a href="#" data-section="why-choose-us" class="nav-item web-content-nav-link">
-                    <i class="material-icons">thumb_up</i>
-                    <span>Why Choose Us</span>
-                </a>
-            </li>
-            
-            <!-- Team Management -->
-            <li>
-                <a href="team-management.html" class="nav-item web-content-nav-link">
-                    <i class="material-icons">group</i>
-                    <span>Team Management</span>
-                </a>
-            </li>
+            <!-- HOME PAGE Section -->
+            <div id="home-page" class="section-content collapsed">
+                <!-- Hero Banner -->
+                <li>
+                    <a href="hero-banner.html" class="nav-item web-content-nav-link">
+                        <i class="material-icons">web</i>
+                        <span>Hero Banner</span>
+                    </a>
+                </li>
+                
+                <!-- Blogs -->
+                <li>
+                    <a href="blogs.html" class="nav-item web-content-nav-link">
+                        <i class="material-icons">article</i>
+                        <span>Blogs</span>
+                    </a>
+                </li>
+                
+                <!-- Our Top Services -->
+                <li>
+                    <a href="services.html" class="nav-item web-content-nav-link">
+                        <i class="material-icons">build</i>
+                        <span>Our Top Services</span>
+                    </a>
+                </li>
+                
+                <!-- Popular Packages -->
+                <li>
+                    <a href="packages.html" class="nav-item web-content-nav-link">
+                        <i class="material-icons">inventory</i>
+                        <span>Popular Packages</span>
+                    </a>
+                </li>
+                
+                <!-- Showcase Gallery -->
+                <li>
+                    <a href="showcase-gallery.html" class="nav-item web-content-nav-link">
+                        <i class="material-icons">photo_library</i>
+                        <span>Showcase Gallery</span>
+                    </a>
+                </li>
+                
+                <!-- Call to Action -->
+                <li>
+                    <a href="call-to-action.html" class="nav-item web-content-nav-link">
+                        <i class="material-icons">campaign</i>
+                        <span>Call to Action</span>
+                    </a>
+                </li>
+            </div>
             
             <!-- Section Header -->
             <li>
-                <div class="section-header">FOOTER</div>
+                <div class="section-header cursor-pointer collapsed" onclick="toggleSection('about-page')">
+                    <i class="material-icons float-right">chevron_right</i>
+                    ABOUT PAGE
+                </div>
             </li>
             
-            <!-- Footer Content -->
+            <!-- ABOUT PAGE Section -->
+            <div id="about-page" class="section-content collapsed">
+                <!-- About Hero -->
+                <li>
+                    <a href="about-hero.html" class="nav-item web-content-nav-link">
+                        <i class="material-icons">info</i>
+                        <span>About Hero</span>
+                    </a>
+                </li>
+                
+                <!-- Mission & Vision -->
+                <li>
+                    <a href="mission-vision.html" class="nav-item web-content-nav-link">
+                        <i class="material-icons">visibility</i>
+                        <span>Mission & Vision</span>
+                    </a>
+                </li>
+                
+                <!-- Why Choose Us -->
+                <li>
+                    <a href="#" data-section="why-choose-us" class="nav-item web-content-nav-link">
+                        <i class="material-icons">thumb_up</i>
+                        <span>Why Choose Us</span>
+                    </a>
+                </li>
+                
+                <!-- Team Management -->
+                <li>
+                    <a href="team-management.html" class="nav-item web-content-nav-link">
+                        <i class="material-icons">group</i>
+                        <span>Team Management</span>
+                    </a>
+                </li>
+                
+                <!-- Proof Stats -->
+                <li>
+                    <a href="proof-stats.html" class="nav-item web-content-nav-link">
+                        <i class="material-icons">analytics</i>
+                        <span>Proof Stats</span>
+                    </a>
+                </li>
+            </div>
+            
+            <!-- Section Header -->
             <li>
-                <a href="footer-content.html" class="nav-item web-content-nav-link">
-                    <i class="material-icons">web_asset</i>
-                    <span>Footer Content</span>
-                </a>
+                <div class="section-header cursor-pointer collapsed" onclick="toggleSection('footer')">
+                    <i class="material-icons float-right">chevron_right</i>
+                    FOOTER
+                </div>
             </li>
             
-            <!-- Social Media -->
-            <li>
-                <a href="social-media-links.html" class="nav-item web-content-nav-link">
-                    <i class="material-icons">share</i>
-                    <span>Social Media</span>
-                </a>
-            </li>
-            
-            <!-- Service Areas -->
-            <li>
-                <a href="service-areas.html" class="nav-item web-content-nav-link">
-                    <i class="material-icons">location_on</i>
-                    <span>Service Areas</span>
-                </a>
-            </li>
-            
-            <!-- Contact Info -->
-            <li>
-                <a href="contact-info.html" class="nav-item web-content-nav-link">
-                    <i class="material-icons">contact_phone</i>
-                    <span>Contact Info</span>
-                </a>
-            </li>
+            <!-- FOOTER Section -->
+            <div id="footer" class="section-content collapsed">
+                <!-- Footer Content -->
+                <li>
+                    <a href="footer-content.html" class="nav-item web-content-nav-link">
+                        <i class="material-icons">web_asset</i>
+                        <span>Footer Content</span>
+                    </a>
+                </li>
+                
+                <!-- Social Media -->
+                <li>
+                    <a href="social-media-links.html" class="nav-item web-content-nav-link">
+                        <i class="material-icons">share</i>
+                        <span>Social Media</span>
+                    </a>
+                </li>
+                
+                <!-- Service Areas -->
+                <li>
+                    <a href="service-areas.html" class="nav-item web-content-nav-link">
+                        <i class="material-icons">location_on</i>
+                        <span>Service Areas</span>
+                    </a>
+                </li>
+                
+                <!-- Contact Info -->
+                <li>
+                    <a href="contact-info.html" class="nav-item web-content-nav-link">
+                        <i class="material-icons">contact_phone</i>
+                        <span>Contact Info</span>
+                    </a>
+                </li>
+            </div>
         </ul>
     </nav>
 </aside> 
@@ -236,13 +273,63 @@ function setActiveLink() {
     navLinks.forEach(link => {
         const href = link.getAttribute('href');
         if (href && href === currentPage) {
-      link.classList.add('active');
+            link.classList.add('active');
         }
     });
 }
 
-// Auto-expand Home Page section on page load
+// Toggle individual sections
+function toggleSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    const header = section.previousElementSibling.querySelector('.section-header');
+    const icon = header.querySelector('.material-icons');
+    
+    // Get current expanded sections from localStorage
+    let expandedSections = JSON.parse(localStorage.getItem('expandedSections') || '[]');
+    
+    if (section.classList.contains('collapsed')) {
+        // Expand section
+        section.classList.remove('collapsed');
+        header.classList.remove('collapsed');
+        icon.textContent = 'expand_more';
+        
+        // Add to expanded sections if not already there
+        if (!expandedSections.includes(sectionId)) {
+            expandedSections.push(sectionId);
+        }
+    } else {
+        // Collapse section
+        section.classList.add('collapsed');
+        header.classList.add('collapsed');
+        icon.textContent = 'chevron_right';
+        
+        // Remove from expanded sections
+        expandedSections = expandedSections.filter(id => id !== sectionId);
+    }
+    
+    // Save updated state to localStorage
+    localStorage.setItem('expandedSections', JSON.stringify(expandedSections));
+}
+
+// Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
     setActiveLink();
+    
+    // Restore expanded sections from localStorage
+    const expandedSections = JSON.parse(localStorage.getItem('expandedSections') || '[]');
+    expandedSections.forEach(sectionId => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+            section.classList.remove('collapsed');
+            const header = section.previousElementSibling.querySelector('.section-header');
+            if (header) {
+                header.classList.remove('collapsed');
+                const icon = header.querySelector('.material-icons');
+                if (icon) {
+                    icon.textContent = 'expand_more';
+                }
+            }
+        }
+    });
 });
 </script>

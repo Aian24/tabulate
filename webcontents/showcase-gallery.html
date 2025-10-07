@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hero Banner Management</title>
+    <title>Showcase Gallery Management</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -13,7 +13,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <style>
-        /* Reduced font sizes for hero banner page - using !important to override Tailwind */
+        /* Reduced font sizes for showcase gallery page - using !important to override Tailwind */
         .text-3xl { font-size: 1.5rem !important; }
         .text-xl { font-size: 1rem !important; }
         .text-lg { font-size: 0.9rem !important; }
@@ -25,7 +25,7 @@
         .material-icons { font-size: 1.1rem !important; }
         .text-2xl { font-size: 1.1rem !important; }
         
-        /* Specific overrides for hero banner page elements */
+        /* Specific overrides for showcase gallery page elements */
         main h1 { font-size: 1.5rem !important; }
         main h2 { font-size: 1rem !important; }
         main h3 { font-size: 0.9rem !important; }
@@ -40,9 +40,9 @@
         
         /* Button and form text */
         main button { font-size: 0.75rem !important; }
-        main input { font-size: 0.75rem !important; }
-        main textarea { font-size: 0.75rem !important; }
-        main select { font-size: 0.75rem !important; }
+        main input { font-size: 0.75rem !important; color: #000000 !important; }
+        main textarea { font-size: 0.75rem !important; color: #000000 !important; }
+        main select { font-size: 0.75rem !important; color: #000000 !important; }
         main label { font-size: 0.75rem !important; }
         
         /* Modal form inputs - ensure black text */
@@ -98,38 +98,76 @@
             color: black !important;
         }
         
-            #searchInput::placeholder {
-                color: #6b7280 !important;
-            }
-            
-            /* Gray styling for table container only */
-            .bg-white.rounded-xl.shadow-lg {
-                background-color: #f8fafc !important;
-                border: 1px solid #9ca3af !important;
-            }
-            
-            /* Form visibility improvements */
-            .modal-content {
-                background: white !important;
-                color: #1f2937 !important;
-                border: 2px solid #3b82f6 !important;
-            }
-            
-            .modal-content input,
-            .modal-content textarea,
-            .modal-content select {
-                background: white !important;
-                color: #1f2937 !important;
-                border: 1px solid #d1d5db !important;
-            }
-            
-            .modal-content input:focus,
-            .modal-content textarea:focus,
-            .modal-content select:focus {
-                border-color: #3b82f6 !important;
-                box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
-            }
-        </style>
+        #searchInput::placeholder {
+            color: #6b7280 !important;
+        }
+        
+        /* Gray styling for table container only */
+        .bg-white.rounded-xl.shadow-lg {
+            background-color: #f8fafc !important;
+            border: 1px solid #9ca3af !important;
+        }
+        
+        /* Form visibility improvements */
+        .modal-content {
+            background: white !important;
+            color: #1f2937 !important;
+            border: 2px solid #3b82f6 !important;
+        }
+        
+        .modal-content input,
+        .modal-content textarea,
+        .modal-content select {
+            background: white !important;
+            color: #1f2937 !important;
+            border: 1px solid #d1d5db !important;
+        }
+        
+        .modal-content input:focus,
+        .modal-content textarea:focus,
+        .modal-content select:focus {
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+        }
+
+        /* Before/After image display styles */
+        .before-after-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .before-after-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-label {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 4px 8px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+
+        .before-image-wrapper {
+            position: relative;
+        }
+
+        .after-image-wrapper {
+            position: relative;
+        }
+    </style>
 </head>
 
 <body class="min-h-screen bg-[#183153]">
@@ -144,20 +182,20 @@
         <main class="flex-1 p-6 bg-gray-100 min-h-screen text-gray-800">
             <div class="max-w-7xl mx-auto">
 
-                <!-- Hero Banner Management Section -->
+                <!-- Showcase Gallery Management Section -->
                 <div class="bg-white rounded-xl shadow-lg -mt-5">
                     <div class="bg-gray-100 text-black px-6 py-4 rounded-t-xl flex justify-between items-center">
                         <div class="flex items-center">
-                            <i class="material-icons mr-3 text-2xl text-blue-600">web</i>
+                            <i class="material-icons mr-3 text-2xl text-blue-600">photo_library</i>
                             <div>
-                                <p class="text-black text-lg font-bold">MANAGE HERO BANNER</p>
+                                <p class="text-black text-lg font-bold">MANAGE SHOWCASE GALLERY</p>
                             </div>
                         </div>
                         <div class="flex items-center space-x-4">
-                            <button id="addBannerBtn" class="bg-blue-600 text-white px-4 py-1 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
+                            <button id="addShowcaseBtn" class="bg-blue-600 text-white px-4 py-1 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
                                 Add New
                             </button>
-                            <button id="previewBtn" class="bg-green-600 text-white px-4 py-1 rounded-lg hover:bg-green-700 transition-colors flex items-center text-sm font-medium">
+                            <button id="previewBtn" class="bg-blue-600 text-white px-4 py-1 rounded-lg hover:bg-blue-700 transition-colors flex items-center text-sm font-medium">
                                 <i class="material-icons mr-2 text-white">visibility</i>
                                 Preview
                             </button>
@@ -186,27 +224,40 @@
                         </div>
                     </div>
                     
-                    <!-- Banner Grid View -->
+                    <!-- Showcase Gallery Grid View -->
                     <div class="p-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="bannersGrid">
-                            <!-- Banner Card 1 -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="showcaseGrid">
+                            <!-- Showcase Card 1 - Before/After Comparison -->
                             <div class="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                                 <div class="relative">
-                                    <img src="../images/banner4.jpg" 
-                                         alt="Hero Banner" class="w-full h-48 object-cover rounded-t-lg">
+                                    <div class="before-after-container">
+                                        <div class="before-image-wrapper">
+                                            <img src="../images/landscaping.png" 
+                                                 alt="Before Image" class="before-after-image">
+                                            <div class="image-label">BEFORE</div>
+                                        </div>
+                                        <div class="after-image-wrapper">
+                                            <img src="../images/banner4.jpg" 
+                                                 alt="After Image" class="before-after-image">
+                                            <div class="image-label">AFTER</div>
+                                        </div>
+                                    </div>
                                     <div class="absolute top-2 right-2">
-                                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">Active</span>
+                                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">Featured</span>
                                     </div>
                                 </div>
                                 <div class="p-4">
-                                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Transforming Yards, Creating Havens</h3>
-                                    <p class="text-gray-600 text-sm mb-4">Turning Ordinary Spaces into Extraordinary Retreats</p>
+                                    <div class="mb-2">
+                                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded-full">LANDSCAPING</span>
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Complete Yard Transformation</h3>
+                                    <p class="text-gray-600 text-sm mb-4">Complete landscape redesign including lawn installation, tree planting, and patio construction.</p>
                                     <div class="flex items-center justify-between">
                                         <div class="flex items-center space-x-2">
                                             <span class="text-xs text-gray-500">Order: 1</span>
                                         </div>
                                         <div class="flex items-center space-x-2">
-                                            <button class="edit-banner-btn text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                            <button class="edit-showcase-btn text-blue-600 hover:text-blue-800 text-sm font-medium">
                                                 <i class="fas fa-edit mr-1"></i>Edit
                                             </button>
                                             <button class="text-red-600 hover:text-red-800 text-sm font-medium">
@@ -217,24 +268,37 @@
                                 </div>
                             </div>
 
-                            <!-- Banner Card 2 -->
+                            <!-- Showcase Card 2 - Before/After Comparison -->
                             <div class="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                                 <div class="relative">
-                                    <img src="../images/logo/banner2.jpg" 
-                                         alt="Hero Banner" class="w-full h-48 object-cover rounded-t-lg">
+                                    <div class="before-after-container">
+                                        <div class="before-image-wrapper">
+                                            <img src="../images/landscaping.png" 
+                                                 alt="Before Image" class="before-after-image">
+                                            <div class="image-label">BEFORE</div>
+                                        </div>
+                                        <div class="after-image-wrapper">
+                                            <img src="../images/banner4.jpg" 
+                                                 alt="After Image" class="before-after-image">
+                                            <div class="image-label">AFTER</div>
+                                        </div>
+                                    </div>
                                     <div class="absolute top-2 right-2">
-                                        <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-1 rounded-full">Inactive</span>
+                                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded-full">Active</span>
                                     </div>
                                 </div>
                                 <div class="p-4">
-                                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Transforming Yards, Creating Havens</h3>
-                                    <p class="text-gray-600 text-sm mb-4">Turning Ordinary Spaces into Extraordinary Retreats</p>
+                                    <div class="mb-2">
+                                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">MAINTENANCE</span>
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Pool Area Renovation</h3>
+                                    <p class="text-gray-600 text-sm mb-4">Pool deck resurfacing and surrounding landscape enhancement.</p>
                                     <div class="flex items-center justify-between">
                                         <div class="flex items-center space-x-2">
                                             <span class="text-xs text-gray-500">Order: 2</span>
                                         </div>
                                         <div class="flex items-center space-x-2">
-                                            <button class="edit-banner-btn text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                            <button class="edit-showcase-btn text-blue-600 hover:text-blue-800 text-sm font-medium">
                                                 <i class="fas fa-edit mr-1"></i>Edit
                                             </button>
                                             <button class="text-red-600 hover:text-red-800 text-sm font-medium">
@@ -245,24 +309,37 @@
                                 </div>
                             </div>
 
-                            <!-- Banner Card 3 -->
+                            <!-- Showcase Card 3 - Before/After Comparison -->
                             <div class="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                                 <div class="relative">
-                                    <img src="../images/logo/banner3.jpg" 
-                                         alt="Hero Banner" class="w-full h-48 object-cover rounded-t-lg">
+                                    <div class="before-after-container">
+                                        <div class="before-image-wrapper">
+                                            <img src="../images/banner4.jpg" 
+                                                 alt="Before Image" class="before-after-image">
+                                            <div class="image-label">BEFORE</div>
+                                        </div>
+                                        <div class="after-image-wrapper">
+                                            <img src="../images/landscaping.png" 
+                                                 alt="After Image" class="before-after-image">
+                                            <div class="image-label">AFTER</div>
+                                        </div>
+                                    </div>
                                     <div class="absolute top-2 right-2">
-                                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">Active</span>
+                                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">Featured</span>
                                     </div>
                                 </div>
                                 <div class="p-4">
-                                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Transforming Yards, Creating Havens</h3>
-                                    <p class="text-gray-600 text-sm mb-4">Turning Ordinary Spaces into Extraordinary Retreats</p>
+                                    <div class="mb-2">
+                                        <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2 py-1 rounded-full">DESIGN</span>
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Modern Garden Design</h3>
+                                    <p class="text-gray-600 text-sm mb-4">Contemporary garden design with native plants and sustainable materials.</p>
                                     <div class="flex items-center justify-between">
                                         <div class="flex items-center space-x-2">
                                             <span class="text-xs text-gray-500">Order: 3</span>
                                         </div>
                                         <div class="flex items-center space-x-2">
-                                            <button class="edit-banner-btn text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                            <button class="edit-showcase-btn text-blue-600 hover:text-blue-800 text-sm font-medium">
                                                 <i class="fas fa-edit mr-1"></i>Edit
                                             </button>
                                             <button class="text-red-600 hover:text-red-800 text-sm font-medium">
@@ -272,6 +349,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                     
@@ -296,13 +374,13 @@
                     </div>
                 </div>
 
-                <!-- Banner Creation Modal -->
-                <div id="bannerModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+                <!-- Showcase Creation Modal -->
+                <div id="showcaseModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
                     <div class="flex items-center justify-center min-h-screen p-4">
-                        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+                        <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
                             <div class="bg-blue-600 text-white px-6 py-4 rounded-t-lg flex justify-between items-center">
-                                <h3 class="text-xl font-semibold">Add New Banner</h3>
-                                <button id="closeBannerModal" class="text-white hover:text-gray-200">
+                                <h3 class="text-xl font-semibold">Add New Showcase Entry</h3>
+                                <button id="closeShowcaseModal" class="text-white hover:text-gray-200">
                                     <i class="fas fa-times text-xl"></i>
                                 </button>
                             </div>
@@ -313,30 +391,46 @@
                                     <!-- Left Column -->
                                     <div class="space-y-4">
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Banner Order</label>
-                                            <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter banner order">
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Showcase Order</label>
+                                            <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter showcase order">
                                         </div>
                                         
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Banner Title</label>
-                                            <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter banner title">
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Showcase Title</label>
+                                            <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter showcase title">
                                         </div>
                                         
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Category</label>
                                             <div class="dropdown-container">
                                                 <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                                    <option value="active">Active</option>
-                                                    <option value="inactive">Inactive</option>
+                                                    <option value="landscaping">LANDSCAPING</option>
+                                                    <option value="maintenance">MAINTENANCE</option>
+                                                    <option value="design">DESIGN</option>
+                                                    <option value="installation">INSTALLATION</option>
                                                 </select>
                                             </div>
                                         </div>
 
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Subscribe Option</label>
-                                            <div class="flex items-center">
-                                                <input type="checkbox" id="subscribeOption" class="mr-2">
-                                                <label for="subscribeOption" class="text-sm text-gray-700">Enable subscribe button</label>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Showcase Type</label>
+                                            <div class="dropdown-container">
+                                                <select id="showcaseType" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                                    <option value="before-after">Before & After Comparison</option>
+                                                    <option value="single-image">Single Image Showcase</option>
+                                                    <option value="gallery">Image Gallery</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                                            <div class="dropdown-container">
+                                                <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                                    <option value="active">Active</option>
+                                                    <option value="featured">Featured</option>
+                                                    <option value="inactive">Inactive</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -345,14 +439,29 @@
                                     <div class="space-y-4">
                                         <div>
                                             <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
-                                            <textarea class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-y" rows="1" placeholder="Enter banner description"></textarea>
+                                            <textarea class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-y" rows="3" placeholder="Enter showcase description"></textarea>
                                         </div>
                                         
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Background Image</label>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Project Details</label>
+                                            <textarea class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-y" rows="2" placeholder="Enter project details, timeline, materials used, etc."></textarea>
+                                        </div>
+                                        
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Before Image</label>
                                             <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
                                                 <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
-                                                <p class="text-gray-500 text-sm mb-1">Click to upload or drag and drop</p>
+                                                <p class="text-gray-500 text-sm mb-1">Click to upload before image</p>
+                                                <p class="text-xs text-gray-400">PNG, JPG, GIF up to 10MB</p>
+                                                <input type="file" class="hidden" accept="image/*">
+                                            </div>
+                                        </div>
+
+                                        <div id="afterImageSection">
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">After Image</label>
+                                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+                                                <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+                                                <p class="text-gray-500 text-sm mb-1">Click to upload after image</p>
                                                 <p class="text-xs text-gray-400">PNG, JPG, GIF up to 10MB</p>
                                                 <input type="file" class="hidden" accept="image/*">
                                             </div>
@@ -361,11 +470,11 @@
                                 </div>
                                 
                                 <div class="flex justify-end space-x-3 pt-4">
-                                    <button type="button" id="cancelBanner" class="px-4 py-2 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors">
+                                    <button type="button" id="cancelShowcase" class="px-4 py-2 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors">
                                         Cancel
                                     </button>
                                     <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                                        Save Banner
+                                        Save Showcase
                                     </button>
                                 </div>
                             </form>
@@ -373,13 +482,13 @@
                     </div>
                 </div>
 
-                <!-- Edit Banner Modal -->
-                <div id="editBannerModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+                <!-- Edit Showcase Modal -->
+                <div id="editShowcaseModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
                     <div class="flex items-center justify-center min-h-screen p-4">
-                        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+                        <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
                             <div class="bg-blue-600 text-white px-6 py-4 rounded-t-lg flex justify-between items-center">
-                                <h3 class="text-xl font-semibold">Edit Banner</h3>
-                                <button id="closeEditBannerModal" class="text-white hover:text-gray-200">
+                                <h3 class="text-xl font-semibold">Edit Showcase Entry</h3>
+                                <button id="closeEditShowcaseModal" class="text-white hover:text-gray-200">
                                     <i class="fas fa-times text-xl"></i>
                                 </button>
                             </div>
@@ -390,30 +499,46 @@
                                     <!-- Left Column -->
                                     <div class="space-y-4">
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Banner Order</label>
-                                            <input type="number" id="editBannerOrder" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter banner order" value="1">
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Showcase Order</label>
+                                            <input type="number" id="editShowcaseOrder" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter showcase order" value="1">
                                         </div>
                                         
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Banner Title</label>
-                                            <input type="text" id="editBannerTitle" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter banner title" value="Transforming Yards, Creating Havens">
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Showcase Title</label>
+                                            <input type="text" id="editShowcaseTitle" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter showcase title" value="Complete Yard Transformation">
                                         </div>
                                         
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Category</label>
                                             <div class="dropdown-container">
-                                                <select id="editBannerStatus" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                                    <option value="active" selected>Active</option>
-                                                    <option value="inactive">Inactive</option>
+                                                <select id="editShowcaseCategory" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                                    <option value="landscaping" selected>LANDSCAPING</option>
+                                                    <option value="maintenance">MAINTENANCE</option>
+                                                    <option value="design">DESIGN</option>
+                                                    <option value="installation">INSTALLATION</option>
                                                 </select>
                                             </div>
                                         </div>
 
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Subscribe Option</label>
-                                            <div class="flex items-center">
-                                                <input type="checkbox" id="editSubscribeOption" class="mr-2" checked>
-                                                <label for="editSubscribeOption" class="text-sm text-gray-700">Enable subscribe button</label>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Showcase Type</label>
+                                            <div class="dropdown-container">
+                                                <select id="editShowcaseType" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                                    <option value="before-after" selected>Before & After Comparison</option>
+                                                    <option value="single-image">Single Image Showcase</option>
+                                                    <option value="gallery">Image Gallery</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                                            <div class="dropdown-container">
+                                                <select id="editShowcaseStatus" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                                    <option value="featured" selected>Featured</option>
+                                                    <option value="active">Active</option>
+                                                    <option value="inactive">Inactive</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -422,34 +547,51 @@
                                     <div class="space-y-4">
                                         <div>
                                             <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
-                                            <textarea id="editBannerDescription" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-y" rows="1" placeholder="Enter banner description">Turning Ordinary Spaces into Extraordinary Retreats</textarea>
+                                            <textarea id="editShowcaseDescription" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-y" rows="3" placeholder="Enter showcase description">Complete landscape redesign including lawn installation, tree planting, and patio construction.</textarea>
                                         </div>
                                         
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Background Image</label>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Project Details</label>
+                                            <textarea id="editShowcaseDetails" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-y" rows="2" placeholder="Enter project details, timeline, materials used, etc.">Project completed in 2 weeks. Used native plants and sustainable materials. Total area: 1500 sq ft.</textarea>
+                                        </div>
+                                        
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Before Image</label>
                                             <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
-                                                <img id="editBannerImagePreview" src="../images/banner4.jpg" alt="Current Banner" class="w-full h-32 object-cover rounded mb-2">
+                                                <img id="editBeforeImagePreview" src="../images/landscaping.png" alt="Current Before Image" class="w-full h-32 object-cover rounded mb-2">
                                                 <i class="fas fa-cloud-upload-alt text-2xl text-gray-400 mb-2"></i>
-                                                <p class="text-gray-500 text-sm mb-1">Click to upload or drag and drop</p>
+                                                <p class="text-gray-500 text-sm mb-1">Click to upload new before image</p>
                                                 <p class="text-xs text-gray-400">PNG, JPG, GIF up to 10MB</p>
-                                                <input type="file" id="editBannerImage" class="hidden" accept="image/*">
+                                                <input type="file" id="editBeforeImage" class="hidden" accept="image/*">
+                                            </div>
+                                        </div>
+
+                                        <div id="editAfterImageSection">
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">After Image</label>
+                                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+                                                <img id="editAfterImagePreview" src="../images/landscaping.png" alt="Current After Image" class="w-full h-32 object-cover rounded mb-2">
+                                                <i class="fas fa-cloud-upload-alt text-2xl text-gray-400 mb-2"></i>
+                                                <p class="text-gray-500 text-sm mb-1">Click to upload new after image</p>
+                                                <p class="text-xs text-gray-400">PNG, JPG, GIF up to 10MB</p>
+                                                <input type="file" id="editAfterImage" class="hidden" accept="image/*">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 
                                 <div class="flex justify-end space-x-3 pt-4">
-                                    <button type="button" id="cancelEditBanner" class="px-4 py-2 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors">
+                                    <button type="button" id="cancelEditShowcase" class="px-4 py-2 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors">
                                         Cancel
                                     </button>
                                     <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                                        Update Banner
+                                        Update Showcase
                                     </button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
+
             </div>
         </main>
     </div>
@@ -609,85 +751,107 @@
             }
         }, 100);
 
-        // Banner modal functionality
+        // Showcase modal functionality
         document.addEventListener('DOMContentLoaded', function() {
-            const addBannerBtn = document.getElementById('addBannerBtn');
-            const bannerModal = document.getElementById('bannerModal');
-            const closeBannerModal = document.getElementById('closeBannerModal');
-            const cancelBanner = document.getElementById('cancelBanner');
+            const addShowcaseBtn = document.getElementById('addShowcaseBtn');
+            const addNewShowcaseCard = document.getElementById('addNewShowcaseCard');
+            const showcaseModal = document.getElementById('showcaseModal');
+            const closeShowcaseModal = document.getElementById('closeShowcaseModal');
+            const cancelShowcase = document.getElementById('cancelShowcase');
 
             // Edit modal elements
-            const editBannerModal = document.getElementById('editBannerModal');
-            const closeEditBannerModal = document.getElementById('closeEditBannerModal');
-            const cancelEditBanner = document.getElementById('cancelEditBanner');
+            const editShowcaseModal = document.getElementById('editShowcaseModal');
+            const closeEditShowcaseModal = document.getElementById('closeEditShowcaseModal');
+            const cancelEditShowcase = document.getElementById('cancelEditShowcase');
 
-            if (addBannerBtn) {
-                addBannerBtn.addEventListener('click', function() {
-                    bannerModal.classList.remove('hidden');
+            // Showcase type change handler
+            const showcaseType = document.getElementById('showcaseType');
+            const afterImageSection = document.getElementById('afterImageSection');
+
+            if (showcaseType) {
+                showcaseType.addEventListener('change', function() {
+                    if (this.value === 'single-image') {
+                        afterImageSection.style.display = 'none';
+                    } else {
+                        afterImageSection.style.display = 'block';
+                    }
                 });
             }
 
-            if (closeBannerModal) {
-                closeBannerModal.addEventListener('click', function() {
-                    bannerModal.classList.add('hidden');
+            if (addShowcaseBtn) {
+                addShowcaseBtn.addEventListener('click', function() {
+                    showcaseModal.classList.remove('hidden');
                 });
             }
 
-            if (cancelBanner) {
-                cancelBanner.addEventListener('click', function() {
-                    bannerModal.classList.add('hidden');
+            if (addNewShowcaseCard) {
+                addNewShowcaseCard.addEventListener('click', function() {
+                    showcaseModal.classList.remove('hidden');
+                });
+            }
+
+            if (closeShowcaseModal) {
+                closeShowcaseModal.addEventListener('click', function() {
+                    showcaseModal.classList.add('hidden');
+                });
+            }
+
+            if (cancelShowcase) {
+                cancelShowcase.addEventListener('click', function() {
+                    showcaseModal.classList.add('hidden');
                 });
             }
 
             // Close modal when clicking outside
-            bannerModal.addEventListener('click', function(e) {
-                if (e.target === bannerModal) {
-                    bannerModal.classList.add('hidden');
+            showcaseModal.addEventListener('click', function(e) {
+                if (e.target === showcaseModal) {
+                    showcaseModal.classList.add('hidden');
                 }
             });
 
             // Edit modal functionality
-            if (closeEditBannerModal) {
-                closeEditBannerModal.addEventListener('click', function() {
-                    editBannerModal.classList.add('hidden');
+            if (closeEditShowcaseModal) {
+                closeEditShowcaseModal.addEventListener('click', function() {
+                    editShowcaseModal.classList.add('hidden');
                 });
             }
 
-            if (cancelEditBanner) {
-                cancelEditBanner.addEventListener('click', function() {
-                    editBannerModal.classList.add('hidden');
+            if (cancelEditShowcase) {
+                cancelEditShowcase.addEventListener('click', function() {
+                    editShowcaseModal.classList.add('hidden');
                 });
             }
 
             // Close edit modal when clicking outside
-            editBannerModal.addEventListener('click', function(e) {
-                if (e.target === editBannerModal) {
-                    editBannerModal.classList.add('hidden');
+            editShowcaseModal.addEventListener('click', function(e) {
+                if (e.target === editShowcaseModal) {
+                    editShowcaseModal.classList.add('hidden');
                 }
             });
 
             // Handle edit button clicks
             document.addEventListener('click', function(e) {
-                if (e.target.closest('.edit-banner-btn')) {
+                if (e.target.closest('.edit-showcase-btn')) {
                     e.preventDefault();
-                    editBannerModal.classList.remove('hidden');
+                    editShowcaseModal.classList.remove('hidden');
                     
-                    // Get banner data from the clicked card
-                    const bannerCard = e.target.closest('.bg-white');
-                    const title = bannerCard.querySelector('h3').textContent;
-                    const description = bannerCard.querySelector('p').textContent;
-                    const status = bannerCard.querySelector('.bg-green-100') ? 'active' : 'inactive';
-                    const order = bannerCard.querySelector('.text-xs').textContent.replace('Order: ', '');
-                    const imageSrc = bannerCard.querySelector('img').src;
+                    // Get showcase data from the clicked card
+                    const showcaseCard = e.target.closest('.bg-white');
+                    const title = showcaseCard.querySelector('h3').textContent;
+                    const description = showcaseCard.querySelector('p').textContent;
+                    const status = showcaseCard.querySelector('.bg-green-100, .bg-blue-100') ? 'featured' : 'active';
+                    const order = showcaseCard.querySelector('.text-xs').textContent.replace('Order: ', '');
+                    const category = showcaseCard.querySelector('.bg-blue-100, .bg-green-100, .bg-purple-100').textContent.toLowerCase();
                     
                     // Populate edit form
-                    document.getElementById('editBannerTitle').value = title;
-                    document.getElementById('editBannerDescription').value = description;
-                    document.getElementById('editBannerStatus').value = status;
-                    document.getElementById('editBannerOrder').value = order;
-                    document.getElementById('editBannerImagePreview').src = imageSrc;
+                    document.getElementById('editShowcaseTitle').value = title;
+                    document.getElementById('editShowcaseDescription').value = description;
+                    document.getElementById('editShowcaseStatus').value = status;
+                    document.getElementById('editShowcaseOrder').value = order;
+                    document.getElementById('editShowcaseCategory').value = category;
                 }
             });
+
         });
     </script>
 </body>
