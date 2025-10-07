@@ -128,8 +128,67 @@
             .modal-content select:focus {
                 border-color: #3b82f6 !important;
                 box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+        }
+
+        /* Ensure grid stays left-aligned on all screen sizes */
+        #bannersGrid {
+            justify-content: start !important;
+            align-items: start !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        /* Override any centering from parent containers */
+        .w-full {
+            max-width: none !important;
+            margin: 0 !important;
+        }
+
+        /* Prevent centering on large screens */
+        @media (min-width: 1280px) {
+            #bannersGrid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+                justify-content: start !important;
             }
-        </style>
+        }
+
+        /* Force left alignment on very large screens */
+        @media (min-width: 1650px) {
+            #bannersGrid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+                justify-content: start !important;
+                max-width: none !important;
+                width: 100% !important;
+            }
+            
+            .p-6 {
+                padding-left: 1.5rem !important;
+                padding-right: 1.5rem !important;
+            }
+        }
+
+        /* Make cards expand to fill available space on wide screens */
+        @media (min-width: 1400px) {
+            #bannersGrid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)) !important;
+                gap: 2rem !important;
+            }
+        }
+
+        @media (min-width: 1800px) {
+            #bannersGrid {
+                grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)) !important;
+                gap: 2.5rem !important;
+            }
+        }
+
+        @media (min-width: 2200px) {
+            #bannersGrid {
+                grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)) !important;
+                gap: 3rem !important;
+            }
+        }
+    </style>
 </head>
 
 <body class="min-h-screen bg-[#183153]">
@@ -142,7 +201,7 @@
         <div id="web-content-nav-container"></div>
         
         <main class="flex-1 p-6 bg-gray-100 min-h-screen text-gray-800">
-            <div class="max-w-7xl mx-auto">
+            <div class="w-full">
 
                 <!-- Hero Banner Management Section -->
                 <div class="bg-white rounded-xl shadow-lg -mt-5">
@@ -188,7 +247,7 @@
                     
                     <!-- Banner Grid View -->
                     <div class="p-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="bannersGrid">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-start" id="bannersGrid">
                             <!-- Banner Card 1 -->
                             <div class="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                                 <div class="relative">
