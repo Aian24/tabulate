@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Information Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        /* Reduced font sizes */
+        .text-3xl { font-size: 1.5rem !important; }
+        .text-xl { font-size: 1rem !important; }
+        .text-lg { font-size: 0.9rem !important; }
+        .text-sm { font-size: 0.75rem !important; }
+        .text-xs { font-size: 0.65rem !important; }
+        h1 { font-size: 1.5rem !important; }
+        h2 { font-size: 1rem !important; }
+        h3 { font-size: 0.9rem !important; }
+        .material-icons { font-size: 1.1rem !important; }
+        .text-2xl { font-size: 1.1rem !important; }
+        
+        main h1 { font-size: 1.5rem !important; }
+        main h2 { font-size: 1rem !important; }
+        main h3 { font-size: 0.9rem !important; }
+        main p { font-size: 0.75rem !important; }
+        main button { font-size: 0.75rem !important; }
+        main input { font-size: 0.75rem !important; color: #000000 !important; }
+        main textarea { font-size: 0.75rem !important; color: #000000 !important; }
+        main select { font-size: 0.75rem !important; color: #000000 !important; }
+        main label { font-size: 0.75rem !important; }
+        
+        input[type="text"], input[type="tel"], input[type="email"], textarea, select {
+            color: #000000 !important;
+        }
+        
+        input::placeholder, textarea::placeholder {
+            color: #6b7280 !important;
+        }
+        
+        .bg-white.rounded-xl.shadow-lg {
+            background-color: #f8fafc !important;
+            border: 1px solid #9ca3af !important;
+        }
+        
+        /* Table header controls */
+        #rowsPerPage {
+            color: black !important;
+        }
+        
+        #rowsPerPage option {
+            color: black !important;
+        }
+        
+        #searchInput {
+            color: black !important;
+        }
+        
+        #searchInput::placeholder {
+            color: #6b7280 !important;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-[#183153]">
+    <!-- Include header -->
+    <div id="header-container"></div>
+    <div id="nav-container"></div>
+    <div class="w-full h-2 bg-transparent"></div>
+    <div class="flex min-h-screen">
+        <!-- Include web content navigation -->
+        <div id="web-content-nav-container"></div>
+        
+        <main class="flex-1 p-6 bg-gray-100 min-h-screen text-gray-800">
+            <div class="w-full">
+
+                <!-- Contact Information Section -->
+                <div class="bg-white rounded-xl shadow-lg -mt-5">
+                    <div class="bg-gray-100 text-black px-6 py-4 rounded-t-xl flex justify-between items-center">
+                        <div class="flex items-center">
+                            <i class="material-icons mr-3 text-2xl text-blue-600">contact_phone</i>
+                            <div>
+                                <p class="text-black text-lg font-bold">CONTACT INFORMATION</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <button id="addNewBtn" class="bg-blue-600 text-white px-4 py-1 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
+                                Add New
+                            </button>
+                            <button id="previewBtn" class="bg-green-600 text-white px-4 py-1 rounded-lg hover:bg-green-700 transition-colors flex items-center text-sm font-medium">
+                                <i class="material-icons mr-2 text-white">visibility</i>
+                                Preview
+                            </button>
+                            <div class="flex items-center space-x-2">
+                                <button class="bg-white text-black px-3 py-1 rounded-lg hover:bg-gray-100 transition-colors text-sm font-medium border border-gray-300">
+                                    <i class="fas fa-sort mr-1 text-black"></i> Sort
+                                </button>
+                                <button class="bg-white text-black px-3 py-1 rounded-lg hover:bg-gray-100 transition-colors text-sm font-medium border border-gray-300">
+                                    <i class="fas fa-filter mr-1 text-black"></i> Filter
+                                </button>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm text-black font-medium">Show:</span>
+                                <select id="rowsPerPage" class="border border-gray-300 rounded px-3 py-1 text-sm text-black bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 min-w-[60px]">
+                                    <option value="5" class="text-black">5</option>
+                                    <option value="10" class="text-black">10</option>
+                                    <option value="25" selected class="text-black">25</option>
+                                    <option value="50" class="text-black">50</option>
+                                </select>
+                            </div>
+                            <div class="relative">
+                                <input type="text" id="searchInput" placeholder="Search..." 
+                                       class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-64 bg-white text-black placeholder-gray-500">
+                                <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Info Cards -->
+                    <div class="p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-start" id="contactInfoGrid">
+                            <!-- Address Card -->
+                            <div class="bg-white border-2 border-blue-200 rounded-lg shadow-sm hover:shadow-md transition-shadow p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-map-marker-alt text-blue-600 text-xl mr-2"></i>
+                                        <h3 class="text-lg font-semibold text-gray-900">Address</h3>
+                                    </div>
+                                    <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">Active</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <div>
+                                        <p class="text-sm text-gray-600">834 Fairfield Ave</p>
+                                        <p class="text-sm text-gray-600">Kenilworth, New Jersey 07033</p>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <label class="flex items-center">
+                                            <input type="checkbox" checked class="mr-2 w-4 h-4">
+                                            <span class="text-xs text-gray-700">Display on Website</span>
+                                        </label>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="edit-contact-btn text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                                <i class="fas fa-edit mr-1"></i>Edit
+                                            </button>
+                                            <button class="text-red-600 hover:text-red-800 text-sm font-medium">
+                                                <i class="fas fa-trash mr-1"></i>Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Phone Card -->
+                            <div class="bg-white border-2 border-green-200 rounded-lg shadow-sm hover:shadow-md transition-shadow p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-phone text-green-600 text-xl mr-2"></i>
+                                        <h3 class="text-lg font-semibold text-gray-900">Call Us</h3>
+                                    </div>
+                                    <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">Active</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <div>
+                                        <p class="text-sm text-gray-600">(973) 671-1820</p>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <label class="flex items-center">
+                                            <input type="checkbox" checked class="mr-2 w-4 h-4">
+                                            <span class="text-xs text-gray-700">Display on Website</span>
+                                        </label>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="edit-contact-btn text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                                <i class="fas fa-edit mr-1"></i>Edit
+                                            </button>
+                                            <button class="text-red-600 hover:text-red-800 text-sm font-medium">
+                                                <i class="fas fa-trash mr-1"></i>Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Email Card -->
+                            <div class="bg-white border-2 border-purple-200 rounded-lg shadow-sm hover:shadow-md transition-shadow p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-envelope text-purple-600 text-xl mr-2"></i>
+                                        <h3 class="text-lg font-semibold text-gray-900">Email Us</h3>
+                                    </div>
+                                    <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">Active</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <div>
+                                        <p class="text-sm text-gray-600">your@email.com</p>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <label class="flex items-center">
+                                            <input type="checkbox" checked class="mr-2 w-4 h-4">
+                                            <span class="text-xs text-gray-700">Display on Website</span>
+                                        </label>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="edit-contact-btn text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                                <i class="fas fa-edit mr-1"></i>Edit
+                                            </button>
+                                            <button class="text-red-600 hover:text-red-800 text-sm font-medium">
+                                                <i class="fas fa-trash mr-1"></i>Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Logo Card -->
+                            <div class="bg-white border-2 border-orange-200 rounded-lg shadow-sm hover:shadow-md transition-shadow p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-image text-orange-600 text-xl mr-2"></i>
+                                        <h3 class="text-lg font-semibold text-gray-900">Logo</h3>
+                                    </div>
+                                    <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">Active</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="w-20 h-20 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center bg-gray-50">
+                                        <img src="../images/logo.png" alt="Logo" class="max-w-full max-h-full object-contain p-1">
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <label class="flex items-center">
+                                            <input type="checkbox" checked class="mr-2 w-4 h-4">
+                                            <span class="text-xs text-gray-700">Display Logo</span>
+                                        </label>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="edit-contact-btn text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                                <i class="fas fa-edit mr-1"></i>Edit
+                                            </button>
+                                            <button class="text-red-600 hover:text-red-800 text-sm font-medium">
+                                                <i class="fas fa-trash mr-1"></i>Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Subscribe Feature Card -->
+                            <div class="bg-white border-2 border-pink-200 rounded-lg shadow-sm hover:shadow-md transition-shadow p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-bell text-pink-600 text-xl mr-2"></i>
+                                        <h3 class="text-lg font-semibold text-gray-900">Subscribe Feature</h3>
+                                    </div>
+                                    <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">Active</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <div>
+                                        <p class="text-sm text-gray-600">Title: Stay Updated</p>
+                                        <p class="text-sm text-gray-600">Button: Subscribe</p>
+                                        <p class="text-sm text-gray-600">Placeholder: Your email</p>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <label class="flex items-center">
+                                            <input type="checkbox" checked class="mr-2 w-4 h-4">
+                                            <span class="text-xs text-gray-700">Enable Subscribe</span>
+                                        </label>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="edit-contact-btn text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                                <i class="fas fa-edit mr-1"></i>Edit
+                                            </button>
+                                            <button class="text-red-600 hover:text-red-800 text-sm font-medium">
+                                                <i class="fas fa-trash mr-1"></i>Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="px-6 py-4 border-t border-gray-200 bg-gray-50 rounded-b-xl">
+                        <div class="flex justify-between items-center">
+                            <div class="text-sm text-gray-600">
+                                Showing <span id="showingStart" class="font-medium">1</span> to <span id="showingEnd" class="font-medium">5</span> of <span id="totalResults" class="font-medium">5</span> results
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button id="prevPage" class="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-100" disabled>
+                                    <i class="fas fa-chevron-left mr-1"></i>Previous
+                                </button>
+                                <div class="flex space-x-1" id="pageNumbers">
+                                    <button class="px-3 py-2 bg-blue-600 text-white rounded-md text-sm font-medium">1</button>
+                                </div>
+                                <button id="nextPage" class="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-100" disabled>
+                                    Next<i class="fas fa-chevron-right ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Include header and navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load header
+            fetch('../nav/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                });
+
+            // Load navigation
+            fetch('../nav/navigation.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('nav-container').innerHTML = data;
+                });
+
+            // Load web content navigation
+            fetch('../nav/web-content-navigation.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('web-content-nav-container').innerHTML = data;
+                    
+                    // Restore expanded sections from localStorage
+                    const expandedSections = JSON.parse(localStorage.getItem('expandedSections') || '[]');
+                    expandedSections.forEach(sectionId => {
+                        const section = document.getElementById(sectionId);
+                        if (section) {
+                            section.classList.remove('collapsed');
+                            const header = section.previousElementSibling.querySelector('.section-header');
+                            if (header) {
+                                header.classList.remove('collapsed');
+                                const icon = header.querySelector('.material-icons');
+                                if (icon) {
+                                    icon.textContent = 'expand_more';
+                                }
+                            }
+                        }
+                    });
+                });
+        });
+
+        // Collapsible navigation function
+        window.toggleSection = function(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (!section) return;
+            
+            const header = section.previousElementSibling.querySelector('.section-header');
+            const icon = header.querySelector('.material-icons');
+            
+            // Get current expanded sections from localStorage
+            let expandedSections = JSON.parse(localStorage.getItem('expandedSections') || '[]');
+            
+            if (section.classList.contains('collapsed')) {
+                // Expand section
+                section.classList.remove('collapsed');
+                header.classList.remove('collapsed');
+                icon.textContent = 'expand_more';
+                
+                // Add to expanded sections if not already there
+                if (!expandedSections.includes(sectionId)) {
+                    expandedSections.push(sectionId);
+                }
+            } else {
+                // Collapse section
+                section.classList.add('collapsed');
+                header.classList.add('collapsed');
+                icon.textContent = 'chevron_right';
+                
+                // Remove from expanded sections
+                expandedSections = expandedSections.filter(id => id !== sectionId);
+            }
+            
+            // Save updated state to localStorage
+            localStorage.setItem('expandedSections', JSON.stringify(expandedSections));
+        };
+    </script>
+</body>
+</html>

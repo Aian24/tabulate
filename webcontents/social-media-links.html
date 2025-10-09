@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Links Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        /* Reduced font sizes */
+        .text-3xl { font-size: 1.5rem !important; }
+        .text-xl { font-size: 1rem !important; }
+        .text-lg { font-size: 0.9rem !important; }
+        .text-sm { font-size: 0.75rem !important; }
+        .text-xs { font-size: 0.65rem !important; }
+        h1 { font-size: 1.5rem !important; }
+        h2 { font-size: 1rem !important; }
+        h3 { font-size: 0.9rem !important; }
+        .material-icons { font-size: 1.1rem !important; }
+        .text-2xl { font-size: 1.1rem !important; }
+        
+        main h1 { font-size: 1.5rem !important; }
+        main h2 { font-size: 1rem !important; }
+        main h3 { font-size: 0.9rem !important; }
+        main p { font-size: 0.75rem !important; }
+        main button { font-size: 0.75rem !important; }
+        main input { font-size: 0.75rem !important; color: #000000 !important; }
+        main label { font-size: 0.75rem !important; }
+        
+        input[type="text"], input[type="url"] {
+            color: #000000 !important;
+        }
+        
+        input::placeholder {
+            color: #6b7280 !important;
+        }
+        
+        .bg-white.rounded-xl.shadow-lg {
+            background-color: #f8fafc !important;
+            border: 1px solid #9ca3af !important;
+        }
+        
+        #socialLinksGrid {
+            justify-content: start !important;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-[#183153]">
+    <!-- Include header -->
+    <div id="header-container"></div>
+    <div id="nav-container"></div>
+    <div class="w-full h-2 bg-transparent"></div>
+    <div class="flex min-h-screen">
+        <!-- Include web content navigation -->
+        <div id="web-content-nav-container"></div>
+        
+        <main class="flex-1 p-6 bg-gray-100 min-h-screen text-gray-800">
+            <div class="w-full">
+
+                <!-- Social Media Management Section -->
+                <div class="bg-white rounded-xl shadow-lg -mt-5">
+                    <div class="bg-gray-100 text-black px-6 py-4 rounded-t-xl flex justify-between items-center">
+                        <div class="flex items-center">
+                            <i class="material-icons mr-3 text-2xl text-blue-600">share</i>
+                            <div>
+                                <p class="text-black text-lg font-bold">SOCIAL MEDIA LINKS</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <button id="addLinkBtn" class="bg-blue-600 text-white px-4 py-1 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
+                                Add New
+                            </button>
+                            <button id="previewBtn" class="bg-green-600 text-white px-4 py-1 rounded-lg hover:bg-green-700 transition-colors flex items-center text-sm font-medium">
+                                <i class="material-icons mr-2 text-white">visibility</i>
+                                Preview
+                            </button>
+                            <div class="flex items-center space-x-2">
+                                <button class="bg-white text-black px-3 py-1 rounded-lg hover:bg-gray-100 transition-colors text-sm font-medium border border-gray-300">
+                                    <i class="fas fa-sort mr-1 text-black"></i> Sort
+                                </button>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm text-black font-medium">Show:</span>
+                                <select id="rowsPerPage" class="border border-gray-300 rounded px-3 py-1 text-sm text-black bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 min-w-[60px]">
+                                    <option value="5" class="text-black">5</option>
+                                    <option value="10" selected class="text-black">10</option>
+                                    <option value="25" class="text-black">25</option>
+                                </select>
+                            </div>
+                            <div class="relative">
+                                <input type="text" id="searchInput" placeholder="Search..." 
+                                       class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-64 bg-white text-black placeholder-gray-500">
+                                <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Links Grid -->
+                    <div class="p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-start" id="socialLinksGrid">
+                            <!-- Facebook -->
+                            <div class="bg-white border-2 border-blue-500 rounded-lg shadow-sm hover:shadow-md transition-shadow p-4">
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                                        <i class="fab fa-facebook-f text-white text-lg"></i>
+                                    </div>
+                                    <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">Active</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <div>
+                                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Facebook</h3>
+                                        <p class="text-xs text-gray-500 mb-3 truncate">facebook.com/yourpage</p>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <label class="flex items-center">
+                                            <input type="checkbox" checked class="mr-2 w-4 h-4">
+                                            <span class="text-xs text-gray-700">Display on Website</span>
+                                        </label>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="edit-link-btn text-blue-600 hover:text-blue-800 text-xs font-medium">
+                                                <i class="fas fa-edit mr-1"></i>Edit
+                                            </button>
+                                            <button class="text-red-600 hover:text-red-800 text-xs font-medium">
+                                                <i class="fas fa-trash mr-1"></i>Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Instagram -->
+                            <div class="bg-white border-2 border-pink-500 rounded-lg shadow-sm hover:shadow-md transition-shadow p-4">
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="w-10 h-10 bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500 rounded-full flex items-center justify-center">
+                                        <i class="fab fa-instagram text-white text-lg"></i>
+                                    </div>
+                                    <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">Active</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <div>
+                                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Instagram</h3>
+                                        <p class="text-xs text-gray-500 mb-3 truncate">instagram.com/yourprofile</p>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <label class="flex items-center">
+                                            <input type="checkbox" checked class="mr-2 w-4 h-4">
+                                            <span class="text-xs text-gray-700">Display on Website</span>
+                                        </label>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="edit-link-btn text-blue-600 hover:text-blue-800 text-xs font-medium">
+                                                <i class="fas fa-edit mr-1"></i>Edit
+                                            </button>
+                                            <button class="text-red-600 hover:text-red-800 text-xs font-medium">
+                                                <i class="fas fa-trash mr-1"></i>Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Twitter/X -->
+                            <div class="bg-white border-2 border-gray-700 rounded-lg shadow-sm hover:shadow-md transition-shadow p-4">
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="w-10 h-10 bg-gray-900 rounded-full flex items-center justify-center">
+                                        <i class="fab fa-twitter text-white text-lg"></i>
+                                    </div>
+                                    <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">Active</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <div>
+                                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Twitter / X</h3>
+                                        <p class="text-xs text-gray-500 mb-3 truncate">twitter.com/yourhandle</p>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <label class="flex items-center">
+                                            <input type="checkbox" checked class="mr-2 w-4 h-4">
+                                            <span class="text-xs text-gray-700">Display on Website</span>
+                                        </label>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="edit-link-btn text-blue-600 hover:text-blue-800 text-xs font-medium">
+                                                <i class="fas fa-edit mr-1"></i>Edit
+                                            </button>
+                                            <button class="text-red-600 hover:text-red-800 text-xs font-medium">
+                                                <i class="fas fa-trash mr-1"></i>Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- LinkedIn -->
+                            <div class="bg-white border-2 border-blue-700 rounded-lg shadow-sm hover:shadow-md transition-shadow p-4">
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center">
+                                        <i class="fab fa-linkedin-in text-white text-lg"></i>
+                                    </div>
+                                    <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">Active</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <div>
+                                        <h3 class="text-sm font-semibold text-gray-900 mb-1">LinkedIn</h3>
+                                        <p class="text-xs text-gray-500 mb-3 truncate">linkedin.com/company/yourcompany</p>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <label class="flex items-center">
+                                            <input type="checkbox" checked class="mr-2 w-4 h-4">
+                                            <span class="text-xs text-gray-700">Display on Website</span>
+                                        </label>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="edit-link-btn text-blue-600 hover:text-blue-800 text-xs font-medium">
+                                                <i class="fas fa-edit mr-1"></i>Edit
+                                            </button>
+                                            <button class="text-red-600 hover:text-red-800 text-xs font-medium">
+                                                <i class="fas fa-trash mr-1"></i>Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- YouTube -->
+                            <div class="bg-white border-2 border-red-600 rounded-lg shadow-sm hover:shadow-md transition-shadow p-4">
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center">
+                                        <i class="fab fa-youtube text-white text-lg"></i>
+                                    </div>
+                                    <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-1 rounded-full">Inactive</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <div>
+                                        <h3 class="text-sm font-semibold text-gray-900 mb-1">YouTube</h3>
+                                        <p class="text-xs text-gray-500 mb-3 truncate">youtube.com/@yourchannel</p>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <label class="flex items-center">
+                                            <input type="checkbox" checked class="mr-2 w-4 h-4">
+                                            <span class="text-xs text-gray-700">Display on Website</span>
+                                        </label>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="edit-link-btn text-blue-600 hover:text-blue-800 text-xs font-medium">
+                                                <i class="fas fa-edit mr-1"></i>Edit
+                                            </button>
+                                            <button class="text-red-600 hover:text-red-800 text-xs font-medium">
+                                                <i class="fas fa-trash mr-1"></i>Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="px-6 py-4 border-t border-gray-200 bg-gray-50 rounded-b-xl">
+                        <div class="flex justify-between items-center">
+                            <div class="text-sm text-gray-600">
+                                Showing <span id="showingStart" class="font-medium">1</span> to <span id="showingEnd" class="font-medium">5</span> of <span id="totalResults" class="font-medium">5</span> results
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button id="prevPage" class="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-100" disabled>
+                                    <i class="fas fa-chevron-left mr-1"></i>Previous
+                                </button>
+                                <div class="flex space-x-1" id="pageNumbers">
+                                    <button class="px-3 py-2 bg-blue-600 text-white rounded-md text-sm font-medium">1</button>
+                                </div>
+                                <button id="nextPage" class="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-100" disabled>
+                                    Next<i class="fas fa-chevron-right ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add/Edit Social Link Modal -->
+                <div id="linkModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+                    <div class="flex items-center justify-center min-h-screen p-4">
+                        <div class="bg-white rounded-lg shadow-xl max-w-lg w-full">
+                            <div class="bg-blue-600 text-white px-6 py-4 rounded-t-lg flex justify-between items-center">
+                                <h3 class="text-xl font-semibold">Add Social Media Link</h3>
+                                <button id="closeLinkModal" class="text-white hover:text-gray-200">
+                                    <i class="fas fa-times text-xl"></i>
+                                </button>
+                            </div>
+                            
+                            <form class="p-6">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Platform</label>
+                                        <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                            <option>Facebook</option>
+                                            <option>Instagram</option>
+                                            <option>Twitter / X</option>
+                                            <option>LinkedIn</option>
+                                            <option>YouTube</option>
+                                            <option>TikTok</option>
+                                            <option>Pinterest</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Profile URL</label>
+                                        <input type="url" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="https://...">
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                                        <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                            <option value="active">Active</option>
+                                            <option value="inactive">Inactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex justify-end space-x-3 pt-4">
+                                    <button type="button" id="cancelLink" class="px-4 py-2 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors">
+                                        Cancel
+                                    </button>
+                                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                                        Save Link
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Include header and navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('../nav/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                });
+
+            fetch('../nav/navigation.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('nav-container').innerHTML = data;
+                });
+
+            fetch('../nav/web-content-navigation.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('web-content-nav-container').innerHTML = data;
+                    
+                    const expandedSections = JSON.parse(localStorage.getItem('expandedSections') || '[]');
+                    expandedSections.forEach(sectionId => {
+                        const section = document.getElementById(sectionId);
+                        if (section) {
+                            section.classList.remove('collapsed');
+                            const header = section.previousElementSibling.querySelector('.section-header');
+                            if (header) {
+                                header.classList.remove('collapsed');
+                                const icon = header.querySelector('.material-icons');
+                                if (icon) {
+                                    icon.textContent = 'expand_more';
+                                }
+                            }
+                        }
+                    });
+                });
+        });
+
+        window.toggleSection = function(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (!section) return;
+            
+            const header = section.previousElementSibling.querySelector('.section-header');
+            const icon = header.querySelector('.material-icons');
+            
+            let expandedSections = JSON.parse(localStorage.getItem('expandedSections') || '[]');
+            
+            if (section.classList.contains('collapsed')) {
+                section.classList.remove('collapsed');
+                header.classList.remove('collapsed');
+                icon.textContent = 'expand_more';
+                
+                if (!expandedSections.includes(sectionId)) {
+                    expandedSections.push(sectionId);
+                }
+            } else {
+                section.classList.add('collapsed');
+                header.classList.add('collapsed');
+                icon.textContent = 'chevron_right';
+                
+                expandedSections = expandedSections.filter(id => id !== sectionId);
+            }
+            
+            localStorage.setItem('expandedSections', JSON.stringify(expandedSections));
+        };
+
+        // Modal functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const addLinkBtn = document.getElementById('addLinkBtn');
+            const linkModal = document.getElementById('linkModal');
+            const closeLinkModal = document.getElementById('closeLinkModal');
+            const cancelLink = document.getElementById('cancelLink');
+
+            if (addLinkBtn) {
+                addLinkBtn.addEventListener('click', () => linkModal.classList.remove('hidden'));
+            }
+
+            if (closeLinkModal) {
+                closeLinkModal.addEventListener('click', () => linkModal.classList.add('hidden'));
+            }
+
+            if (cancelLink) {
+                cancelLink.addEventListener('click', () => linkModal.classList.add('hidden'));
+            }
+
+            linkModal.addEventListener('click', function(e) {
+                if (e.target === linkModal) {
+                    linkModal.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
