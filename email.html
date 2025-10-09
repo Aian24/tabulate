@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Composer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="flex items-center justify-center min-h-screen p-4 bg-gray-100/50">
+    
+    <!-- Email Composer Form -->
+    <div class="bg-white rounded-xl shadow-lg w-full max-w-xl border border-gray-100">
+        
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-blue-600 to-blue-500 px-4 py-3 rounded-t-xl">
+            <h2 class="text-xl font-bold text-white text-center flex items-center justify-center gap-2">
+                <i class="fas fa-paper-plane"></i>
+                Send an Email
+            </h2>
+        </div>
+
+        <div class="p-4 space-y-3">
+            <!-- To Field -->
+            <div class="flex items-center gap-3">
+                <label class="text-sm font-bold text-blue-600 w-16">
+                    To:
+                </label>
+                <div class="flex-1 border border-gray-200 rounded-lg p-1.5 min-h-[38px] focus-within:border-blue-400 focus-within:ring-1 focus-within:ring-blue-400 transition-all">
+                    <div id="toEmailsContainer" class="flex flex-wrap gap-1.5 mb-1"></div>
+                <input 
+                    type="email" 
+                    id="toEmailInput" 
+                    class="w-full outline-none text-sm text-gray-700 px-1" 
+                    placeholder="Add recipients"
+                    onkeydown="handleEmailInput(event, 'to')"
+                >
+                </div>
+            </div>
+
+            <!-- BCC Field -->
+            <div class="flex items-center gap-3">
+                <label class="text-sm font-bold text-blue-600 w-16">
+                    BCC:
+                </label>
+                <div class="flex-1 border border-gray-200 rounded-lg p-1.5 min-h-[38px] focus-within:border-blue-400 focus-within:ring-1 focus-within:ring-blue-400 transition-all">
+                    <div id="bccEmailsContainer" class="flex flex-wrap gap-1.5 mb-1"></div>
+                <input 
+                    type="email" 
+                    id="bccEmailInput" 
+                    class="w-full outline-none text-sm text-gray-700 px-1" 
+                    placeholder="Add BCC"
+                    onkeydown="handleEmailInput(event, 'bcc')"
+                >
+                </div>
+            </div>
+
+            <!-- Subject Field -->
+            <div class="flex items-center gap-3">
+                <label class="text-sm font-bold text-blue-600 w-16">
+                    Subject:
+                </label>
+                <input 
+                    type="text" 
+                    id="subjectInput" 
+                    class="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none transition-all text-gray-700"
+                    placeholder="Enter subject"
+                >
+            </div>
+
+            <!-- Message Field -->
+            <div>
+                <label class="text-sm font-bold text-blue-600 mb-2 block">
+                    Message:
+                </label>
+                <textarea 
+                    id="messageInput" 
+                    rows="5" 
+                    class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none transition-all text-gray-700 resize-none"
+                    placeholder="Type your message..."
+                ></textarea>
+            </div>
+
+            <!-- Attachments Section -->
+            <div>
+                <label class="text-sm font-bold text-blue-600 mb-2 block">
+                    Attachments:
+                </label>
+                <div class="border border-dashed border-gray-300 rounded-lg p-3 text-center hover:border-blue-400 hover:bg-blue-50/30 transition-all cursor-pointer">
+                    <input 
+                        type="file" 
+                        id="fileInput" 
+                        class="hidden" 
+                        multiple
+                        onchange="handleFileSelect(event)"
+                    >
+                    <label for="fileInput" class="cursor-pointer">
+                        <div class="flex items-center justify-center gap-2">
+                            <span class="text-xs text-blue-600 font-medium">Attach files</span>
+                            <span class="text-[11px] text-gray-500">(Click or drag)</span>
+                        </div>
+                    </label>
+                    
+                    <!-- Selected Files Display -->
+                    <div id="selectedFilesContainer" class="mt-2 space-y-1.5"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex justify-center gap-3 px-4 pb-4">
+            <button 
+                onclick="handleSend()"
+                class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-all duration-200 flex items-center gap-2"
+            >
+                <i class="fas fa-paper-plane"></i>
+                Send
+            </button>
+            <button 
+                onclick="handleCancel()"
+                class="px-6 py-2 bg-red-500 hover:bg-red-600 text-white text-sm font-medium rounded-lg transition-all duration-200 flex items-center gap-2"
+            >
+                <i class="fas fa-times"></i>
+                Cancel
+            </button>
+        </div>
+
+    </div>
+
+    <script>
+        // Store email arrays
+        const emails = {
+            to: [],
+            bcc: []
+        };
+
+        // Store selected files
+        let selectedFiles = [];
+
+        // Handle email input (Enter key)
+        function handleEmailInput(event, type) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                const input = event.target;
+                const email = input.value.trim();
+                
+                if (email && validateEmail(email)) {
+                    emails[type].push(email);
+                    addEmailChip(email, type);
+                    input.value = '';
+                } else if (email) {
+                    showError(input, 'Please enter a valid email address');
+                }
+            }
+        }
+
+        // Validate email format
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // Add email chip to display
+        function addEmailChip(email, type) {
+            const container = document.getElementById(`${type}EmailsContainer`);
+            const chip = document.createElement('div');
+            chip.className = 'flex items-center gap-1.5 bg-blue-50 text-blue-700 px-2 py-0.5 rounded-md text-xs font-medium border border-blue-200';
+            chip.innerHTML = `
+                <span>${email}</span>
+                <button onclick="removeEmail('${email}', '${type}')" class="hover:text-blue-900 focus:outline-none ml-0.5">
+                    <i class="fas fa-times text-[10px]"></i>
+                </button>
+            `;
+            container.appendChild(chip);
+        }
+
+        // Remove email chip
+        function removeEmail(email, type) {
+            const index = emails[type].indexOf(email);
+            if (index > -1) {
+                emails[type].splice(index, 1);
+            }
+            
+            // Remove chip from display
+            const container = document.getElementById(`${type}EmailsContainer`);
+            const chips = container.children;
+            for (let i = 0; i < chips.length; i++) {
+                if (chips[i].textContent.includes(email)) {
+                    container.removeChild(chips[i]);
+                    break;
+                }
+            }
+        }
+
+        // Show error message
+        function showError(input, message) {
+            input.classList.add('border-red-500');
+            
+            // Create error tooltip
+            const error = document.createElement('div');
+            error.className = 'text-red-500 text-xs mt-1';
+            error.textContent = message;
+            input.parentElement.appendChild(error);
+            
+            setTimeout(() => {
+                input.classList.remove('border-red-500');
+                error.remove();
+            }, 3000);
+        }
+
+        // Handle file selection
+        function handleFileSelect(event) {
+            const files = Array.from(event.target.files);
+            const maxSize = 10 * 1024 * 1024; // 10MB
+            
+            files.forEach(file => {
+                if (file.size > maxSize) {
+                    alert(`File ${file.name} is too large. Maximum size is 10MB.`);
+                    return;
+                }
+                
+                if (!selectedFiles.find(f => f.name === file.name)) {
+                    selectedFiles.push(file);
+                    addFileChip(file);
+                }
+            });
+        }
+
+        // Add file chip to display
+        function addFileChip(file) {
+            const container = document.getElementById('selectedFilesContainer');
+            const fileChip = document.createElement('div');
+            fileChip.className = 'flex items-center justify-between bg-gray-50 px-2 py-1.5 rounded-md border border-gray-200 text-left';
+            
+            const fileSize = (file.size / 1024).toFixed(1);
+            const fileIcon = getFileIcon(file.name);
+            
+            fileChip.innerHTML = `
+                <div class="flex items-center gap-2 flex-1 min-w-0">
+                    <i class="${fileIcon} text-sm text-blue-500"></i>
+                    <div class="min-w-0 flex-1">
+                        <p class="text-xs font-medium text-gray-700 truncate">${file.name}</p>
+                        <p class="text-[10px] text-gray-500">${fileSize} KB</p>
+                    </div>
+                </div>
+                <button onclick="removeFile('${file.name}')" class="text-red-400 hover:text-red-600 focus:outline-none ml-2 flex-shrink-0">
+                    <i class="fas fa-times text-xs"></i>
+                </button>
+            `;
+            
+            container.appendChild(fileChip);
+        }
+
+        // Get file icon based on extension
+        function getFileIcon(filename) {
+            const ext = filename.split('.').pop().toLowerCase();
+            const icons = {
+                'pdf': 'fas fa-file-pdf',
+                'doc': 'fas fa-file-word',
+                'docx': 'fas fa-file-word',
+                'xls': 'fas fa-file-excel',
+                'xlsx': 'fas fa-file-excel',
+                'jpg': 'fas fa-file-image',
+                'jpeg': 'fas fa-file-image',
+                'png': 'fas fa-file-image',
+                'gif': 'fas fa-file-image',
+                'zip': 'fas fa-file-archive',
+                'rar': 'fas fa-file-archive'
+            };
+            return icons[ext] || 'fas fa-file';
+        }
+
+        // Remove file
+        function removeFile(filename) {
+            selectedFiles = selectedFiles.filter(f => f.name !== filename);
+            
+            // Remove chip from display
+            const container = document.getElementById('selectedFilesContainer');
+            const chips = container.children;
+            for (let i = 0; i < chips.length; i++) {
+                if (chips[i].textContent.includes(filename)) {
+                    container.removeChild(chips[i]);
+                    break;
+                }
+            }
+        }
+
+        // Handle send button
+        function handleSend() {
+            const subject = document.getElementById('subjectInput').value.trim();
+            const message = document.getElementById('messageInput').value.trim();
+            
+            // Validation
+            if (emails.to.length === 0) {
+                alert('Please add at least one recipient email address.');
+                return;
+            }
+            
+            if (!subject) {
+                alert('Please enter a subject.');
+                return;
+            }
+            
+            if (!message) {
+                alert('Please enter a message.');
+                return;
+            }
+            
+            // Prepare email data
+            const emailData = {
+                to: emails.to,
+                bcc: emails.bcc,
+                subject: subject,
+                message: message,
+                attachments: selectedFiles.map(f => f.name)
+            };
+            
+            console.log('Email Data:', emailData);
+            console.log('Files:', selectedFiles);
+            
+            // Show success message
+            alert('Email sent successfully!');
+            
+            // Reset form (optional)
+            // resetForm();
+        }
+
+        // Handle cancel button
+        function handleCancel() {
+            if (confirm('Are you sure you want to cancel? All unsaved data will be lost.')) {
+                resetForm();
+            }
+        }
+
+        // Reset form
+        function resetForm() {
+            emails.to = [];
+            emails.bcc = [];
+            selectedFiles = [];
+            
+            document.getElementById('toEmailsContainer').innerHTML = '';
+            document.getElementById('bccEmailsContainer').innerHTML = '';
+            document.getElementById('toEmailInput').value = '';
+            document.getElementById('bccEmailInput').value = '';
+            document.getElementById('subjectInput').value = '';
+            document.getElementById('messageInput').value = '';
+            document.getElementById('selectedFilesContainer').innerHTML = '';
+            document.getElementById('fileInput').value = '';
+        }
+
+        // Drag and drop functionality
+        const dropZone = document.querySelector('.border-dashed');
+        
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('border-blue-500', 'bg-blue-50');
+        });
+        
+        dropZone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('border-blue-500', 'bg-blue-50');
+        });
+        
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('border-blue-500', 'bg-blue-50');
+            
+            const files = Array.from(e.dataTransfer.files);
+            const maxSize = 10 * 1024 * 1024; // 10MB
+            
+            files.forEach(file => {
+                if (file.size > maxSize) {
+                    alert(`File ${file.name} is too large. Maximum size is 10MB.`);
+                    return;
+                }
+                
+                if (!selectedFiles.find(f => f.name === file.name)) {
+                    selectedFiles.push(file);
+                    addFileChip(file);
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
+
